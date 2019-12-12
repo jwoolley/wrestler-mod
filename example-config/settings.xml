@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<settings xmlns="http://maven.apache.org/SETTINGS/1.0.0"
+          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xsi:schemaLocation="http://maven.apache.org/SETTINGS/1.0.0 http://maven.apache.org/xsd/settings-1.0.0.xsd">
+    <profiles>
+        <profile>
+            <id>sts-mod-development</id>
+            <properties>
+                <steam-sts-directory>D:/Program Files (x86)/Steam/steamapps/common/SlayTheSpire</steam-sts-directory>
+                <sts-libs-directory>D:/development/java/IntelliJ/my_mods/lib</sts-libs-directory>
+            </properties>
+        </profile>
+    </profiles>
+
+    <activeProfiles>
+        <activeProfile>sts-mod-development</activeProfile>
+    </activeProfiles>
+
+    <!-- THIS FILE SHOULD EXIST OUTSIDE OF THE PROJECT. -->
+    <!-- THIS FILE IS USED TO DEFINE SYSTEM-WIDE VARIABLES USED IN E.G. THE PROJECT'S POM.XML-->
+    <!-- EXAMPLE FILEPATH FOR THIS FILE: .m2\settings.xml -->
+</settings>

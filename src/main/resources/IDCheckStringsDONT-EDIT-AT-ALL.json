@@ -1,0 +1,8 @@
+{
+  "DEFAULTID": "ThePlaceholder",
+  "DEVID": "thePlaceholderDev",
+  "EXCEPTION": "Go to your constructor in your class with SpireInitializer and change your mod ID from \"ThePlaceholder\"",
+  "PACKAGE_EXCEPTION": "Rename your ThePlaceholder folder (package) to match your mod ID! ",
+  "RESOURCE_FOLDER_EXCEPTION": "Rename your PlaceholderMod resources folder to match your mod ID!",
+  "RESOURCES": "Resources"
+}
