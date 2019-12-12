@@ -3,6 +3,7 @@ package theplaceholder;
 import basemod.BaseMod;
 import basemod.ModLabeledToggleButton;
 import basemod.ModPanel;
+import basemod.ReflectionHacks;
 import basemod.helpers.RelicType;
 import basemod.interfaces.*;
 import com.badlogic.gdx.Gdx;
@@ -13,6 +14,9 @@ import com.evacipated.cardcrawl.mod.stslib.Keyword;
 import com.evacipated.cardcrawl.modthespire.lib.SpireConfig;
 import com.evacipated.cardcrawl.modthespire.lib.SpireInitializer;
 import com.google.gson.Gson;
+import com.megacrit.cardcrawl.audio.Sfx;
+import com.megacrit.cardcrawl.audio.SoundMaster;
+import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.core.Settings;
 import com.megacrit.cardcrawl.dungeons.TheCity;
 import com.megacrit.cardcrawl.helpers.CardHelper;
@@ -28,7 +32,7 @@ import theplaceholder.enums.PlaceholderCharEnum;
 import theplaceholder.events.IdentityCrisisEvent;
 import theplaceholder.potions.PlaceholderPotion;
 import theplaceholder.relics.BottledPlaceholderRelic;
-import theplaceholder.relics.DefaultClickableRelic;
+import theplaceholder.relics.Headgear;
 import theplaceholder.relics.PlaceholderRelic;
 import theplaceholder.relics.PlaceholderRelic2;
 import theplaceholder.util.IDCheckDontTouchPls;
@@ -39,6 +43,7 @@ import theplaceholder.variables.DefaultSecondMagicNumber;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
+import java.util.HashMap;
 import java.util.Properties;
 
 //TODO: DON'T MASS RENAME/REFACTOR
@@ -119,6 +124,10 @@ public class PlaceholderMod implements
 
     public static final String getImageResourcePath(String resourcePath) {
         return RESOURCE_FOLDER_NAME + "/images/" + resourcePath;
+    }
+
+    public static final String getAudioResourcePath(String resourcePath) {
+        return RESOURCE_FOLDER_NAME + "/sounds/" + resourcePath;
     }
 
     // Card backgrounds - The actual rectangular card.
@@ -285,19 +294,33 @@ public class PlaceholderMod implements
     
     // ====== YOU CAN EDIT AGAIN ======
     
-    
+    // ======= REGISTER ASSETS ========
+
+    @SuppressWarnings("unchecked")
+    private HashMap<String, Sfx> getSoundsMap() {
+        return (HashMap<String, Sfx>) ReflectionHacks.getPrivate(CardCrawlGame.sound, SoundMaster.class, "map");
+    }
+
+    private void registerSfx() {
+        HashMap<String, Sfx> reflectedMap = getSoundsMap();
+        reflectedMap.put("THUD_MEDIUM_1", new Sfx(getAudioResourcePath("TheWrestler_ThudMedium1.ogg")));
+    }
+
+    // ======= /REGISTER ASSETS/ ========
+
+
     @SuppressWarnings("unused")
     public static void initialize() {
         logger.info("========================= Initializing Default Mod. Hi. =========================");
         PlaceholderMod defaultmod = new PlaceholderMod();
         logger.info("========================= /Default Mod Initialized. Hello World./ =========================");
     }
-    
+
     // ============== /SUBSCRIBE, CREATE THE COLOR_GRAY, INITIALIZE/ =================
-    
-    
+
+
     // =============== LOAD THE CHARACTER =================
-    
+
     @Override
     public void receiveEditCharacters() {
         logger.info("Beginning to edit characters. " + "Add " + PlaceholderCharEnum.THE_PLACEHOLDER);
@@ -317,7 +340,9 @@ public class PlaceholderMod implements
     @Override
     public void receivePostInitialize() {
         logger.info("Loading badge image and mod options");
-        
+
+        registerSfx();
+
         // Load the Mod Badge
         Texture badgeTexture = TextureLoader.getTexture(BADGE_IMAGE);
         
@@ -346,7 +371,6 @@ public class PlaceholderMod implements
         settingsPanel.addUIElement(enableNormalsButton); // Add the button to the settings panel. Button is a go.
         
         BaseMod.registerModBadge(badgeTexture, MODNAME, AUTHOR, DESCRIPTION, settingsPanel);
-
         
         // =============== EVENTS =================
         
@@ -385,17 +409,14 @@ public class PlaceholderMod implements
     @Override
     public void receiveEditRelics() {
         logger.info("Adding relics");
-        
         // This adds a character specific relic. Only when you play with the mentioned color, will you get this relic.
-        BaseMod.addRelicToCustomPool(new PlaceholderRelic(), AbstractCardEnum.THE_PLACEHOLDER_GRAY);
-        BaseMod.addRelicToCustomPool(new BottledPlaceholderRelic(),  AbstractCardEnum.THE_PLACEHOLDER_GRAY);
-//        BaseMod.addRelicToCustomPool(new DefaultClickableRelic(),  AbstractCardEnum.THE_PLACEHOLDER_GRAY);
-        
+        BaseMod.addRelicToCustomPool(new Headgear(), AbstractCardEnum.THE_PLACEHOLDER_GRAY);
+
         // This adds a relic to the Shared pool. Every character can find this relic.
-        BaseMod.addRelic(new PlaceholderRelic2(), RelicType.SHARED);
+        //  BaseMod.addRelic(new PlaceholderRelic2(), RelicType.SHARED);
         
         // Mark relics as seen (the others are all starters so they're marked as seen in the character file
-        UnlockTracker.markRelicAsSeen(BottledPlaceholderRelic.ID);
+        // UnlockTracker.markRelicAsSeen(BottledPlaceholderRelic.ID);
         logger.info("Done adding relics!");
     }
     

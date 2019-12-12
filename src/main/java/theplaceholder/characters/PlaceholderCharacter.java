@@ -5,8 +5,6 @@ import basemod.animations.SpriterAnimation;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
-import com.badlogic.gdx.math.MathUtils;
-import com.esotericsoftware.spine.AnimationState;
 import com.evacipated.cardcrawl.modthespire.lib.SpireEnum;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
@@ -25,9 +23,7 @@ import org.apache.logging.log4j.Logger;
 import theplaceholder.PlaceholderMod;
 import theplaceholder.cards.*;
 import theplaceholder.enums.AbstractCardEnum;
-import theplaceholder.relics.DefaultClickableRelic;
-import theplaceholder.relics.PlaceholderRelic;
-import theplaceholder.relics.PlaceholderRelic2;
+import theplaceholder.relics.Headgear;
 
 import java.util.ArrayList;
 
@@ -116,16 +112,6 @@ public class PlaceholderCharacter extends CustomPlayer {
             getCharacterOrbImagePath("vfx.png"), null,
                 new SpriterAnimation(getAnimationResourcePath(ANIMATION_PATH)));
 
-        // =============== TEXTURES, ENERGY, LOADOUT =================  
-        // ENABLE IF USING CHARACTER STATIC CHARACTER IMAGE
-        /*
-        initializeClass(THE_PLACEHOLDER_STATIC_CHARACTER_SPRITE, // character image (using static sprite)
-            THE_PLACEHOLDER_SHOULDER_2, // campfire pose
-            THE_PLACEHOLDER_SHOULDER_1, // another campfire pose
-            THE_PLACEHOLDER_CORPSE, // dead corpse
-            getLoadout(), 20.0F, -10.0F, 220.0F, 290.0F, new EnergyManager(ENERGY_PER_TURN)); // energy manager
-        */
-
         // ENABLE IF USING CHARACTER ANIMATION
         initializeClass(null, // required call to load textures and setup energy/loadout.
                 // I left these in PlaceholderMod.java (Ctrl+click them to see where they are, Ctrl+hover to see what they read.)
@@ -136,20 +122,7 @@ public class PlaceholderCharacter extends CustomPlayer {
                         // ENABLE IF USING CHARACTER ANIMATION
 
         // =============== /TEXTURES, ENERGY, LOADOUT/ =================
-
-
-        // =============== ANIMATIONS =================  
-
-        // ENABLE IF USING CHARACTER ANIMATION
-//            loadAnimation(
-//                    THE_PLACEHOLDER_SKELETON_ATLAS,
-//                    THE_PLACEHOLDER_SKELETON_JSON,
-//                    1.0f);
-//            AnimationState.TrackEntry e = state.setAnimation(0, "animation", true);
-//            e.setTime(e.getEndTime() * MathUtils.random());
-        // =============== /ANIMATIONS/ =================
-
-
+        
         // =============== TEXT BUBBLE LOCATION =================
 
         dialogX = (drawX + 0.0F * Settings.scale); // set location for text bubbles
@@ -197,15 +170,8 @@ public class PlaceholderCharacter extends CustomPlayer {
     // Starting Relics	
     public ArrayList<String> getStartingRelics() {
         ArrayList<String> retVal = new ArrayList<>();
-
-        retVal.add(PlaceholderRelic.ID);
-        retVal.add(PlaceholderRelic2.ID);
-//        retVal.add(DefaultClickableRelic.ID);
-
-        UnlockTracker.markRelicAsSeen(PlaceholderRelic.ID);
-        UnlockTracker.markRelicAsSeen(PlaceholderRelic2.ID);
-//        UnlockTracker.markRelicAsSeen(DefaultClickableRelic.ID);
-
+        retVal.add(Headgear.ID);
+        UnlockTracker.markRelicAsSeen(Headgear.ID);
         return retVal;
     }
 

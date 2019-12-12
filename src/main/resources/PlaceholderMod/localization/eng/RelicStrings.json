@@ -30,5 +30,13 @@
       ".",
       "Select a card to bottle for "
     ]
+  },
+  "PlaceholderMod:Headgear": {
+    "NAME": "Shabby Headgear",
+    "FLAVOR": "Flimsy protection—but it's better than nothing.",
+    "DESCRIPTIONS": [
+      "Whenever you apply a debuff to an enemy that they don't already have, gain #b",
+      " #yBlock."
+    ]
   }
 }
