@@ -131,16 +131,16 @@ public class PlaceholderMod implements
     }
 
     // Card backgrounds - The actual rectangular card.
-    private static final String ATTACK_PLACEHOLDER_GRAY = getImageResourcePath("512/bg_attack_default_gray.png");
-    private static final String SKILL_PLACEHOLDER_GRAY = getImageResourcePath("512/bg_skill_default_gray.png");
-    private static final String POWER_PLACEHOLDER_GRAY = getImageResourcePath("512/bg_power_default_gray.png");
+    private static final String ATTACK_PLACEHOLDER_GRAY = getImageResourcePath("512/attack_wrestler.png");
+    private static final String SKILL_PLACEHOLDER_GRAY = getImageResourcePath("512/skill_wrestler.png");
+    private static final String POWER_PLACEHOLDER_GRAY = getImageResourcePath("512/power_wrestler.png");
     
     private static final String ENERGY_ORB_DEFAULT_GRAY = getImageResourcePath("512/card_default_gray_orb.png");
     private static final String CARD_ENERGY_ORB = getImageResourcePath("512/card_small_orb.png");
     
-    private static final String ATTACK_DEFAULT_GRAY_PORTRAIT = getImageResourcePath("1024/bg_attack_default_gray.png");
-    private static final String SKILL_DEFAULT_GRAY_PORTRAIT = getImageResourcePath("1024/bg_skill_default_gray.png");
-    private static final String POWER_DEFAULT_GRAY_PORTRAIT = getImageResourcePath("1024/bg_power_default_gray.png");
+    private static final String ATTACK_DEFAULT_GRAY_PORTRAIT = getImageResourcePath("1024/attack_wrestler.png");
+    private static final String SKILL_DEFAULT_GRAY_PORTRAIT = getImageResourcePath("1024/skill_wrestler.png");
+    private static final String POWER_DEFAULT_GRAY_PORTRAIT = getImageResourcePath("1024/power_wrestler.png");
     private static final String ENERGY_ORB_DEFAULT_GRAY_PORTRAIT = getImageResourcePath("1024/card_default_gray_orb.png");
     
     // Character assets
