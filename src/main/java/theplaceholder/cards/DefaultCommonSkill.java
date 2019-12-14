@@ -6,10 +6,9 @@ import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import theplaceholder.PlaceholderMod;
-import theplaceholder.characters.PlaceholderCharacter;
 import theplaceholder.enums.AbstractCardEnum;
 
-import static theplaceholder.PlaceholderMod.makeCardPath;
+import static theplaceholder.PlaceholderMod.getCardResourcePath;
 
 public class DefaultCommonSkill extends AbstractDynamicCard {
 
@@ -23,7 +22,7 @@ public class DefaultCommonSkill extends AbstractDynamicCard {
     // TEXT DECLARATION
 
     public static final String ID = PlaceholderMod.makeID(DefaultCommonSkill.class.getSimpleName());
-    public static final String IMG = makeCardPath("Skill.png");
+    public static final String IMG = getCardResourcePath("Skill.png");
 
     // /TEXT DECLARATION/
 

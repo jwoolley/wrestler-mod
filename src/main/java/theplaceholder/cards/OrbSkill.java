@@ -7,11 +7,10 @@ import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import theplaceholder.PlaceholderMod;
-import theplaceholder.characters.PlaceholderCharacter;
 import theplaceholder.enums.AbstractCardEnum;
 import theplaceholder.orbs.DefaultOrb;
 
-import static theplaceholder.PlaceholderMod.makeCardPath;
+import static theplaceholder.PlaceholderMod.getCardResourcePath;
 
 public class OrbSkill extends AbstractDynamicCard {
 
@@ -26,7 +25,7 @@ public class OrbSkill extends AbstractDynamicCard {
     public static final String ID = PlaceholderMod.makeID(OrbSkill.class.getSimpleName());
     private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(ID);
 
-    public static final String IMG = makeCardPath("Skill.png");
+    public static final String IMG = getCardResourcePath("Skill.png");
 
     public static final String NAME = cardStrings.NAME;
     public static final String DESCRIPTION = cardStrings.DESCRIPTION;

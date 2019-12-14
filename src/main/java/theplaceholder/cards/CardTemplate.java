@@ -7,10 +7,9 @@ import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import theplaceholder.PlaceholderMod;
-import theplaceholder.characters.PlaceholderCharacter;
 import theplaceholder.enums.AbstractCardEnum;
 
-import static theplaceholder.PlaceholderMod.makeCardPath;
+import static theplaceholder.PlaceholderMod.getCardResourcePath;
 
 // public class ${NAME} extends AbstractDynamicCard
 public class CardTemplate extends AbstractDynamicCard {
@@ -37,7 +36,7 @@ public class CardTemplate extends AbstractDynamicCard {
 
     // public static final String ID = PlaceholderMod.makeID(${NAME}.class.getSimpleName()); // USE THIS ONE FOR THE TEMPLATE;
     public static final String ID = PlaceholderMod.makeID("DefaultCommonAttack"); // DELETE THIS ONE.
-    public static final String IMG = makeCardPath("Attack.png");// "public static final String IMG = makeCardPath("${NAME}.png");
+    public static final String IMG = getCardResourcePath("Attack.png");// "public static final String IMG = getCardResourcePath("${NAME}.png");
     // This does mean that you will need to have an image with the same NAME as the card in your image folder for it to run correctly.
 
 

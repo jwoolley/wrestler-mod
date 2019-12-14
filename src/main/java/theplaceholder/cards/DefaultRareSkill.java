@@ -8,10 +8,9 @@ import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.powers.VulnerablePower;
 import theplaceholder.PlaceholderMod;
-import theplaceholder.characters.PlaceholderCharacter;
 import theplaceholder.enums.AbstractCardEnum;
 
-import static theplaceholder.PlaceholderMod.makeCardPath;
+import static theplaceholder.PlaceholderMod.getCardResourcePath;
 
 public class DefaultRareSkill extends AbstractDynamicCard {
 
@@ -24,7 +23,7 @@ public class DefaultRareSkill extends AbstractDynamicCard {
     // TEXT DECLARATION 
 
     public static final String ID = PlaceholderMod.makeID(DefaultRareSkill.class.getSimpleName());
-    public static final String IMG = makeCardPath("Skill.png");
+    public static final String IMG = getCardResourcePath("Skill.png");
 
     private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(ID);
     public static final String UPGRADE_DESCRIPTION = cardStrings.UPGRADE_DESCRIPTION;

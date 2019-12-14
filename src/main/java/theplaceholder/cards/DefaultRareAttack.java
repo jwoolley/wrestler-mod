@@ -9,10 +9,9 @@ import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.vfx.combat.WeightyImpactEffect;
 import theplaceholder.PlaceholderMod;
-import theplaceholder.characters.PlaceholderCharacter;
 import theplaceholder.enums.AbstractCardEnum;
 
-import static theplaceholder.PlaceholderMod.makeCardPath;
+import static theplaceholder.PlaceholderMod.getCardResourcePath;
 
 public class DefaultRareAttack extends AbstractDynamicCard {
 
@@ -26,7 +25,7 @@ public class DefaultRareAttack extends AbstractDynamicCard {
     // TEXT DECLARATION 
 
     public static final String ID = PlaceholderMod.makeID(DefaultRareAttack.class.getSimpleName());
-    public static final String IMG = makeCardPath("Attack.png");
+    public static final String IMG = getCardResourcePath("Attack.png");
 
     // /TEXT DECLARATION/
 

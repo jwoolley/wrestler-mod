@@ -6,11 +6,10 @@ import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import theplaceholder.PlaceholderMod;
-import theplaceholder.characters.PlaceholderCharacter;
 import theplaceholder.enums.AbstractCardEnum;
 import theplaceholder.powers.RarePower;
 
-import static theplaceholder.PlaceholderMod.makeCardPath;
+import static theplaceholder.PlaceholderMod.getCardResourcePath;
 
 public class DefaultRarePower extends AbstractDynamicCard {
 
@@ -23,7 +22,7 @@ public class DefaultRarePower extends AbstractDynamicCard {
     // TEXT DECLARATION 
 
     public static final String ID = PlaceholderMod.makeID(DefaultRarePower.class.getSimpleName());
-    public static final String IMG = makeCardPath("Power.png");
+    public static final String IMG = getCardResourcePath("Power.png");
 
     // /TEXT DECLARATION/
 

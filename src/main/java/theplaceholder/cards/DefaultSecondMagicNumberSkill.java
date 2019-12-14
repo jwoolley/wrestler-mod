@@ -7,10 +7,9 @@ import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.powers.PoisonPower;
 import com.megacrit.cardcrawl.powers.VulnerablePower;
 import theplaceholder.PlaceholderMod;
-import theplaceholder.characters.PlaceholderCharacter;
 import theplaceholder.enums.AbstractCardEnum;
 
-import static theplaceholder.PlaceholderMod.makeCardPath;
+import static theplaceholder.PlaceholderMod.getCardResourcePath;
 
 public class DefaultSecondMagicNumberSkill extends AbstractDynamicCard {
 
@@ -31,7 +30,7 @@ public class DefaultSecondMagicNumberSkill extends AbstractDynamicCard {
     // TEXT DECLARATION
 
     public static final String ID = PlaceholderMod.makeID(DefaultSecondMagicNumberSkill.class.getSimpleName());
-    public static final String IMG = makeCardPath("Skill.png");
+    public static final String IMG = getCardResourcePath("Skill.png");
 
     // /TEXT DECLARATION/
 

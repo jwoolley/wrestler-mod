@@ -4,7 +4,6 @@ import basemod.BaseMod;
 import basemod.ModLabeledToggleButton;
 import basemod.ModPanel;
 import basemod.ReflectionHacks;
-import basemod.helpers.RelicType;
 import basemod.interfaces.*;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.files.FileHandle;
@@ -26,15 +25,13 @@ import com.megacrit.cardcrawl.unlock.UnlockTracker;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import theplaceholder.cards.*;
+import theplaceholder.cards.skill.ExampleGrappleSkill;
 import theplaceholder.characters.PlaceholderCharacter;
 import theplaceholder.enums.AbstractCardEnum;
 import theplaceholder.enums.PlaceholderCharEnum;
 import theplaceholder.events.IdentityCrisisEvent;
 import theplaceholder.potions.PlaceholderPotion;
-import theplaceholder.relics.BottledPlaceholderRelic;
 import theplaceholder.relics.Headgear;
-import theplaceholder.relics.PlaceholderRelic;
-import theplaceholder.relics.PlaceholderRelic2;
 import theplaceholder.util.IDCheckDontTouchPls;
 import theplaceholder.util.TextureLoader;
 import theplaceholder.variables.DefaultCustomVariable;
@@ -160,7 +157,7 @@ public class PlaceholderMod implements
 
     // =============== MAKE IMAGE PATHS =================
 
-    public static String makeCardPath(String resourcePath) {
+    public static String getCardResourcePath(String resourcePath) {
         return getImageResourcePath("cards/" + resourcePath);
     }
     
@@ -440,7 +437,10 @@ public class PlaceholderMod implements
         // Add the cards
         // Don't comment out/delete these cards (yet). You need 1 of each type and rarity (technically) for your game not to crash
         // when generating card rewards/shop screen items.
-        
+
+        BaseMod.addCard(new ExampleGrappleSkill());
+
+
         BaseMod.addCard(new OrbSkill());
         BaseMod.addCard(new DefaultSecondMagicNumberSkill());
         BaseMod.addCard(new DefaultCommonAttack());
@@ -458,6 +458,8 @@ public class PlaceholderMod implements
         // Unlock the cards
         // This is so that they are all "seen" in the library, for people who like to look at the card list
         // before playing your mod.
+
+        // TODO: create "addCardToBasePool" method for cards that begin unlocked
         UnlockTracker.unlockCard(OrbSkill.ID);
         UnlockTracker.unlockCard(DefaultSecondMagicNumberSkill.ID);
         UnlockTracker.unlockCard(DefaultCommonAttack.ID);
@@ -470,6 +472,7 @@ public class PlaceholderMod implements
         UnlockTracker.unlockCard(DefaultRareAttack.ID);
         UnlockTracker.unlockCard(DefaultRareSkill.ID);
         UnlockTracker.unlockCard(DefaultRarePower.ID);
+        UnlockTracker.unlockCard(ExampleGrappleSkill.ID);
         
         logger.info("Done adding cards!");
     }
@@ -569,7 +572,7 @@ public class PlaceholderMod implements
     
     // this adds "ModName:" before the ID of any card/relic/power etc.
     // in order to avoid conflicts if any other mod uses the same ID.
-    public static String makeID(String idText) {
-        return getModID() + ":" + idText;
+    public static String makeID(String id) {
+        return getModID() + ":" + id;
     }
 }

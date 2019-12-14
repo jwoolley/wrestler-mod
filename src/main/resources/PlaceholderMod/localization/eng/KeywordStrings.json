@@ -16,5 +16,12 @@
       "multikeyword"
     ],
     "DESCRIPTION": "Make sure the first element in the NAMES is the same as your PROPER_NAME. The rest is to match keywords like the single word keyword."
+  },
+  {
+ 
+    "NAMES": [
+      "grapple", "grappled"
+    ],
+    "DESCRIPTION": "#yGrappled enemies receive #b25% more and deal #b25% less. Breaks once you're dealt damage equal to #b10% of your max HP or Grapple another enemy."
   }
 ]

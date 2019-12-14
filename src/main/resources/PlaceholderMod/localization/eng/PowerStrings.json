@@ -1,10 +1,19 @@
 {
-"PlaceholderMod:CommonPower": {
-        "NAME": "Placeholder Power",
-        "DESCRIPTIONS": ["You applied #b", " keyword.", " keywords."]
-},
-"PlaceholderMod:RarePower": {
-        "NAME": "Placeholder Power",
-        "DESCRIPTIONS": ["At the start of your turn, TOUCH #b", " enemy." , " enemies."]
-}
+  "PlaceholderMod:CommonPower": {
+          "NAME": "Placeholder Power",
+          "DESCRIPTIONS": ["You applied #b", " keyword.", " keywords."]
+  },
+  "PlaceholderMod:GrappledPower": {
+    "NAME": "Grappled",
+    "DESCRIPTIONS": [
+      "Deals #b",
+      "% less damage and receives #b",
+      "% more. Lasts until you receive #b",
+      " damage or #yGrapple another enemy."
+    ]
+  },
+  "PlaceholderMod:RarePower": {
+          "NAME": "Placeholder Power",
+          "DESCRIPTIONS": ["At the start of your turn, TOUCH #b", " enemy." , " enemies."]
+  }
 }
