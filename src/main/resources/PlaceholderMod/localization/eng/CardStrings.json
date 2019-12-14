@@ -52,8 +52,8 @@
   },
 
   "PlaceholderMod:ExampleGrappleSkill": {
-    "NAME": "Take To the Mat",
-    "DESCRIPTION": "PlaceholderMod:Grapple an enemy."
+    "NAME": "Take to the Mat",
+    "DESCRIPTION": "Deal !D! Damage. If the enemy has 50% health or less, they become Grappled."
   },
 
   "PlaceholderMod:DefaultCommonAttack": {

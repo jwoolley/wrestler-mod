@@ -3,13 +3,14 @@
           "NAME": "Placeholder Power",
           "DESCRIPTIONS": ["You applied #b", " keyword.", " keywords."]
   },
+
   "PlaceholderMod:GrappledPower": {
     "NAME": "Grappled",
     "DESCRIPTIONS": [
       "Deals #b",
       "% less damage and receives #b",
       "% more. Lasts until you receive #b",
-      " damage or #yGrapple another enemy."
+      " damage, or you #yGrapple another enemy."
     ]
   },
   "PlaceholderMod:RarePower": {

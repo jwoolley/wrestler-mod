@@ -13,6 +13,7 @@ import com.evacipated.cardcrawl.mod.stslib.Keyword;
 import com.evacipated.cardcrawl.modthespire.lib.SpireConfig;
 import com.evacipated.cardcrawl.modthespire.lib.SpireInitializer;
 import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import com.megacrit.cardcrawl.audio.Sfx;
 import com.megacrit.cardcrawl.audio.SoundMaster;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
@@ -39,8 +40,10 @@ import theplaceholder.variables.DefaultSecondMagicNumber;
 
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.lang.reflect.Type;
 import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
+import java.util.Map;
 import java.util.Properties;
 
 //TODO: DON'T MASS RENAME/REFACTOR
@@ -84,7 +87,7 @@ public class PlaceholderMod implements
     public static final Logger logger = LogManager.getLogger(PlaceholderMod.class.getName());
     public static final String MOD_ID = "PlaceholderMod";
     public static final String RESOURCE_FOLDER_NAME = "PlaceholderMod";
-    private static final String IN_GAME_CHARACTER_NAME = "The Placeholder";
+    private static final String IN_GAME_CHARACTER_NAME = "The Wrestler";
     private static String modID;
 
     // Mod-settings settings. This is if you want an on/off savable button
@@ -154,6 +157,8 @@ public class PlaceholderMod implements
     public static final String THE_PLACEHOLDER_SKELETON_ATLAS = getImageResourcePath("char/defaultCharacter/skeleton.atlas");
     public static final String THE_PLACEHOLDER_SKELETON_JSON = getImageResourcePath("/char/defaultCharacter/skeleton.json");
     public static final String THE_PLACEHOLDER_STATIC_CHARACTER_SPRITE = getImageResourcePath("char/defaultCharacter/main3.png");
+
+    private static Map<String, Keyword> keywords;
 
     // =============== MAKE IMAGE PATHS =================
 
@@ -554,18 +559,33 @@ public class PlaceholderMod implements
         // If you're using multiword keywords, the first element in your NAMES array in your keywords-strings.json has to be the same as the PROPER_NAME.
         // That is, in Card-Strings.json you would have #yA_Long_Keyword (#y highlights the keyword in yellow).
         // In Keyword-Strings.json you would have PROPER_NAME as A Long Keyword and the first element in NAMES be a long keyword, and the second element be a_long_keyword
-        
-        Gson gson = new Gson();
+
+
+        final Gson gson = new Gson();
         String language = getLanguageString();
 
-        String json = Gdx.files.internal(RESOURCE_FOLDER_NAME + "/localization/" + language + "/KeywordStrings.json").readString(String.valueOf(StandardCharsets.UTF_8));
-        com.evacipated.cardcrawl.mod.stslib.Keyword[] keywords = gson.fromJson(json, com.evacipated.cardcrawl.mod.stslib.Keyword[].class);
-        
-        if (keywords != null) {
-            for (Keyword keyword : keywords) {
-                BaseMod.addKeyword(getModID().toLowerCase(), keyword.PROPER_NAME, keyword.NAMES, keyword.DESCRIPTION);
-            }
-        }
+        String keywordStrings =
+            Gdx.files.internal(RESOURCE_FOLDER_NAME + "/localization/" + language + "/KeywordStrings.json")
+                .readString(String.valueOf(StandardCharsets.UTF_8));
+
+        Type typeToken = new TypeToken<Map<String, Keyword>>(){}.getType();
+
+        keywords = gson.fromJson(keywordStrings, typeToken);
+        keywords.forEach((k, v) -> {
+            BaseMod.addKeyword(v.PROPER_NAME, v.NAMES, v.DESCRIPTION);
+        });
+
+//        Gson gson = new Gson();
+//        String language = getLanguageString();
+//
+//        String json = Gdx.files.internal(RESOURCE_FOLDER_NAME + "/localization/" + language + "/KeywordStrings.json").readString(String.valueOf(StandardCharsets.UTF_8));
+//        com.evacipated.cardcrawl.mod.stslib.Keyword[] keywords = gson.fromJson(json, com.evacipated.cardcrawl.mod.stslib.Keyword[].class);
+//
+//        if (keywords != null) {
+//            for (Keyword keyword : keywords) {
+//                BaseMod.addKeyword(getModID().toLowerCase(), keyword.PROPER_NAME, keyword.NAMES, keyword.DESCRIPTION);
+//            }
+//        }
     }
     
     // ================ /LOAD THE KEYWORDS/ ===================    

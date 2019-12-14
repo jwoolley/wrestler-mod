@@ -11,7 +11,7 @@ public class GrappledPower extends AbstractWrestlerPower implements CloneablePow
   private static final int DMG_INCREASE_PCT = 25;
   public static final int MAX_HP_PCT = 10;
 
-  public static final String POWER_ID = "GrappledPower";
+  public static final String POWER_ID = theplaceholder.PlaceholderMod.makeID("GrappledPower");
   public static final String IMG = "grappled.png";
   private static final PowerStrings powerStrings = CardCrawlGame.languagePack.getPowerStrings(POWER_ID);
   public static final String NAME = powerStrings.NAME;

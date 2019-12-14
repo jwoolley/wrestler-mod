@@ -1,9 +1,13 @@
 package theplaceholder.cards.skill;
 
 import basemod.abstracts.CustomCard;
+import com.megacrit.cardcrawl.actions.AbstractGameAction;
+import com.megacrit.cardcrawl.actions.common.DamageAction;
 import com.megacrit.cardcrawl.actions.common.DrawCardAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
+import com.megacrit.cardcrawl.cards.DamageInfo;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
+import com.megacrit.cardcrawl.core.AbstractCreature;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.CardStrings;
@@ -23,8 +27,8 @@ public class ExampleGrappleSkill extends CustomCard {
 
   private static final CardStrings cardStrings;
 
-  private static final CardType TYPE = CardType.SKILL;
-  private static final CardRarity RARITY = CardRarity.UNCOMMON;
+  private static final CardType TYPE = CardType.ATTACK;
+  private static final CardRarity RARITY = CardRarity.BASIC;
   private static final CardTarget TARGET = CardTarget.ENEMY;
 
   private static final int COST = 2;
@@ -33,10 +37,14 @@ public class ExampleGrappleSkill extends CustomCard {
   public ExampleGrappleSkill() {
     super(ID, NAME, getCardResourcePath(IMG_PATH), COST, getDescription(), TYPE, AbstractCardEnum.THE_PLACEHOLDER_GRAY,
         RARITY, TARGET);
+    this.baseDamage = this.damage = 10;
   }
 
   @Override
   public void use(AbstractPlayer p, AbstractMonster m) {
+    AbstractDungeon.actionManager.addToBottom(new DamageAction(m,
+          new DamageInfo(p, damage, damageTypeForTurn), AbstractGameAction.AttackEffect.BLUNT_HEAVY));
+
     AbstractDungeon.actionManager.addToBottom(new ApplyGrappledAction(m, p));
   }
 

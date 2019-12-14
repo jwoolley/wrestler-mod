@@ -1,27 +1,9 @@
-[
-  {
-    "NAMES": [
-      "keyword",
-      "keywords"
-    ],
-    "DESCRIPTION": "Whenever you play a card, gain 1 dexterity this turn only."
-  },
-  {
-    "PROPER_NAME": "Multiword Keyword",
-    "NAMES": [
-      "Multiword Keyword",
-      "multiword_keyword",
-      "multiword_keywords",
-      "multikey",
-      "multikeyword"
-    ],
-    "DESCRIPTION": "Make sure the first element in the NAMES is the same as your PROPER_NAME. The rest is to match keywords like the single word keyword."
-  },
-  {
- 
+{
+  "PlaceholderMod:Grappled": {
+    "PROPER_NAME": "Grappled",
     "NAMES": [
       "grapple", "grappled"
     ],
-    "DESCRIPTION": "#yGrappled enemies receive #b25% more and deal #b25% less. Breaks once you're dealt damage equal to #b10% of your max HP or Grapple another enemy."
+    "DESCRIPTION": "#yGrappled enemies receive #b25% more damage and deal #b25% less. Grapple breaks once you're dealt damage equal to #b10% of your max HP, or if you Grapple another enemy."
   }
-]
+}
