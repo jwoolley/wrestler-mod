@@ -1,0 +1,6 @@
+{
+"WrestlerMod:WrestlerPotion": {
+        "NAME": "Wrestler Potion",
+        "DESCRIPTIONS": ["Gain ", " At the end of your turn, lose ", " Strength."]
+}
+}

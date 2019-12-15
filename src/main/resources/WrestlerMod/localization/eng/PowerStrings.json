@@ -1,0 +1,29 @@
+{
+  "WrestlerMod:CommonPower": {
+          "NAME": "Wrestler Power",
+          "DESCRIPTIONS": ["You applied #b", " keyword.", " keywords."]
+  },
+
+  "WrestlerMod:GrappleContestedPower": {
+    "NAME": "Maintaining Grapple",
+    "DESCRIPTIONS": [
+      "When you receive #b",
+      " more damage this turn, #yGrappled enemy breaks free."
+    ]
+  },
+
+  "WrestlerMod:GrappledPower": {
+    "NAME": "Grappled",
+    "DESCRIPTIONS": [
+      "Deals #b",
+      "% less damage and receives #b",
+      "% more. Lasts until you receive #b",
+      " damage in one turn, or you #yGrapple another enemy."
+    ]
+  },
+
+  "WrestlerMod:RarePower": {
+          "NAME": "Wrestler Power",
+          "DESCRIPTIONS": ["At the start of your turn, TOUCH #b", " enemy." , " enemies."]
+  }
+}
