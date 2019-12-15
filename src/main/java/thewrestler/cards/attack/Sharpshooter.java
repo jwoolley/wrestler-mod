@@ -1,25 +1,26 @@
 package thewrestler.cards.attack;
 
 import basemod.abstracts.CustomCard;
+import com.megacrit.cardcrawl.actions.AbstractGameAction;
+import com.megacrit.cardcrawl.actions.common.DamageAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
+import com.megacrit.cardcrawl.cards.DamageInfo;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
-import thewrestler.actions.cards.TakeToTheMatAction;
+import com.megacrit.cardcrawl.powers.AbstractPower;
 import thewrestler.enums.AbstractCardEnum;
 
 import static thewrestler.WrestlerMod.getCardResourcePath;
 
-public class TakeToTheMat extends CustomCard {
-  public static final String ID = "WrestlerMod:TakeToTheMat";
+public class Sharpshooter extends CustomCard {
+  public static final String ID = "WrestlerMod:Sharpshooter";
   public static final String NAME;
   public static final String DESCRIPTION;
   public static final String[] EXTENDED_DESCRIPTION;
-  public static final String IMG_PATH = "taketothemat.png";
-
-  private static final int HP_PERCENT_THRESHOLD = 50;
+  public static final String IMG_PATH = "sharpshooter.png";
 
   private static final CardStrings cardStrings;
 
@@ -27,25 +28,29 @@ public class TakeToTheMat extends CustomCard {
   private static final CardRarity RARITY = CardRarity.BASIC;
   private static final CardTarget TARGET = CardTarget.ENEMY;
 
-  private static final int COST = 2;
-  private static final int DAMAGE = 10;
-  private static final int DAMAGE_UPGRADE = 5;
+  private static final int COST = 1;
+  private static final int DAMAGE_PER_TRIGGER = 5;
+  private static final int DAMAGE_UPGRADE = 1;
 
-  public TakeToTheMat() {
-    super(ID, NAME, getCardResourcePath(IMG_PATH), COST, getDescription(), TYPE, AbstractCardEnum.THE_WRESTLER_GRAY,
-        RARITY, TARGET);
-    this.baseDamage = this.damage = DAMAGE;
-    this.baseMagicNumber = this.magicNumber = HP_PERCENT_THRESHOLD;
+  public Sharpshooter() {
+    super(ID, NAME, getCardResourcePath(IMG_PATH), COST, DESCRIPTION, TYPE,
+        AbstractCardEnum.THE_WRESTLER_GRAY, RARITY, TARGET);
+    this.baseDamage = this.damage = DAMAGE_PER_TRIGGER;
   }
 
   @Override
   public void use(AbstractPlayer p, AbstractMonster m) {
-    AbstractDungeon.actionManager.addToBottom(new TakeToTheMatAction(m, this.damage, HP_PERCENT_THRESHOLD));
+
+    m.powers.stream().filter(pow -> pow.type == AbstractPower.PowerType.DEBUFF).forEach(pow -> {
+      AbstractDungeon.actionManager.addToBottom(
+          new DamageAction(m, new DamageInfo(p, damage, damageTypeForTurn),
+              AbstractGameAction.AttackEffect.SMASH));
+    });
   }
 
   @Override
   public AbstractCard makeCopy() {
-    return new TakeToTheMat();
+    return new Sharpshooter();
   }
 
   @Override
@@ -53,12 +58,7 @@ public class TakeToTheMat extends CustomCard {
     if (!this.upgraded) {
       this.upgradeName();
       this.upgradeDamage(DAMAGE_UPGRADE);
-      this.rawDescription = getDescription();
-      initializeDescription();
     }
-  }
-  public static String getDescription() {
-    return DESCRIPTION;
   }
 
   static {

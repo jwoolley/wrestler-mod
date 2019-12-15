@@ -56,6 +56,13 @@
     "DESCRIPTION": "Apply !M! Weak and !M! Vulnerable."
   },
 
+
+  "WrestlerMod:Sharpshooter": {
+    "NAME": "Sharpshooter",
+    "DESCRIPTION": "Deal !D! Damage for each debuff the enemy has."
+  },
+
+
   "WrestlerMod:TakeToTheMat": {
     "NAME": "Take to the Mat",
     "DESCRIPTION": "Deal !D! Damage. NL If the enemy has !M! % health or less, they become Grappled."
