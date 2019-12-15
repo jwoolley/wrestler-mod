@@ -15,7 +15,7 @@ public class ApplyGrappledAction extends AbstractGameAction {
 
   private final boolean useFastMode;
 
-  public static int getHpThreshold(AbstractCreature grappledSource) {
+  private static int getHpThreshold(AbstractCreature grappledSource) {
     return (int) Math.floor(grappledSource.maxHealth * GrappledPower.MAX_HP_PCT/100.0f);
   }
 
@@ -23,11 +23,7 @@ public class ApplyGrappledAction extends AbstractGameAction {
     this(target, source, getHpThreshold(source),false);
   }
 
-  public ApplyGrappledAction(AbstractCreature target, AbstractCreature source, int amount) {
-    this(target, source, amount,false);
-  }
-
-  public ApplyGrappledAction(AbstractCreature target, AbstractCreature source, int amount, boolean useFastMode) {
+  private ApplyGrappledAction(AbstractCreature target, AbstractCreature source, int amount, boolean useFastMode) {
     this.actionType = ActionType.DEBUFF;
     this.target = target;
     this.source = source;
@@ -42,6 +38,7 @@ public class ApplyGrappledAction extends AbstractGameAction {
     Logger logger = WrestlerMod.logger;
     if (this.duration == this.startDuration) {
       logger.debug("ApplyGrappledAction.update :: Applying Grapple with HP threshold: " +  this.amount);
+
       AbstractDungeon.actionManager.addToBottom(
           new ApplyPowerAction(
               this.target, this.source, new GrappledPower(this.target, this.source, this.amount), this.amount,

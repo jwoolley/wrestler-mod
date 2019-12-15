@@ -23,11 +23,12 @@ public class GrappleContestedPower extends AbstractWrestlerPower implements Clon
   private static final PowerStrings powerStrings = CardCrawlGame.languagePack.getPowerStrings(POWER_ID);
   public static final String NAME = powerStrings.NAME;
   public static final String[] DESCRIPTIONS = powerStrings.DESCRIPTIONS;
+  public static final PowerType POWER_TYPE = PowerType.BUFF;
 
   // TODO: highlight enemy when moused over
 
   public GrappleContestedPower(AbstractCreature owner, AbstractCreature source, int amount) {
-    super(POWER_ID, NAME, IMG, owner, source, amount);
+    super(POWER_ID, NAME, IMG, owner, source, amount, POWER_TYPE);
   }
 
   @Override

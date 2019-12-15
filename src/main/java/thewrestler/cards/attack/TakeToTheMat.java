@@ -10,6 +10,7 @@ import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
+import thewrestler.actions.cards.TakeToTheMatAction;
 import thewrestler.actions.power.ApplyGrappledAction;
 import thewrestler.enums.AbstractCardEnum;
 
@@ -20,7 +21,9 @@ public class TakeToTheMat extends CustomCard {
   public static final String NAME;
   public static final String DESCRIPTION;
   public static final String[] EXTENDED_DESCRIPTION;
-  public static final String IMG_PATH = "grappleskill.png";
+  public static final String IMG_PATH = "taketothemat.png";
+
+  private static final int HP_PERCENT_THRESHOLD = 50;
 
   private static final CardStrings cardStrings;
 
@@ -29,21 +32,19 @@ public class TakeToTheMat extends CustomCard {
   private static final CardTarget TARGET = CardTarget.ENEMY;
 
   private static final int COST = 2;
-  private static final int UPGRADED_COST = 1;
+  private static final int DAMAGE = 10;
+  private static final int UPGRADE_DAMAGE = 5;
 
   public TakeToTheMat() {
     super(ID, NAME, getCardResourcePath(IMG_PATH), COST, getDescription(), TYPE, AbstractCardEnum.THE_WRESTLER_GRAY,
         RARITY, TARGET);
-    this.baseDamage = this.damage = 10;
+    this.baseDamage = this.damage = DAMAGE;
+    this.baseMagicNumber = this.magicNumber = HP_PERCENT_THRESHOLD;
   }
 
   @Override
   public void use(AbstractPlayer p, AbstractMonster m) {
-    AbstractDungeon.actionManager.addToBottom(new DamageAction(m,
-          new DamageInfo(p, damage, damageTypeForTurn), AbstractGameAction.AttackEffect.BLUNT_HEAVY));
-
-    // TODO: HP check
-    AbstractDungeon.actionManager.addToBottom(new ApplyGrappledAction(m, p));
+    AbstractDungeon.actionManager.addToBottom(new TakeToTheMatAction(m, this.damage, HP_PERCENT_THRESHOLD));
   }
 
   @Override
@@ -54,7 +55,7 @@ public class TakeToTheMat extends CustomCard {
   @Override
   public void upgrade() {
     if (!this.upgraded) {
-      this.upgradeBaseCost(UPGRADED_COST);
+      this.upgradeDamage(UPGRADE_DAMAGE);
       this.rawDescription = getDescription();
       initializeDescription();
     }

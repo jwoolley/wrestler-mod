@@ -14,13 +14,13 @@ public class AbstractWrestlerPower extends AbstractPower {
   protected AbstractCreature source;
 
   public AbstractWrestlerPower(String id, String name, String imgFilename,
-                               AbstractCreature owner, AbstractCreature source, int amount) {
+                               AbstractCreature owner, AbstractCreature source, int amount, PowerType powerType) {
     this.ID = id;
     this.name = name;
     this.owner = owner;
     this.source = source;
     this.amount = amount;
-
+    this.type = powerType;
     updateDescription();
 
     this.region128 =

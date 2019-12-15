@@ -25,8 +25,10 @@ public class GrappledPower extends AbstractWrestlerPower implements CloneablePow
   public static final String NAME = powerStrings.NAME;
   public static final String[] DESCRIPTIONS = powerStrings.DESCRIPTIONS;
 
+  public static final PowerType POWER_TYPE = PowerType.DEBUFF;
+
   public GrappledPower(AbstractCreature owner, AbstractCreature source, int amount) {
-    super(POWER_ID, NAME, IMG, owner, source, amount);
+    super(POWER_ID, NAME, IMG, owner, source, amount, POWER_TYPE);
   }
 
   @Override

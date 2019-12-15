@@ -53,7 +53,7 @@
 
   "WrestlerMod:TakeToTheMat": {
     "NAME": "Take to the Mat",
-    "DESCRIPTION": "Deal !D! Damage. If the enemy has 50% health or less, they become Grappled."
+    "DESCRIPTION": "Deal !D! Damage. NL If the enemy has !M!% health or less, they become Grappled."
   },
 
   "WrestlerMod:DefaultCommonAttack": {
