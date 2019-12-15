@@ -51,9 +51,14 @@
     "DESCRIPTION": "Channel 1 Default Orb."
   },
 
+  "WrestlerMod:EyePoke": {
+    "NAME": "Eye Poke",
+    "DESCRIPTION": "Apply !M! Weak and !M! Vulnerable."
+  },
+
   "WrestlerMod:TakeToTheMat": {
     "NAME": "Take to the Mat",
-    "DESCRIPTION": "Deal !D! Damage. NL If the enemy has !M!% health or less, they become Grappled."
+    "DESCRIPTION": "Deal !D! Damage. NL If the enemy has !M! % health or less, they become Grappled."
   },
 
   "WrestlerMod:DefaultCommonAttack": {

@@ -27,6 +27,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import thewrestler.cards.*;
 import thewrestler.cards.attack.TakeToTheMat;
+import thewrestler.cards.skill.EyePoke;
 import thewrestler.characters.WrestlerCharacter;
 import thewrestler.enums.AbstractCardEnum;
 import thewrestler.enums.WrestlerCharEnum;
@@ -112,11 +113,6 @@ public class WrestlerMod implements
     public static final Color WRESTLER_POTION_LIQUID = CardHelper.getColor(209.0f, 53.0f, 18.0f); // Orange-ish Red
     public static final Color WRESTLER_POTION_HYBRID = CardHelper.getColor(255.0f, 230.0f, 230.0f); // Near White
     public static final Color WRESTLER_POTION_SPOTS = CardHelper.getColor(100.0f, 25.0f, 10.0f); // Super Dark Red/Brown
-    
-    // ONCE YOU CHANGE YOUR MOD ID (BELOW, YOU CAN'T MISS IT) CHANGE THESE PATHS!!!!!!!!!!!
-    // ONCE YOU CHANGE YOUR MOD ID (BELOW, YOU CAN'T MISS IT) CHANGE THESE PATHS!!!!!!!!!!!
-    // ONCE YOU CHANGE YOUR MOD ID (BELOW, YOU CAN'T MISS IT) CHANGE THESE PATHS!!!!!!!!!!!
-
 
     public static final String getAnimationResourcePath(String resourcePath) {
         return RESOURCE_FOLDER_NAME + "/animations/" + resourcePath;
@@ -197,31 +193,9 @@ public class WrestlerMod implements
         logger.info("Subscribe to BaseMod hooks");
         
         BaseMod.subscribe(this);
-        
-      /*
-           (   ( /(  (     ( /( (            (  `   ( /( )\ )    )\ ))\ )
-           )\  )\()) )\    )\()))\ )   (     )\))(  )\()|()/(   (()/(()/(
-         (((_)((_)((((_)( ((_)\(()/(   )\   ((_)()\((_)\ /(_))   /(_))(_))
-         )\___ _((_)\ _ )\ _((_)/(_))_((_)  (_()((_) ((_|_))_  _(_))(_))_
-        ((/ __| || (_)_\(_) \| |/ __| __| |  \/  |/ _ \|   \  |_ _||   (_)
-         | (__| __ |/ _ \ | .` | (_ | _|  | |\/| | (_) | |) |  | | | |) |
-          \___|_||_/_/ \_\|_|\_|\___|___| |_|  |_|\___/|___/  |___||___(_)
-      */
-      
+
         setModID(MOD_ID);
-        // cool
-        // TODO: NOW READ THIS!!!!!!!!!!!!!!!:
-        
-        // 1. Go to your resources folder in the project panel, and refactor> rename theWrestlerResources to
-        // yourModIDResources.
-        
-        // 2. Click on the localization > eng folder and press ctrl+shift+r, then select "Directory" (rather than in Project)
-        // replace all instances of WrestlerCharacter with yourModID.
-        // Because your mod ID isn't the default. Your cards (and everything else) should have Your mod id. Not mine.
-        
-        // 3. FINALLY and most importantly: Scroll up a bit. You may have noticed the image locations above don't use getModID()
-        // Change their locations to reflect your actual ID rather than WrestlerCharacter. They get loaded before getID is a thing.
-        
+
         logger.info("Done subscribing");
         
         logger.info("Creating the color " + AbstractCardEnum.THE_WRESTLER_GRAY);
@@ -258,7 +232,7 @@ public class WrestlerMod implements
     public static void setModID(String ID) { // DON'T EDIT
         modID = ID;
 
-        /*
+
         Gson coolG = new Gson(); // EY DON'T EDIT THIS
         InputStream in = WrestlerMod.class.getResourceAsStream("/IDCheckStringsDONT-EDIT-AT-ALL.json"); // DON'T EDIT THIS ETHER
         IDCheckDontTouchPls EXCEPTION_STRINGS = coolG.fromJson(new InputStreamReader(in, StandardCharsets.UTF_8), IDCheckDontTouchPls.class); // OR THIS, DON'T EDIT IT
@@ -271,8 +245,7 @@ public class WrestlerMod implements
             modID = ID; // DON'T WRITE OR CHANGE THINGS HERE NOT EVEN A LITTLE
         } // NO
         logger.info("Success! ID is " + modID); // WHY WOULD U WANT IT NOT TO LOG?? DON'T EDIT THIS.
-        */
-    } // NO
+    }
     
     public static String getModID() { // NO
         return modID; // DOUBLE NO
@@ -443,8 +416,8 @@ public class WrestlerMod implements
         // Don't comment out/delete these cards (yet). You need 1 of each type and rarity (technically) for your game not to crash
         // when generating card rewards/shop screen items.
 
+        BaseMod.addCard(new EyePoke());
         BaseMod.addCard(new TakeToTheMat());
-
 
         BaseMod.addCard(new OrbSkill());
         BaseMod.addCard(new DefaultSecondMagicNumberSkill());
@@ -477,6 +450,8 @@ public class WrestlerMod implements
         UnlockTracker.unlockCard(DefaultRareAttack.ID);
         UnlockTracker.unlockCard(DefaultRareSkill.ID);
         UnlockTracker.unlockCard(DefaultRarePower.ID);
+
+        UnlockTracker.unlockCard(EyePoke.ID);
         UnlockTracker.unlockCard(TakeToTheMat.ID);
         
         logger.info("Done adding cards!");

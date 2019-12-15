@@ -1,8 +1,8 @@
 {
-  "DEFAULTID": "TheWrestler",
-  "DEVID": "theWrestlerDev",
-  "EXCEPTION": "Go to your constructor in your class with SpireInitializer and change your mod ID from \"TheWrestler\"",
-  "PACKAGE_EXCEPTION": "Rename your TheWrestler folder (package) to match your mod ID! ",
-  "RESOURCE_FOLDER_EXCEPTION": "Rename your WrestlerMod resources folder to match your mod ID!",
+  "DEFAULTID": "TheDefault",
+  "DEVID": "theDefaultDev",
+  "EXCEPTION": "Go to your constructor in your class with SpireInitializer and change your mod ID from \"TheDefault\"",
+  "PACKAGE_EXCEPTION": "Rename your TheDefault folder (package) to match your mod ID! ",
+  "RESOURCE_FOLDER_EXCEPTION": "Rename your DefaultMod resources folder to match your mod ID!",
   "RESOURCES": "Resources"
 }

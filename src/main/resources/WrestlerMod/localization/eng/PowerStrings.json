@@ -4,11 +4,12 @@
           "DESCRIPTIONS": ["You applied #b", " keyword.", " keywords."]
   },
 
-  "WrestlerMod:GrappleContestedPower": {
+  "WrestlerMod:MaintainGrapplePower": {
     "NAME": "Maintaining Grapple",
     "DESCRIPTIONS": [
       "When you receive #b",
-      " more damage this turn, the #yGrappled enemy breaks free."
+      " more damage this turn, the #yGrappled enemy breaks free.",
+      "Maintain Grapple Up"
     ]
   },
 

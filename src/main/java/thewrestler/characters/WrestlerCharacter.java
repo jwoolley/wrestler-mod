@@ -22,6 +22,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import thewrestler.WrestlerMod;
 import thewrestler.cards.*;
+import thewrestler.cards.skill.EyePoke;
 import thewrestler.cards.attack.TakeToTheMat;
 import thewrestler.enums.AbstractCardEnum;
 import thewrestler.relics.Headgear;
@@ -160,6 +161,7 @@ public class WrestlerCharacter extends CustomPlayer {
         retVal.add(DefaultCommonSkill.ID);
         retVal.add(DefaultCommonSkill.ID);
 
+        retVal.add(EyePoke.ID);
         retVal.add(TakeToTheMat.ID);
 
         retVal.add(DefaultSecondMagicNumberSkill.ID);

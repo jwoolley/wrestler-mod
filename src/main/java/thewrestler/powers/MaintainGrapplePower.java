@@ -16,10 +16,10 @@ import thewrestler.WrestlerMod;
 
 import java.util.List;
 
-public class GrappleContestedPower extends AbstractWrestlerPower implements CloneablePowerInterface {
+public class MaintainGrapplePower extends AbstractWrestlerPower implements CloneablePowerInterface {
 
-  public static final String POWER_ID = WrestlerMod.makeID("GrappleContestedPower");
-  public static final String IMG = "grapple_contested.png";
+  public static final String POWER_ID = WrestlerMod.makeID("MaintainGrapplePower");
+  public static final String IMG = "maintain_grapple.png";
   private static final PowerStrings powerStrings = CardCrawlGame.languagePack.getPowerStrings(POWER_ID);
   public static final String NAME = powerStrings.NAME;
   public static final String[] DESCRIPTIONS = powerStrings.DESCRIPTIONS;
@@ -27,7 +27,7 @@ public class GrappleContestedPower extends AbstractWrestlerPower implements Clon
 
   // TODO: highlight enemy when moused over
 
-  public GrappleContestedPower(AbstractCreature owner, AbstractCreature source, int amount) {
+  public MaintainGrapplePower(AbstractCreature owner, AbstractCreature source, int amount) {
     super(POWER_ID, NAME, IMG, owner, source, amount, POWER_TYPE);
   }
 
@@ -36,34 +36,47 @@ public class GrappleContestedPower extends AbstractWrestlerPower implements Clon
     this.description = DESCRIPTIONS[0] + this.amount + DESCRIPTIONS[1];
   }
 
-  static public void applyGrappleContested(AbstractCreature source, AbstractCreature owner, int amount) {
-    // TODO: application logic should be in GrappleContestedPower
-    if (source.hasPower(GrappleContestedPower.POWER_ID)) {
-      GrappleContestedPower contestedPower = (GrappleContestedPower) source.getPower(GrappleContestedPower.POWER_ID);
-      contestedPower.amount = amount;
-      contestedPower.flash();
+  static public void applyGrappleContested(AbstractCreature source, AbstractCreature owner, int amount,
+                                           boolean isRefresh) {
+    if (source.hasPower(MaintainGrapplePower.POWER_ID)) {
 
-      AbstractDungeon.effectList.add(
-          new PowerBuffEffect(source.hb.cX - source.animX, source.hb.cY + source.hb.height / 2.0F, NAME));
+      MaintainGrapplePower powerInstance = (MaintainGrapplePower) source.getPower(MaintainGrapplePower.POWER_ID);
 
-      contestedPower.updateDescription();
+      //  negative value parameter isn't handled at present (if handled, should use "Maintain Grapple Down" flashText)
+      if (amount > 0) {
+        final String flashText = isRefresh ? NAME : DESCRIPTIONS[2];
+
+        if (!isRefresh) {
+          powerInstance.stackPower(amount);
+        } else {
+          powerInstance.amount = amount;
+        }
+
+        powerInstance.updateDescription();
+        powerInstance.flashWithoutSound();
+        AbstractDungeon.effectList.add(
+            new PowerBuffEffect(source.hb.cX - source.animX, source.hb.cY + source.hb.height / 2.0F, flashText));
+
+      }
     } else {
       AbstractDungeon.actionManager.addToBottom(new ApplyPowerAction(source, owner,
-          new GrappleContestedPower(source, owner, amount), amount));
+          new MaintainGrapplePower(source, owner, amount), amount));
     }
   }
 
   public static void clearGrappleContested(AbstractCreature source, AbstractCreature owner) {
-    if (source.hasPower(GrappleContestedPower.POWER_ID)) {
+    if (source.hasPower(MaintainGrapplePower.POWER_ID)) {
       AbstractDungeon.actionManager.addToBottom(
-          new RemoveSpecificPowerAction(source, owner, GrappleContestedPower.POWER_ID));
+          new RemoveSpecificPowerAction(source, owner, MaintainGrapplePower.POWER_ID));
     }
   }
 
   @Override
   public int onAttackedToChangeDamage(DamageInfo info, int amount) {
-    AbstractDungeon.actionManager.addToBottom(
-        new ReducePowerAction(this.owner, this.owner, this, amount));
+    if (amount > 0) {
+      AbstractDungeon.actionManager.addToBottom(
+          new ReducePowerAction(this.owner, this.owner, this, amount));
+    }
     return amount;
   }
 
@@ -78,6 +91,6 @@ public class GrappleContestedPower extends AbstractWrestlerPower implements Clon
 
   @Override
   public AbstractPower makeCopy() {
-    return new GrappleContestedPower(owner, source, amount);
+    return new MaintainGrapplePower(owner, source, amount);
   }
 }

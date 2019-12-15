@@ -1,6 +1,7 @@
 package thewrestler.powers;
 
 import basemod.interfaces.CloneablePowerInterface;
+import com.megacrit.cardcrawl.actions.common.RemoveSpecificPowerAction;
 import com.megacrit.cardcrawl.cards.DamageInfo;
 import com.megacrit.cardcrawl.core.AbstractCreature;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
@@ -70,8 +71,8 @@ public class GrappledPower extends AbstractWrestlerPower implements CloneablePow
   public void atEndOfRound() {
     System.out.println("GrappledPower::atEndOfRound triggered. source: " + this.source);
       if (this.source == AbstractDungeon.player) {
-        GrappleContestedPower.applyGrappleContested(AbstractDungeon.player, this.owner, this.amount);
-        System.out.println("GrappledPower::atEndOfRound source is player. reapplying GrappleContestedPower");
+        MaintainGrapplePower.applyGrappleContested(AbstractDungeon.player, this.owner, this.amount, true);
+        System.out.println("GrappledPower::atEndOfRound source is player. reapplying MaintainGrapplePower");
       } else {
       System.out.println("GrappledPower::atEndOfRound source isn't player. what is going on exactly");
     }
@@ -81,24 +82,40 @@ public class GrappledPower extends AbstractWrestlerPower implements CloneablePow
   public void atEndOfTurn(boolean isPlayer) {
     System.out.println("GrappledPower::atEndOfTurn triggered. isPlayer: " + isPlayer);
     if (isPlayer) {
-      System.out.println("GrappledPower::atStartOfTurnPostDraw reapplying GrappleContestedPower to source: " + this.source);
-      GrappleContestedPower.applyGrappleContested(this.source, this.owner, this.amount);
+      System.out.println("GrappledPower::atStartOfTurnPostDraw reapplying MaintainGrapplePower to source: " + this.source);
+      MaintainGrapplePower.applyGrappleContested(this.source, this.owner, this.amount, true);
     }
   }
 
+  @Override
+  public void stackPower(int stackAmount) {
+    super.stackPower(stackAmount);
+    MaintainGrapplePower.applyGrappleContested(this.source, this.owner, stackAmount, false);
 
+  }
+
+  @Override
   public void onInitialApplication() {
-    GrappleContestedPower.applyGrappleContested(this.source, this.owner, this.amount);
+    MaintainGrapplePower.applyGrappleContested(this.source, this.owner, this.amount, false);
+
+    getGrappledEnemies().stream()
+        .filter(m -> m != this.owner)
+        .forEach(m ->
+            AbstractDungeon.actionManager.addToBottom(
+                new RemoveSpecificPowerAction(m, this.owner, GrappledPower.POWER_ID)));
   }
 
   @Override
   public void onDeath() {
-    GrappleContestedPower.clearGrappleContested(this.source, this.owner);
+    MaintainGrapplePower.clearGrappleContested(this.source, this.owner);
   }
 
   @Override
   public void onRemove() {
-    GrappleContestedPower.clearGrappleContested(this.source, this.owner);
+    logger.info("GrapplePower:onRemove number of grappled enemies: " + getGrappledEnemies().size());
+    if (getGrappledEnemies().size() == 0) {
+      MaintainGrapplePower.clearGrappleContested(this.source, this.owner);
+    }
   }
 
   @Override

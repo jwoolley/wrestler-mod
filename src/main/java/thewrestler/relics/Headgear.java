@@ -24,7 +24,7 @@ public class Headgear extends CustomRelic {
     super(ID, IMG, OUTLINE, RelicTier.STARTER, LandingSound.FLAT);
   }
 
-  private static final int BLOCK_AMOUNT = 4;
+  private static final int BLOCK_AMOUNT = 3;
 
   public void onApplyPower(AbstractPower power) {
     AbstractPlayer player = AbstractDungeon.player;
