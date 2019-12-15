@@ -4,15 +4,24 @@
           "DESCRIPTIONS": ["You applied #b", " keyword.", " keywords."]
   },
 
+  "PlaceholderMod:GrappleContestedPower": {
+    "NAME": "Maintaining Grapple",
+    "DESCRIPTIONS": [
+      "When you receive #b",
+      " more damage this turn, #yGrappled enemy breaks free."
+    ]
+  },
+
   "PlaceholderMod:GrappledPower": {
     "NAME": "Grappled",
     "DESCRIPTIONS": [
       "Deals #b",
       "% less damage and receives #b",
       "% more. Lasts until you receive #b",
-      " damage, or you #yGrapple another enemy."
+      " damage in one turn, or you #yGrapple another enemy."
     ]
   },
+
   "PlaceholderMod:RarePower": {
           "NAME": "Placeholder Power",
           "DESCRIPTIONS": ["At the start of your turn, TOUCH #b", " enemy." , " enemies."]

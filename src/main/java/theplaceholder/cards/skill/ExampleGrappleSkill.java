@@ -45,6 +45,7 @@ public class ExampleGrappleSkill extends CustomCard {
     AbstractDungeon.actionManager.addToBottom(new DamageAction(m,
           new DamageInfo(p, damage, damageTypeForTurn), AbstractGameAction.AttackEffect.BLUNT_HEAVY));
 
+    // TODO: HP check
     AbstractDungeon.actionManager.addToBottom(new ApplyGrappledAction(m, p));
   }
 

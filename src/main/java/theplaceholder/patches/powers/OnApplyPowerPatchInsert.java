@@ -24,15 +24,15 @@ public class OnApplyPowerPatchInsert {
   public static void Insert(ApplyPowerAction __instance, AbstractCreature source, AbstractCreature target,
                              AbstractPower powerToApply) {
 
-    System.out.println("OnApplyPowerPatchBefore::Insert called.");
-    System.out.println("OnApplyPowerPatchBefore::Insert source: " + source);
-    System.out.println("OnApplyPowerPatchBefore::Insert target: " + target);
-    System.out.println("OnApplyPowerPatchBefore::Insert powerToApply: " + powerToApply);
+//    System.out.println("OnApplyPowerPatchBefore::Insert called.");
+//    System.out.println("OnApplyPowerPatchBefore::Insert source: " + source);
+//    System.out.println("OnApplyPowerPatchBefore::Insert target: " + target);
+//    System.out.println("OnApplyPowerPatchBefore::Insert powerToApply: " + powerToApply);
 
     boolean hasBuffAlready = target.hasPower(powerToApply.ID);
 
-    System.out.println("OnApplyPowerPatchBefore::Insert hasBuffAlready: " + hasBuffAlready);
-    System.out.println("OnApplyPowerPatchBefore::Insert isDeadOrEscaped: " + target.isDeadOrEscaped());
+//    System.out.println("OnApplyPowerPatchBefore::Insert hasBuffAlready: " + hasBuffAlready);
+//    System.out.println("OnApplyPowerPatchBefore::Insert isDeadOrEscaped: " + target.isDeadOrEscaped());
 
     // TODO: check for artifact power
 
