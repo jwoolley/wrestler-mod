@@ -26,5 +26,17 @@
   "WrestlerMod:RarePower": {
           "NAME": "Wrestler Power",
           "DESCRIPTIONS": ["At the start of your turn, TOUCH #b", " enemy." , " enemies."]
+  },
+
+
+  "WrestlerMod:SquaringOffPower": {
+    "NAME": "Squaring Off",
+    "DESCRIPTIONS": [
+      "If you attack this enemy #b",
+      " more ",
+      "time ",
+      "times ",
+      "this turn, apply #yGrappled."
+    ]
   }
 }

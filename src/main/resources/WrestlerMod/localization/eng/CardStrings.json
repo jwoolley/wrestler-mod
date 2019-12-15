@@ -62,6 +62,12 @@
     "DESCRIPTION": "Deal !D! Damage for each debuff the enemy has."
   },
 
+  "WrestlerMod:SquareOff": {
+    "NAME": "Square Off",
+    "DESCRIPTION": "Choose an enemy. If you attack it twice this turn, apply Grappled. NL Gain !B! Block."
+  },
+
+
 
   "WrestlerMod:TakeToTheMat": {
     "NAME": "Take to the Mat",

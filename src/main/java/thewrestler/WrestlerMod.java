@@ -29,6 +29,7 @@ import thewrestler.cards.*;
 import thewrestler.cards.attack.Sharpshooter;
 import thewrestler.cards.attack.TakeToTheMat;
 import thewrestler.cards.skill.EyePoke;
+import thewrestler.cards.skill.SquareOff;
 import thewrestler.characters.WrestlerCharacter;
 import thewrestler.enums.AbstractCardEnum;
 import thewrestler.enums.WrestlerCharEnum;
@@ -108,7 +109,7 @@ public class WrestlerMod implements
 
     // Colors (RGB)
     // Character Color
-    public static final Color WRESTLER_GRAY = CardHelper.getColor(70.0f, 70.0f, 64.0f);
+    public static final Color WRESTLER_ORANGE = CardHelper.getColor(220.0f, 140.0f, 0.0f);
     
     // Potion Colors in RGB
     public static final Color WRESTLER_POTION_LIQUID = CardHelper.getColor(209.0f, 53.0f, 18.0f); // Orange-ish Red
@@ -199,10 +200,10 @@ public class WrestlerMod implements
 
         logger.info("Done subscribing");
         
-        logger.info("Creating the color " + AbstractCardEnum.THE_WRESTLER_GRAY);
+        logger.info("Creating the color " + AbstractCardEnum.THE_WRESTLER_ORANGE);
         
-        BaseMod.addColor(AbstractCardEnum.THE_WRESTLER_GRAY, WRESTLER_GRAY, WRESTLER_GRAY, WRESTLER_GRAY,
-            WRESTLER_GRAY, WRESTLER_GRAY, WRESTLER_GRAY, WRESTLER_GRAY,
+        BaseMod.addColor(AbstractCardEnum.THE_WRESTLER_ORANGE, WRESTLER_ORANGE, WRESTLER_ORANGE, WRESTLER_ORANGE,
+            WRESTLER_ORANGE, WRESTLER_ORANGE, WRESTLER_ORANGE, WRESTLER_ORANGE,
             ATTACK_WRESTLER_GRAY, SKILL_WRESTLER_GRAY, POWER_WRESTLER_GRAY, ENERGY_ORB_DEFAULT_GRAY,
                 ATTACK_DEFAULT_GRAY_PORTRAIT, SKILL_DEFAULT_GRAY_PORTRAIT, POWER_DEFAULT_GRAY_PORTRAIT,
                 ENERGY_ORB_DEFAULT_GRAY_PORTRAIT, CARD_ENERGY_ORB);
@@ -386,7 +387,7 @@ public class WrestlerMod implements
     public void receiveEditRelics() {
         logger.info("Adding relics");
         // This adds a character specific relic. Only when you play with the mentioned color, will you get this relic.
-        BaseMod.addRelicToCustomPool(new Headgear(), AbstractCardEnum.THE_WRESTLER_GRAY);
+        BaseMod.addRelicToCustomPool(new Headgear(), AbstractCardEnum.THE_WRESTLER_ORANGE);
 
         // This adds a relic to the Shared pool. Every character can find this relic.
         //  BaseMod.addRelic(new WrestlerRelic2(), RelicType.SHARED);
@@ -419,6 +420,7 @@ public class WrestlerMod implements
 
         BaseMod.addCard(new EyePoke());
         BaseMod.addCard(new Sharpshooter());
+        BaseMod.addCard(new SquareOff());
         BaseMod.addCard(new TakeToTheMat());
 
         BaseMod.addCard(new OrbSkill());
@@ -455,6 +457,7 @@ public class WrestlerMod implements
 
         UnlockTracker.unlockCard(EyePoke.ID);
         UnlockTracker.unlockCard(Sharpshooter.ID);
+        UnlockTracker.unlockCard(SquareOff.ID);
         UnlockTracker.unlockCard(TakeToTheMat.ID);
         
         logger.info("Done adding cards!");

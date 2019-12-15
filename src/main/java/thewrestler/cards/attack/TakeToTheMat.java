@@ -32,7 +32,7 @@ public class TakeToTheMat extends CustomCard {
   private static final int DAMAGE_UPGRADE = 5;
 
   public TakeToTheMat() {
-    super(ID, NAME, getCardResourcePath(IMG_PATH), COST, getDescription(), TYPE, AbstractCardEnum.THE_WRESTLER_GRAY,
+    super(ID, NAME, getCardResourcePath(IMG_PATH), COST, getDescription(), TYPE, AbstractCardEnum.THE_WRESTLER_ORANGE,
         RARITY, TARGET);
     this.baseDamage = this.damage = DAMAGE;
     this.baseMagicNumber = this.magicNumber = HP_PERCENT_THRESHOLD;

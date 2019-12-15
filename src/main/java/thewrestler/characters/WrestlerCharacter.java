@@ -36,9 +36,8 @@ import static thewrestler.WrestlerMod.*;
 //All text (starting description and loadout, anything labeled TEXT[]) can be found in WrestlerMod-character-Strings.json in the resources
 
 public class WrestlerCharacter extends CustomPlayer {
-    public static final Color CARD_RENDER_COLOR = new Color(0.9F, 0.6F, 0.9F, 1.0F);
-    public static final Color SLASH_ATTACK_COLOR = Color.LIGHT_GRAY.cpy();
-
+    public static final Color CARD_RENDER_COLOR = new Color(0.9F, 0.5F, 0.0F, 1.0F);
+    public static final Color SLASH_ATTACK_COLOR = Color.ORANGE.cpy();
 
     public static final Logger logger = LogManager.getLogger(WrestlerMod.class.getName());
 
@@ -52,9 +51,9 @@ public class WrestlerCharacter extends CustomPlayer {
     public static class Enums {
 //        @SpireEnum
 //        public static AbstractPlayer.PlayerClass THE_WRESTLER;
-//        @SpireEnum(name = "THE_WRESTLER_GRAY") // These two HAVE to have the same absolutely identical name.
-//        public static AbstractCard.CardColor THE_WRESTLER_GRAY;
-        @SpireEnum(name = "THE_WRESTLER_GRAY") @SuppressWarnings("unused")
+//        @SpireEnum(name = "THE_WRESTLER_ORANGE") // These two HAVE to have the same absolutely identical name.
+//        public static AbstractCard.CardColor THE_WRESTLER_ORANGE;
+        @SpireEnum(name = "THE_WRESTLER_ORANGE") @SuppressWarnings("unused")
         public static CardLibrary.LibraryType THE_WRESTLER_GRAY;
     }
 
@@ -200,7 +199,7 @@ public class WrestlerCharacter extends CustomPlayer {
     // Should return the card color enum to be associated with your character.
     @Override
     public AbstractCard.CardColor getCardColor() {
-        return AbstractCardEnum.THE_WRESTLER_GRAY;
+        return AbstractCardEnum.THE_WRESTLER_ORANGE;
     }
 
     // Should return a color object to be used to color the trail of moving cards

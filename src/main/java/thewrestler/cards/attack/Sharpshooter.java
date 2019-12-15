@@ -34,7 +34,7 @@ public class Sharpshooter extends CustomCard {
 
   public Sharpshooter() {
     super(ID, NAME, getCardResourcePath(IMG_PATH), COST, DESCRIPTION, TYPE,
-        AbstractCardEnum.THE_WRESTLER_GRAY, RARITY, TARGET);
+        AbstractCardEnum.THE_WRESTLER_ORANGE, RARITY, TARGET);
     this.baseDamage = this.damage = DAMAGE_PER_TRIGGER;
   }
 
