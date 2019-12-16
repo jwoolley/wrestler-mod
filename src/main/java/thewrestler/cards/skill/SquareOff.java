@@ -53,6 +53,7 @@ public class SquareOff extends CustomCard {
   @Override
   public void upgrade() {
     if (!this.upgraded) {
+      this.upgradeName();
       this.upgradeBlock(BLOCK_AMOUNT_UPGRADE);
       this.rawDescription = getDescription();
       initializeDescription();
