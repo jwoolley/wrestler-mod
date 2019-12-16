@@ -26,6 +26,8 @@ import com.megacrit.cardcrawl.unlock.UnlockTracker;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import thewrestler.cards.*;
+import thewrestler.cards.attack.DivingStomp;
+import thewrestler.cards.attack.FrogSplash;
 import thewrestler.cards.attack.Sharpshooter;
 import thewrestler.cards.attack.TakeToTheMat;
 import thewrestler.cards.power.Scrapper;
@@ -281,6 +283,7 @@ public class WrestlerMod implements
 
     private void registerSfx() {
         HashMap<String, Sfx> reflectedMap = getSoundsMap();
+        reflectedMap.put("SPLAT_WET_1", new Sfx(getAudioResourcePath("TheWrestler_SplatWet1.ogg")));
         reflectedMap.put("THUD_MEDIUM_1", new Sfx(getAudioResourcePath("TheWrestler_ThudMedium1.ogg")));
     }
 
@@ -419,7 +422,9 @@ public class WrestlerMod implements
         // Don't comment out/delete these cards (yet). You need 1 of each type and rarity (technically) for your game not to crash
         // when generating card rewards/shop screen items.
 
+        BaseMod.addCard(new DivingStomp());
         BaseMod.addCard(new EyePoke());
+        BaseMod.addCard(new FrogSplash());
         BaseMod.addCard(new Scrapper());
         BaseMod.addCard(new Sharpshooter());
         BaseMod.addCard(new SquareOff());
@@ -453,7 +458,9 @@ public class WrestlerMod implements
         UnlockTracker.unlockCard(DefaultRareAttack.ID);
         UnlockTracker.unlockCard(DefaultRareSkill.ID);
 
+        UnlockTracker.unlockCard(DivingStomp.ID);
         UnlockTracker.unlockCard(EyePoke.ID);
+        UnlockTracker.unlockCard(FrogSplash.ID);
         UnlockTracker.unlockCard(Scrapper.ID);
         UnlockTracker.unlockCard(Sharpshooter.ID);
         UnlockTracker.unlockCard(SquareOff.ID);

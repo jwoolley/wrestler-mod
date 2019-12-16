@@ -45,10 +45,22 @@
     "DESCRIPTION": "Channel 1 Default Orb."
   },
 
+  "WrestlerMod:DivingStomp": {
+    "NAME": "Diving Stomp",
+    "DESCRIPTION": "Deal !D! Damage. NL Apply !M! Sprained."
+  },
+
+
   "WrestlerMod:EyePoke": {
     "NAME": "Eye Poke",
     "DESCRIPTION": "Apply !M! Weak and !M! Vulnerable."
   },
+
+  "WrestlerMod:FrogSplash": {
+    "NAME": "Frog Splash",
+    "DESCRIPTION": "Deal !D! Damage to an enemy and half that damage to all other enemies."
+  },
+
 
   "WrestlerMod:Scrapper": {
     "NAME": "Scrapper",

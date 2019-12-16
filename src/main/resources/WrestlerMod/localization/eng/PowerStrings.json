@@ -36,6 +36,15 @@
     ]
   },
 
+
+  "WrestlerMod:SprainPower": {
+    "NAME": "Sprained",
+    "DESCRIPTIONS": [
+      "Whenever this character attacks, it takes #b",
+      " damage."
+    ]
+  },
+
   "WrestlerMod:SquaringOffPower": {
     "NAME": "Squaring Off",
     "DESCRIPTIONS": [

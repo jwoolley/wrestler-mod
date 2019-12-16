@@ -2,8 +2,8 @@ package thewrestler.cards.attack;
 
 import basemod.abstracts.CustomCard;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
+import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
 import com.megacrit.cardcrawl.actions.common.DamageAction;
-import com.megacrit.cardcrawl.actions.utility.SFXAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.cards.DamageInfo;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
@@ -12,50 +12,49 @@ import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import thewrestler.enums.AbstractCardEnum;
+import thewrestler.powers.SprainPower;
 
 import static thewrestler.WrestlerMod.getCardResourcePath;
 
-public class FrogSplash extends CustomCard {
-  public static final String ID = "WrestlerMod:FrogSplash";
+public class DivingStomp extends CustomCard {
+  public static final String ID = "WrestlerMod:DivingStomp";
   public static final String NAME;
   public static final String DESCRIPTION;
   public static final String[] EXTENDED_DESCRIPTION;
-  public static final String IMG_PATH = "frogsplash.png";
+  public static final String IMG_PATH = "divingstomp.png";
 
   private static final CardStrings cardStrings;
 
   private static final CardType TYPE = CardType.ATTACK;
-  private static final CardRarity RARITY = CardRarity.BASIC;
+  private static final CardRarity RARITY = CardRarity.UNCOMMON;
   private static final CardTarget TARGET = CardTarget.ENEMY;
 
-  private static final int COST = 1;
-  private static final int DAMAGE = 10;
+  private static final int COST = 2;
+  private static final int DAMAGE = 14;
   private static final int DAMAGE_UPGRADE = 2;
+  private static final int SPRAIN_AMOUNT = 1;
+  private static final int SPRAIN_AMOUNT_UPGRADE = 1;
 
-  public FrogSplash() {
+  public DivingStomp() {
     super(ID, NAME, getCardResourcePath(IMG_PATH), COST, DESCRIPTION, TYPE,
         AbstractCardEnum.THE_WRESTLER_ORANGE, RARITY, TARGET);
     this.baseDamage = this.damage = DAMAGE;
+    this.baseMagicNumber = this.magicNumber = SPRAIN_AMOUNT;
   }
 
   @Override
   public void use(AbstractPlayer p, AbstractMonster m) {
     AbstractDungeon.actionManager.addToBottom(
         new DamageAction(m, new DamageInfo(p, damage, damageTypeForTurn),
-            AbstractGameAction.AttackEffect.NONE));
+            AbstractGameAction.AttackEffect.BLUNT_HEAVY));
 
-    AbstractDungeon.getCurrRoom().monsters.monsters.stream()
-        .filter(mo -> !mo.isDying && !mo.isDeadOrEscaped() && !(mo == m))
-        .forEach(mo ->
-          AbstractDungeon.actionManager.addToBottom(
-            new DamageAction(mo, new DamageInfo(p, damage / 2, damageTypeForTurn), AbstractGameAction.AttackEffect.NONE)));
-
-      AbstractDungeon.actionManager.addToBottom(new SFXAction("THUD_MEDIUM_1"));
+    AbstractDungeon.actionManager.addToBottom(
+        new ApplyPowerAction(m, p, new SprainPower(m, this.magicNumber), this.magicNumber));
   }
 
   @Override
   public AbstractCard makeCopy() {
-    return new FrogSplash();
+    return new DivingStomp();
   }
 
   @Override
@@ -63,6 +62,7 @@ public class FrogSplash extends CustomCard {
     if (!this.upgraded) {
       this.upgradeName();
       this.upgradeDamage(DAMAGE_UPGRADE);
+      this.upgradeMagicNumber(SPRAIN_AMOUNT_UPGRADE);
     }
   }
 

@@ -28,6 +28,8 @@ public class GrappledPower extends AbstractWrestlerPower implements CloneablePow
 
   public static final PowerType POWER_TYPE = PowerType.DEBUFF;
 
+  // TODO: unique sound effect when applying power (for playability)
+
   public GrappledPower(AbstractCreature owner, AbstractCreature source, int amount) {
     super(POWER_ID, NAME, IMG, owner, source, amount, POWER_TYPE);
   }
@@ -57,14 +59,6 @@ public class GrappledPower extends AbstractWrestlerPower implements CloneablePow
   static public List<AbstractMonster> getGrappledEnemies() {
     return AbstractDungeon.getCurrRoom().monsters.monsters.stream()
         .filter(m -> m.hasPower(POWER_ID)).collect(Collectors.toList());
-  }
-
-  static public GrappledPower getGrapplePowerInstance() {
-     List<AbstractMonster> grappledMonsters = getGrappledEnemies();
-     if (!grappledMonsters.isEmpty()) {
-       return (GrappledPower) grappledMonsters.get(0).getPower(POWER_ID);
-     }
-     return null;
   }
 
   @Override

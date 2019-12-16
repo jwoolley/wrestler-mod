@@ -28,9 +28,9 @@ public class Scrapper extends CustomCard {
   private static final CardRarity RARITY = CardRarity.RARE;
   private static final CardTarget TARGET = CardTarget.NONE;
 
-  private static final int COST = 2;
-  private static final int UPGRADED_COST = 1;
-  private static final int STRENGTH_PER_TURN = 2;
+  private static final int COST = 1;
+  private static final int UPGRADED_COST = 0;
+  private static final int STRENGTH_PER_TURN = 1;
 
   public Scrapper() {
     super(ID, NAME, getCardResourcePath(IMG_PATH), COST, DESCRIPTION, TYPE, AbstractCardEnum.THE_WRESTLER_ORANGE,
