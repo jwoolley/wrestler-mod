@@ -11,6 +11,8 @@ import com.megacrit.cardcrawl.powers.AbstractPower;
 import thewrestler.WrestlerMod;
 import thewrestler.actions.power.ApplyGrappledAction;
 
+import javax.xml.stream.events.DTD;
+
 public class SquaringOffPower extends AbstractWrestlerPower implements CloneablePowerInterface {
   public static final String POWER_ID = WrestlerMod.makeID("SquaringOffPower");
   public static final String IMG = "squaringoff.png";
@@ -34,8 +36,8 @@ public class SquaringOffPower extends AbstractWrestlerPower implements Cloneable
   }
 
   @Override
-  public int onAttacked(DamageInfo damageInfo, int amount) {
-    if (damageInfo.owner == this.source) {
+  public int onAttacked(DamageInfo info, int amount) {
+    if (info.owner == this.source && info.type == DamageInfo.DamageType.NORMAL) {
       this.applyTrigger();
       this.updateDescription();
     }

@@ -1,4 +1,4 @@
-package thewrestler.cards.skill;
+package thewrestler.cards.power;
 
 import basemod.abstracts.CustomCard;
 import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
@@ -8,60 +8,54 @@ import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
-import com.megacrit.cardcrawl.powers.VulnerablePower;
-import com.megacrit.cardcrawl.powers.WeakPower;
+import thewrestler.WrestlerMod;
 import thewrestler.enums.AbstractCardEnum;
+import thewrestler.powers.ScrapperPower;
 
 import static thewrestler.WrestlerMod.getCardResourcePath;
 
-public class EyePoke extends CustomCard {
-  public static final String ID = "WrestlerMod:EyePoke";
+public class Scrapper extends CustomCard {
+  public static final String ID = WrestlerMod.makeID("Scrapper");
+
   public static final String NAME;
   public static final String DESCRIPTION;
   public static final String[] EXTENDED_DESCRIPTION;
-  public static final String IMG_PATH = "eyepoke.png";
-
-  private static final int DEBUFF_AMOUNT = 1;
-  private static final int DEBUFF_AMOUNT_UPGRADE  = 1;
+  public static final String IMG_PATH = "scrapper.png";
 
   private static final CardStrings cardStrings;
 
-  private static final CardType TYPE = CardType.SKILL;
-  private static final CardRarity RARITY = CardRarity.BASIC;
-  private static final CardTarget TARGET = CardTarget.ENEMY;
+  private static final CardType TYPE = CardType.POWER;
+  private static final CardRarity RARITY = CardRarity.RARE;
+  private static final CardTarget TARGET = CardTarget.NONE;
 
-  private static final int COST = 1;
+  private static final int COST = 2;
+  private static final int UPGRADED_COST = 1;
+  private static final int STRENGTH_PER_TURN = 2;
 
-  public EyePoke() {
-    super(ID, NAME, getCardResourcePath(IMG_PATH), COST, getDescription(), TYPE, AbstractCardEnum.THE_WRESTLER_ORANGE,
+  public Scrapper() {
+    super(ID, NAME, getCardResourcePath(IMG_PATH), COST, DESCRIPTION, TYPE, AbstractCardEnum.THE_WRESTLER_ORANGE,
         RARITY, TARGET);
-    this.baseMagicNumber = this.magicNumber = DEBUFF_AMOUNT;
+    this.baseMagicNumber = this.magicNumber = STRENGTH_PER_TURN;
   }
 
   @Override
   public void use(AbstractPlayer p, AbstractMonster m) {
     AbstractDungeon.actionManager.addToBottom(
-        new ApplyPowerAction(m, p, new WeakPower(m, this.magicNumber, true), this.magicNumber));
-    AbstractDungeon.actionManager.addToBottom(
-        new ApplyPowerAction(m, p, new VulnerablePower(m, this.magicNumber, true), this.magicNumber));
+        new ApplyPowerAction(p, p, new ScrapperPower(p, this.magicNumber), this.magicNumber));
   }
 
   @Override
   public AbstractCard makeCopy() {
-    return new EyePoke();
+    return new Scrapper();
   }
 
   @Override
   public void upgrade() {
     if (!this.upgraded) {
       this.upgradeName();
-      this.upgradeMagicNumber(DEBUFF_AMOUNT_UPGRADE);
-      this.rawDescription = getDescription();
+      this.upgradeBaseCost(UPGRADED_COST);
       initializeDescription();
     }
-  }
-  public static String getDescription() {
-    return DESCRIPTION;
   }
 
   static {

@@ -28,6 +28,7 @@ import org.apache.logging.log4j.Logger;
 import thewrestler.cards.*;
 import thewrestler.cards.attack.Sharpshooter;
 import thewrestler.cards.attack.TakeToTheMat;
+import thewrestler.cards.power.Scrapper;
 import thewrestler.cards.skill.EyePoke;
 import thewrestler.cards.skill.SquareOff;
 import thewrestler.characters.WrestlerCharacter;
@@ -419,6 +420,7 @@ public class WrestlerMod implements
         // when generating card rewards/shop screen items.
 
         BaseMod.addCard(new EyePoke());
+        BaseMod.addCard(new Scrapper());
         BaseMod.addCard(new Sharpshooter());
         BaseMod.addCard(new SquareOff());
         BaseMod.addCard(new TakeToTheMat());
@@ -429,12 +431,10 @@ public class WrestlerMod implements
         BaseMod.addCard(new DefaultAttackWithVariable());
         BaseMod.addCard(new DefaultCommonSkill());
         BaseMod.addCard(new DefaultCommonPower());
-        BaseMod.addCard(new DefaultUncommonSkill());
         BaseMod.addCard(new DefaultUncommonAttack());
         BaseMod.addCard(new DefaultUncommonPower());
         BaseMod.addCard(new DefaultRareAttack());
         BaseMod.addCard(new DefaultRareSkill());
-        BaseMod.addCard(new DefaultRarePower());
 
         logger.info("Making sure the cards are unlocked.");
         // Unlock the cards
@@ -448,14 +448,13 @@ public class WrestlerMod implements
         UnlockTracker.unlockCard(DefaultAttackWithVariable.ID);
         UnlockTracker.unlockCard(DefaultCommonSkill.ID);
         UnlockTracker.unlockCard(DefaultCommonPower.ID);
-        UnlockTracker.unlockCard(DefaultUncommonSkill.ID);
         UnlockTracker.unlockCard(DefaultUncommonAttack.ID);
         UnlockTracker.unlockCard(DefaultUncommonPower.ID);
         UnlockTracker.unlockCard(DefaultRareAttack.ID);
         UnlockTracker.unlockCard(DefaultRareSkill.ID);
-        UnlockTracker.unlockCard(DefaultRarePower.ID);
 
         UnlockTracker.unlockCard(EyePoke.ID);
+        UnlockTracker.unlockCard(Scrapper.ID);
         UnlockTracker.unlockCard(Sharpshooter.ID);
         UnlockTracker.unlockCard(SquareOff.ID);
         UnlockTracker.unlockCard(TakeToTheMat.ID);

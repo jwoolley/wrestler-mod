@@ -16,17 +16,14 @@
     "NAME": "Big slap",
     "DESCRIPTION": "Deal !D! Damage."
   },
-  "WrestlerMod:DefaultUncommonSkill": {
-    "NAME": "A Better Defend",
-    "DESCRIPTION": "Gain !B! Plated Armor. Affected by Dexterity."
-  },
+
   "WrestlerMod:DefaultUncommonPower": {
     "NAME": "Weirdness",
     "DESCRIPTION": "Gain X WrestlerMod:Keywords.",
     "UPGRADE_DESCRIPTION": "Gain X +1 WrestlerMod:Keywords."
   },
   "WrestlerMod:DefaultRareAttack": {
-    "NAME": "TOUCH",
+    "NAME": "Power Bomb",
     "DESCRIPTION": "Deal !D! Damage."
   },
   "WrestlerMod:DefaultRareSkill": {
@@ -34,10 +31,7 @@
     "DESCRIPTION": "Apply !M! vulnerable to all enemies, 2 times.",
     "UPGRADE_DESCRIPTION": "Apply !M! vulnerable to all enemies, 3 times."
   },
-  "WrestlerMod:DefaultRarePower": {
-    "NAME": "In-Progress Form",
-    "DESCRIPTION": "At the start of your turn, play a TOUCH."
-  },
+
   "WrestlerMod:DefaultAttackWithVariable": {
     "NAME": "Special Strike",
     "DESCRIPTION": "Deal !D! Damage [E] times. NL (Deal !WrestlerMod:ENERGY_DAMAGE! damage total.)"
@@ -56,6 +50,10 @@
     "DESCRIPTION": "Apply !M! Weak and !M! Vulnerable."
   },
 
+  "WrestlerMod:Scrapper": {
+    "NAME": "Scrapper",
+    "DESCRIPTION": "At the start of your turn, if an enemy is Grappled, gain !M! Strength."
+  },
 
   "WrestlerMod:Sharpshooter": {
     "NAME": "Sharpshooter",
@@ -66,8 +64,6 @@
     "NAME": "Square Off",
     "DESCRIPTION": "Choose an enemy. If you attack it twice this turn, apply Grappled. NL Gain !B! Block."
   },
-
-
 
   "WrestlerMod:TakeToTheMat": {
     "NAME": "Take to the Mat",

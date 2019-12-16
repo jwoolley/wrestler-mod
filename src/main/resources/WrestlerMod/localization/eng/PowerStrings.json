@@ -24,10 +24,17 @@
   },
 
   "WrestlerMod:RarePower": {
-          "NAME": "Wrestler Power",
-          "DESCRIPTIONS": ["At the start of your turn, TOUCH #b", " enemy." , " enemies."]
+      "NAME": "Wrestler Power",
+      "DESCRIPTIONS": ["At the start of your turn, Power Bomb #b", " enemy." , " enemies."]
   },
 
+  "WrestlerMod:ScrapperPower": {
+    "NAME": "Scrapper",
+    "DESCRIPTIONS": [
+      "At the start of your turn, if an enemy is #yGrappled, gain #b",
+      " #yStrength."
+    ]
+  },
 
   "WrestlerMod:SquaringOffPower": {
     "NAME": "Squaring Off",

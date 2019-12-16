@@ -24,26 +24,19 @@ public class OnApplyPowerPatchInsert {
   public static void Insert(ApplyPowerAction __instance, AbstractCreature source, AbstractCreature target,
                              AbstractPower powerToApply) {
 
-//    System.out.println("OnApplyPowerPatchBefore::Insert called.");
-//    System.out.println("OnApplyPowerPatchBefore::Insert source: " + source);
-//    System.out.println("OnApplyPowerPatchBefore::Insert target: " + target);
-//    System.out.println("OnApplyPowerPatchBefore::Insert powerToApply: " + powerToApply);
-
-    boolean hasBuffAlready = target.hasPower(powerToApply.ID);
-
-//    System.out.println("OnApplyPowerPatchBefore::Insert hasBuffAlready: " + hasBuffAlready);
-//    System.out.println("OnApplyPowerPatchBefore::Insert isDeadOrEscaped: " + target.isDeadOrEscaped());
+      boolean hasBuffAlready = target != null && target.hasPower(powerToApply.ID);
 
     // TODO: check for artifact power
 
     final AbstractPlayer player = AbstractDungeon.player;
-    boolean playerHasHeadgear = player.hasRelic(Headgear.ID);
-    boolean isDebuff = powerToApply.type == AbstractPower.PowerType.DEBUFF;
-    boolean sourceIsPlayer = source == player;
-    boolean targetIsEnemy = target instanceof AbstractMonster;
 
-    boolean shouldTrigger = playerHasHeadgear && isDebuff && sourceIsPlayer && targetIsEnemy
-        && !hasBuffAlready && targetIsEnemy && !target.isDeadOrEscaped();
+//    boolean playerHasHeadgear = player.hasRelic(Headgear.ID);
+//    boolean isDebuff = powerToApply.type == AbstractPower.PowerType.DEBUFF;
+//    boolean sourceIsPlayer = source == player;
+//    boolean targetIsEnemy = target instanceof AbstractMonster;
+//
+//    boolean shouldTrigger = playerHasHeadgear && isDebuff && sourceIsPlayer && targetIsEnemy
+//        && !hasBuffAlready && targetIsEnemy && !target.isDeadOrEscaped();
 
     if (player.hasRelic(Headgear.ID)
         && powerToApply.type == AbstractPower.PowerType.DEBUFF
