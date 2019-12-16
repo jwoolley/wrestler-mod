@@ -41,7 +41,8 @@ public class SquareOff extends CustomCard {
   @Override
   public void use(AbstractPlayer p, AbstractMonster m) {
     AbstractDungeon.actionManager.addToBottom(new GainBlockAction(p, p, block));
-    AbstractDungeon.actionManager.addToBottom(new ApplyPowerAction(m, p, new SquaringOffPower(m)));
+    AbstractDungeon.actionManager.addToBottom(
+        new ApplyPowerAction(m, p, new SquaringOffPower(m, SquaringOffPower.TRIGGER_THRESHOLD)));
   }
 
   @Override

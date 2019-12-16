@@ -22,19 +22,14 @@ public class SquaringOffPower extends AbstractWrestlerPower implements Cloneable
 
   public static final PowerType POWER_TYPE = PowerType.BUFF;
 
-  public SquaringOffPower(AbstractCreature owner) {
-    this(owner, 0);
-  }
-
-  private SquaringOffPower(AbstractCreature owner, int amount) {
+  public SquaringOffPower(AbstractCreature owner, int amount) {
     super(POWER_ID, NAME, IMG, owner, AbstractDungeon.player, amount, POWER_TYPE);
   }
 
   @Override
   public void updateDescription() {
-    final int remainingAttacks = TRIGGER_THRESHOLD - this.amount;
-    this.description = DESCRIPTIONS[0] + remainingAttacks + DESCRIPTIONS[1]
-        + (remainingAttacks == 1 ? DESCRIPTIONS[2] : DESCRIPTIONS[3])
+    this.description = DESCRIPTIONS[0] + this.amount + DESCRIPTIONS[1]
+        + (this.amount == 1 ? DESCRIPTIONS[2] : DESCRIPTIONS[3])
         + DESCRIPTIONS[4];
   }
 
@@ -54,8 +49,8 @@ public class SquaringOffPower extends AbstractWrestlerPower implements Cloneable
   }
 
   private void applyTrigger() {
-    super.stackPower(1);
-    if (this.amount >= TRIGGER_THRESHOLD) {
+    super.reducePower(1);
+    if (this.amount <= 0) {
       AbstractDungeon.actionManager.addToBottom(
           new RemoveSpecificPowerAction(this.owner, this.owner, POWER_ID));
       AbstractDungeon.actionManager.addToBottom(new ApplyGrappledAction(this.owner, this.source));

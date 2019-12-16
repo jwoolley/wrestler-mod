@@ -71,7 +71,9 @@ public class GrappledPower extends AbstractWrestlerPower implements CloneablePow
   public void atEndOfRound() {
     System.out.println("GrappledPower::atEndOfRound triggered. source: " + this.source);
       if (this.source == AbstractDungeon.player) {
-        MaintainGrapplePower.applyGrappleContested(AbstractDungeon.player, this.owner, this.amount, true);
+        MaintainGrapplePower.apply(AbstractDungeon.player, this.owner, this.amount,
+            true);
+
         System.out.println("GrappledPower::atEndOfRound source is player. reapplying MaintainGrapplePower");
       } else {
       System.out.println("GrappledPower::atEndOfRound source isn't player. what is going on exactly");
@@ -83,38 +85,40 @@ public class GrappledPower extends AbstractWrestlerPower implements CloneablePow
     System.out.println("GrappledPower::atEndOfTurn triggered. isPlayer: " + isPlayer);
     if (isPlayer) {
       System.out.println("GrappledPower::atStartOfTurnPostDraw reapplying MaintainGrapplePower to source: " + this.source);
-      MaintainGrapplePower.applyGrappleContested(this.source, this.owner, this.amount, true);
+      MaintainGrapplePower.apply(this.source, this.owner, this.amount, true);
     }
   }
 
   @Override
   public void stackPower(int stackAmount) {
     super.stackPower(stackAmount);
-    MaintainGrapplePower.applyGrappleContested(this.source, this.owner, stackAmount, false);
+    MaintainGrapplePower.apply(this.source, this.owner, stackAmount, false);
 
   }
 
   @Override
   public void onInitialApplication() {
-    MaintainGrapplePower.applyGrappleContested(this.source, this.owner, this.amount, false);
-
     getGrappledEnemies().stream()
         .filter(m -> m != this.owner)
         .forEach(m ->
             AbstractDungeon.actionManager.addToBottom(
                 new RemoveSpecificPowerAction(m, this.owner, GrappledPower.POWER_ID)));
+
+    // isRefreshOrTargetSwitch is either true (because another enemy is grappled) or doesn't matter
+    // (the flag isn't checked the player isn't already maintaining grapple
+    MaintainGrapplePower.apply(this.source, this.owner, this.amount, true);
   }
 
   @Override
   public void onDeath() {
-    MaintainGrapplePower.clearGrappleContested(this.source, this.owner);
+    MaintainGrapplePower.clear(this.source, this.owner);
   }
 
   @Override
   public void onRemove() {
     logger.info("GrapplePower:onRemove number of grappled enemies: " + getGrappledEnemies().size());
     if (getGrappledEnemies().size() == 0) {
-      MaintainGrapplePower.clearGrappleContested(this.source, this.owner);
+      MaintainGrapplePower.clear(this.source, this.owner);
     }
   }
 

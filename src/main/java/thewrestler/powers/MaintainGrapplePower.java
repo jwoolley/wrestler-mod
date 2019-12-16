@@ -36,17 +36,15 @@ public class MaintainGrapplePower extends AbstractWrestlerPower implements Clone
     this.description = DESCRIPTIONS[0] + this.amount + DESCRIPTIONS[1];
   }
 
-  static public void applyGrappleContested(AbstractCreature source, AbstractCreature owner, int amount,
-                                           boolean isRefresh) {
+  static public void apply(AbstractCreature source, AbstractCreature owner, int amount,
+                           boolean isRefreshOrTargetSwitch) {
     if (source.hasPower(MaintainGrapplePower.POWER_ID)) {
-
       MaintainGrapplePower powerInstance = (MaintainGrapplePower) source.getPower(MaintainGrapplePower.POWER_ID);
 
-      //  negative value parameter isn't handled at present (if handled, should use "Maintain Grapple Down" flashText)
       if (amount > 0) {
-        final String flashText = isRefresh ? NAME : DESCRIPTIONS[2];
+        final String flashText = isRefreshOrTargetSwitch ? NAME : DESCRIPTIONS[2];
 
-        if (!isRefresh) {
+        if (!isRefreshOrTargetSwitch) {
           powerInstance.stackPower(amount);
         } else {
           powerInstance.amount = amount;
@@ -64,7 +62,7 @@ public class MaintainGrapplePower extends AbstractWrestlerPower implements Clone
     }
   }
 
-  public static void clearGrappleContested(AbstractCreature source, AbstractCreature owner) {
+  public static void clear(AbstractCreature source, AbstractCreature owner) {
     if (source.hasPower(MaintainGrapplePower.POWER_ID)) {
       AbstractDungeon.actionManager.addToBottom(
           new RemoveSpecificPowerAction(source, owner, MaintainGrapplePower.POWER_ID));
