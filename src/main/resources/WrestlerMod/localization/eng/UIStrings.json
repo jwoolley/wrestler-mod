@@ -1,1 +1,9 @@
-{}
+{
+  "WrestlerMod:ChooseAndAddFilteredDiscardCardsToHandAction": {
+    "TEXT": [
+      "Choose a Card to Add to Your Hand.",
+      "Choose ",
+      " Cards to Add to Your Hand."
+    ]
+  }
+}

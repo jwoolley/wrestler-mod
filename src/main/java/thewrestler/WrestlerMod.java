@@ -30,8 +30,10 @@ import thewrestler.cards.attack.DivingStomp;
 import thewrestler.cards.attack.FrogSplash;
 import thewrestler.cards.attack.Sharpshooter;
 import thewrestler.cards.attack.TakeToTheMat;
+import thewrestler.cards.power.CurtainJerker;
 import thewrestler.cards.power.Scrapper;
 import thewrestler.cards.skill.EyePoke;
+import thewrestler.cards.skill.OffTheRopes;
 import thewrestler.cards.skill.SquareOff;
 import thewrestler.characters.WrestlerCharacter;
 import thewrestler.enums.AbstractCardEnum;
@@ -422,9 +424,11 @@ public class WrestlerMod implements
         // Don't comment out/delete these cards (yet). You need 1 of each type and rarity (technically) for your game not to crash
         // when generating card rewards/shop screen items.
 
+//        BaseMod.addCard(new CurtainJerker());
         BaseMod.addCard(new DivingStomp());
         BaseMod.addCard(new EyePoke());
         BaseMod.addCard(new FrogSplash());
+        BaseMod.addCard(new OffTheRopes());
         BaseMod.addCard(new Scrapper());
         BaseMod.addCard(new Sharpshooter());
         BaseMod.addCard(new SquareOff());
@@ -458,9 +462,11 @@ public class WrestlerMod implements
         UnlockTracker.unlockCard(DefaultRareAttack.ID);
         UnlockTracker.unlockCard(DefaultRareSkill.ID);
 
+//        UnlockTracker.unlockCard(CurtainJerker.ID);
         UnlockTracker.unlockCard(DivingStomp.ID);
         UnlockTracker.unlockCard(EyePoke.ID);
         UnlockTracker.unlockCard(FrogSplash.ID);
+        UnlockTracker.unlockCard(OffTheRopes.ID);
         UnlockTracker.unlockCard(Scrapper.ID);
         UnlockTracker.unlockCard(Sharpshooter.ID);
         UnlockTracker.unlockCard(SquareOff.ID);

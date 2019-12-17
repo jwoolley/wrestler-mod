@@ -5,34 +5,42 @@ import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
 import com.megacrit.cardcrawl.actions.common.GainBlockAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
+import com.megacrit.cardcrawl.core.AbstractCreature;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
+import com.megacrit.cardcrawl.powers.VulnerablePower;
+import com.megacrit.cardcrawl.powers.WeakPower;
+import com.sun.org.apache.bcel.internal.generic.ACONST_NULL;
+import thewrestler.actions.ChooseAndAddFilteredDiscardCardsToHandAction;
 import thewrestler.enums.AbstractCardEnum;
-import thewrestler.powers.SquaringOffPower;
+
+import java.util.function.Predicate;
 
 import static thewrestler.WrestlerMod.getCardResourcePath;
 
-public class SquareOff extends CustomCard {
-  public static final String ID = "WrestlerMod:SquareOff";
+public class OffTheRopes extends CustomCard {
+  public static final String ID = "WrestlerMod:OffTheRopes";
   public static final String NAME;
   public static final String DESCRIPTION;
   public static final String[] EXTENDED_DESCRIPTION;
-  public static final String IMG_PATH = "squareoff.png";
+  public static final String IMG_PATH = "offtheropes.png";
 
-  private static final int BLOCK_AMOUNT = 7;
-  private static final int BLOCK_AMOUNT_UPGRADE  = 4;
+  private static final int DEBUFF_AMOUNT = 1;
+  private static final int DEBUFF_AMOUNT_UPGRADE  = 1;
 
   private static final CardStrings cardStrings;
 
   private static final CardType TYPE = CardType.SKILL;
-  private static final CardRarity RARITY = CardRarity.UNCOMMON;
-  private static final CardTarget TARGET = CardTarget.ENEMY;
+  private static final CardRarity RARITY = CardRarity.COMMON;
+  private static final CardTarget TARGET = CardTarget.NONE;
 
+  private static final int BLOCK_AMOUNT = 5;
+  private static final int BLOCK_AMOUNT_UPGRADE  = 3;
   private static final int COST = 1;
 
-  public SquareOff() {
+  public OffTheRopes() {
     super(ID, NAME, getCardResourcePath(IMG_PATH), COST, getDescription(), TYPE, AbstractCardEnum.THE_WRESTLER_ORANGE,
         RARITY, TARGET);
     this.baseBlock = this.block = BLOCK_AMOUNT;
@@ -42,15 +50,14 @@ public class SquareOff extends CustomCard {
   public void use(AbstractPlayer p, AbstractMonster m) {
     AbstractDungeon.actionManager.addToBottom(new GainBlockAction(p, p, block));
 
-      if (!m.hasPower(SquaringOffPower.POWER_ID)) {
-        AbstractDungeon.actionManager.addToBottom(
-            new ApplyPowerAction(m, p, new SquaringOffPower(m, SquaringOffPower.TRIGGER_THRESHOLD)));
-      }
+    AbstractDungeon.actionManager.addToBottom(
+        new ChooseAndAddFilteredDiscardCardsToHandAction(1,
+            c -> c.type == CardType.ATTACK, EXTENDED_DESCRIPTION));
   }
 
   @Override
   public AbstractCard makeCopy() {
-    return new SquareOff();
+    return new OffTheRopes();
   }
 
   @Override

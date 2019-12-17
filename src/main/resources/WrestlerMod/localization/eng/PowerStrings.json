@@ -4,6 +4,20 @@
           "DESCRIPTIONS": ["You applied #b", " keyword.", " keywords."]
   },
 
+  "WrestlerMod:CurtainJerkerAttacked": {
+    "NAME": "Curtain Jerker Grapple",
+    "DESCRIPTIONS": [
+      "At the start of your turn, this enemy becomes #yGrappled."
+    ]
+  },
+
+  "WrestlerMod:CurtainJerkerPower": {
+    "NAME": "Curtain Jerker",
+    "DESCRIPTIONS": [
+      "At the start of your next turn, the last enemy who attacked you becomes #yGrappled."
+    ]
+  },
+
   "WrestlerMod:MaintainGrapplePower": {
     "NAME": "Maintaining Grapple",
     "DESCRIPTIONS": [

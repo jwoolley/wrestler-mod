@@ -45,11 +45,15 @@
     "DESCRIPTION": "Channel 1 Default Orb."
   },
 
+  "WrestlerMod:Curtain Jerker": {
+    "NAME": "Curtain Jerker",
+    "DESCRIPTION": "The next time you're attacked, the attacker becomes Grappled at the start of your next turn."
+  },
+
   "WrestlerMod:DivingStomp": {
     "NAME": "Diving Stomp",
     "DESCRIPTION": "Deal !D! Damage. NL Apply !M! Sprained."
   },
-
 
   "WrestlerMod:EyePoke": {
     "NAME": "Eye Poke",
@@ -61,6 +65,15 @@
     "DESCRIPTION": "Deal !D! Damage to an enemy and half that damage to all other enemies."
   },
 
+  "WrestlerMod:OffTheRopes": {
+    "NAME": "Off the Ropes",
+    "DESCRIPTION": "Gain !B! Block. NL Return an Attack card from your discard pile to your hand.",
+    "EXTENDED_DESCRIPTION": [
+      "Choose an Attack Card to Add to Your Hand.",
+      "Choose ",
+      " Attack Cards to Add to Your Hand."
+    ]
+  },
 
   "WrestlerMod:Scrapper": {
     "NAME": "Scrapper",
