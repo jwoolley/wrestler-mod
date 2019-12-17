@@ -45,7 +45,12 @@
     "DESCRIPTION": "Channel 1 Default Orb."
   },
 
-  "WrestlerMod:Curtain Jerker": {
+  "WrestlerMod:CheapShot": {
+    "NAME": "Cheap Shot",
+    "DESCRIPTION": "Innate. NL Deal !D! damage. NL If the enemy intends to attack, apply !M! Vulnerable. NL Exhaust."
+  },
+
+  "WrestlerMod:CurtainJerker": {
     "NAME": "Curtain Jerker",
     "DESCRIPTION": "The next time you're attacked, the attacker becomes Grappled at the start of your next turn."
   },

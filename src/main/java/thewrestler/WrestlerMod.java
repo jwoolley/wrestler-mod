@@ -26,10 +26,7 @@ import com.megacrit.cardcrawl.unlock.UnlockTracker;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import thewrestler.cards.*;
-import thewrestler.cards.attack.DivingStomp;
-import thewrestler.cards.attack.FrogSplash;
-import thewrestler.cards.attack.Sharpshooter;
-import thewrestler.cards.attack.TakeToTheMat;
+import thewrestler.cards.attack.*;
 import thewrestler.cards.power.CurtainJerker;
 import thewrestler.cards.power.Scrapper;
 import thewrestler.cards.skill.EyePoke;
@@ -428,6 +425,7 @@ public class WrestlerMod implements
         // when generating card rewards/shop screen items.
 
 //        BaseMod.addCard(new CurtainJerker());
+        BaseMod.addCard(new CheapShot());
         BaseMod.addCard(new DivingStomp());
         BaseMod.addCard(new EyePoke());
         BaseMod.addCard(new HeelTurn());
@@ -465,6 +463,7 @@ public class WrestlerMod implements
         UnlockTracker.unlockCard(DefaultRareAttack.ID);
 
 //        UnlockTracker.unlockCard(CurtainJerker.ID);
+        UnlockTracker.unlockCard(CheapShot.ID);
         UnlockTracker.unlockCard(DivingStomp.ID);
         UnlockTracker.unlockCard(EyePoke.ID);
         UnlockTracker.unlockCard(FrogSplash.ID);
