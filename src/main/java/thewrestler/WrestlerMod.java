@@ -33,6 +33,7 @@ import thewrestler.cards.attack.TakeToTheMat;
 import thewrestler.cards.power.CurtainJerker;
 import thewrestler.cards.power.Scrapper;
 import thewrestler.cards.skill.EyePoke;
+import thewrestler.cards.skill.HeelTurn;
 import thewrestler.cards.skill.OffTheRopes;
 import thewrestler.cards.skill.SquareOff;
 import thewrestler.characters.WrestlerCharacter;
@@ -285,6 +286,8 @@ public class WrestlerMod implements
 
     private void registerSfx() {
         HashMap<String, Sfx> reflectedMap = getSoundsMap();
+        reflectedMap.put("BOO_CROWD_1", new Sfx(getAudioResourcePath("TheWrestler_BooCrowd1.ogg")));
+        reflectedMap.put("BOUNCE_METALLIC_1", new Sfx(getAudioResourcePath("TheWrestler_BounceMetallic1.ogg")));
         reflectedMap.put("SPLAT_WET_1", new Sfx(getAudioResourcePath("TheWrestler_SplatWet1.ogg")));
         reflectedMap.put("THUD_MEDIUM_1", new Sfx(getAudioResourcePath("TheWrestler_ThudMedium1.ogg")));
     }
@@ -427,6 +430,7 @@ public class WrestlerMod implements
 //        BaseMod.addCard(new CurtainJerker());
         BaseMod.addCard(new DivingStomp());
         BaseMod.addCard(new EyePoke());
+        BaseMod.addCard(new HeelTurn());
         BaseMod.addCard(new FrogSplash());
         BaseMod.addCard(new OffTheRopes());
         BaseMod.addCard(new Scrapper());
@@ -443,7 +447,6 @@ public class WrestlerMod implements
         BaseMod.addCard(new DefaultUncommonAttack());
         BaseMod.addCard(new DefaultUncommonPower());
         BaseMod.addCard(new DefaultRareAttack());
-        BaseMod.addCard(new DefaultRareSkill());
 
         logger.info("Making sure the cards are unlocked.");
         // Unlock the cards
@@ -460,12 +463,12 @@ public class WrestlerMod implements
         UnlockTracker.unlockCard(DefaultUncommonAttack.ID);
         UnlockTracker.unlockCard(DefaultUncommonPower.ID);
         UnlockTracker.unlockCard(DefaultRareAttack.ID);
-        UnlockTracker.unlockCard(DefaultRareSkill.ID);
 
 //        UnlockTracker.unlockCard(CurtainJerker.ID);
         UnlockTracker.unlockCard(DivingStomp.ID);
         UnlockTracker.unlockCard(EyePoke.ID);
         UnlockTracker.unlockCard(FrogSplash.ID);
+        UnlockTracker.unlockCard(HeelTurn.ID);
         UnlockTracker.unlockCard(OffTheRopes.ID);
         UnlockTracker.unlockCard(Scrapper.ID);
         UnlockTracker.unlockCard(Sharpshooter.ID);

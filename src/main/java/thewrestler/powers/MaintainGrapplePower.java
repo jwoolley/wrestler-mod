@@ -64,6 +64,7 @@ public class MaintainGrapplePower extends AbstractWrestlerPower implements Clone
 
   public static void clear(AbstractCreature source, AbstractCreature owner) {
     if (source.hasPower(MaintainGrapplePower.POWER_ID)) {
+      CardCrawlGame.sound.play("BOUNCE_METALLIC_1");
       AbstractDungeon.actionManager.addToBottom(
           new RemoveSpecificPowerAction(source, owner, MaintainGrapplePower.POWER_ID));
     }

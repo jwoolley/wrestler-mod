@@ -29,8 +29,8 @@ public class FrogSplash extends CustomCard {
   private static final CardTarget TARGET = CardTarget.ENEMY;
 
   private static final int COST = 1;
-  private static final int DAMAGE = 10;
-  private static final int DAMAGE_UPGRADE = 2;
+  private static final int DAMAGE = 9;
+  private static final int DAMAGE_UPGRADE = 3;
 
   public FrogSplash() {
     super(ID, NAME, getCardResourcePath(IMG_PATH), COST, DESCRIPTION, TYPE,
@@ -40,17 +40,19 @@ public class FrogSplash extends CustomCard {
 
   @Override
   public void use(AbstractPlayer p, AbstractMonster m) {
+    AbstractDungeon.actionManager.addToBottom(new SFXAction("ATTACK_POISON"));
+
     AbstractDungeon.actionManager.addToBottom(
         new DamageAction(m, new DamageInfo(p, damage, damageTypeForTurn),
-            AbstractGameAction.AttackEffect.NONE));
+            AbstractGameAction.AttackEffect.BLUNT_HEAVY));
 
     AbstractDungeon.getCurrRoom().monsters.monsters.stream()
         .filter(mo -> !mo.isDying && !mo.isDeadOrEscaped() && !(mo == m))
         .forEach(mo ->
           AbstractDungeon.actionManager.addToBottom(
-            new DamageAction(mo, new DamageInfo(p, damage / 2, damageTypeForTurn), AbstractGameAction.AttackEffect.NONE)));
+            new DamageAction(mo, new DamageInfo(p, damage / 2, damageTypeForTurn),
+                AbstractGameAction.AttackEffect.BLUNT_LIGHT)));
 
-      AbstractDungeon.actionManager.addToBottom(new SFXAction("THUD_MEDIUM_1"));
   }
 
   @Override

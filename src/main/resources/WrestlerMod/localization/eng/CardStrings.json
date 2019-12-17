@@ -62,7 +62,17 @@
 
   "WrestlerMod:FrogSplash": {
     "NAME": "Frog Splash",
-    "DESCRIPTION": "Deal !D! Damage to an enemy and half that damage to all other enemies."
+    "DESCRIPTION": "Deal !D! Damage to an enemy and half to all other enemies."
+  },
+
+
+  "WrestlerMod:HeelTurn": {
+    "NAME": "Heel Turn",
+    "DESCRIPTION": "Gain ",
+    "EXTENDED_DESCRIPTION": [
+      " Intangible. NL Gain ",
+      " Strength. NL Gain !M! Gold. NL Exhaust."
+    ]
   },
 
   "WrestlerMod:OffTheRopes": {
@@ -99,6 +109,7 @@
     "NAME": "Strike",
     "DESCRIPTION": "Deal !D! Damage."
   },
+
   "WrestlerMod:DefaultCommonSkill": {
     "NAME": "Defend",
     "DESCRIPTION": "Gain !B! Block."
