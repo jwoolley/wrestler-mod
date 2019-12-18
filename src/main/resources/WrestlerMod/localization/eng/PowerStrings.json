@@ -50,6 +50,17 @@
     ]
   },
 
+  "WrestlerMod:IrradiatedPower": {
+    "NAME": "Irradiated",
+    "DESCRIPTIONS": [
+      "The next ",
+      "time",
+      "#b",
+      " times",
+      " you attack this enemy this turn, gain [E]."
+    ]
+  },
+
   "WrestlerMod:RarePower": {
       "NAME": "Wrestler Power",
       "DESCRIPTIONS": ["At the start of your turn, Power Bomb #b", " enemy." , " enemies."]

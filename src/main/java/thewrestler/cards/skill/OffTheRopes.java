@@ -1,22 +1,15 @@
 package thewrestler.cards.skill;
 
 import basemod.abstracts.CustomCard;
-import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
 import com.megacrit.cardcrawl.actions.common.GainBlockAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
-import com.megacrit.cardcrawl.core.AbstractCreature;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
-import com.megacrit.cardcrawl.powers.VulnerablePower;
-import com.megacrit.cardcrawl.powers.WeakPower;
-import com.sun.org.apache.bcel.internal.generic.ACONST_NULL;
 import thewrestler.actions.ChooseAndAddFilteredDiscardCardsToHandAction;
 import thewrestler.enums.AbstractCardEnum;
-
-import java.util.function.Predicate;
 
 import static thewrestler.WrestlerMod.getCardResourcePath;
 
@@ -26,9 +19,6 @@ public class OffTheRopes extends CustomCard {
   public static final String DESCRIPTION;
   public static final String[] EXTENDED_DESCRIPTION;
   public static final String IMG_PATH = "offtheropes.png";
-
-  private static final int DEBUFF_AMOUNT = 1;
-  private static final int DEBUFF_AMOUNT_UPGRADE  = 1;
 
   private static final CardStrings cardStrings;
 

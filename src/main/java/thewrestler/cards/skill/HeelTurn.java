@@ -34,7 +34,7 @@ public class HeelTurn extends CustomCard {
 
   private static final int INTANGIBLE_AMOUNT = 1;
   private static final int STRENGTH_AMOUNT = 3;
-  private static final int GOLD_AMOUNT = 10;
+  private static final int GOLD_AMOUNT = 6;
 
   public HeelTurn() {
     super(ID, NAME, getCardResourcePath(IMG_PATH), COST, getDescription(), TYPE, AbstractCardEnum.THE_WRESTLER_ORANGE,

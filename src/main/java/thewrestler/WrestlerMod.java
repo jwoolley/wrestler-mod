@@ -156,9 +156,9 @@ public class WrestlerMod implements
     public static final String BADGE_IMAGE = getImageResourcePath("Badge.png");
     
     // Atlas and JSON files for the Animations
-    public static final String THE_WRESTLER_SKELETON_ATLAS = getImageResourcePath("char/wrestler/skeleton.atlas");
-    public static final String THE_WRESTLER_SKELETON_JSON = getImageResourcePath("/char/wrestler/skeleton.json");
-    public static final String THE_WRESTLER_STATIC_CHARACTER_SPRITE = getImageResourcePath("char/wrestler/main3.png");
+//    public static final String THE_WRESTLER_SKELETON_ATLAS = getImageResourcePath("char/wrestler/skeleton.atlas");
+//    public static final String THE_WRESTLER_SKELETON_JSON = getImageResourcePath("/char/wrestler/skeleton.json");
+//    public static final String THE_WRESTLER_STATIC_CHARACTER_SPRITE = getImageResourcePath("char/wrestler/main3.png");
 
     private static Map<String, Keyword> keywords;
 
@@ -285,6 +285,7 @@ public class WrestlerMod implements
     private void registerSfx() {
         HashMap<String, Sfx> reflectedMap = getSoundsMap();
         reflectedMap.put("BOO_CROWD_1", new Sfx(getAudioResourcePath("TheWrestler_BooCrowd1.ogg")));
+        reflectedMap.put("CHEER_CROWD_1", new Sfx(getAudioResourcePath("TheWrestler_CheerCrowd1.ogg")));
         reflectedMap.put("BOUNCE_METALLIC_1", new Sfx(getAudioResourcePath("TheWrestler_BounceMetallic1.ogg")));
         reflectedMap.put("SPLAT_WET_1", new Sfx(getAudioResourcePath("TheWrestler_SplatWet1.ogg")));
         reflectedMap.put("THUD_MEDIUM_1", new Sfx(getAudioResourcePath("TheWrestler_ThudMedium1.ogg")));
@@ -425,7 +426,7 @@ public class WrestlerMod implements
         // Don't comment out/delete these cards (yet). You need 1 of each type and rarity (technically) for your game not to crash
         // when generating card rewards/shop screen items.
 
-//        BaseMod.addCard(new CurtainJerker());
+        BaseMod.addCard(new AtomicDrop());
         BaseMod.addCard(new CheapShot());
         BaseMod.addCard(new DivingStomp());
         BaseMod.addCard(new EyePoke());
@@ -438,14 +439,16 @@ public class WrestlerMod implements
         BaseMod.addCard(new SquareOff());
         BaseMod.addCard(new TakeToTheMat());
 
-        BaseMod.addCard(new OrbSkill());
+        //        BaseMod.addCard(new CurtainJerker());
+
+//        BaseMod.addCard(new OrbSkill());
         BaseMod.addCard(new DefaultSecondMagicNumberSkill());
         BaseMod.addCard(new DefaultCommonAttack());
         BaseMod.addCard(new DefaultAttackWithVariable());
         BaseMod.addCard(new DefaultCommonSkill());
         BaseMod.addCard(new DefaultCommonPower());
         BaseMod.addCard(new DefaultUncommonAttack());
-        BaseMod.addCard(new DefaultUncommonPower());
+//        BaseMod.addCard(new DefaultUncommonPower());
         BaseMod.addCard(new DefaultRareAttack());
 
         logger.info("Making sure the cards are unlocked.");
@@ -454,14 +457,14 @@ public class WrestlerMod implements
         // before playing your mod.
 
         // TODO: create "addCardToBasePool" method for cards that begin unlocked
-        UnlockTracker.unlockCard(OrbSkill.ID);
+//        UnlockTracker.unlockCard(OrbSkill.ID);
         UnlockTracker.unlockCard(DefaultSecondMagicNumberSkill.ID);
         UnlockTracker.unlockCard(DefaultCommonAttack.ID);
         UnlockTracker.unlockCard(DefaultAttackWithVariable.ID);
         UnlockTracker.unlockCard(DefaultCommonSkill.ID);
         UnlockTracker.unlockCard(DefaultCommonPower.ID);
         UnlockTracker.unlockCard(DefaultUncommonAttack.ID);
-        UnlockTracker.unlockCard(DefaultUncommonPower.ID);
+//        UnlockTracker.unlockCard(DefaultUncommonPower.ID);
         UnlockTracker.unlockCard(DefaultRareAttack.ID);
 
 //        UnlockTracker.unlockCard(CurtainJerker.ID);
