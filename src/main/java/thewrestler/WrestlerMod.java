@@ -28,6 +28,7 @@ import org.apache.logging.log4j.Logger;
 import thewrestler.cards.*;
 import thewrestler.cards.attack.*;
 import thewrestler.cards.power.CurtainJerker;
+import thewrestler.cards.power.FanFavorite;
 import thewrestler.cards.power.Scrapper;
 import thewrestler.cards.skill.EyePoke;
 import thewrestler.cards.skill.HeelTurn;
@@ -428,6 +429,7 @@ public class WrestlerMod implements
         BaseMod.addCard(new CheapShot());
         BaseMod.addCard(new DivingStomp());
         BaseMod.addCard(new EyePoke());
+        BaseMod.addCard(new FanFavorite());
         BaseMod.addCard(new HeelTurn());
         BaseMod.addCard(new FrogSplash());
         BaseMod.addCard(new OffTheRopes());
@@ -466,6 +468,7 @@ public class WrestlerMod implements
         UnlockTracker.unlockCard(CheapShot.ID);
         UnlockTracker.unlockCard(DivingStomp.ID);
         UnlockTracker.unlockCard(EyePoke.ID);
+        UnlockTracker.unlockCard(FanFavorite.ID);
         UnlockTracker.unlockCard(FrogSplash.ID);
         UnlockTracker.unlockCard(HeelTurn.ID);
         UnlockTracker.unlockCard(OffTheRopes.ID);

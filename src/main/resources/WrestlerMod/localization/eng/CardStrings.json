@@ -65,11 +65,20 @@
     "DESCRIPTION": "Apply !M! Weak and !M! Vulnerable."
   },
 
+
+  "WrestlerMod:FanFavorite": {
+    "NAME": "Fan Favorite",
+    "DESCRIPTION": "Every time you play ",
+    "EXTENDED_DESCRIPTION": [
+      " Attacks in a single turn, gain !M! Block."
+    ]
+  },
+
+
   "WrestlerMod:FrogSplash": {
     "NAME": "Frog Splash",
     "DESCRIPTION": "Deal !D! Damage to an enemy and half to all other enemies."
   },
-
 
   "WrestlerMod:HeelTurn": {
     "NAME": "Heel Turn",

@@ -18,6 +18,19 @@
     ]
   },
 
+  "WrestlerMod:FanFavoritePower": {
+    "NAME": "Fan Favorite",
+    "DESCRIPTIONS": [
+      "Every time you play #b",
+      " #yAttacks in a single turn, gain #b",
+      " #yBlock. (Play ",
+      " attack",
+      " attacks",
+      " to trigger.)"
+    ]
+  },
+
+
   "WrestlerMod:MaintainGrapplePower": {
     "NAME": "Maintaining Grapple",
     "DESCRIPTIONS": [
