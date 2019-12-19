@@ -30,7 +30,6 @@
     ]
   },
 
-
   "WrestlerMod:MaintainGrapplePower": {
     "NAME": "Maintaining Grapple",
     "DESCRIPTIONS": [
@@ -47,6 +46,17 @@
       "% less damage and receives #b",
       "% more. Lasts until you receive #b",
       " damage in one turn, or you #yGrapple another enemy."
+    ]
+  },
+
+  "WrestlerMod:GrayMatterPower": {
+    "NAME": "Gray Matter",
+    "DESCRIPTIONS": [
+      "The next ",
+      "time",
+      "#b",
+      " times",
+      " you attack this enemy this turn, Draw a card."
     ]
   },
 
@@ -73,7 +83,6 @@
       " #yStrength."
     ]
   },
-
 
   "WrestlerMod:SprainPower": {
     "NAME": "Sprained",

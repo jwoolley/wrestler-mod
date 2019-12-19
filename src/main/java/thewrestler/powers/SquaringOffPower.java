@@ -22,7 +22,7 @@ public class SquaringOffPower extends AbstractWrestlerPower implements Cloneable
 
   public static final int TRIGGER_THRESHOLD = 2;
 
-  public static final PowerType POWER_TYPE = PowerType.BUFF;
+  public static final PowerType POWER_TYPE = PowerType.DEBUFF;
 
   public SquaringOffPower(AbstractCreature owner, int amount) {
     super(POWER_ID, NAME, IMG, owner, AbstractDungeon.player, amount, POWER_TYPE);
