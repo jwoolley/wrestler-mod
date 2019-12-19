@@ -42,7 +42,7 @@ public class OffTheRopes extends CustomCard {
 
     AbstractDungeon.actionManager.addToBottom(
         new ChooseAndAddFilteredDiscardCardsToHandAction(1,
-            c -> c.type == CardType.ATTACK, EXTENDED_DESCRIPTION));
+            c -> c.type == CardType.ATTACK, EXTENDED_DESCRIPTION, true));
   }
 
   @Override

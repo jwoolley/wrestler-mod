@@ -122,7 +122,7 @@
 
   "WrestlerMod:SquareOff": {
     "NAME": "Square Off",
-    "DESCRIPTION": "Choose an enemy. If you attack it twice this turn, apply Grappled. NL Gain !B! Block."
+    "DESCRIPTION": "Gain !B! Block. NL Choose an enemy. If you attack it twice this turn, apply Grappled."
   },
 
   "WrestlerMod:TakeToTheMat": {

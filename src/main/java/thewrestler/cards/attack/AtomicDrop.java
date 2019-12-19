@@ -4,13 +4,17 @@ import basemod.abstracts.CustomCard;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
 import com.megacrit.cardcrawl.actions.common.DamageAction;
+import com.megacrit.cardcrawl.actions.utility.SFXAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.cards.DamageInfo;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
+import com.megacrit.cardcrawl.core.Settings;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
+import com.megacrit.cardcrawl.vfx.combat.FlashAtkImgEffect;
+import thewrestler.actions.cards.attack.AtomicDropAction;
 import thewrestler.enums.AbstractCardEnum;
 import thewrestler.powers.IrradiatedPower;
 
@@ -43,9 +47,17 @@ public class AtomicDrop extends CustomCard {
 
   @Override
   public void use(AbstractPlayer p, AbstractMonster m) {
+//    AbstractDungeon.actionManager.addToBottom(
+//        new AtomicDropAction(m, p, this.damage, this.magicNumber, Settings.FAST_MODE));
+
+    AbstractDungeon.effectList.add(
+        new FlashAtkImgEffect(m.hb.cX, m.hb.cY, AbstractGameAction.AttackEffect.BLUNT_HEAVY));
+
+    AbstractDungeon.actionManager.addToTop(new SFXAction("BOOM_LOWFREQ_1"));
+
     AbstractDungeon.actionManager.addToBottom(
-        new DamageAction(m, new DamageInfo(p, damage, damageTypeForTurn),
-            AbstractGameAction.AttackEffect.BLUNT_HEAVY));
+        new DamageAction(m, new DamageInfo(p, this.damage, DamageInfo.DamageType.NORMAL),
+            AbstractGameAction.AttackEffect.NONE));
 
     AbstractDungeon.actionManager.addToBottom(
         new ApplyPowerAction(m, p, new IrradiatedPower(m, this.magicNumber), this.magicNumber));

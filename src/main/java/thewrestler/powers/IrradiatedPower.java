@@ -2,7 +2,9 @@ package thewrestler.powers;
 
 import basemod.interfaces.CloneablePowerInterface;
 import com.megacrit.cardcrawl.actions.common.GainEnergyAction;
+import com.megacrit.cardcrawl.actions.common.ReducePowerAction;
 import com.megacrit.cardcrawl.actions.common.RemoveSpecificPowerAction;
+import com.megacrit.cardcrawl.actions.utility.SFXAction;
 import com.megacrit.cardcrawl.cards.DamageInfo;
 import com.megacrit.cardcrawl.core.AbstractCreature;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
@@ -34,7 +36,7 @@ public class IrradiatedPower extends AbstractWrestlerPower implements CloneableP
   }
 
   @Override
-  public int onAttacked(DamageInfo info, int amount) {
+  public int onAttackedToChangeDamage(DamageInfo info, int amount) {
     if (info.owner == this.source && info.type == DamageInfo.DamageType.NORMAL) {
       this.flash();
       this.applyTrigger();
@@ -49,13 +51,17 @@ public class IrradiatedPower extends AbstractWrestlerPower implements CloneableP
         new RemoveSpecificPowerAction(this.owner, this.owner, POWER_ID));
   }
 
+  @Override
+  public void reducePower(int amount) {
+    WrestlerMod.logger.info("IrradiatedPower::reducePower called. amount: " + amount);
+    super.reducePower(amount);
+  }
+
   private void applyTrigger() {
-    super.reducePower(1);
+//    CardCrawlGame.sound.play("ELECTRO_INTERFERENCE_1");
+    AbstractDungeon.actionManager.addToTop(new SFXAction("ELECTRO_INTERFERENCE_1"));
+    AbstractDungeon.actionManager.addToTop(new ReducePowerAction(this.owner, this.owner, this, 1));
     AbstractDungeon.actionManager.addToBottom(new GainEnergyAction(ENERGY_PER_TRIGGER));
-    if (this.amount <= 0) {
-      AbstractDungeon.actionManager.addToBottom(
-          new RemoveSpecificPowerAction(this.owner, this.owner, POWER_ID));
-    }
   }
 
   @Override

@@ -21,8 +21,8 @@ public class ChooseAndAddFilteredDiscardCardsToHandAction extends AbstractGameAc
     private Predicate<AbstractCard> predicate;
     private final String[] chooserUiStrings;
 
-  public ChooseAndAddFilteredDiscardCardsToHandAction(int numberOfCards, boolean optional,
-          Predicate<AbstractCard> predicate, String[] chooserUiStrings) {
+  public ChooseAndAddFilteredDiscardCardsToHandAction(int numberOfCards, Predicate<AbstractCard> predicate,
+                                                      String[] chooserUiStrings, boolean optional) {
     this.actionType = AbstractGameAction.ActionType.CARD_MANIPULATION;
     this.duration = (this.startDuration = Settings.ACTION_DUR_FAST);
     this.player = AbstractDungeon.player;
@@ -33,12 +33,12 @@ public class ChooseAndAddFilteredDiscardCardsToHandAction extends AbstractGameAc
   }
 
   public ChooseAndAddFilteredDiscardCardsToHandAction(int numberOfCards) {
-    this(numberOfCards, false, c -> true, TEXT);
+    this(numberOfCards, c -> true, TEXT, false);
   }
 
   public ChooseAndAddFilteredDiscardCardsToHandAction(int numberOfCards, Predicate<AbstractCard> predicate,
                                                       String[] chooserUiStrings) {
-    this(numberOfCards, false, predicate, chooserUiStrings);
+    this(numberOfCards, predicate, chooserUiStrings, false);
   }
 
   private static ArrayList<AbstractCard> getDiscardCards() {

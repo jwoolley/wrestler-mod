@@ -1,4 +1,4 @@
-package thewrestler.actions.cards;
+package thewrestler.actions.cards.attack;
 
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.cards.DamageInfo;
