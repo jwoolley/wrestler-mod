@@ -5,5 +5,10 @@
       "Choose ",
       " Cards to Add to Your Hand."
     ]
+  },
+  "WrestlerMod:SideRollAction": {
+    "TEXT": [
+      "Choose a Card to Discard."
+    ]
   }
 }

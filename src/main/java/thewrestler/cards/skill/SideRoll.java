@@ -8,21 +8,17 @@ import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
-import thewrestler.actions.ChooseAndAddFilteredDiscardCardsToHandAction;
-import thewrestler.actions.MoveRandomCardsFromDiscardToHandAction;
+import thewrestler.actions.cards.skill.SideRollAction;
 import thewrestler.enums.AbstractCardEnum;
-
-import java.util.Arrays;
-import java.util.function.Predicate;
 
 import static thewrestler.WrestlerMod.getCardResourcePath;
 
-public class OffTheRopes extends CustomCard {
-  public static final String ID = "WrestlerMod:OffTheRopes";
+public class SideRoll extends CustomCard {
+  public static final String ID = "WrestlerMod:SideRoll";
   public static final String NAME;
   public static final String DESCRIPTION;
   public static final String[] EXTENDED_DESCRIPTION;
-  public static final String IMG_PATH = "offtheropes.png";
+  public static final String IMG_PATH = "sideroll.png";
 
   private static final CardStrings cardStrings;
 
@@ -30,12 +26,13 @@ public class OffTheRopes extends CustomCard {
   private static final CardRarity RARITY = CardRarity.COMMON;
   private static final CardTarget TARGET = CardTarget.NONE;
 
-  private static final int BLOCK_AMOUNT = 5;
+  private static final int BLOCK_AMOUNT = 9;
+  private static final int BLOCK_AMOUNT_UPGRADE = 3;
   private static final int COST = 1;
 
-  public OffTheRopes() {
-    super(ID, NAME, getCardResourcePath(IMG_PATH), COST, getDescription(false), TYPE,
-        AbstractCardEnum.THE_WRESTLER_ORANGE, RARITY, TARGET);
+  public SideRoll() {
+    super(ID, NAME, getCardResourcePath(IMG_PATH), COST, getDescription(), TYPE, AbstractCardEnum.THE_WRESTLER_ORANGE,
+        RARITY, TARGET);
     this.baseBlock = this.block = BLOCK_AMOUNT;
   }
 
@@ -43,35 +40,25 @@ public class OffTheRopes extends CustomCard {
   public void use(AbstractPlayer p, AbstractMonster m) {
     AbstractDungeon.actionManager.addToBottom(new GainBlockAction(p, p, block));
 
-    Predicate<AbstractCard> predicate =  c -> c.type == CardType.ATTACK;
-
-    if (this.upgraded) {
-      AbstractDungeon.actionManager.addToBottom(
-          new ChooseAndAddFilteredDiscardCardsToHandAction(1,
-              predicate, Arrays.copyOfRange(EXTENDED_DESCRIPTION, 3, 6), true));
-    } else {
-      AbstractDungeon.actionManager.addToBottom(
-          new MoveRandomCardsFromDiscardToHandAction(1, predicate));
-    }
+    AbstractDungeon.actionManager.addToBottom(new SideRollAction());
   }
 
   @Override
   public AbstractCard makeCopy() {
-    return new OffTheRopes();
+    return new SideRoll();
   }
 
   @Override
   public void upgrade() {
     if (!this.upgraded) {
       this.upgradeName();
-      this.rawDescription = getDescription(true);
+      this.upgradeBlock(BLOCK_AMOUNT_UPGRADE);
+      this.rawDescription = getDescription();
       initializeDescription();
     }
   }
-  public static String getDescription(boolean upgraded) {
-    return DESCRIPTION
-        + (!upgraded ? EXTENDED_DESCRIPTION[0] : EXTENDED_DESCRIPTION[1])
-        + EXTENDED_DESCRIPTION[2];
+  public static String getDescription() {
+    return DESCRIPTION;
   }
 
   static {

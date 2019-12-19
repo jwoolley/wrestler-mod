@@ -112,11 +112,14 @@
 
   "WrestlerMod:OffTheRopes": {
     "NAME": "Off the Ropes",
-    "DESCRIPTION": "Gain !B! Block. NL Return an Attack card from your discard pile to your hand.",
+    "DESCRIPTION": "Gain !B! Block. NL Return",
     "EXTENDED_DESCRIPTION": [
-      "Choose an Attack Card to Add to Your Hand.",
+      " a random",
+      " an",
+      " Attack from your discard pile to your hand.",
+      "Choose an Attack to Add to Your Hand.",
       "Choose ",
-      " Attack Cards to Add to Your Hand."
+      " Attack to Add to Your Hand."
     ]
   },
 
@@ -129,6 +132,12 @@
     "NAME": "Sharpshooter",
     "DESCRIPTION": "Deal !D! Damage for each debuff the enemy has."
   },
+
+  "WrestlerMod:SideRoll": {
+    "NAME": "SideRoll",
+    "DESCRIPTION": "Gain !B! Block. NL Discard 1 card. NL If you discarded an Attack this way, Draw 1 card."
+  },
+
 
   "WrestlerMod:SquareOff": {
     "NAME": "Square Off",

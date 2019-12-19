@@ -30,10 +30,7 @@ import thewrestler.cards.attack.*;
 import thewrestler.cards.power.CurtainJerker;
 import thewrestler.cards.power.FanFavorite;
 import thewrestler.cards.power.Scrapper;
-import thewrestler.cards.skill.EyePoke;
-import thewrestler.cards.skill.HeelTurn;
-import thewrestler.cards.skill.OffTheRopes;
-import thewrestler.cards.skill.SquareOff;
+import thewrestler.cards.skill.*;
 import thewrestler.characters.WrestlerCharacter;
 import thewrestler.enums.AbstractCardEnum;
 import thewrestler.enums.WrestlerCharEnum;
@@ -441,6 +438,7 @@ public class WrestlerMod implements
         BaseMod.addCard(new OffTheRopes());
         BaseMod.addCard(new Scrapper());
         BaseMod.addCard(new Sharpshooter());
+        BaseMod.addCard(new SideRoll());
         BaseMod.addCard(new SquareOff());
         BaseMod.addCard(new TakeToTheMat());
 
@@ -482,6 +480,7 @@ public class WrestlerMod implements
         UnlockTracker.unlockCard(OffTheRopes.ID);
         UnlockTracker.unlockCard(Scrapper.ID);
         UnlockTracker.unlockCard(Sharpshooter.ID);
+        UnlockTracker.unlockCard(SideRoll.ID);
         UnlockTracker.unlockCard(SquareOff.ID);
         UnlockTracker.unlockCard(TakeToTheMat.ID);
         

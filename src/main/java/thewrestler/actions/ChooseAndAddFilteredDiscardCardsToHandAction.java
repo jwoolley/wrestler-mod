@@ -32,15 +32,6 @@ public class ChooseAndAddFilteredDiscardCardsToHandAction extends AbstractGameAc
     this.chooserUiStrings = chooserUiStrings;
   }
 
-  public ChooseAndAddFilteredDiscardCardsToHandAction(int numberOfCards) {
-    this(numberOfCards, c -> true, TEXT, false);
-  }
-
-  public ChooseAndAddFilteredDiscardCardsToHandAction(int numberOfCards, Predicate<AbstractCard> predicate,
-                                                      String[] chooserUiStrings) {
-    this(numberOfCards, predicate, chooserUiStrings, false);
-  }
-
   private static ArrayList<AbstractCard> getDiscardCards() {
     return AbstractDungeon.player.discardPile.group;
   }
