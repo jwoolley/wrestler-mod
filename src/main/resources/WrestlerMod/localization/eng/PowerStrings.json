@@ -42,9 +42,9 @@
   "WrestlerMod:GrappledPower": {
     "NAME": "Grappled",
     "DESCRIPTIONS": [
-      "Deals #b",
-      "% less damage and receives #b",
-      "% more. Lasts until you receive #b",
+      "Deals [#ED3030]",
+      "%[] less damage and receives #b[#B6F8C0]",
+      "%[] more. Lasts until you receive #b",
       " damage in one turn, or you #yGrapple another enemy."
     ]
   },

@@ -16,7 +16,8 @@ public class ApplyGrappledAction extends AbstractGameAction {
   private final boolean useFastMode;
 
   private static int getHpThreshold(AbstractCreature grappledSource) {
-    return (int) Math.floor(grappledSource.maxHealth * GrappledPower.MAX_HP_PCT/100.0f);
+      // return (int) Math.floor(grappledSource.maxHealth * GrappledPower.MAX_HP_PCT/100.0f);
+      return GrappledPower.HP_THRESHOLD;
   }
 
   public ApplyGrappledAction(AbstractCreature target, AbstractCreature source) {

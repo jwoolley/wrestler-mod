@@ -18,7 +18,9 @@ import java.util.stream.Collectors;
 public class GrappledPower extends AbstractWrestlerPower implements CloneablePowerInterface {
   private static final int DMG_DECREASE_PCT = 25;
   private static final int DMG_INCREASE_PCT = 25;
-  public static final int MAX_HP_PCT = 10;
+//  public static final int MAX_HP_PCT = 10;
+
+  public static final int HP_THRESHOLD = 10;
 
   public static final String POWER_ID = WrestlerMod.makeID("GrappledPower");
   public static final String IMG = "grappled.png";

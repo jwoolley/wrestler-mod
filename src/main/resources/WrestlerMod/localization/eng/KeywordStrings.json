@@ -11,6 +11,6 @@
       "NAMES": [
         "grapple", "grappled"
       ],
-      "DESCRIPTION": "#yGrappled enemies receive #b25% more damage and deal #b25% less. Grapple breaks once you're dealt damage equal to #b10% of your max HP in a single turn, or if you Grapple another enemy."
+      "DESCRIPTION": "#yGrappled enemies receive [#ED3030]+25%[] more and deal [#B6F8C0]-25%[] less damage. Grapple breaks once you're dealt #b10 damage in a single turn, or if you Grapple another enemy."
     }
 }
