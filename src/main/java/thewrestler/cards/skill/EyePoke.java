@@ -1,5 +1,6 @@
 package thewrestler.cards.skill;
 
+import basemod.abstracts.CustomCard;
 import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.cards.blue.Buffer;
@@ -15,7 +16,7 @@ import thewrestler.enums.AbstractCardEnum;
 
 import static thewrestler.WrestlerMod.getCardResourcePath;
 
-public class EyePoke extends AbstractCardWithPreviewCard {
+public class EyePoke extends CustomCard {
   public static final String ID = "WrestlerMod:EyePoke";
   public static final String NAME;
   public static final String DESCRIPTION;
@@ -35,7 +36,7 @@ public class EyePoke extends AbstractCardWithPreviewCard {
 
   public EyePoke() {
     super(ID, NAME, getCardResourcePath(IMG_PATH), COST, getDescription(), TYPE, AbstractCardEnum.THE_WRESTLER_ORANGE,
-        RARITY, TARGET, new Buffer());
+        RARITY, TARGET);
     this.baseMagicNumber = this.magicNumber = DEBUFF_AMOUNT;
   }
 
