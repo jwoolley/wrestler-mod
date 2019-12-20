@@ -434,6 +434,7 @@ public class WrestlerMod implements
         BaseMod.addCard(new EyePoke());
         BaseMod.addCard(new FanFavorite());
         BaseMod.addCard(new HeelTurn());
+        BaseMod.addCard(new HotTag());
         BaseMod.addCard(new FrogSplash());
         BaseMod.addCard(new OffTheRopes());
         BaseMod.addCard(new Scrapper());
@@ -477,6 +478,7 @@ public class WrestlerMod implements
         UnlockTracker.unlockCard(FanFavorite.ID);
         UnlockTracker.unlockCard(FrogSplash.ID);
         UnlockTracker.unlockCard(HeelTurn.ID);
+        UnlockTracker.unlockCard(HotTag.ID);
         UnlockTracker.unlockCard(OffTheRopes.ID);
         UnlockTracker.unlockCard(Scrapper.ID);
         UnlockTracker.unlockCard(Sharpshooter.ID);

@@ -27,7 +27,7 @@ public class HeelTurn extends CustomCard {
 
   private static final CardType TYPE = CardType.SKILL;
   private static final CardRarity RARITY = CardRarity.RARE;
-  private static final CardTarget TARGET = CardTarget.NONE;
+  private static final CardTarget TARGET = CardTarget.SELF;
 
   private static final int COST = 3;
   private static final int UPGRADED_COST = 2;

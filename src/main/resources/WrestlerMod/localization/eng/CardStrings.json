@@ -86,7 +86,6 @@
     "DESCRIPTION": "Apply !M! Weak and !M! Vulnerable."
   },
 
-
   "WrestlerMod:FanFavorite": {
     "NAME": "Fan Favorite",
     "DESCRIPTION": "Every time you play ",
@@ -94,7 +93,6 @@
       " Attacks in a single turn, gain !M! Block."
     ]
   },
-
 
   "WrestlerMod:FrogSplash": {
     "NAME": "Frog Splash",
@@ -109,6 +107,15 @@
       " Strength. NL Gain !M! Gold. NL Exhaust."
     ]
   },
+
+  "WrestlerMod:HotTag": {
+    "NAME": "Hot Tag",
+    "DESCRIPTION": "Gain !B! Block. NL Put a ",
+    "EXTENDED_DESCRIPTION": [
+      " on the bottom of your draw pile. NL Exhaust."
+    ]
+  },
+
 
   "WrestlerMod:OffTheRopes": {
     "NAME": "Off the Ropes",
@@ -147,6 +154,14 @@
   "WrestlerMod:TakeToTheMat": {
     "NAME": "Take to the Mat",
     "DESCRIPTION": "Deal !D! Damage. NL If the enemy has !M! % health or less, they become Grappled."
+  },
+
+  "WrestlerMod:TornadoTag": {
+    "NAME": "Tornado Tag",
+    "DESCRIPTION": "Deal !D! Damage to a random enemy !M! times. NL Put a ",
+    "EXTENDED_DESCRIPTION": [
+      " on the bottom of your draw pile. NL Exhaust."
+    ]
   },
 
   "WrestlerMod:DefaultCommonAttack": {

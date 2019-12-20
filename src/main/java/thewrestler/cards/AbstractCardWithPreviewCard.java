@@ -7,18 +7,14 @@ import com.megacrit.cardcrawl.core.Settings;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 
 abstract public class AbstractCardWithPreviewCard extends CustomCard {
-  private AbstractCard previewCard;
   private MultiLock renderPreviewCard;
   public AbstractCardWithPreviewCard(String id, String name, String img, int cost, String rawDescription, CardType type,
-                                     CardColor color, CardRarity rarity, CardTarget target, AbstractCard previewCard) {
+                                     CardColor color, CardRarity rarity, CardTarget target) {
     super(id, name, img, cost, rawDescription, type, color, rarity, target);
-    this.previewCard = previewCard;
     renderPreviewCard = MultiLock.ZERO;
   }
 
-  public AbstractCard getPreviewCard() {
-    return this.previewCard;
-  }
+  abstract public AbstractCard getPreviewCard();
 
   public void renderCardTip(SpriteBatch sb) {
     super.renderCardTip(sb);
