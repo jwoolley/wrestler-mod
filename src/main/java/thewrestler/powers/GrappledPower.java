@@ -111,7 +111,6 @@ public class GrappledPower extends AbstractWrestlerPower implements CloneablePow
 
   @Override
   public void onRemove() {
-    logger.info("GrapplePower:onRemove number of grappled enemies: " + getGrappledEnemies().size());
     if (getGrappledEnemies().size() == 0) {
       MaintainGrapplePower.clear(this.source, this.owner);
     }

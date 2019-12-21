@@ -12,5 +12,13 @@
         "grapple", "grappled"
       ],
       "DESCRIPTION": "#yGrappled enemies receive [#ED3030]+25%[] more and deal [#B6F8C0]-25%[] less damage. Grapple breaks once you're dealt #b10 damage in a single turn, or if you Grapple another enemy."
-    }
+    },
+
+  "WrestlerMod:Choked": {
+    "PROPER_NAME": "Choked",
+    "NAMES": [
+      "choked"
+    ],
+    "DESCRIPTION": "Whenever you play a card this turn, loses HP."
+  }
 }

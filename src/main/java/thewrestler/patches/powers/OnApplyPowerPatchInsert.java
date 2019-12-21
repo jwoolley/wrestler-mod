@@ -8,6 +8,7 @@ import com.megacrit.cardcrawl.core.AbstractCreature;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.powers.AbstractPower;
+import com.megacrit.cardcrawl.powers.ArtifactPower;
 import thewrestler.relics.Headgear;
 
 @SpirePatch(
@@ -42,6 +43,7 @@ public class OnApplyPowerPatchInsert {
         && powerToApply.type == AbstractPower.PowerType.DEBUFF
         && source == player && (target instanceof AbstractMonster)
         && !target.isDeadOrEscaped()
+        && !target.hasPower(ArtifactPower.POWER_ID)
         && !hasBuffAlready) {
       ((Headgear)AbstractDungeon.player.getRelic(Headgear.ID)).onApplyPower(powerToApply);
     }
