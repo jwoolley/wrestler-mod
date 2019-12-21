@@ -1,18 +1,12 @@
 package thewrestler.cards.skill;
 
-import basemod.abstracts.CustomCard;
-import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
 import com.megacrit.cardcrawl.actions.common.GainBlockAction;
-import com.megacrit.cardcrawl.actions.common.PutOnBottomOfDeckAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
-import com.megacrit.cardcrawl.cards.blue.Buffer;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
-import com.megacrit.cardcrawl.powers.VulnerablePower;
-import com.megacrit.cardcrawl.powers.WeakPower;
 import thewrestler.cards.AbstractCardWithPreviewCard;
 import thewrestler.cards.attack.TornadoTag;
 import thewrestler.enums.AbstractCardEnum;
@@ -20,11 +14,11 @@ import thewrestler.enums.AbstractCardEnum;
 import static thewrestler.WrestlerMod.getCardResourcePath;
 
 public class HotTag extends AbstractCardWithPreviewCard {
-  public static final String ID = "WrestlerMod:HotTag";
+  public static final String ID = "WrestlerMod:SafetyTag";
   public static final String NAME;
   public static final String DESCRIPTION;
   public static final String[] EXTENDED_DESCRIPTION;
-  public static final String IMG_PATH = "hottag.png";
+  public static final String IMG_PATH = "safetytag.png";
 
   private static final CardStrings cardStrings;
 

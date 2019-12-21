@@ -2,6 +2,7 @@ package thewrestler.cards.attack;
 
 import basemod.abstracts.CustomCard;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
+import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
 import com.megacrit.cardcrawl.actions.common.DamageAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.cards.DamageInfo;
@@ -11,7 +12,11 @@ import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.powers.AbstractPower;
+import com.megacrit.cardcrawl.powers.ChokePower;
+import thewrestler.actions.cards.attack.SharpshooterAction;
+import thewrestler.actions.cards.attack.TakeToTheMatAction;
 import thewrestler.enums.AbstractCardEnum;
+import thewrestler.powers.SprainPower;
 
 import static thewrestler.WrestlerMod.getCardResourcePath;
 
@@ -29,23 +34,23 @@ public class Sharpshooter extends CustomCard {
   private static final CardTarget TARGET = CardTarget.ENEMY;
 
   private static final int COST = 1;
-  private static final int DAMAGE_PER_TRIGGER = 6;
+  private static final int DAMAGE_PER_TRIGGER = 4;
   private static final int DAMAGE_UPGRADE = 1;
+  private static final int DEBUFF_STACKS = 1;
 
   public Sharpshooter() {
     super(ID, NAME, getCardResourcePath(IMG_PATH), COST, DESCRIPTION, TYPE,
         AbstractCardEnum.THE_WRESTLER_ORANGE, RARITY, TARGET);
     this.baseDamage = this.damage = DAMAGE_PER_TRIGGER;
+    this.baseMagicNumber = this.magicNumber = DEBUFF_STACKS;
   }
 
   @Override
   public void use(AbstractPlayer p, AbstractMonster m) {
+    AbstractDungeon.actionManager.addToBottom(
+        new ApplyPowerAction(m, p, new ChokePower(m, this.magicNumber), this.magicNumber));
 
-    m.powers.stream().filter(pow -> pow.type == AbstractPower.PowerType.DEBUFF).forEach(pow -> {
-      AbstractDungeon.actionManager.addToBottom(
-          new DamageAction(m, new DamageInfo(p, damage, damageTypeForTurn),
-              AbstractGameAction.AttackEffect.SMASH));
-    });
+    AbstractDungeon.actionManager.addToBottom(new SharpshooterAction(m, p, this.damage));
   }
 
   @Override

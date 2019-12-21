@@ -99,6 +99,11 @@
     "DESCRIPTION": "Deal !D! Damage to an enemy and half to all other enemies."
   },
 
+  "WrestlerMod:Headlock": {
+    "NAME": "Headlock",
+    "DESCRIPTION": "Deal !D! Damage. Enemy loses !M! Strength until end of turn."
+  },
+
   "WrestlerMod:HeelTurn": {
     "NAME": "Heel Turn",
     "DESCRIPTION": "Gain ",
@@ -107,15 +112,6 @@
       " Strength. NL Gain !M! Gold. NL Exhaust."
     ]
   },
-
-  "WrestlerMod:HotTag": {
-    "NAME": "Hot Tag",
-    "DESCRIPTION": "Gain !B! Block. NL Put a ",
-    "EXTENDED_DESCRIPTION": [
-      " on the bottom of your draw pile. NL Exhaust."
-    ]
-  },
-
 
   "WrestlerMod:OffTheRopes": {
     "NAME": "Off the Ropes",
@@ -130,6 +126,14 @@
     ]
   },
 
+  "WrestlerMod:SafetyTag": {
+    "NAME": "Safety Tag",
+    "DESCRIPTION": "Gain !B! Block. NL Put a ",
+    "EXTENDED_DESCRIPTION": [
+      " on the bottom of your draw pile. NL Exhaust."
+    ]
+  },
+
   "WrestlerMod:Scrapper": {
     "NAME": "Scrapper",
     "DESCRIPTION": "At the start of your turn, if an enemy is Grappled, gain !M! Strength."
@@ -137,7 +141,7 @@
 
   "WrestlerMod:Sharpshooter": {
     "NAME": "Sharpshooter",
-    "DESCRIPTION": "Deal !D! Damage for each debuff the enemy has."
+    "DESCRIPTION": "Apply !M! Choked. NL Deal !D! Damage for each debuff applied to the enemy."
   },
 
   "WrestlerMod:SideRoll": {
