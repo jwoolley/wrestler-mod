@@ -1,29 +1,17 @@
 package thewrestler.cards.attack;
 
-import basemod.abstracts.CustomCard;
-import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.animations.VFXAction;
-import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
-import com.megacrit.cardcrawl.actions.common.DamageAction;
-import com.megacrit.cardcrawl.actions.common.GainBlockAction;
 import com.megacrit.cardcrawl.actions.utility.SFXAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
-import com.megacrit.cardcrawl.cards.DamageInfo;
-import com.megacrit.cardcrawl.cards.blue.Buffer;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
-import com.megacrit.cardcrawl.powers.VulnerablePower;
-import com.megacrit.cardcrawl.powers.WeakPower;
 import com.megacrit.cardcrawl.vfx.combat.LightningEffect;
-import com.megacrit.cardcrawl.vfx.combat.LightningOrbActivateEffect;
-import com.megacrit.cardcrawl.vfx.combat.ThrowDaggerEffect;
 import thewrestler.actions.cards.attack.TornadoTagAction;
 import thewrestler.cards.AbstractCardWithPreviewCard;
-import thewrestler.cards.skill.EyePoke;
-import thewrestler.cards.skill.HotTag;
+import thewrestler.cards.skill.SafetyTag;
 import thewrestler.effects.utils.VFXActionTemplate;
 import thewrestler.enums.AbstractCardEnum;
 
@@ -50,7 +38,7 @@ public class TornadoTag extends AbstractCardWithPreviewCard {
   private static final int COST = 1;
 
   public TornadoTag() {
-    super(ID, NAME, getCardResourcePath(IMG_PATH), COST, getDescription(HotTag.NAME), TYPE, AbstractCardEnum.THE_WRESTLER_ORANGE,
+    super(ID, NAME, getCardResourcePath(IMG_PATH), COST, getDescription(SafetyTag.NAME), TYPE, AbstractCardEnum.THE_WRESTLER_ORANGE,
         RARITY, TARGET);
     this.baseDamage = this.damage = DAMAGE;
     this.baseMagicNumber = this.magicNumber = NUM_ATTACKS;
@@ -108,7 +96,7 @@ public class TornadoTag extends AbstractCardWithPreviewCard {
     return DESCRIPTION + otherCardName + EXTENDED_DESCRIPTION[0];
   }
 
-  private static final AbstractCard getBasePreviewCard() { return new HotTag(); }
+  private static final AbstractCard getBasePreviewCard() { return new SafetyTag(); }
 
   static {
     cardStrings = CardCrawlGame.languagePack.getCardStrings(ID);

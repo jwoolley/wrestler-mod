@@ -13,7 +13,7 @@ import thewrestler.enums.AbstractCardEnum;
 
 import static thewrestler.WrestlerMod.getCardResourcePath;
 
-public class HotTag extends AbstractCardWithPreviewCard {
+public class SafetyTag extends AbstractCardWithPreviewCard {
   public static final String ID = "WrestlerMod:SafetyTag";
   public static final String NAME;
   public static final String DESCRIPTION;
@@ -30,7 +30,7 @@ public class HotTag extends AbstractCardWithPreviewCard {
   private static final int BLOCK_AMOUNT = 10;
   private static final int BLOCK_AMOUNT_UPGRADE = 4;
 
-  public HotTag() {
+  public SafetyTag() {
     super(ID, NAME, getCardResourcePath(IMG_PATH), COST, getDescription(TornadoTag.NAME), TYPE, AbstractCardEnum.THE_WRESTLER_ORANGE,
         RARITY, TARGET);
     this.baseBlock = this.block = BLOCK_AMOUNT;
@@ -58,7 +58,7 @@ public class HotTag extends AbstractCardWithPreviewCard {
 
   @Override
   public AbstractCard makeCopy() {
-    return new HotTag();
+    return new SafetyTag();
   }
 
   @Override

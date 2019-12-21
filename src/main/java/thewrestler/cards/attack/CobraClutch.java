@@ -1,74 +1,71 @@
 package thewrestler.cards.attack;
 
 import basemod.abstracts.CustomCard;
-import com.megacrit.cardcrawl.actions.AbstractGameAction.AttackEffect;
+import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
-import com.megacrit.cardcrawl.actions.common.DamageAllEnemiesAction;
-import com.megacrit.cardcrawl.actions.utility.SFXAction;
+import com.megacrit.cardcrawl.actions.common.DamageAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
+import com.megacrit.cardcrawl.cards.DamageInfo;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.CardStrings;
+import com.megacrit.cardcrawl.localization.UIStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
-import com.megacrit.cardcrawl.powers.WeakPower;
+import com.megacrit.cardcrawl.powers.PoisonPower;
+import com.megacrit.cardcrawl.powers.VulnerablePower;
+import com.megacrit.cardcrawl.vfx.ThoughtBubble;
 import thewrestler.enums.AbstractCardEnum;
 
 import static thewrestler.WrestlerMod.getCardResourcePath;
 
-public class FrogSplash extends CustomCard {
-  public static final String ID = "WrestlerMod:FrogSplash";
+public class CobraClutch extends CustomCard {
+  public static final String ID = "WrestlerMod:CobraClutch";
   public static final String NAME;
   public static final String DESCRIPTION;
   public static final String[] EXTENDED_DESCRIPTION;
-  public static final String IMG_PATH = "frogsplash.png";
+  public static final String IMG_PATH = "cobraclutch.png";
 
   private static final CardStrings cardStrings;
 
   private static final CardType TYPE = CardType.ATTACK;
-  private static final CardRarity RARITY = CardRarity.UNCOMMON;
-  private static final CardTarget TARGET = CardTarget.ALL_ENEMY;
+  private static final CardRarity RARITY = CardRarity.COMMON;
+  private static final CardTarget TARGET = CardTarget.ENEMY;
 
-  private static final int COST = 2;
-  private static final int DAMAGE = 12;
-  private static final int WEAK_AMOUNT = 1;
-  private static final int WEAK_AMOUNT_UPGRADE = 1;
+  private static final int COST = 0;
+  private static final int DAMAGE = 3;
+  private static final int POISON_AMOUNT = 3;
+  private static final int POISON_AMOUNT_UPGRADE = 3;
 
-  public FrogSplash() {
+  public CobraClutch() {
     super(ID, NAME, getCardResourcePath(IMG_PATH), COST, DESCRIPTION, TYPE,
         AbstractCardEnum.THE_WRESTLER_ORANGE, RARITY, TARGET);
     this.baseDamage = this.damage = DAMAGE;
-    this.baseMagicNumber = this.magicNumber = WEAK_AMOUNT;
+    this.baseMagicNumber = this.magicNumber = POISON_AMOUNT;
+    this.isInnate = true;
     this.exhaust = true;
   }
 
   @Override
   public void use(AbstractPlayer p, AbstractMonster m) {
-
     AbstractDungeon.actionManager.addToBottom(
-        new DamageAllEnemiesAction(p, this.multiDamage, this.damageType, AttackEffect.SMASH, true));
+        new DamageAction(m, new DamageInfo(p, damage, damageTypeForTurn),
+            AbstractGameAction.AttackEffect.SLASH_DIAGONAL));
 
-    AbstractDungeon.actionManager.addToBottom(new SFXAction("ATTACK_POISON"));
-
-    AbstractDungeon.getCurrRoom().monsters.monsters.stream()
-        .filter(mo -> !mo.isDying && !mo.isDeadOrEscaped())
-        .forEach(mo -> {
-              AbstractDungeon.actionManager.addToBottom(
-                  new ApplyPowerAction(mo, p,
-                      new WeakPower(mo, this.magicNumber, false), this.magicNumber));
-        });
+      AbstractDungeon.actionManager.addToBottom(
+          new ApplyPowerAction(m, p, new PoisonPower(m, p, this.magicNumber), this.magicNumber));
   }
 
   @Override
   public AbstractCard makeCopy() {
-    return new FrogSplash();
+    return new CobraClutch();
   }
 
   @Override
   public void upgrade() {
     if (!this.upgraded) {
       this.upgradeName();
-      this.upgradeMagicNumber(WEAK_AMOUNT_UPGRADE);
+      this.upgradeMagicNumber(POISON_AMOUNT_UPGRADE);
     }
   }
 

@@ -89,7 +89,6 @@ public class GrappledPower extends AbstractWrestlerPower implements CloneablePow
   public void stackPower(int stackAmount) {
     super.stackPower(stackAmount);
     MaintainGrapplePower.apply(this.source, this.owner, stackAmount, false);
-
   }
 
   @Override

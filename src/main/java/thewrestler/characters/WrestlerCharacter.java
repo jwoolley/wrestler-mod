@@ -163,7 +163,6 @@ public class WrestlerCharacter extends CustomPlayer {
         retVal.add(EyePoke.ID);
         retVal.add(TakeToTheMat.ID);
 
-        retVal.add(DefaultSecondMagicNumberSkill.ID);
         return retVal;
     }
 

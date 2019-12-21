@@ -71,6 +71,11 @@
     "DESCRIPTION": "Innate. NL Deal !D! damage. NL If the enemy intends to attack, apply !M! Vulnerable. NL Exhaust."
   },
 
+  "WrestlerMod:CobraClutch": {
+    "NAME": "Cobra Clutch",
+    "DESCRIPTION": "Deal !D! damage. NL Apply !M! Poison."
+  },
+
   "WrestlerMod:CurtainJerker": {
     "NAME": "Curtain Jerker",
     "DESCRIPTION": "The next time you're attacked, the attacker becomes Grappled at the start of your next turn."
@@ -96,12 +101,12 @@
 
   "WrestlerMod:FrogSplash": {
     "NAME": "Frog Splash",
-    "DESCRIPTION": "Deal !D! Damage to an enemy and half to all other enemies."
+    "DESCRIPTION": "Deal !D! Damage and apply !M! Weak to ALL enemies. NL Exhaust."
   },
 
   "WrestlerMod:Headlock": {
     "NAME": "Headlock",
-    "DESCRIPTION": "Deal !D! Damage. Enemy loses !M! Strength until end of turn."
+    "DESCRIPTION": "Deal !D! Damage. NL Enemy loses !M! Strength until end of turn."
   },
 
   "WrestlerMod:HeelTurn": {

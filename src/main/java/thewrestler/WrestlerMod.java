@@ -26,7 +26,6 @@ import com.megacrit.cardcrawl.unlock.UnlockTracker;
 import org.apache.logging.log4j.LogManager;
 import thewrestler.cards.*;
 import thewrestler.cards.attack.*;
-import thewrestler.cards.power.CurtainJerker;
 import thewrestler.cards.power.FanFavorite;
 import thewrestler.cards.power.Scrapper;
 import thewrestler.cards.skill.*;
@@ -427,14 +426,20 @@ public class WrestlerMod implements
         // Don't comment out/delete these cards (yet). You need 1 of each type and rarity (technically) for your game not to crash
         // when generating card rewards/shop screen items.
 
+        // TODO: rename these
+        BaseMod.addCard(new DefaultCommonSkill());
+        BaseMod.addCard(new DefaultCommonPower());
+
         BaseMod.addCard(new AtomicDrop());
         BaseMod.addCard(new Brainbuster());
         BaseMod.addCard(new CheapShot());
+        BaseMod.addCard(new CobraClutch());
         BaseMod.addCard(new DivingStomp());
         BaseMod.addCard(new EyePoke());
         BaseMod.addCard(new FanFavorite());
+        BaseMod.addCard(new Headlock());
         BaseMod.addCard(new HeelTurn());
-        BaseMod.addCard(new HotTag());
+        BaseMod.addCard(new SafetyTag());
         BaseMod.addCard(new FrogSplash());
         BaseMod.addCard(new OffTheRopes());
         BaseMod.addCard(new Scrapper());
@@ -443,17 +448,15 @@ public class WrestlerMod implements
         BaseMod.addCard(new SquareOff());
         BaseMod.addCard(new TakeToTheMat());
 
-        //        BaseMod.addCard(new CurtainJerker());
-
-//        BaseMod.addCard(new OrbSkill());
-        BaseMod.addCard(new DefaultSecondMagicNumberSkill());
-        BaseMod.addCard(new DefaultCommonAttack());
-        BaseMod.addCard(new DefaultAttackWithVariable());
-        BaseMod.addCard(new DefaultCommonSkill());
-        BaseMod.addCard(new DefaultCommonPower());
-        BaseMod.addCard(new DefaultUncommonAttack());
-//        BaseMod.addCard(new DefaultUncommonPower());
+        // BaseMod.addCard(new CurtainJerker());
         BaseMod.addCard(new DefaultRareAttack());
+
+                BaseMod.addCard(new DefaultAttackWithVariable());
+                BaseMod.addCard(new DefaultCommonAttack());
+                BaseMod.addCard(new DefaultUncommonAttack());
+                BaseMod.addCard(new DefaultSecondMagicNumberSkill());
+
+
 
         logger.info("Making sure the cards are unlocked.");
         // Unlock the cards
@@ -461,31 +464,34 @@ public class WrestlerMod implements
         // before playing your mod.
 
         // TODO: create "addCardToBasePool" method for cards that begin unlocked
-//        UnlockTracker.unlockCard(OrbSkill.ID);
-        UnlockTracker.unlockCard(DefaultSecondMagicNumberSkill.ID);
-        UnlockTracker.unlockCard(DefaultCommonAttack.ID);
-        UnlockTracker.unlockCard(DefaultAttackWithVariable.ID);
-        UnlockTracker.unlockCard(DefaultCommonSkill.ID);
-        UnlockTracker.unlockCard(DefaultCommonPower.ID);
-        UnlockTracker.unlockCard(DefaultUncommonAttack.ID);
-//        UnlockTracker.unlockCard(DefaultUncommonPower.ID);
-        UnlockTracker.unlockCard(DefaultRareAttack.ID);
 
-//        UnlockTracker.unlockCard(CurtainJerker.ID);
+        UnlockTracker.unlockCard(DefaultCommonAttack.ID);
+        UnlockTracker.unlockCard(DefaultCommonSkill.ID);
+
         UnlockTracker.unlockCard(CheapShot.ID);
+        UnlockTracker.unlockCard(CobraClutch.ID);
         UnlockTracker.unlockCard(DivingStomp.ID);
         UnlockTracker.unlockCard(EyePoke.ID);
         UnlockTracker.unlockCard(FanFavorite.ID);
         UnlockTracker.unlockCard(FrogSplash.ID);
+        UnlockTracker.unlockCard(Headlock.ID);
         UnlockTracker.unlockCard(HeelTurn.ID);
-        UnlockTracker.unlockCard(HotTag.ID);
+        UnlockTracker.unlockCard(SafetyTag.ID);
         UnlockTracker.unlockCard(OffTheRopes.ID);
         UnlockTracker.unlockCard(Scrapper.ID);
         UnlockTracker.unlockCard(Sharpshooter.ID);
         UnlockTracker.unlockCard(SideRoll.ID);
         UnlockTracker.unlockCard(SquareOff.ID);
         UnlockTracker.unlockCard(TakeToTheMat.ID);
-        
+        // UnlockTracker.unlockCard(CurtainJerker.ID);
+
+        UnlockTracker.unlockCard(DefaultRareAttack.ID);
+
+                UnlockTracker.unlockCard(DefaultAttackWithVariable.ID);
+                UnlockTracker.unlockCard(DefaultSecondMagicNumberSkill.ID);
+                UnlockTracker.unlockCard(DefaultCommonPower.ID);
+                UnlockTracker.unlockCard(DefaultUncommonAttack.ID);
+
         logger.info("Done adding cards!");
     }
     
