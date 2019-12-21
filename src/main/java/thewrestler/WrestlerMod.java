@@ -427,8 +427,8 @@ public class WrestlerMod implements
         // when generating card rewards/shop screen items.
 
         // TODO: rename these
+        BaseMod.addCard(new DefaultCommonAttack());
         BaseMod.addCard(new DefaultCommonSkill());
-        BaseMod.addCard(new DefaultCommonPower());
 
         BaseMod.addCard(new AtomicDrop());
         BaseMod.addCard(new Brainbuster());
@@ -440,9 +440,10 @@ public class WrestlerMod implements
         BaseMod.addCard(new Hardway());
         BaseMod.addCard(new Headlock());
         BaseMod.addCard(new HeelTurn());
-        BaseMod.addCard(new SafetyTag());
         BaseMod.addCard(new FrogSplash());
         BaseMod.addCard(new OffTheRopes());
+        BaseMod.addCard(new Ropewalk());
+        BaseMod.addCard(new SafetyTag());
         BaseMod.addCard(new Scrapper());
         BaseMod.addCard(new Sharpshooter());
         BaseMod.addCard(new SideRoll());
@@ -452,10 +453,10 @@ public class WrestlerMod implements
         // BaseMod.addCard(new CurtainJerker());
         BaseMod.addCard(new DefaultRareAttack());
 
-                BaseMod.addCard(new DefaultAttackWithVariable());
-                BaseMod.addCard(new DefaultCommonAttack());
-                BaseMod.addCard(new DefaultUncommonAttack());
-                BaseMod.addCard(new DefaultSecondMagicNumberSkill());
+//                BaseMod.addCard(new DefaultAttackWithVariable());
+//                BaseMod.addCard(new DefaultCommonPower());
+//                BaseMod.addCard(new DefaultUncommonAttack());
+//                BaseMod.addCard(new DefaultSecondMagicNumberSkill());
 
 
 
@@ -478,8 +479,9 @@ public class WrestlerMod implements
         UnlockTracker.unlockCard(Hardway.ID);
         UnlockTracker.unlockCard(Headlock.ID);
         UnlockTracker.unlockCard(HeelTurn.ID);
-        UnlockTracker.unlockCard(SafetyTag.ID);
         UnlockTracker.unlockCard(OffTheRopes.ID);
+        UnlockTracker.unlockCard(Ropewalk.ID);
+        UnlockTracker.unlockCard(SafetyTag.ID);
         UnlockTracker.unlockCard(Scrapper.ID);
         UnlockTracker.unlockCard(Sharpshooter.ID);
         UnlockTracker.unlockCard(SideRoll.ID);
@@ -489,10 +491,10 @@ public class WrestlerMod implements
 
         UnlockTracker.unlockCard(DefaultRareAttack.ID);
 
-                UnlockTracker.unlockCard(DefaultAttackWithVariable.ID);
-                UnlockTracker.unlockCard(DefaultSecondMagicNumberSkill.ID);
-                UnlockTracker.unlockCard(DefaultCommonPower.ID);
-                UnlockTracker.unlockCard(DefaultUncommonAttack.ID);
+//                UnlockTracker.unlockCard(DefaultAttackWithVariable.ID);
+//                UnlockTracker.unlockCard(DefaultSecondMagicNumberSkill.ID);
+//                UnlockTracker.unlockCard(DefaultCommonPower.ID);
+//                UnlockTracker.unlockCard(DefaultUncommonAttack.ID);
 
         logger.info("Done adding cards!");
     }

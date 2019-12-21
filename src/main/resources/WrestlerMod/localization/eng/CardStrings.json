@@ -104,7 +104,6 @@
     "DESCRIPTION": "Deal !D! Damage and apply !M! Weak to ALL enemies. NL Exhaust."
   },
 
-
   "WrestlerMod:Hardway": {
     "NAME": "Hardway",
     "DESCRIPTION": "Remove all of the enemy's debuffs. NL They lose 1 Strength for each debuff removed. NL Exhaust.",
@@ -112,7 +111,6 @@
       "Ethereal. NL "
     ]
   },
-
 
   "WrestlerMod:Headlock": {
     "NAME": "Headlock",
@@ -141,11 +139,20 @@
     ]
   },
 
+  "WrestlerMod:Ropewalk": {
+    "NAME": "Ropewalk",
+    "DESCRIPTION": "Gain !B! Block. NL Reduce the cost of a random Attack card in your hand by 1 this",
+    "EXTENDED_DESCRIPTION": [
+      " turn.",
+      " combat."
+    ]
+  },
+
   "WrestlerMod:SafetyTag": {
     "NAME": "Safety Tag",
-    "DESCRIPTION": "Gain !B! Block. NL Put a ",
+    "DESCRIPTION": "Gain !B! Block. NL Add a ",
     "EXTENDED_DESCRIPTION": [
-      " on the bottom of your draw pile. NL Exhaust."
+      " to your discard pile. NL Exhaust."
     ]
   },
 
@@ -160,7 +167,7 @@
   },
 
   "WrestlerMod:SideRoll": {
-    "NAME": "SideRoll",
+    "NAME": "Side Roll",
     "DESCRIPTION": "Gain !B! Block. NL Discard 1 card. NL If you discarded an Attack this way, Draw 1 card."
   },
 

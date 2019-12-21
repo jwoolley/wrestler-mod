@@ -1,6 +1,7 @@
 package thewrestler.cards.skill;
 
 import com.megacrit.cardcrawl.actions.common.GainBlockAction;
+import com.megacrit.cardcrawl.actions.common.MakeTempCardInDiscardAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
@@ -23,12 +24,15 @@ public class SafetyTag extends AbstractCardWithPreviewCard {
   private static final CardStrings cardStrings;
 
   private static final CardType TYPE = CardType.SKILL;
-  private static final CardRarity RARITY = CardRarity.BASIC;
+  private static final CardRarity RARITY = CardRarity.UNCOMMON;
   private static final CardTarget TARGET = CardTarget.SELF;
+  private static AbstractCard BASE_PREVIEW_CARD;
+  private static AbstractCard UPGRADED_PREVIEW_CARD;
+
 
   private static final int COST = 1;
-  private static final int BLOCK_AMOUNT = 10;
-  private static final int BLOCK_AMOUNT_UPGRADE = 4;
+  private static final int BLOCK_AMOUNT = 7;
+  private static final int BLOCK_AMOUNT_UPGRADE = 2;
 
   public SafetyTag() {
     super(ID, NAME, getCardResourcePath(IMG_PATH), COST, getDescription(TornadoTag.NAME), TYPE, AbstractCardEnum.THE_WRESTLER_ORANGE,
@@ -40,20 +44,13 @@ public class SafetyTag extends AbstractCardWithPreviewCard {
   @Override
   public void use(AbstractPlayer p, AbstractMonster m) {
     AbstractDungeon.actionManager.addToBottom(new GainBlockAction(p, p, block));
-    AbstractDungeon.getCurrRoom().souls.onToBottomOfDeck(this.getOtherCard());
+    AbstractDungeon.actionManager.addToBottom(
+        new MakeTempCardInDiscardAction(this.getPreviewCard().makeStatEquivalentCopy(), 1));
   }
 
   @Override
   public AbstractCard getPreviewCard() {
-    return getOtherCard();
-  }
-
-  private AbstractCard getOtherCard() {
-    AbstractCard otherCard = getBasePreviewCard().makeCopy();
-    if (this.upgraded) {
-      otherCard.upgrade();
-    }
-    return otherCard;
+    return getPreviewCard(this.upgraded);
   }
 
   @Override
@@ -66,8 +63,23 @@ public class SafetyTag extends AbstractCardWithPreviewCard {
     if (!this.upgraded) {
       this.upgradeName();
       this.upgradeBlock(BLOCK_AMOUNT_UPGRADE);
-      this.rawDescription = getDescription(this.getOtherCard().name);
+      this.rawDescription = getDescription(this.getPreviewCard().name);
       initializeDescription();
+    }
+  }
+
+  private static AbstractCard getPreviewCard(boolean upgraded) {
+    if (!upgraded) {
+      if (BASE_PREVIEW_CARD == null) {
+        BASE_PREVIEW_CARD = new TornadoTag();
+      }
+      return BASE_PREVIEW_CARD;
+    } else {
+      if (UPGRADED_PREVIEW_CARD == null) {
+        UPGRADED_PREVIEW_CARD = new TornadoTag();
+        UPGRADED_PREVIEW_CARD.upgrade();
+      }
+      return UPGRADED_PREVIEW_CARD;
     }
   }
 
@@ -75,12 +87,14 @@ public class SafetyTag extends AbstractCardWithPreviewCard {
     return DESCRIPTION + otherCardName + EXTENDED_DESCRIPTION[0];
   }
 
-  private static final AbstractCard getBasePreviewCard() { return new TornadoTag(); }
-
   static {
     cardStrings = CardCrawlGame.languagePack.getCardStrings(ID);
     NAME = cardStrings.NAME;
     DESCRIPTION = cardStrings.DESCRIPTION;
     EXTENDED_DESCRIPTION = cardStrings.EXTENDED_DESCRIPTION;
+
+    BASE_PREVIEW_CARD = new TornadoTag();
+    UPGRADED_PREVIEW_CARD = new TornadoTag();
+    UPGRADED_PREVIEW_CARD.upgrade();
   }
 }
