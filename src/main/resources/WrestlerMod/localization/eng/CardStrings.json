@@ -104,6 +104,16 @@
     "DESCRIPTION": "Deal !D! Damage and apply !M! Weak to ALL enemies. NL Exhaust."
   },
 
+
+  "WrestlerMod:Hardway": {
+    "NAME": "Hardway",
+    "DESCRIPTION": "Remove all of the enemy's debuffs. NL They lose 1 Strength for each debuff removed. NL Exhaust.",
+    "EXTENDED_DESCRIPTION": [
+      "Ethereal. NL "
+    ]
+  },
+
+
   "WrestlerMod:Headlock": {
     "NAME": "Headlock",
     "DESCRIPTION": "Deal !D! Damage. NL Enemy loses !M! Strength until end of turn."

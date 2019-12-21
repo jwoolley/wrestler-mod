@@ -31,6 +31,7 @@ public class FrogSplash extends CustomCard {
 
   private static final int COST = 2;
   private static final int DAMAGE = 12;
+  private static final int DAMAGE_UPGRADE = 5;
   private static final int WEAK_AMOUNT = 1;
   private static final int WEAK_AMOUNT_UPGRADE = 1;
 
@@ -68,6 +69,7 @@ public class FrogSplash extends CustomCard {
   public void upgrade() {
     if (!this.upgraded) {
       this.upgradeName();
+      this.upgradeDamage(DAMAGE_UPGRADE);
       this.upgradeMagicNumber(WEAK_AMOUNT_UPGRADE);
     }
   }

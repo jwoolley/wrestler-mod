@@ -42,8 +42,6 @@ public class CobraClutch extends CustomCard {
         AbstractCardEnum.THE_WRESTLER_ORANGE, RARITY, TARGET);
     this.baseDamage = this.damage = DAMAGE;
     this.baseMagicNumber = this.magicNumber = POISON_AMOUNT;
-    this.isInnate = true;
-    this.exhaust = true;
   }
 
   @Override

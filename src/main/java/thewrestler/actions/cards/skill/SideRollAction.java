@@ -23,7 +23,6 @@ public class SideRollAction extends AbstractGameAction  {
 
   public SideRollAction() {
     this.source = this.target = this.player = AbstractDungeon.player;
-    setValues(target, source);
     this.actionType = AbstractGameAction.ActionType.DISCARD;
     this.duration = DURATION;
   }

@@ -13,6 +13,7 @@ import org.apache.logging.log4j.Logger;
 import thewrestler.WrestlerMod;
 import thewrestler.actions.power.ApplyGrappledAction;
 import thewrestler.util.BasicUtils;
+import thewrestler.util.CreatureUtils;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -36,8 +37,7 @@ public class SharpshooterAction extends AbstractGameAction {
   @Override
   public void update() {
     if (this.duration <= this.startDuration) {
-      List<AbstractPower> debuffs = this.target.powers.stream()
-          .filter(pow -> pow.type == AbstractPower.PowerType.DEBUFF).collect(Collectors.toList());
+      List<AbstractPower> debuffs = CreatureUtils.getDebuffs(this.target);
 
       Logger logger = WrestlerMod.logger;
       logger.info("SharpshooterAction::update # of debuffs: " + debuffs.size());
