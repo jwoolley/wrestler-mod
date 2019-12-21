@@ -48,11 +48,11 @@
 
   "WrestlerMod:AtomicDrop": {
     "NAME": "Atomic Drop",
-    "DESCRIPTION": "Deal !D! Damage to ALL enemies. NL The next ",
+    "DESCRIPTION": "Deal !D! Damage. NL The next ",
     "EXTENDED_DESCRIPTION": [
       "time",
       "!M! times",
-      " you attack each of them this turn, gain [E]."
+      " you attack the enemy this turn, gain [E]."
     ]
   },
 

@@ -29,13 +29,14 @@ public class CobraClutch extends CustomCard {
   private static final CardStrings cardStrings;
 
   private static final CardType TYPE = CardType.ATTACK;
-  private static final CardRarity RARITY = CardRarity.COMMON;
+  private static final CardRarity RARITY = CardRarity.UNCOMMON;
   private static final CardTarget TARGET = CardTarget.ENEMY;
 
   private static final int COST = 0;
-  private static final int DAMAGE = 3;
-  private static final int POISON_AMOUNT = 3;
-  private static final int POISON_AMOUNT_UPGRADE = 3;
+  private static final int DAMAGE = 2;
+  private static final int DAMAGE_UPGRADE = 1;
+  private static final int POISON_AMOUNT = 2;
+  private static final int POISON_AMOUNT_UPGRADE = 1;
 
   public CobraClutch() {
     super(ID, NAME, getCardResourcePath(IMG_PATH), COST, DESCRIPTION, TYPE,
@@ -63,6 +64,7 @@ public class CobraClutch extends CustomCard {
   public void upgrade() {
     if (!this.upgraded) {
       this.upgradeName();
+      this.upgradeDamage(DAMAGE_UPGRADE);
       this.upgradeMagicNumber(POISON_AMOUNT_UPGRADE);
     }
   }

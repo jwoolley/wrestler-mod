@@ -3,6 +3,7 @@ package thewrestler.cards.attack;
 import basemod.abstracts.CustomCard;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
+import com.megacrit.cardcrawl.actions.common.DamageAction;
 import com.megacrit.cardcrawl.actions.common.DamageAllEnemiesAction;
 import com.megacrit.cardcrawl.actions.utility.SFXAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
@@ -29,12 +30,12 @@ public class AtomicDrop extends CustomCard {
 
   private static final CardType TYPE = CardType.ATTACK;
   private static final CardRarity RARITY = CardRarity.UNCOMMON;
-  private static final CardTarget TARGET = CardTarget.ALL_ENEMY;
+  private static final CardTarget TARGET = CardTarget.ENEMY;
 
   private static final int COST = 2;
   private static final int DAMAGE = 10;
-  private static final int DAMAGE_UPGRADE = 5;
   private static final int POWER_STACKS = 1;
+  private static final int POWER_STACKS_UPGRADE = 1;
 
   public AtomicDrop() {
     super(ID, NAME, getCardResourcePath(IMG_PATH), COST, getDescription(POWER_STACKS), TYPE,
@@ -48,23 +49,11 @@ public class AtomicDrop extends CustomCard {
     AbstractDungeon.actionManager.addToTop(new SFXAction("BOOM_LOWFREQ_1"));
 
     AbstractDungeon.actionManager.addToBottom(
-        new DamageAllEnemiesAction(AbstractDungeon.player,
-            DamageInfo.createDamageMatrix(this.damage, true, true),
-            DamageInfo.DamageType.THORNS, AbstractGameAction.AttackEffect.NONE));
+        new DamageAction(m, new DamageInfo(p, damage, damageTypeForTurn),
+            AbstractGameAction.AttackEffect.BLUNT_HEAVY));
 
-    AbstractDungeon.getCurrRoom().monsters.monsters.stream()
-        .filter(mo -> !mo.isDying && !mo.isDeadOrEscaped())
-        .forEach(mo -> {
-          AbstractDungeon.effectList.add(
-              new FlashAtkImgEffect(mo.hb.cX, mo.hb.cY, AbstractGameAction.AttackEffect.BLUNT_HEAVY));
-
-//          AbstractDungeon.actionManager.addToBottom(
-//              new DamageAction(mo, new DamageInfo(p, damage,  DamageInfo.DamageType.NORMAL),
-//                  AbstractGameAction.AttackEffect.NONE));
-
-          AbstractDungeon.actionManager.addToBottom(
-              new ApplyPowerAction(mo, p, new IrradiatedPower(mo, this.magicNumber), this.magicNumber));
-        });
+    AbstractDungeon.actionManager.addToBottom(
+      new ApplyPowerAction(m, p, new IrradiatedPower(m, this.magicNumber), this.magicNumber));
   }
 
   @Override
@@ -76,7 +65,7 @@ public class AtomicDrop extends CustomCard {
   public void upgrade() {
     if (!this.upgraded) {
       this.upgradeName();
-      this.upgradeDamage(DAMAGE_UPGRADE);
+      this.upgradeMagicNumber(POWER_STACKS_UPGRADE);
       this.rawDescription = getDescription(this.magicNumber);
       this.initializeDescription();
     }
