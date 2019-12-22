@@ -24,7 +24,6 @@ import com.megacrit.cardcrawl.helpers.FontHelper;
 import com.megacrit.cardcrawl.localization.*;
 import com.megacrit.cardcrawl.unlock.UnlockTracker;
 import org.apache.logging.log4j.LogManager;
-import thewrestler.cards.*;
 import thewrestler.cards.attack.*;
 import thewrestler.cards.power.FanFavorite;
 import thewrestler.cards.power.Scrapper;
@@ -286,6 +285,7 @@ public class WrestlerMod implements
         reflectedMap.put("BUBBLE_SHORT_1", new Sfx(getAudioResourcePath("TheWrestler_BubbleShort1.ogg")));
         reflectedMap.put("CHEER_CROWD_1", new Sfx(getAudioResourcePath("TheWrestler_CheerCrowd1.ogg")));
         reflectedMap.put("ELECTRO_INTERFERENCE_1", new Sfx(getAudioResourcePath("TheWrestler_ElectroInterference1.ogg")));
+        reflectedMap.put("GONG_STRIKE_1", new Sfx(getAudioResourcePath("TheWrestler_GongStrike_1.ogg")));
         reflectedMap.put("SPLAT_WET_1", new Sfx(getAudioResourcePath("TheWrestler_SplatWet1.ogg")));
         reflectedMap.put("THUD_MEDIUM_1", new Sfx(getAudioResourcePath("TheWrestler_ThudMedium1.ogg")));
         reflectedMap.put("TONE_ELECTRONIC_1", new Sfx(getAudioResourcePath("TheWrestler_ToneElectronic_1.ogg")));
@@ -427,8 +427,8 @@ public class WrestlerMod implements
         // when generating card rewards/shop screen items.
 
         // TODO: rename these
-        BaseMod.addCard(new DefaultCommonAttack());
-        BaseMod.addCard(new DefaultCommonSkill());
+        BaseMod.addCard(new WrestlerStrike());
+        BaseMod.addCard(new WrestlerDefend());
 
         BaseMod.addCard(new AtomicDrop());
         BaseMod.addCard(new Brainbuster());
@@ -440,25 +440,20 @@ public class WrestlerMod implements
         BaseMod.addCard(new Hardway());
         BaseMod.addCard(new Headlock());
         BaseMod.addCard(new HeelTurn());
+        BaseMod.addCard(new HotShot());
         BaseMod.addCard(new FrogSplash());
         BaseMod.addCard(new OffTheRopes());
         BaseMod.addCard(new Ropewalk());
-        BaseMod.addCard(new SafetyTag());
+
         BaseMod.addCard(new Scrapper());
         BaseMod.addCard(new Sharpshooter());
         BaseMod.addCard(new SideRoll());
         BaseMod.addCard(new SquareOff());
         BaseMod.addCard(new TakeToTheMat());
+        BaseMod.addCard(new TripleThreat());
 
         // BaseMod.addCard(new CurtainJerker());
-        BaseMod.addCard(new DefaultRareAttack());
-
-//                BaseMod.addCard(new DefaultAttackWithVariable());
-//                BaseMod.addCard(new DefaultCommonPower());
-//                BaseMod.addCard(new DefaultUncommonAttack());
-//                BaseMod.addCard(new DefaultSecondMagicNumberSkill());
-
-
+        // BaseMod.addCard(new SafetyTag());
 
         logger.info("Making sure the cards are unlocked.");
         // Unlock the cards
@@ -467,8 +462,8 @@ public class WrestlerMod implements
 
         // TODO: create "addCardToBasePool" method for cards that begin unlocked
 
-        UnlockTracker.unlockCard(DefaultCommonAttack.ID);
-        UnlockTracker.unlockCard(DefaultCommonSkill.ID);
+        UnlockTracker.unlockCard(WrestlerStrike.ID);
+        UnlockTracker.unlockCard(WrestlerDefend.ID);
 
         UnlockTracker.unlockCard(CheapShot.ID);
         UnlockTracker.unlockCard(CobraClutch.ID);
@@ -479,22 +474,23 @@ public class WrestlerMod implements
         UnlockTracker.unlockCard(Hardway.ID);
         UnlockTracker.unlockCard(Headlock.ID);
         UnlockTracker.unlockCard(HeelTurn.ID);
+        UnlockTracker.unlockCard(HotShot.ID);
         UnlockTracker.unlockCard(OffTheRopes.ID);
         UnlockTracker.unlockCard(Ropewalk.ID);
-        UnlockTracker.unlockCard(SafetyTag.ID);
+
         UnlockTracker.unlockCard(Scrapper.ID);
         UnlockTracker.unlockCard(Sharpshooter.ID);
         UnlockTracker.unlockCard(SideRoll.ID);
         UnlockTracker.unlockCard(SquareOff.ID);
         UnlockTracker.unlockCard(TakeToTheMat.ID);
+        UnlockTracker.unlockCard(TripleThreat.ID);
+
         // UnlockTracker.unlockCard(CurtainJerker.ID);
+        // UnlockTracker.unlockCard(SafetyTag.ID);
 
+        // TODO: Remove this once card pool is sufficiently large
+        BaseMod.addCard(new DefaultRareAttack());
         UnlockTracker.unlockCard(DefaultRareAttack.ID);
-
-//                UnlockTracker.unlockCard(DefaultAttackWithVariable.ID);
-//                UnlockTracker.unlockCard(DefaultSecondMagicNumberSkill.ID);
-//                UnlockTracker.unlockCard(DefaultCommonPower.ID);
-//                UnlockTracker.unlockCard(DefaultUncommonAttack.ID);
 
         logger.info("Done adding cards!");
     }

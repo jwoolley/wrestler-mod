@@ -21,7 +21,8 @@ import com.megacrit.cardcrawl.unlock.UnlockTracker;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import thewrestler.WrestlerMod;
-import thewrestler.cards.*;
+import thewrestler.cards.attack.WrestlerStrike;
+import thewrestler.cards.skill.WrestlerDefend;
 import thewrestler.cards.skill.EyePoke;
 import thewrestler.cards.attack.TakeToTheMat;
 import thewrestler.enums.AbstractCardEnum;
@@ -150,15 +151,15 @@ public class WrestlerCharacter extends CustomPlayer {
 
         logger.info("Begin loading starter Deck Strings");
 
-        retVal.add(DefaultCommonAttack.ID);
-        retVal.add(DefaultCommonAttack.ID);
-        retVal.add(DefaultCommonAttack.ID);
-        retVal.add(DefaultCommonAttack.ID);
+        retVal.add(WrestlerStrike.ID);
+        retVal.add(WrestlerStrike.ID);
+        retVal.add(WrestlerStrike.ID);
+        retVal.add(WrestlerStrike.ID);
 
-        retVal.add(DefaultCommonSkill.ID);
-        retVal.add(DefaultCommonSkill.ID);
-        retVal.add(DefaultCommonSkill.ID);
-        retVal.add(DefaultCommonSkill.ID);
+        retVal.add(WrestlerDefend.ID);
+        retVal.add(WrestlerDefend.ID);
+        retVal.add(WrestlerDefend.ID);
+        retVal.add(WrestlerDefend.ID);
 
         retVal.add(EyePoke.ID);
         retVal.add(TakeToTheMat.ID);
@@ -223,7 +224,7 @@ public class WrestlerCharacter extends CustomPlayer {
     //Which card should be obtainable from the Match and Keep event?
     @Override
     public AbstractCard getStartCardForEvent() {
-        return new DefaultCommonAttack();
+        return new WrestlerStrike();
     }
 
     // The class name as it appears next to your player name in-game

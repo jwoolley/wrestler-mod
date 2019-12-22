@@ -1,4 +1,4 @@
-package thewrestler.powers;
+package thewrestler.powers.unused;
 
 import basemod.interfaces.CloneablePowerInterface;
 import com.megacrit.cardcrawl.actions.common.ReducePowerAction;
@@ -10,6 +10,7 @@ import com.megacrit.cardcrawl.localization.PowerStrings;
 import com.megacrit.cardcrawl.powers.AbstractPower;
 import thewrestler.WrestlerMod;
 import thewrestler.actions.power.ApplyGrappledAction;
+import thewrestler.powers.AbstractWrestlerPower;
 
 public class CurtainJerkerPower extends AbstractWrestlerPower implements CloneablePowerInterface {
   public static final String POWER_ID = WrestlerMod.makeID("CurtainJerkerPower");

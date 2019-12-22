@@ -1,4 +1,4 @@
-package thewrestler.cards;
+package thewrestler.cards.attack;
 
 import basemod.abstracts.CustomCard;
 import basemod.helpers.BaseModCardTags;
@@ -24,9 +24,9 @@ import static thewrestler.WrestlerMod.getCardResourcePath;
 // Abstract Dynamic Card builds up on Abstract Default Card even more and makes it so that you don't need to add
 // the NAME and the DESCRIPTION into your card - it'll get it automatically. Of course, this functionality could have easily
 // Been added to the default card rather than creating a new Dynamic one, but was done so to deliberately.
-public class DefaultCommonAttack extends CustomCard {
+public class WrestlerStrike extends CustomCard {
 
-    public static final String ID = WrestlerMod.makeID(DefaultCommonAttack.class.getSimpleName());
+    public static final String ID = WrestlerMod.makeID(WrestlerStrike.class.getSimpleName());
     private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(ID);
 
     public static final String IMG = getCardResourcePath("Attack.png");
@@ -42,7 +42,7 @@ public class DefaultCommonAttack extends CustomCard {
     private static final int COST = 1;
     private static final int DAMAGE = 6;
     private static final int UPGRADE_PLUS_DMG = 3;
-    public DefaultCommonAttack() {
+    public WrestlerStrike() {
         super(ID, NAME, IMG, COST, DESCRIPTION, TYPE, COLOR, RARITY, TARGET);
         baseDamage = DAMAGE;
         this.tags.add(BaseModCardTags.BASIC_STRIKE);

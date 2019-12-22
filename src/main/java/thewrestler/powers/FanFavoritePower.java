@@ -46,7 +46,6 @@ public class FanFavoritePower extends AbstractWrestlerPower implements Cloneable
       if (this.amount % ATTACKS_PER_TRIGGER == 0) {
         flash();
         CardCrawlGame.sound.play("CHEER_CROWD_1");
-//        AbstractDungeon.actionManager.addToBottom(new SFXAction("CHEER_CROWD_1"));
         this.amount = 0;
         AbstractDungeon.actionManager.addToBottom(new GainBlockAction(this.owner, this.owner, this.blockAmount));
       }

@@ -26,8 +26,8 @@ public class SideRoll extends CustomCard {
   private static final CardRarity RARITY = CardRarity.COMMON;
   private static final CardTarget TARGET = CardTarget.SELF;
 
-  private static final int BLOCK_AMOUNT = 9;
-  private static final int BLOCK_AMOUNT_UPGRADE = 3;
+  private static final int BLOCK_AMOUNT = 7;
+  private static final int BLOCK_AMOUNT_UPGRADE = 2;
   private static final int COST = 1;
 
   public SideRoll() {

@@ -101,5 +101,16 @@
       "times ",
       "this turn, apply #yGrappled."
     ]
+  },
+
+  "WrestlerMod:TripleThreatPower": {
+    "NAME": "Triple Threat",
+    "DESCRIPTIONS": [
+      "The next ",
+      "time",
+      "#b",
+      " times",
+      " you attack this enemy this turn, add a #yKnee to your hand."
+    ]
   }
 }

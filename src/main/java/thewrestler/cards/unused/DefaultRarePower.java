@@ -1,4 +1,4 @@
-package thewrestler.cards;
+package thewrestler.cards.unused;
 
 import basemod.helpers.BaseModCardTags;
 import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
@@ -6,8 +6,9 @@ import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import thewrestler.WrestlerMod;
+import thewrestler.cards.AbstractDynamicCard;
 import thewrestler.enums.AbstractCardEnum;
-import thewrestler.powers.RarePower;
+import thewrestler.powers.unused.RarePower;
 
 import static thewrestler.WrestlerMod.getCardResourcePath;
 

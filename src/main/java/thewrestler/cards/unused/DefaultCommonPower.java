@@ -1,4 +1,4 @@
-package thewrestler.cards;
+package thewrestler.cards.unused;
 
 import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
@@ -7,8 +7,9 @@ import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import thewrestler.WrestlerMod;
+import thewrestler.cards.AbstractDynamicCard;
 import thewrestler.enums.AbstractCardEnum;
-import thewrestler.powers.CommonPower;
+import thewrestler.powers.unused.CommonPower;
 
 import static thewrestler.WrestlerMod.getCardResourcePath;
 

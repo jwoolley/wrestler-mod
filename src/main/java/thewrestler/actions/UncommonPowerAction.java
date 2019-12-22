@@ -8,7 +8,7 @@ import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.relics.ChemicalX;
 import com.megacrit.cardcrawl.ui.panels.EnergyPanel;
-import thewrestler.powers.CommonPower;
+import thewrestler.powers.unused.CommonPower;
 
 public class UncommonPowerAction extends AbstractGameAction {
     private boolean freeToPlayOnce;

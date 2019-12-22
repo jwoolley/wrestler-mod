@@ -20,6 +20,7 @@ public class TakeToTheMat extends CustomCard {
   public static final String IMG_PATH = "taketothemat.png";
 
   private static final int HP_PERCENT_THRESHOLD = 50;
+  private static final int HP_PERCENT_THRESHOLD_UPGRADE = 10;
 
   private static final CardStrings cardStrings;
 
@@ -29,7 +30,6 @@ public class TakeToTheMat extends CustomCard {
 
   private static final int COST = 2;
   private static final int DAMAGE = 10;
-  private static final int DAMAGE_UPGRADE = 5;
 
   public TakeToTheMat() {
     super(ID, NAME, getCardResourcePath(IMG_PATH), COST, getDescription(), TYPE, AbstractCardEnum.THE_WRESTLER_ORANGE,
@@ -52,7 +52,7 @@ public class TakeToTheMat extends CustomCard {
   public void upgrade() {
     if (!this.upgraded) {
       this.upgradeName();
-      this.upgradeDamage(DAMAGE_UPGRADE);
+      this.upgradeMagicNumber(HP_PERCENT_THRESHOLD_UPGRADE);
       this.rawDescription = getDescription();
       initializeDescription();
     }

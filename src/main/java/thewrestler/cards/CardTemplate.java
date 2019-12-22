@@ -35,7 +35,7 @@ public class CardTemplate extends AbstractDynamicCard {
     // TEXT DECLARATION
 
     // public static final String ID = WrestlerMod.makeID(${NAME}.class.getSimpleName()); // USE THIS ONE FOR THE TEMPLATE;
-    public static final String ID = WrestlerMod.makeID("DefaultCommonAttack"); // DELETE THIS ONE.
+    public static final String ID = WrestlerMod.makeID("WrestlerStrike"); // DELETE THIS ONE.
     public static final String IMG = getCardResourcePath("Attack.png");// "public static final String IMG = getCardResourcePath("${NAME}.png");
     // This does mean that you will need to have an image with the same NAME as the card in your image folder for it to run correctly.
 

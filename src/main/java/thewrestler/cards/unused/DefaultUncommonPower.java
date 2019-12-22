@@ -1,4 +1,4 @@
-package thewrestler.cards;
+package thewrestler.cards.unused;
 
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
@@ -8,6 +8,7 @@ import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.ui.panels.EnergyPanel;
 import thewrestler.WrestlerMod;
 import thewrestler.actions.UncommonPowerAction;
+import thewrestler.cards.AbstractDynamicCard;
 import thewrestler.enums.AbstractCardEnum;
 
 import static thewrestler.WrestlerMod.getCardResourcePath;

@@ -38,6 +38,7 @@ public class EyePoke extends CustomCard {
     super(ID, NAME, getCardResourcePath(IMG_PATH), COST, getDescription(), TYPE, AbstractCardEnum.THE_WRESTLER_ORANGE,
         RARITY, TARGET);
     this.baseMagicNumber = this.magicNumber = DEBUFF_AMOUNT;
+    this.exhaust = true;
   }
 
   @Override

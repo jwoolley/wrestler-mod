@@ -1,10 +1,9 @@
 package thewrestler.powers;
 
 import basemod.interfaces.CloneablePowerInterface;
-import com.megacrit.cardcrawl.actions.common.DrawCardAction;
-import com.megacrit.cardcrawl.actions.common.ReducePowerAction;
-import com.megacrit.cardcrawl.actions.common.RemoveSpecificPowerAction;
+import com.megacrit.cardcrawl.actions.common.*;
 import com.megacrit.cardcrawl.actions.utility.SFXAction;
+import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.cards.DamageInfo;
 import com.megacrit.cardcrawl.core.AbstractCreature;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
@@ -13,19 +12,20 @@ import com.megacrit.cardcrawl.localization.PowerStrings;
 import com.megacrit.cardcrawl.powers.AbstractPower;
 import thewrestler.WrestlerMod;
 
-public class GrayMatterPower extends AbstractWrestlerPower implements CloneablePowerInterface {
-  public static final String POWER_ID = WrestlerMod.makeID("GrayMatterPower");
-  public static final String IMG = "graymatter.png";
+public class TripleThreatPower extends AbstractWrestlerPower implements CloneablePowerInterface {
+  public static final String POWER_ID = WrestlerMod.makeID("TripleThreatPower");
+  public static final String IMG = "triplethreat.png";
   private static final PowerStrings powerStrings = CardCrawlGame.languagePack.getPowerStrings(POWER_ID);
   public static final String NAME = powerStrings.NAME;
   public static final String[] DESCRIPTIONS = powerStrings.DESCRIPTIONS;
 
-  public static final int CARDS_PER_TRIGGER = 1;
-
   public static final PowerType POWER_TYPE = PowerType.BUFF;
 
-  public GrayMatterPower(AbstractCreature owner, int amount) {
+  private final AbstractCard bonusCard;
+
+  public TripleThreatPower(AbstractCreature owner, int amount, AbstractCard bonusCard) {
     super(POWER_ID, NAME, IMG, owner, AbstractDungeon.player, amount, POWER_TYPE);
+    this.bonusCard = bonusCard;
   }
 
   @Override
@@ -52,13 +52,14 @@ public class GrayMatterPower extends AbstractWrestlerPower implements CloneableP
   }
 
   private void applyTrigger() {
-    AbstractDungeon.actionManager.addToTop(new DrawCardAction(AbstractDungeon.player, CARDS_PER_TRIGGER));
+    AbstractDungeon.actionManager.addToBottom(
+        new MakeTempCardInHandAction(this.bonusCard.makeStatEquivalentCopy()));
     AbstractDungeon.actionManager.addToTop(new ReducePowerAction(this.owner, this.owner, this, 1));
-    AbstractDungeon.actionManager.addToBottom(new SFXAction("SLIME_ATTACK_2"));
+    AbstractDungeon.actionManager.addToBottom(new SFXAction("GONG_STRIKE_1"));
   }
 
   @Override
   public AbstractPower makeCopy() {
-    return new GrayMatterPower(owner, amount);
+    return new TripleThreatPower(owner, amount, this.bonusCard);
   }
 }

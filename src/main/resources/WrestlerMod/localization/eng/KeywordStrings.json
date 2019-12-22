@@ -20,5 +20,13 @@
       "choked"
     ],
     "DESCRIPTION": "Whenever you play a card this turn, loses HP."
+  },
+
+  "WrestlerMod:Knee": {
+    "PROPER_NAME": "Knee",
+    "NAMES": [
+      "knee", "knees"
+    ],
+    "DESCRIPTION": "A 1-cost #yAttack card with #yEthereal and #yExhaust that deals moderate damage."
   }
 }

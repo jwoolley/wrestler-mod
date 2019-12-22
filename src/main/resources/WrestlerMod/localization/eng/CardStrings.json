@@ -88,7 +88,7 @@
 
   "WrestlerMod:EyePoke": {
     "NAME": "Eye Poke",
-    "DESCRIPTION": "Apply !M! Weak and !M! Vulnerable."
+    "DESCRIPTION": "Apply !M! Weak and !M! Vulnerable. NL Exhaust."
   },
 
   "WrestlerMod:FanFavorite": {
@@ -124,6 +124,16 @@
       " Intangible. NL Gain ",
       " Strength. NL Gain !M! Gold. NL Exhaust."
     ]
+  },
+
+  "WrestlerMod:HotShot": {
+    "NAME": "Hot Shot",
+    "DESCRIPTION": "Deal !D! Damage. NL Lose !M! HP."
+  },
+
+  "WrestlerMod:Knee": {
+    "NAME": "Knee",
+    "DESCRIPTION": "Ethereal. NL Deal !D! Damage. NL Exhaust."
   },
 
   "WrestlerMod:OffTheRopes": {
@@ -171,7 +181,6 @@
     "DESCRIPTION": "Gain !B! Block. NL Discard 1 card. NL If you discarded an Attack this way, Draw 1 card."
   },
 
-
   "WrestlerMod:SquareOff": {
     "NAME": "Square Off",
     "DESCRIPTION": "Gain !B! Block. NL Apply !M! Weak. NL If you attack that enemy twice this turn, apply Grappled."
@@ -190,12 +199,20 @@
     ]
   },
 
-  "WrestlerMod:DefaultCommonAttack": {
+  "WrestlerMod:TripleThreat": {
+    "NAME": "Triple Threat",
+    "DESCRIPTION": "Deal !D! Damage. NL The next time you attack that enemy this turn, add a ",
+    "EXTENDED_DESCRIPTION": [
+      " to your hand."
+    ]
+  },
+
+  "WrestlerMod:WrestlerStrike": {
     "NAME": "Strike",
     "DESCRIPTION": "Deal !D! Damage."
   },
 
-  "WrestlerMod:DefaultCommonSkill": {
+  "WrestlerMod:WrestlerDefend": {
     "NAME": "Defend",
     "DESCRIPTION": "Gain !B! Block."
   }

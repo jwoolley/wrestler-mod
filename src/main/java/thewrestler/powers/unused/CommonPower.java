@@ -1,4 +1,4 @@
-package thewrestler.powers;
+package thewrestler.powers.unused;
 
 import basemod.interfaces.CloneablePowerInterface;
 import com.badlogic.gdx.graphics.Texture;

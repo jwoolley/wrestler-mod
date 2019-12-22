@@ -1,4 +1,4 @@
-package thewrestler.powers;
+package thewrestler.powers.unused;
 
 import basemod.interfaces.CloneablePowerInterface;
 import com.badlogic.gdx.graphics.Texture;
@@ -12,7 +12,7 @@ import com.megacrit.cardcrawl.localization.PowerStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.powers.AbstractPower;
 import thewrestler.WrestlerMod;
-import thewrestler.cards.DefaultRareAttack;
+import thewrestler.cards.attack.DefaultRareAttack;
 import thewrestler.util.TextureLoader;
 
 public class RarePower extends AbstractPower implements CloneablePowerInterface {
