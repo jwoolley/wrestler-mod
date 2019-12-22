@@ -18,20 +18,20 @@ import com.megacrit.cardcrawl.audio.Sfx;
 import com.megacrit.cardcrawl.audio.SoundMaster;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.core.Settings;
-import com.megacrit.cardcrawl.dungeons.TheCity;
 import com.megacrit.cardcrawl.helpers.CardHelper;
 import com.megacrit.cardcrawl.helpers.FontHelper;
 import com.megacrit.cardcrawl.localization.*;
 import com.megacrit.cardcrawl.unlock.UnlockTracker;
 import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import thewrestler.cards.attack.*;
+import thewrestler.cards.power.CurtainJerker;
 import thewrestler.cards.power.FanFavorite;
 import thewrestler.cards.power.Scrapper;
 import thewrestler.cards.skill.*;
 import thewrestler.characters.WrestlerCharacter;
 import thewrestler.enums.AbstractCardEnum;
 import thewrestler.enums.WrestlerCharEnum;
-import thewrestler.events.IdentityCrisisEvent;
 import thewrestler.potions.WrestlerPotion;
 import thewrestler.relics.Headgear;
 import thewrestler.util.IDCheckDontTouchPls;
@@ -46,7 +46,6 @@ import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Properties;
-import org.apache.logging.log4j.Logger;
 
 //TODO: DON'T MASS RENAME/REFACTOR
 //TODO: DON'T MASS RENAME/REFACTOR
@@ -103,8 +102,6 @@ public class WrestlerMod implements
     private static final String DESCRIPTION = "A base for Slay the Spire to my own mod from, featuring The Wrestler.";
     
     // =============== INPUT TEXTURE LOCATION =================
-
-
 
     // Colors (RGB)
     // Character Color
@@ -232,8 +229,6 @@ public class WrestlerMod implements
     
     public static void setModID(String ID) { // DON'T EDIT
         modID = ID;
-
-
         Gson coolG = new Gson(); // EY DON'T EDIT THIS
         InputStream in = WrestlerMod.class.getResourceAsStream("/IDCheckStringsDONT-EDIT-AT-ALL.json"); // DON'T EDIT THIS ETHER
         IDCheckDontTouchPls EXCEPTION_STRINGS = coolG.fromJson(new InputStreamReader(in, StandardCharsets.UTF_8), IDCheckDontTouchPls.class); // OR THIS, DON'T EDIT IT
@@ -363,7 +358,7 @@ public class WrestlerMod implements
         // part of the game, simply don't include the dungeon ID
         // If you want to h ave a character-specific event, look at slimebound (CityRemoveEventPatch).
         // Essentially, you need to patch the game and say "if a player is not playing my character class, remove the event from the pool"
-        BaseMod.addEvent(IdentityCrisisEvent.ID, IdentityCrisisEvent.class, TheCity.ID);
+//        BaseMod.addEvent(IdentityCrisisEvent.ID, IdentityCrisisEvent.class, TheCity.ID);
         
         // =============== /EVENTS/ =================
         logger.info("Done loading badge Image and mod options");
@@ -452,8 +447,8 @@ public class WrestlerMod implements
         BaseMod.addCard(new TakeToTheMat());
         BaseMod.addCard(new TripleThreat());
 
-        // BaseMod.addCard(new CurtainJerker());
-        // BaseMod.addCard(new SafetyTag());
+         BaseMod.addCard(new CurtainJerker());
+         BaseMod.addCard(new SafetyTag());
 
         logger.info("Making sure the cards are unlocked.");
         // Unlock the cards
@@ -587,18 +582,6 @@ public class WrestlerMod implements
         keywords.forEach((k, v) -> {
             BaseMod.addKeyword(v.PROPER_NAME, v.NAMES, v.DESCRIPTION);
         });
-
-//        Gson gson = new Gson();
-//        String language = getLanguageString();
-//
-//        String json = Gdx.files.internal(RESOURCE_FOLDER_NAME + "/localization/" + language + "/KeywordStrings.json").readString(String.valueOf(StandardCharsets.UTF_8));
-//        com.evacipated.cardcrawl.mod.stslib.Keyword[] keywords = gson.fromJson(json, com.evacipated.cardcrawl.mod.stslib.Keyword[].class);
-//
-//        if (keywords != null) {
-//            for (Keyword keyword : keywords) {
-//                BaseMod.addKeyword(getModID().toLowerCase(), keyword.PROPER_NAME, keyword.NAMES, keyword.DESCRIPTION);
-//            }
-//        }
     }
     
     // ================ /LOAD THE KEYWORDS/ ===================    

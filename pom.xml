@@ -84,6 +84,7 @@
                             <target>
                                 <!-- This moves your mod into a common folder where all mods you make can go. -->
                                 <copy file="target/${project.artifactId}.jar" tofile="${steam-sts-mods-directory}/${project.artifactId}.jar"/>
+                                <copy file="target/${project.artifactId}.jar" tofile="${steam-sts-publish-content-directory}/${project.artifactId}.jar"/>
                             </target>
                         </configuration>
                         <goals>

@@ -1,0 +1,20 @@
+Dec 22, 2019 2:20:34 AM com.megacrit.moduploader.Main main
+FINE: programStr=D:/Program%20Files%20(x86)/Steam/steamapps/common/SlayTheSpire/mod-uploader.jar
+Dec 22, 2019 2:20:34 AM com.megacrit.moduploader.Main main
+INFO: This program isn't launched in a console. Relaunching with a console...
+Dec 22, 2019 2:20:34 AM com.megacrit.moduploader.Main main
+INFO: os_name=Windows 10
+Dec 22, 2019 2:20:34 AM com.megacrit.moduploader.Main main
+INFO: Windows OS detected launching program with 'cmd'.
+Dec 22, 2019 2:20:34 AM com.megacrit.moduploader.Uploader writeSteamAppIDFile
+FINE: The file 'steam_appid.txt' exists. Not creating it...
+Dec 22, 2019 2:20:34 AM com.megacrit.moduploader.Uploader connectToSteam
+INFO: ACCOUNT ID: 39346184
+Dec 22, 2019 2:20:34 AM com.megacrit.moduploader.Uploader updateItemInfo
+INFO: Submitting workshop item update
+Dec 22, 2019 2:20:37 AM com.megacrit.moduploader.Uploader handleLicenseAgreement
+FINE: needsToAcceptWLA=false
+Dec 22, 2019 2:20:37 AM com.megacrit.moduploader.Uploader$Callback onSubmitItemUpdate
+FINE: Successfully updated workshop item
+Dec 22, 2019 2:20:37 AM com.megacrit.moduploader.Uploader openWorkshopItemInSteamBrowser
+FINE: Opening url=steam://url/CommunityFilePage/1943143532 in browser...

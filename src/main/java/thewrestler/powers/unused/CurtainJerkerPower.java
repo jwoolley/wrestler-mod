@@ -35,9 +35,7 @@ public class CurtainJerkerPower extends AbstractWrestlerPower implements Cloneab
 
   @Override
   public void updateDescription() {
-    this.description = DESCRIPTIONS[0]
-        + (this.amount == 1 ? DESCRIPTIONS[1] : "#b" + this.amount + " " + DESCRIPTIONS[2])
-        + DESCRIPTIONS[3];
+    this.description = DESCRIPTIONS[0];
   }
 
   @Override
