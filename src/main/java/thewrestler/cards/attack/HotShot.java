@@ -69,6 +69,7 @@ public class HotShot extends CustomCard {
     if (!this.upgraded) {
       this.upgradeName();
       this.upgradeDamage(DAMAGE_UPGRADE);
+      this.initializeDescription();
     }
   }
 

@@ -11,11 +11,10 @@ public class CardUtil {
                                             boolean forEntireCombat) {
     AbstractCard card = decreasableCards.get(AbstractDungeon.cardRng.random(decreasableCards.size() - 1));
 
-    card.costForTurn -= discountAmount;
     if (forEntireCombat) {
-      card.isCostModified = true;
+      card.modifyCostForCombat(-discountAmount);
     } else {
-      card.isCostModifiedForTurn = true;
+      card.modifyCostForTurn(-discountAmount);
     }
 
     card.superFlash(Color.GOLD.cpy());
