@@ -86,7 +86,16 @@ public class GrappledPower extends AbstractWrestlerPower implements CloneablePow
 
   @Override
   public void stackPower(int stackAmount) {
-    super.stackPower(stackAmount);
+
+
+    //    // THIS ENABLES STACKING OF HP THRESHOLD (if reapplying grapple to the same target). disabling now
+    //    // see similar code section in MaintainGrapplePower
+    //    super.stackPower(stackAmount);
+
+    //    // THIS DISABLES STACKING OF HP THRESHOLD (if reapplying grapple to the same target).
+    final int currentGrappleStacks = owner.getPower(POWER_ID).amount;
+    MaintainGrapplePower.apply(this.source, this.owner, stackAmount - currentGrappleStacks, false);
+
     MaintainGrapplePower.apply(this.source, this.owner, stackAmount, false);
   }
 

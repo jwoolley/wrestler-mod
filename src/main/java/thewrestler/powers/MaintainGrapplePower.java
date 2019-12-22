@@ -44,11 +44,15 @@ public class MaintainGrapplePower extends AbstractWrestlerPower implements Clone
       if (amount > 0) {
         final String flashText = isRefreshOrTargetSwitch ? NAME : DESCRIPTIONS[2];
 
-        if (!isRefreshOrTargetSwitch) {
-          powerInstance.stackPower(amount);
-        } else {
-          powerInstance.amount = amount;
-        }
+        //        // THIS ENABLES STACKING OF HP THRESHOLD (if reapplying grapple to the same target). disabling now
+        //        if (!isRefreshOrTargetSwitch) {
+        //          powerInstance.stackPower(amount);
+        //        } else {
+        //          powerInstance.amount = amount;
+        //        }
+
+        // THIS DISABLES STACKING OF HP THRESHOLD (if reapplying grapple to the same target).
+        powerInstance.amount = amount;
 
         powerInstance.updateDescription();
         powerInstance.flashWithoutSound();
