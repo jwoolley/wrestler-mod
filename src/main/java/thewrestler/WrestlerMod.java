@@ -278,6 +278,7 @@ public class WrestlerMod implements
         reflectedMap.put("BOOM_LOWFREQ_1", new Sfx(getAudioResourcePath("TheWrestler_ExplosionBombLowFrequency1.ogg")));
         reflectedMap.put("BOUNCE_METALLIC_1", new Sfx(getAudioResourcePath("TheWrestler_BounceMetallic1.ogg")));
         reflectedMap.put("BUBBLE_SHORT_1", new Sfx(getAudioResourcePath("TheWrestler_BubbleShort1.ogg")));
+        reflectedMap.put("CAMERA_SHUTTER_1", new Sfx(getAudioResourcePath("TheWrestler_CameraShutter1.ogg")));
         reflectedMap.put("CHEER_CROWD_1", new Sfx(getAudioResourcePath("TheWrestler_CheerCrowd1.ogg")));
         reflectedMap.put("ELECTRO_INTERFERENCE_1", new Sfx(getAudioResourcePath("TheWrestler_ElectroInterference1.ogg")));
         reflectedMap.put("GONG_STRIKE_1", new Sfx(getAudioResourcePath("TheWrestler_GongStrike_1.ogg")));
@@ -428,6 +429,7 @@ public class WrestlerMod implements
         BaseMod.addCard(new AtomicDrop());
         BaseMod.addCard(new Brainbuster());
         BaseMod.addCard(new CheapShot());
+        BaseMod.addCard(new CleanFinish());
         BaseMod.addCard(new CobraClutch());
         BaseMod.addCard(new DivingStomp());
         BaseMod.addCard(new EyePoke());
@@ -447,8 +449,8 @@ public class WrestlerMod implements
         BaseMod.addCard(new TakeToTheMat());
         BaseMod.addCard(new TripleThreat());
 
-         BaseMod.addCard(new CurtainJerker());
-         BaseMod.addCard(new SafetyTag());
+        BaseMod.addCard(new CurtainJerker());
+        BaseMod.addCard(new SafetyTag());
 
         logger.info("Making sure the cards are unlocked.");
         // Unlock the cards
@@ -461,6 +463,7 @@ public class WrestlerMod implements
         UnlockTracker.unlockCard(WrestlerDefend.ID);
 
         UnlockTracker.unlockCard(CheapShot.ID);
+        UnlockTracker.unlockCard(CleanFinish.ID);
         UnlockTracker.unlockCard(CobraClutch.ID);
         UnlockTracker.unlockCard(DivingStomp.ID);
         UnlockTracker.unlockCard(EyePoke.ID);

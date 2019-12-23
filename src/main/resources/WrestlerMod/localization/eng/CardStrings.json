@@ -71,6 +71,14 @@
     "DESCRIPTION": "Innate. NL Deal !D! damage. NL If the enemy intends to attack, apply !M! Vulnerable. NL Exhaust."
   },
 
+  "WrestlerMod:CleanFinish": {
+    "NAME": "Clean Finish",
+    "DESCRIPTION": "Cards in your hand and cost 0 this combat and Exhaust when played. NL Exhaust.",
+    "EXTENDED_DESCRIPTION": [
+      " NL Exhaust."
+    ]
+  },
+
   "WrestlerMod:CobraClutch": {
     "NAME": "Cobra Clutch",
     "DESCRIPTION": "Deal !D! damage. NL Apply !M! Poison."
