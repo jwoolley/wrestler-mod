@@ -1,8 +1,11 @@
 package thewrestler.cards.attack;
 
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
+import com.megacrit.cardcrawl.actions.animations.VFXAction;
 import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
 import com.megacrit.cardcrawl.actions.common.DamageAction;
+import com.megacrit.cardcrawl.actions.common.MakeTempCardInDiscardAction;
+import com.megacrit.cardcrawl.actions.utility.SFXAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.cards.DamageInfo;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
@@ -10,9 +13,14 @@ import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
+import com.megacrit.cardcrawl.vfx.combat.LightningEffect;
+import thewrestler.actions.cards.attack.TornadoTagAction;
 import thewrestler.cards.AbstractCardWithPreviewCard;
 import thewrestler.cards.colorless.attack.Knee;
+import thewrestler.cards.skill.SafetyTag;
+import thewrestler.effects.utils.VFXActionTemplate;
 import thewrestler.enums.AbstractCardEnum;
+import thewrestler.powers.GrayMatterPower;
 import thewrestler.powers.TripleThreatPower;
 
 import static thewrestler.WrestlerMod.getCardResourcePath;

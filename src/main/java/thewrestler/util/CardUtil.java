@@ -19,4 +19,8 @@ public class CardUtil {
 
     card.superFlash(Color.GOLD.cpy());
   }
+
+  public static boolean isCardInHand(AbstractCard card) {
+    return BasicUtils.isPlayerInCombat() && AbstractDungeon.player.hand.group.contains(card);
+  }
 }

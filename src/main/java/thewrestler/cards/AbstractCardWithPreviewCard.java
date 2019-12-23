@@ -5,6 +5,9 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.core.Settings;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
+import thewrestler.util.BasicUtils;
+import thewrestler.util.CardUtil;
+import thewrestler.util.ConfigurationOptions;
 
 abstract public class AbstractCardWithPreviewCard extends CustomCard {
   private MultiLock renderPreviewCard;
@@ -19,20 +22,33 @@ abstract public class AbstractCardWithPreviewCard extends CustomCard {
   public void renderCardTip(SpriteBatch sb) {
     super.renderCardTip(sb);
 
-    // TODO: render cards in compendium (done), shop (untested), rewards screen (untested), event (untested), ...?
     // TODO: reposition if card is offscreen (most likely off right side?)
-
     if (shouldRenderPreviewCard()) {
       final AbstractCard _previewCard = getPreviewCard();
-      final float cardScale = this.drawScale * Settings.scale;
       if (_previewCard != null) {
-        _previewCard.current_x = _previewCard.hb.x = (this.hb.x - this.hb.width * .44f) * cardScale;
-        _previewCard.current_y = _previewCard.hb.y = (this.hb.y + this.hb.height * 0.64f) * cardScale;
+        _previewCard.current_x = _previewCard.hb.x = getPreviewXOffset();
+        _previewCard.current_y = _previewCard.hb.y = getPreviewYOffset();
         _previewCard.render(sb);
       }
     }
   }
 
+  private float getPreviewXOffset() {
+    final float cardScale = this.drawScale * Settings.scale;
+    final boolean isCardNearRightEdge = this.current_x > Settings.WIDTH * 0.725F;
+    final boolean isCardNearLeftEdge = this.current_x < (1 - 0.725F);
+    final boolean isInCombat = BasicUtils.isPlayerInCombat();
+    if (isCardNearRightEdge && !isInCombat || isCardNearLeftEdge && isInCombat) {
+      return (this.hb.x + this.hb.width + this.hb.width * .44f) * cardScale;
+    } else {
+      return (this.hb.x - this.hb.width * .44f) * cardScale;
+    }
+  }
+
+  protected float getPreviewYOffset() {
+    final float cardScale = this.drawScale * Settings.scale;
+    return (this.hb.y + this.hb.height * 0.64f) * cardScale;
+  }
 
 
   @Override
@@ -65,9 +81,10 @@ abstract public class AbstractCardWithPreviewCard extends CustomCard {
   }
 
   private boolean shouldRenderPreviewCard() {
-    return this.renderPreviewCard == MultiLock.TWO
+    return !(CardUtil.isCardInHand(this) && ConfigurationOptions.HIDE_PREVIEW_CARDS_IN_COMBAT)
+        && this.renderPreviewCard == MultiLock.TWO
         && (AbstractDungeon.player == null
-          || (this.isHoveredInHand(Settings.scale) && !AbstractDungeon.player.isDraggingCard));
+        || (this.isHoveredInHand(Settings.scale) && !AbstractDungeon.player.isDraggingCard));
   }
 
   @Override
