@@ -68,7 +68,7 @@
 
   "WrestlerMod:CageMatch": {
     "NAME": "Cage Match",
-    "DESCRIPTION": "Apply Grappled. NL Until next turn, attack damage to and from any other enemy is reduced to 1. NL Exhaust."
+    "DESCRIPTION": "Apply Grappled. NL Stun all other enemies. NL Exhaust."
   },
 
   "WrestlerMod:CheapShot": {

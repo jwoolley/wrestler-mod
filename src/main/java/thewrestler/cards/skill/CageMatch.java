@@ -1,7 +1,9 @@
 package thewrestler.cards.skill;
 
 import basemod.abstracts.CustomCard;
+import com.evacipated.cardcrawl.mod.stslib.powers.StunMonsterPower;
 import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
+import com.megacrit.cardcrawl.actions.common.RemoveSpecificPowerAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
@@ -11,7 +13,6 @@ import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import thewrestler.WrestlerMod;
 import thewrestler.actions.power.ApplyGrappledAction;
 import thewrestler.enums.AbstractCardEnum;
-import thewrestler.powers.CageMatchPower;
 
 import static thewrestler.WrestlerMod.getCardResourcePath;
 
@@ -29,8 +30,8 @@ public class CageMatch extends CustomCard {
   private static final CardRarity RARITY = CardRarity.RARE;
   private static final CardTarget TARGET = CardTarget.ENEMY;
 
-  private static final int COST = 1;
-  private static final int UPGRADED_COST = 0;
+  private static final int COST = 2;
+  private static final int UPGRADED_COST = 1;
 
   public CageMatch() {
     super(ID, NAME, getCardResourcePath(IMG_PATH), COST, getDescription(), TYPE,
@@ -40,10 +41,18 @@ public class CageMatch extends CustomCard {
 
   @Override
   public void use(AbstractPlayer p, AbstractMonster m) {
-    CageMatchPower.removePowerFromAllCharacters();
+    if (m.hasPower(StunMonsterPower.POWER_ID)) {
+      AbstractDungeon.actionManager.addToBottom(new RemoveSpecificPowerAction(m, p,StunMonsterPower.POWER_ID));
+    }
+
     AbstractDungeon.actionManager.addToBottom(new ApplyGrappledAction(m, p));
-    AbstractDungeon.actionManager.addToBottom(new ApplyPowerAction(p, p, new CageMatchPower(p, m)));
-    AbstractDungeon.actionManager.addToBottom(new ApplyPowerAction(m, p, new CageMatchPower(m, p)));
+
+    AbstractDungeon.getCurrRoom().monsters.monsters.stream()
+        .filter(mo -> !mo.isDying && !mo.isDeadOrEscaped() && mo != m)
+        .forEach(mo -> {
+          AbstractDungeon.actionManager.addToBottom(
+              new ApplyPowerAction(mo, p, new StunMonsterPower(mo)));
+        });
   }
 
   @Override
@@ -55,7 +64,7 @@ public class CageMatch extends CustomCard {
   public void upgrade() {
     if (!this.upgraded) {
       this.upgradeName();
-      this.updateCost(UPGRADED_COST);
+      this.upgradeBaseCost(UPGRADED_COST);
       initializeDescription();
     }
   }
