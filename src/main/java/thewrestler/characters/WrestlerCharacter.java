@@ -279,8 +279,6 @@ public class WrestlerCharacter extends CustomPlayer {
         return TEXT[2];
     }
 
-
-
     @Override
     public Texture getEnergyImage() {
         final Texture energyImage = super.getEnergyImage();
@@ -289,5 +287,4 @@ public class WrestlerCharacter extends CustomPlayer {
     }
 
     // Should return class name as it appears in run history screen.
-
 }

@@ -202,6 +202,17 @@
     "DESCRIPTION": "Gain !B! Block. NL Discard 1 card. NL If you discarded an Attack this way, Draw 1 card."
   },
 
+  "WrestlerMod:Springboard": {
+    "NAME": "Springboard",
+    "DESCRIPTION": "Draw",
+    "EXTENDED_DESCRIPTION": [
+      " a card.",
+      " !M! cards.",
+      " NL Gain [E] for each Attack drawn. NL Exhaust."
+    ]
+  },
+
+
   "WrestlerMod:SquareOff": {
     "NAME": "Square Off",
     "DESCRIPTION": "Gain !B! Block. NL Apply !M! Weak. NL If you attack that enemy twice this turn, apply Grappled."

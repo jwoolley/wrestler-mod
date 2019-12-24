@@ -287,6 +287,7 @@ public class WrestlerMod implements
         reflectedMap.put("ELECTRO_INTERFERENCE_1", new Sfx(getAudioResourcePath("TheWrestler_ElectroInterference1.ogg")));
         reflectedMap.put("GONG_STRIKE_1", new Sfx(getAudioResourcePath("TheWrestler_GongStrike_1.ogg")));
         reflectedMap.put("SPLAT_WET_1", new Sfx(getAudioResourcePath("TheWrestler_SplatWet1.ogg")));
+        reflectedMap.put("SPRINGBOARD_1", new Sfx(getAudioResourcePath("TheWrestler_Springboard1.ogg")));
         reflectedMap.put("THUD_MEDIUM_1", new Sfx(getAudioResourcePath("TheWrestler_ThudMedium1.ogg")));
         reflectedMap.put("TONE_ELECTRONIC_1", new Sfx(getAudioResourcePath("TheWrestler_ToneElectronic_1.ogg")));
 
@@ -449,7 +450,7 @@ public class WrestlerMod implements
         BaseMod.addCard(new FrogSplash());
         BaseMod.addCard(new OffTheRopes());
         BaseMod.addCard(new Ropewalk());
-
+        BaseMod.addCard(new Springboard());
         BaseMod.addCard(new Scrapper());
         BaseMod.addCard(new Sharpshooter());
         BaseMod.addCard(new SideRoll());
@@ -487,7 +488,7 @@ public class WrestlerMod implements
         UnlockTracker.unlockCard(IronMan.ID);
         UnlockTracker.unlockCard(OffTheRopes.ID);
         UnlockTracker.unlockCard(Ropewalk.ID);
-
+        UnlockTracker.unlockCard(Springboard.ID);
         UnlockTracker.unlockCard(Scrapper.ID);
         UnlockTracker.unlockCard(Sharpshooter.ID);
         UnlockTracker.unlockCard(SideRoll.ID);
