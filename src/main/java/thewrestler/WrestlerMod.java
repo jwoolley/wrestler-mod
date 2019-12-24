@@ -21,6 +21,7 @@ import com.megacrit.cardcrawl.core.Settings;
 import com.megacrit.cardcrawl.helpers.CardHelper;
 import com.megacrit.cardcrawl.helpers.FontHelper;
 import com.megacrit.cardcrawl.localization.*;
+import com.megacrit.cardcrawl.rooms.AbstractRoom;
 import com.megacrit.cardcrawl.unlock.UnlockTracker;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -30,6 +31,7 @@ import thewrestler.cards.skill.*;
 import thewrestler.characters.WrestlerCharacter;
 import thewrestler.enums.AbstractCardEnum;
 import thewrestler.enums.WrestlerCharEnum;
+import thewrestler.patches.powers.OnApplyPowerPatchInsert;
 import thewrestler.potions.WrestlerPotion;
 import thewrestler.relics.Headgear;
 import thewrestler.util.IDCheckDontTouchPls;
@@ -80,7 +82,10 @@ public class WrestlerMod implements
         EditStringsSubscriber,
         EditKeywordsSubscriber,
         EditCharactersSubscriber,
-        PostInitializeSubscriber {
+        PostInitializeSubscriber,
+
+        OnStartBattleSubscriber
+    {
     // Make sure to implement the subscribers *you* are using (read basemod wiki). Editing cards? EditCardsSubscriber.
     // Making relics? EditRelicsSubscriber. etc., etc., for a full list and how to make your own, visit the basemod wiki.
     public static final Logger logger = LogManager.getLogger(WrestlerMod.class.getName());
@@ -601,4 +606,9 @@ public class WrestlerMod implements
     public static String makeID(String id) {
         return getModID() + ":" + id;
     }
-}
+
+        @Override
+        public void receiveOnBattleStart(AbstractRoom abstractRoom) {
+            OnApplyPowerPatchInsert.powerActionList.clear();
+        }
+    }

@@ -34,7 +34,6 @@ public class Headlock extends CustomCard {
   private static final int DAMAGE = 5;
   private static final int DAMAGE_UPGRADE = 3;
   private static final int LOSE_STRENGTH_AMOUNT = 3;
-//  private static final int LOSE_STRENGTH_AMOUNT_UPGRADE = 2;
 
   public Headlock() {
     super(ID, NAME, getCardResourcePath(IMG_PATH), COST, DESCRIPTION, TYPE,
@@ -52,6 +51,7 @@ public class Headlock extends CustomCard {
       AbstractDungeon.actionManager.addToBottom(
           new ApplyPowerAction(m, p, new StrengthPower(m, -this.magicNumber), -this.magicNumber, true,
               AbstractGameAction.AttackEffect.NONE));
+
       if (!m.hasPower("Artifact")) {
         AbstractDungeon.actionManager.addToBottom(
             new ApplyPowerAction(m, p, new WrestlerShackled(m, this.magicNumber), this.magicNumber, true,
@@ -69,7 +69,6 @@ public class Headlock extends CustomCard {
     if (!this.upgraded) {
       this.upgradeName();
       this.upgradeDamage(DAMAGE_UPGRADE);
-//      this.upgradeMagicNumber(LOSE_STRENGTH_AMOUNT_UPGRADE);
     }
   }
 

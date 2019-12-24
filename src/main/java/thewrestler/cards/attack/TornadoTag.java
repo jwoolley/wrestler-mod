@@ -45,6 +45,7 @@ public class TornadoTag extends AbstractCardWithPreviewCard {
         RARITY, TARGET);
     this.baseDamage = this.damage = DAMAGE;
     this.baseMagicNumber = this.magicNumber = NUM_ATTACKS;
+    this.exhaust = true;
   }
 
   @Override
