@@ -8,7 +8,7 @@ import com.megacrit.cardcrawl.core.AbstractCreature;
 import com.megacrit.cardcrawl.core.Settings;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.powers.StrengthPower;
-import thewrestler.cards.power.WrestlerShackled;
+import thewrestler.powers.WrestlerShackled;
 import thewrestler.util.CreatureUtils;
 
 public class HardwayAction extends AbstractGameAction  {

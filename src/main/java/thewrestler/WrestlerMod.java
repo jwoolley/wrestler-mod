@@ -25,9 +25,7 @@ import com.megacrit.cardcrawl.unlock.UnlockTracker;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import thewrestler.cards.attack.*;
-import thewrestler.cards.power.CurtainJerker;
-import thewrestler.cards.power.FanFavorite;
-import thewrestler.cards.power.Scrapper;
+import thewrestler.cards.power.*;
 import thewrestler.cards.skill.*;
 import thewrestler.characters.WrestlerCharacter;
 import thewrestler.enums.AbstractCardEnum;
@@ -280,11 +278,14 @@ public class WrestlerMod implements
         reflectedMap.put("BUBBLE_SHORT_1", new Sfx(getAudioResourcePath("TheWrestler_BubbleShort1.ogg")));
         reflectedMap.put("CAMERA_SHUTTER_1", new Sfx(getAudioResourcePath("TheWrestler_CameraShutter1.ogg")));
         reflectedMap.put("CHEER_CROWD_1", new Sfx(getAudioResourcePath("TheWrestler_CheerCrowd1.ogg")));
+        reflectedMap.put("DOOR_HATCH_OPEN_1", new Sfx(getAudioResourcePath("TheWrestler_DoorHatchOpen1.ogg")));
         reflectedMap.put("ELECTRO_INTERFERENCE_1", new Sfx(getAudioResourcePath("TheWrestler_ElectroInterference1.ogg")));
         reflectedMap.put("GONG_STRIKE_1", new Sfx(getAudioResourcePath("TheWrestler_GongStrike_1.ogg")));
         reflectedMap.put("SPLAT_WET_1", new Sfx(getAudioResourcePath("TheWrestler_SplatWet1.ogg")));
         reflectedMap.put("THUD_MEDIUM_1", new Sfx(getAudioResourcePath("TheWrestler_ThudMedium1.ogg")));
         reflectedMap.put("TONE_ELECTRONIC_1", new Sfx(getAudioResourcePath("TheWrestler_ToneElectronic_1.ogg")));
+
+        reflectedMap.put("METAL_MAN_RIFF_1", new Sfx(getAudioResourcePath("music/TheWrestler_MetalManRiff1.ogg")));
     }
 
     // ======= /REGISTER ASSETS/ ========
@@ -428,6 +429,7 @@ public class WrestlerMod implements
 
         BaseMod.addCard(new AtomicDrop());
         BaseMod.addCard(new Brainbuster());
+        BaseMod.addCard(new CageMatch());
         BaseMod.addCard(new CheapShot());
         BaseMod.addCard(new CleanFinish());
         BaseMod.addCard(new CobraClutch());
@@ -438,6 +440,7 @@ public class WrestlerMod implements
         BaseMod.addCard(new Headlock());
         BaseMod.addCard(new HeelTurn());
         BaseMod.addCard(new HotShot());
+        BaseMod.addCard(new IronMan());
         BaseMod.addCard(new FrogSplash());
         BaseMod.addCard(new OffTheRopes());
         BaseMod.addCard(new Ropewalk());
@@ -462,6 +465,9 @@ public class WrestlerMod implements
         UnlockTracker.unlockCard(WrestlerStrike.ID);
         UnlockTracker.unlockCard(WrestlerDefend.ID);
 
+        UnlockTracker.unlockCard(AtomicDrop.ID);
+        UnlockTracker.unlockCard(Brainbuster.ID);
+        UnlockTracker.unlockCard(CageMatch.ID);
         UnlockTracker.unlockCard(CheapShot.ID);
         UnlockTracker.unlockCard(CleanFinish.ID);
         UnlockTracker.unlockCard(CobraClutch.ID);
@@ -473,6 +479,7 @@ public class WrestlerMod implements
         UnlockTracker.unlockCard(Headlock.ID);
         UnlockTracker.unlockCard(HeelTurn.ID);
         UnlockTracker.unlockCard(HotShot.ID);
+        UnlockTracker.unlockCard(IronMan.ID);
         UnlockTracker.unlockCard(OffTheRopes.ID);
         UnlockTracker.unlockCard(Ropewalk.ID);
 
@@ -483,8 +490,8 @@ public class WrestlerMod implements
         UnlockTracker.unlockCard(TakeToTheMat.ID);
         UnlockTracker.unlockCard(TripleThreat.ID);
 
-        // UnlockTracker.unlockCard(CurtainJerker.ID);
-        // UnlockTracker.unlockCard(SafetyTag.ID);
+        UnlockTracker.unlockCard(CurtainJerker.ID);
+        UnlockTracker.unlockCard(SafetyTag.ID);
 
         // TODO: Remove this once card pool is sufficiently large
         BaseMod.addCard(new DefaultRareAttack());

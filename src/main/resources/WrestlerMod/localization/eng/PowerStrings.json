@@ -1,4 +1,11 @@
 {
+  "WrestlerMod:CageMatchPower": {
+    "NAME": "Cage Fighting",
+    "DESCRIPTIONS": [
+      "Until next turn, attack damage to and from #ySidelined enemies is reduced to #b",
+      "."]
+  },
+
   "WrestlerMod:CommonPower": {
           "NAME": "Wrestler Power",
           "DESCRIPTIONS": ["You applied #b", " keyword.", " keywords."]
@@ -60,6 +67,25 @@
     ]
   },
 
+  "WrestlerMod:IronManPower": {
+    "NAME": "Iron Man",
+    "DESCRIPTIONS": [
+      "The next time",
+      "For the next #b",
+      " times",
+      " you would die this turn, heal for #b",
+      " HP instead."
+    ]
+  },
+
+  "WrestlerMod:IronManHealPower": {
+    "NAME": "Iron Heart",
+    "DESCRIPTIONS": [
+      "At the end of combat, heal #b",
+      " HP."
+    ]
+  },
+
   "WrestlerMod:IrradiatedPower": {
     "NAME": "Irradiated",
     "DESCRIPTIONS": [
@@ -69,6 +95,13 @@
       " times",
       " you attack this enemy this turn, gain [E]."
     ]
+  },
+
+  "WrestlerMod:NotCageFightingPower": {
+    "NAME": "Sidelined",
+    "DESCRIPTIONS": [
+      "Until next turn, attack damage to and from #yCage #yFighting enemies is reduced to #b",
+      "."]
   },
 
   "WrestlerMod:RarePower": {

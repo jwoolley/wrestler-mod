@@ -1,4 +1,4 @@
-package thewrestler.cards.power;
+package thewrestler.powers;
 
 import com.megacrit.cardcrawl.core.AbstractCreature;
 import com.megacrit.cardcrawl.powers.GainStrengthPower;
