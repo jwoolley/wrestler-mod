@@ -455,11 +455,12 @@ public class WrestlerMod implements
         BaseMod.addCard(new Sharpshooter());
         BaseMod.addCard(new SideRoll());
         BaseMod.addCard(new SquareOff());
+        BaseMod.addCard(new TagIn());
         BaseMod.addCard(new TakeToTheMat());
         BaseMod.addCard(new TripleThreat());
 
         BaseMod.addCard(new CurtainJerker());
-        BaseMod.addCard(new SafetyTag());
+//        BaseMod.addCard(new SafetyTag());
 
         logger.info("Making sure the cards are unlocked.");
         // Unlock the cards
@@ -493,11 +494,12 @@ public class WrestlerMod implements
         UnlockTracker.unlockCard(Sharpshooter.ID);
         UnlockTracker.unlockCard(SideRoll.ID);
         UnlockTracker.unlockCard(SquareOff.ID);
+        UnlockTracker.unlockCard(TagIn.ID);
         UnlockTracker.unlockCard(TakeToTheMat.ID);
         UnlockTracker.unlockCard(TripleThreat.ID);
 
         UnlockTracker.unlockCard(CurtainJerker.ID);
-        UnlockTracker.unlockCard(SafetyTag.ID);
+//        UnlockTracker.unlockCard(SafetyTag.ID);
 
         // TODO: Remove this once card pool is sufficiently large
         BaseMod.addCard(new DefaultRareAttack());

@@ -218,6 +218,22 @@
     "DESCRIPTION": "Gain !B! Block. NL Apply !M! Weak. NL If you attack that enemy twice this turn, apply Grappled."
   },
 
+  "WrestlerMod:TagIn": {
+    "NAME": "Tag In",
+    "DESCRIPTION": "Gain !M! Strength. NL Add a ",
+    "EXTENDED_DESCRIPTION": [
+      " to your discard pile. NL Exhaust."
+    ]
+  },
+
+  "WrestlerMod:TagOut": {
+    "NAME": "Tag Out",
+    "DESCRIPTION": "Gain !M! Dexterity. NL Add a ",
+    "EXTENDED_DESCRIPTION": [
+      " to your discard pile. NL Exhaust."
+    ]
+  },
+
   "WrestlerMod:TakeToTheMat": {
     "NAME": "Take to the Mat",
     "DESCRIPTION": "Deal !D! Damage. NL If the enemy has !M! % health or less, they become Grappled."
