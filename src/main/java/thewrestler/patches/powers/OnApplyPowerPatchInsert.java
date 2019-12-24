@@ -36,10 +36,6 @@ public class OnApplyPowerPatchInsert {
       final AbstractPlayer player = AbstractDungeon.player;
       boolean hasBuffAlready = target != null && target.hasPower(powerToApply.ID);
 
-//      final int strengthAmount = StrengthPower.POWER_ID.equals(powerToApply.ID) && hasBuffAlready
-//          ? target.getPower(StrengthPower.POWER_ID).amount : 0;
-//      final int powerAmount = __instance.amount;
-
       if (player.hasRelic(Headgear.ID)
           && source == player
           && (target instanceof AbstractMonster)
@@ -47,8 +43,7 @@ public class OnApplyPowerPatchInsert {
           && !target.hasPower(ArtifactPower.POWER_ID)
           && powerToApply.type == AbstractPower.PowerType.DEBUFF
           && (!hasBuffAlready || StrengthPower.POWER_ID.equals(powerToApply.ID) &&
-            target.getPower(StrengthPower.POWER_ID).amount >= 0 &&
-            (__instance.amount + target.getPower(StrengthPower.POWER_ID).amount < 0))) {
+            target.getPower(StrengthPower.POWER_ID).amount >= 0 && __instance.amount < 0)) {
         ((Headgear) AbstractDungeon.player.getRelic(Headgear.ID)).onApplyPower(powerToApply);
       }
     }
