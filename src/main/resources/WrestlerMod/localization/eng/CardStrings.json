@@ -179,6 +179,16 @@
     ]
   },
 
+  "WrestlerMod:RunTheRing": {
+    "NAME": "Run the Ring",
+    "DESCRIPTION": "Discard your hand. NL Deal !D! damage to ALL enemies for each card discarded.",
+    "EXTENDED_DESCRIPTION": [
+      " turn.",
+      " combat."
+    ]
+  },
+
+
   "WrestlerMod:SafetyTag": {
     "NAME": "Safety Tag",
     "DESCRIPTION": "Gain !B! Block. NL Add a ",
