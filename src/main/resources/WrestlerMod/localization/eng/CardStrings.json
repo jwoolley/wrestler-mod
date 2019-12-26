@@ -187,6 +187,12 @@
     ]
   },
 
+
+  "WrestlerMod:Sandbag": {
+    "NAME": "Sandbag",
+    "DESCRIPTION": "Gain !B! Block. NL When you play an Attack, increase this card's Block by !M! this turn."
+  },
+
   "WrestlerMod:Scrapper": {
     "NAME": "Scrapper",
     "DESCRIPTION": "At the start of your turn, if an enemy is Grappled, gain !M! Strength."

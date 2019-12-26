@@ -450,10 +450,11 @@ public class WrestlerMod implements
         BaseMod.addCard(new FrogSplash());
         BaseMod.addCard(new OffTheRopes());
         BaseMod.addCard(new Ropewalk());
-        BaseMod.addCard(new Springboard());
+        BaseMod.addCard(new Sandbag());
         BaseMod.addCard(new Scrapper());
         BaseMod.addCard(new Sharpshooter());
         BaseMod.addCard(new SideRoll());
+        BaseMod.addCard(new Springboard());
         BaseMod.addCard(new SquareOff());
         BaseMod.addCard(new TagIn());
         BaseMod.addCard(new TakeToTheMat());
@@ -489,10 +490,11 @@ public class WrestlerMod implements
         UnlockTracker.unlockCard(IronMan.ID);
         UnlockTracker.unlockCard(OffTheRopes.ID);
         UnlockTracker.unlockCard(Ropewalk.ID);
-        UnlockTracker.unlockCard(Springboard.ID);
+        UnlockTracker.unlockCard(Sandbag.ID);
         UnlockTracker.unlockCard(Scrapper.ID);
         UnlockTracker.unlockCard(Sharpshooter.ID);
         UnlockTracker.unlockCard(SideRoll.ID);
+        UnlockTracker.unlockCard(Springboard.ID);
         UnlockTracker.unlockCard(SquareOff.ID);
         UnlockTracker.unlockCard(TagIn.ID);
         UnlockTracker.unlockCard(TakeToTheMat.ID);

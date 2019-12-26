@@ -29,7 +29,7 @@ public class TagIn extends AbstractCardWithPreviewCard {
   private static AbstractCard PREVIEW_CARD;
 
   private static final int COST = 1;
-  private static final int STRENGTH_GAIN = 1;
+  private static final int STRENGTH_GAIN = 2;
   private static final int STRENGTH_GAIN_UPGRADE = 1;
 
   public TagIn() {

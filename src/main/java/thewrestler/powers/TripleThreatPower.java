@@ -47,8 +47,7 @@ public class TripleThreatPower extends AbstractWrestlerPower implements Cloneabl
 
   @Override
   public void atEndOfTurn(boolean isPlayer) {
-    AbstractDungeon.actionManager.addToBottom(
-        new RemoveSpecificPowerAction(this.owner, this.owner, POWER_ID));
+    AbstractDungeon.actionManager.addToBottom(new RemoveSpecificPowerAction(this.owner, this.source, POWER_ID));
   }
 
   private void applyTrigger() {

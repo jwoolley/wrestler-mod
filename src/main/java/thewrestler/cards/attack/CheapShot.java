@@ -37,7 +37,7 @@ public class CheapShot extends CustomCard {
   private static final int COST = 0;
   private static final int DAMAGE = 5;
   private static final int DAMAGE_UPGRADE = 1;
-  private static final int VULNERABLE_AMOUNT = 1;
+  private static final int VULNERABLE_AMOUNT = 2;
   private static final int VULNERABLE_AMOUNT_UPGRADE = 1;
 
   public CheapShot() {
