@@ -8,7 +8,6 @@ import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
-import thewrestler.actions.cards.skill.SideRollAction;
 import thewrestler.enums.AbstractCardEnum;
 
 import static thewrestler.WrestlerMod.getCardResourcePath;
@@ -63,6 +62,7 @@ public class Sandbag extends CustomCard {
   @Override
   public void onPlayCard(AbstractCard card, AbstractMonster target) {
     if (card.type == CardType.ATTACK) {
+      this.superFlash();
       this.upgradeBlock(this.magicNumber);
       this.bonusBlock += this.magicNumber;
       initializeDescription();

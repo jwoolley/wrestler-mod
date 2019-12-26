@@ -45,7 +45,7 @@ public class SquaringOffPower extends AbstractWrestlerPower implements Cloneable
   }
 
   @Override
-  public void atEndOfTurn(boolean isPlayer) {
+  public void atStartOfTurn() {
     AbstractDungeon.actionManager.addToBottom(new RemoveSpecificPowerAction(this.owner, this.source, POWER_ID));
   }
 

@@ -23,8 +23,8 @@ public class TagOut extends AbstractCardWithPreviewCard {
 
   private static final CardStrings cardStrings;
 
-  private static final CardType TYPE = CardType.SKILL;
-  private static final CardRarity RARITY = CardRarity.SPECIAL;
+  private static final CardType TYPE = CardType.POWER ;
+  private static final CardRarity RARITY = CardRarity.RARE;
   private static final CardTarget TARGET = CardTarget.SELF;
   private static AbstractCard PREVIEW_CARD;
 

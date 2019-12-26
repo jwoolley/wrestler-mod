@@ -78,7 +78,7 @@
 
   "WrestlerMod:CleanFinish": {
     "NAME": "Clean Finish",
-    "DESCRIPTION": "Cards in your hand and cost 0 this combat and Exhaust when played. NL Exhaust.",
+    "DESCRIPTION": "Cards in your hand cost 0 this combat and Exhaust when played. NL Exhaust.",
     "EXTENDED_DESCRIPTION": [
       " NL Exhaust."
     ]
@@ -228,7 +228,7 @@
     "NAME": "Tag In",
     "DESCRIPTION": "Gain !M! Strength. NL Add a ",
     "EXTENDED_DESCRIPTION": [
-      " to your discard pile. NL Exhaust."
+      " to your discard pile."
     ]
   },
 
@@ -236,7 +236,7 @@
     "NAME": "Tag Out",
     "DESCRIPTION": "Gain !M! Dexterity. NL Add a ",
     "EXTENDED_DESCRIPTION": [
-      " to your discard pile. NL Exhaust."
+      " to your discard pile."
     ]
   },
 

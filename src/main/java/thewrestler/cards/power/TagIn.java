@@ -23,7 +23,7 @@ public class TagIn extends AbstractCardWithPreviewCard {
 
   private static final CardStrings cardStrings;
 
-  private static final CardType TYPE = CardType.SKILL;
+  private static final CardType TYPE = CardType.POWER;
   private static final CardRarity RARITY = CardRarity.RARE;
   private static final CardTarget TARGET = CardTarget.SELF;
   private static AbstractCard PREVIEW_CARD;
@@ -36,7 +36,6 @@ public class TagIn extends AbstractCardWithPreviewCard {
     super(ID, NAME, getCardResourcePath(IMG_PATH), COST, getDescription(TagOut.NAME), TYPE, AbstractCardEnum.THE_WRESTLER_ORANGE,
         RARITY, TARGET);
     this.baseMagicNumber = this.magicNumber = STRENGTH_GAIN;
-    this.exhaust = true;
   }
 
   @Override
