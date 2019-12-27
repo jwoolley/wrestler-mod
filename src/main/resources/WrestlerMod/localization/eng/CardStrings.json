@@ -104,6 +104,16 @@
     "DESCRIPTION": "Apply !M! Weak and !M! Vulnerable. NL Exhaust."
   },
 
+  "WrestlerMod:Facewash": {
+    "NAME": "Facewash",
+    "DESCRIPTION": "Draw ",
+    "EXTENDED_DESCRIPTION": [
+      "a card",
+      "!M! cards",
+      ", then discard a card. NL If it's an Attack, play it."
+    ]
+  },
+
   "WrestlerMod:FanFavorite": {
     "NAME": "Fan Favorite",
     "DESCRIPTION": "Every time you play ",
@@ -188,7 +198,6 @@
     ]
   },
 
-
   "WrestlerMod:SafetyTag": {
     "NAME": "Safety Tag",
     "DESCRIPTION": "Gain !B! Block. NL Add a ",
@@ -196,7 +205,6 @@
       " to your discard pile. NL Exhaust."
     ]
   },
-
 
   "WrestlerMod:Sandbag": {
     "NAME": "Sandbag",

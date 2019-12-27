@@ -441,6 +441,7 @@ public class WrestlerMod implements
         BaseMod.addCard(new CobraClutch());
         BaseMod.addCard(new DivingStomp());
         BaseMod.addCard(new EyePoke());
+        BaseMod.addCard(new Facewash());
         BaseMod.addCard(new FanFavorite());
         BaseMod.addCard(new Hardway());
         BaseMod.addCard(new Headlock());
@@ -461,7 +462,7 @@ public class WrestlerMod implements
         BaseMod.addCard(new TakeToTheMat());
         BaseMod.addCard(new TripleThreat());
 
-        BaseMod.addCard(new CurtainJerker());
+//        BaseMod.addCard(new CurtainJerker());
 //        BaseMod.addCard(new SafetyTag());
 
         logger.info("Making sure the cards are unlocked.");
@@ -482,6 +483,7 @@ public class WrestlerMod implements
         UnlockTracker.unlockCard(CobraClutch.ID);
         UnlockTracker.unlockCard(DivingStomp.ID);
         UnlockTracker.unlockCard(EyePoke.ID);
+        UnlockTracker.unlockCard(Facewash.ID);
         UnlockTracker.unlockCard(FanFavorite.ID);
         UnlockTracker.unlockCard(FrogSplash.ID);
         UnlockTracker.unlockCard(Hardway.ID);
@@ -502,7 +504,7 @@ public class WrestlerMod implements
         UnlockTracker.unlockCard(TakeToTheMat.ID);
         UnlockTracker.unlockCard(TripleThreat.ID);
 
-        UnlockTracker.unlockCard(CurtainJerker.ID);
+//        UnlockTracker.unlockCard(CurtainJerker.ID);
 //        UnlockTracker.unlockCard(SafetyTag.ID);
 
         // TODO: Remove this once card pool is sufficiently large

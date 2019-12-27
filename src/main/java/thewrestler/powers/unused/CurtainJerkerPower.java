@@ -28,7 +28,7 @@ public class CurtainJerkerPower extends AbstractWrestlerPower implements Cloneab
   @Override
   public int onAttacked(DamageInfo info, int amount) {
     flash();
-    AbstractDungeon.actionManager.addToBottom(new ApplyGrappledAction(this.owner, this.source));
+    AbstractDungeon.actionManager.addToBottom(new ApplyGrappledAction(info.owner, this.owner));
     AbstractDungeon.actionManager.addToTop(new ReducePowerAction(this.owner, this.owner, this.ID, 1));
     return amount;
   }

@@ -9,7 +9,7 @@ import java.util.List;
 public class CardUtil {
   public static void discountRandomCardCost(List<AbstractCard> decreasableCards, int discountAmount,
                                             boolean forEntireCombat) {
-    AbstractCard card = decreasableCards.get(AbstractDungeon.cardRng.random(decreasableCards.size() - 1));
+    AbstractCard card = decreasableCards.get(AbstractDungeon.cardRandomRng.random(decreasableCards.size() - 1));
 
     if (forEntireCombat) {
       card.modifyCostForCombat(-discountAmount);

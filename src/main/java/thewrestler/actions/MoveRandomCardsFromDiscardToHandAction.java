@@ -50,7 +50,7 @@ public class MoveRandomCardsFromDiscardToHandAction extends AbstractGameAction {
         cardsToMove = new ArrayList<>();
         ArrayList<Integer> cardToMoveIndexes = new ArrayList<>();
         for (int i = 0; i < this.numberOfCards; i++) {
-          int index = AbstractDungeon.miscRng.random(0,matchingCards.size() - 1);
+          int index = AbstractDungeon.cardRandomRng.random(0,matchingCards.size() - 1);
           if (!cardToMoveIndexes.contains(index)) {
             cardsToMove.add(matchingCards.group.get(index));
             cardToMoveIndexes.add(index);
