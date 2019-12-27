@@ -27,6 +27,7 @@ public class TagIn extends AbstractCardWithPreviewCard {
   private static final CardRarity RARITY = CardRarity.RARE;
   private static final CardTarget TARGET = CardTarget.SELF;
   private static AbstractCard PREVIEW_CARD;
+  private static AbstractCard UPGRADED_PREVIEW_CARD;
 
   private static final int COST = 1;
   private static final int STRENGTH_GAIN = 2;
@@ -40,11 +41,10 @@ public class TagIn extends AbstractCardWithPreviewCard {
 
   @Override
   public void use(AbstractPlayer p, AbstractMonster m) {
-    AbstractDungeon.actionManager.addToBottom(
+     AbstractDungeon.actionManager.addToBottom(
         new ApplyPowerAction(p, p, new StrengthPower(p, this.magicNumber), this.magicNumber));
-    AbstractDungeon.actionManager.addToBottom(
-        new MakeTempCardInDiscardAction(this.getPreviewCard().makeStatEquivalentCopy(), 1));
-  }
+     p.hand.moveToBottomOfDeck(this.getPreviewCard().makeStatEquivalentCopy());
+   }
 
   @Override
   public AbstractCard getPreviewCard() {
@@ -67,6 +67,13 @@ public class TagIn extends AbstractCardWithPreviewCard {
   }
 
   private static AbstractCard getPreviewCard(boolean upgraded) {
+    if (upgraded) {
+      if (UPGRADED_PREVIEW_CARD == null) {
+        UPGRADED_PREVIEW_CARD = new TagOut();
+        UPGRADED_PREVIEW_CARD.upgrade();
+      }
+      return UPGRADED_PREVIEW_CARD;
+    }
     if (PREVIEW_CARD == null) {
       PREVIEW_CARD = new TagOut();
     }

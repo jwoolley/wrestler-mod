@@ -10,52 +10,56 @@ import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import thewrestler.WrestlerMod;
 import thewrestler.enums.AbstractCardEnum;
-import thewrestler.powers.ScrapperPower;
+import thewrestler.powers.ProvenTacticsPower;
 
 import static thewrestler.WrestlerMod.getCardResourcePath;
 
-public class Scrapper extends CustomCard {
-  public static final String ID = WrestlerMod.makeID("Scrapper");
+public class ProvenTactics extends CustomCard {
+  public static final String ID = WrestlerMod.makeID("ProvenTactics");
 
   public static final String NAME;
   public static final String DESCRIPTION;
   public static final String[] EXTENDED_DESCRIPTION;
-  public static final String IMG_PATH = "scrapper.png";
+  public static final String IMG_PATH = "proventactics.png";
 
   private static final CardStrings cardStrings;
 
   private static final CardType TYPE = CardType.POWER;
-  private static final CardRarity RARITY = CardRarity.RARE;
+  private static final CardRarity RARITY = CardRarity.UNCOMMON;
   private static final CardTarget TARGET = CardTarget.NONE;
 
   private static final int COST = 1;
-  private static final int STRENGTH_PER_TURN = 2;
-  private static final int STRENGTH_PER_TURN_UPGRADE = 3;
+  private static final int CARDS_PER_TURN = 1;
 
-  public Scrapper() {
-    super(ID, NAME, getCardResourcePath(IMG_PATH), COST, DESCRIPTION, TYPE, AbstractCardEnum.THE_WRESTLER_ORANGE,
+  public ProvenTactics() {
+    super(ID, NAME, getCardResourcePath(IMG_PATH), COST, getDescription(false), TYPE, AbstractCardEnum.THE_WRESTLER_ORANGE,
         RARITY, TARGET);
-    this.baseMagicNumber = this.magicNumber = STRENGTH_PER_TURN;
+    this.baseMagicNumber = this.magicNumber = CARDS_PER_TURN;
   }
 
   @Override
   public void use(AbstractPlayer p, AbstractMonster m) {
     AbstractDungeon.actionManager.addToBottom(
-        new ApplyPowerAction(p, p, new ScrapperPower(p, this.magicNumber), this.magicNumber));
+        new ApplyPowerAction(p, p, new ProvenTacticsPower(p, this.magicNumber), this.magicNumber));
   }
 
   @Override
   public AbstractCard makeCopy() {
-    return new Scrapper();
+    return new ProvenTactics();
   }
 
   @Override
   public void upgrade() {
     if (!this.upgraded) {
       this.upgradeName();
-      this.upgradeMagicNumber(STRENGTH_PER_TURN_UPGRADE);
+      this.isInnate = true;
+      this.rawDescription = getDescription(true);
       initializeDescription();
     }
+  }
+
+  public static String getDescription(boolean isInnate) {
+    return (isInnate ? EXTENDED_DESCRIPTION[0] : "") + DESCRIPTION;
   }
 
   static {

@@ -180,6 +180,12 @@
     ]
   },
 
+  "WrestlerMod:ProvenTactics": {
+    "NAME": "Proven Tactics",
+    "DESCRIPTION": "At the start of your turn, randomly add one of Flex, Neutralize, or Go for the Eyes to your hand. It gains Exhaust.",
+    "EXTENDED_DESCRIPTION": [ "Innate. NL " ]
+  },
+
   "WrestlerMod:Ropewalk": {
     "NAME": "Ropewalk",
     "DESCRIPTION": "Gain !B! Block. NL Reduce the cost of a random Attack card in your hand by 1 this",
@@ -244,17 +250,17 @@
 
   "WrestlerMod:TagIn": {
     "NAME": "Tag In",
-    "DESCRIPTION": "Gain !M! Strength. NL Add a ",
+    "DESCRIPTION": "Gain !M! Strength. NL Put a ",
     "EXTENDED_DESCRIPTION": [
-      " to your discard pile."
+      " on the bottom of your draw pile."
     ]
   },
 
   "WrestlerMod:TagOut": {
     "NAME": "Tag Out",
-    "DESCRIPTION": "Gain !M! Dexterity. NL Add a ",
+    "DESCRIPTION": "Gain !M! Dexterity. NL Put a ",
     "EXTENDED_DESCRIPTION": [
-      " to your discard pile."
+      " on the bottom of your draw pile."
     ]
   },
 

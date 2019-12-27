@@ -21,7 +21,7 @@
   "WrestlerMod:CurtainJerkerPower": {
     "NAME": "Curtain Jerker",
     "DESCRIPTIONS": [
-      "At the start of your next turn, the last enemy who attacked you becomes #yGrappled."
+      "At the start of your next turn, the last enemy who attacked you becomes #yGrappled.",
     ]
   },
 
@@ -34,15 +34,6 @@
       " attack",
       " attacks",
       " to trigger.)"
-    ]
-  },
-
-  "WrestlerMod:MaintainGrapplePower": {
-    "NAME": "Maintaining Grapple",
-    "DESCRIPTIONS": [
-      "When you receive #b",
-      " more damage this turn, the #yGrappled enemy breaks free.",
-      "Maintain Grapple Up"
     ]
   },
 
@@ -97,11 +88,33 @@
     ]
   },
 
+  "WrestlerMod:MaintainGrapplePower": {
+    "NAME": "Maintaining Grapple",
+    "DESCRIPTIONS": [
+      "When you receive #b",
+      " more damage this turn, the #yGrappled enemy breaks free.",
+      "Maintain Grapple Up"
+    ]
+  },
+
   "WrestlerMod:NotCageFightingPower": {
     "NAME": "Sidelined",
     "DESCRIPTIONS": [
       "Until next turn, attack damage to and from #yCage #yFighting enemies is reduced to #b",
       "."]
+  },
+
+  "WrestlerMod:ProvenTacticsPower": {
+    "NAME": "ProvenTactics",
+    "DESCRIPTIONS": [
+      "At the start of your turn, randomly add a copy of [#9e2b2e]Flex, [#427937]Neutralize, or [#4699cc]Go [#4699cc]for [#4699cc]the [#4699cc]Eyes to your hand",
+      " #b",
+      " times",
+      ".",
+      " It gains #yExhaust.",
+      " They gain #yExhaust.",
+      " NL Exhaust."
+    ]
   },
 
   "WrestlerMod:RarePower": {
