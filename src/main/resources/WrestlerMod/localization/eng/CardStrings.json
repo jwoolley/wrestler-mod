@@ -110,7 +110,7 @@
     "EXTENDED_DESCRIPTION": [
       "a card",
       "!M! cards",
-      ", then discard a card. NL If it's an Attack, play it."
+      ", then discard a card at random. NL If it's an Attack, play it."
     ]
   },
 
@@ -165,6 +165,11 @@
   "WrestlerMod:Knee": {
     "NAME": "Knee",
     "DESCRIPTION": "Ethereal. NL Deal !D! Damage. NL Exhaust."
+  },
+
+  "WrestlerMod:Neckbreaker": {
+    "NAME": "Neckbreaker",
+    "DESCRIPTION": "Deal !D! damage. NL If the enemy is Grappled, remove !M! Block and deal !D! damage again."
   },
 
   "WrestlerMod:OffTheRopes": {
