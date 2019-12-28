@@ -187,7 +187,7 @@
 
   "WrestlerMod:ProvenTactics": {
     "NAME": "Proven Tactics",
-    "DESCRIPTION": "At the start of your turn, randomly add one of Flex, Neutralize, or Go for the Eyes to your hand. It gains Exhaust.",
+    "DESCRIPTION": "At the start of your turn, randomly add one of Flex, Neutralize, or Beam Cell to your hand. It gains Exhaust.",
     "EXTENDED_DESCRIPTION": [ "Innate. NL " ]
   },
 
@@ -287,6 +287,17 @@
     "DESCRIPTION": "Deal !D! Damage. NL The next time you attack that enemy this turn, add a ",
     "EXTENDED_DESCRIPTION": [
       " to your hand."
+    ]
+  },
+
+  "WrestlerMod:WindUpKick": {
+    "NAME": "Wind-Up Kick",
+    "DESCRIPTION": "Can only be played if you've played !M! Skills this turn. NL Deal !D! damage to ALL enemies.",
+    "EXTENDED_DESCRIPTION": [
+      "I have to play #b",
+      " more ",
+      "Skill first.",
+      "Skills first."
     ]
   },
 

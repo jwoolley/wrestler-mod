@@ -3,9 +3,8 @@ package thewrestler.powers;
 import basemod.interfaces.CloneablePowerInterface;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.common.MakeTempCardInHandAction;
-import com.megacrit.cardcrawl.actions.utility.SFXAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
-import com.megacrit.cardcrawl.cards.blue.GoForTheEyes;
+import com.megacrit.cardcrawl.cards.blue.BeamCell;
 import com.megacrit.cardcrawl.cards.green.Neutralize;
 import com.megacrit.cardcrawl.cards.red.Flex;
 import com.megacrit.cardcrawl.core.AbstractCreature;
@@ -14,7 +13,6 @@ import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.PowerStrings;
 import com.megacrit.cardcrawl.powers.AbstractPower;
 import com.megacrit.cardcrawl.unlock.UnlockTracker;
-import com.megacrit.cardcrawl.vfx.cardManip.ShowCardAndAddToHandEffect;
 import thewrestler.WrestlerMod;
 
 import java.util.ArrayList;
@@ -89,7 +87,7 @@ public class ProvenTacticsPower extends AbstractWrestlerPower implements Cloneab
     if (POSSIBLE_CARDS.isEmpty()) {
       POSSIBLE_CARDS.add(new Flex());
       POSSIBLE_CARDS.add(new Neutralize());
-      POSSIBLE_CARDS.add(new GoForTheEyes());
+      POSSIBLE_CARDS.add(new BeamCell());
     }
     return Collections.unmodifiableList(POSSIBLE_CARDS);
   }
