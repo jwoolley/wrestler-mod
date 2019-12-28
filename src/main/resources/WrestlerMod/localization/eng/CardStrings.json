@@ -202,10 +202,10 @@
 
   "WrestlerMod:RunTheRing": {
     "NAME": "Run the Ring",
-    "DESCRIPTION": "Discard your hand. NL Deal !D! damage to ALL enemies for each card discarded.",
+    "DESCRIPTION": "Discard !M! cards at random. NL Deal !D! damage to ALL enemies",
     "EXTENDED_DESCRIPTION": [
-      " turn.",
-      " combat."
+      " twice.",
+      " !M! times."
     ]
   },
 

@@ -1,14 +1,13 @@
 package thewrestler.cards.attack;
 
 import basemod.abstracts.CustomCard;
-import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
+import com.megacrit.cardcrawl.actions.common.DiscardAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
-import com.megacrit.cardcrawl.powers.ChokePower;
 import thewrestler.actions.cards.attack.RunTheRingAction;
 import thewrestler.enums.AbstractCardEnum;
 
@@ -28,23 +27,31 @@ public class RunTheRing extends CustomCard {
   private static final CardTarget TARGET = CardTarget.ALL_ENEMY;
 
   private static final int COST = 1;
-  private static final int DAMAGE_PER_TRIGGER = 3;
-  private static final int DAMAGE_UPGRADE = 1;
+  private static final int DAMAGE_PER_TRIGGER = 4;
+
+  private static final int NUM_DISCARDED_AND_ATTACKS = 2;
+  private static final int NUM_DISCARDED_AND_ATTACKS_UPGRADE = 1;
 
   public RunTheRing() {
-    super(ID, NAME, getCardResourcePath(IMG_PATH), COST, DESCRIPTION, TYPE,
+    super(ID, NAME, getCardResourcePath(IMG_PATH), COST, getDescription(NUM_DISCARDED_AND_ATTACKS), TYPE,
         AbstractCardEnum.THE_WRESTLER_ORANGE, RARITY, TARGET);
     this.baseDamage = this.damage = DAMAGE_PER_TRIGGER;
+    this.baseMagicNumber = this.magicNumber = NUM_DISCARDED_AND_ATTACKS;
     this.isMultiDamage = true;
   }
 
   @Override
   public void use(AbstractPlayer p, AbstractMonster m) {
     AbstractDungeon.actionManager.addToBottom(
-        new ApplyPowerAction(m, p, new ChokePower(m, this.magicNumber), this.magicNumber));
+        new DiscardAction(AbstractDungeon.player, AbstractDungeon.player, this.magicNumber, true));
 
-    AbstractDungeon.actionManager.addToBottom(new RunTheRingAction(p, this.multiDamage, this.damageTypeForTurn));
+    AbstractDungeon.actionManager.addToBottom(
+        new RunTheRingAction(p, this.multiDamage, this.damageTypeForTurn, this.magicNumber));
   }
+
+//    AbstractDungeon.actionManager.addToBottom(
+//        new RunTheRingAction(p, this.multiDamage, this.damageTypeForTurn, this.magicNumber, this.magicNumber));
+//  }
 
   @Override
   public AbstractCard makeCopy() {
@@ -55,8 +62,14 @@ public class RunTheRing extends CustomCard {
   public void upgrade() {
     if (!this.upgraded) {
       this.upgradeName();
-      this.upgradeDamage(DAMAGE_UPGRADE);
+      this.upgradeMagicNumber(NUM_DISCARDED_AND_ATTACKS_UPGRADE);
+      this.rawDescription = getDescription(this.magicNumber);
+      initializeDescription();
     }
+  }
+
+  private static String getDescription(int numTriggers) {
+    return DESCRIPTION + (numTriggers == -1 ? EXTENDED_DESCRIPTION[0] : EXTENDED_DESCRIPTION[1]);
   }
 
   static {
