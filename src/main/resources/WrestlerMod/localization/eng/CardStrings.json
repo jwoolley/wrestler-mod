@@ -127,6 +127,11 @@
     "DESCRIPTION": "Deal !D! Damage and apply !M! Weak to ALL enemies. NL Exhaust."
   },
 
+  "WrestlerMod:HairPull": {
+    "NAME": "Hair Pull",
+    "DESCRIPTION": "Deal !D! damage. NL If the enemy is Grappled, gain [E]."
+  },
+
   "WrestlerMod:Hardway": {
     "NAME": "Hardway",
     "DESCRIPTION": "Remove all of the enemy's debuffs. NL They lose 1 Strength for each debuff removed. NL Exhaust.",
@@ -169,7 +174,7 @@
 
   "WrestlerMod:Neckbreaker": {
     "NAME": "Neckbreaker",
-    "DESCRIPTION": "Deal !D! damage. NL If the enemy is Grappled, remove !M! Block and deal !D! damage again."
+    "DESCRIPTION": "Deal !D! damage. NL If the enemy is Grappled, apply !M! Vulnerable, !M! Weak, and !M! Frail."
   },
 
   "WrestlerMod:OffTheRopes": {

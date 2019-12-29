@@ -124,6 +124,11 @@ public class GrappledPower extends AbstractWrestlerPower implements CloneablePow
     }
   }
 
+  public static boolean enemyWillHaveGrappleAfterAttack(AbstractMonster m) {
+    return m.hasPower(GrappledPower.POWER_ID)
+          || (m.hasPower(SquaringOffPower.POWER_ID) && m.getPower(SquaringOffPower.POWER_ID).amount == 1);
+  }
+
   @Override
   public AbstractPower makeCopy() {
     return new GrappledPower(owner, source, amount);

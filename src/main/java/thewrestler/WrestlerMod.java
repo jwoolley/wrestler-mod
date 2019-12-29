@@ -290,7 +290,8 @@ public class WrestlerMod implements
         reflectedMap.put("SPLAT_WET_1", new Sfx(getAudioResourcePath("TheWrestler_SplatWet1.ogg")));
         reflectedMap.put("SPRINGBOARD_1", new Sfx(getAudioResourcePath("TheWrestler_Springboard1.ogg")));
         reflectedMap.put("THUD_MEDIUM_1", new Sfx(getAudioResourcePath("TheWrestler_ThudMedium1.ogg")));
-        reflectedMap.put("TONE_ELECTRONIC_1", new Sfx(getAudioResourcePath("TheWrestler_ToneElectronic_1.ogg")));
+        reflectedMap.put("TONE_ELECTRONIC_1", new Sfx(getAudioResourcePath("TheWrestler_ToneElectronic1.ogg")));
+        reflectedMap.put("YELL_PAIN_1", new Sfx(getAudioResourcePath("TheWrestler_YellPain1.ogg")));
 
         reflectedMap.put("METAL_MAN_RIFF_1", new Sfx(getAudioResourcePath("music/TheWrestler_MetalManRiff1.ogg")));
     }
@@ -445,6 +446,7 @@ public class WrestlerMod implements
         BaseMod.addCard(new Facewash());
         BaseMod.addCard(new FanFavorite());
         BaseMod.addCard(new FrogSplash());
+        BaseMod.addCard(new HairPull());
         BaseMod.addCard(new Hardway());
         BaseMod.addCard(new Headlock());
         BaseMod.addCard(new HeelTurn());
@@ -490,6 +492,7 @@ public class WrestlerMod implements
         UnlockTracker.unlockCard(Facewash.ID);
         UnlockTracker.unlockCard(FanFavorite.ID);
         UnlockTracker.unlockCard(FrogSplash.ID);
+        UnlockTracker.unlockCard(HairPull.ID);
         UnlockTracker.unlockCard(Hardway.ID);
         UnlockTracker.unlockCard(Headlock.ID);
         UnlockTracker.unlockCard(HeelTurn.ID);

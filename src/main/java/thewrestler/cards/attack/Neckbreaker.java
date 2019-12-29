@@ -12,7 +12,7 @@ import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
-import com.megacrit.cardcrawl.powers.StrengthPower;
+import com.megacrit.cardcrawl.powers.*;
 import thewrestler.actions.ReduceBlockAction;
 import thewrestler.powers.GrappledPower;
 import thewrestler.powers.SquaringOffPower;
@@ -35,16 +35,15 @@ public class Neckbreaker extends CustomCard {
   private static final CardTarget TARGET = CardTarget.ENEMY;
 
   private static final int COST = 1;
-  private static final int DAMAGE = 8;
+  private static final int DAMAGE = 9;
   private static final int DAMAGE_UPGRADE = 3;
-  private static final int BLOCK_REDUCE_AMOUNT = 8;
-  private static final int BLOCK_REDUCE_AMOUNT_UPGRADE = 3;
+  private static final int DEBUFF_AMOUNT = 1;
 
   public Neckbreaker() {
     super(ID, NAME, getCardResourcePath(IMG_PATH), COST, DESCRIPTION, TYPE,
         AbstractCardEnum.THE_WRESTLER_ORANGE, RARITY, TARGET);
     this.baseDamage = this.damage = DAMAGE;
-    this.baseMagicNumber = this.magicNumber = BLOCK_REDUCE_AMOUNT;
+    this.baseMagicNumber = this.magicNumber = DEBUFF_AMOUNT;
   }
 
   @Override
@@ -53,15 +52,15 @@ public class Neckbreaker extends CustomCard {
         new DamageAction(m, new DamageInfo(p, damage, damageTypeForTurn),
             AbstractGameAction.AttackEffect.BLUNT_LIGHT));
 
-    // TODO: check that this interacts as expected with Square Off grappled trigger
-    if (m.hasPower(GrappledPower.POWER_ID) ||
-        m.hasPower(SquaringOffPower.POWER_ID) && m.getPower(SquaringOffPower.POWER_ID).amount == 1) {
-      AbstractDungeon.actionManager.addToTop(new WaitAction(0.5f));
-      AbstractDungeon.actionManager.addToBottom(new ReduceBlockAction(m, p, this.magicNumber));
-      AbstractDungeon.actionManager.addToTop(new WaitAction(0.3f));
+    if (GrappledPower.enemyWillHaveGrappleAfterAttack(m)) {
       AbstractDungeon.actionManager.addToBottom(
-          new DamageAction(m, new DamageInfo(p, damage, damageTypeForTurn),
-              AbstractGameAction.AttackEffect.BLUNT_HEAVY));
+          new ApplyPowerAction(m, p, new VulnerablePower(m, this.magicNumber, false), this.magicNumber));
+
+      AbstractDungeon.actionManager.addToBottom(
+          new ApplyPowerAction(m, p, new WeakPower(m, this.magicNumber, false), this.magicNumber));
+
+      AbstractDungeon.actionManager.addToBottom(
+          new ApplyPowerAction(m, p, new FrailPower(m, this.magicNumber, false), this.magicNumber));
     }
   }
 
@@ -75,7 +74,6 @@ public class Neckbreaker extends CustomCard {
     if (!this.upgraded) {
       this.upgradeName();
       this.upgradeDamage(DAMAGE_UPGRADE);
-      this.upgradeMagicNumber(BLOCK_REDUCE_AMOUNT_UPGRADE);
     }
   }
 
