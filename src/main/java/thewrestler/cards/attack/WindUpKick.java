@@ -37,6 +37,7 @@ public class WindUpKick extends CustomCard {
         AbstractCardEnum.THE_WRESTLER_ORANGE, RARITY, TARGET);
     this.baseDamage = this.damage = DAMAGE;
     this.baseMagicNumber = this.magicNumber = NUM_SKILLS_REQUIRED;
+    this.isMultiDamage = true;
   }
 
   @Override

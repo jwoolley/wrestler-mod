@@ -8,6 +8,8 @@ import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
+import com.megacrit.cardcrawl.powers.DexterityPower;
+import com.megacrit.cardcrawl.powers.StrengthPower;
 import thewrestler.WrestlerMod;
 import thewrestler.enums.AbstractCardEnum;
 import thewrestler.powers.unused.CurtainJerkerPower;
@@ -29,17 +31,22 @@ public class CurtainJerker extends CustomCard {
   private static final CardTarget TARGET = CardTarget.NONE;
 
   private static final int COST = 1;
-  private static final int UPGRADED_COST = 0;
+  private static final int STRENGTH_AND_DEX_GAIN = 2;
 
   public CurtainJerker() {
-    super(ID, NAME, getCardResourcePath(IMG_PATH), COST, DESCRIPTION, TYPE, AbstractCardEnum.THE_WRESTLER_ORANGE,
-        RARITY, TARGET);
+    super(ID, NAME, getCardResourcePath(IMG_PATH), COST, getDescription(false), TYPE,
+        AbstractCardEnum.THE_WRESTLER_ORANGE, RARITY, TARGET);
+    this.baseMagicNumber = this.magicNumber = STRENGTH_AND_DEX_GAIN;
   }
 
   @Override
   public void use(AbstractPlayer p, AbstractMonster m) {
     AbstractDungeon.actionManager.addToBottom(
-        new ApplyPowerAction(p, p, new CurtainJerkerPower(p, 1), 1));
+        new ApplyPowerAction(p, p, new CurtainJerkerPower(p, this.magicNumber), this.magicNumber));
+    AbstractDungeon.actionManager.addToBottom(
+        new ApplyPowerAction(p, p, new StrengthPower(p, this.magicNumber), this.magicNumber));
+    AbstractDungeon.actionManager.addToBottom(
+        new ApplyPowerAction(p, p, new DexterityPower(p, this.magicNumber), this.magicNumber));
   }
 
   @Override
@@ -51,9 +58,14 @@ public class CurtainJerker extends CustomCard {
   public void upgrade() {
     if (!this.upgraded) {
       this.upgradeName();
-      this.upgradeBaseCost(UPGRADED_COST);
+      this.isInnate = true;
+      this.rawDescription = getDescription(true);
       initializeDescription();
     }
+  }
+
+  public static String getDescription(boolean isInnate) {
+    return (isInnate ? EXTENDED_DESCRIPTION[0] : "") + DESCRIPTION;
   }
 
   static {

@@ -91,7 +91,8 @@
 
   "WrestlerMod:CurtainJerker": {
     "NAME": "Curtain Jerker",
-    "DESCRIPTION": "The next time you're attacked, the attacker becomes Grappled at the start of your next turn."
+    "DESCRIPTION": "Gain !M! Strength and !M! Dexterity which last until you take attack damage from an enemy.",
+    "EXTENDED_DESCRIPTION": [ "Innate. NL " ]
   },
 
   "WrestlerMod:DivingStomp": {
