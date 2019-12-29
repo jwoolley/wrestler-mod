@@ -28,5 +28,30 @@
       "knee", "knees"
     ],
     "DESCRIPTION": "A 1-cost #yAttack card with #yEthereal and #yExhaust that deals moderate damage."
+  },
+
+  "WrestledMod:Flex": {
+    "PROPER_NAME": "Flex",
+    "NAMES": [
+      "Flex", "flex"
+    ],
+    "DESCRIPTION": "A 0-cost [#9e2b2e]Ironclad #ySkill card which grants temporary #yStrength."
+  },
+
+  "WrestledMod:Neutralize": {
+    "PROPER_NAME": "Neutralize",
+    "NAMES": [
+      "neutralize"
+    ],
+    "DESCRIPTION": "A 0-cost [#427937]Silent #yAttack card which applies #yWeak."
+  },
+
+  "WrestledMod:Beam_Cell": {
+    "PROPER_NAME": "Beam Cell",
+    "NAMES": [
+      "beam cell",
+      "beam_cell"
+    ],
+    "DESCRIPTION": "A 0-cost [#4699cc]Defect #yAttack card which applies #yVulnerable."
   }
 }

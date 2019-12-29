@@ -193,7 +193,7 @@
 
   "WrestlerMod:ProvenTactics": {
     "NAME": "Proven Tactics",
-    "DESCRIPTION": "At the start of your turn, randomly add one of Flex, Neutralize, or Beam Cell to your hand. It gains Exhaust."
+    "DESCRIPTION": "At the start of your turn, randomly add a Flex, Neutralize, or Beam_Cell to your hand. It gains Exhaust."
   },
 
   "WrestlerMod:Ropewalk": {
