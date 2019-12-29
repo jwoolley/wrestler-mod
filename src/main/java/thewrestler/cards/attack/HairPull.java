@@ -4,6 +4,7 @@ import basemod.abstracts.CustomCard;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.common.DamageAction;
 import com.megacrit.cardcrawl.actions.common.GainEnergyAction;
+import com.megacrit.cardcrawl.actions.utility.SFXAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.cards.DamageInfo;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
@@ -48,8 +49,8 @@ public class HairPull extends CustomCard {
             AbstractGameAction.AttackEffect.BLUNT_LIGHT));
 
     if (GrappledPower.enemyWillHaveGrappleAfterAttack(m)) {
-      CardCrawlGame.sound.play("YELL_PAIN_1");
       AbstractDungeon.actionManager.addToBottom(new GainEnergyAction(ENERGY_PER_TRIGGER));
+      AbstractDungeon.actionManager.addToTop(new SFXAction("YELL_PAIN_1", 0.95f));
     }
   }
 

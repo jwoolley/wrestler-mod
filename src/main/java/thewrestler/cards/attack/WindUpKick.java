@@ -50,7 +50,7 @@ public class WindUpKick extends CustomCard {
   public boolean canPlay(AbstractCard card) {
     if (card == this) {
       card.cantUseMessage = getCanPlayMessage();
-      return getNumSkillsPlayed() > 2;
+      return getNumSkillsPlayed() >=  this.magicNumber;
     } else {
       return true;
     }
