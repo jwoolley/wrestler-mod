@@ -27,10 +27,9 @@ public class WindUpKick extends CustomCard {
   private static final CardTarget TARGET = CardTarget.ALL_ENEMY;
 
   private static final int COST = 0;
-  private static final int DAMAGE = 13;
+  private static final int DAMAGE = 9;
+  private static final int DAMAGE_UPGRADE = 3;
   private static final int NUM_SKILLS_REQUIRED = 3;
-  private static final int NUM_SKILLS_REQUIRED_UPGRADE = -1;
-
 
   public WindUpKick() {
     super(ID, NAME, getCardResourcePath(IMG_PATH), COST, DESCRIPTION, TYPE,
@@ -66,7 +65,7 @@ public class WindUpKick extends CustomCard {
   public void upgrade() {
     if (!this.upgraded) {
       this.upgradeName();
-      this.upgradeMagicNumber(NUM_SKILLS_REQUIRED_UPGRADE);
+      this.upgradeDamage(DAMAGE_UPGRADE);
     }
   }
 

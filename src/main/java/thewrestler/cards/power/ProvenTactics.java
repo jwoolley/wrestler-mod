@@ -28,11 +28,12 @@ public class ProvenTactics extends CustomCard {
   private static final CardRarity RARITY = CardRarity.UNCOMMON;
   private static final CardTarget TARGET = CardTarget.NONE;
 
-  private static final int COST = 1;
+  private static final int COST = 2;
+  private static final int UPGRADED_COST = 1;
   private static final int CARDS_PER_TURN = 1;
 
   public ProvenTactics() {
-    super(ID, NAME, getCardResourcePath(IMG_PATH), COST, getDescription(false), TYPE, AbstractCardEnum.THE_WRESTLER_ORANGE,
+    super(ID, NAME, getCardResourcePath(IMG_PATH), COST, DESCRIPTION, TYPE, AbstractCardEnum.THE_WRESTLER_ORANGE,
         RARITY, TARGET);
     this.baseMagicNumber = this.magicNumber = CARDS_PER_TURN;
   }
@@ -52,14 +53,9 @@ public class ProvenTactics extends CustomCard {
   public void upgrade() {
     if (!this.upgraded) {
       this.upgradeName();
-      this.isInnate = true;
-      this.rawDescription = getDescription(true);
       initializeDescription();
+      this.upgradeBaseCost(UPGRADED_COST);
     }
-  }
-
-  public static String getDescription(boolean isInnate) {
-    return (isInnate ? EXTENDED_DESCRIPTION[0] : "") + DESCRIPTION;
   }
 
   static {
