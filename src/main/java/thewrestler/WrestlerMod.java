@@ -46,6 +46,7 @@ import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Properties;
+import java.util.stream.Collectors;
 
 //TODO: DON'T MASS RENAME/REFACTOR
 //TODO: DON'T MASS RENAME/REFACTOR
@@ -83,9 +84,7 @@ public class WrestlerMod implements
         EditKeywordsSubscriber,
         EditCharactersSubscriber,
         PostInitializeSubscriber,
-
-        OnStartBattleSubscriber
-    {
+        OnStartBattleSubscriber {
     // Make sure to implement the subscribers *you* are using (read basemod wiki). Editing cards? EditCardsSubscriber.
     // Making relics? EditRelicsSubscriber. etc., etc., for a full list and how to make your own, visit the basemod wiki.
     public static final Logger logger = LogManager.getLogger(WrestlerMod.class.getName());
@@ -103,13 +102,13 @@ public class WrestlerMod implements
     private static final String MODNAME = "The Wrestler";
     private static final String AUTHOR = "Author";
     private static final String DESCRIPTION = "A base for Slay the Spire to my own mod from, featuring The Wrestler.";
-    
+
     // =============== INPUT TEXTURE LOCATION =================
 
     // Colors (RGB)
     // Character Color
     public static final Color WRESTLER_ORANGE = CardHelper.getColor(220.0f, 140.0f, 0.0f);
-    
+
     // Potion Colors in RGB
     public static final Color WRESTLER_POTION_LIQUID = CardHelper.getColor(209.0f, 53.0f, 18.0f); // Orange-ish Red
     public static final Color WRESTLER_POTION_HYBRID = CardHelper.getColor(255.0f, 230.0f, 230.0f); // Near White
@@ -131,15 +130,15 @@ public class WrestlerMod implements
     private static final String ATTACK_WRESTLER_GRAY = getImageResourcePath("512/attack_wrestler.png");
     private static final String SKILL_WRESTLER_GRAY = getImageResourcePath("512/skill_wrestler.png");
     private static final String POWER_WRESTLER_GRAY = getImageResourcePath("512/power_wrestler.png");
-    
+
     private static final String ENERGY_ORB_DEFAULT_GRAY = getImageResourcePath("512/card_default_gray_orb.png");
     private static final String CARD_ENERGY_ORB = getImageResourcePath("512/card_small_orb.png");
-    
+
     private static final String ATTACK_DEFAULT_GRAY_PORTRAIT = getImageResourcePath("1024/attack_wrestler.png");
     private static final String SKILL_DEFAULT_GRAY_PORTRAIT = getImageResourcePath("1024/skill_wrestler.png");
     private static final String POWER_DEFAULT_GRAY_PORTRAIT = getImageResourcePath("1024/power_wrestler.png");
     private static final String ENERGY_ORB_DEFAULT_GRAY_PORTRAIT = getImageResourcePath("1024/card_default_gray_orb.png");
-    
+
     // Character assets
     private static final String THE_WRESTLER_BUTTON = getImageResourcePath("charSelect/WrestlerCharacterButton.png");
     private static final String THE_WRESTLER_PORTRAIT = getImageResourcePath("charSelect/WrestlerCharacterPortraitBG.png");
@@ -149,7 +148,7 @@ public class WrestlerMod implements
 
     //Mod Badge - A small icon that appears in the mod settings menu next to your mod.
     public static final String BADGE_IMAGE = getImageResourcePath("Badge.png");
-    
+
     // Atlas and JSON files for the Animations
 //    public static final String THE_WRESTLER_SKELETON_ATLAS = getImageResourcePath("char/wrestler/skeleton.atlas");
 //    public static final String THE_WRESTLER_SKELETON_JSON = getImageResourcePath("/char/wrestler/skeleton.json");
@@ -162,54 +161,54 @@ public class WrestlerMod implements
     public static String getCardResourcePath(String resourcePath) {
         return getImageResourcePath("cards/" + resourcePath);
     }
-    
+
     public static String makeRelicPath(String resourcePath) {
         return getImageResourcePath("relics/" + resourcePath);
     }
-    
+
     public static String makeRelicOutlinePath(String resourcePath) {
         return getImageResourcePath("relics/outline/" + resourcePath);
     }
-    
+
     public static String makeOrbPath(String resourcePath) {
         return getImageResourcePath("orb/" + resourcePath);
     }
-    
+
     public static String makePowerPath(String resourcePath) {
         return getImageResourcePath("powers/" + resourcePath);
     }
-    
+
     public static String makeEventPath(String resourcePath) {
         return getImageResourcePath("events/" + resourcePath);
     }
-    
+
     // =============== /MAKE IMAGE PATHS/ =================
-    
+
     // =============== /INPUT TEXTURE LOCATION/ =================
-    
-    
+
+
     // =============== SUBSCRIBE, CREATE THE COLOR_GRAY, INITIALIZE =================
-    
+
     public WrestlerMod() {
         logger.info("Subscribe to BaseMod hooks");
-        
+
         BaseMod.subscribe(this);
 
         setModID(MOD_ID);
 
         logger.info("Done subscribing");
-        
+
         logger.info("Creating the color " + AbstractCardEnum.THE_WRESTLER_ORANGE);
-        
+
         BaseMod.addColor(AbstractCardEnum.THE_WRESTLER_ORANGE, WRESTLER_ORANGE, WRESTLER_ORANGE, WRESTLER_ORANGE,
             WRESTLER_ORANGE, WRESTLER_ORANGE, WRESTLER_ORANGE, WRESTLER_ORANGE,
             ATTACK_WRESTLER_GRAY, SKILL_WRESTLER_GRAY, POWER_WRESTLER_GRAY, ENERGY_ORB_DEFAULT_GRAY,
                 ATTACK_DEFAULT_GRAY_PORTRAIT, SKILL_DEFAULT_GRAY_PORTRAIT, POWER_DEFAULT_GRAY_PORTRAIT,
                 ENERGY_ORB_DEFAULT_GRAY_PORTRAIT, CARD_ENERGY_ORB);
-        
+
         logger.info("Done creating the color");
-        
-        
+
+
         logger.info("Adding mod settings");
         // This loads the mod settings.
         // The actual mod Button is added below in receivePostInitialize()
@@ -223,13 +222,13 @@ public class WrestlerMod implements
             e.printStackTrace();
         }
         logger.info("Done adding mod settings");
-        
+
     }
-    
+
     // ====== NO EDIT AREA ======
     // DON'T TOUCH THIS STUFF. IT IS HERE FOR STANDARDIZATION BETWEEN MODS AND TO ENSURE GOOD CODE PRACTICES.
     // IF YOU MODIFY THIS I WILL HUNT YOU DOWN AND DOWNVOTE YOUR MOD ON WORKSHOP
-    
+
     public static void setModID(String ID) { // DON'T EDIT
         modID = ID;
         Gson coolG = new Gson(); // EY DON'T EDIT THIS
@@ -245,11 +244,11 @@ public class WrestlerMod implements
         } // NO
         logger.info("Success! ID is " + modID); // WHY WOULD U WANT IT NOT TO LOG?? DON'T EDIT THIS.
     }
-    
+
     public static String getModID() { // NO
         return modID; // DOUBLE NO
     } // NU-UH
-    
+
     private static void pathCheck() { // ALSO NO
         Gson coolG = new Gson(); // NNOPE DON'T EDIT THIS
         InputStream in = WrestlerMod.class.getResourceAsStream("/IDCheckStringsDONT-EDIT-AT-ALL.json"); // DON'T EDIT THISSSSS
@@ -265,9 +264,9 @@ public class WrestlerMod implements
             }
         }
     }
-    
+
     // ====== YOU CAN EDIT AGAIN ======
-    
+
     // ======= REGISTER ASSETS ========
 
     @SuppressWarnings("unchecked")
@@ -314,19 +313,19 @@ public class WrestlerMod implements
     @Override
     public void receiveEditCharacters() {
         logger.info("Beginning to edit characters. " + "Add " + WrestlerCharEnum.THE_WRESTLER);
-        
+
         BaseMod.addCharacter(new WrestlerCharacter(IN_GAME_CHARACTER_NAME, WrestlerCharEnum.THE_WRESTLER),
             THE_WRESTLER_BUTTON, THE_WRESTLER_PORTRAIT, WrestlerCharEnum.THE_WRESTLER);
-        
+
         receiveEditPotions();
         logger.info("Added " +  WrestlerCharEnum.THE_WRESTLER);
     }
-    
+
     // =============== /LOAD THE CHARACTER/ =================
-    
-    
+
+
     // =============== POST-INITIALIZE =================
-    
+
     @Override
     public void receivePostInitialize() {
         logger.info("Loading badge image and mod options");
@@ -335,10 +334,10 @@ public class WrestlerMod implements
 
         // Load the Mod Badge
         Texture badgeTexture = TextureLoader.getTexture(BADGE_IMAGE);
-        
+
         // Create the Mod Menu
         ModPanel settingsPanel = new ModPanel();
-        
+
         // Create the on/off button:
         ModLabeledToggleButton enableNormalsButton = new ModLabeledToggleButton("This is the text which goes next to the checkbox.",
                 350.0f, 700.0f, Settings.CREAM_COLOR, FontHelper.charDescFont, // Position (trial and error it), color, font
@@ -346,7 +345,7 @@ public class WrestlerMod implements
                 settingsPanel, // The mod panel in which this button will be in
                 (label) -> {}, // thing??????? idk
                 (button) -> { // The actual button:
-            
+
             enableWrestler = button.enabled; // The boolean true/false will be whether the button is enabled or not
             try {
                 // And based on that boolean, set the settings and save them
@@ -357,45 +356,45 @@ public class WrestlerMod implements
                 e.printStackTrace();
             }
         });
-        
+
         settingsPanel.addUIElement(enableNormalsButton); // Add the button to the settings panel. Button is a go.
-        
+
         BaseMod.registerModBadge(badgeTexture, MODNAME, AUTHOR, DESCRIPTION, settingsPanel);
-        
+
         // =============== EVENTS =================
-        
+
         // This event will be exclusive to the City (act 2). If you want an event that's present at any
         // part of the game, simply don't include the dungeon ID
         // If you want to h ave a character-specific event, look at slimebound (CityRemoveEventPatch).
         // Essentially, you need to patch the game and say "if a player is not playing my character class, remove the event from the pool"
 //        BaseMod.addEvent(IdentityCrisisEvent.ID, IdentityCrisisEvent.class, TheCity.ID);
-        
+
         // =============== /EVENTS/ =================
         logger.info("Done loading badge Image and mod options");
     }
-    
+
     // =============== / POST-INITIALIZE/ =================
-    
-    
+
+
     // ================ ADD POTIONS ===================
-    
+
     public void receiveEditPotions() {
         logger.info("Beginning to edit potions");
-        
+
         // Class Specific Potion. If you want your potion to not be class-specific,
         // just remove the player class at the end (in this case the "theWrestlerEnum.THE_DEFAULT".
         // Remember, you can press ctrl+P inside parentheses like addPotions)
         BaseMod.addPotion(WrestlerPotion.class, WRESTLER_POTION_LIQUID, WRESTLER_POTION_HYBRID,
             WRESTLER_POTION_SPOTS, WrestlerPotion.POTION_ID, WrestlerCharEnum.THE_WRESTLER);
-        
+
         logger.info("Done editing potions");
     }
-    
+
     // ================ /ADD POTIONS/ ===================
-    
-    
+
+
     // ================ ADD RELICS ===================
-    
+
     @Override
     public void receiveEditRelics() {
         logger.info("Adding relics");
@@ -404,17 +403,17 @@ public class WrestlerMod implements
 
         // This adds a relic to the Shared pool. Every character can find this relic.
         //  BaseMod.addRelic(new WrestlerRelic2(), RelicType.SHARED);
-        
+
         // Mark relics as seen (the others are all starters so they're marked as seen in the character file
         // UnlockTracker.markRelicAsSeen(BottledWrestlerRelic.ID);
         logger.info("Done adding relics!");
     }
-    
+
     // ================ /ADD RELICS/ ===================
-    
-    
+
+
     // ================ ADD CARDS ===================
-    
+
     @Override
     public void receiveEditCards() {
         logger.info("Adding variables");
@@ -425,7 +424,7 @@ public class WrestlerMod implements
         // Add the Custom Dynamic variabls
         BaseMod.addDynamicVariable(new DefaultCustomVariable());
         BaseMod.addDynamicVariable(new DefaultSecondMagicNumber());
-        
+
         logger.info("Adding cards");
         // Add the cards
         // Don't comment out/delete these cards (yet). You need 1 of each type and rarity (technically) for your game not to crash
@@ -524,14 +523,14 @@ public class WrestlerMod implements
 
         logger.info("Done adding cards!");
     }
-    
+
     // There are better ways to do this than listing every single individual card, but I do not want to complicate things
     // in a "tutorial" mod. This will do and it's completely ok to use. If you ever want to clean up and
     // shorten all the imports, go look take a look at other mods, such as Hubris.
-    
+
     // ================ /ADD CARDS/ ===================
-    
-    
+
+
     // ================ LOAD THE TEXT ===================
 
 
@@ -561,38 +560,38 @@ public class WrestlerMod implements
         // CardStrings
         BaseMod.loadCustomStringsFile(CardStrings.class,
             RESOURCE_FOLDER_NAME + "/localization/eng/CardStrings.json");
-        
+
         // PowerStrings
         BaseMod.loadCustomStringsFile(PowerStrings.class,
             RESOURCE_FOLDER_NAME + "/localization/eng/PowerStrings.json");
-        
+
         // RelicStrings
         BaseMod.loadCustomStringsFile(RelicStrings.class,
             RESOURCE_FOLDER_NAME + "/localization/eng/RelicStrings.json");
-        
+
         // Event Strings
         BaseMod.loadCustomStringsFile(EventStrings.class,
             RESOURCE_FOLDER_NAME + "/localization/eng/EventStrings.json");
-        
+
         // PotionStrings
         BaseMod.loadCustomStringsFile(PotionStrings.class,
             RESOURCE_FOLDER_NAME + "/localization/eng/PotionStrings.json");
-        
+
         // CharacterStrings
         BaseMod.loadCustomStringsFile(CharacterStrings.class,
             RESOURCE_FOLDER_NAME + "/localization/eng/CharacterStrings.json");
-        
+
         // OrbStrings
         BaseMod.loadCustomStringsFile(OrbStrings.class,
             RESOURCE_FOLDER_NAME + "/localization/eng/OrbStrings.json");
-        
+
         logger.info("Done editing strings");
     }
-    
+
     // ================ /LOAD THE TEXT/ ===================
-    
+
     // ================ LOAD THE KEYWORDS ===================
-    
+
     @Override
     public void receiveEditKeywords() {
         // Keywords on cards are supposed to be Capitalized, while in Keyword-String.json they're lowercase
@@ -614,21 +613,43 @@ public class WrestlerMod implements
         Type typeToken = new TypeToken<Map<String, Keyword>>(){}.getType();
 
         keywords = gson.fromJson(keywordStrings, typeToken);
-        keywords.forEach((k, v) -> {
+
+        Map<String, Keyword> unscopedKeywords = keywords.entrySet().stream()
+            .filter(entry -> !startsWithModPrefix(entry.getKey()))
+            .collect(Collectors.toMap(Map.Entry::getKey,Map.Entry::getValue));
+
+        Map<String, Keyword> modScopedKeywords = keywords.entrySet().stream()
+            .filter(entry -> startsWithModPrefix(entry.getKey()))
+            .collect(Collectors.toMap(Map.Entry::getKey,Map.Entry::getValue));
+
+        unscopedKeywords.forEach((k, v) -> {
             BaseMod.addKeyword(v.PROPER_NAME, v.NAMES, v.DESCRIPTION);
         });
+
+        modScopedKeywords.forEach((k, v) -> {
+            BaseMod.addKeyword(getModKeywordPrefix(), v.PROPER_NAME, v.NAMES, v.DESCRIPTION);
+        });
     }
-    
-    // ================ /LOAD THE KEYWORDS/ ===================    
-    
+
+    public static String getModKeywordPrefix() {
+        return getModID().toLowerCase() + ":";
+    }
+
+    // the prefix isn't lowercased in KeywordStrings.json, so don't lowercase when doing this comparison
+    public static boolean startsWithModPrefix(String string) {
+        return string.startsWith(getModID() + ":");
+    }
+
+    // ================ /LOAD THE KEYWORDS/ ===================
+
     // this adds "ModName:" before the ID of any card/relic/power etc.
     // in order to avoid conflicts if any other mod uses the same ID.
     public static String makeID(String id) {
         return getModID() + ":" + id;
     }
 
-        @Override
-        public void receiveOnBattleStart(AbstractRoom abstractRoom) {
-            OnApplyPowerPatchInsert.powerActionList.clear();
-        }
+    @Override
+    public void receiveOnBattleStart(AbstractRoom abstractRoom) {
+        OnApplyPowerPatchInsert.powerActionList.clear();
     }
+}

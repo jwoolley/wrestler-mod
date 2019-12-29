@@ -68,7 +68,7 @@
 
   "WrestlerMod:CageMatch": {
     "NAME": "Cage Match",
-    "DESCRIPTION": "Apply Grappled. NL Stun all other enemies. NL Exhaust."
+    "DESCRIPTION": "Apply wrestlermod:Grappled. NL Stun all other enemies. NL Exhaust."
   },
 
   "WrestlerMod:CheapShot": {
@@ -97,7 +97,7 @@
 
   "WrestlerMod:DivingStomp": {
     "NAME": "Diving Stomp",
-    "DESCRIPTION": "Deal !D! Damage. NL Apply !M! Sprained."
+    "DESCRIPTION": "Deal !D! Damage. NL Apply !M! wrestlermod:Sprained."
   },
 
   "WrestlerMod:EyePoke": {
@@ -130,7 +130,7 @@
 
   "WrestlerMod:HairPull": {
     "NAME": "Hair Pull",
-    "DESCRIPTION": "Deal !D! damage. NL If the enemy is Grappled, gain [E]."
+    "DESCRIPTION": "Deal !D! damage. NL If the enemy is wrestlermod:Grappled, gain [E]."
   },
 
   "WrestlerMod:Hardway": {
@@ -175,7 +175,7 @@
 
   "WrestlerMod:Neckbreaker": {
     "NAME": "Neckbreaker",
-    "DESCRIPTION": "Deal !D! damage. NL If the enemy is Grappled, apply !M! Vulnerable, !M! Weak, and !M! Frail."
+    "DESCRIPTION": "Deal !D! damage. NL If the enemy is wrestlermod:Grappled, apply !M! Vulnerable, !M! Weak, and !M! Frail."
   },
 
   "WrestlerMod:OffTheRopes": {
@@ -229,7 +229,7 @@
 
   "WrestlerMod:Scrapper": {
     "NAME": "Scrapper",
-    "DESCRIPTION": "At the start of your turn, if an enemy is Grappled, gain !M! Strength."
+    "DESCRIPTION": "At the start of your turn, if an enemy is wrestlermod:Grappled, gain !M! Strength."
   },
 
   "WrestlerMod:Sharpshooter": {
@@ -255,7 +255,7 @@
 
   "WrestlerMod:SquareOff": {
     "NAME": "Square Off",
-    "DESCRIPTION": "Gain !B! Block. NL Apply !M! Weak. NL If you attack that enemy twice this turn, apply Grappled."
+    "DESCRIPTION": "Gain !B! Block. NL Apply !M! Weak. NL If you attack that enemy twice this turn, apply wrestlermod:Grappled."
   },
 
   "WrestlerMod:TagIn": {
@@ -276,7 +276,7 @@
 
   "WrestlerMod:TakeToTheMat": {
     "NAME": "Take to the Mat",
-    "DESCRIPTION": "Deal !D! Damage. NL If the enemy has !M! % health or less, they become Grappled."
+    "DESCRIPTION": "Deal !D! Damage. NL If the enemy has !M! % health or less, they become wrestlermod:Grappled."
   },
 
   "WrestlerMod:TornadoTag": {

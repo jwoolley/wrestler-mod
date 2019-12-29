@@ -1,25 +1,18 @@
 {
-    "WrestlerMod:Sprained": {
-      "PROPER_NAME": "Sprained",
-      "NAMES": [
-        "sprain", "sprained"
-      ],
-      "DESCRIPTION": "When attacking, receive damage."
-    },
-    "WrestlerMod:Grappled": {
-      "PROPER_NAME": "Grappled",
-      "NAMES": [
-        "grapple", "grappled"
-      ],
-      "DESCRIPTION": "#yGrappled enemies receive [#ED3030]+30%[] more and deal [#B6F8C0]-30%[] less damage. Grapple breaks once you're dealt #b10 damage in a single turn, or if you Grapple another enemy."
-    },
-
-  "WrestlerMod:Choked": {
-    "PROPER_NAME": "Choked",
+  "WrestlerMod:Sprained": {
+    "PROPER_NAME": "Sprained",
     "NAMES": [
-      "choked"
+      "sprain", "sprained"
     ],
-    "DESCRIPTION": "Whenever you play a card this turn, loses HP."
+    "DESCRIPTION": "When attacking, receive damage."
+  },
+
+  "WrestlerMod:Grappled": {
+    "PROPER_NAME": "Grappled",
+    "NAMES": [
+      "grapple", "grappled"
+    ],
+    "DESCRIPTION": "#yGrappled enemies receive [#ED3030]+30%[] more and deal [#B6F8C0]-30%[] less damage. Grapple breaks once you're dealt #b10 damage in a single turn, or if you Grapple another enemy."
   },
 
   "WrestlerMod:Knee": {
@@ -30,28 +23,36 @@
     "DESCRIPTION": "A 1-cost #yAttack card with #yEthereal and #yExhaust that deals moderate damage."
   },
 
-  "WrestledMod:Flex": {
+  "Choked": {
+    "PROPER_NAME": "Choked",
+    "NAMES": [
+      "choked"
+    ],
+    "DESCRIPTION": "Whenever you play a card this turn, loses HP."
+  },
+
+  "Flex": {
     "PROPER_NAME": "Flex",
     "NAMES": [
       "Flex", "flex"
     ],
-    "DESCRIPTION": "A 0-cost [#9e2b2e]Ironclad #ySkill card which grants temporary #yStrength."
+    "DESCRIPTION": "A 0-cost [#9e2b2e]Ironclad Skill card which grants temporary #yStrength."
   },
 
-  "WrestledMod:Neutralize": {
+  "Neutralize": {
     "PROPER_NAME": "Neutralize",
     "NAMES": [
       "neutralize"
     ],
-    "DESCRIPTION": "A 0-cost [#427937]Silent #yAttack card which applies #yWeak."
+    "DESCRIPTION": "A 0-cost [#427937]Silent Attack card which applies #yWeak."
   },
 
-  "WrestledMod:Beam_Cell": {
+  "Beam_Cell": {
     "PROPER_NAME": "Beam Cell",
     "NAMES": [
       "beam cell",
       "beam_cell"
     ],
-    "DESCRIPTION": "A 0-cost [#4699cc]Defect #yAttack card which applies #yVulnerable."
+    "DESCRIPTION": "A 0-cost [#4699cc]Defect Attack card which applies #yVulnerable."
   }
 }

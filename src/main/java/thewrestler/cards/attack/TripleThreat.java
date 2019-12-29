@@ -10,6 +10,7 @@ import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
+import thewrestler.WrestlerMod;
 import thewrestler.cards.AbstractCardWithPreviewCard;
 import thewrestler.cards.colorless.attack.Knee;
 import thewrestler.enums.AbstractCardEnum;
@@ -79,7 +80,7 @@ public class TripleThreat extends AbstractCardWithPreviewCard {
   }
 
   private static String getDescription(String bonusCardName) {
-    return DESCRIPTION + bonusCardName + EXTENDED_DESCRIPTION[0];
+    return DESCRIPTION + WrestlerMod.getModKeywordPrefix() + bonusCardName + EXTENDED_DESCRIPTION[0];
   }
 
   static {
