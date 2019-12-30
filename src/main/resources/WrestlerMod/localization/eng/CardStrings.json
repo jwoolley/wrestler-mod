@@ -295,6 +295,11 @@
     ]
   },
 
+  "WrestlerMod:TriangleChoke": {
+    "NAME": "Triangle Choke",
+    "DESCRIPTION": "Deal !D! Damage. NL If you have played a Power and a Skill this turn, apply wrestlermod:Grappled."
+  },
+
   "WrestlerMod:WindUpKick": {
     "NAME": "Wind-Up Kick",
     "DESCRIPTION": "Can only be played if you've played !M! Skills this turn. NL Deal !D! damage to ALL enemies.",
