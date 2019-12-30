@@ -23,6 +23,14 @@
     "DESCRIPTION": "A 1-cost #yAttack card with #yEthereal and #yExhaust that deals moderate damage."
   },
 
+  "WrestlerMod:CobraClutch": {
+    "PROPER_NAME": "Cobra Clutch",
+    "NAMES": [
+      "cobra_clutch", "cobra_clutches"
+    ],
+    "DESCRIPTION": "Cobra Clutches are 0-cost #yAttack cards which deal modest damage and apply #yPoison."
+  },
+
   "Choked": {
     "PROPER_NAME": "Choked",
     "NAMES": [

@@ -1,6 +1,21 @@
 {
-"WrestlerMod:WrestlerPotion": {
-        "NAME": "Wrestler Potion",
-        "DESCRIPTIONS": ["Gain ", " At the end of your turn, lose ", " Strength."]
-}
+  "WrestlerMod:CobraPotion": {
+    "NAME": "Cobra Venom",
+    "DESCRIPTIONS": [
+      "Add #b",
+      " [#568526]Cobra [#568526]Clutches to your hand."
+    ]
+  },
+  "WrestlerMod:CobraPotionCobraClutchName": {
+  "NAME": "CobraPotionCobraClutchName",
+  "DESCRIPTIONS": ["Cobra Clutch"]
+},
+  "WrestlerMod:GrapplePotion": {
+    "NAME": "Grapple Potion",
+    "DESCRIPTIONS": ["Apply #yGrappled."]
+  },
+  "WrestlerMod:GrapplePotionGrappledName": {
+    "NAME": "GrapplePotionGrappledName",
+    "DESCRIPTIONS": ["Grappled"]
+  }
 }

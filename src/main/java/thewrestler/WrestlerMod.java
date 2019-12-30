@@ -32,7 +32,8 @@ import thewrestler.characters.WrestlerCharacter;
 import thewrestler.enums.AbstractCardEnum;
 import thewrestler.enums.WrestlerCharEnum;
 import thewrestler.patches.powers.OnApplyPowerPatchInsert;
-import thewrestler.potions.WrestlerPotion;
+import thewrestler.potions.CobraPotion;
+import thewrestler.potions.GrapplePotion;
 import thewrestler.relics.Headgear;
 import thewrestler.util.IDCheckDontTouchPls;
 import thewrestler.util.TextureLoader;
@@ -108,11 +109,6 @@ public class WrestlerMod implements
     // Colors (RGB)
     // Character Color
     public static final Color WRESTLER_ORANGE = CardHelper.getColor(220.0f, 140.0f, 0.0f);
-
-    // Potion Colors in RGB
-    public static final Color WRESTLER_POTION_LIQUID = CardHelper.getColor(209.0f, 53.0f, 18.0f); // Orange-ish Red
-    public static final Color WRESTLER_POTION_HYBRID = CardHelper.getColor(255.0f, 230.0f, 230.0f); // Near White
-    public static final Color WRESTLER_POTION_SPOTS = CardHelper.getColor(100.0f, 25.0f, 10.0f); // Super Dark Red/Brown
 
     public static final String getAnimationResourcePath(String resourcePath) {
         return RESOURCE_FOLDER_NAME + "/animations/" + resourcePath;
@@ -381,11 +377,12 @@ public class WrestlerMod implements
     public void receiveEditPotions() {
         logger.info("Beginning to edit potions");
 
-        // Class Specific Potion. If you want your potion to not be class-specific,
-        // just remove the player class at the end (in this case the "theWrestlerEnum.THE_DEFAULT".
-        // Remember, you can press ctrl+P inside parentheses like addPotions)
-        BaseMod.addPotion(WrestlerPotion.class, WRESTLER_POTION_LIQUID, WRESTLER_POTION_HYBRID,
-            WRESTLER_POTION_SPOTS, WrestlerPotion.POTION_ID, WrestlerCharEnum.THE_WRESTLER);
+        // If you want your potion to be class-specific, add the player class argument
+        BaseMod.addPotion(CobraPotion.class, CobraPotion.LIQUID_COLOR, CobraPotion.HYBRID_COLOR,
+            CobraPotion.SPOTS_COLOR, CobraPotion.POTION_ID);
+
+        BaseMod.addPotion(GrapplePotion.class, GrapplePotion.LIQUID_COLOR, GrapplePotion.HYBRID_COLOR,
+            GrapplePotion.SPOTS_COLOR, GrapplePotion.POTION_ID);
 
         logger.info("Done editing potions");
     }
