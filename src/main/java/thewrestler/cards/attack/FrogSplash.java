@@ -40,6 +40,7 @@ public class FrogSplash extends CustomCard {
         AbstractCardEnum.THE_WRESTLER_ORANGE, RARITY, TARGET);
     this.baseDamage = this.damage = DAMAGE;
     this.baseMagicNumber = this.magicNumber = WEAK_AMOUNT;
+    this.isMultiDamage = true;
     this.exhaust = true;
   }
 
