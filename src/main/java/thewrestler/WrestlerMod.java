@@ -35,6 +35,7 @@ import thewrestler.patches.powers.OnApplyPowerPatchInsert;
 import thewrestler.potions.CobraPotion;
 import thewrestler.potions.GrapplePotion;
 import thewrestler.relics.Headgear;
+import thewrestler.ui.WrestlerCombatInfoPanel;
 import thewrestler.util.IDCheckDontTouchPls;
 import thewrestler.util.TextureLoader;
 import thewrestler.variables.DefaultCustomVariable;
@@ -85,6 +86,7 @@ public class WrestlerMod implements
         EditKeywordsSubscriber,
         EditCharactersSubscriber,
         PostInitializeSubscriber,
+        StartGameSubscriber,
         OnStartBattleSubscriber {
     // Make sure to implement the subscribers *you* are using (read basemod wiki). Editing cards? EditCardsSubscriber.
     // Making relics? EditRelicsSubscriber. etc., etc., for a full list and how to make your own, visit the basemod wiki.
@@ -145,12 +147,11 @@ public class WrestlerMod implements
     //Mod Badge - A small icon that appears in the mod settings menu next to your mod.
     public static final String BADGE_IMAGE = getImageResourcePath("Badge.png");
 
-    // Atlas and JSON files for the Animations
-//    public static final String THE_WRESTLER_SKELETON_ATLAS = getImageResourcePath("char/wrestler/skeleton.atlas");
-//    public static final String THE_WRESTLER_SKELETON_JSON = getImageResourcePath("/char/wrestler/skeleton.json");
-//    public static final String THE_WRESTLER_STATIC_CHARACTER_SPRITE = getImageResourcePath("char/wrestler/main3.png");
-
     private static Map<String, Keyword> keywords;
+
+
+    public static WrestlerCombatInfoPanel combatInfoPanel;
+
 
     // =============== MAKE IMAGE PATHS =================
 
@@ -650,5 +651,10 @@ public class WrestlerMod implements
     @Override
     public void receiveOnBattleStart(AbstractRoom abstractRoom) {
         OnApplyPowerPatchInsert.powerActionList.clear();
+    }
+
+    @Override
+    public void receiveStartGame() {
+        combatInfoPanel = new WrestlerCombatInfoPanel();
     }
 }
