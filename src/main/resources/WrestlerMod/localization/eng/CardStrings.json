@@ -68,7 +68,7 @@
 
   "WrestlerMod:CageMatch": {
     "NAME": "Cage Match",
-    "DESCRIPTION": "Apply wrestlermod:Grappled. NL Stun all other enemies. NL Exhaust."
+    "DESCRIPTION": "Apply wrestlermod:Grappled. NL Stun all other enemies for 1 turn. NL Exhaust."
   },
 
   "WrestlerMod:CheapShot": {

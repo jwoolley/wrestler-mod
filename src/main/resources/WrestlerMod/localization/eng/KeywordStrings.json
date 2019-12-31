@@ -39,6 +39,15 @@
     "DESCRIPTION": "Whenever you play a card this turn, loses HP."
   },
 
+  "Beam_Cell": {
+    "PROPER_NAME": "Beam Cell",
+    "NAMES": [
+      "beam cell",
+      "beam_cell"
+    ],
+    "DESCRIPTION": "A 0-cost [#4699cc]Defect Attack card which applies #yVulnerable."
+  },
+
   "Flex": {
     "PROPER_NAME": "Flex",
     "NAMES": [
@@ -55,12 +64,11 @@
     "DESCRIPTION": "A 0-cost [#427937]Silent Attack card which applies #yWeak."
   },
 
-  "Beam_Cell": {
-    "PROPER_NAME": "Beam Cell",
+  "Stun": {
+    "PROPER_NAME": "Stunned",
     "NAMES": [
-      "beam cell",
-      "beam_cell"
+      "Stun", "stun", "Stunned", "stunned"
     ],
-    "DESCRIPTION": "A 0-cost [#4699cc]Defect Attack card which applies #yVulnerable."
+    "DESCRIPTION": "Unable to take any combat actions."
   }
 }
