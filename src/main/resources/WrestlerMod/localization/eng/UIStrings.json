@@ -1,9 +1,10 @@
 {
   "WrestlerMod:CombatInfoPanel": {
     "TEXT": [
-      "Attacks this turn:",
-      "Skills this turn:",
-      "Powers this turn:"
+      "Cards Played This Turn",
+      "Attacks: ",
+      "Skills: ",
+      "Powers: "
     ]
   },
   "WrestlerMod:ChooseAndAddFilteredDiscardCardsToHandAction": {

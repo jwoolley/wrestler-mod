@@ -7,6 +7,7 @@ public interface CustomInfoPanel {
   void render(SpriteBatch sb);
   boolean shouldRenderPanel();
   void atStartOfTurn();
+  void atEndOfTurn();
   void atStartOfCombat();
   void atEndOfCombat();
 }

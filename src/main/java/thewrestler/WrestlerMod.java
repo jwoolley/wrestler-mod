@@ -16,11 +16,13 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.megacrit.cardcrawl.audio.Sfx;
 import com.megacrit.cardcrawl.audio.SoundMaster;
+import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.core.Settings;
 import com.megacrit.cardcrawl.helpers.CardHelper;
 import com.megacrit.cardcrawl.helpers.FontHelper;
 import com.megacrit.cardcrawl.localization.*;
+import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.rooms.AbstractRoom;
 import com.megacrit.cardcrawl.unlock.UnlockTracker;
 import org.apache.logging.log4j.LogManager;
@@ -38,6 +40,7 @@ import thewrestler.relics.Headgear;
 import thewrestler.ui.WrestlerCombatInfoPanel;
 import thewrestler.util.IDCheckDontTouchPls;
 import thewrestler.util.TextureLoader;
+import thewrestler.util.info.CombatInfo;
 import thewrestler.variables.DefaultCustomVariable;
 import thewrestler.variables.DefaultSecondMagicNumber;
 
@@ -87,7 +90,11 @@ public class WrestlerMod implements
         EditCharactersSubscriber,
         PostInitializeSubscriber,
         StartGameSubscriber,
-        OnStartBattleSubscriber {
+        OnStartBattleSubscriber,
+        PostEnergyRechargeSubscriber,
+        PreMonsterTurnSubscriber,
+        PostBattleSubscriber,
+        OnCardUseSubscriber {
     // Make sure to implement the subscribers *you* are using (read basemod wiki). Editing cards? EditCardsSubscriber.
     // Making relics? EditRelicsSubscriber. etc., etc., for a full list and how to make your own, visit the basemod wiki.
     public static final Logger logger = LogManager.getLogger(WrestlerMod.class.getName());
@@ -651,10 +658,32 @@ public class WrestlerMod implements
     @Override
     public void receiveOnBattleStart(AbstractRoom abstractRoom) {
         OnApplyPowerPatchInsert.powerActionList.clear();
+        combatInfoPanel.atStartOfCombat();
     }
 
     @Override
     public void receiveStartGame() {
         combatInfoPanel = new WrestlerCombatInfoPanel();
+    }
+
+    @Override
+    public void receiveCardUsed(AbstractCard abstractCard) {
+       combatInfoPanel.updateCardCounts();
+    }
+
+    @Override
+    public void receivePostEnergyRecharge() {
+        combatInfoPanel.atStartOfTurn();
+    }
+
+    @Override
+    public void receivePostBattle(AbstractRoom abstractRoom) {
+        combatInfoPanel.atEndOfCombat();
+    }
+
+    @Override
+    public boolean receivePreMonsterTurn(AbstractMonster abstractMonster) {
+        combatInfoPanel.atEndOfTurn();
+        return true;
     }
 }

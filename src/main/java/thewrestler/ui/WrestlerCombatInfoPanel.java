@@ -14,6 +14,7 @@ import com.megacrit.cardcrawl.localization.UIStrings;
 import thewrestler.WrestlerMod;
 import thewrestler.util.BasicUtils;
 import thewrestler.util.TextureLoader;
+import thewrestler.util.info.CombatInfo;
 
 import java.util.ArrayList;
 
@@ -21,12 +22,12 @@ public class WrestlerCombatInfoPanel implements CustomInfoPanel {
   private static final String[] TEXT;
 
   private static final float WIDTH = 290;
-  private static final float HEIGHT = 194;
+  private static final float HEIGHT = 160;
   private static final float X_OFFSET = 24;
   private static final float Y_OFFSET = 191 + HEIGHT;
   private static final float Y_OFFSET_WIDESCREEN = 207;
   private static final float X_TEXT_OFFSET = 10;
-  private static final float Y_TEXT_OFFSET = 28 + HEIGHT;
+  private static final float Y_TEXT_OFFSET =  HEIGHT - 20;
   private static final float Y_TEXT_OFFSET_WIDESCREEN = Y_TEXT_OFFSET;
   private static final float TOOLTIP_X_OFFSET = 16.0F;
   private static final float TOOLTIP_Y_OFFSET = -32.0F;
@@ -34,8 +35,9 @@ public class WrestlerCombatInfoPanel implements CustomInfoPanel {
   private static final String UI_NAME = WrestlerMod.makeID("CombatInfoPanel");
   private static final String BACKGROUND_TEXURE_PATH = UiHelper.getUiImageResourcePath("combatinfopanel/background.png");
 
-  private static final BitmapFont LABEL_FONT = FontHelper.panelNameFont;
-  private static final Color LABEL_COLOR = Color.valueOf("f0d26cCff");
+  private static final BitmapFont INFO_FONT = FontHelper.charDescFont;
+  private static final Color INFO_HEADER_COLOR = Color.valueOf("f7d445ff");
+  private static final Color INFO_COLOR = Color.valueOf("fcfcfcf6");
   private static final boolean IS_CLICKABLE = false;
   private final String uiName;
   private final String backgroundImgPath;
@@ -45,6 +47,8 @@ public class WrestlerCombatInfoPanel implements CustomInfoPanel {
   private final int xTextOffset;
   private final int yTextOffset;
   private Hitbox hb;
+
+  private CombatInfo.CardsPlayedCounts cardCounts;
 
   // TODO: define imgName as static named BACKGROUND_IMAGE_PATH;
   // TODO: for SignatureMoveInfoPanel, take uiName argument and load labels from there
@@ -62,11 +66,25 @@ public class WrestlerCombatInfoPanel implements CustomInfoPanel {
 
     this.hb = new Hitbox(WIDTH * SettingsHelper.getScaleX(), HEIGHT * SettingsHelper.getScaleY());
     hb.translate(xOffset, yOffset);
+    this.cardCounts = CombatInfo.RESET_CARDS_PLAYED_COUNTS;
+  }
+
+  boolean updateCardCountsFlag = false;
+  public void updateCardCounts() {
+    updateCardCountsFlag = true;
   }
 
   @Override
   public void update() {
+    if (updateCardCountsFlag) {
+      this.cardCounts = CombatInfo.getCardsPlayedCounts();
 
+      WrestlerMod.logger.info("WrestlerCombatInfoPanel::updateCardCounts called. updated counts: "
+          + "attacks:  " + this.cardCounts.attacks
+          + "skills:   " + this.cardCounts.skills
+          + "powers:   " + this.cardCounts.powers);
+      updateCardCountsFlag = false;
+    }
   }
 
   @Override
@@ -87,16 +105,58 @@ public class WrestlerCombatInfoPanel implements CustomInfoPanel {
           backgroundImage.getWidth(),  backgroundImage.getHeight(),
           false, false);
 
-      FontHelper.renderFontLeft(
-          sb,
-          LABEL_FONT,
-          this.getInfoText(),
-          this.xOffset + this.xTextOffset,
-          this.yOffset + this.yTextOffset,
-          LABEL_COLOR);
+      renderInfoText(sb);
+
+//      FontHelper.renderFontLeft(
+//          sb,
+//          INFO_FONT,
+//          this.getInfoText(),
+//          this.xOffset + this.xTextOffset,
+//          this.yOffset + this.yTextOffset,
+//          INFO_COLOR);
 
       hb.render(sb);
     }
+  }
+
+  private void renderInfoText(SpriteBatch sb) {
+    final BitmapFont font = INFO_FONT;
+    final Color headerColor = INFO_HEADER_COLOR;
+    final Color color = INFO_COLOR;
+
+    final int yLineOffset = (int)(INFO_FONT.getLineHeight() * 1.05f);
+
+    FontHelper.renderFontLeft(
+        sb,
+        font,
+        TEXT[0],
+        this.xOffset + this.xTextOffset,
+        this.yOffset + this.yTextOffset,
+        headerColor);
+
+    FontHelper.renderFontLeft(
+        sb,
+        font,
+        TEXT[1] + (this.cardCounts.attacks >= 0 ? this.cardCounts.attacks : ""),
+        this.xOffset + this.xTextOffset,
+        this.yOffset + this.yTextOffset - (yLineOffset * 1.075f),
+        color);
+
+    FontHelper.renderFontLeft(
+        sb,
+        font,
+        TEXT[2] + (this.cardCounts.skills >= 0 ? this.cardCounts.skills : ""),
+        this.xOffset + this.xTextOffset,
+        this.yOffset + this.yTextOffset - (yLineOffset * 2.075f),
+        color);
+
+    FontHelper.renderFontLeft(
+        sb,
+        font,
+        TEXT[3] + (this.cardCounts.powers >= 0 ? this.cardCounts.powers : ""),
+        this.xOffset + this.xTextOffset,
+        this.yOffset + this.yTextOffset - (yLineOffset * 3.075f),
+        color);
   }
 
   public boolean shouldRenderPanel() {
@@ -109,17 +169,22 @@ public class WrestlerCombatInfoPanel implements CustomInfoPanel {
 
   @Override
   public void atStartOfTurn() {
-    // reset values
+    this.cardCounts = CombatInfo.RESET_CARDS_PLAYED_COUNTS;
+  }
+
+  @Override
+  public void atEndOfTurn() {
+    this.cardCounts = CombatInfo.RESET_CARDS_PLAYED_COUNTS;
   }
 
   @Override
   public void atStartOfCombat() {
-    // reset values
+    this.cardCounts = CombatInfo.RESET_CARDS_PLAYED_COUNTS;
   }
 
   @Override
   public void atEndOfCombat() {
-    // reset values
+    this.cardCounts = CombatInfo.UNINITIALIZED_CARDS_PLAYED_COUNTS;
   }
 
   private ArrayList<PowerTip> getPowerTips() {
