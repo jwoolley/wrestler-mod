@@ -24,11 +24,11 @@ public class WrestlerCombatInfoPanel implements CustomInfoPanel {
   private static final float WIDTH = 290;
   private static final float HEIGHT = 160;
   private static final float X_OFFSET = 24;
-  private static final float Y_OFFSET = 191 + HEIGHT;
-  private static final float Y_OFFSET_WIDESCREEN = 207;
+  private static final float Y_OFFSET = 441 + HEIGHT;
+  private static final float Y_OFFSET_WIDESCREEN = 207 + HEIGHT;
   private static final float X_TEXT_OFFSET = 10;
   private static final float Y_TEXT_OFFSET =  HEIGHT - 20;
-  private static final float Y_TEXT_OFFSET_WIDESCREEN = Y_TEXT_OFFSET;
+  private static final float Y_TEXT_OFFSET_WIDESCREEN = Y_TEXT_OFFSET + 0;
   private static final float TOOLTIP_X_OFFSET = 16.0F;
   private static final float TOOLTIP_Y_OFFSET = -32.0F;
 
@@ -36,9 +36,8 @@ public class WrestlerCombatInfoPanel implements CustomInfoPanel {
   private static final String BACKGROUND_TEXURE_PATH = UiHelper.getUiImageResourcePath("combatinfopanel/background.png");
 
   private static final BitmapFont INFO_FONT = FontHelper.charDescFont;
-  private static final Color INFO_HEADER_COLOR = Color.valueOf("f7d445ff");
-  private static final Color INFO_COLOR = Color.valueOf("fcfcfcf6");
-  private static final boolean IS_CLICKABLE = false;
+  private static final Color INFO_HEADER_COLOR = Color.valueOf("992200ff");
+  private static final Color INFO_COLOR = Color.valueOf("e9e9e0cc");
   private final String uiName;
   private final String backgroundImgPath;
   private Texture panelBackgroundImage;
@@ -66,7 +65,7 @@ public class WrestlerCombatInfoPanel implements CustomInfoPanel {
 
     this.hb = new Hitbox(WIDTH * SettingsHelper.getScaleX(), HEIGHT * SettingsHelper.getScaleY());
     hb.translate(xOffset, yOffset);
-    this.cardCounts = CombatInfo.RESET_CARDS_PLAYED_COUNTS;
+    this.cardCounts = CombatInfo.UNINITIALIZED_CARDS_PLAYED_COUNTS;
   }
 
   boolean updateCardCountsFlag = false;
@@ -107,14 +106,6 @@ public class WrestlerCombatInfoPanel implements CustomInfoPanel {
 
       renderInfoText(sb);
 
-//      FontHelper.renderFontLeft(
-//          sb,
-//          INFO_FONT,
-//          this.getInfoText(),
-//          this.xOffset + this.xTextOffset,
-//          this.yOffset + this.yTextOffset,
-//          INFO_COLOR);
-
       hb.render(sb);
     }
   }
@@ -124,13 +115,13 @@ public class WrestlerCombatInfoPanel implements CustomInfoPanel {
     final Color headerColor = INFO_HEADER_COLOR;
     final Color color = INFO_COLOR;
 
-    final int yLineOffset = (int)(INFO_FONT.getLineHeight() * 1.05f);
+    final int yLineOffset = (int)(INFO_FONT.getLineHeight() * (Settings.isSixteenByTen ? 1.05f : 0.95f));
 
     FontHelper.renderFontLeft(
         sb,
         font,
         TEXT[0],
-        this.xOffset + this.xTextOffset,
+        this.xOffset + WIDTH * 0.1485f,
         this.yOffset + this.yTextOffset,
         headerColor);
 
