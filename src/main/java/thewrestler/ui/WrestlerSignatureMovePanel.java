@@ -3,7 +3,9 @@ package thewrestler.ui;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import com.badlogic.gdx.graphics.g2d.GlyphLayout;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.utils.Align;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.core.Settings;
 import com.megacrit.cardcrawl.helpers.FontHelper;
@@ -42,6 +44,8 @@ public class WrestlerSignatureMovePanel implements CustomInfoPanel {
   private final String uiName;
   private final String backgroundImgPath;
   private Texture panelBackgroundImage;
+  private final int width;
+  private final int height;
   private final int xOffset;
   private final int yOffset;
   private final int xTextOffset;
@@ -56,6 +60,9 @@ public class WrestlerSignatureMovePanel implements CustomInfoPanel {
     this.uiName = UI_NAME;
     this.backgroundImgPath = BACKGROUND_TEXURE_PATH;
 
+    this.width = Math.round(WIDTH * SettingsHelper.getScaleX());
+    this.height = Math.round(HEIGHT * SettingsHelper.getScaleY());
+
     this.xOffset = Math.round(X_OFFSET * SettingsHelper.getScaleX());
     this.xTextOffset = Math.round(X_TEXT_OFFSET * SettingsHelper.getScaleX());
 
@@ -64,7 +71,7 @@ public class WrestlerSignatureMovePanel implements CustomInfoPanel {
     this.yTextOffset =  Math.round(
         (Settings.isSixteenByTen ? Y_TEXT_OFFSET : Y_TEXT_OFFSET_WIDESCREEN) * SettingsHelper.getScaleY());
 
-    this.hb = new Hitbox(WIDTH * SettingsHelper.getScaleX(), HEIGHT * SettingsHelper.getScaleY());
+    this.hb = new Hitbox(this.width, this.height);
     hb.translate(xOffset, yOffset);
     this.cardCounts = CombatInfo.UNINITIALIZED_CARDS_PLAYED_COUNTS;
   }
@@ -122,18 +129,30 @@ public class WrestlerSignatureMovePanel implements CustomInfoPanel {
         sb,
         font,
         TEXT[0],
-        this.xOffset + WIDTH * 0.04f,
+        this.xOffset + this.width * 0.04f,
         this.yOffset + this.yTextOffset,
         headerColor);
 
-    FontHelper.renderWrappedText(
-        sb,
-        font,
-        (WrestlerCharacter.getSignatureMoveInfo().getConditionText()),
+    final String infoMessage = WrestlerCharacter.getSignatureMoveInfo().getConditionText();
+    GlyphLayout layout = new GlyphLayout(font, WrestlerCharacter.getSignatureMoveInfo().getConditionText(), color,
+        this.width -  this.xTextOffset, Align.left, true);
+
+
+
+    font.setColor(color);
+    font.draw(sb, infoMessage,
         this.xOffset + this.xTextOffset,
-        this.yOffset + this.yTextOffset - (yLineOffset * 1.075f),
-        WIDTH * SettingsHelper.getScaleX() - 2 * this.xTextOffset,
-        color, Settings.scale);
+        (this.yOffset + this.yTextOffset) - (yLineOffset * 1.075f),
+        layout.width, Align.left, true);
+
+//    FontHelper.renderWrappedText(
+//        sb,
+//        font,
+//        (WrestlerCharacter.getSignatureMoveInfo().getConditionText()),
+//        this.xOffset + (this.width -  this.xTextOffset * 1.0f) / 2,
+//        this.yOffset + this.yTextOffset - (yLineOffset * 1.075f),
+//        WIDTH * SettingsHelper.getScaleX() - 2 * this.xTextOffset,
+//        color, Settings.scale);
   }
 
   public boolean shouldRenderPanel() {
