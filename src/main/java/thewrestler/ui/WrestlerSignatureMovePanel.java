@@ -6,7 +6,6 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.core.Settings;
-import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.helpers.FontHelper;
 import com.megacrit.cardcrawl.helpers.Hitbox;
 import com.megacrit.cardcrawl.helpers.PowerTip;
@@ -20,13 +19,13 @@ import thewrestler.util.info.CombatInfo;
 
 import java.util.ArrayList;
 
-public class WrestlerCombatInfoPanel implements CustomInfoPanel {
+public class WrestlerSignatureMovePanel implements CustomInfoPanel {
   private static final String[] TEXT;
 
   private static final float WIDTH = 290;
   private static final float HEIGHT = 160;
   private static final float X_OFFSET = 24;
-  private static final float Y_OFFSET = 611 + HEIGHT;
+  private static final float Y_OFFSET = 441 + HEIGHT;
   private static final float Y_OFFSET_WIDESCREEN = 207 + HEIGHT;
   private static final float X_TEXT_OFFSET = 10;
   private static final float Y_TEXT_OFFSET =  HEIGHT - 20;
@@ -34,8 +33,8 @@ public class WrestlerCombatInfoPanel implements CustomInfoPanel {
   private static final float TOOLTIP_X_OFFSET = 16.0F;
   private static final float TOOLTIP_Y_OFFSET = -32.0F;
 
-  private static final String UI_NAME = WrestlerMod.makeID("CombatInfoPanel");
-  private static final String BACKGROUND_TEXURE_PATH = UiHelper.getUiImageResourcePath("combatinfopanel/background.png");
+  private static final String UI_NAME = WrestlerMod.makeID("SignatureMovePanel");
+  private static final String BACKGROUND_TEXURE_PATH = UiHelper.getUiImageResourcePath("signaturemovepanel/background.png");
 
   private static final BitmapFont INFO_FONT = FontHelper.charDescFont;
   private static final Color INFO_HEADER_COLOR = Color.valueOf("992200ff");
@@ -53,7 +52,7 @@ public class WrestlerCombatInfoPanel implements CustomInfoPanel {
 
   // TODO: define imgName as static named BACKGROUND_IMAGE_PATH;
   // TODO: for SignatureMoveInfoPanel, take uiName argument and load labels from there
-  public WrestlerCombatInfoPanel() {
+  public WrestlerSignatureMovePanel() {
     this.uiName = UI_NAME;
     this.backgroundImgPath = BACKGROUND_TEXURE_PATH;
 
@@ -123,33 +122,18 @@ public class WrestlerCombatInfoPanel implements CustomInfoPanel {
         sb,
         font,
         TEXT[0],
-        this.xOffset + WIDTH * 0.1485f,
+        this.xOffset + WIDTH * 0.04f,
         this.yOffset + this.yTextOffset,
         headerColor);
 
-    FontHelper.renderFontLeft(
+    FontHelper.renderWrappedText(
         sb,
         font,
-        TEXT[1] + (this.cardCounts.attacks >= 0 ? this.cardCounts.attacks : ""),
+        (WrestlerCharacter.getSignatureMoveInfo().getConditionText()),
         this.xOffset + this.xTextOffset,
         this.yOffset + this.yTextOffset - (yLineOffset * 1.075f),
-        color);
-
-    FontHelper.renderFontLeft(
-        sb,
-        font,
-        TEXT[2] + (this.cardCounts.skills >= 0 ? this.cardCounts.skills : ""),
-        this.xOffset + this.xTextOffset,
-        this.yOffset + this.yTextOffset - (yLineOffset * 2.075f),
-        color);
-
-    FontHelper.renderFontLeft(
-        sb,
-        font,
-        TEXT[3] + (this.cardCounts.powers >= 0 ? this.cardCounts.powers : ""),
-        this.xOffset + this.xTextOffset,
-        this.yOffset + this.yTextOffset - (yLineOffset * 3.075f),
-        color);
+        WIDTH * SettingsHelper.getScaleX() - 2 * this.xTextOffset,
+        color, Settings.scale);
   }
 
   public boolean shouldRenderPanel() {
@@ -157,8 +141,8 @@ public class WrestlerCombatInfoPanel implements CustomInfoPanel {
   }
 
   public static boolean shouldRender() {
-    return BasicUtils.isPlayingAsWrestler() &&
-        (AbstractDungeon.screen == AbstractDungeon.CurrentScreen.MAP || BasicUtils.isPlayerInCombat());
+    return BasicUtils.isPlayingAsWrestler() && BasicUtils.isPlayerInCombat()
+        && WrestlerCharacter.getSignatureMoveInfo() != null;
   }
 
   @Override
@@ -200,5 +184,9 @@ public class WrestlerCombatInfoPanel implements CustomInfoPanel {
   static {
     UIStrings uiStrings = CardCrawlGame.languagePack.getUIString(UI_NAME);
     TEXT = uiStrings.TEXT;
+  }
+
+  public void onCardUsed() {
+    // TODO: call SignatureMoveInfo.onCardUsed
   }
 }

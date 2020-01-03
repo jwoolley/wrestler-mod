@@ -1,4 +1,4 @@
-package thewrestler.cards.signaturemoves.abstractions.upgrades;
+package thewrestler.signaturemoves.upgrades;
 
 import java.util.Collections;
 import java.util.HashMap;

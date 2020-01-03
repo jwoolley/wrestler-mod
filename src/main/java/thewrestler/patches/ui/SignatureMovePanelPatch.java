@@ -9,15 +9,14 @@ import thewrestler.WrestlerMod;
 import thewrestler.ui.WrestlerCombatInfoPanel;
 import thewrestler.util.BasicUtils;
 
-public class CombatInfoPanelPatch {
-
+public class SignatureMovePanelPatch {
   @SpirePatch(clz = EnergyPanel.class, method = "update")
-  public static class CombatInfoPanelUpdatePatch {
+  public static class SignatureMovePanelUpdatePatch {
     @SpirePrefixPatch
     public static void Prefix(EnergyPanel __instance) {
       if (BasicUtils.isPlayingAsWrestler()) {
         if (WrestlerCombatInfoPanel.shouldRender()) {
-          WrestlerMod.combatInfoPanel.update();
+          WrestlerMod.signatureMovePanel.update();
         }
       }
     }
@@ -25,12 +24,12 @@ public class CombatInfoPanelPatch {
 
   // for rendering in combat
   @SpirePatch(clz = EnergyPanel.class, method = "renderOrb")
-  public static class CombatInfoPanelRenderPatch {
+  public static class SignatureMovePanelRenderPatch {
     @SpirePostfixPatch
     public static void Postfix(EnergyPanel __instance, SpriteBatch sb) {
       if (BasicUtils.isPlayingAsWrestler()) {
         if (WrestlerCombatInfoPanel.shouldRender()) {
-          WrestlerMod.combatInfoPanel.render(sb);
+          WrestlerMod.signatureMovePanel.render(sb);
         }
       }
     }

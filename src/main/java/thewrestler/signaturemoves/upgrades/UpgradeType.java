@@ -1,4 +1,4 @@
-package thewrestler.cards.signaturemoves.abstractions.upgrades;
+package thewrestler.signaturemoves.upgrades;
 
 public enum UpgradeType {
   DAMAGE,

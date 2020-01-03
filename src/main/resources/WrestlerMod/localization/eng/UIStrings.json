@@ -7,6 +7,16 @@
       "Powers: "
     ]
   },
+
+  "WrestlerMod:SignatureMovePanel": {
+    "TEXT": [
+      "Your Signature Move",
+      "Attacks: ",
+      "Skills: ",
+      "Powers: "
+    ]
+  },
+
   "WrestlerMod:ChooseAndAddFilteredDiscardCardsToHandAction": {
     "TEXT": [
       "Choose a Card to Add to Your Hand.",

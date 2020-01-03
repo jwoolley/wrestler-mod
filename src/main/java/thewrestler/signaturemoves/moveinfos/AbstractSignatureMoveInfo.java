@@ -1,8 +1,9 @@
-package thewrestler.cards.signaturemoves.abstractions.moveinfos;
+package thewrestler.signaturemoves.moveinfos;
 
-import thewrestler.cards.signaturemoves.abstractions.cards.AbstractSignatureMoveCard;
-import thewrestler.cards.signaturemoves.abstractions.upgrades.AbstractSignatureMoveUpgrade;
-import thewrestler.cards.signaturemoves.abstractions.upgrades.UpgradeType;
+import thewrestler.signaturemoves.cards.AbstractSignatureMoveCard;
+import thewrestler.signaturemoves.upgrades.AbstractSignatureMoveUpgrade;
+import thewrestler.signaturemoves.upgrades.UpgradeType;
+import thewrestler.util.BasicUtils;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -22,8 +23,13 @@ public abstract class AbstractSignatureMoveInfo {
   public abstract void atStartOfCombat();
   public abstract void upgradeMove(UpgradeType type);
   public abstract void onEnemyGrappled();
-  public abstract String getConditionText();
+  public abstract String getStaticConditionText();
   public abstract String getDynamicConditionText();
+
+  public String getConditionText() {
+    return BasicUtils.isPlayerInCombat() ? getDynamicConditionText() : getStaticConditionText();
+  }
+
   public void triggerGainCard() {
 
   };

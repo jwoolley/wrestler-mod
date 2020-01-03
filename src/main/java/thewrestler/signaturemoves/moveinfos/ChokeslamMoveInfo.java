@@ -1,8 +1,8 @@
-package thewrestler.cards.signaturemoves.abstractions.moveinfos;
+package thewrestler.signaturemoves.moveinfos;
 
-import thewrestler.cards.signaturemoves.abstractions.cards.AbstractSignatureMoveCard;
-import thewrestler.cards.signaturemoves.abstractions.upgrades.AbstractSignatureMoveUpgrade;
-import thewrestler.cards.signaturemoves.abstractions.upgrades.UpgradeType;
+import thewrestler.signaturemoves.cards.Chokeslam;
+import thewrestler.signaturemoves.upgrades.AbstractSignatureMoveUpgrade;
+import thewrestler.signaturemoves.upgrades.UpgradeType;
 
 import java.util.Map;
 
@@ -10,8 +10,12 @@ public class ChokeslamMoveInfo extends AbstractSignatureMoveInfo {
   private static final int GRAPPLES_REQUIRED = 3;
   private int grappledCount = 0;
 
-  public ChokeslamMoveInfo(AbstractSignatureMoveCard signatureMoveCard, Map<AbstractSignatureMoveUpgrade, Integer> upgrades) {
-    super(signatureMoveCard, upgrades);
+  public ChokeslamMoveInfo() {
+    this(AbstractSignatureMoveUpgrade.NO_UPGRADES);
+  }
+
+  public ChokeslamMoveInfo(Map<AbstractSignatureMoveUpgrade, Integer> upgrades) {
+    super(new Chokeslam(), upgrades);
   }
 
   @Override
@@ -44,7 +48,7 @@ public class ChokeslamMoveInfo extends AbstractSignatureMoveInfo {
   }
 
   @Override
-  public String getConditionText() {
+  public String getStaticConditionText() {
     return "Apply Grappled 3 times in the same battle.";
   }
 

@@ -29,7 +29,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import thewrestler.cards.attack.*;
 import thewrestler.cards.power.*;
-import thewrestler.cards.signaturemoves.abstractions.cards.Chokeslam;
+import thewrestler.signaturemoves.cards.Chokeslam;
 import thewrestler.cards.skill.*;
 import thewrestler.characters.WrestlerCharacter;
 import thewrestler.enums.AbstractCardEnum;
@@ -39,6 +39,7 @@ import thewrestler.potions.CobraPotion;
 import thewrestler.potions.GrapplePotion;
 import thewrestler.relics.Headgear;
 import thewrestler.ui.WrestlerCombatInfoPanel;
+import thewrestler.ui.WrestlerSignatureMovePanel;
 import thewrestler.util.IDCheckDontTouchPls;
 import thewrestler.util.TextureLoader;
 import thewrestler.variables.DefaultCustomVariable;
@@ -103,17 +104,17 @@ public class WrestlerMod implements
     }
 
     // Card backgrounds - The actual rectangular card.
-    private static final String ATTACK_WRESTLER_GRAY = getImageResourcePath("512/attack_wrestler.png");
-    private static final String SKILL_WRESTLER_GRAY = getImageResourcePath("512/skill_wrestler.png");
-    private static final String POWER_WRESTLER_GRAY = getImageResourcePath("512/power_wrestler.png");
+    private static final String ATTACK_WRESTLER_ORANGE = getImageResourcePath("512/attack_wrestler.png");
+    private static final String SKILL_WRESTLER_ORANGE = getImageResourcePath("512/skill_wrestler.png");
+    private static final String POWER_WRESTLER_ORANGE = getImageResourcePath("512/power_wrestler.png");
 
-    private static final String ENERGY_ORB_DEFAULT_GRAY = getImageResourcePath("512/card_default_gray_orb.png");
+    private static final String ENERGY_ORB_DEFAULT_ORANGE = getImageResourcePath("512/card_default_gray_orb.png");
     private static final String CARD_ENERGY_ORB = getImageResourcePath("512/card_small_orb.png");
 
-    private static final String ATTACK_DEFAULT_GRAY_PORTRAIT = getImageResourcePath("1024/attack_wrestler.png");
-    private static final String SKILL_DEFAULT_GRAY_PORTRAIT = getImageResourcePath("1024/skill_wrestler.png");
-    private static final String POWER_DEFAULT_GRAY_PORTRAIT = getImageResourcePath("1024/power_wrestler.png");
-    private static final String ENERGY_ORB_DEFAULT_GRAY_PORTRAIT = getImageResourcePath("1024/card_default_gray_orb.png");
+    private static final String ATTACK_DEFAULT_ORANGE_PORTRAIT = getImageResourcePath("1024/attack_wrestler.png");
+    private static final String SKILL_DEFAULT_ORANGE_PORTRAIT = getImageResourcePath("1024/skill_wrestler.png");
+    private static final String POWER_DEFAULT_ORANGE_PORTRAIT = getImageResourcePath("1024/power_wrestler.png");
+    private static final String ENERGY_ORB_DEFAULT_ORANGE_PORTRAIT = getImageResourcePath("1024/card_default_gray_orb.png");
 
     // Character assets
     private static final String THE_WRESTLER_BUTTON = getImageResourcePath("charSelect/WrestlerCharacterButton.png");
@@ -129,7 +130,7 @@ public class WrestlerMod implements
 
 
     public static WrestlerCombatInfoPanel combatInfoPanel;
-
+    public static WrestlerSignatureMovePanel signatureMovePanel;
 
     // =============== MAKE IMAGE PATHS =================
 
@@ -177,9 +178,9 @@ public class WrestlerMod implements
 
         BaseMod.addColor(AbstractCardEnum.THE_WRESTLER_ORANGE, WRESTLER_ORANGE, WRESTLER_ORANGE, WRESTLER_ORANGE,
             WRESTLER_ORANGE, WRESTLER_ORANGE, WRESTLER_ORANGE, WRESTLER_ORANGE,
-            ATTACK_WRESTLER_GRAY, SKILL_WRESTLER_GRAY, POWER_WRESTLER_GRAY, ENERGY_ORB_DEFAULT_GRAY,
-                ATTACK_DEFAULT_GRAY_PORTRAIT, SKILL_DEFAULT_GRAY_PORTRAIT, POWER_DEFAULT_GRAY_PORTRAIT,
-                ENERGY_ORB_DEFAULT_GRAY_PORTRAIT, CARD_ENERGY_ORB);
+            ATTACK_WRESTLER_ORANGE, SKILL_WRESTLER_ORANGE, POWER_WRESTLER_ORANGE, ENERGY_ORB_DEFAULT_ORANGE,
+            ATTACK_DEFAULT_ORANGE_PORTRAIT, SKILL_DEFAULT_ORANGE_PORTRAIT, POWER_DEFAULT_ORANGE_PORTRAIT,
+            ENERGY_ORB_DEFAULT_ORANGE_PORTRAIT, CARD_ENERGY_ORB);
 
         logger.info("Done creating the color");
 
@@ -633,31 +634,37 @@ public class WrestlerMod implements
     public void receiveOnBattleStart(AbstractRoom abstractRoom) {
         OnApplyPowerPatchInsert.powerActionList.clear();
         combatInfoPanel.atStartOfCombat();
+        signatureMovePanel.atStartOfCombat();
     }
 
     @Override
     public void receiveStartGame() {
         combatInfoPanel = new WrestlerCombatInfoPanel();
+        signatureMovePanel = new WrestlerSignatureMovePanel();
     }
 
     @Override
     public void receiveCardUsed(AbstractCard abstractCard) {
-       combatInfoPanel.updateCardCounts();
+        combatInfoPanel.updateCardCounts();
+        signatureMovePanel.onCardUsed();
     }
 
     @Override
     public void receivePostEnergyRecharge() {
         combatInfoPanel.atStartOfTurn();
+        signatureMovePanel.atStartOfTurn();
     }
 
     @Override
     public void receivePostBattle(AbstractRoom abstractRoom) {
         combatInfoPanel.atEndOfCombat();
+        signatureMovePanel.atEndOfCombat();
     }
 
     @Override
     public boolean receivePreMonsterTurn(AbstractMonster abstractMonster) {
         combatInfoPanel.atEndOfTurn();
+        signatureMovePanel.atEndOfTurn();
         return true;
     }
 }

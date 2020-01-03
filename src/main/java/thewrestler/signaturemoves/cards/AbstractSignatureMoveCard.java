@@ -1,7 +1,7 @@
-package thewrestler.cards.signaturemoves.abstractions.cards;
+package thewrestler.signaturemoves.cards;
 
 import basemod.abstracts.CustomCard;
-import thewrestler.cards.signaturemoves.abstractions.upgrades.AbstractSignatureMoveUpgrade;
+import thewrestler.signaturemoves.upgrades.AbstractSignatureMoveUpgrade;
 import thewrestler.enums.AbstractCardEnum;
 
 import java.lang.reflect.Constructor;
