@@ -319,5 +319,11 @@
   "WrestlerMod:WrestlerDefend": {
     "NAME": "Defend",
     "DESCRIPTION": "Gain !B! Block."
+  },
+
+
+  "WrestlerMod:Chokeslam": {
+    "NAME": "Chokeslam",
+    "DESCRIPTION": "Deal !D! Damage. NL Apply Choked. NL Add !M! Knees to your hand. They cost 0 this turn."
   }
 }
