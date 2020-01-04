@@ -6,6 +6,7 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.GlyphLayout;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.Align;
+import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.core.Settings;
 import com.megacrit.cardcrawl.helpers.FontHelper;
@@ -15,13 +16,15 @@ import com.megacrit.cardcrawl.helpers.TipHelper;
 import com.megacrit.cardcrawl.localization.UIStrings;
 import thewrestler.WrestlerMod;
 import thewrestler.characters.WrestlerCharacter;
+import thewrestler.signaturemoves.cards.AbstractSignatureMoveCard;
+import thewrestler.signaturemoves.moveinfos.AbstractSignatureMoveInfo;
 import thewrestler.util.BasicUtils;
 import thewrestler.util.TextureLoader;
 import thewrestler.util.info.CombatInfo;
 
 import java.util.ArrayList;
 
-public class WrestlerSignatureMovePanel implements CustomInfoPanel {
+public class WrestlerSignatureMovePanel implements CustomInfoPanel, CardPreviewElement {
   private static final String[] TEXT;
 
   private static final float WIDTH = 290;
@@ -53,8 +56,8 @@ public class WrestlerSignatureMovePanel implements CustomInfoPanel {
   private final int yTextOffset;
   private Hitbox hb;
 
-  private CombatInfo.CardsPlayedCounts cardCounts;
-
+  // TODO: show preview of signature move card
+  // TODO: smarter text/tooltips to explain what happens
   // TODO: define imgName as static named BACKGROUND_IMAGE_PATH;
   // TODO: for SignatureMoveInfoPanel, take uiName argument and load labels from there
   public WrestlerSignatureMovePanel() {
@@ -74,25 +77,11 @@ public class WrestlerSignatureMovePanel implements CustomInfoPanel {
 
     this.hb = new Hitbox(this.width, this.height);
     hb.translate(xOffset, yOffset);
-    this.cardCounts = CombatInfo.UNINITIALIZED_CARDS_PLAYED_COUNTS;
-  }
-
-  boolean updateCardCountsFlag = false;
-  public void updateCardCounts() {
-    updateCardCountsFlag = true;
   }
 
   @Override
   public void update() {
-    if (updateCardCountsFlag) {
-      this.cardCounts = CombatInfo.getCardsPlayedCounts();
 
-      WrestlerMod.logger.info("WrestlerCombatInfoPanel::updateCardCounts called. updated counts: "
-          + "attacks:  " + this.cardCounts.attacks
-          + "skills:   " + this.cardCounts.skills
-          + "powers:   " + this.cardCounts.powers);
-      updateCardCountsFlag = false;
-    }
   }
 
   @Override
@@ -116,6 +105,10 @@ public class WrestlerSignatureMovePanel implements CustomInfoPanel {
       renderInfoText(sb);
 
       hb.render(sb);
+
+      if (this.hb.hovered) {
+        renderPreviewCardTip(sb);
+      }
     }
   }
 
@@ -135,15 +128,26 @@ public class WrestlerSignatureMovePanel implements CustomInfoPanel {
         this.yOffset + this.yTextOffset,
         headerColor);
 
-    final String infoMessage = WrestlerCharacter.getSignatureMoveInfo().getConditionText();
-    GlyphLayout layout = new GlyphLayout(font, WrestlerCharacter.getSignatureMoveInfo().getConditionText(), color,
-        this.width -  this.xTextOffset, Align.left, true);
+    final String conditionText = getMoveGainConditionText();
+
+    GlyphLayout layout = new GlyphLayout(font, conditionText, color,this.width -  this.xTextOffset,
+        Align.left, true);
 
     font.setColor(color);
-    font.draw(sb, infoMessage,
+    font.draw(sb, conditionText,
         this.xOffset + this.xTextOffset,
         (this.yOffset + this.yTextOffset) - (yLineOffset * 1.0f),
         layout.width, Align.left, true);
+  }
+
+  // if not in combat, show static condition description;
+  // if in combat and signature move card can still be gained, show the dynamic description;
+  // if in combat and signature move card can no longer be gained, show the "already gained" text
+  private String getMoveGainConditionText() {
+    final AbstractSignatureMoveInfo moveInfo = WrestlerCharacter.getSignatureMoveInfo();
+    return !BasicUtils.isPlayerInCombat()
+        ? getStaticConditionText()
+        : ( moveInfo.canStillTriggerCardGain() ? getDynamicConditionText() : TEXT[3]);
   }
 
   public boolean shouldRenderPanel() {
@@ -156,24 +160,16 @@ public class WrestlerSignatureMovePanel implements CustomInfoPanel {
   }
 
   @Override
-  public void atStartOfTurn() {
-    this.cardCounts = CombatInfo.RESET_CARDS_PLAYED_COUNTS;
-  }
+  public void atStartOfTurn() {}
 
   @Override
-  public void atEndOfTurn() {
-    this.cardCounts = CombatInfo.RESET_CARDS_PLAYED_COUNTS;
-  }
+  public void atEndOfTurn() {}
 
   @Override
-  public void atStartOfCombat() {
-    this.cardCounts = CombatInfo.RESET_CARDS_PLAYED_COUNTS;
-  }
+  public void atStartOfCombat() {}
 
   @Override
-  public void atEndOfCombat() {
-    this.cardCounts = CombatInfo.UNINITIALIZED_CARDS_PLAYED_COUNTS;
-  }
+  public void atEndOfCombat() {}
 
   private ArrayList<PowerTip> getPowerTips() {
     return new ArrayList<>();
@@ -196,7 +192,54 @@ public class WrestlerSignatureMovePanel implements CustomInfoPanel {
     TEXT = uiStrings.TEXT;
   }
 
-  public void onCardUsed() {
+  public void onCardUsed(AbstractCard card) {
     // TODO: call SignatureMoveInfo.onCardUsed
+    getMoveInfo().onCardPlayed(card);
+  }
+
+  @Override
+  public AbstractSignatureMoveCard getPreviewCard() {
+    return getMoveInfo().getSignatureMoveCard();
+  }
+
+  @Override
+  public void renderPreviewCardTip(SpriteBatch sb) {
+    if (shouldRenderPreviewCard()) {
+      final AbstractCard _previewCard = getPreviewCard();
+      if (_previewCard != null) {
+        _previewCard.current_x = _previewCard.hb.x = getPreviewXOffset();
+        _previewCard.current_y = _previewCard.hb.y = getPreviewYOffset();
+        _previewCard.render(sb);
+      }
+    }
+  }
+
+  @Override
+  public float getPreviewXOffset() {
+    return TOOLTIP_X_OFFSET;
+  }
+
+  @Override
+  public float getPreviewYOffset() {
+    return TOOLTIP_Y_OFFSET;
+  }
+
+  @Override
+  public boolean shouldRenderPreviewCard() {
+    return true;
+  }
+
+  private static String getStaticConditionText() {
+    return getMoveInfo().getStaticConditionText() + TEXT[1]
+        + getMoveInfo().getSignatureMoveCard().getIndefiniteCardName() + TEXT[2];
+  }
+
+  private static String getDynamicConditionText() {
+    return getMoveInfo().getDynamicConditionText() + TEXT[1]
+        + getMoveInfo().getSignatureMoveCard().getIndefiniteCardName()+ TEXT[2];
+  }
+
+  private static AbstractSignatureMoveInfo getMoveInfo() {
+    return WrestlerCharacter.getSignatureMoveInfo();
   }
 }

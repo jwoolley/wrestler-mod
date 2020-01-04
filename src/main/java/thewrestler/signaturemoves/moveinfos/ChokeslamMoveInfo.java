@@ -1,8 +1,10 @@
 package thewrestler.signaturemoves.moveinfos;
 
+import com.megacrit.cardcrawl.cards.AbstractCard;
 import thewrestler.signaturemoves.cards.Chokeslam;
 import thewrestler.signaturemoves.upgrades.AbstractSignatureMoveUpgrade;
 import thewrestler.signaturemoves.upgrades.UpgradeType;
+import thewrestler.ui.WrestlerSignatureMovePanel;
 
 import java.util.Map;
 
@@ -19,7 +21,7 @@ public class ChokeslamMoveInfo extends AbstractSignatureMoveInfo {
   }
 
   @Override
-  public void onCardPlayed() {
+  public void onCardPlayed(AbstractCard card) {
 
   }
 
@@ -51,20 +53,25 @@ public class ChokeslamMoveInfo extends AbstractSignatureMoveInfo {
     }
   }
 
+  // TODO: move this text to UiStrings.json
   @Override
   public String getStaticConditionText() {
-    return "Apply Grappled " + GRAPPLES_REQUIRED + " times in the same battle.";
+    return "Apply Grappled " + GRAPPLES_REQUIRED + " times in the same battle to ";
   }
 
   @Override
-  public String getDynamicConditionText() {
-    final int grapplesRemaining = GRAPPLES_REQUIRED - grappledCount;
+  public boolean canStillTriggerCardGain() {
+    return getGrapplesRemaining() > 0;
+  }
 
-    if (grapplesRemaining > 0) {
-      return "Apply Grappled " + grapplesRemaining + " more " +
-          (grapplesRemaining == 1 ? "time" : "times") + " this combat.";
-    } else {
-      return "You have acquired your signature move already this combat.";
-    }
+  private int getGrapplesRemaining() {
+    return GRAPPLES_REQUIRED - this.grappledCount;
+  }
+
+  // TODO: move this text to UiStrings.json (or similar new file)
+  @Override
+  public String getDynamicConditionText() {
+    return "Apply Grappled " + getGrapplesRemaining()  + " more " +
+        (getGrapplesRemaining()  == 1 ? "time" : "times") + " this combat to ";
   }
 }

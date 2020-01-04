@@ -658,7 +658,7 @@ public class WrestlerMod implements
     @Override
     public void receiveCardUsed(AbstractCard abstractCard) {
         combatInfoPanel.updateCardCounts();
-        signatureMovePanel.onCardUsed();
+        signatureMovePanel.onCardUsed(abstractCard);
     }
 
     @Override

@@ -82,6 +82,11 @@ public class Chokeslam extends AbstractSignatureMoveCard {
   }
 
   @Override
+  public String getIndefiniteCardName() {
+    return EXTENDED_DESCRIPTION[6] + this.name;
+  }
+
+  @Override
   public void upgrade() {
     if (!this.upgraded) {
       this.upgradeName();

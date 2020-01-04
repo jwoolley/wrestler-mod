@@ -52,4 +52,6 @@ abstract public class AbstractSignatureMoveCard extends CustomCard {
       throw new RuntimeException("WrestlerMod failed to auto-generate makeCopy for AbstractSignatureMoveCard: " + this.cardID);
     }
   }
+
+  abstract public String getIndefiniteCardName();
 }

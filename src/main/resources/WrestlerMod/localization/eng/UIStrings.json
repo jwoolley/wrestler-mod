@@ -10,10 +10,10 @@
 
   "WrestlerMod:SignatureMovePanel": {
     "TEXT": [
-      "Your Signature Move",
-      "Attacks: ",
-      "Skills: ",
-      "Powers: "
+      "Signature Move",
+      " add ",
+      " to your hand.",
+      "You have acquired your signature move already this combat."
     ]
   },
 

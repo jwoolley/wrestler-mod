@@ -14,6 +14,7 @@ import com.megacrit.cardcrawl.helpers.TipHelper;
 import com.megacrit.cardcrawl.localization.UIStrings;
 import thewrestler.WrestlerMod;
 import thewrestler.characters.WrestlerCharacter;
+import thewrestler.signaturemoves.cards.AbstractSignatureMoveCard;
 import thewrestler.util.BasicUtils;
 import thewrestler.util.TextureLoader;
 import thewrestler.util.info.CombatInfo;
