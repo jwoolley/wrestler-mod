@@ -137,22 +137,11 @@ public class WrestlerSignatureMovePanel implements CustomInfoPanel {
     GlyphLayout layout = new GlyphLayout(font, WrestlerCharacter.getSignatureMoveInfo().getConditionText(), color,
         this.width -  this.xTextOffset, Align.left, true);
 
-
-
     font.setColor(color);
     font.draw(sb, infoMessage,
         this.xOffset + this.xTextOffset,
         (this.yOffset + this.yTextOffset) - (yLineOffset * 1.075f),
         layout.width, Align.left, true);
-
-//    FontHelper.renderWrappedText(
-//        sb,
-//        font,
-//        (WrestlerCharacter.getSignatureMoveInfo().getConditionText()),
-//        this.xOffset + (this.width -  this.xTextOffset * 1.0f) / 2,
-//        this.yOffset + this.yTextOffset - (yLineOffset * 1.075f),
-//        WIDTH * SettingsHelper.getScaleX() - 2 * this.xTextOffset,
-//        color, Settings.scale);
   }
 
   public boolean shouldRenderPanel() {

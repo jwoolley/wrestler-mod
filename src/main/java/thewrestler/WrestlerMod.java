@@ -40,6 +40,7 @@ import thewrestler.potions.GrapplePotion;
 import thewrestler.relics.Headgear;
 import thewrestler.ui.WrestlerCombatInfoPanel;
 import thewrestler.ui.WrestlerSignatureMovePanel;
+import thewrestler.util.BasicUtils;
 import thewrestler.util.IDCheckDontTouchPls;
 import thewrestler.util.TextureLoader;
 import thewrestler.variables.DefaultCustomVariable;
@@ -632,10 +633,21 @@ public class WrestlerMod implements
 
     @Override
     public void receiveOnBattleStart(AbstractRoom abstractRoom) {
-        OnApplyPowerPatchInsert.powerActionList.clear();
-        combatInfoPanel.atStartOfCombat();
-        signatureMovePanel.atStartOfCombat();
+        if (BasicUtils.isPlayingAsWrestler()) {
+            OnApplyPowerPatchInsert.powerActionList.clear();
+            combatInfoPanel.atStartOfCombat();
+
+            // TODO: remove this once save/restore is implemented
+
+            if (WrestlerCharacter.getSignatureMoveInfo() == null) {
+                WrestlerMod.logger.info("WrestlerMod::receiveOnBattleStart initializing signatureMoveInfo");
+                WrestlerCharacter.setSignatureMoveInfo(WrestlerCharacter.initializeSignatureMoveInfo());
+            }
+            signatureMovePanel.atStartOfCombat();
+            WrestlerCharacter.getSignatureMoveInfo().atStartOfCombat();
+        }
     }
+
 
     @Override
     public void receiveStartGame() {
@@ -653,12 +665,14 @@ public class WrestlerMod implements
     public void receivePostEnergyRecharge() {
         combatInfoPanel.atStartOfTurn();
         signatureMovePanel.atStartOfTurn();
+        WrestlerCharacter.getSignatureMoveInfo().atStartOfTurn();
     }
 
     @Override
     public void receivePostBattle(AbstractRoom abstractRoom) {
         combatInfoPanel.atEndOfCombat();
         signatureMovePanel.atEndOfCombat();
+        WrestlerCharacter.getSignatureMoveInfo().atEndOfCombat();
     }
 
     @Override

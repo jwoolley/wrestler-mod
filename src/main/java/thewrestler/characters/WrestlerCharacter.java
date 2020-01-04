@@ -139,6 +139,11 @@ public class WrestlerCharacter extends CustomPlayer {
         return retVal;
     }
 
+    public static boolean hasSignatureMoveInfo() {
+        return signatureMoveInfo != null;
+    }
+
+
     public static AbstractSignatureMoveInfo getSignatureMoveInfo() {
         return signatureMoveInfo;
     }

@@ -30,7 +30,12 @@ public class ChokeslamMoveInfo extends AbstractSignatureMoveInfo {
 
   @Override
   public void atStartOfCombat() {
+    this.grappledCount = 0;
+  }
 
+  @Override
+  public void atEndOfCombat() {
+    this.grappledCount = 0;
   }
 
   @Override
@@ -41,9 +46,8 @@ public class ChokeslamMoveInfo extends AbstractSignatureMoveInfo {
   @Override
   public void onEnemyGrappled() {
     grappledCount++;
-    if (grappledCount >= GRAPPLES_REQUIRED) {
+    if (grappledCount == GRAPPLES_REQUIRED) {
       triggerGainCard();
-      this.grappledCount = 0;
     }
   }
 
@@ -54,11 +58,13 @@ public class ChokeslamMoveInfo extends AbstractSignatureMoveInfo {
 
   @Override
   public String getDynamicConditionText() {
-    return "Apply Grappled " + (GRAPPLES_REQUIRED - grappledCount) + " more times this combat.";
-  }
+    final int grapplesRemaining = GRAPPLES_REQUIRED - grappledCount;
 
-  @Override
-  public void triggerGainCard() {
-
+    if (grapplesRemaining > 0) {
+      return "Apply Grappled " + grapplesRemaining + " more " +
+          (grapplesRemaining == 1 ? "time" : "times") + " this combat.";
+    } else {
+      return "You have acquired your signature move already this combat.";
+    }
   }
 }

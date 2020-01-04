@@ -1,5 +1,7 @@
 package thewrestler.signaturemoves.moveinfos;
 
+import com.megacrit.cardcrawl.actions.common.MakeTempCardInHandAction;
+import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import thewrestler.signaturemoves.cards.AbstractSignatureMoveCard;
 import thewrestler.signaturemoves.upgrades.AbstractSignatureMoveUpgrade;
 import thewrestler.signaturemoves.upgrades.UpgradeType;
@@ -21,6 +23,7 @@ public abstract class AbstractSignatureMoveInfo {
   public abstract void onCardPlayed();
   public abstract void atStartOfTurn();
   public abstract void atStartOfCombat();
+  public abstract void atEndOfCombat();
   public abstract void upgradeMove(UpgradeType type);
   public abstract void onEnemyGrappled();
   public abstract String getStaticConditionText();
@@ -31,6 +34,6 @@ public abstract class AbstractSignatureMoveInfo {
   }
 
   public void triggerGainCard() {
-
+    AbstractDungeon.actionManager.addToBottom(new MakeTempCardInHandAction(this.signatureMoveCard));
   };
 }
