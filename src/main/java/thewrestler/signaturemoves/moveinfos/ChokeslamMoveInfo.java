@@ -7,7 +7,7 @@ import thewrestler.signaturemoves.upgrades.UpgradeType;
 import java.util.Map;
 
 public class ChokeslamMoveInfo extends AbstractSignatureMoveInfo {
-  private static final int GRAPPLES_REQUIRED = 3;
+  private static final int GRAPPLES_REQUIRED = 2;
   private int grappledCount = 0;
 
   public ChokeslamMoveInfo() {
@@ -53,7 +53,7 @@ public class ChokeslamMoveInfo extends AbstractSignatureMoveInfo {
 
   @Override
   public String getStaticConditionText() {
-    return "Apply Grappled 3 times in the same battle.";
+    return "Apply Grappled " + GRAPPLES_REQUIRED + " times in the same battle.";
   }
 
   @Override

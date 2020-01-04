@@ -33,15 +33,16 @@ public class Chokeslam extends AbstractSignatureMoveCard {
 
   private static final int COST = 1;
   private static final int DAMAGE = 10;
-  private static final int NUM_CARD_COPIES = 2;
+  private static final int NUM_CARD_COPIES = 1;
   private static final int NUM_CHOKE_STACKS = 1;
+  private static final boolean HAS_RETAIN = true;
 
   private static AbstractCard BONUS_CARD;
 
   private int numChokeStacks;
 
   public Chokeslam() {
-    super(ID, NAME, IMG_PATH, COST, getDescription(), TYPE, TARGET);
+    super(ID, NAME, IMG_PATH, COST, getDescription(NUM_CARD_COPIES), TYPE, TARGET, HAS_RETAIN);
     this.baseDamage = this.damage = DAMAGE;
     this.baseMagicNumber = this.magicNumber = NUM_CARD_COPIES;
     this.numChokeStacks = NUM_CHOKE_STACKS;
@@ -84,12 +85,15 @@ public class Chokeslam extends AbstractSignatureMoveCard {
   public void upgrade() {
     if (!this.upgraded) {
       this.upgradeName();
-      this.rawDescription = getDescription();
+      this.rawDescription = getDescription(this.magicNumber);
       initializeDescription();
     }
   }
-  public static String getDescription() {
-    return DESCRIPTION;
+  public static String getDescription(int numBonusCards) {
+    return DESCRIPTION + (numBonusCards == 1 ? EXTENDED_DESCRIPTION[0] : EXTENDED_DESCRIPTION[1])
+      + EXTENDED_DESCRIPTION[2]
+      + (numBonusCards == 1 ? EXTENDED_DESCRIPTION[3] : EXTENDED_DESCRIPTION[4])
+      + EXTENDED_DESCRIPTION[5];
   }
 
   static {

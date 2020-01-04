@@ -324,6 +324,14 @@
 
   "WrestlerMod:Chokeslam": {
     "NAME": "Chokeslam",
-    "DESCRIPTION": "Deal !D! Damage. NL Apply Choked. NL Add !M! Knees to your hand. They cost 0 this turn."
+    "DESCRIPTION": "Retain. NL Deal !D! Damage. NL Apply Choked. NL Add",
+    "EXTENDED_DESCRIPTION": [
+      " a Knee",
+      "  !M! Knees",
+      " to your hand.",
+      " It costs",
+      " They cost",
+      " 0 this turn."
+    ]
   }
 }

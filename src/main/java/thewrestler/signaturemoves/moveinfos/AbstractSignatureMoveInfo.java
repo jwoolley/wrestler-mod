@@ -34,6 +34,8 @@ public abstract class AbstractSignatureMoveInfo {
   }
 
   public void triggerGainCard() {
+    AbstractSignatureMoveCard card = this.signatureMoveCard.makeCopy();
+    card.setCostForTurn(0);
     AbstractDungeon.actionManager.addToBottom(new MakeTempCardInHandAction(this.signatureMoveCard));
   };
 }

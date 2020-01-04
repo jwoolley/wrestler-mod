@@ -38,7 +38,8 @@ public class WrestlerSignatureMovePanel implements CustomInfoPanel {
   private static final String UI_NAME = WrestlerMod.makeID("SignatureMovePanel");
   private static final String BACKGROUND_TEXURE_PATH = UiHelper.getUiImageResourcePath("signaturemovepanel/background.png");
 
-  private static final BitmapFont INFO_FONT = FontHelper.charDescFont;
+  private static final BitmapFont INFO_HEADER_FONT = FontHelper.charDescFont;
+  private static final BitmapFont INFO_FONT = FontHelper.tipBodyFont;
   private static final Color INFO_HEADER_COLOR = Color.valueOf("992200ff");
   private static final Color INFO_COLOR = Color.valueOf("e9e9e0cc");
   private final String uiName;
@@ -119,6 +120,7 @@ public class WrestlerSignatureMovePanel implements CustomInfoPanel {
   }
 
   private void renderInfoText(SpriteBatch sb) {
+    final BitmapFont headerFont = INFO_HEADER_FONT;
     final BitmapFont font = INFO_FONT;
     final Color headerColor = INFO_HEADER_COLOR;
     final Color color = INFO_COLOR;
@@ -127,7 +129,7 @@ public class WrestlerSignatureMovePanel implements CustomInfoPanel {
 
     FontHelper.renderFontLeft(
         sb,
-        font,
+        headerFont,
         TEXT[0],
         this.xOffset + this.width * 0.04f,
         this.yOffset + this.yTextOffset,
@@ -140,7 +142,7 @@ public class WrestlerSignatureMovePanel implements CustomInfoPanel {
     font.setColor(color);
     font.draw(sb, infoMessage,
         this.xOffset + this.xTextOffset,
-        (this.yOffset + this.yTextOffset) - (yLineOffset * 1.075f),
+        (this.yOffset + this.yTextOffset) - (yLineOffset * 1.0f),
         layout.width, Align.left, true);
   }
 
