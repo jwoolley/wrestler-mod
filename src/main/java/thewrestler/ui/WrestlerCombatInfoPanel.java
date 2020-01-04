@@ -124,7 +124,7 @@ public class WrestlerCombatInfoPanel implements CustomInfoPanel {
         sb,
         font,
         TEXT[0],
-        this.xOffset + WIDTH * 0.1485f,
+        this.xOffset + WIDTH * 0.04f,
         this.yOffset + this.yTextOffset,
         headerColor);
 

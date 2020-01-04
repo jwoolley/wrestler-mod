@@ -4,7 +4,6 @@ import com.megacrit.cardcrawl.cards.AbstractCard;
 import thewrestler.signaturemoves.cards.Chokeslam;
 import thewrestler.signaturemoves.upgrades.AbstractSignatureMoveUpgrade;
 import thewrestler.signaturemoves.upgrades.UpgradeType;
-import thewrestler.ui.WrestlerSignatureMovePanel;
 
 import java.util.Map;
 
@@ -56,7 +55,7 @@ public class ChokeslamMoveInfo extends AbstractSignatureMoveInfo {
   // TODO: move this text to UiStrings.json
   @Override
   public String getStaticConditionText() {
-    return "Apply Grappled " + GRAPPLES_REQUIRED + " times in the same battle to ";
+    return "Apply Grappled " + GRAPPLES_REQUIRED + " times in the same battle to";
   }
 
   @Override
@@ -72,6 +71,6 @@ public class ChokeslamMoveInfo extends AbstractSignatureMoveInfo {
   @Override
   public String getDynamicConditionText() {
     return "Apply Grappled " + getGrapplesRemaining()  + " more " +
-        (getGrapplesRemaining()  == 1 ? "time" : "times") + " this combat to ";
+        (getGrapplesRemaining()  == 1 ? "time" : "times") + " this combat to";
   }
 }

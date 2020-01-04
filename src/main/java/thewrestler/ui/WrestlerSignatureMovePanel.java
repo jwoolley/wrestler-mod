@@ -13,6 +13,7 @@ import com.megacrit.cardcrawl.helpers.FontHelper;
 import com.megacrit.cardcrawl.helpers.Hitbox;
 import com.megacrit.cardcrawl.helpers.PowerTip;
 import com.megacrit.cardcrawl.helpers.TipHelper;
+import com.megacrit.cardcrawl.helpers.input.InputHelper;
 import com.megacrit.cardcrawl.localization.UIStrings;
 import thewrestler.WrestlerMod;
 import thewrestler.characters.WrestlerCharacter;
@@ -20,9 +21,10 @@ import thewrestler.signaturemoves.cards.AbstractSignatureMoveCard;
 import thewrestler.signaturemoves.moveinfos.AbstractSignatureMoveInfo;
 import thewrestler.util.BasicUtils;
 import thewrestler.util.TextureLoader;
-import thewrestler.util.info.CombatInfo;
 
 import java.util.ArrayList;
+
+// TODO: subheader w/ Signature Move name (in yellow)
 
 public class WrestlerSignatureMovePanel implements CustomInfoPanel, CardPreviewElement {
   private static final String[] TEXT;
@@ -35,8 +37,8 @@ public class WrestlerSignatureMovePanel implements CustomInfoPanel, CardPreviewE
   private static final float X_TEXT_OFFSET = 10;
   private static final float Y_TEXT_OFFSET =  HEIGHT - 20;
   private static final float Y_TEXT_OFFSET_WIDESCREEN = Y_TEXT_OFFSET + 0;
-  private static final float TOOLTIP_X_OFFSET = 16.0F;
-  private static final float TOOLTIP_Y_OFFSET = -32.0F;
+  private static final float TOOLTIP_X_OFFSET = 108.0F;
+  private static final float TOOLTIP_Y_OFFSET = -8.0F;
 
   private static final String UI_NAME = WrestlerMod.makeID("SignatureMovePanel");
   private static final String BACKGROUND_TEXURE_PATH = UiHelper.getUiImageResourcePath("signaturemovepanel/background.png");
@@ -81,7 +83,7 @@ public class WrestlerSignatureMovePanel implements CustomInfoPanel, CardPreviewE
 
   @Override
   public void update() {
-
+    this.hb.update();
   }
 
   @Override
@@ -108,9 +110,32 @@ public class WrestlerSignatureMovePanel implements CustomInfoPanel, CardPreviewE
 
       if (this.hb.hovered) {
         renderPreviewCardTip(sb);
+      } else {
+
+        if (debugFrame == 0) {
+          WrestlerMod.logger.info("WrestlerSignatureMovePanel::render"
+              + "\n\thb.x: " + this.hb.x
+              + "\n\thb.width: " + this.hb.width
+              + "\n\thb.xRightEdge: " + (this.hb.x + this.hb.width)
+              + "\n\tInputHelper.mX: " + InputHelper.mX
+              + "\n\thb.y: " + this.hb.y
+              + "\n\thb.height: " + this.hb.height
+              + "\n\thb.yTopEdge: " + (this.hb.y + this.hb.height)
+              + "\n\tInputHelper.mY: " + InputHelper.mY
+              + "\n\thb.hovered: " + this.hb.hovered
+          );
+        } else {
+          debugFrame++;
+          if (debugFrame >= FRAMES_PER_DEBUG_LOG) {
+            debugFrame = 0;
+          }
+        }
       }
     }
   }
+
+  static int debugFrame = 0;
+  static final int FRAMES_PER_DEBUG_LOG = 24;
 
   private void renderInfoText(SpriteBatch sb) {
     final BitmapFont headerFont = INFO_HEADER_FONT;
@@ -207,8 +232,8 @@ public class WrestlerSignatureMovePanel implements CustomInfoPanel, CardPreviewE
     if (shouldRenderPreviewCard()) {
       final AbstractCard _previewCard = getPreviewCard();
       if (_previewCard != null) {
-        _previewCard.current_x = _previewCard.hb.x = getPreviewXOffset();
-        _previewCard.current_y = _previewCard.hb.y = getPreviewYOffset();
+        _previewCard.current_x = _previewCard.hb.x = this.hb.x + this.hb.width + getPreviewXOffset();
+        _previewCard.current_y = _previewCard.hb.y = this.hb.y + this.hb.height + getPreviewYOffset();
         _previewCard.render(sb);
       }
     }

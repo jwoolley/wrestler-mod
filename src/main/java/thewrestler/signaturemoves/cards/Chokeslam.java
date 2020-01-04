@@ -17,7 +17,7 @@ import thewrestler.signaturemoves.upgrades.AbstractSignatureMoveUpgrade;
 
 import java.util.Map;
 
-// TODO: this should extend? implement? AbstractPreviewCard and
+// TODO: implement getTooltips() method for Grapple and Knee keywords
 
 public class Chokeslam extends AbstractSignatureMoveCard {
   public static final String ID = "WrestlerMod:Chokeslam";

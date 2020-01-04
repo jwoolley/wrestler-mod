@@ -6,7 +6,6 @@ import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import thewrestler.signaturemoves.cards.AbstractSignatureMoveCard;
 import thewrestler.signaturemoves.upgrades.AbstractSignatureMoveUpgrade;
 import thewrestler.signaturemoves.upgrades.UpgradeType;
-import thewrestler.util.BasicUtils;
 
 import java.util.HashMap;
 import java.util.Map;
