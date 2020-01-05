@@ -14,6 +14,7 @@ import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.powers.ChokePower;
 import thewrestler.cards.colorless.attack.Knee;
 import thewrestler.signaturemoves.upgrades.AbstractSignatureMoveUpgrade;
+import thewrestler.signaturemoves.upgrades.SignatureMoveUpgradeList;
 
 import java.util.Map;
 
@@ -72,7 +73,7 @@ public class Chokeslam extends AbstractSignatureMoveCard {
   }
 
   @Override
-  protected void applyUpgrades(Map<AbstractSignatureMoveUpgrade, Integer> upgrades) {
+  public void applyUpgrades(SignatureMoveUpgradeList upgradeList) {
 
   }
 

@@ -5,5 +5,11 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class AbstractSignatureMoveUpgrade {
-  public static final Map<AbstractSignatureMoveUpgrade, Integer> NO_UPGRADES = Collections.unmodifiableMap(new HashMap<>());
+  final private UpgradeType upgradeType;
+  final int numUpgrades;
+
+  public AbstractSignatureMoveUpgrade(UpgradeType upgradeType, int numUpgrades) {
+    this.upgradeType = upgradeType;
+    this.numUpgrades = numUpgrades;
+  }
 }

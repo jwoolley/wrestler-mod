@@ -2,21 +2,19 @@ package thewrestler.signaturemoves.moveinfos;
 
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import thewrestler.signaturemoves.cards.Chokeslam;
-import thewrestler.signaturemoves.upgrades.AbstractSignatureMoveUpgrade;
+import thewrestler.signaturemoves.upgrades.SignatureMoveUpgradeList;
 import thewrestler.signaturemoves.upgrades.UpgradeType;
-
-import java.util.Map;
 
 public class ChokeslamMoveInfo extends AbstractSignatureMoveInfo {
   private static final int GRAPPLES_REQUIRED = 2;
   private int grappledCount = 0;
 
   public ChokeslamMoveInfo() {
-    this(AbstractSignatureMoveUpgrade.NO_UPGRADES);
+    this(SignatureMoveUpgradeList.NO_UPGRADES, true);
   }
 
-  public ChokeslamMoveInfo(Map<AbstractSignatureMoveUpgrade, Integer> upgrades) {
-    super(new Chokeslam(), upgrades);
+  public ChokeslamMoveInfo(SignatureMoveUpgradeList upgradeList, boolean isFirstInstance) {
+    super(new Chokeslam(), upgradeList, isFirstInstance);
   }
 
   @Override
