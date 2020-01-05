@@ -1,5 +1,6 @@
 package thewrestler.signaturemoves.cards;
 
+import thewrestler.WrestlerMod;
 import thewrestler.signaturemoves.moveinfos.AbstractSignatureMoveInfo;
 import thewrestler.signaturemoves.moveinfos.ChokeslamMoveInfo;
 import thewrestler.signaturemoves.upgrades.SignatureMoveUpgradeList;
@@ -22,6 +23,24 @@ public enum SignatureMoveCardEnum {
   public AbstractSignatureMoveInfo getInfoCopy(SignatureMoveUpgradeList upgradeList) {
     return this.moveInfo.makeCopy();
   }
+
+  public static AbstractSignatureMoveCard getCardCopy(int index) {
+    if (index < 0) {
+      WrestlerMod.logger.warn("AbstractSignatureMoveCard::getCardCopy unrecognized index: " + index);
+      return null;
+    }
+    return SignatureMoveCardEnum.values()[index].getCardCopy();
+  }
+
+  public static SignatureMoveCardEnum getEnum(AbstractSignatureMoveCard card) {
+    final int index = getOrdinal(card);
+
+    if (index > -1) {
+      return null;
+    }
+    return SignatureMoveCardEnum.values()[index];
+  }
+
 
   public static int getOrdinal(AbstractSignatureMoveCard card) {
     Optional<SignatureMoveCardEnum> optional = Arrays.stream(SignatureMoveCardEnum.values())

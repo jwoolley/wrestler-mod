@@ -149,6 +149,7 @@ public class WrestlerCharacter extends CustomPlayer {
     }
 
     public static void setSignatureMoveInfo(AbstractSignatureMoveInfo _signatureMoveInfo) {
+        WrestlerMod.logger.info("WrestlerCharacter:setSignatureMoveInfo setting info from save: " + _signatureMoveInfo);
         signatureMoveInfo = _signatureMoveInfo;
     }
 

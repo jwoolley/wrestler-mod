@@ -38,6 +38,7 @@ import thewrestler.patches.powers.OnApplyPowerPatchInsert;
 import thewrestler.potions.CobraPotion;
 import thewrestler.potions.GrapplePotion;
 import thewrestler.relics.Headgear;
+import thewrestler.signaturemoves.moveinfos.AbstractSignatureMoveInfo;
 import thewrestler.ui.WrestlerCombatInfoPanel;
 import thewrestler.ui.WrestlerSignatureMovePanel;
 import thewrestler.util.BasicUtils;
@@ -639,10 +640,6 @@ public class WrestlerMod implements
 
             // TODO: remove this once save/restore is implemented
 
-            if (WrestlerCharacter.getSignatureMoveInfo() == null) {
-                WrestlerMod.logger.info("WrestlerMod::receiveOnBattleStart initializing signatureMoveInfo");
-                WrestlerCharacter.setSignatureMoveInfo(WrestlerCharacter.initializeSignatureMoveInfo());
-            }
             signatureMovePanel.atStartOfCombat();
             WrestlerCharacter.getSignatureMoveInfo().atStartOfCombat();
         }
@@ -653,6 +650,14 @@ public class WrestlerMod implements
     public void receiveStartGame() {
         combatInfoPanel = new WrestlerCombatInfoPanel();
         signatureMovePanel = new WrestlerSignatureMovePanel();
+        logger.info("WresterMod:receiveStartGame called");
+
+        if (AbstractSignatureMoveInfo.hasCompleteSaveData()) {
+            AbstractSignatureMoveInfo.loadSaveData();
+        } else {
+            WrestlerMod.logger.info("WrestlerMod::receiveOnBattleStart initializing signatureMoveInfo");
+            WrestlerCharacter.setSignatureMoveInfo(WrestlerCharacter.initializeSignatureMoveInfo());
+        }
     }
 
     @Override

@@ -112,24 +112,24 @@ public class WrestlerSignatureMovePanel implements CustomInfoPanel, CardPreviewE
         renderPreviewCardTip(sb);
       } else {
 
-        if (debugFrame == 0) {
-          WrestlerMod.logger.info("WrestlerSignatureMovePanel::render"
-              + "\n\thb.x: " + this.hb.x
-              + "\n\thb.width: " + this.hb.width
-              + "\n\thb.xRightEdge: " + (this.hb.x + this.hb.width)
-              + "\n\tInputHelper.mX: " + InputHelper.mX
-              + "\n\thb.y: " + this.hb.y
-              + "\n\thb.height: " + this.hb.height
-              + "\n\thb.yTopEdge: " + (this.hb.y + this.hb.height)
-              + "\n\tInputHelper.mY: " + InputHelper.mY
-              + "\n\thb.hovered: " + this.hb.hovered
-          );
-        } else {
-          debugFrame++;
-          if (debugFrame >= FRAMES_PER_DEBUG_LOG) {
-            debugFrame = 0;
-          }
-        }
+//        if (debugFrame == 0) {
+//          WrestlerMod.logger.info("WrestlerSignatureMovePanel::render"
+//              + "\n\thb.x: " + this.hb.x
+//              + "\n\thb.width: " + this.hb.width
+//              + "\n\thb.xRightEdge: " + (this.hb.x + this.hb.width)
+//              + "\n\tInputHelper.mX: " + InputHelper.mX
+//              + "\n\thb.y: " + this.hb.y
+//              + "\n\thb.height: " + this.hb.height
+//              + "\n\thb.yTopEdge: " + (this.hb.y + this.hb.height)
+//              + "\n\tInputHelper.mY: " + InputHelper.mY
+//              + "\n\thb.hovered: " + this.hb.hovered
+//          );
+//        } else {
+//          debugFrame++;
+//          if (debugFrame >= FRAMES_PER_DEBUG_LOG) {
+//            debugFrame = 0;
+//          }
+//        }
       }
     }
   }
