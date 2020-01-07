@@ -4,7 +4,6 @@ import basemod.abstracts.CustomCard;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
 import com.megacrit.cardcrawl.actions.common.DamageAction;
-import com.megacrit.cardcrawl.actions.utility.SFXAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.cards.DamageInfo;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
@@ -14,7 +13,6 @@ import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import thewrestler.enums.AbstractCardEnum;
 import thewrestler.powers.BearHugPower;
-import thewrestler.powers.GrayMatterPower;
 
 import static thewrestler.WrestlerMod.getCardResourcePath;
 
@@ -33,14 +31,14 @@ public class BearHug extends CustomCard {
 
   private static final int COST = 1;
   private static final int DAMAGE = 6;
-  private static final int DAMAGE_UPGRADE = 3;
-  private static final int DAMAGE_PER_SKILL = 3;
+  private static final int DEBUFFS_PER_SKILL = 1;
 
   public BearHug() {
-    super(ID, NAME, getCardResourcePath(IMG_PATH), COST, DESCRIPTION, TYPE,
+    super(ID, NAME, getCardResourcePath(IMG_PATH), COST, getDescription(true), TYPE,
         AbstractCardEnum.THE_WRESTLER_ORANGE, RARITY, TARGET);
     this.baseDamage = this.damage = DAMAGE;
-    this.baseMagicNumber = this.magicNumber = DAMAGE_PER_SKILL;
+    this.baseMagicNumber = this.magicNumber = DEBUFFS_PER_SKILL;
+    this.exhaust = true;
   }
 
   @Override
@@ -61,9 +59,14 @@ public class BearHug extends CustomCard {
   public void upgrade() {
     if (!this.upgraded) {
       this.upgradeName();
-      this.upgradeDamage(DAMAGE_UPGRADE);
+      this.exhaust = false;
+      this.rawDescription = getDescription(false);
       this.initializeDescription();
     }
+  }
+
+  public static String getDescription(boolean hasExhaust) {
+    return DESCRIPTION + (hasExhaust ? EXTENDED_DESCRIPTION[0] : "");
   }
 
   static {

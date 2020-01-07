@@ -26,15 +26,15 @@ public class BlowOff extends CustomCard {
   private static final CardRarity RARITY = CardRarity.UNCOMMON;
   private static final CardTarget TARGET = CardTarget.SELF;
 
-  private static final int BLOCK = 5;
-  private static final int BLOCK_UPGRADE = 3;
+  private static final int BLOCK_AMOUNT = 6;
   private static final int DISCARD_AMOUNT = 2;
+  private static final int DISCARD_AMOUNT_UPGRADE = -1;
   private static final int COST = 0;
 
   public BlowOff() {
     super(ID, NAME, getCardResourcePath(IMG_PATH), COST, getDescription(DISCARD_AMOUNT), TYPE,
         AbstractCardEnum.THE_WRESTLER_ORANGE, RARITY, TARGET);
-    this.baseBlock = this.block = BLOCK;
+    this.baseBlock = this.block = BLOCK_AMOUNT;
     this.baseMagicNumber = this.magicNumber = DISCARD_AMOUNT;
   }
 
@@ -53,8 +53,10 @@ public class BlowOff extends CustomCard {
   public void upgrade() {
     if (!this.upgraded) {
       this.upgradeName();
-      this.upgradeBlock(BLOCK_UPGRADE);
-      initializeDescription();
+
+      if (this.magicNumber + DISCARD_AMOUNT_UPGRADE > -1) {
+        this.upgradeMagicNumber(DISCARD_AMOUNT_UPGRADE);
+      }
     }
   }
   public static String getDescription(int numCards) {

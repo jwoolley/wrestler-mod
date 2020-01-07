@@ -1,18 +1,18 @@
 package thewrestler.powers;
 
 import basemod.interfaces.CloneablePowerInterface;
-import com.megacrit.cardcrawl.actions.AbstractGameAction;
-import com.megacrit.cardcrawl.actions.common.DamageAction;
+import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
 import com.megacrit.cardcrawl.actions.common.RemoveSpecificPowerAction;
 import com.megacrit.cardcrawl.actions.utility.SFXAction;
 import com.megacrit.cardcrawl.actions.utility.UseCardAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
-import com.megacrit.cardcrawl.cards.DamageInfo;
 import com.megacrit.cardcrawl.core.AbstractCreature;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.PowerStrings;
 import com.megacrit.cardcrawl.powers.AbstractPower;
+import com.megacrit.cardcrawl.powers.VulnerablePower;
+import com.megacrit.cardcrawl.powers.WeakPower;
 import thewrestler.WrestlerMod;
 
 public class BearHugPower extends AbstractWrestlerPower implements CloneablePowerInterface {
@@ -48,13 +48,16 @@ public class BearHugPower extends AbstractWrestlerPower implements CloneablePowe
 
     private void applyTrigger() {
       flash();
-      AbstractDungeon.actionManager.addToTop(
-          new DamageAction(
-              this.owner,
-              new DamageInfo(this.owner, this.amount, DamageInfo.DamageType.THORNS),
-              AbstractGameAction.AttackEffect.SMASH));
 
-      AbstractDungeon.actionManager.addToBottom(new SFXAction("GRUNT_SHORT_1"));
+      AbstractDungeon.actionManager.addToTop(new SFXAction("GRUNT_SHORT_1"));
+
+      AbstractDungeon.actionManager.addToBottom(
+          new ApplyPowerAction(this.owner, this.source, new VulnerablePower(this.owner, this.amount, false)));
+
+
+      AbstractDungeon.actionManager.addToBottom(
+          new ApplyPowerAction(this.owner, this.source, new WeakPower(this.owner, this.amount, false)));
+
     }
 
     @Override

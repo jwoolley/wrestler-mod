@@ -58,7 +58,10 @@
 
   "WrestlerMod:BearHug": {
     "NAME": "Bear Hug",
-    "DESCRIPTION": "Deal !D! Damage. NL Whenever you play a Skill this turn, the enemy takes !M! damage."
+    "DESCRIPTION": "Deal !D! Damage. NL Whenever you play a Skill this turn, apply !M! Vulnerable and !M! Weak.",
+    "EXTENDED_DESCRIPTION": [
+      " NL Exhaust."
+    ]
   },
 
   "WrestlerMod:BlowOff": {
