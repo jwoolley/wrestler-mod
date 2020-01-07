@@ -15,14 +15,12 @@ import com.megacrit.cardcrawl.powers.ChokePower;
 import thewrestler.cards.colorless.attack.Knee;
 import thewrestler.signaturemoves.upgrades.SignatureMoveUpgradeList;
 
-// TODO: implement getTooltips() method for Grapple and Knee keywords
-
-public class Chokeslam extends AbstractSignatureMoveCard {
-  public static final String ID = "WrestlerMod:Chokeslam";
+public class Piledriver extends AbstractSignatureMoveCard {
+  public static final String ID = "WrestlerMod:Piledriver";
   public static final String NAME;
   public static final String DESCRIPTION;
   public static final String[] EXTENDED_DESCRIPTION;
-  public static final String IMG_PATH = "chokeslam.png";
+  public static final String IMG_PATH = "piledriver.png";
 
   private static final CardStrings cardStrings;
 
@@ -39,7 +37,7 @@ public class Chokeslam extends AbstractSignatureMoveCard {
 
   private int numChokeStacks;
 
-  public Chokeslam() {
+  public Piledriver() {
     super(ID, NAME, IMG_PATH, COST, getDescription(NUM_CARD_COPIES), TYPE, TARGET, HAS_RETAIN);
     this.baseDamage = this.damage = DAMAGE;
     this.baseMagicNumber = this.magicNumber = NUM_CARD_COPIES;
@@ -76,7 +74,7 @@ public class Chokeslam extends AbstractSignatureMoveCard {
 
   @Override
   public AbstractSignatureMoveCard makeCopy() {
-    return new Chokeslam();
+    return new Piledriver();
   }
 
   @Override
