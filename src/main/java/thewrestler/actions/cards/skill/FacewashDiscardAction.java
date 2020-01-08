@@ -23,6 +23,8 @@ public class FacewashDiscardAction extends AbstractGameAction  {
   private boolean discardFinished;
   private boolean isAttackCard;
 
+  private AbstractMonster targetMonster;
+
   public FacewashDiscardAction() {
     this.source = this.target = this.player = AbstractDungeon.player;
     this.actionType = ActionType.DISCARD;
@@ -41,15 +43,21 @@ public class FacewashDiscardAction extends AbstractGameAction  {
         } else {
           discardedCard = hand.group.get(AbstractDungeon.cardRandomRng.random(0, hand.size() - 1));
         }
-
         if (discardedCard != null) {
-          if (discardedCard.type == AbstractCard.CardType.ATTACK) {
-            AbstractDungeon.player.limbo.group.add(discardedCard);
-            isAttackCard = true;
-          } else {
-            AbstractDungeon.actionManager.addToTop(
-                new DiscardSpecificCardAction(discardedCard, AbstractDungeon.player.hand));
-            AbstractDungeon.actionManager.addToTop(new WaitAction(0.4f));
+          discardedCard.freeToPlayOnce = true;
+          if (!AbstractDungeon.getMonsters().areMonstersBasicallyDead()) {
+            this.targetMonster = AbstractDungeon.getCurrRoom().monsters
+                .getRandomMonster(null, true, AbstractDungeon.cardRandomRng);
+            if (discardedCard.type == AbstractCard.CardType.ATTACK && targetMonster != null
+                && discardedCard.canUse(AbstractDungeon.player, this.targetMonster)) {
+              isAttackCard = true;
+              AbstractDungeon.player.limbo.group.add(discardedCard);
+            } else {
+              discardedCard.freeToPlayOnce = false;
+              AbstractDungeon.actionManager.addToTop(
+                  new DiscardSpecificCardAction(discardedCard, AbstractDungeon.player.hand));
+              AbstractDungeon.actionManager.addToTop(new WaitAction(0.4f));
+            }
           }
           discardedCard.current_y = (-200.0F * Settings.scale);
           discardedCard.target_x = (Settings.WIDTH / 2.0F + 200.0F * Settings.scale);
@@ -61,27 +69,14 @@ public class FacewashDiscardAction extends AbstractGameAction  {
         }
         discardFinished = true;
       } else {
-        if (isAttackCard && !AbstractDungeon.getMonsters().areMonstersBasicallyDead()) {
-
-          final AbstractMonster targetMonster =  AbstractDungeon.getCurrRoom().monsters
-              .getRandomMonster(null, true, AbstractDungeon.cardRandomRng);
-
-          discardedCard.freeToPlayOnce = true;
-
-          if (!discardedCard.canUse(AbstractDungeon.player, targetMonster)) {
-            discardedCard.freeToPlayOnce = false;
-            AbstractDungeon.actionManager.addToTop(
-                new DiscardSpecificCardAction(discardedCard, AbstractDungeon.player.limbo));
-            AbstractDungeon.actionManager.addToTop(new UnlimboAction(discardedCard));
+        if (isAttackCard) {
+          discardedCard.applyPowers();
+          AbstractDungeon.actionManager.cardQueue.add(new CardQueueItem(discardedCard, targetMonster, discardedCard.energyOnUse, true));
+          AbstractDungeon.actionManager.addToTop(new UnlimboAction(discardedCard));
+          if (!Settings.FAST_MODE) {
+            AbstractDungeon.actionManager.addToTop(new WaitAction(Settings.ACTION_DUR_MED));
           } else {
-            discardedCard.applyPowers();
-            AbstractDungeon.actionManager.cardQueue.add(new CardQueueItem(discardedCard, targetMonster, discardedCard.energyOnUse, true));
-            AbstractDungeon.actionManager.addToTop(new UnlimboAction(discardedCard));
-            if (!Settings.FAST_MODE) {
-              AbstractDungeon.actionManager.addToTop(new WaitAction(Settings.ACTION_DUR_MED));
-            } else {
-              AbstractDungeon.actionManager.addToTop(new WaitAction(Settings.ACTION_DUR_FASTER));
-            }
+            AbstractDungeon.actionManager.addToTop(new WaitAction(Settings.ACTION_DUR_FASTER));
           }
         }
         this.isDone = true;

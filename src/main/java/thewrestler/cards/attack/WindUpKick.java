@@ -47,13 +47,18 @@ public class WindUpKick extends CustomCard {
   }
 
   @Override
-  public boolean canPlay(AbstractCard card) {
-    if (card == this) {
-      card.cantUseMessage = getCanPlayMessage();
-      return getNumSkillsPlayed() >=  this.magicNumber;
-    } else {
-      return true;
+  public boolean canUse(AbstractPlayer p, AbstractMonster m) {
+    boolean canUse = super.canUse(p, m);
+
+    if (!canUse) {
+      return false;
     }
+
+    if (canUse && getNumSkillsPlayed() <  this.magicNumber) {
+      canUse = false;
+      this.cantUseMessage = getCantPlayMessage();
+    }
+    return canUse;
   }
 
   @Override
@@ -69,7 +74,8 @@ public class WindUpKick extends CustomCard {
     }
   }
 
-  private String getCanPlayMessage() {
+  @Override
+  public String getCantPlayMessage() {
     final int numSkillsRemaining = this.magicNumber - getNumSkillsPlayed();
     return EXTENDED_DESCRIPTION[0] + numSkillsRemaining + EXTENDED_DESCRIPTION[1]
         + (numSkillsRemaining == 1 ? EXTENDED_DESCRIPTION[2] : EXTENDED_DESCRIPTION[3]);

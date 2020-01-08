@@ -56,6 +56,25 @@
     ]
   },
 
+  "WrestlerMod:BearHug": {
+    "NAME": "Bear Hug",
+    "DESCRIPTION": "Deal !D! Damage. NL Whenever you play a Skill this turn, apply !M! Vulnerable and !M! Weak.",
+    "EXTENDED_DESCRIPTION": [
+      " NL Exhaust."
+    ]
+  },
+
+  "WrestlerMod:BlowOff": {
+    "NAME": "Blow Off",
+    "DESCRIPTION": "Discard ",
+    "EXTENDED_DESCRIPTION": [
+      "!M! card",
+      "!M! cards",
+      ". NL Gain !B! Block."
+    ]
+  },
+
+
   "WrestlerMod:Brainbuster": {
     "NAME": "Brainbuster",
     "DESCRIPTION": "Deal !D! Damage. NL The next ",

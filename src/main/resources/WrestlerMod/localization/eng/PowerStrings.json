@@ -1,4 +1,11 @@
 {
+  "WrestlerMod:BearHugPower": {
+    "NAME": "Bear Hug",
+    "DESCRIPTIONS": [
+      "Whenever you play a #ySkill this turn, takes #b",
+      " damage."]
+  },
+
   "WrestlerMod:CageMatchPower": {
     "NAME": "Cage Fighting",
     "DESCRIPTIONS": [
