@@ -1,14 +1,15 @@
 package thewrestler.signaturemoves.moveinfos;
 
 import com.megacrit.cardcrawl.cards.AbstractCard;
+import com.megacrit.cardcrawl.characters.AbstractPlayer;
+import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import thewrestler.signaturemoves.cards.Piledriver;
 import thewrestler.signaturemoves.upgrades.SignatureMoveUpgradeList;
 import thewrestler.signaturemoves.upgrades.UpgradeType;
 import thewrestler.util.info.CombatInfo;
 
 public class PiledriverMoveInfo extends AbstractSignatureMoveInfo {
-  private static final int SKILLS_REQUIRED = 3;
-  private static final int TURNS_REQUIRED = 2;
+  private static final int TURNS_REQUIRED = 1;
   private int numTurns = 0;
 
   public PiledriverMoveInfo() {
@@ -20,17 +21,20 @@ public class PiledriverMoveInfo extends AbstractSignatureMoveInfo {
   }
 
   @Override
-  public void onCardPlayed(AbstractCard card) {
-    if (card.type == AbstractCard.CardType.SKILL && CombatInfo.getNumSkillsPlayed() + 1 == SKILLS_REQUIRED) {
+  public void onCardPlayed(AbstractCard card) { }
+
+  @Override
+  public void atStartOfTurn() {
+  }
+
+  @Override
+  public void atEndOfTurn() {
+    if (AbstractDungeon.player.drawPile.isEmpty()) {
       numTurns++;
       if (numTurns == TURNS_REQUIRED) {
         triggerGainCard();
       }
     }
-  }
-
-  @Override
-  public void atStartOfTurn() {
   }
 
   @Override
@@ -54,7 +58,7 @@ public class PiledriverMoveInfo extends AbstractSignatureMoveInfo {
   // TODO: move this text to UiStrings.json
   @Override
   public String getStaticConditionText() {
-    return "Play " + SKILLS_REQUIRED + " in one turn"
+    return "End your turn with an empty draw pile"
       + (TURNS_REQUIRED > 1 ? " on " + TURNS_REQUIRED + " separate turns" : "") + " to";
   }
 
@@ -70,7 +74,7 @@ public class PiledriverMoveInfo extends AbstractSignatureMoveInfo {
   // TODO: move this text to UiStrings.json (or similar new file)
   @Override
   public String getDynamicConditionText() {
-    final String prefixText = "Play " + SKILLS_REQUIRED + " Skills in one turn";
+    final String prefixText = "End your turn with an empty draw pile";
 
     return prefixText
         + (TURNS_REQUIRED > 1 ? " for " + getTurnsRemaining() + " more turn" + (getTurnsRemaining() > 1 ? "s" : "") : "")

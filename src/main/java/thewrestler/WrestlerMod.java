@@ -271,6 +271,7 @@ public class WrestlerMod implements
         reflectedMap.put("SPRINGBOARD_1", new Sfx(getAudioResourcePath("TheWrestler_Springboard1.ogg")));
         reflectedMap.put("THUD_MEDIUM_1", new Sfx(getAudioResourcePath("TheWrestler_ThudMedium1.ogg")));
         reflectedMap.put("TONE_ELECTRONIC_1", new Sfx(getAudioResourcePath("TheWrestler_ToneElectronic1.ogg")));
+        reflectedMap.put("WHISTLE_STEAM_1", new Sfx(getAudioResourcePath("TheWrestler_WhistleSteam1.ogg")));
         reflectedMap.put("YELL_PAIN_1", new Sfx(getAudioResourcePath("TheWrestler_YellPain1.ogg")));
 
         reflectedMap.put("METAL_MAN_RIFF_1", new Sfx(getAudioResourcePath("music/TheWrestler_MetalManRiff1.ogg")));
@@ -687,6 +688,10 @@ public class WrestlerMod implements
         combatInfoPanel.atEndOfCombat();
         signatureMovePanel.atEndOfCombat();
         WrestlerCharacter.getSignatureMoveInfo().atEndOfCombat();
+    }
+
+    public static void atEndOfPlayerTurn() {
+        WrestlerCharacter.getSignatureMoveInfo().atEndOfTurn();
     }
 
     @Override

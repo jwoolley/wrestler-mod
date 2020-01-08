@@ -32,7 +32,7 @@ abstract public class AbstractSignatureMoveCard extends CustomCard {
   public AbstractSignatureMoveCard(String id, String name, String img, int cost, String rawDescription,
                                    CardType type, CardTarget target, boolean hasRetain) {
     this(id, name, img, cost, rawDescription, type, target, SignatureMoveUpgradeList.NO_UPGRADES);
-    this.retain = hasRetain;
+    this.selfRetain = hasRetain;
   }
 
   public AbstractSignatureMoveCard(String id, String name, String img, int cost, String rawDescription,

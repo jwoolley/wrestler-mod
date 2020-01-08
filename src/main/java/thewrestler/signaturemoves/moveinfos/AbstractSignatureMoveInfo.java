@@ -55,6 +55,7 @@ public abstract class AbstractSignatureMoveInfo {
 
   public abstract void onCardPlayed(AbstractCard card);
   public abstract void atStartOfTurn();
+  public abstract void atEndOfTurn();
   public abstract void atStartOfCombat();
   public abstract void atEndOfCombat();
   public abstract void upgradeMove(UpgradeType type);

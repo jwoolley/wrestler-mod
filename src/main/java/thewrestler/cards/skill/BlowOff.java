@@ -3,6 +3,7 @@ package thewrestler.cards.skill;
 import basemod.abstracts.CustomCard;
 import com.megacrit.cardcrawl.actions.common.DiscardAction;
 import com.megacrit.cardcrawl.actions.common.GainBlockAction;
+import com.megacrit.cardcrawl.actions.utility.SFXAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
@@ -41,6 +42,7 @@ public class BlowOff extends CustomCard {
   @Override
   public void use(AbstractPlayer p, AbstractMonster m) {
     AbstractDungeon.actionManager.addToBottom(new DiscardAction(p, p, this.magicNumber, false));
+    AbstractDungeon.actionManager.addToBottom(new SFXAction("WHISTLE_STEAM_1"));
     AbstractDungeon.actionManager.addToBottom(new GainBlockAction(p, p, block));
   }
 

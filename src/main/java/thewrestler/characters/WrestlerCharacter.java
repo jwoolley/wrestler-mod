@@ -147,7 +147,6 @@ public class WrestlerCharacter extends CustomPlayer {
         return signatureMoveInfo != null;
     }
 
-
     public static AbstractSignatureMoveInfo getSignatureMoveInfo() {
         return signatureMoveInfo;
     }
@@ -160,6 +159,12 @@ public class WrestlerCharacter extends CustomPlayer {
     public static AbstractSignatureMoveInfo initializeSignatureMoveInfo() {
         final int index = (new Random()).nextInt(SignatureMoveCardEnum.values().length);
         return SignatureMoveCardEnum.values()[index].getInfoCopy(SignatureMoveUpgradeList.NO_UPGRADES);
+    }
+
+    @Override
+    public void applyEndOfTurnTriggers() {
+        super.applyEndOfTurnTriggers();
+        WrestlerMod.atEndOfPlayerTurn();
     }
 
     // character Select screen effect

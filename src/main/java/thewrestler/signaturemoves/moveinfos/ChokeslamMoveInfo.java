@@ -28,6 +28,11 @@ public class ChokeslamMoveInfo extends AbstractSignatureMoveInfo {
   }
 
   @Override
+  public void atEndOfTurn() {
+
+  }
+
+  @Override
   public void atStartOfCombat() {
     this.grappledCount = 0;
   }
