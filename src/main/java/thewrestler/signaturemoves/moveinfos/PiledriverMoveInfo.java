@@ -10,6 +10,7 @@ import thewrestler.util.info.CombatInfo;
 
 public class PiledriverMoveInfo extends AbstractSignatureMoveInfo {
   private static final int TURNS_REQUIRED = 1;
+  private static final int MAX_CARDS = 1;
   private int numTurns = 0;
 
   public PiledriverMoveInfo() {
@@ -29,7 +30,7 @@ public class PiledriverMoveInfo extends AbstractSignatureMoveInfo {
 
   @Override
   public void atEndOfTurn() {
-    if (AbstractDungeon.player.drawPile.isEmpty()) {
+    if (AbstractDungeon.player.drawPile.size() <= MAX_CARDS) {
       numTurns++;
       if (numTurns == TURNS_REQUIRED) {
         triggerGainCard();
@@ -58,8 +59,9 @@ public class PiledriverMoveInfo extends AbstractSignatureMoveInfo {
   // TODO: move this text to UiStrings.json
   @Override
   public String getStaticConditionText() {
-    return "End your turn with an empty draw pile"
-      + (TURNS_REQUIRED > 1 ? " on " + TURNS_REQUIRED + " separate turns" : "") + " to";
+    return "End your turn with "
+        + (MAX_CARDS == 0 ? "an empty" : MAX_CARDS + " or less cards in your" ) + " draw pile"
+        + (TURNS_REQUIRED > 1 ? " on " + TURNS_REQUIRED + " separate turns" : "") + " to";
   }
 
   @Override
@@ -74,7 +76,8 @@ public class PiledriverMoveInfo extends AbstractSignatureMoveInfo {
   // TODO: move this text to UiStrings.json (or similar new file)
   @Override
   public String getDynamicConditionText() {
-    final String prefixText = "End your turn with an empty draw pile";
+    final String prefixText = "End your turn with "
+        + (MAX_CARDS == 0 ? "an empty" : MAX_CARDS + " or less cards in your" ) + " draw pile";
 
     return prefixText
         + (TURNS_REQUIRED > 1 ? " for " + getTurnsRemaining() + " more turn" + (getTurnsRemaining() > 1 ? "s" : "") : "")
