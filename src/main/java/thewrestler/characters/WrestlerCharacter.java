@@ -12,6 +12,7 @@ import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.core.EnergyManager;
 import com.megacrit.cardcrawl.core.Settings;
+import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.helpers.CardLibrary;
 import com.megacrit.cardcrawl.helpers.FontHelper;
 import com.megacrit.cardcrawl.helpers.ScreenShake;
@@ -22,6 +23,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import thewrestler.WrestlerMod;
 import thewrestler.cards.attack.WrestlerStrike;
+import thewrestler.signaturemoves.cards.SignatureMoveCardEnum;
 import thewrestler.signaturemoves.moveinfos.AbstractSignatureMoveInfo;
 import thewrestler.signaturemoves.moveinfos.ChokeslamMoveInfo;
 import thewrestler.cards.skill.WrestlerDefend;
@@ -29,8 +31,10 @@ import thewrestler.cards.skill.EyePoke;
 import thewrestler.cards.attack.TakeToTheMat;
 import thewrestler.enums.AbstractCardEnum;
 import thewrestler.relics.Headgear;
+import thewrestler.signaturemoves.upgrades.SignatureMoveUpgradeList;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 import static thewrestler.WrestlerMod.*;
 
@@ -154,7 +158,8 @@ public class WrestlerCharacter extends CustomPlayer {
     }
 
     public static AbstractSignatureMoveInfo initializeSignatureMoveInfo() {
-        return new ChokeslamMoveInfo();
+        final int index = (new Random()).nextInt(SignatureMoveCardEnum.values().length);
+        return SignatureMoveCardEnum.values()[index].getInfoCopy(SignatureMoveUpgradeList.NO_UPGRADES);
     }
 
     // character Select screen effect

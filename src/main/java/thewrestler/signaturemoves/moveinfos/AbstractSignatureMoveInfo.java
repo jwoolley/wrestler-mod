@@ -44,11 +44,12 @@ public abstract class AbstractSignatureMoveInfo {
   public AbstractSignatureMoveInfo makeCopy(SignatureMoveUpgradeList upgradeList) {
     try {
       final Constructor<? extends AbstractSignatureMoveInfo> constructor =
-          this.getClass().getConstructor(AbstractSignatureMoveCard.class, SignatureMoveUpgradeList.class, Boolean.class);
+          this.getClass().getConstructor(SignatureMoveUpgradeList.class, boolean.class);
 
-      return constructor.newInstance(this.signatureMoveCard, this.upgradeList, this.isFirstInstance) ;
+      return constructor.newInstance(this.upgradeList, this.isFirstInstance);
     } catch (NoSuchMethodException | IllegalAccessException | InstantiationException | InvocationTargetException e) {
-      throw new RuntimeException("WrestlerMod failed to auto-generate makeCopy for AbstractSignatureMoveInfo: " + this);
+      throw new RuntimeException("WrestlerMod failed to auto-generate makeCopy for " + this.getClass().getSimpleName()
+          + ". Error: " + e);
     }
   }
 

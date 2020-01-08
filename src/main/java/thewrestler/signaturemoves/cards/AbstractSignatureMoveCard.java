@@ -18,6 +18,9 @@ import java.util.Map;
 import static thewrestler.WrestlerMod.getCardResourcePath;
 
 abstract public class AbstractSignatureMoveCard extends CustomCard {
+  // TODO: add effects on the info panel, etc. for full trigger (with card gain) and partial trigger (for multi-step
+  //  conditions)
+
   public static final CardColor COLOR = AbstractCardEnum.THE_WRESTLER_ORANGE;
   public static final CardRarity RARITY = CardRarity.SPECIAL;
 

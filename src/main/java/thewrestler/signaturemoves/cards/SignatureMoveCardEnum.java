@@ -3,13 +3,15 @@ package thewrestler.signaturemoves.cards;
 import thewrestler.WrestlerMod;
 import thewrestler.signaturemoves.moveinfos.AbstractSignatureMoveInfo;
 import thewrestler.signaturemoves.moveinfos.ChokeslamMoveInfo;
+import thewrestler.signaturemoves.moveinfos.PiledriverMoveInfo;
 import thewrestler.signaturemoves.upgrades.SignatureMoveUpgradeList;
 
 import java.util.Arrays;
 import java.util.Optional;
 
 public enum SignatureMoveCardEnum {
-  CHOKESLAM(new Chokeslam(), new ChokeslamMoveInfo());
+  CHOKESLAM(new Chokeslam(), new ChokeslamMoveInfo()),
+  PILEDRIVER(new Piledriver(), new PiledriverMoveInfo());
 
   SignatureMoveCardEnum(AbstractSignatureMoveCard card, AbstractSignatureMoveInfo moveInfo) {
     this.card = card;

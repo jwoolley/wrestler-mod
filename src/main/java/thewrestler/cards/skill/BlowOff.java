@@ -57,6 +57,8 @@ public class BlowOff extends CustomCard {
       if (this.magicNumber + DISCARD_AMOUNT_UPGRADE > -1) {
         this.upgradeMagicNumber(DISCARD_AMOUNT_UPGRADE);
       }
+      this.rawDescription = getDescription(this.magicNumber);
+      initializeDescription();
     }
   }
   public static String getDescription(int numCards) {

@@ -353,5 +353,17 @@
       " 0 this turn.",
       "a "
     ]
+  },
+
+  "WrestlerMod:Piledriver": {
+    "NAME": "Piledriver",
+    "DESCRIPTION": "Retain. NL Deal !D! Damage. NL If this kills an enemy or breaks its block, gain ",
+    "EXTENDED_DESCRIPTION": [
+      "[E]",
+      " and draw !M!",
+      " card.",
+      " cards.",
+      "a "
+    ]
   }
 }

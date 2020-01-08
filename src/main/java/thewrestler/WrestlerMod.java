@@ -38,6 +38,7 @@ import thewrestler.patches.powers.OnApplyPowerPatchInsert;
 import thewrestler.potions.CobraPotion;
 import thewrestler.potions.GrapplePotion;
 import thewrestler.relics.Headgear;
+import thewrestler.signaturemoves.cards.Piledriver;
 import thewrestler.signaturemoves.moveinfos.AbstractSignatureMoveInfo;
 import thewrestler.ui.WrestlerCombatInfoPanel;
 import thewrestler.ui.WrestlerSignatureMovePanel;
@@ -505,6 +506,8 @@ public class WrestlerMod implements
         BaseMod.addCard(new Chokeslam());
         UnlockTracker.unlockCard(Chokeslam.ID);
 
+        BaseMod.addCard(new Piledriver());
+        UnlockTracker.unlockCard(Piledriver.ID);
 //        UnlockTracker.unlockCard(SafetyTag.ID);
 
         // TODO: Remove this once card pool is sufficiently large

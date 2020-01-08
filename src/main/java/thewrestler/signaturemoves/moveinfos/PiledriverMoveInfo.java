@@ -4,10 +4,12 @@ import com.megacrit.cardcrawl.cards.AbstractCard;
 import thewrestler.signaturemoves.cards.Piledriver;
 import thewrestler.signaturemoves.upgrades.SignatureMoveUpgradeList;
 import thewrestler.signaturemoves.upgrades.UpgradeType;
+import thewrestler.util.info.CombatInfo;
 
 public class PiledriverMoveInfo extends AbstractSignatureMoveInfo {
-  private static final int BLOCK_REQUIRED = 15;
-  private int blockCount = 0;
+  private static final int SKILLS_REQUIRED = 3;
+  private static final int TURNS_REQUIRED = 2;
+  private int numTurns = 0;
 
   public PiledriverMoveInfo() {
     this(SignatureMoveUpgradeList.NO_UPGRADES, true);
@@ -19,22 +21,26 @@ public class PiledriverMoveInfo extends AbstractSignatureMoveInfo {
 
   @Override
   public void onCardPlayed(AbstractCard card) {
-
+    if (card.type == AbstractCard.CardType.SKILL && CombatInfo.getNumSkillsPlayed() + 1 == SKILLS_REQUIRED) {
+      numTurns++;
+      if (numTurns == TURNS_REQUIRED) {
+        triggerGainCard();
+      }
+    }
   }
 
   @Override
   public void atStartOfTurn() {
-    this.blockCount = 0;
   }
 
   @Override
   public void atStartOfCombat() {
-    this.blockCount = 0;
+    this.numTurns = 0;
   }
 
   @Override
   public void atEndOfCombat() {
-    this.blockCount = 0;
+    this.numTurns = 0;
   }
 
   @Override
@@ -48,23 +54,26 @@ public class PiledriverMoveInfo extends AbstractSignatureMoveInfo {
   // TODO: move this text to UiStrings.json
   @Override
   public String getStaticConditionText() {
-    return "Block " + BLOCK_REQUIRED + " damage in one turn to";
+    return "Play " + SKILLS_REQUIRED + " in one turn"
+      + (TURNS_REQUIRED > 1 ? " on " + TURNS_REQUIRED + " separate turns" : "") + " to";
   }
-
-  private boolean triggeredGain = false;
 
   @Override
   public boolean canStillTriggerCardGain() {
-    return !triggeredGain;
+    return numTurns < TURNS_REQUIRED;
   }
 
-  private int getBlockRemaining() {
-    return BLOCK_REQUIRED - this.blockCount;
+  private int getTurnsRemaining() {
+    return TURNS_REQUIRED - this.numTurns;
   }
 
   // TODO: move this text to UiStrings.json (or similar new file)
   @Override
   public String getDynamicConditionText() {
-    return "Block " + getBlockRemaining()  + " more damage this turn to";
+    final String prefixText = "Play " + SKILLS_REQUIRED + " Skills in one turn";
+
+    return prefixText
+        + (TURNS_REQUIRED > 1 ? " for " + getTurnsRemaining() + " more turn" + (getTurnsRemaining() > 1 ? "s" : "") : "")
+        + " to";
   }
 }
