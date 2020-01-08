@@ -29,16 +29,16 @@ public class BearHug extends CustomCard {
   private static final CardRarity RARITY = CardRarity.UNCOMMON;
   private static final CardTarget TARGET = CardTarget.ENEMY;
 
-  private static final int COST = 1;
-  private static final int DAMAGE = 6;
+  private static final int COST = 2;
+  private static final int DAMAGE = 12;
+  private static final int DAMAGE_UPGRADE = 2;
   private static final int DEBUFFS_PER_SKILL = 1;
 
   public BearHug() {
-    super(ID, NAME, getCardResourcePath(IMG_PATH), COST, getDescription(true), TYPE,
+    super(ID, NAME, getCardResourcePath(IMG_PATH), COST, getDescription(false), TYPE,
         AbstractCardEnum.THE_WRESTLER_ORANGE, RARITY, TARGET);
     this.baseDamage = this.damage = DAMAGE;
     this.baseMagicNumber = this.magicNumber = DEBUFFS_PER_SKILL;
-    this.exhaust = true;
   }
 
   @Override
@@ -59,7 +59,7 @@ public class BearHug extends CustomCard {
   public void upgrade() {
     if (!this.upgraded) {
       this.upgradeName();
-      this.exhaust = false;
+      this.upgradeDamage(DAMAGE_UPGRADE);
       this.rawDescription = getDescription(false);
       this.initializeDescription();
     }

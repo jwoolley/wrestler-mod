@@ -30,10 +30,10 @@ public class HeelTurn extends CustomCard {
   private static final CardTarget TARGET = CardTarget.SELF;
 
   private static final int COST = 3;
-  private static final int UPGRADED_COST = 2;
 
   private static final int INTANGIBLE_AMOUNT = 1;
-  private static final int STRENGTH_AMOUNT = 3;
+  private static final int STRENGTH_AMOUNT = 2;
+  private static final int UPGRADED_STRENGTH_AMOUNT = 1;
   private static final int GOLD_AMOUNT = 6;
 
   public HeelTurn() {
@@ -65,7 +65,7 @@ public class HeelTurn extends CustomCard {
   public void upgrade() {
     if (!this.upgraded) {
       this.upgradeName();
-      this.upgradeBaseCost(UPGRADED_COST);
+      this.upgradeMagicNumber(UPGRADED_STRENGTH_AMOUNT);
       this.rawDescription = getDescription();
       initializeDescription();
     }
