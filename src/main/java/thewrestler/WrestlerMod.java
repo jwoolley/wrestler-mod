@@ -91,7 +91,7 @@ public class WrestlerMod implements
 
     // Colors (RGB)
     // Character Color
-    public static final Color WRESTLER_ORANGE = CardHelper.getColor(220.0f, 140.0f, 0.0f);
+    public static final Color WRESTLER_ORANGE = CardHelper.getColor(220, 140, 0);
 
     public static final String getAnimationResourcePath(String resourcePath) {
         return RESOURCE_FOLDER_NAME + "/animations/" + resourcePath;

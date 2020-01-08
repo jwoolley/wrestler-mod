@@ -14,7 +14,7 @@ public class CardUtil {
     if (forEntireCombat) {
       card.modifyCostForCombat(-discountAmount);
     } else {
-      card.modifyCostForTurn(-discountAmount);
+      card.setCostForTurn(card.costForTurn - discountAmount);
     }
 
     card.superFlash(Color.GOLD.cpy());
