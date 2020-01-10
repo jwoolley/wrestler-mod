@@ -37,7 +37,7 @@ public enum SignatureMoveCardEnum {
   public static SignatureMoveCardEnum getEnum(AbstractSignatureMoveCard card) {
     final int index = getOrdinal(card);
 
-    if (index > -1) {
+    if (index == -1) {
       return null;
     }
     return SignatureMoveCardEnum.values()[index];

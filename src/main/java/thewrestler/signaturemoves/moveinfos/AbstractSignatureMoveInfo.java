@@ -5,9 +5,11 @@ import basemod.abstracts.CustomSavable;
 import com.megacrit.cardcrawl.actions.common.MakeTempCardInHandAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
+import org.apache.commons.net.smtp.SMTP;
 import thewrestler.WrestlerMod;
 import thewrestler.characters.WrestlerCharacter;
 import thewrestler.signaturemoves.cards.AbstractSignatureMoveCard;
+import thewrestler.signaturemoves.cards.Chokeslam;
 import thewrestler.signaturemoves.cards.SignatureMoveCardEnum;
 import thewrestler.signaturemoves.upgrades.AbstractSignatureMoveUpgrade;
 import thewrestler.signaturemoves.upgrades.SerializedSignatureMoveUpgrade;
@@ -32,9 +34,6 @@ public abstract class AbstractSignatureMoveInfo {
     if (upgradeList != SignatureMoveUpgradeList.NO_UPGRADES) {
       this.signatureMoveCard.applyUpgrades(upgradeList);
     }
-
-    cardSavable = new MoveCardCustomSavable();
-    upgradeSavable = new MoveUpgradeCustomSavable();
   }
 
   public AbstractSignatureMoveInfo makeCopy() {
@@ -46,7 +45,7 @@ public abstract class AbstractSignatureMoveInfo {
       final Constructor<? extends AbstractSignatureMoveInfo> constructor =
           this.getClass().getConstructor(SignatureMoveUpgradeList.class, boolean.class);
 
-      return constructor.newInstance(this.upgradeList, this.isFirstInstance);
+      return constructor.newInstance(upgradeList, this.isFirstInstance);
     } catch (NoSuchMethodException | IllegalAccessException | InstantiationException | InvocationTargetException e) {
       throw new RuntimeException("WrestlerMod failed to auto-generate makeCopy for " + this.getClass().getSimpleName()
           + ". Error: " + e);
@@ -63,12 +62,6 @@ public abstract class AbstractSignatureMoveInfo {
   public abstract String getDynamicConditionText();
   public abstract String getStaticConditionText();
 
-  public static final String SIGNATURE_CARD_SAVABLE_KEY = WrestlerMod.makeID("SignatureCardCustomSavable");
-  public static final String SIGNATURE_UPGRADE_SAVABLE_KEY = WrestlerMod.makeID("SignatureUpgradeCustomSavable");
-
-  private MoveCardCustomSavable cardSavable;
-  private MoveUpgradeCustomSavable upgradeSavable;
-
   public AbstractSignatureMoveCard getSignatureMoveCard() {
     return this.signatureMoveCard;
   }
@@ -81,16 +74,12 @@ public abstract class AbstractSignatureMoveInfo {
 
   abstract public boolean canStillTriggerCardGain();
 
-  public void registerSaves() {
-    BaseMod.addSaveField(SIGNATURE_CARD_SAVABLE_KEY, this.cardSavable);
-    BaseMod.addSaveField(SIGNATURE_UPGRADE_SAVABLE_KEY, this.upgradeSavable);
-  }
-
-  class MoveCardCustomSavable implements CustomSavable<Integer> {
+  static class MoveCardCustomSavable implements CustomSavable<Integer> {
     @Override
     public Integer onSave() {
-      WrestlerMod.logger.info("MoveCardCustomSavable saving value: " + SignatureMoveCardEnum.getOrdinal(signatureMoveCard));
-      return SignatureMoveCardEnum.getOrdinal(signatureMoveCard);
+      AbstractSignatureMoveCard card = WrestlerCharacter.getSignatureMoveInfo().signatureMoveCard;
+      WrestlerMod.logger.info("MoveCardCustomSavable saving value: " + SignatureMoveCardEnum.getOrdinal(card) + " card: " + card.name);
+      return SignatureMoveCardEnum.getOrdinal(WrestlerCharacter.getSignatureMoveInfo().signatureMoveCard);
     }
 
     @Override
@@ -101,11 +90,12 @@ public abstract class AbstractSignatureMoveInfo {
     }
   }
 
-  class MoveUpgradeCustomSavable implements CustomSavable<Integer> {
+  static class MoveUpgradeCustomSavable implements CustomSavable<Integer> {
     @Override
     public Integer onSave() {
-      WrestlerMod.logger.info("MoveUpgradeCustomSavable saving value: " + upgradeList.getSerializedUpgradeList());
-      return upgradeList.getSerializedUpgradeList();
+      SignatureMoveUpgradeList list = WrestlerCharacter.getSignatureMoveInfo().upgradeList;
+      WrestlerMod.logger.info("MoveUpgradeCustomSavable saving value: " + list.getSerializedUpgradeList() + " size: " + list.size());
+      return list.getSerializedUpgradeList();
     }
 
     @Override
@@ -130,6 +120,8 @@ public abstract class AbstractSignatureMoveInfo {
     SignatureMoveUpgradeList upgradeListFromSave;
 
     boolean hasCompleteData() {
+      WrestlerMod.logger.info("AbstractSignatureMoveInfo::hasCompleteData called");
+
       if (cardFromSave != null && SignatureMoveCardEnum.getEnum(cardFromSave) == null) {
         WrestlerMod.logger.warn(
             "AbstractSignatureMoveInfo::hasCompleteData unable to find card enum for " + cardFromSave.cardID);
@@ -144,10 +136,33 @@ public abstract class AbstractSignatureMoveInfo {
 
     if (infoFromSave.hasCompleteData()) {
       // TODO: load save data into WrestlerCharacter.signatureMoveInfo
+      WrestlerMod.logger.info("AbstractSignatureMoveInfo::loadSaveData save data found. loading from save");
+
       SignatureMoveCardEnum cardEnum = SignatureMoveCardEnum.getEnum(infoFromSave.cardFromSave);
       WrestlerCharacter.setSignatureMoveInfo(cardEnum.getInfoCopy(infoFromSave.upgradeListFromSave));
     }
   }
 
-  static InfoDataFromSave infoFromSave = new InfoDataFromSave();
+  private static InfoDataFromSave infoFromSave = new InfoDataFromSave();
+
+  public static final String SIGNATURE_CARD_SAVABLE_KEY = WrestlerMod.makeID("SignatureCardCustomSavable");
+  public static final String SIGNATURE_UPGRADE_SAVABLE_KEY = WrestlerMod.makeID("SignatureUpgradeCustomSavable");
+  private static MoveCardCustomSavable cardSavable = new MoveCardCustomSavable();
+  private static MoveUpgradeCustomSavable upgradeSavable = new MoveUpgradeCustomSavable();
+
+  public static MoveCardCustomSavable getCardSavable() {
+    return cardSavable;
+  }
+
+  public static MoveUpgradeCustomSavable getUpgradeSavable() {
+    return upgradeSavable;
+  }
+
+  public static void resetSavables() {
+
+    WrestlerMod.logger.info(
+        "AbstractSignatureMoveInfo::resetSavables called");
+    cardSavable = null;
+    upgradeSavable = null;
+  }
 }

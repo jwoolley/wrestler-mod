@@ -64,6 +64,7 @@ public class WrestlerMod implements
         EditStringsSubscriber,
         EditKeywordsSubscriber,
         EditCharactersSubscriber,
+        PostDungeonInitializeSubscriber,
         PostInitializeSubscriber,
         StartGameSubscriber,
         OnStartBattleSubscriber,
@@ -516,6 +517,12 @@ public class WrestlerMod implements
         UnlockTracker.unlockCard(DefaultRareAttack.ID);
 
         logger.info("Done adding cards!");
+
+
+        BaseMod.addSaveField(AbstractSignatureMoveInfo.SIGNATURE_CARD_SAVABLE_KEY,
+            AbstractSignatureMoveInfo.getCardSavable());
+        BaseMod.addSaveField(AbstractSignatureMoveInfo.SIGNATURE_UPGRADE_SAVABLE_KEY,
+            AbstractSignatureMoveInfo.getUpgradeSavable());
     }
 
     // There are better ways to do this than listing every single individual card, but I do not want to complicate things
@@ -664,6 +671,8 @@ public class WrestlerMod implements
 
         if (AbstractSignatureMoveInfo.hasCompleteSaveData()) {
             AbstractSignatureMoveInfo.loadSaveData();
+            WrestlerMod.logger.info("WrestlerCharacter:setSignatureMoveInfo set info from save: " + WrestlerCharacter.getSignatureMoveInfo());
+
         } else {
             WrestlerMod.logger.info("WrestlerMod::receiveOnBattleStart initializing signatureMoveInfo");
             WrestlerCharacter.setSignatureMoveInfo(WrestlerCharacter.initializeSignatureMoveInfo());
@@ -699,5 +708,10 @@ public class WrestlerMod implements
         combatInfoPanel.atEndOfTurn();
         signatureMovePanel.atEndOfTurn();
         return true;
+    }
+
+    @Override
+    public void receivePostDungeonInitialize() {
+        AbstractSignatureMoveInfo.resetSavables();
     }
 }
