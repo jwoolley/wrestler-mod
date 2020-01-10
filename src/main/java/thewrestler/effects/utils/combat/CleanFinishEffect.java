@@ -13,14 +13,25 @@ import org.apache.logging.log4j.Logger;
 
 public class CleanFinishEffect extends AbstractGameEffect {
     private static final Color WHITE_CAMERA_FLASH = new Color(0.95f, 0.95f, 1.0f, 0.9f);
+    private static final String CAMERA_SFX_KEY = "CAMERA_SHUTTER_1";
+
     private static float ACTION_DURATION = Settings.ACTION_DUR_FAST;
     private int actionCounter;
 
     private Logger logger;
 
+    private final String sfxKey;
+    private final Color flashColor;
+
     public CleanFinishEffect() {
+      this(WHITE_CAMERA_FLASH, CAMERA_SFX_KEY, ACTION_DURATION);
+    }
+
+    public CleanFinishEffect(Color color, String sfxKey, float duration) {
       this.duration = ACTION_DURATION;
       this.actionCounter = 24;
+      this.flashColor = color.cpy();
+      this.sfxKey = sfxKey;
     }
 
     @Override
@@ -48,9 +59,9 @@ public class CleanFinishEffect extends AbstractGameEffect {
         if (actionCounter == 24) {
           AbstractDungeon.effectsQueue.add(new RoomTintEffect(Color.BLACK.cpy(), 0.9F));
         } else if (actionCounter == 20) {
-          AbstractDungeon.actionManager.addToTop(new SFXAction("CAMERA_SHUTTER_1"));
+          AbstractDungeon.actionManager.addToTop(new SFXAction(this.sfxKey));
         } else if (actionCounter < 16) {
-          AbstractDungeon.effectsQueue.add(new RoomTintEffect(WHITE_CAMERA_FLASH, 0.99F));
+          AbstractDungeon.effectsQueue.add(new RoomTintEffect(this.flashColor, 0.99F));
           AbstractDungeon.effectsQueue.add(new BorderFlashEffect(Color.WHITE.cpy(), false));
           this.isDone = true;
         }

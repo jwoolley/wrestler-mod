@@ -355,6 +355,14 @@
     ]
   },
 
+  "WrestlerMod:DragonGate": {
+    "NAME": "Dragon Gate",
+    "DESCRIPTION": "Retain. NL Add !M! random cards from your Exhaust pile into your hand. NL They cost 1 less this combat.",
+    "EXTENDED_DESCRIPTION": [
+      "a "
+    ]
+  },
+
   "WrestlerMod:Piledriver": {
     "NAME": "Piledriver",
     "DESCRIPTION": "Retain. NL Deal !D! Damage. NL If this kills an enemy or breaks its Block, gain ",

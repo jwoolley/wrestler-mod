@@ -38,6 +38,7 @@ import thewrestler.patches.powers.OnApplyPowerPatchInsert;
 import thewrestler.potions.CobraPotion;
 import thewrestler.potions.GrapplePotion;
 import thewrestler.relics.Headgear;
+import thewrestler.signaturemoves.cards.DragonGate;
 import thewrestler.signaturemoves.cards.Piledriver;
 import thewrestler.signaturemoves.moveinfos.AbstractSignatureMoveInfo;
 import thewrestler.ui.WrestlerCombatInfoPanel;
@@ -266,6 +267,7 @@ public class WrestlerMod implements
         reflectedMap.put("DOOR_HATCH_OPEN_1", new Sfx(getAudioResourcePath("TheWrestler_DoorHatchOpen1.ogg")));
         reflectedMap.put("ELECTRO_INTERFERENCE_1", new Sfx(getAudioResourcePath("TheWrestler_ElectroInterference1.ogg")));
         reflectedMap.put("GONG_STRIKE_1", new Sfx(getAudioResourcePath("TheWrestler_GongStrike1.ogg")));
+        reflectedMap.put("GONG_STRIKE_2", new Sfx(getAudioResourcePath("TheWrestler_GongStrike2.ogg")));
         reflectedMap.put("GRUNT_SHORT_1", new Sfx(getAudioResourcePath("TheWrestler_GruntShort1.ogg")));
         reflectedMap.put("GRUNT_SHORT_2", new Sfx(getAudioResourcePath("TheWrestler_GruntShort2.ogg")));
         reflectedMap.put("SPLAT_WET_1", new Sfx(getAudioResourcePath("TheWrestler_SplatWet1.ogg")));
@@ -508,8 +510,13 @@ public class WrestlerMod implements
         BaseMod.addCard(new Chokeslam());
         UnlockTracker.unlockCard(Chokeslam.ID);
 
+        BaseMod.addCard(new DragonGate());
+        UnlockTracker.unlockCard(DragonGate.ID);
+
         BaseMod.addCard(new Piledriver());
         UnlockTracker.unlockCard(Piledriver.ID);
+
+
 //        UnlockTracker.unlockCard(SafetyTag.ID);
 
         // TODO: Remove this once card pool is sufficiently large
@@ -713,5 +720,9 @@ public class WrestlerMod implements
     @Override
     public void receivePostDungeonInitialize() {
         AbstractSignatureMoveInfo.resetSavables();
+    }
+
+    static public void onExhaustCardHook(AbstractCard card) {
+        WrestlerCharacter.getSignatureMoveInfo().onCardExhausted(card);
     }
 }

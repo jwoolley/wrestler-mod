@@ -3,6 +3,7 @@ package thewrestler.signaturemoves.cards;
 import thewrestler.WrestlerMod;
 import thewrestler.signaturemoves.moveinfos.AbstractSignatureMoveInfo;
 import thewrestler.signaturemoves.moveinfos.ChokeslamMoveInfo;
+import thewrestler.signaturemoves.moveinfos.DragonGateMoveInfo;
 import thewrestler.signaturemoves.moveinfos.PiledriverMoveInfo;
 import thewrestler.signaturemoves.upgrades.SignatureMoveUpgradeList;
 
@@ -11,6 +12,7 @@ import java.util.Optional;
 
 public enum SignatureMoveCardEnum {
   CHOKESLAM(new Chokeslam(), new ChokeslamMoveInfo()),
+  DRAGON_GATE(new DragonGate(), new DragonGateMoveInfo()),
   PILEDRIVER(new Piledriver(), new PiledriverMoveInfo());
 
   SignatureMoveCardEnum(AbstractSignatureMoveCard card, AbstractSignatureMoveInfo moveInfo) {

@@ -23,6 +23,11 @@ public class ChokeslamMoveInfo extends AbstractSignatureMoveInfo {
   }
 
   @Override
+  public void onCardExhausted(AbstractCard card) {
+
+  }
+
+  @Override
   public void atStartOfTurn() {
 
   }

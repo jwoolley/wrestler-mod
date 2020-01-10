@@ -25,6 +25,11 @@ public class PiledriverMoveInfo extends AbstractSignatureMoveInfo {
   public void onCardPlayed(AbstractCard card) { }
 
   @Override
+  public void onCardExhausted(AbstractCard card) {
+
+  }
+
+  @Override
   public void atStartOfTurn() {
   }
 
