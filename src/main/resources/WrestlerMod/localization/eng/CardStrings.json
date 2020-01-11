@@ -365,7 +365,7 @@
 
   "WrestlerMod:Piledriver": {
     "NAME": "Piledriver",
-    "DESCRIPTION": "Retain. NL Deal !D! Damage. NL If this kills an enemy or breaks its Block, gain ",
+    "DESCRIPTION": "Retain. NL Deal !D! Damage to ALL enemies. NL For each enemy killed or whose Block is broken, gain ",
     "EXTENDED_DESCRIPTION": [
       "[E]",
       " and draw !M!",

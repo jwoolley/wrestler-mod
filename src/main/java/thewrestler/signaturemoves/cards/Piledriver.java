@@ -18,6 +18,7 @@ import com.megacrit.cardcrawl.vfx.combat.FlashAtkImgEffect;
 import com.megacrit.cardcrawl.vfx.combat.WeightyImpactEffect;
 import org.apache.commons.lang3.StringUtils;
 import thewrestler.signaturemoves.upgrades.SignatureMoveUpgradeList;
+import thewrestler.util.CreatureUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -32,10 +33,10 @@ public class Piledriver extends AbstractSignatureMoveCard {
   private static final CardStrings cardStrings;
 
   private static final CardType TYPE = CardType.ATTACK;
-  private static final CardTarget TARGET = CardTarget.ENEMY;
+  private static final CardTarget TARGET = CardTarget.ALL_ENEMY;
 
-  private static final int COST = 2;
-  private static final int DAMAGE = 15;
+  private static final int COST = 1;
+  private static final int DAMAGE = 10;
   private static final int NUM_CARDS = 1;
   private static final int NUM_ENERGY = 1;
   private static final boolean HAS_RETAIN = true;
@@ -49,70 +50,13 @@ public class Piledriver extends AbstractSignatureMoveCard {
     this.energyGain = NUM_ENERGY;
   }
 
-  private static class PiledriverAction extends AbstractGameAction {
-    private static final float DURATION = Settings.ACTION_DUR_FAST;
-    private final DamageInfo damageInfo;
-    private final int numEnergy;
-    private final int numCards;
-    private final List<AbstractMonster> monsters = new ArrayList<>();
-
-    PiledriverAction(AbstractMonster target, AbstractPlayer source, int damage, int numEnergy, int numCards) {
-      this.duration = DURATION;
-      this.actionType = ActionType.DAMAGE;
-      this.target = target;
-      this.source = source;
-      this.numEnergy = numEnergy;
-      this.numCards = numCards;
-      this.damageInfo =  new DamageInfo(this.source, damage, DamageInfo.DamageType.NORMAL);
-    }
-
-    @Override
-    public void update() {
-
-      if (this.monsters.isEmpty()) {
-
-      }
-
-      if (this.duration <= 0.1f) {
-        AbstractDungeon.effectList.add(
-            new FlashAtkImgEffect(this.target.hb.cX, this.target.hb.cY, AbstractGameAction.AttackEffect.NONE));
-        boolean shouldTrigger = false;
-
-        if (target.currentBlock > 0 && damageInfo.output > target.currentBlock) {
-          shouldTrigger = true;
-        }
-
-        this.target.damage(damageInfo);
-
-        if (!shouldTrigger && (this.target.isDying || this.target.currentHealth <= 0) && !this.target.halfDead){
-          shouldTrigger = true;
-        }
-
-        if (shouldTrigger) {
-          CardCrawlGame.sound.play("CARD_BURN");
-          AbstractDungeon.actionManager.addToTop(new VFXAction(
-              new DamageImpactBlurEffect(this.target.hb.cX, this.target.hb.cY), Settings.ACTION_DUR_XFAST));
-          AbstractDungeon.actionManager.addToTop(new GainEnergyAction(this.numEnergy));
-          AbstractDungeon.actionManager.addToTop(new DrawCardAction(AbstractDungeon.player, this.numCards));
-        }
-        if (AbstractDungeon.getCurrRoom().monsters.areMonstersBasicallyDead()) {
-          AbstractDungeon.actionManager.clearPostCombatActions();
-        }
-        this.isDone = true;
-      }
-      tickDuration();
-    }
-  }
-
   @Override
   public void use(AbstractPlayer p, AbstractMonster m) {
-    if (m != null) {
-      AbstractDungeon.actionManager.addToBottom(
-          new VFXAction(new WeightyImpactEffect(m.hb.cX, m.hb.cY, Color.MAROON.cpy()), Settings.ACTION_DUR_XFAST));
+    CreatureUtils.getLivingMonsters().forEach(monster -> AbstractDungeon.actionManager.addToTop(new VFXAction(
+      new WeightyImpactEffect(monster.hb.cX, monster.hb.cY, Color.MAROON.cpy()), Settings.ACTION_DUR_XFAST)));
 
-      AbstractDungeon.actionManager.addToBottom(
-          new PiledriverAction(m, p, this.damage, this.energyGain, this.magicNumber));
-    }
+    AbstractDungeon.actionManager.addToBottom(
+      new PiledriverAction(p, this.damage, this.energyGain, this.magicNumber));
   }
 
   @Override
@@ -137,11 +81,71 @@ public class Piledriver extends AbstractSignatureMoveCard {
       initializeDescription();
     }
   }
+
   public static String getDescription(int numEnergy, int numBonusCards) {
     return DESCRIPTION
         + StringUtils.repeat(EXTENDED_DESCRIPTION[0], numEnergy)
         + EXTENDED_DESCRIPTION[1]
         + (numBonusCards == 1 ? EXTENDED_DESCRIPTION[2] : EXTENDED_DESCRIPTION[3]);
+  }
+
+  private static class PiledriverAction extends AbstractGameAction {
+    private static final float DURATION = Settings.ACTION_DUR_LONG;
+    private final DamageInfo damageInfo;
+    private final int numEnergy;
+    private final int numCards;
+    private final List<AbstractMonster> monsters = new ArrayList<>();
+    private final List<AbstractMonster> triggeredMonsters = new ArrayList<>();
+
+    PiledriverAction(AbstractPlayer source, int damage, int numEnergy, int numCards) {
+      this.duration = DURATION;
+      this.actionType = ActionType.DAMAGE;
+      this.source = source;
+      this.numEnergy = numEnergy;
+      this.numCards = numCards;
+      this.damageInfo =  new DamageInfo(this.source, damage, DamageInfo.DamageType.NORMAL);
+    }
+
+    @Override
+    public void update() {
+      if (this.monsters.isEmpty()) {
+        this.monsters.addAll(CreatureUtils.getLivingMonsters());
+        if (this.monsters.isEmpty()) {
+          this.isDone = true;
+          return;
+        }
+
+        this.monsters.forEach(m -> AbstractDungeon.effectList.add(
+            new FlashAtkImgEffect(m.hb.cX, m.hb.cY, AbstractGameAction.AttackEffect.NONE)));
+      }
+
+      if (this.duration <= 0.1f) {
+        monsters.forEach(m -> {
+          if (m.currentBlock > 0 && damageInfo.output > m.currentBlock) {
+            triggeredMonsters.add(m);
+          }
+          m.damage(damageInfo);
+          if (!triggeredMonsters.contains(m) && (m.isDying || m.currentHealth <= 0) && !m.halfDead) {
+            triggeredMonsters.add(m);
+          }
+        });
+
+        if (triggeredMonsters.size() > 0 && !AbstractDungeon.getCurrRoom().monsters.areMonstersBasicallyDead()) {
+          triggeredMonsters.forEach(m -> {
+            CardCrawlGame.sound.play("CARD_BURN");
+            AbstractDungeon.actionManager.addToTop(new VFXAction(
+                new DamageImpactBlurEffect(m.hb.cX, m.hb.cY), Settings.ACTION_DUR_XFAST));
+            AbstractDungeon.actionManager.addToTop(new GainEnergyAction(this.numEnergy));
+            AbstractDungeon.actionManager.addToTop(new DrawCardAction(AbstractDungeon.player, this.numCards));
+          });
+        }
+        if (AbstractDungeon.getCurrRoom().monsters.areMonstersBasicallyDead()) {
+          AbstractDungeon.actionManager.clearPostCombatActions();
+        }
+        this.isDone = true;
+      }
+      tickDuration();
+    }
   }
 
   static {
