@@ -6,13 +6,6 @@
       " damage."]
   },
 
-  "WrestlerMod:CageMatchPower": {
-    "NAME": "Cage Fighting",
-    "DESCRIPTIONS": [
-      "Until next turn, attack damage to and from #ySidelined enemies is reduced to #b",
-      "."]
-  },
-
   "WrestlerMod:CommonPower": {
           "NAME": "Wrestler Power",
           "DESCRIPTIONS": ["You applied #b", " keyword.", " keywords."]
@@ -97,13 +90,6 @@
       " more damage this turn, the #yGrappled enemy breaks free.",
       "Maintain Grapple Up"
     ]
-  },
-
-  "WrestlerMod:NotCageFightingPower": {
-    "NAME": "Sidelined",
-    "DESCRIPTIONS": [
-      "Until next turn, attack damage to and from #yCage #yFighting enemies is reduced to #b",
-      "."]
   },
 
   "WrestlerMod:ProvenTacticsPower": {
