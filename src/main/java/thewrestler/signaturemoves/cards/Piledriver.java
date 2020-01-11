@@ -19,6 +19,9 @@ import com.megacrit.cardcrawl.vfx.combat.WeightyImpactEffect;
 import org.apache.commons.lang3.StringUtils;
 import thewrestler.signaturemoves.upgrades.SignatureMoveUpgradeList;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Piledriver extends AbstractSignatureMoveCard {
   public static final String ID = "WrestlerMod:Piledriver";
   public static final String NAME;
@@ -51,6 +54,7 @@ public class Piledriver extends AbstractSignatureMoveCard {
     private final DamageInfo damageInfo;
     private final int numEnergy;
     private final int numCards;
+    private final List<AbstractMonster> monsters = new ArrayList<>();
 
     PiledriverAction(AbstractMonster target, AbstractPlayer source, int damage, int numEnergy, int numCards) {
       this.duration = DURATION;
@@ -64,6 +68,11 @@ public class Piledriver extends AbstractSignatureMoveCard {
 
     @Override
     public void update() {
+
+      if (this.monsters.isEmpty()) {
+
+      }
+
       if (this.duration <= 0.1f) {
         AbstractDungeon.effectList.add(
             new FlashAtkImgEffect(this.target.hb.cX, this.target.hb.cY, AbstractGameAction.AttackEffect.NONE));

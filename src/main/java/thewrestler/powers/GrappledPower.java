@@ -12,6 +12,7 @@ import com.megacrit.cardcrawl.powers.AbstractPower;
 import thewrestler.WrestlerMod;
 import thewrestler.characters.WrestlerCharacter;
 import thewrestler.util.BasicUtils;
+import thewrestler.util.CreatureUtils;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -59,7 +60,7 @@ public class GrappledPower extends AbstractWrestlerPower implements CloneablePow
   }
 
   static public List<AbstractMonster> getGrappledEnemies() {
-    return AbstractDungeon.getCurrRoom().monsters.monsters.stream()
+    return CreatureUtils.getLivingMonsters().stream()
         .filter(m -> m.hasPower(POWER_ID)).collect(Collectors.toList());
   }
 

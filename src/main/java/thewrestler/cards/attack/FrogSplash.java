@@ -13,6 +13,7 @@ import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.powers.WeakPower;
 import thewrestler.enums.AbstractCardEnum;
+import thewrestler.util.CreatureUtils;
 
 import static thewrestler.WrestlerMod.getCardResourcePath;
 
@@ -52,13 +53,10 @@ public class FrogSplash extends CustomCard {
 
     AbstractDungeon.actionManager.addToBottom(new SFXAction("ATTACK_POISON"));
 
-    AbstractDungeon.getCurrRoom().monsters.monsters.stream()
-        .filter(mo -> !mo.isDying && !mo.isDeadOrEscaped())
-        .forEach(mo -> {
-              AbstractDungeon.actionManager.addToBottom(
-                  new ApplyPowerAction(mo, p,
-                      new WeakPower(mo, this.magicNumber, false), this.magicNumber));
-        });
+    CreatureUtils.getLivingMonsters().forEach(mo -> {
+      AbstractDungeon.actionManager.addToBottom(
+          new ApplyPowerAction(mo, p, new WeakPower(mo, this.magicNumber, false), this.magicNumber));
+    });
   }
 
   @Override

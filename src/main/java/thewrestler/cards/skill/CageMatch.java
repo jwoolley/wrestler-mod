@@ -13,6 +13,7 @@ import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import thewrestler.WrestlerMod;
 import thewrestler.actions.power.ApplyGrappledAction;
 import thewrestler.enums.AbstractCardEnum;
+import thewrestler.util.CreatureUtils;
 
 import static thewrestler.WrestlerMod.getCardResourcePath;
 
@@ -47,12 +48,8 @@ public class CageMatch extends CustomCard {
 
     AbstractDungeon.actionManager.addToBottom(new ApplyGrappledAction(m, p));
 
-    AbstractDungeon.getCurrRoom().monsters.monsters.stream()
-        .filter(mo -> !mo.isDying && !mo.isDeadOrEscaped() && mo != m)
-        .forEach(mo -> {
-          AbstractDungeon.actionManager.addToBottom(
-              new ApplyPowerAction(mo, p, new StunMonsterPower(mo)));
-        });
+    CreatureUtils.getLivingMonsters()
+      .forEach(mo -> AbstractDungeon.actionManager.addToBottom(new ApplyPowerAction(mo, p, new StunMonsterPower(mo))));
   }
 
   @Override
