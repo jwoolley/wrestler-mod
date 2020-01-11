@@ -27,7 +27,7 @@ public class WrestlerCombatInfoPanel implements CustomInfoPanel {
   private static final float WIDTH = 290;
   private static final float HEIGHT = 160;
   private static final float X_OFFSET = 24;
-  private static final float Y_OFFSET = 611 + HEIGHT;
+  private static final float Y_OFFSET = 626 + HEIGHT;
   private static final float Y_OFFSET_WIDESCREEN = 207 + HEIGHT;
   private static final float X_TEXT_OFFSET = 10;
   private static final float Y_TEXT_OFFSET =  HEIGHT - 20;

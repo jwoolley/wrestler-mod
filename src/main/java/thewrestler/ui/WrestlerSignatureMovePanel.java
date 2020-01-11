@@ -30,7 +30,7 @@ public class WrestlerSignatureMovePanel implements CustomInfoPanel, CardPreviewE
   private static final String[] TEXT;
 
   private static final float WIDTH = 290;
-  private static final float HEIGHT = 160;
+  private static final float HEIGHT = 185;
   private static final float X_OFFSET = 24;
   private static final float Y_OFFSET = 441 + HEIGHT;
   private static final float Y_OFFSET_WIDESCREEN = 207 + HEIGHT;
@@ -41,12 +41,15 @@ public class WrestlerSignatureMovePanel implements CustomInfoPanel, CardPreviewE
   private static final float TOOLTIP_Y_OFFSET = -8.0F;
 
   private static final String UI_NAME = WrestlerMod.makeID("SignatureMovePanel");
-  private static final String BACKGROUND_TEXURE_PATH = UiHelper.getUiImageResourcePath("signaturemovepanel/background.png");
+  private static final String BACKGROUND_TEXURE_PATH = UiHelper.getUiImageResourcePath("signaturemovepanel/background-2.png");
 
   private static final BitmapFont INFO_HEADER_FONT = FontHelper.charDescFont;
+  private static final BitmapFont CARD_NAME_FONT = FontHelper.healthInfoFont;
+  private static final Color CARD_NAME_COLOR = Color.GOLDENROD.cpy();
   private static final BitmapFont INFO_FONT = FontHelper.tipBodyFont;
   private static final Color INFO_HEADER_COLOR = Color.valueOf("992200ff");
   private static final Color INFO_COLOR = Color.valueOf("e9e9e0cc");
+
   private final String uiName;
   private final String backgroundImgPath;
   private Texture panelBackgroundImage;
@@ -140,8 +143,10 @@ public class WrestlerSignatureMovePanel implements CustomInfoPanel, CardPreviewE
 
   private void renderInfoText(SpriteBatch sb) {
     final BitmapFont headerFont = INFO_HEADER_FONT;
+    final BitmapFont cardNameFont = CARD_NAME_FONT;
     final BitmapFont font = INFO_FONT;
     final Color headerColor = INFO_HEADER_COLOR;
+    final Color cardNameColor = CARD_NAME_COLOR;
     final Color color = INFO_COLOR;
 
     final int yLineOffset = (int)(INFO_FONT.getLineHeight() * (Settings.isSixteenByTen ? 1.05f : 0.95f));
@@ -154,6 +159,14 @@ public class WrestlerSignatureMovePanel implements CustomInfoPanel, CardPreviewE
         this.yOffset + this.yTextOffset,
         headerColor);
 
+    FontHelper.renderFontLeft(
+        sb,
+        cardNameFont,
+        getPreviewCard().name,
+        this.xOffset + this.width * 0.04f,
+        this.yOffset + this.yTextOffset - (yLineOffset * 1.0f),
+        cardNameColor);
+
     final String conditionText = getMoveGainConditionText();
 
     GlyphLayout layout = new GlyphLayout(font, conditionText, color,this.width -  this.xTextOffset,
@@ -162,7 +175,7 @@ public class WrestlerSignatureMovePanel implements CustomInfoPanel, CardPreviewE
     font.setColor(color);
     font.draw(sb, conditionText,
         this.xOffset + this.xTextOffset,
-        (this.yOffset + this.yTextOffset) - (yLineOffset * 1.0f),
+        (this.yOffset + this.yTextOffset) - (yLineOffset * 2.0f),
         layout.width, Align.left, true);
   }
 
