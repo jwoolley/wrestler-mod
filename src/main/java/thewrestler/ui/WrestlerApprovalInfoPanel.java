@@ -26,6 +26,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
+// TODO: VFX/SFX when approval changes (e.g. red or green border flash)
+
 public class WrestlerApprovalInfoPanel implements CustomInfoPanel {
   private static final String[] TEXT;
 
@@ -65,8 +67,6 @@ public class WrestlerApprovalInfoPanel implements CustomInfoPanel {
   private boolean updateApprovalValueFlag = false;
   private int approvalValue;
 
-  // TODO: define imgName as static named BACKGROUND_IMAGE_PATH;
-  // TODO: for SignatureMoveInfoPanel, take uiName argument and load labels from there
   public WrestlerApprovalInfoPanel() {
     this.uiName = UI_NAME;
     this.backgroundImgPath = BACKGROUND_TEXTURE_PATH;

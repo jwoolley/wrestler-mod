@@ -25,9 +25,8 @@ public class RingCard extends CustomRelic {
   private static final Texture IMG = TextureLoader.getTexture(makeRelicPath("ringcard.png"));
   private static final Texture OUTLINE = TextureLoader.getTexture(makeRelicOutlinePath("ringcard.png"));
 
-
   public static final int HEAL_AMOUNT = 3;
-  public static final int REWARD_PERCENTAGE_BONUS = 10;
+  public static final int REWARD_PERCENTAGE_BONUS = 20;
 
   public RingCard() {
     super(ID, IMG, OUTLINE, RelicTier.STARTER, LandingSound.CLINK);

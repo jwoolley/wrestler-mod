@@ -170,7 +170,7 @@
     "DESCRIPTION": "wrestlermod:Dirty. NL Gain ",
     "EXTENDED_DESCRIPTION": [
       " Intangible. NL Gain ",
-      " Strength. NL Gain !M! Gold. NL Exhaust."
+      " Strength. NL Lose !M! wrestlermod:Fan_Approval. NL Exhaust."
     ]
   },
 

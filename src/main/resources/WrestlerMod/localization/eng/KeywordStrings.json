@@ -1,10 +1,11 @@
 {
   "WrestlerMod:Approval": {
-    "PROPER_NAME": "Approval",
+    "PROPER_NAME": "Fan Approval",
     "NAMES": [
-      "approval"
+      "Fan Approval",
+      "fan_approval"
     ],
-    "DESCRIPTION": "A measure of how well-liked you are by fans. Playing #yDirty cards affects your Approval."
+    "DESCRIPTION": "A measure of how well-liked you are by fans. Playing #yDirty cards affects your Fan Approval."
   },
 
   "WrestlerMod:Dirty": {
@@ -12,23 +13,23 @@
     "NAMES": [
       "dirty"
     ],
-    "DESCRIPTION": "Playing a Dirty card decreases your #yApproval by 5. Ending your turn without playing any Dirty cards increases it by 5."
+    "DESCRIPTION": "Playing a Dirty card decreases your #yFan #yApproval by 5. Ending your turn without playing any Dirty cards increases it by 5."
   },
 
   "WrestlerMod:Disliked": {
-    "PROPER_NAME": "Disliked",
+    "PROPER_NAME": "Unpopular",
     "NAMES": [
-      "disliked"
+      "unpopular"
     ],
-    "DESCRIPTION": "You're Disliked if your #yApproval is #b0 or less."
+    "DESCRIPTION": "You're Unpopular if your #yFan #yApproval is #b0 or less."
   },
 
   "WrestlerMod:Liked": {
-    "PROPER_NAME": "Liked",
+    "PROPER_NAME": "Popular",
     "NAMES": [
-      "liked"
+      "popular"
     ],
-    "DESCRIPTION": "You're Liked if your #yApproval is #b0 or more."
+    "DESCRIPTION": "You're Popular if your #yFan #yApproval is #b0 or more."
   },
 
   "WrestlerMod:Sprained": {

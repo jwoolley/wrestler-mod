@@ -45,8 +45,8 @@
     "NAME": "Ring Card",
     "FLAVOR": "Discarded from a long-forgotten fight. But you haven't forgotten.",
     "DESCRIPTIONS": [
-      "At the end of combat, if you're #yDisliked, heal #b",
-      " HP. If you're #yLiked, enemies reward #b",
+      "At the end of combat, if you're #yUnpopular, heal #b",
+      " HP. If you're #yPopular, enemies reward #b",
       "% more Gold."
     ]
   }

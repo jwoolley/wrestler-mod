@@ -13,6 +13,7 @@ import com.megacrit.cardcrawl.powers.IntangiblePlayerPower;
 import com.megacrit.cardcrawl.powers.StrengthPower;
 import thewrestler.actions.GainGoldAction;
 import thewrestler.cards.WrestlerCardTags;
+import thewrestler.characters.WrestlerCharacter;
 import thewrestler.enums.AbstractCardEnum;
 
 import static thewrestler.WrestlerMod.getCardResourcePath;
@@ -35,7 +36,7 @@ public class HeelTurn extends CustomCard {
   private static final int INTANGIBLE_AMOUNT = 1;
   private static final int STRENGTH_AMOUNT = 2;
   private static final int STRENGTH_AMOUNT_UPGRADE = 1;
-  private static final int GOLD_AMOUNT = 6;
+  private static final int APPROVAL_LOSS = 10;
 
 
   private int strengthAmount;
@@ -43,8 +44,8 @@ public class HeelTurn extends CustomCard {
   public HeelTurn() {
     super(ID, NAME, getCardResourcePath(IMG_PATH), COST, getDescription(STRENGTH_AMOUNT), TYPE,
         AbstractCardEnum.THE_WRESTLER_ORANGE, RARITY, TARGET);
-    this.baseMagicNumber = this.magicNumber = GOLD_AMOUNT;
     this.strengthAmount = STRENGTH_AMOUNT;
+    this.baseMagicNumber = this.magicNumber = APPROVAL_LOSS;
     this.exhaust = true;
     tags.add(WrestlerCardTags.DIRTY);
   }
@@ -59,7 +60,7 @@ public class HeelTurn extends CustomCard {
     AbstractDungeon.actionManager.addToBottom(
         new ApplyPowerAction(p, p, new StrengthPower(p, this.strengthAmount), this.strengthAmount));
 
-    AbstractDungeon.actionManager.addToBottom(new GainGoldAction(this.magicNumber));
+    WrestlerCharacter.getApprovalInfo().decreaseApproval(this.magicNumber);
   }
 
   @Override
