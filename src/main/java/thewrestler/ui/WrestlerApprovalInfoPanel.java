@@ -20,10 +20,7 @@ import thewrestler.util.BasicUtils;
 import thewrestler.util.TextureLoader;
 import thewrestler.util.info.ApprovalInfo;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.stream.Collectors;
 
 // TODO: VFX/SFX when approval changes (e.g. red or green border flash)
@@ -197,7 +194,7 @@ public class WrestlerApprovalInfoPanel implements CustomInfoPanel {
   private Map<String, String> getKeywords() {
     Map<String, String> keywords = keywordList.stream()
         .map(k -> WrestlerMod.getKeyword(k))
-        .filter(kw -> kw != null)
+        .filter(Objects::nonNull)
         .collect(Collectors.toMap(kw -> kw.PROPER_NAME, kw -> kw.DESCRIPTION));
 
     keywords.putAll(baseGameKeywordList.stream()

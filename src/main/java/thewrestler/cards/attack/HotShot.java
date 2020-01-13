@@ -33,7 +33,7 @@ public class HotShot extends CustomCard {
   private static final int DAMAGE = 6;
   private static final int LIFE_LOSS = 1;
 
-  private static final int DAMAGE_UPGRADE = 1;
+  private static final int DAMAGE_UPGRADE = 2;
 
   public HotShot() {
     super(ID, NAME, getCardResourcePath(IMG_PATH), COST, DESCRIPTION, TYPE,

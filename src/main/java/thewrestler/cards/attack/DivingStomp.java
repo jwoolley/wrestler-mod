@@ -30,7 +30,7 @@ public class DivingStomp extends CustomCard {
   private static final CardTarget TARGET = CardTarget.ENEMY;
 
   private static final int COST = 2;
-  private static final int DAMAGE = 14;
+  private static final int DAMAGE = 12;
   private static final int DAMAGE_UPGRADE = 2;
   private static final int SPRAIN_AMOUNT = 1;
   private static final int SPRAIN_AMOUNT_UPGRADE = 1;

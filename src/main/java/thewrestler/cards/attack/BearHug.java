@@ -30,8 +30,8 @@ public class BearHug extends CustomCard {
   private static final CardTarget TARGET = CardTarget.ENEMY;
 
   private static final int COST = 2;
-  private static final int DAMAGE = 12;
-  private static final int DAMAGE_UPGRADE = 2;
+  private static final int DAMAGE = 9;
+  private static final int DAMAGE_UPGRADE = 4;
   private static final int DEBUFFS_PER_SKILL = 1;
 
   public BearHug() {

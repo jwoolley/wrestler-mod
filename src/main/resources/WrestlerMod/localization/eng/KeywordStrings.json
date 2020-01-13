@@ -16,20 +16,20 @@
     "DESCRIPTION": "Playing a Dirty card decreases your #yFan #yApproval by 5. Ending your turn without playing any Dirty cards increases it by 5."
   },
 
-  "WrestlerMod:Disliked": {
-    "PROPER_NAME": "Unpopular",
-    "NAMES": [
-      "unpopular"
-    ],
-    "DESCRIPTION": "You're Unpopular if your #yFan #yApproval is #b0 or less."
-  },
-
   "WrestlerMod:Liked": {
     "PROPER_NAME": "Popular",
     "NAMES": [
       "popular"
     ],
-    "DESCRIPTION": "You're Popular if your #yFan #yApproval is #b0 or more."
+    "DESCRIPTION": "Your #yFan #yApproval is greater than #b0."
+  },
+
+  "WrestlerMod:Disliked": {
+    "PROPER_NAME": "Unpopular",
+    "NAMES": [
+      "unpopular"
+    ],
+    "DESCRIPTION": "Your #yFan #yApproval is less than #b0."
   },
 
   "WrestlerMod:Sprained": {
