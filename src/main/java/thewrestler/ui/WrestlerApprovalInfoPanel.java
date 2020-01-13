@@ -12,55 +12,66 @@ import com.megacrit.cardcrawl.helpers.FontHelper;
 import com.megacrit.cardcrawl.helpers.Hitbox;
 import com.megacrit.cardcrawl.helpers.PowerTip;
 import com.megacrit.cardcrawl.helpers.TipHelper;
+import com.megacrit.cardcrawl.localization.Keyword;
 import com.megacrit.cardcrawl.localization.UIStrings;
 import thewrestler.WrestlerMod;
 import thewrestler.characters.WrestlerCharacter;
-import thewrestler.signaturemoves.cards.AbstractSignatureMoveCard;
 import thewrestler.util.BasicUtils;
 import thewrestler.util.TextureLoader;
-import thewrestler.util.info.CombatInfo;
+import thewrestler.util.info.ApprovalInfo;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
-public class WrestlerCombatInfoPanel implements CustomInfoPanel {
+public class WrestlerApprovalInfoPanel implements CustomInfoPanel {
   private static final String[] TEXT;
 
   private static final float WIDTH = 290;
-  private static final float HEIGHT = 160;
+  private static final float HEIGHT = 104;
   private static final float X_OFFSET = 24;
-  private static final float Y_OFFSET = 626 + HEIGHT;
+  private static final float Y_OFFSET = 786 + HEIGHT;
   private static final float Y_OFFSET_WIDESCREEN = 207 + HEIGHT;
-  private static final float X_TEXT_OFFSET = 10;
   private static final float Y_TEXT_OFFSET =  HEIGHT - 20;
   private static final float Y_TEXT_OFFSET_WIDESCREEN = Y_TEXT_OFFSET + 0;
-  private static final float TOOLTIP_X_OFFSET = 16.0F;
-  private static final float TOOLTIP_Y_OFFSET = -32.0F;
+  private static final float TOOLTIP_X_OFFSET = WIDTH + 16.0F;
+  private static final float TOOLTIP_Y_OFFSET = -(HEIGHT + 64.0f);
 
-  private static final String UI_NAME = WrestlerMod.makeID("CombatInfoPanel");
-  private static final String BACKGROUND_TEXURE_PATH = UiHelper.getUiImageResourcePath("combatinfopanel/background.png");
+  private static final String UI_NAME = WrestlerMod.makeID("ApprovalInfoPanel");
+  private static final String BACKGROUND_TEXTURE_PATH = UiHelper.getUiImageResourcePath("approvalinfopanel/background.png");
 
-  private static final BitmapFont INFO_FONT = FontHelper.charDescFont;
+  private static final BitmapFont INFO_HEADER_FONT = FontHelper.charDescFont;
+  private static final BitmapFont INFO_FONT = FontHelper.losePowerFont;
   private static final Color INFO_HEADER_COLOR = Color.valueOf("992200ff");
-  private static final Color INFO_COLOR = Color.valueOf("e9e9e0cc");
+
+  private static final Color NEGATIVE_APPROVAL_COLOR = Settings.RED_TEXT_COLOR.cpy();
+  private static final Color NEUTRAL_APPROVAL_COLOR = Color.WHITE.cpy();
+  private static final Color POSITIVE_APPROVAL_COLOR = Settings.GREEN_TEXT_COLOR.cpy();
+
+  private static final List<String> keywordList = Arrays.asList(ApprovalInfo.APPROVAL_KEYWORD_ID, ApprovalInfo.DIRTY_KEYWORD_ID);
+  private static final List<Keyword> baseGameKeywordList = new ArrayList<>();
+  private ArrayList<PowerTip> keywordPowerTips;
+
   private final String uiName;
   private final String backgroundImgPath;
   private Texture panelBackgroundImage;
   private final int xOffset;
   private final int yOffset;
-  private final int xTextOffset;
   private final int yTextOffset;
   private Hitbox hb;
 
-  private CombatInfo.CardsPlayedCounts cardCounts;
+  private boolean updateApprovalValueFlag = false;
+  private int approvalValue;
 
   // TODO: define imgName as static named BACKGROUND_IMAGE_PATH;
   // TODO: for SignatureMoveInfoPanel, take uiName argument and load labels from there
-  public WrestlerCombatInfoPanel() {
+  public WrestlerApprovalInfoPanel() {
     this.uiName = UI_NAME;
-    this.backgroundImgPath = BACKGROUND_TEXURE_PATH;
+    this.backgroundImgPath = BACKGROUND_TEXTURE_PATH;
 
     this.xOffset = Math.round(X_OFFSET * SettingsHelper.getScaleX());
-    this.xTextOffset = Math.round(X_TEXT_OFFSET * SettingsHelper.getScaleX());
 
     this.yOffset =  Math.round(
         (Settings.HEIGHT - (Settings.isSixteenByTen ? Y_OFFSET : Y_OFFSET_WIDESCREEN) * SettingsHelper.getScaleY()));
@@ -69,24 +80,14 @@ public class WrestlerCombatInfoPanel implements CustomInfoPanel {
 
     this.hb = new Hitbox(WIDTH * SettingsHelper.getScaleX(), HEIGHT * SettingsHelper.getScaleY());
     hb.translate(xOffset, yOffset);
-    this.cardCounts = CombatInfo.UNINITIALIZED_CARDS_PLAYED_COUNTS;
-  }
-
-  boolean updateCardCountsFlag = false;
-  public void updateCardCounts() {
-    updateCardCountsFlag = true;
+    this.approvalValue = 0;
   }
 
   @Override
   public void update() {
-    if (updateCardCountsFlag) {
-      this.cardCounts = CombatInfo.getCardsPlayedCounts();
-
-      WrestlerMod.logger.info("WrestlerCombatInfoPanel::updateCardCounts called. updated counts: "
-          + "attacks:  " + this.cardCounts.attacks
-          + "skills:   " + this.cardCounts.skills
-          + "powers:   " + this.cardCounts.powers);
-      updateCardCountsFlag = false;
+    this.hb.update();
+    if (updateApprovalValueFlag) {
+      this.approvalValue = WrestlerCharacter.getApprovalInfo().getApprovalAmount();
     }
   }
 
@@ -115,15 +116,26 @@ public class WrestlerCombatInfoPanel implements CustomInfoPanel {
   }
 
   private void renderInfoText(SpriteBatch sb) {
+    final BitmapFont headerFont = INFO_HEADER_FONT;
     final BitmapFont font = INFO_FONT;
     final Color headerColor = INFO_HEADER_COLOR;
-    final Color color = INFO_COLOR;
+    final Color color = this.approvalValue > 0
+        ? POSITIVE_APPROVAL_COLOR
+        : (this.approvalValue < 0 ? NEGATIVE_APPROVAL_COLOR : NEUTRAL_APPROVAL_COLOR);
 
     final int yLineOffset = (int)(INFO_FONT.getLineHeight() * (Settings.isSixteenByTen ? 1.05f : 0.95f));
 
+    final double amountTextWidth = INFO_FONT.getSpaceWidth()
+        * (2.5f * (this.approvalValue == 0 ? 1 : Math.floor(Math.log10(Math.abs(this.approvalValue))) + 1));
+
+    final float negativeSignTextWidth =  INFO_FONT.getSpaceWidth() * (this.approvalValue < 0 ? 1 : 0);
+
+    final int xApprovalTextOffset =
+        (int)((this.hb.width - (amountTextWidth + negativeSignTextWidth))/2.0f);
+
     FontHelper.renderFontLeft(
         sb,
-        font,
+        headerFont,
         TEXT[0],
         this.xOffset + WIDTH * 0.04f,
         this.yOffset + this.yTextOffset,
@@ -131,26 +143,9 @@ public class WrestlerCombatInfoPanel implements CustomInfoPanel {
 
     FontHelper.renderFontLeft(
         sb,
-        font,
-        TEXT[1] + (this.cardCounts.attacks >= 0 ? this.cardCounts.attacks : ""),
-        this.xOffset + this.xTextOffset,
-        this.yOffset + this.yTextOffset - (yLineOffset * 1.075f),
-        color);
-
-    FontHelper.renderFontLeft(
-        sb,
-        font,
-        TEXT[2] + (this.cardCounts.skills >= 0 ? this.cardCounts.skills : ""),
-        this.xOffset + this.xTextOffset,
-        this.yOffset + this.yTextOffset - (yLineOffset * 2.075f),
-        color);
-
-    FontHelper.renderFontLeft(
-        sb,
-        font,
-        TEXT[3] + (this.cardCounts.powers >= 0 ? this.cardCounts.powers : ""),
-        this.xOffset + this.xTextOffset,
-        this.yOffset + this.yTextOffset - (yLineOffset * 3.075f),
+        font, this.approvalValue + "",
+        this.xOffset + xApprovalTextOffset,
+        this.yOffset + this.yTextOffset - (yLineOffset * 1.035f),
         color);
   }
 
@@ -165,36 +160,50 @@ public class WrestlerCombatInfoPanel implements CustomInfoPanel {
 
   @Override
   public void atStartOfTurn() {
-    this.cardCounts = CombatInfo.RESET_CARDS_PLAYED_COUNTS;
+
+  }
+
+  private void refreshApprovalAmount() {
+    this.updateApprovalValueFlag = true;
   }
 
   @Override
-  public void atEndOfTurn() {
-    this.cardCounts = CombatInfo.RESET_CARDS_PLAYED_COUNTS;
-  }
+  public void atEndOfTurn() { refreshApprovalAmount(); }
 
   @Override
-  public void atStartOfCombat() {
-    this.cardCounts = CombatInfo.RESET_CARDS_PLAYED_COUNTS;
-  }
+  public void atStartOfCombat() { refreshApprovalAmount(); }
 
   @Override
   public void onCardUsed(AbstractCard card) {
-
+    refreshApprovalAmount();
   }
 
-  @Override
-  public void atEndOfCombat() {
-    this.cardCounts = CombatInfo.UNINITIALIZED_CARDS_PLAYED_COUNTS;
-  }
+                         @Override
+  public void atEndOfCombat() { refreshApprovalAmount(); }
 
   private ArrayList<PowerTip> getPowerTips() {
-    return new ArrayList<>();
+    if (keywordPowerTips == null) {
+      keywordPowerTips = new ArrayList<>();
+
+      // crop keyword tooltips
+      for (Map.Entry<String,String> entry : getKeywords().entrySet()) {
+        keywordPowerTips.add(new PowerTip(TipHelper.capitalize(entry.getKey()), entry.getValue()));
+      }
+    }
+    return keywordPowerTips;
   }
 
-  // TODO: this probably needs to do some more sophisticated text layout work
-  private String getInfoText() {
-    return "Info goes here";
+
+  private Map<String, String> getKeywords() {
+    Map<String, String> keywords = keywordList.stream()
+        .map(k -> WrestlerMod.getKeyword(k))
+        .filter(kw -> kw != null)
+        .collect(Collectors.toMap(kw -> kw.PROPER_NAME, kw -> kw.DESCRIPTION));
+
+    keywords.putAll(baseGameKeywordList.stream()
+        .collect(Collectors.toMap(kw -> kw.NAMES[0], kw -> kw.DESCRIPTION)));
+
+    return keywords;
   }
 
   private Texture getPanelBackgroundImage() {

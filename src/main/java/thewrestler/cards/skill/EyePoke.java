@@ -10,6 +10,7 @@ import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.powers.VulnerablePower;
 import com.megacrit.cardcrawl.powers.WeakPower;
+import thewrestler.cards.WrestlerCardTags;
 import thewrestler.enums.AbstractCardEnum;
 
 import static thewrestler.WrestlerMod.getCardResourcePath;
@@ -37,6 +38,7 @@ public class EyePoke extends CustomCard {
         RARITY, TARGET);
     this.baseMagicNumber = this.magicNumber = DEBUFF_AMOUNT;
     this.exhaust = true;
+    tags.add(WrestlerCardTags.DIRTY);
   }
 
   @Override

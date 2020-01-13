@@ -231,6 +231,7 @@ public class WrestlerSignatureMovePanel implements CustomInfoPanel, CardPreviewE
     TEXT = uiStrings.TEXT;
   }
 
+  @Override
   public void onCardUsed(AbstractCard card) {
     // TODO: call SignatureMoveInfo.onCardUsed
     getMoveInfo().onCardPlayed(card);

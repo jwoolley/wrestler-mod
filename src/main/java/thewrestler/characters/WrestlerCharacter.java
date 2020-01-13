@@ -12,7 +12,6 @@ import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.core.EnergyManager;
 import com.megacrit.cardcrawl.core.Settings;
-import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.helpers.CardLibrary;
 import com.megacrit.cardcrawl.helpers.FontHelper;
 import com.megacrit.cardcrawl.helpers.ScreenShake;
@@ -22,16 +21,16 @@ import com.megacrit.cardcrawl.unlock.UnlockTracker;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import thewrestler.WrestlerMod;
-import thewrestler.cards.attack.WrestlerStrike;
-import thewrestler.signaturemoves.cards.SignatureMoveCardEnum;
-import thewrestler.signaturemoves.moveinfos.AbstractSignatureMoveInfo;
-import thewrestler.signaturemoves.moveinfos.ChokeslamMoveInfo;
-import thewrestler.cards.skill.WrestlerDefend;
-import thewrestler.cards.skill.EyePoke;
 import thewrestler.cards.attack.TakeToTheMat;
+import thewrestler.cards.attack.WrestlerStrike;
+import thewrestler.cards.skill.EyePoke;
+import thewrestler.cards.skill.WrestlerDefend;
 import thewrestler.enums.AbstractCardEnum;
 import thewrestler.relics.Headgear;
+import thewrestler.signaturemoves.cards.SignatureMoveCardEnum;
+import thewrestler.signaturemoves.moveinfos.AbstractSignatureMoveInfo;
 import thewrestler.signaturemoves.upgrades.SignatureMoveUpgradeList;
+import thewrestler.util.info.ApprovalInfo;
 
 import java.util.ArrayList;
 import java.util.Random;
@@ -56,6 +55,8 @@ public class WrestlerCharacter extends CustomPlayer {
     public static final int CARD_DRAW = 5;
     public static final int ORB_SLOTS = 0;
 
+    public static final int STARTING_APPROVAL = 0;
+    private static int approval;
 
     private static final String ID = makeID("TheWrestler"); // needs to be the key from CharacterStrings.json
     private static final CharacterStrings characterStrings = CardCrawlGame.languagePack.getCharacterString(ID);
@@ -86,6 +87,7 @@ public class WrestlerCharacter extends CustomPlayer {
 
     // custom metadata
     private static AbstractSignatureMoveInfo signatureMoveInfo;
+    private static ApprovalInfo approvalInfo;
 
     public WrestlerCharacter(String name, PlayerClass setClass) {
         super(name, setClass, orbTextures,
@@ -102,6 +104,7 @@ public class WrestlerCharacter extends CustomPlayer {
         dialogX = (drawX + 0.0F * Settings.scale); // set location for text bubbles
         dialogY = (drawY + 220.0F * Settings.scale); // you can just copy these values
 
+        approval = STARTING_APPROVAL;
     }
 
     // Starting description and loadout
@@ -158,6 +161,25 @@ public class WrestlerCharacter extends CustomPlayer {
     public static AbstractSignatureMoveInfo initializeSignatureMoveInfo() {
         final int index = (new Random()).nextInt(SignatureMoveCardEnum.values().length);
         return SignatureMoveCardEnum.values()[index].getInfoCopy(SignatureMoveUpgradeList.NO_UPGRADES);
+    }
+
+
+    public static boolean hasApprovalInfo() {
+    return approvalInfo != null;
+    }
+
+    public static ApprovalInfo getApprovalInfo() {
+        return approvalInfo;
+    }
+
+
+    public static void resetApprovalInfo() {
+     approvalInfo.reset();
+    }
+
+    public static ApprovalInfo initializeApprovalInfo() {
+        approvalInfo = new ApprovalInfo();
+        return  approvalInfo;
     }
 
     @Override

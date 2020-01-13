@@ -1,4 +1,10 @@
 {
+  "WrestlerMod:ApprovalInfoPanel": {
+    "TEXT": [
+      "Fan Approval"
+    ]
+  },
+
   "WrestlerMod:CombatInfoPanel": {
     "TEXT": [
       "Played This Turn",

@@ -92,7 +92,7 @@
 
   "WrestlerMod:CheapShot": {
     "NAME": "Cheap Shot",
-    "DESCRIPTION": "Innate. NL Deal !D! damage. NL If the enemy intends to attack, apply !M! Vulnerable. NL Exhaust."
+    "DESCRIPTION": "wrestlermod:Dirty. NL Innate. NL Deal !D! damage. NL If the enemy intends to attack, apply !M! Vulnerable. NL Exhaust."
   },
 
   "WrestlerMod:CleanFinish": {
@@ -121,7 +121,7 @@
 
   "WrestlerMod:EyePoke": {
     "NAME": "Eye Poke",
-    "DESCRIPTION": "Apply !M! Weak and !M! Vulnerable. NL Exhaust."
+    "DESCRIPTION": "wrestlermod:Dirty. NL Apply !M! Weak and !M! Vulnerable. NL Exhaust."
   },
 
   "WrestlerMod:Facewash": {
@@ -149,12 +149,12 @@
 
   "WrestlerMod:HairPull": {
     "NAME": "Hair Pull",
-    "DESCRIPTION": "Deal !D! damage. NL If the enemy is wrestlermod:Grappled, gain [E]."
+    "DESCRIPTION": "wrestlermod:Dirty. NL Deal !D! damage. NL If the enemy is wrestlermod:Grappled, gain [E]."
   },
 
   "WrestlerMod:Hardway": {
     "NAME": "Hardway",
-    "DESCRIPTION": "Remove all of the enemy's debuffs. NL They lose 1 Strength for each debuff removed. NL Exhaust.",
+    "DESCRIPTION": "wrestlermod:Dirty. NL Remove all of the enemy's debuffs. NL They lose 1 Strength for each debuff removed. NL Exhaust.",
     "EXTENDED_DESCRIPTION": [
       "Ethereal. NL "
     ]
@@ -167,7 +167,7 @@
 
   "WrestlerMod:HeelTurn": {
     "NAME": "Heel Turn",
-    "DESCRIPTION": "Gain ",
+    "DESCRIPTION": "wrestlermod:Dirty. NL Gain ",
     "EXTENDED_DESCRIPTION": [
       " Intangible. NL Gain ",
       " Strength. NL Gain !M! Gold. NL Exhaust."
@@ -176,7 +176,7 @@
 
   "WrestlerMod:HotShot": {
     "NAME": "Hot Shot",
-    "DESCRIPTION": "Deal !D! Damage. NL Lose !M! HP."
+    "DESCRIPTION": "wrestlermod:Dirty. NL Deal !D! Damage. NL Lose !M! HP."
   },
 
   "WrestlerMod:IronMan": {

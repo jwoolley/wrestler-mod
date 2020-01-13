@@ -1,5 +1,22 @@
 {
-  "WrestlerMod:Sprained": {
+  "WrestlerMod:Approval": {
+    "PROPER_NAME": "Approval",
+    "NAMES": [
+      "approval"
+    ],
+    "DESCRIPTION": "A measure of how well-liked you are by fans. Playing #yDirty cards affects your Approval."
+  },
+
+  "WrestlerMod:Dirty": {
+    "PROPER_NAME": "Dirty",
+    "NAMES": [
+      "dirty"
+    ],
+    "DESCRIPTION": "Playing a Dirty card decreases your #yApproval by 5. Ending your turn without playing any Dirty cards increases it by 5."
+  },
+
+
+"WrestlerMod:Sprained": {
     "PROPER_NAME": "Sprained",
     "NAMES": [
       "sprain", "sprained"

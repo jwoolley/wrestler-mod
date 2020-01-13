@@ -13,6 +13,7 @@ import com.megacrit.cardcrawl.powers.IntangiblePlayerPower;
 import com.megacrit.cardcrawl.powers.StrengthPower;
 import thewrestler.actions.GainGoldAction;
 import thewrestler.actions.cards.skill.HardwayAction;
+import thewrestler.cards.WrestlerCardTags;
 import thewrestler.enums.AbstractCardEnum;
 
 import static thewrestler.WrestlerMod.getCardResourcePath;
@@ -37,6 +38,7 @@ public class Hardway extends CustomCard {
         RARITY, TARGET);
     this.exhaust = true;
     this.isEthereal = true;
+    tags.add(WrestlerCardTags.DIRTY);
   }
 
   @Override

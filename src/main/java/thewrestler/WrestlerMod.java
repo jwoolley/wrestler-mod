@@ -29,7 +29,6 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import thewrestler.cards.attack.*;
 import thewrestler.cards.power.*;
-import thewrestler.signaturemoves.cards.Chokeslam;
 import thewrestler.cards.skill.*;
 import thewrestler.characters.WrestlerCharacter;
 import thewrestler.enums.AbstractCardEnum;
@@ -38,9 +37,11 @@ import thewrestler.patches.powers.OnApplyPowerPatchInsert;
 import thewrestler.potions.CobraPotion;
 import thewrestler.potions.GrapplePotion;
 import thewrestler.relics.Headgear;
+import thewrestler.signaturemoves.cards.Chokeslam;
 import thewrestler.signaturemoves.cards.DragonGate;
 import thewrestler.signaturemoves.cards.Piledriver;
 import thewrestler.signaturemoves.moveinfos.AbstractSignatureMoveInfo;
+import thewrestler.ui.WrestlerApprovalInfoPanel;
 import thewrestler.ui.WrestlerCombatInfoPanel;
 import thewrestler.ui.WrestlerSignatureMovePanel;
 import thewrestler.util.BasicUtils;
@@ -134,6 +135,7 @@ public class WrestlerMod implements
     private static Map<String, Keyword> keywords;
 
 
+    public static WrestlerApprovalInfoPanel approvalInfoPanel;
     public static WrestlerCombatInfoPanel combatInfoPanel;
     public static WrestlerSignatureMovePanel signatureMovePanel;
 
@@ -661,6 +663,7 @@ public class WrestlerMod implements
         if (BasicUtils.isPlayingAsWrestler()) {
             OnApplyPowerPatchInsert.powerActionList.clear();
             combatInfoPanel.atStartOfCombat();
+            approvalInfoPanel.atEndOfCombat();
 
             // TODO: remove this once save/restore is implemented
 
@@ -672,6 +675,7 @@ public class WrestlerMod implements
 
     @Override
     public void receiveStartGame() {
+        approvalInfoPanel = new WrestlerApprovalInfoPanel();
         combatInfoPanel = new WrestlerCombatInfoPanel();
         signatureMovePanel = new WrestlerSignatureMovePanel();
         logger.info("WresterMod:receiveStartGame called");
@@ -684,23 +688,29 @@ public class WrestlerMod implements
             WrestlerMod.logger.info("WrestlerMod::receiveOnBattleStart initializing signatureMoveInfo");
             WrestlerCharacter.setSignatureMoveInfo(WrestlerCharacter.initializeSignatureMoveInfo());
         }
+        WrestlerCharacter.initializeApprovalInfo();
     }
 
     @Override
     public void receiveCardUsed(AbstractCard abstractCard) {
         combatInfoPanel.updateCardCounts();
         signatureMovePanel.onCardUsed(abstractCard);
+        approvalInfoPanel.onCardUsed(abstractCard);
+        WrestlerCharacter.getApprovalInfo().onCardUsed(abstractCard);
     }
 
     @Override
     public void receivePostEnergyRecharge() {
+        approvalInfoPanel.atStartOfTurn();
         combatInfoPanel.atStartOfTurn();
         signatureMovePanel.atStartOfTurn();
         WrestlerCharacter.getSignatureMoveInfo().atStartOfTurn();
+        WrestlerCharacter.getApprovalInfo().atStartOfTurn();
     }
 
     @Override
     public void receivePostBattle(AbstractRoom abstractRoom) {
+        approvalInfoPanel.atEndOfCombat();
         combatInfoPanel.atEndOfCombat();
         signatureMovePanel.atEndOfCombat();
         WrestlerCharacter.getSignatureMoveInfo().atEndOfCombat();
@@ -708,10 +718,12 @@ public class WrestlerMod implements
 
     public static void atEndOfPlayerTurn() {
         WrestlerCharacter.getSignatureMoveInfo().atEndOfTurn();
+        WrestlerCharacter.getApprovalInfo().atEndOfTurn();
     }
 
     @Override
     public boolean receivePreMonsterTurn(AbstractMonster abstractMonster) {
+        approvalInfoPanel.atEndOfTurn();
         combatInfoPanel.atEndOfTurn();
         signatureMovePanel.atEndOfTurn();
         return true;
@@ -720,9 +732,14 @@ public class WrestlerMod implements
     @Override
     public void receivePostDungeonInitialize() {
         AbstractSignatureMoveInfo.resetSavables();
+        WrestlerCharacter.resetApprovalInfo();
     }
 
     static public void onExhaustCardHook(AbstractCard card) {
         WrestlerCharacter.getSignatureMoveInfo().onCardExhausted(card);
+    }
+
+    public static Keyword getKeyword(String key) {
+        return keywords.get(key);
     }
 }

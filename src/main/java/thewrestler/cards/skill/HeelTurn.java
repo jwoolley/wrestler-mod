@@ -12,6 +12,7 @@ import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.powers.IntangiblePlayerPower;
 import com.megacrit.cardcrawl.powers.StrengthPower;
 import thewrestler.actions.GainGoldAction;
+import thewrestler.cards.WrestlerCardTags;
 import thewrestler.enums.AbstractCardEnum;
 
 import static thewrestler.WrestlerMod.getCardResourcePath;
@@ -41,6 +42,7 @@ public class HeelTurn extends CustomCard {
         RARITY, TARGET);
     this.baseMagicNumber = this.magicNumber = GOLD_AMOUNT;
     this.exhaust = true;
+    tags.add(WrestlerCardTags.DIRTY);
   }
 
   @Override
