@@ -23,7 +23,7 @@ public class RewardItemApplyGoldBonusPatch {
       if (!(AbstractDungeon.getCurrRoom() instanceof TreasureRoom) &&
           (!BasicUtils.isPlayingAsWrestler()
           || !WrestlerCharacter.hasApprovalInfo()
-          || WrestlerCharacter.getApprovalInfo().isLiked())) {
+          || WrestlerCharacter.getApprovalInfo().isDisliked())) {
 
         final int goldBonus = MathUtils.round(__instance.goldAmt * RingCard.REWARD_PERCENTAGE_BONUS / 100.0f);
 

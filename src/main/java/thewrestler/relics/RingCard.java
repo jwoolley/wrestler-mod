@@ -41,7 +41,7 @@ public class RingCard extends CustomRelic {
   public void onVictory() {
     if (!BasicUtils.isPlayingAsWrestler()
         || !WrestlerCharacter.hasApprovalInfo()
-        || WrestlerCharacter.getApprovalInfo().isDisliked()) {
+        || WrestlerCharacter.getApprovalInfo().isLiked()) {
       flash();
       AbstractPlayer player = AbstractDungeon.player;
       addToTop(new RelicAboveCreatureAction(player, this));
