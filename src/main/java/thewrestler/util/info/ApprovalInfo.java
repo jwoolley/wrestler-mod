@@ -57,11 +57,11 @@ public class ApprovalInfo {
   }
 
   public boolean isLiked() {
-    return this.amount > 0;
+    return this.amount >= 0;
   }
 
   public boolean isDisliked() {
-    return this.amount < 0;
+    return this.amount <= 0;
   }
 
   public void reset() {

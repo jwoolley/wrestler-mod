@@ -15,8 +15,23 @@
     "DESCRIPTION": "Playing a Dirty card decreases your #yApproval by 5. Ending your turn without playing any Dirty cards increases it by 5."
   },
 
+  "WrestlerMod:Disliked": {
+    "PROPER_NAME": "Disliked",
+    "NAMES": [
+      "disliked"
+    ],
+    "DESCRIPTION": "You're Disliked if your #yApproval is #b0 or less."
+  },
 
-"WrestlerMod:Sprained": {
+  "WrestlerMod:Liked": {
+    "PROPER_NAME": "Liked",
+    "NAMES": [
+      "liked"
+    ],
+    "DESCRIPTION": "You're Liked if your #yApproval is #b0 or more."
+  },
+
+  "WrestlerMod:Sprained": {
     "PROPER_NAME": "Sprained",
     "NAMES": [
       "sprain", "sprained"

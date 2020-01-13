@@ -1,8 +1,12 @@
 package thewrestler.patches.rewards;
 
+import com.badlogic.gdx.math.MathUtils;
 import com.evacipated.cardcrawl.modthespire.lib.SpirePatch;
+import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.rewards.RewardItem;
-import thewrestler.ui.WrestlerApprovalInfoPanel;
+import com.megacrit.cardcrawl.rooms.TreasureRoom;
+import thewrestler.characters.WrestlerCharacter;
+import thewrestler.relics.RingCard;
 import thewrestler.util.BasicUtils;
 
 @SpirePatch(
@@ -15,8 +19,19 @@ import thewrestler.util.BasicUtils;
 
 public class RewardItemApplyGoldBonusPatch {
   public static void Postfix(RewardItem __instance, boolean theft) {
-    if (BasicUtils.isPlayingAsWrestler()) {
-      // TODO: if has approval relic, update bonus amount & update text string (__instance.text) accordingly
+    if (AbstractDungeon.player.hasRelic(RingCard.ID)) {
+      if (!(AbstractDungeon.getCurrRoom() instanceof TreasureRoom) &&
+          (!BasicUtils.isPlayingAsWrestler()
+          || !WrestlerCharacter.hasApprovalInfo()
+          || WrestlerCharacter.getApprovalInfo().isLiked())) {
+
+        final int goldBonus = MathUtils.round(__instance.goldAmt * RingCard.REWARD_PERCENTAGE_BONUS / 100.0f);
+
+        if (goldBonus > 0) {
+          __instance.bonusGold += goldBonus;
+          __instance.text = (__instance.goldAmt + RewardItem.TEXT[1] + " (" + __instance.bonusGold + ")");
+        }
+      }
     }
   }
 }

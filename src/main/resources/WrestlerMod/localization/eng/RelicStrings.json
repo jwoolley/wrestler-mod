@@ -31,12 +31,23 @@
       "Select a card to bottle for "
     ]
   },
+
   "WrestlerMod:Headgear": {
     "NAME": "Shabby Headgear",
     "FLAVOR": "Flimsy protection—but it's better than nothing.",
     "DESCRIPTIONS": [
       "Whenever you apply a debuff to an enemy that they don't already have, gain #b",
       " #yBlock."
+    ]
+  },
+
+  "WrestlerMod:RingCard": {
+    "NAME": "Ring Card",
+    "FLAVOR": "Discarded from a long-forgotten fight. But you haven't forgotten.",
+    "DESCRIPTIONS": [
+      "At the end of combat, if you're #yDisliked, heal #b",
+      " HP. If you're #yLiked, enemies reward #b",
+      "% more Gold."
     ]
   }
 }
