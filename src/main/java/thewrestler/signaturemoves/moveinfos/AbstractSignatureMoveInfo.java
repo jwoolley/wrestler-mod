@@ -78,6 +78,7 @@ public abstract class AbstractSignatureMoveInfo {
   static class MoveCardCustomSavable implements CustomSavable<Integer> {
     @Override
     public Integer onSave() {
+      isStartOfRun = false;
       AbstractSignatureMoveCard card = WrestlerCharacter.getSignatureMoveInfo().signatureMoveCard;
       WrestlerMod.logger.info("MoveCardCustomSavable saving value: " + SignatureMoveCardEnum.getOrdinal(card) + " card: " + card.name);
       return SignatureMoveCardEnum.getOrdinal(WrestlerCharacter.getSignatureMoveInfo().signatureMoveCard);
@@ -145,6 +146,17 @@ public abstract class AbstractSignatureMoveInfo {
 
   private static InfoDataFromSave infoFromSave = new InfoDataFromSave();
 
+  private static boolean isStartOfRun = false;
+
+  public static boolean isSaveDataValid() {
+    return !isStartOfRun && hasCompleteSaveData();
+  }
+
+  public static void resetForNewRun() {
+    resetSavables();
+    isStartOfRun = true;
+  }
+
   public static final String SIGNATURE_CARD_SAVABLE_KEY = WrestlerMod.makeID("SignatureCardCustomSavable");
   public static final String SIGNATURE_UPGRADE_SAVABLE_KEY = WrestlerMod.makeID("SignatureUpgradeCustomSavable");
   private static MoveCardCustomSavable cardSavable = new MoveCardCustomSavable();
@@ -153,13 +165,11 @@ public abstract class AbstractSignatureMoveInfo {
   public static MoveCardCustomSavable getCardSavable() {
     return cardSavable;
   }
-
   public static MoveUpgradeCustomSavable getUpgradeSavable() {
     return upgradeSavable;
   }
 
   public static void resetSavables() {
-
     WrestlerMod.logger.info(
         "AbstractSignatureMoveInfo::resetSavables called");
     cardSavable = null;

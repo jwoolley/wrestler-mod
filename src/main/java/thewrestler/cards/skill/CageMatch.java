@@ -48,8 +48,9 @@ public class CageMatch extends CustomCard {
 
     AbstractDungeon.actionManager.addToBottom(new ApplyGrappledAction(m, p));
 
-    CreatureUtils.getLivingMonsters()
-      .forEach(mo -> AbstractDungeon.actionManager.addToBottom(new ApplyPowerAction(mo, p, new StunMonsterPower(mo))));
+    CreatureUtils.getLivingMonsters().stream()
+        .filter(mo -> mo != m)
+        .forEach(mo -> AbstractDungeon.actionManager.addToBottom(new ApplyPowerAction(mo, p, new StunMonsterPower(mo))));
   }
 
   @Override

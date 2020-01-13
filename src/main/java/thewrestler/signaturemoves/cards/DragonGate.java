@@ -72,19 +72,20 @@ public class DragonGate extends AbstractSignatureMoveCard {
         List<AbstractCard> cards = new ArrayList();
 
         cards.addAll(player.exhaustPile.group.stream()
-            .filter(c -> c.type != CardType.SKILL).collect(Collectors.toList()));
+            .filter(c -> c.type != CardType.STATUS && !c.hasTag(CardTags.HEALING))
+            .collect(Collectors.toList()));
 
         if (cards.size() > this.numCards) {
           Collections.shuffle(cards);
           cards = cards.subList(0, this.numCards);
         }
 
-//        for (AbstractCard card : cards) {
-//          if (card.cost > 0) {
-//            card.modifyCostForCombat(- 1);
-//          }
-//          AbstractDungeon.actionManager.addToBottom(new ExhaustToHandAction(card));
-//        }
+        for (AbstractCard card : cards) {
+          // if (card.cost > 0) {
+          //  card.modifyCostForCombat(- 1);
+          // }
+          AbstractDungeon.actionManager.addToBottom(new ExhaustToHandAction(card));
+        }
 
         this.isDone = true;
       }

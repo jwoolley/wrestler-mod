@@ -30,7 +30,7 @@ public class Scrapper extends CustomCard {
 
   private static final int COST = 1;
   private static final int STRENGTH_PER_TURN = 2;
-  private static final int STRENGTH_PER_TURN_UPGRADE = 3;
+  private static final int STRENGTH_PER_TURN_UPGRADE = 1;
 
   public Scrapper() {
     super(ID, NAME, getCardResourcePath(IMG_PATH), COST, DESCRIPTION, TYPE, AbstractCardEnum.THE_WRESTLER_ORANGE,

@@ -17,6 +17,8 @@ import com.google.gson.reflect.TypeToken;
 import com.megacrit.cardcrawl.audio.Sfx;
 import com.megacrit.cardcrawl.audio.SoundMaster;
 import com.megacrit.cardcrawl.cards.AbstractCard;
+import com.megacrit.cardcrawl.cards.CardGroup;
+import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.core.Settings;
 import com.megacrit.cardcrawl.helpers.CardHelper;
@@ -67,6 +69,7 @@ public class WrestlerMod implements
         EditStringsSubscriber,
         EditKeywordsSubscriber,
         EditCharactersSubscriber,
+        PostCreateStartingDeckSubscriber,
         PostDungeonInitializeSubscriber,
         PostInitializeSubscriber,
         StartGameSubscriber,
@@ -677,11 +680,9 @@ public class WrestlerMod implements
         combatInfoPanel = new WrestlerCombatInfoPanel();
         signatureMovePanel = new WrestlerSignatureMovePanel();
         logger.info("WresterMod:receiveStartGame called");
-
-        if (AbstractSignatureMoveInfo.hasCompleteSaveData()) {
+        if (AbstractSignatureMoveInfo.isSaveDataValid()) {
             AbstractSignatureMoveInfo.loadSaveData();
             WrestlerMod.logger.info("WrestlerCharacter:setSignatureMoveInfo set info from save: " + WrestlerCharacter.getSignatureMoveInfo());
-
         } else {
             WrestlerMod.logger.info("WrestlerMod::receiveOnBattleStart initializing signatureMoveInfo");
             WrestlerCharacter.setSignatureMoveInfo(WrestlerCharacter.initializeSignatureMoveInfo());
@@ -727,17 +728,22 @@ public class WrestlerMod implements
         return true;
     }
 
-    @Override
-    public void receivePostDungeonInitialize() {
-        AbstractSignatureMoveInfo.resetSavables();
-        WrestlerCharacter.resetApprovalInfo();
-    }
-
     static public void onExhaustCardHook(AbstractCard card) {
         WrestlerCharacter.getSignatureMoveInfo().onCardExhausted(card);
     }
 
     public static Keyword getKeyword(String key) {
         return keywords.get(key);
+    }
+
+    @Override
+    public void receivePostCreateStartingDeck(AbstractPlayer.PlayerClass playerClass, CardGroup cardGroup) {
+        AbstractSignatureMoveInfo.resetForNewRun();
+        WrestlerCharacter.resetApprovalInfo();
+    }
+
+    @Override
+    public void receivePostDungeonInitialize() {
+
     }
 }
