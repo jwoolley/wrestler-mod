@@ -29,7 +29,7 @@ public class WindUpKick extends CustomCard {
   private static final int COST = 0;
   private static final int DAMAGE = 9;
   private static final int DAMAGE_UPGRADE = 3;
-  private static final int NUM_SKILLS_REQUIRED = 3;
+  private static final int NUM_SKILLS_REQUIRED = 2;
 
   public WindUpKick() {
     super(ID, NAME, getCardResourcePath(IMG_PATH), COST, DESCRIPTION, TYPE,

@@ -17,7 +17,7 @@ import thewrestler.util.info.ApprovalInfo;
 import static thewrestler.WrestlerMod.makeRelicOutlinePath;
 import static thewrestler.WrestlerMod.makeRelicPath;
 
-// TODO: Render keyword tooltips
+// TODO: Render keyword tooltips for Liked, Disliked, and Approval
 
 public class RingCard extends CustomRelic {
   public static final String ID = WrestlerMod.makeID("RingCard");

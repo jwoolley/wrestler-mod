@@ -34,13 +34,17 @@ public class HeelTurn extends CustomCard {
 
   private static final int INTANGIBLE_AMOUNT = 1;
   private static final int STRENGTH_AMOUNT = 2;
-  private static final int UPGRADED_STRENGTH_AMOUNT = 1;
+  private static final int STRENGTH_AMOUNT_UPGRADE = 1;
   private static final int GOLD_AMOUNT = 6;
 
+
+  private int strengthAmount;
+
   public HeelTurn() {
-    super(ID, NAME, getCardResourcePath(IMG_PATH), COST, getDescription(), TYPE, AbstractCardEnum.THE_WRESTLER_ORANGE,
-        RARITY, TARGET);
+    super(ID, NAME, getCardResourcePath(IMG_PATH), COST, getDescription(STRENGTH_AMOUNT), TYPE,
+        AbstractCardEnum.THE_WRESTLER_ORANGE, RARITY, TARGET);
     this.baseMagicNumber = this.magicNumber = GOLD_AMOUNT;
+    this.strengthAmount = STRENGTH_AMOUNT;
     this.exhaust = true;
     tags.add(WrestlerCardTags.DIRTY);
   }
@@ -53,7 +57,7 @@ public class HeelTurn extends CustomCard {
         new ApplyPowerAction(p, p, new IntangiblePlayerPower(p, INTANGIBLE_AMOUNT), INTANGIBLE_AMOUNT));
 
     AbstractDungeon.actionManager.addToBottom(
-        new ApplyPowerAction(p, p, new StrengthPower(p, STRENGTH_AMOUNT), STRENGTH_AMOUNT));
+        new ApplyPowerAction(p, p, new StrengthPower(p, this.strengthAmount), this.strengthAmount));
 
     AbstractDungeon.actionManager.addToBottom(new GainGoldAction(this.magicNumber));
   }
@@ -67,14 +71,14 @@ public class HeelTurn extends CustomCard {
   public void upgrade() {
     if (!this.upgraded) {
       this.upgradeName();
-      this.upgradeMagicNumber(UPGRADED_STRENGTH_AMOUNT);
-      this.rawDescription = getDescription();
+      this.strengthAmount += STRENGTH_AMOUNT_UPGRADE;
+      this.rawDescription = getDescription(this.strengthAmount);
       initializeDescription();
     }
   }
 
-  public static String getDescription() {
-    return DESCRIPTION + INTANGIBLE_AMOUNT + EXTENDED_DESCRIPTION[0] + STRENGTH_AMOUNT + EXTENDED_DESCRIPTION[1];
+  public static String getDescription(int strengthAmount) {
+    return DESCRIPTION + INTANGIBLE_AMOUNT + EXTENDED_DESCRIPTION[0] + strengthAmount + EXTENDED_DESCRIPTION[1];
   }
 
   static {
