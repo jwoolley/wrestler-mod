@@ -22,10 +22,12 @@ public class DragonGateMoveInfo extends AbstractSignatureMoveInfo {
 
   @Override
   public void onCardExhausted(AbstractCard card) {
-    this.numCardsExhausted++;
+    if (card.type != AbstractCard.CardType.STATUS) {
+      this.numCardsExhausted++;
 
-    if (this.numCardsExhausted == NUM_CARDS_REQUIRED) {
-      triggerGainCard();
+      if (this.numCardsExhausted == NUM_CARDS_REQUIRED) {
+        triggerGainCard();
+      }
     }
   }
 
@@ -59,7 +61,7 @@ public class DragonGateMoveInfo extends AbstractSignatureMoveInfo {
   // TODO: move this text to UiStrings.json
   @Override
   public String getStaticConditionText() {
-    return "Exhaust " + NUM_CARDS_REQUIRED + " "
+    return "Exhaust " + NUM_CARDS_REQUIRED + " non-Status "
       + (NUM_CARDS_REQUIRED == 1 ? "card" : "cards")
         + " in one battle to";
   }
@@ -77,7 +79,7 @@ public class DragonGateMoveInfo extends AbstractSignatureMoveInfo {
   @Override
   public String getDynamicConditionText() {
     return "Exhaust " + getCardsRemaining()
-        + (NUM_CARDS_REQUIRED > 1 ? " more " + (getCardsRemaining() > 1 ? "cards" : "card") : "card")
+        + (NUM_CARDS_REQUIRED > 1 ? " more non-Status " + (getCardsRemaining() > 1 ? "cards" : "card") : "card")
         + " this combat to";
   }
 }
