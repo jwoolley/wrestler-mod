@@ -38,14 +38,10 @@ public class HeelTurn extends CustomCard {
   private static final int STRENGTH_AMOUNT_UPGRADE = 1;
   private static final int APPROVAL_LOSS = 10;
 
-
-  private int strengthAmount;
-
   public HeelTurn() {
-    super(ID, NAME, getCardResourcePath(IMG_PATH), COST, getDescription(STRENGTH_AMOUNT), TYPE,
+    super(ID, NAME, getCardResourcePath(IMG_PATH), COST, getDescription(), TYPE,
         AbstractCardEnum.THE_WRESTLER_ORANGE, RARITY, TARGET);
-    this.strengthAmount = STRENGTH_AMOUNT;
-    this.baseMagicNumber = this.magicNumber = APPROVAL_LOSS;
+    this.baseMagicNumber = this.magicNumber = STRENGTH_AMOUNT;
     this.exhaust = true;
     tags.add(WrestlerCardTags.DIRTY);
   }
@@ -58,9 +54,9 @@ public class HeelTurn extends CustomCard {
         new ApplyPowerAction(p, p, new IntangiblePlayerPower(p, INTANGIBLE_AMOUNT), INTANGIBLE_AMOUNT));
 
     AbstractDungeon.actionManager.addToBottom(
-        new ApplyPowerAction(p, p, new StrengthPower(p, this.strengthAmount), this.strengthAmount));
+        new ApplyPowerAction(p, p, new StrengthPower(p, this.magicNumber), this.magicNumber));
 
-    WrestlerCharacter.getApprovalInfo().decreaseApproval(this.magicNumber);
+    WrestlerCharacter.getApprovalInfo().decreaseApproval(APPROVAL_LOSS);
   }
 
   @Override
@@ -72,14 +68,14 @@ public class HeelTurn extends CustomCard {
   public void upgrade() {
     if (!this.upgraded) {
       this.upgradeName();
-      this.strengthAmount += STRENGTH_AMOUNT_UPGRADE;
-      this.rawDescription = getDescription(this.strengthAmount);
+      this.upgradeMagicNumber(STRENGTH_AMOUNT_UPGRADE);
+      this.rawDescription = getDescription();
       initializeDescription();
     }
   }
 
-  public static String getDescription(int strengthAmount) {
-    return DESCRIPTION + INTANGIBLE_AMOUNT + EXTENDED_DESCRIPTION[0] + strengthAmount + EXTENDED_DESCRIPTION[1];
+  public static String getDescription() {
+    return DESCRIPTION + INTANGIBLE_AMOUNT + EXTENDED_DESCRIPTION[0] + APPROVAL_LOSS + EXTENDED_DESCRIPTION[1];
   }
 
   static {

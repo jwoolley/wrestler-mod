@@ -48,11 +48,14 @@
 
   "WrestlerMod:AtomicDrop": {
     "NAME": "Atomic Drop",
-    "DESCRIPTION": "Deal !D! Damage. NL The next ",
+    "DESCRIPTION": "Deal !D! Damage. NL",
     "EXTENDED_DESCRIPTION": [
-      "time",
-      "!M! times",
-      " you attack the enemy this turn, gain [E]."
+      " The",
+      " For each enemy, the",
+      " next time you attack",
+      " the enemy",
+      " them",
+      " this turn, gain [E]."
     ]
   },
 
@@ -92,7 +95,7 @@
 
   "WrestlerMod:CheapShot": {
     "NAME": "Cheap Shot",
-    "DESCRIPTION": "wrestlermod:Dirty. NL Innate. NL Deal !D! damage. NL If the enemy intends to attack, apply !M! Vulnerable. NL Exhaust."
+    "DESCRIPTION": "Innate. wrestlermod:Dirty. NL Deal !D! damage. NL If the enemy intends to attack, apply !M! Vulnerable. NL Exhaust."
   },
 
   "WrestlerMod:CleanFinish": {
@@ -169,8 +172,8 @@
     "NAME": "Heel Turn",
     "DESCRIPTION": "wrestlermod:Dirty. NL Gain ",
     "EXTENDED_DESCRIPTION": [
-      " Intangible. NL Gain ",
-      " Strength. NL Lose !M! wrestlermod:Fan_Approval. NL Exhaust."
+      " Intangible. NL Gain !M! Strength. NL Lose ",
+      " wrestlermod:Fan_Approval. NL Exhaust."
     ]
   },
 

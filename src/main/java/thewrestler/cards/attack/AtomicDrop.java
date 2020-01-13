@@ -14,6 +14,7 @@ import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import thewrestler.enums.AbstractCardEnum;
 import thewrestler.powers.IrradiatedPower;
+import thewrestler.util.CreatureUtils;
 
 import static thewrestler.WrestlerMod.getCardResourcePath;
 
@@ -36,7 +37,7 @@ public class AtomicDrop extends CustomCard {
   private static final int POWER_STACKS_UPGRADE = 1;
 
   public AtomicDrop() {
-    super(ID, NAME, getCardResourcePath(IMG_PATH), COST, getDescription(POWER_STACKS), TYPE,
+    super(ID, NAME, getCardResourcePath(IMG_PATH), COST, getDescription(false), TYPE,
         AbstractCardEnum.THE_WRESTLER_ORANGE, RARITY, TARGET);
     this.baseDamage = this.damage = DAMAGE;
     this.baseMagicNumber = this.magicNumber = POWER_STACKS;
@@ -50,8 +51,13 @@ public class AtomicDrop extends CustomCard {
         new DamageAction(m, new DamageInfo(p, damage, damageTypeForTurn),
             AbstractGameAction.AttackEffect.BLUNT_HEAVY));
 
-    AbstractDungeon.actionManager.addToBottom(
-      new ApplyPowerAction(m, p, new IrradiatedPower(m, this.magicNumber), this.magicNumber));
+    if (this.upgraded) {
+      CreatureUtils.getLivingMonsters().forEach(mo ->  AbstractDungeon.actionManager.addToBottom(
+          new ApplyPowerAction(mo, p, new IrradiatedPower(m, this.magicNumber), this.magicNumber)));
+    } else {
+      AbstractDungeon.actionManager.addToBottom(
+          new ApplyPowerAction(m, p, new IrradiatedPower(m, this.magicNumber), this.magicNumber));
+    }
   }
 
   @Override
@@ -63,16 +69,17 @@ public class AtomicDrop extends CustomCard {
   public void upgrade() {
     if (!this.upgraded) {
       this.upgradeName();
-      this.upgradeMagicNumber(POWER_STACKS_UPGRADE);
-      this.rawDescription = getDescription(this.magicNumber);
+      this.rawDescription = getDescription(true);
       this.initializeDescription();
     }
   }
 
-  private static String getDescription(int numStacks) {
+  private static String getDescription(boolean upgraded) {
     return DESCRIPTION
-        + (numStacks == 1 ? EXTENDED_DESCRIPTION[0] : EXTENDED_DESCRIPTION[1])
-        + EXTENDED_DESCRIPTION[2];
+        + (!upgraded ? EXTENDED_DESCRIPTION[0] : EXTENDED_DESCRIPTION[1])
+        + EXTENDED_DESCRIPTION[2]
+        + (!upgraded ? EXTENDED_DESCRIPTION[3] : EXTENDED_DESCRIPTION[4])
+        + EXTENDED_DESCRIPTION[5];
   }
 
   static {
