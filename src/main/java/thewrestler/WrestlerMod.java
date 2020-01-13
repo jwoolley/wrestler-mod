@@ -529,7 +529,6 @@ public class WrestlerMod implements
 
         logger.info("Done adding cards!");
 
-
         BaseMod.addSaveField(AbstractSignatureMoveInfo.SIGNATURE_CARD_SAVABLE_KEY,
             AbstractSignatureMoveInfo.getCardSavable());
         BaseMod.addSaveField(AbstractSignatureMoveInfo.SIGNATURE_UPGRADE_SAVABLE_KEY,
@@ -666,9 +665,6 @@ public class WrestlerMod implements
             OnApplyPowerPatchInsert.powerActionList.clear();
             combatInfoPanel.atStartOfCombat();
             approvalInfoPanel.atEndOfCombat();
-
-            // TODO: remove this once save/restore is implemented
-
             signatureMovePanel.atStartOfCombat();
             WrestlerCharacter.getSignatureMoveInfo().atStartOfCombat();
         }

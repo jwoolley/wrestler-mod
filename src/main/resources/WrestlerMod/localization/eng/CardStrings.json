@@ -357,7 +357,7 @@
 
   "WrestlerMod:DragonGate": {
     "NAME": "Dragon Gate",
-    "DESCRIPTION": "Retain. NL Add !M! random cards from your Exhaust pile into your hand. NL They cost 1 less this combat.",
+    "DESCRIPTION": "Retain. NL Add !M! random non-Status cards from your Exhaust pile into your hand.",
     "EXTENDED_DESCRIPTION": [
       "a "
     ]

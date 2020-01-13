@@ -138,7 +138,6 @@ public abstract class AbstractSignatureMoveInfo {
     if (infoFromSave.hasCompleteData()) {
       // TODO: load save data into WrestlerCharacter.signatureMoveInfo
       WrestlerMod.logger.info("AbstractSignatureMoveInfo::loadSaveData save data found. loading from save");
-
       SignatureMoveCardEnum cardEnum = SignatureMoveCardEnum.getEnum(infoFromSave.cardFromSave);
       WrestlerCharacter.setSignatureMoveInfo(cardEnum.getInfoCopy(infoFromSave.upgradeListFromSave));
     }
