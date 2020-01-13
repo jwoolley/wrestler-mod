@@ -31,7 +31,7 @@ public class FrogSplash extends CustomCard {
   private static final CardTarget TARGET = CardTarget.ALL_ENEMY;
 
   private static final int COST = 2;
-  private static final int DAMAGE = 12;
+  private static final int DAMAGE = 10;
   private static final int DAMAGE_UPGRADE = 4;
   private static final int WEAK_AMOUNT = 1;
   private static final int WEAK_AMOUNT_UPGRADE = 1;
