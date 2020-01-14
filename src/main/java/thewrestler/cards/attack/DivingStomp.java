@@ -31,8 +31,8 @@ public class DivingStomp extends CustomCard {
 
   private static final int COST = 2;
   private static final int DAMAGE = 12;
-  private static final int DAMAGE_UPGRADE = 2;
-  private static final int SPRAIN_AMOUNT = 1;
+  private static final int DAMAGE_UPGRADE = 1;
+  private static final int SPRAIN_AMOUNT = 2;
   private static final int SPRAIN_AMOUNT_UPGRADE = 1;
 
   public DivingStomp() {

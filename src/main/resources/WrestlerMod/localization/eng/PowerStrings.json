@@ -121,8 +121,10 @@
   "WrestlerMod:SprainPower": {
     "NAME": "Sprained",
     "DESCRIPTIONS": [
-      "Whenever this character attacks, it takes #b",
-      " damage."
+      "At the start of your turn, lose #b",
+      " HP. Lose #ySprained at the end of your turn if you didn't attack.",
+      "At the start of its turn, loses #b",
+      " HP. Loses #ySprained at the end of its turn if it didn't attack."
     ]
   },
 

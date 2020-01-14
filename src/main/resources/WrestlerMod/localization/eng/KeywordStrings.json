@@ -37,7 +37,7 @@
     "NAMES": [
       "sprain", "sprained"
     ],
-    "DESCRIPTION": "When attacking, receive damage."
+    "DESCRIPTION": "Sprained creatures lose HP at the start of their turn, and remain Sprained unless they don't attack."
   },
 
   "WrestlerMod:Grappled": {
