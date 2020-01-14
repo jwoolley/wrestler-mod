@@ -218,6 +218,16 @@
     "DESCRIPTION": "At the start of your turn, randomly add a Flex, Neutralize, or Beam_Cell to your hand. It gains Exhaust."
   },
 
+
+  "WrestlerMod:Redemption": {
+    "NAME": "Redemption",
+    "DESCRIPTION": "Costs ",
+    "EXTENDED_DESCRIPTION": [
+      "[E]",
+      "  less if you're wrestlermod:Unpopular. NL Gain !B! Block. NL Gain !M! wrestlermod:Fan_Approval."
+    ]
+  },
+
   "WrestlerMod:Ropewalk": {
     "NAME": "Ropewalk",
     "DESCRIPTION": "Gain !B! Block. NL Reduce the cost of a random Attack card in your hand by 1 this",

@@ -1,4 +1,4 @@
-package thewrestler.util.info;
+package thewrestler.util.info.approval;
 
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import thewrestler.WrestlerMod;

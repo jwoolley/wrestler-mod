@@ -31,7 +31,7 @@ import thewrestler.relics.RingCard;
 import thewrestler.signaturemoves.cards.SignatureMoveCardEnum;
 import thewrestler.signaturemoves.moveinfos.AbstractSignatureMoveInfo;
 import thewrestler.signaturemoves.upgrades.SignatureMoveUpgradeList;
-import thewrestler.util.info.ApprovalInfo;
+import thewrestler.util.info.approval.ApprovalInfo;
 
 import java.util.ArrayList;
 import java.util.Random;
@@ -177,12 +177,16 @@ public class WrestlerCharacter extends CustomPlayer {
 
 
     public static void resetApprovalInfo() {
-     approvalInfo.reset();
+        if (hasApprovalInfo()) {
+            approvalInfo.reset();
+        } else {
+            initializeApprovalInfo();
+        }
     }
 
     public static ApprovalInfo initializeApprovalInfo() {
         approvalInfo = new ApprovalInfo();
-        return  approvalInfo;
+        return approvalInfo;
     }
 
     @Override
