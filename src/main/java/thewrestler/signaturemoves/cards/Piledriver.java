@@ -36,7 +36,7 @@ public class Piledriver extends AbstractSignatureMoveCard {
   private static final CardTarget TARGET = CardTarget.ALL_ENEMY;
 
   private static final int COST = 1;
-  private static final int DAMAGE = 10;
+  private static final int DAMAGE = 13;
   private static final int NUM_CARDS = 1;
   private static final int NUM_ENERGY = 1;
   private static final boolean HAS_RETAIN = true;

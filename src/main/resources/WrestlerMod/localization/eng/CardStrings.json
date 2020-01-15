@@ -221,10 +221,10 @@
 
   "WrestlerMod:Redemption": {
     "NAME": "Redemption",
-    "DESCRIPTION": "Costs ",
+    "DESCRIPTION": "If you're wrestlermod:Unpopular ",
     "EXTENDED_DESCRIPTION": [
       "[E]",
-      "  less if you're wrestlermod:Unpopular. NL Gain !B! Block. NL Gain !M! wrestlermod:Fan_Approval."
+      "  less if you're wrestlermod:Unpopular. NL Gain !M! wrestlermod:Fan_Approval if you're wrestlermod:Unpopular. NL Gain !B! Block."
     ]
   },
 
@@ -289,6 +289,12 @@
     "NAME": "Square Off",
     "DESCRIPTION": "Gain !B! Block. NL Apply !M! Weak. NL If you attack that enemy twice this turn, apply wrestlermod:Grappled."
   },
+
+  "WrestlerMod:StomachClaw": {
+    "NAME": "Stomach Claw",
+    "DESCRIPTION": "wrestlermod:Dirty. NL Apply !M! wrestlermod:Sprained."
+  },
+
 
   "WrestlerMod:TagIn": {
     "NAME": "Tag In",

@@ -44,7 +44,7 @@ public class SprainPower extends AbstractWrestlerPower implements CloneablePower
     if (!isPlayer && loseSprained || isPlayer && CombatInfo.getNumAttacksPlayed() == 0) {
       AbstractDungeon.actionManager.addToBottom(new RemoveSpecificPowerAction(this.owner, this.source, POWER_ID));
     } else {
-      this.flashWithoutSound();
+      // this.flashWithoutSound();
     }
   }
 

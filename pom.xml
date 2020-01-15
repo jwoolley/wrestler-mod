@@ -7,9 +7,7 @@
     <artifactId>TheWrestler</artifactId>
     <name>The Wrestler</name>
     <version>0.0.1</version>
-    <description>A former champion, looking to win back his title.
-
-THE WRESTLER NOW REQUIRES SLAY THE SPIRE TO BE LAUNCHED FROM *BETA* BRANCH (until Jan 14th)</description>
+    <description>A former champion, looking to win back his title.</description>
 
     <properties>
         <maven.compiler.source>1.8</maven.compiler.source>

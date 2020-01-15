@@ -12,6 +12,7 @@ import org.apache.commons.lang3.StringUtils;
 import thewrestler.characters.WrestlerCharacter;
 import thewrestler.enums.AbstractCardEnum;
 import thewrestler.util.BasicUtils;
+import thewrestler.util.info.approval.ApprovalInfo;
 
 import static thewrestler.WrestlerMod.getCardResourcePath;
 
@@ -47,7 +48,11 @@ public class Redemption extends CustomCard {
   @Override
   public void use(AbstractPlayer p, AbstractMonster m) {
     AbstractDungeon.actionManager.addToBottom(new GainBlockAction(p, p, block));
-    WrestlerCharacter.getApprovalInfo().increaseApproval(APPROVAL_GAIN);
+
+    ApprovalInfo info = WrestlerCharacter.getApprovalInfo();
+    if (info.isDisliked()) {
+      info.increaseApproval(APPROVAL_GAIN);
+    }
     calculateCost();
   }
 
