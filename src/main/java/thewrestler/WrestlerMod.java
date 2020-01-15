@@ -29,6 +29,7 @@ import com.megacrit.cardcrawl.rooms.AbstractRoom;
 import com.megacrit.cardcrawl.unlock.UnlockTracker;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import thewrestler.cards.StartOfCombatListener;
 import thewrestler.cards.attack.*;
 import thewrestler.cards.power.*;
 import thewrestler.cards.skill.*;
@@ -276,13 +277,13 @@ public class WrestlerMod implements
         reflectedMap.put("GONG_STRIKE_2", new Sfx(getAudioResourcePath("TheWrestler_GongStrike2.ogg")));
         reflectedMap.put("GRUNT_SHORT_1", new Sfx(getAudioResourcePath("TheWrestler_GruntShort1.ogg")));
         reflectedMap.put("GRUNT_SHORT_2", new Sfx(getAudioResourcePath("TheWrestler_GruntShort2.ogg")));
+        reflectedMap.put("SNAP_LIGAMENT_1", new Sfx(getAudioResourcePath("TheWrestler_SnapLigament1.ogg")));
         reflectedMap.put("SPLAT_WET_1", new Sfx(getAudioResourcePath("TheWrestler_SplatWet1.ogg")));
         reflectedMap.put("SPRINGBOARD_1", new Sfx(getAudioResourcePath("TheWrestler_Springboard1.ogg")));
         reflectedMap.put("THUD_MEDIUM_1", new Sfx(getAudioResourcePath("TheWrestler_ThudMedium1.ogg")));
         reflectedMap.put("TONE_ELECTRONIC_1", new Sfx(getAudioResourcePath("TheWrestler_ToneElectronic1.ogg")));
         reflectedMap.put("WHISTLE_STEAM_1", new Sfx(getAudioResourcePath("TheWrestler_WhistleSteam1.ogg")));
         reflectedMap.put("YELL_PAIN_1", new Sfx(getAudioResourcePath("TheWrestler_YellPain1.ogg")));
-
         reflectedMap.put("METAL_MAN_RIFF_1", new Sfx(getAudioResourcePath("music/TheWrestler_MetalManRiff1.ogg")));
     }
 
@@ -675,6 +676,8 @@ public class WrestlerMod implements
             signatureMovePanel.atStartOfCombat();
             WrestlerCharacter.getSignatureMoveInfo().atStartOfCombat();
         }
+
+        StartOfCombatListener.triggerStartOfCombatCards();
     }
 
 

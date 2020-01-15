@@ -48,8 +48,11 @@ public class CleanFinish extends CustomCard {
   public void use(AbstractPlayer p, AbstractMonster m) {
     List<AbstractCard> cards = p.hand.group.stream()
         .filter(c -> c.type != CardType.STATUS && c.type != CardType.CURSE)
-        .filter(c -> !(c.cost == 0 && c.exhaust == true))
+        .filter(c -> c.cost != 0 && c.exhaust != true)
         .collect(Collectors.toList());
+
+    WrestlerMod.logger.info("CleanFinish:use filtered cards:" + cards.stream()
+        .map(c -> c.name).collect(Collectors.joining(", ")));
 
     AbstractDungeon.actionManager.addToBottom(new VFXAction(new CleanFinishEffect()));
 
@@ -58,6 +61,9 @@ public class CleanFinish extends CustomCard {
     if (cards.size() > this.magicNumber) {
       cards = cards.subList(0, this.magicNumber);
     }
+
+    WrestlerMod.logger.info("CleanFinish:use suffled and truncated cards:" + cards.stream()
+        .map(c -> c.name).collect(Collectors.joining(", ")));
 
     if (!cards.isEmpty()) {
       cards.stream().forEach(c -> {

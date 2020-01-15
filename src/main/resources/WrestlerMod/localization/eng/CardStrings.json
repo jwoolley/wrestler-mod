@@ -221,7 +221,7 @@
 
   "WrestlerMod:Redemption": {
     "NAME": "Redemption",
-    "DESCRIPTION": "If you're wrestlermod:Unpopular ",
+    "DESCRIPTION": "Costs ",
     "EXTENDED_DESCRIPTION": [
       "[E]",
       "  less if you're wrestlermod:Unpopular. NL Gain !M! wrestlermod:Fan_Approval if you're wrestlermod:Unpopular. NL Gain !B! Block."
