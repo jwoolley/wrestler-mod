@@ -264,6 +264,7 @@ public class WrestlerMod implements
 
     private void registerSfx() {
         HashMap<String, Sfx> reflectedMap = getSoundsMap();
+        reflectedMap.put("BOMB_DROP_EXPLODE_1", new Sfx(getAudioResourcePath("TheWrestler_BombDropExplode1.ogg")));
         reflectedMap.put("BOO_CROWD_1", new Sfx(getAudioResourcePath("TheWrestler_BooCrowd1.ogg")));
         reflectedMap.put("BOOM_LOWFREQ_1", new Sfx(getAudioResourcePath("TheWrestler_ExplosionBombLowFrequency1.ogg")));
         reflectedMap.put("BOUNCE_METALLIC_1", new Sfx(getAudioResourcePath("TheWrestler_BounceMetallic1.ogg")));
@@ -532,8 +533,8 @@ public class WrestlerMod implements
 //        UnlockTracker.unlockCard(SafetyTag.ID);
 
         // TODO: Remove this once card pool is sufficiently large
-        BaseMod.addCard(new DefaultRareAttack());
-        UnlockTracker.unlockCard(DefaultRareAttack.ID);
+        BaseMod.addCard(new Powerbomb());
+        UnlockTracker.unlockCard(Powerbomb.ID);
 
         logger.info("Done adding cards!");
 

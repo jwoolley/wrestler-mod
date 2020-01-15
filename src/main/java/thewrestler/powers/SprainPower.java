@@ -33,6 +33,7 @@ public class SprainPower extends AbstractWrestlerPower implements CloneablePower
   public void atStartOfTurn() {
     this.flash();
     CardCrawlGame.sound.play("SPRINGBOARD_1");
+    CardCrawlGame.sound.play("SNAP_LIGAMENT_1");
     AbstractDungeon.actionManager.addToBottom(
         new DamageAction(this.owner, new DamageInfo(this.owner, this.amount, DamageInfo.DamageType.THORNS),
             AbstractGameAction.AttackEffect.SMASH, false));

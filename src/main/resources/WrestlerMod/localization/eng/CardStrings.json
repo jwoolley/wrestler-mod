@@ -22,10 +22,7 @@
     "DESCRIPTION": "Gain X WrestlerMod:Keywords.",
     "UPGRADE_DESCRIPTION": "Gain X +1 WrestlerMod:Keywords."
   },
-  "WrestlerMod:DefaultRareAttack": {
-    "NAME": "Power Bomb",
-    "DESCRIPTION": "Deal !D! Damage."
-  },
+
   "WrestlerMod:DefaultRareSkill": {
     "NAME": "For Each Loop x2",
     "DESCRIPTION": "Apply !M! vulnerable to all enemies, 2 times.",
@@ -210,6 +207,14 @@
       "Choose an Attack to Add to Your Hand.",
       "Choose ",
       " Attack to Add to Your Hand."
+    ]
+  },
+
+  "WrestlerMod:Powerbomb": {
+    "NAME": "Power Bomb",
+    "DESCRIPTION": "Deal !D! Damage. NL Apply !M! Vulnerable. NL Apply ",
+    "EXTENDED_DESCRIPTION": [
+      " wrestlermod:Sprained."
     ]
   },
 
