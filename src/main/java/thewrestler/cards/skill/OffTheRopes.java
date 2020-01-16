@@ -48,7 +48,7 @@ public class OffTheRopes extends CustomCard {
     if (this.upgraded) {
       AbstractDungeon.actionManager.addToBottom(
           new ChooseAndAddFilteredDiscardCardsToHandAction(1,
-              predicate, Arrays.copyOfRange(EXTENDED_DESCRIPTION, 3, 6), true));
+              predicate, Arrays.copyOfRange(EXTENDED_DESCRIPTION, 3, 6), false));
     } else {
       AbstractDungeon.actionManager.addToBottom(
           new MoveRandomCardsFromDiscardToHandAction(1, predicate));

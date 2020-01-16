@@ -56,6 +56,22 @@
     "DESCRIPTION": "A 1-cost #yAttack card with #yEthereal and #yExhaust that deals moderate damage."
   },
 
+  "WrestlerMod:BrutesTrophy": {
+    "PROPER_NAME": "Brute's Trophy",
+    "NAMES": [
+      "brutes_trophy"
+    ],
+    "DESCRIPTION": "A relic which grants 2 #yStrength at the start of each combat."
+  },
+
+  "WrestlerMod:PeoplesCrown": {
+    "PROPER_NAME": "People's Crown",
+    "NAMES": [
+      "peoples_crown"
+    ],
+    "DESCRIPTION": "A relic which grants 2 #yDexterity at the start of each combat."
+  },
+
   "WrestlerMod:CobraClutch": {
     "PROPER_NAME": "Cobra Clutch",
     "NAMES": [

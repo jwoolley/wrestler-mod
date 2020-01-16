@@ -1,18 +1,4 @@
 {
-  "WrestlerMod:WrestlerRelic": {
-    "NAME": "Wrestler Energy Relic",
-    "FLAVOR": "The snake is a friend.",
-    "DESCRIPTIONS": [
-      "Gain #b1 [E] ."
-    ]
-  },
-  "WrestlerMod:WrestlerRelic2": {
-    "NAME": "Wrestler Relic 2",
-    "FLAVOR": "You feel stronger.",
-    "DESCRIPTIONS": [
-      "At the start of each combat, gain #b1 #yStrength."
-    ]
-  },
   "WrestlerMod:DefaultClickableRelic": {
     "NAME": "Right-Clicky Relic",
     "FLAVOR": "The more you right-click it, the more orbs you've evoked in your lifetime.",
@@ -21,14 +7,15 @@
       "YOU ARE MINE!"
     ]
   },
-  "WrestlerMod:BottledWrestlerRelic": {
-    "NAME": "Bottled Wrestler",
-    "FLAVOR": "What is this?",
+
+  "WrestlerMod:FightCard": {
+    "NAME": "Fight Card",
+    "FLAVOR": "The venue isn't glamorous, but the money is good.",
     "DESCRIPTIONS": [
-      "Choose a card. Whenever you take play any card, draw the chosen card.",
-      "Whenever you play a card, draw ",
-      ".",
-      "Select a card to bottle for "
+      "On pickup, gain #b",
+      " #yGold. If you win #b",
+      " combats in a row while #yPopular, gain the #yPeople's #yCrown. If you win #b",
+      " combats in a row while #yUnpopular, gain the #yBrute's #yTrophy."
     ]
   },
 
