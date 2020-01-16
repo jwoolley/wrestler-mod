@@ -43,6 +43,15 @@
   },
 
 
+  "WrestlerMod:AlleyOop": {
+    "NAME": "Alley Oop",
+    "DESCRIPTION": "Put !M! random Attacks with cost ",
+    "EXTENDED_DESCRIPTION": [
+      " or less from your draw pile into your hand."
+    ]
+  },
+
+
   "WrestlerMod:AtomicDrop": {
     "NAME": "Atomic Drop",
     "DESCRIPTION": "Deal !D! Damage. NL",

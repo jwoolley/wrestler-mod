@@ -39,12 +39,12 @@ public class Powerbomb extends CustomCard {
 
     private static final int COST = 3;
 
-    private static final int DAMAGE = 20;
+    private static final int DAMAGE = 18;
     private static final int DAMAGE_UPGRADE = 8;
     private static final int DEBUFF_AMOUNT_1 = 2;
     private static final int DEBUFF_AMOUNT_2 = 5;
     private static final int DEBUFF_AMOUNT_1_UPGRADE = 1;
-    private static final int DEBUFF_AMOUNT_2_UPGRADE = 5;
+    private static final int DEBUFF_AMOUNT_2_UPGRADE = 3;
 
     // TODO: make dynamic variable for sprained amount (so it will be highlighted on card updates).
     private final int baseSprainedAmount;

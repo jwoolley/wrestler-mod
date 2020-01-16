@@ -10,6 +10,7 @@ import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import thewrestler.actions.ChooseAndAddFilteredDiscardCardsToHandAction;
 import thewrestler.actions.MoveRandomCardsFromDiscardToHandAction;
+import thewrestler.actions.MoveRandomCardsFromDrawPileToHandAction;
 import thewrestler.enums.AbstractCardEnum;
 
 import java.util.Arrays;
@@ -45,12 +46,12 @@ public class AlleyOop extends CustomCard {
   public void use(AbstractPlayer p, AbstractMonster m) {
     Predicate<AbstractCard> predicate =  c -> c.type == CardType.ATTACK && c.cost <= MAX_CARD_COST;
     AbstractDungeon.actionManager.addToBottom(
-        new MoveRandomCardsFromDiscardToHandAction(1, predicate));
+        new MoveRandomCardsFromDrawPileToHandAction(this.magicNumber, predicate));
   }
 
   @Override
   public AbstractCard makeCopy() {
-    return new OffTheRopes();
+    return new AlleyOop();
   }
 
   @Override
