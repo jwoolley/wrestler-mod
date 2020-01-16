@@ -59,17 +59,17 @@
   "WrestlerMod:BrutesTrophy": {
     "PROPER_NAME": "Brute's Trophy",
     "NAMES": [
-      "brutes_trophy"
+      "Brute's Trophy", "brutes_trophy"
     ],
-    "DESCRIPTION": "A relic which grants 2 #yStrength at the start of each combat."
+    "DESCRIPTION": "A relic which grants 2 #yStrength at the start of each combat if you're #yUnpopular."
   },
 
   "WrestlerMod:PeoplesCrown": {
     "PROPER_NAME": "People's Crown",
     "NAMES": [
-      "peoples_crown"
+      "People's Crown", "peoples_crown"
     ],
-    "DESCRIPTION": "A relic which grants 2 #yDexterity at the start of each combat."
+    "DESCRIPTION": "A relic which grants 2 #yDexterity at the start of each combat if you're #yPopular."
   },
 
   "WrestlerMod:CobraClutch": {

@@ -39,9 +39,7 @@ import thewrestler.enums.WrestlerCharEnum;
 import thewrestler.patches.powers.OnApplyPowerPatchInsert;
 import thewrestler.potions.CobraPotion;
 import thewrestler.potions.GrapplePotion;
-import thewrestler.relics.FightCard;
-import thewrestler.relics.Headgear;
-import thewrestler.relics.RingCard;
+import thewrestler.relics.*;
 import thewrestler.signaturemoves.cards.Chokeslam;
 import thewrestler.signaturemoves.cards.DragonGate;
 import thewrestler.signaturemoves.cards.Piledriver;
@@ -396,7 +394,10 @@ public class WrestlerMod implements
         // This adds a character specific relic. Only when you play with the mentioned color, will you get this relic.
         BaseMod.addRelicToCustomPool(new Headgear(), AbstractCardEnum.THE_WRESTLER_ORANGE);
         BaseMod.addRelicToCustomPool(new RingCard(), AbstractCardEnum.THE_WRESTLER_ORANGE);
+
+        BaseMod.addRelicToCustomPool(new BrutesTrophy(), AbstractCardEnum.THE_WRESTLER_ORANGE);
         BaseMod.addRelicToCustomPool(new FightCard(), AbstractCardEnum.THE_WRESTLER_ORANGE);
+        BaseMod.addRelicToCustomPool(new PeoplesCrown(), AbstractCardEnum.THE_WRESTLER_ORANGE);
 
         // This adds a relic to the Shared pool. Every character can find this relic.
         //  BaseMod.addRelic(new Headgear(), RelicType.SHARED);

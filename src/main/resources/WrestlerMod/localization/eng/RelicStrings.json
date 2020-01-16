@@ -8,6 +8,15 @@
     ]
   },
 
+  "WrestlerMod:BrutesTrophy": {
+    "NAME": "Brute's Trophy",
+    "FLAVOR": "Imposing in its splendor.",
+    "DESCRIPTIONS": [
+      "At the start of each combat, if you're #yUnpopular, gain #b",
+      " #yStrength."
+    ]
+  },
+
   "WrestlerMod:FightCard": {
     "NAME": "Fight Card",
     "FLAVOR": "The venue isn't glamorous, but the money is good.",
@@ -25,6 +34,15 @@
     "DESCRIPTIONS": [
       "Whenever you apply a debuff to an enemy that they don't already have, gain #b",
       " #yBlock."
+    ]
+  },
+
+  "WrestlerMod:PeoplesCrown": {
+    "NAME": "Peoples Crown",
+    "FLAVOR": "Dignified in its simplicity.",
+    "DESCRIPTIONS": [
+      "At the start of each combat, if you're #yPopular, gain #b",
+      " #yDexterity."
     ]
   },
 

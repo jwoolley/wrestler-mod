@@ -32,12 +32,15 @@ public class FightCard extends CustomWrestlerRelic implements CustomSavable<Inte
   private static final Texture IMG = TextureLoader.getTexture(makeRelicPath("fightcard.png"));
   private static final Texture OUTLINE = TextureLoader.getTexture(makeRelicOutlinePath("fightcard.png"));
 
-  private static final List<String> POWERTIP_KEYWORDS = Arrays.asList(WrestlerMod.makeID("Liked"), WrestlerMod.makeID("Disliked"));
+  private static final List<String> POWERTIP_KEYWORDS =
+      Arrays.asList(WrestlerMod.makeID("Liked"), WrestlerMod.makeID("Disliked"),
+                    WrestlerMod.makeID("PeoplesCrown"), WrestlerMod.makeID("BrutesTrophy"));
 
-  public static final int GOLD_ON_PICKUP = 40;
-  public static final int THRESHOLD = 3;
+  private static AbstractRelic POPULAR_RELIC_REWARD = new PeoplesCrown();
+  private static AbstractRelic UNPOPULAR_RELIC_REWARD = new BrutesTrophy();
+  private static final int GOLD_ON_PICKUP = 40;
+  private static final int THRESHOLD = 3;
 
-  boolean isUsed;
   private int fightRecord;
 
   // TODO: TOOLTIP with RECORD
@@ -46,18 +49,30 @@ public class FightCard extends CustomWrestlerRelic implements CustomSavable<Inte
     super(ID, IMG, OUTLINE, RelicTier.UNCOMMON, LandingSound.MAGICAL);
     fightRecord = 0;
     counter = -1;
-    isUsed = false;
   }
 
   public boolean shouldRewardRelic() {
-    return !this.isUsed && Math.abs(fightRecord) >= THRESHOLD;
+    return !this.usedUp && Math.abs(fightRecord) >= THRESHOLD;
   }
 
   public AbstractRelic redeemRelicReward() {
-    this.isUsed = true;
+    usedUp();
+    this.fightRecord = RELIC_USED_KEY;
+    this.counter = -1;
 
-    // TODO: return the appropriate relic
+    if (BasicUtils.isPlayingAsWrestler()
+        && WrestlerCharacter.hasApprovalInfo()) {
+      ApprovalInfo info = WrestlerCharacter.getApprovalInfo();
+      return info.isLiked() ? POPULAR_RELIC_REWARD : UNPOPULAR_RELIC_REWARD;
+    }
+
     return AbstractDungeon.returnRandomRelic(AbstractDungeon.returnRandomRelicTier());
+  }
+
+  @Override
+  public boolean canSpawn() {
+    final AbstractPlayer player = AbstractDungeon.player;
+    return !player.hasRelic(BrutesTrophy.ID) && !player.hasRelic(PeoplesCrown.ID);
   }
 
   @Override
@@ -68,7 +83,12 @@ public class FightCard extends CustomWrestlerRelic implements CustomSavable<Inte
 
   @Override
   public void onVictory() {
-    if (!isUsed && BasicUtils.isPlayingAsWrestler()
+    if (this.usedUp) {
+      setCounter(-1);
+      return;
+    }
+
+    if (!this.usedUp && BasicUtils.isPlayingAsWrestler()
         || WrestlerCharacter.hasApprovalInfo()) {
 
       ApprovalInfo info = WrestlerCharacter.getApprovalInfo();
@@ -92,7 +112,7 @@ public class FightCard extends CustomWrestlerRelic implements CustomSavable<Inte
         this.counter = -1;
       }
     }
-    setCounter(Math.abs(this.fightRecord) > 0 ? Math.abs(this.fightRecord) : -1);
+    setCounter(Math.abs(this.fightRecord));
   }
 
   public void renderCounter(SpriteBatch sb, boolean inTopPanel) {
@@ -130,14 +150,14 @@ public class FightCard extends CustomWrestlerRelic implements CustomSavable<Inte
   final static private int RELIC_USED_KEY = -999;
   @Override
   public Integer onSave() {
-    return this.isUsed ? RELIC_USED_KEY : this.fightRecord;
+    return this.usedUp ? RELIC_USED_KEY : this.fightRecord;
   }
 
   @Override
   public void onLoad(Integer i) {
     this.fightRecord = i;
     if (i == RELIC_USED_KEY) {
-      this.isUsed = true;
+      usedUp();
       this.counter = -1;
     } else {
       this.counter = Math.abs(fightRecord);
