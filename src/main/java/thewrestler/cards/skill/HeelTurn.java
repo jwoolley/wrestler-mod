@@ -15,6 +15,8 @@ import thewrestler.actions.GainGoldAction;
 import thewrestler.cards.WrestlerCardTags;
 import thewrestler.characters.WrestlerCharacter;
 import thewrestler.enums.AbstractCardEnum;
+import thewrestler.util.BasicUtils;
+import thewrestler.util.info.approval.ApprovalInfo;
 
 import static thewrestler.WrestlerMod.getCardResourcePath;
 
@@ -56,7 +58,12 @@ public class HeelTurn extends CustomCard {
     AbstractDungeon.actionManager.addToBottom(
         new ApplyPowerAction(p, p, new StrengthPower(p, this.magicNumber), this.magicNumber));
 
-    WrestlerCharacter.getApprovalInfo().decreaseApproval(APPROVAL_LOSS);
+
+    if (BasicUtils.isPlayingAsWrestler() && WrestlerCharacter.hasApprovalInfo()) {
+      if (WrestlerCharacter.getApprovalInfo().isLiked()) {
+        WrestlerCharacter.getApprovalInfo().decreaseApproval(APPROVAL_LOSS);
+      }
+    }
   }
 
   @Override

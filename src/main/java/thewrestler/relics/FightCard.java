@@ -89,7 +89,7 @@ public class FightCard extends CustomWrestlerRelic implements CustomSavable<Inte
     }
 
     if (!this.usedUp && BasicUtils.isPlayingAsWrestler()
-        || WrestlerCharacter.hasApprovalInfo()) {
+        && WrestlerCharacter.hasApprovalInfo()) {
 
       ApprovalInfo info = WrestlerCharacter.getApprovalInfo();
 
