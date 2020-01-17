@@ -288,6 +288,14 @@
     "DESCRIPTION": "Gain !B! Block. NL Discard 1 card. NL If you discarded an Attack this way, Draw 1 card."
   },
 
+  "WrestlerMod:Screwjob": {
+    "NAME": "Screwjob",
+    "DESCRIPTION": "Deal !D! damage. If you're wrestlermod:Unpopular, permanently increase this card's damage by !M!. Exhaust.",
+    "EXTENDED_DESCRIPTION": [
+      "Ethereal. NL "
+    ]
+  },
+
   "WrestlerMod:Springboard": {
     "NAME": "Springboard",
     "DESCRIPTION": "Draw",
@@ -297,7 +305,6 @@
       " NL Gain [E] for each Attack drawn. NL Exhaust."
     ]
   },
-
 
   "WrestlerMod:SquareOff": {
     "NAME": "Square Off",

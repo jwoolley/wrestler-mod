@@ -50,6 +50,9 @@ public class HeelTurn extends CustomCard {
 
   @Override
   public void use(AbstractPlayer p, AbstractMonster m) {
+    boolean wasLiked = ApprovalInfo.isPopular()
+        || ApprovalInfo.hasApprovalInfo() && ApprovalInfo.getAmount() + ApprovalInfo.APPROVAL_DEFAULT_DELTA > 0;
+
     AbstractDungeon.actionManager.addToBottom(new SFXAction("BOO_CROWD_1"));
 
     AbstractDungeon.actionManager.addToBottom(
@@ -58,11 +61,8 @@ public class HeelTurn extends CustomCard {
     AbstractDungeon.actionManager.addToBottom(
         new ApplyPowerAction(p, p, new StrengthPower(p, this.magicNumber), this.magicNumber));
 
-
-    if (BasicUtils.isPlayingAsWrestler() && WrestlerCharacter.hasApprovalInfo()) {
-      if (WrestlerCharacter.getApprovalInfo().isLiked()) {
+    if (wasLiked) {
         WrestlerCharacter.getApprovalInfo().decreaseApproval(APPROVAL_LOSS);
-      }
     }
   }
 

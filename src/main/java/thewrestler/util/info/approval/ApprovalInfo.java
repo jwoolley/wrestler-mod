@@ -1,11 +1,14 @@
 package thewrestler.util.info.approval;
 
+import basemod.abstracts.CustomSavable;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import thewrestler.WrestlerMod;
 import thewrestler.cards.WrestlerCardTags;
 import thewrestler.cards.skill.AbstractApprovalListener;
+import thewrestler.characters.WrestlerCharacter;
+import thewrestler.util.BasicUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -97,12 +100,38 @@ public class ApprovalInfo {
     return this.amount > 0;
   }
 
+  public static boolean hasApprovalInfo() {
+    return BasicUtils.isPlayingAsWrestler() && WrestlerCharacter.hasApprovalInfo();
+  }
+
+  public static int getAmount() {
+    return hasApprovalInfo() ? WrestlerCharacter.getApprovalInfo().getApprovalAmount() : 0;
+  }
+
+
+  public static boolean isPopular() {
+    return hasApprovalInfo() && WrestlerCharacter.getApprovalInfo().isLiked();
+  }
+
+  public static boolean isUnpopular() {
+    return hasApprovalInfo() && WrestlerCharacter.getApprovalInfo().isDisliked();
+  }
+
   public boolean isDisliked() {
     return this.amount < 0;
   }
 
   public void reset() {
     this.amount = 0;
+  }
+
+  public void setApprovalValueFromSave(int amount) {
+    if (amount > MAX_APPROVAL || amount < MIN_APPROVAL) {
+      WrestlerMod.logger.warn("ApprovalInfo::setApprovalValueFromSave attempted to set invalid value: " + amount + "; setting to 0.");
+      this.amount = 0;
+      return;
+    }
+    this.amount = amount;
   }
 
   public void onCardUsed(AbstractCard card) {
@@ -161,5 +190,72 @@ public class ApprovalInfo {
     cards.addAll(player.exhaustPile.group.stream()
         .filter(c -> c instanceof AbstractApprovalListener).map(c -> (AbstractApprovalListener)c).collect(Collectors.toList()));
     return cards;
+  }
+
+  static class ApprovalCustomSavable implements CustomSavable<Integer> {
+    @Override
+    public Integer onSave() {
+      isStartOfRun = false;
+      WrestlerMod.logger.info("ApprovalCustomSavable saving value: " + WrestlerCharacter.getApprovalInfo().amount);
+      return WrestlerCharacter.getApprovalInfo().amount;
+    }
+
+    @Override
+    public void onLoad(Integer serializedValue) {
+      infoFromSave.approvalFromSave = serializedValue;
+      WrestlerMod.logger.info("Loaded ApprovalCustomSavable from save : " + infoFromSave.approvalFromSave);
+    }
+  }
+
+  public static void loadSaveData() {
+    WrestlerMod.logger.info("ApprovalCustomSavable::loadSaveData called");
+
+    if (infoFromSave.hasCompleteData()) {
+      WrestlerMod.logger.info("ApprovalCustomSavable::loadSaveData save data found. loading from save");
+      WrestlerCharacter.resetApprovalInfo();
+      WrestlerCharacter.setApprovalInfoFromSave(infoFromSave.approvalFromSave);
+    }
+  }
+
+  static class InfoDataFromSave {
+    Integer approvalFromSave;
+
+    boolean hasCompleteData() {
+      return approvalFromSave != null;
+    }
+  }
+
+  private static InfoDataFromSave infoFromSave = new InfoDataFromSave();
+
+  private static boolean isStartOfRun = false;
+
+  public static boolean isSaveDataValid() {
+    return !isStartOfRun && infoFromSave.approvalFromSave != null;
+  }
+
+  public static int getApprovalFromSave() {
+    if (!isSaveDataValid()) {
+      return 0;
+    } else {
+      return infoFromSave.approvalFromSave;
+    }
+  }
+
+  public static void resetForNewRun() {
+    resetSavable();
+    isStartOfRun = true;
+  }
+
+  public static final String APPROVAL_SAVABLE_KEY = WrestlerMod.makeID("ApprovalCustomSavable");
+  private static ApprovalCustomSavable approvalSavable = new ApprovalCustomSavable();
+
+  public static ApprovalCustomSavable getApprovalSavable() {
+    return approvalSavable;
+  }
+
+  public static void resetSavable() {
+    WrestlerMod.logger.info(
+        "ApprovalInfo::resetSavable called");
+    approvalSavable = null;
   }
 }

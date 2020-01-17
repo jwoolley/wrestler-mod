@@ -40,11 +40,11 @@ public class Powerbomb extends CustomCard {
     private static final int COST = 3;
 
     private static final int DAMAGE = 18;
-    private static final int DAMAGE_UPGRADE = 8;
+    private static final int DAMAGE_UPGRADE = 6;
     private static final int DEBUFF_AMOUNT_1 = 2;
-    private static final int DEBUFF_AMOUNT_2 = 5;
+    private static final int DEBUFF_AMOUNT_2 = 4;
     private static final int DEBUFF_AMOUNT_1_UPGRADE = 1;
-    private static final int DEBUFF_AMOUNT_2_UPGRADE = 3;
+    private static final int DEBUFF_AMOUNT_2_UPGRADE = 2;
 
     // TODO: make dynamic variable for sprained amount (so it will be highlighted on card updates).
     private final int baseSprainedAmount;
@@ -62,40 +62,20 @@ public class Powerbomb extends CustomCard {
 
     @Override
     public void use(AbstractPlayer p, AbstractMonster m) {
-        AbstractDungeon.actionManager.addToBottom(new VFXAction(new WeightyImpactEffect(Settings.WIDTH / 2.0f, Settings.HEIGHT / 2.0f)));
+        AbstractDungeon.actionManager.addToBottom(new VFXAction(
+            new WeightyImpactEffect(CreatureUtils. getAllMonstersCenterOfMass(), Settings.HEIGHT / 2.0f)));
         CardCrawlGame.sound.play("BOMB_DROP_EXPLODE_1");
         AbstractDungeon.actionManager.addToBottom((new WaitAction(0.8F)));
 
         AbstractDungeon.actionManager.addToBottom(new PowerbombAction(p, this.multiDamage, this.damageType,
             AbstractGameAction.AttackEffect.FIRE, this.magicNumber, this.sprainedAmount, false));
 
-        /*
-        PowerbombAction(AbstractPlayer source, int[] multiDamage, DamageInfo.DamageType damageType,
-        AttackEffect attackEffect, int numDebuffs, int numSprained, boolean isFast) {
-        */
-
-        /*
-        CreatureUtils.getLivingMonsters().forEach(mo -> {
-            AbstractDungeon.actionManager.addToBottom(
-                new ApplyPowerAction(mo, p,
-                    new WeakPower(mo, this.magicNumber, false), this.magicNumber));
-
-            AbstractDungeon.actionManager.addToBottom(
-                new ApplyPowerAction(mo, p,
-                    new VulnerablePower(mo, this.magicNumber, false), this.magicNumber));
-
-            AbstractDungeon.actionManager.addToBottom(
-                new ApplyPowerAction(mo, p,
-                    new SprainPower(mo, this.sprainedAmount), this.sprainedAmount));
-        });
-        */
     }
 
     public static String getDescription(int sprainedAmount) {
         return DESCRIPTION + sprainedAmount + EXTENDED_DESCRIPTION[0];
     }
 
-    //Upgraded stats.
     @Override
     public void upgrade() {
         if (!upgraded) {
@@ -103,6 +83,7 @@ public class Powerbomb extends CustomCard {
             upgradeDamage(DAMAGE_UPGRADE);
             upgradeMagicNumber(DEBUFF_AMOUNT_1_UPGRADE);
             this.sprainedAmount += DEBUFF_AMOUNT_2_UPGRADE;
+            this.rawDescription = getDescription(this.sprainedAmount);
         }
     }
 

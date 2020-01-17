@@ -171,7 +171,7 @@ public abstract class AbstractSignatureMoveInfo {
 
   public static void resetSavables() {
     WrestlerMod.logger.info(
-        "AbstractSignatureMoveInfo::resetSavables called");
+        "AbstractSignatureMoveInfo::resetSavable called");
     cardSavable = null;
     upgradeSavable = null;
   }

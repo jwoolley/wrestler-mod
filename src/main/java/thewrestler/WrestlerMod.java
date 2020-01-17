@@ -50,6 +50,7 @@ import thewrestler.ui.WrestlerSignatureMovePanel;
 import thewrestler.util.BasicUtils;
 import thewrestler.util.IDCheckDontTouchPls;
 import thewrestler.util.TextureLoader;
+import thewrestler.util.info.approval.ApprovalInfo;
 import thewrestler.variables.DefaultCustomVariable;
 import thewrestler.variables.DefaultSecondMagicNumber;
 
@@ -272,6 +273,7 @@ public class WrestlerMod implements
         reflectedMap.put("CHALK_WRITING_1", new Sfx(getAudioResourcePath("TheWrestler_ChalkWriting1.ogg")));
         reflectedMap.put("CHEER_CROWD_1", new Sfx(getAudioResourcePath("TheWrestler_CheerCrowd1.ogg")));
         reflectedMap.put("DOOR_HATCH_OPEN_1", new Sfx(getAudioResourcePath("TheWrestler_DoorHatchOpen1.ogg")));
+        reflectedMap.put("DRILL_SPIN_1", new Sfx(getAudioResourcePath("TheWrestler_DrillSpin1.ogg")));
         reflectedMap.put("ELECTRO_INTERFERENCE_1", new Sfx(getAudioResourcePath("TheWrestler_ElectroInterference1.ogg")));
         reflectedMap.put("GONG_STRIKE_1", new Sfx(getAudioResourcePath("TheWrestler_GongStrike1.ogg")));
         reflectedMap.put("GONG_STRIKE_2", new Sfx(getAudioResourcePath("TheWrestler_GongStrike2.ogg")));
@@ -461,6 +463,7 @@ public class WrestlerMod implements
         BaseMod.addCard(new RunTheRing());
         BaseMod.addCard(new Sandbag());
         BaseMod.addCard(new Scrapper());
+        BaseMod.addCard(new Screwjob());
         BaseMod.addCard(new Sharpshooter());
         BaseMod.addCard(new SideRoll());
         BaseMod.addCard(new Springboard());
@@ -513,6 +516,7 @@ public class WrestlerMod implements
         UnlockTracker.unlockCard(RunTheRing.ID);
         UnlockTracker.unlockCard(Sandbag.ID);
         UnlockTracker.unlockCard(Scrapper.ID);
+        UnlockTracker.unlockCard(Screwjob.ID);
         UnlockTracker.unlockCard(Sharpshooter.ID);
         UnlockTracker.unlockCard(SideRoll.ID);
         UnlockTracker.unlockCard(Springboard.ID);
@@ -547,6 +551,8 @@ public class WrestlerMod implements
             AbstractSignatureMoveInfo.getCardSavable());
         BaseMod.addSaveField(AbstractSignatureMoveInfo.SIGNATURE_UPGRADE_SAVABLE_KEY,
             AbstractSignatureMoveInfo.getUpgradeSavable());
+
+        BaseMod.addSaveField(ApprovalInfo.APPROVAL_SAVABLE_KEY, ApprovalInfo.getApprovalSavable());
     }
 
     // There are better ways to do this than listing every single individual card, but I do not want to complicate things
@@ -700,7 +706,11 @@ public class WrestlerMod implements
             WrestlerMod.logger.info("WrestlerMod::receiveOnBattleStart initializing signatureMoveInfo");
             WrestlerCharacter.setSignatureMoveInfo(WrestlerCharacter.initializeSignatureMoveInfo());
         }
+
         WrestlerCharacter.initializeApprovalInfo();
+        if (ApprovalInfo.isSaveDataValid()) {
+            WrestlerCharacter.setApprovalInfoFromSave(ApprovalInfo.getApprovalFromSave());
+        }
     }
 
     @Override
@@ -752,6 +762,7 @@ public class WrestlerMod implements
     @Override
     public void receivePostCreateStartingDeck(AbstractPlayer.PlayerClass playerClass, CardGroup cardGroup) {
         AbstractSignatureMoveInfo.resetForNewRun();
+        ApprovalInfo.resetForNewRun();
         WrestlerCharacter.resetApprovalInfo();
     }
 

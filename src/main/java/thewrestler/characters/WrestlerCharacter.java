@@ -57,7 +57,6 @@ public class WrestlerCharacter extends CustomPlayer {
     public static final int ORB_SLOTS = 0;
 
     public static final int STARTING_APPROVAL = 0;
-    private static int approval;
 
     private static final String ID = makeID("TheWrestler"); // needs to be the key from CharacterStrings.json
     private static final CharacterStrings characterStrings = CardCrawlGame.languagePack.getCharacterString(ID);
@@ -104,8 +103,6 @@ public class WrestlerCharacter extends CustomPlayer {
         // =============== TEXT BUBBLE LOCATION =================
         dialogX = (drawX + 0.0F * Settings.scale); // set location for text bubbles
         dialogY = (drawY + 220.0F * Settings.scale); // you can just copy these values
-
-        approval = STARTING_APPROVAL;
     }
 
     // Starting description and loadout
@@ -187,6 +184,10 @@ public class WrestlerCharacter extends CustomPlayer {
     public static ApprovalInfo initializeApprovalInfo() {
         approvalInfo = new ApprovalInfo();
         return approvalInfo;
+    }
+
+    public static void setApprovalInfoFromSave(int approvalAmount) {
+        approvalInfo.setApprovalValueFromSave(approvalAmount);
     }
 
     @Override
