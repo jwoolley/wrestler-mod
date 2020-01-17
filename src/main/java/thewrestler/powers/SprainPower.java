@@ -22,11 +22,11 @@ public class SprainPower extends AbstractWrestlerPower implements CloneablePower
 
   public static final PowerType POWER_TYPE = PowerType.DEBUFF;
 
-  private boolean loseSprained;
+  private boolean keepSprained;
 
   public SprainPower(AbstractCreature owner, int amount) {
     super(POWER_ID, NAME, IMG, owner, owner, amount, POWER_TYPE);
-    loseSprained = true;
+    keepSprained = false;
   }
 
   @Override
@@ -35,15 +35,21 @@ public class SprainPower extends AbstractWrestlerPower implements CloneablePower
     CardCrawlGame.sound.play("SPRINGBOARD_1");
     CardCrawlGame.sound.play("SNAP_LIGAMENT_1");
     AbstractDungeon.actionManager.addToBottom(
-        new DamageAction(this.owner, new DamageInfo(this.owner, this.amount, DamageInfo.DamageType.THORNS),
+        new DamageAction(this.owner, new DamageInfo(this.source, this.amount, DamageInfo.DamageType.THORNS),
             AbstractGameAction.AttackEffect.SMASH, false));
 
-    loseSprained = true;
+    WrestlerMod.logger.info("SprainPower::atStartOfTurn called. setting keepSprained to false: " + this.keepSprained);
+
+    this.keepSprained = false;
   }
 
   @Override
   public void atEndOfTurn(boolean isPlayer) {
-    if (!isPlayer && loseSprained || isPlayer && CombatInfo.getNumAttacksPlayed() == 0) {
+
+    WrestlerMod.logger.info("SprainPower::atEndOfTurn called. isPlayer: " + isPlayer
+        + "; keepSprained: " + this.keepSprained + "; numAttacksPlayed: " + CombatInfo.getNumAttacksPlayed());
+    if (!isPlayer && !this.keepSprained || isPlayer && CombatInfo.getNumAttacksPlayed() == 0) {
+      WrestlerMod.logger.info("SprainPower::atEndOfTurn removing power");
       AbstractDungeon.actionManager.addToBottom(new RemoveSpecificPowerAction(this.owner, this.source, POWER_ID));
     } else {
       // this.flashWithoutSound();
@@ -52,7 +58,10 @@ public class SprainPower extends AbstractWrestlerPower implements CloneablePower
 
   @Override
   public void onAttack(DamageInfo info, int amount, AbstractCreature target) {
-    loseSprained = false;
+    if (info.owner == this.owner && this.owner != target && info.type == DamageInfo.DamageType.NORMAL) {
+      WrestlerMod.logger.info("SprainPower::onAttack called. setting keepSprained to true");
+      this.keepSprained = true;
+    }
   }
 
   @Override
