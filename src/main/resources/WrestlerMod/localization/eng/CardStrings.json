@@ -179,7 +179,7 @@
     "DESCRIPTION": "wrestlermod:Dirty. NL Gain ",
     "EXTENDED_DESCRIPTION": [
       " Intangible. NL Gain !M! Strength. NL Lose ",
-      " wrestlermod:Fan_Approval if you're wrestlermod:Popular. NL Exhaust."
+      " wrestlermod:Fan_Approval if wrestlermod:Popular. NL Exhaust."
     ]
   },
 
@@ -221,8 +221,8 @@
 
   "WrestlerMod:PlayToTheCrowd": {
     "NAME": "Play to the Crowd",
-    "DESCRIPTION": "Gain !B! Block unless you're wrestlermod:Unpopular. NL Add a *Knee to your hand unless you're wrestlermod:Popular.",
-    "UPGRADE_DESCRIPTION": "Gain !B! Block unless you're wrestlermod:Unpopular. NL Add a *Knee+ to your hand unless you're wrestlermod:Popular."
+    "DESCRIPTION": "If wrestlermod:Popular, gain !B! Block. NL If wrestlermod:Unpopular, add a *Knee to your hand. NL If neither, do both.",
+    "UPGRADE_DESCRIPTION":  "If wrestlermod:Popular, gain !B! Block. NL If wrestlermod:Unpopular, add a *Knee+ to your hand. NL If neither, do both."
   },
 
   "WrestlerMod:Powerbomb": {
@@ -244,7 +244,7 @@
     "DESCRIPTION": "Costs ",
     "EXTENDED_DESCRIPTION": [
       "[E]",
-      "  less if you're wrestlermod:Unpopular. NL Gain !M! wrestlermod:Fan_Approval if you're wrestlermod:Unpopular. NL Gain !B! Block."
+      "  less if wrestlermod:Unpopular. NL Gain !M! wrestlermod:Fan_Approval if wrestlermod:Unpopular. NL Gain !B! Block."
     ]
   },
 
@@ -296,7 +296,7 @@
 
   "WrestlerMod:Screwjob": {
     "NAME": "Screwjob",
-    "DESCRIPTION": "Deal !D! damage. If you're wrestlermod:Unpopular, permanently increase this card's damage by !M!. Exhaust.",
+    "DESCRIPTION": "Deal !D! damage. If  wrestlermod:Unpopular, permanently increase this card's damage by !M!. NL Exhaust.",
     "EXTENDED_DESCRIPTION": [
       "Ethereal. NL "
     ]

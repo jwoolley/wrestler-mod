@@ -22,8 +22,8 @@ public class SquareOff extends CustomCard {
   public static final String[] EXTENDED_DESCRIPTION;
   public static final String IMG_PATH = "squareoff.png";
 
-  private static final int BLOCK_AMOUNT = 3;
-  private static final int BLOCK_AMOUNT_UPGRADE  = 3;
+  private static final int BLOCK_AMOUNT = 4;
+  private static final int BLOCK_AMOUNT_UPGRADE = 2;
 
   private static final CardStrings cardStrings;
 
