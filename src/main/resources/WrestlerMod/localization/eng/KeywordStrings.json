@@ -16,6 +16,14 @@
     "DESCRIPTION": "Playing a Dirty card decreases your #yFan #yApproval by 5. Ending your turn without playing any Dirty cards increases it by 5."
   },
 
+  "WrestlerMod:Elbow": {
+    "PROPER_NAME": "Elbow",
+    "NAMES": [
+      "elbow", "elbows"
+    ],
+    "DESCRIPTION": "A 1-cost #yAttack card with #yEthereal and #yExhaust that deals modest damage."
+  },
+
   "WrestlerMod:Liked": {
     "PROPER_NAME": "Popular",
     "NAMES": [

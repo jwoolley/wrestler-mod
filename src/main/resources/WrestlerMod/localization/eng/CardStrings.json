@@ -219,6 +219,12 @@
     ]
   },
 
+  "WrestlerMod:PlayToTheCrowd": {
+    "NAME": "Play to the Crowd",
+    "DESCRIPTION": "Gain !B! Block unless you're wrestlermod:Unpopular. NL Add a *Knee to your hand unless you're wrestlermod:Popular.",
+    "UPGRADE_DESCRIPTION": "Gain !B! Block unless you're wrestlermod:Unpopular. NL Add a *Knee+ to your hand unless you're wrestlermod:Popular."
+  },
+
   "WrestlerMod:Powerbomb": {
     "NAME": "Power Bomb",
     "DESCRIPTION": "Deal !D! Damage to ALL enemies. NL Apply !M! Vulnerable and ",

@@ -13,12 +13,12 @@ import com.megacrit.cardcrawl.monsters.AbstractMonster;
 
 import static thewrestler.WrestlerMod.getCardResourcePath;
 
-public class Knee extends CustomCard {
-  public static final String ID = "WrestlerMod:Knee";
+public class Elbow extends CustomCard {
+  public static final String ID = "WrestlerMod:Elbow";
   public static final String NAME;
   public static final String DESCRIPTION;
   public static final String[] EXTENDED_DESCRIPTION;
-  public static final String IMG_PATH = "knee.png";
+  public static final String IMG_PATH = "elbow.png";
 
   private static final CardStrings cardStrings;
 
@@ -27,10 +27,10 @@ public class Knee extends CustomCard {
   private static final CardTarget TARGET = CardTarget.ENEMY;
 
   private static final int COST = 1;
-  private static final int DAMAGE = 10;
+  private static final int DAMAGE = 8;
   private static final int DAMAGE_UPGRADE = 2;
 
-  public Knee() {
+  public Elbow() {
     super(ID, NAME, getCardResourcePath(IMG_PATH), COST, DESCRIPTION, TYPE,
         CardColor.COLORLESS, RARITY, TARGET);
     this.baseDamage = this.damage = DAMAGE;
@@ -47,7 +47,7 @@ public class Knee extends CustomCard {
 
   @Override
   public AbstractCard makeCopy() {
-    return new Knee();
+    return new Elbow();
   }
 
   @Override
@@ -55,7 +55,6 @@ public class Knee extends CustomCard {
     if (!this.upgraded) {
       this.upgradeName();
       this.upgradeDamage(DAMAGE_UPGRADE);
-      initializeDescription();
     }
   }
 
