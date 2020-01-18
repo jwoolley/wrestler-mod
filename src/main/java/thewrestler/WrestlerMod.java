@@ -437,7 +437,7 @@ public class WrestlerMod implements
         BaseMod.addCard(new AlleyOop());
         BaseMod.addCard(new AtomicDrop());
         BaseMod.addCard(new BearHug());
-//        BaseMod.addCard(new BlowOff());
+        BaseMod.addCard(new BlowOff());
         BaseMod.addCard(new Brainbuster());
         BaseMod.addCard(new CageMatch());
         BaseMod.addCard(new CheapShot());
@@ -491,7 +491,7 @@ public class WrestlerMod implements
         UnlockTracker.unlockCard(AlleyOop.ID);
         UnlockTracker.unlockCard(AtomicDrop.ID);
         UnlockTracker.unlockCard(BearHug.ID);
-//        UnlockTracker.unlockCard(BlowOff.ID);
+        UnlockTracker.unlockCard(BlowOff.ID);
         UnlockTracker.unlockCard(Brainbuster.ID);
         UnlockTracker.unlockCard(CageMatch.ID);
         UnlockTracker.unlockCard(CheapShot.ID);

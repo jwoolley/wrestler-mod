@@ -64,7 +64,7 @@ public class Screwjob extends CustomCard implements CustomSavable<Integer> {
 
   @Override
   public void onLoad(Integer baseDamage) {
-    this.baseDamage = this.damage = baseDamage;
+    this.baseDamage = this.damage = this.misc = baseDamage;
     this.rawDescription = getDescription(this.isEthereal);
     this.initializeDescription();
   }

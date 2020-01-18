@@ -75,12 +75,7 @@
 
   "WrestlerMod:BlowOff": {
     "NAME": "Blow Off",
-    "DESCRIPTION": "Discard ",
-    "EXTENDED_DESCRIPTION": [
-      "!M! card",
-      "!M! cards",
-      ". NL Gain !B! Block."
-    ]
+    "DESCRIPTION": "If hand is empty, deal !D! Damage to ALL enemies and Exhaust. NL Else discard all cards and increase this card's damage by !M! this combat for each."
   },
 
 
