@@ -471,6 +471,7 @@ public class WrestlerMod implements
         BaseMod.addCard(new SquareOff());
         BaseMod.addCard(new StomachClaw());
         BaseMod.addCard(new TagIn());
+        BaseMod.addCard(new TakeAPowder());
         BaseMod.addCard(new TakeToTheMat());
         BaseMod.addCard(new TriangleChoke());
         BaseMod.addCard(new TripleThreat());
@@ -525,6 +526,7 @@ public class WrestlerMod implements
         UnlockTracker.unlockCard(SquareOff.ID);
         UnlockTracker.unlockCard(StomachClaw.ID);
         UnlockTracker.unlockCard(TagIn.ID);
+        UnlockTracker.unlockCard(TakeAPowder.ID);
         UnlockTracker.unlockCard(TakeToTheMat.ID);
         UnlockTracker.unlockCard(TriangleChoke.ID);
         UnlockTracker.unlockCard(TripleThreat.ID);

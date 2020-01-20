@@ -17,9 +17,9 @@ import java.util.stream.Collectors;
 public class ApprovalInfo {
   public static final String APPROVAL_KEYWORD_ID = WrestlerMod.makeID("Approval");
   public static final String DIRTY_KEYWORD_ID = WrestlerMod.makeID("Dirty");
-  public final static int STARTING_AMOUNT = 0;
-  public final static int MIN_APPROVAL = -50;
-  public final static int MAX_APPROVAL = 50;
+  private final static int STARTING_AMOUNT = 0;
+  private final static int MIN_APPROVAL = -50;
+  private final static int MAX_APPROVAL = 50;
   private int amount;
 
   private int numDirtyCardsPlayed = 0;
@@ -30,7 +30,7 @@ public class ApprovalInfo {
 
   public final static int APPROVAL_DEFAULT_DELTA = 5;
 
-  public void increaseApproval() {
+  private void increaseApproval() {
     increaseApproval(APPROVAL_DEFAULT_DELTA);
   }
 
@@ -40,21 +40,24 @@ public class ApprovalInfo {
       return;
     }
 
-    int actualChangeAmount = amount;
-    if (this.amount + amount > MAX_APPROVAL) {
-      actualChangeAmount  = MAX_APPROVAL;
+    if (this.amount >= MAX_APPROVAL) {
+      return;
     }
 
-    boolean becamePopular = this.amount <= 0 && this.amount + actualChangeAmount > 0;
-
-    this.amount += actualChangeAmount;
-
-    List<AbstractApprovalListener> cards = getApprovalListenerCards();
+    final int previousAmount = this.amount;
+    if (this.amount + amount > MAX_APPROVAL) {
+      this.amount = MAX_APPROVAL;
+    } else {
+      this.amount += amount;
+    }
+    final int actualChangeAmount = this.amount - previousAmount;
 
     if (actualChangeAmount > 0) {
       final int changeAmount = actualChangeAmount; // closure dictates that this needs to be final
+      List<AbstractApprovalListener> cards = getApprovalListenerCards();
       cards.forEach(c -> c.onApprovalChanged(changeAmount, this.amount));
 
+      boolean becamePopular = previousAmount <= 0 && this.amount > 0;
       if (becamePopular) {
         cards.forEach(AbstractApprovalListener::onBecomeLiked);
       }
@@ -71,22 +74,27 @@ public class ApprovalInfo {
       return;
     }
 
-    int actualChangeAmount = amount;
-    if (this.amount - actualChangeAmount < MIN_APPROVAL) {
-      actualChangeAmount  = MIN_APPROVAL;
+    if (this.amount <= MIN_APPROVAL) {
+      return;
     }
 
-    boolean becameUnopular = this.amount >= 0 && this.amount - actualChangeAmount < 0;
+    final int previousAmount = this.amount;
+    if (this.amount - amount < MIN_APPROVAL) {
+      this.amount = MIN_APPROVAL;
+    } else {
+      this.amount -= amount;
+    }
 
-    this.amount -= actualChangeAmount;
-
-    List<AbstractApprovalListener> cards = getApprovalListenerCards();
+    final int actualChangeAmount = previousAmount - this.amount; // this is an absolute (hence positive) value
 
     if (actualChangeAmount > 0) {
       final int changeAmount = actualChangeAmount; // closure dictates that this needs to be final
+
+      List<AbstractApprovalListener> cards = getApprovalListenerCards();
       cards.forEach(c -> c.onApprovalChanged(-changeAmount, this.amount));
 
-      if (becameUnopular) {
+      boolean becameUnpopular = previousAmount >= 0 && this.amount < 0;
+      if (becameUnpopular) {
         cards.forEach(AbstractApprovalListener::onBecomeDisliked);
       }
     }

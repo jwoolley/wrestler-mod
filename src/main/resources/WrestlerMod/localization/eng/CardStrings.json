@@ -334,6 +334,11 @@
     ]
   },
 
+  "WrestlerMod:TakeAPowder": {
+    "NAME": "Take a Powder",
+    "DESCRIPTION": "If wrestlermod:Popular, gain !M! Buffer. NL If wrestlermod:Unpopular, obtain a random potion. NL If neither, do both. NL Exhaust."
+  },
+
   "WrestlerMod:TakeToTheMat": {
     "NAME": "Take to the Mat",
     "DESCRIPTION": "Deal !D! Damage. NL If the enemy has !M! % health or less, they become wrestlermod:Grappled."
