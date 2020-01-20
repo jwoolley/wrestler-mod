@@ -1,48 +1,4 @@
 {
-  "WrestlerMod:_ColorExample": {
-    "NAME": "COLOR EXAMPLE",
-    "DESCRIPTION": "Deal !D! Damage. NL [#0000ff]This[] [#ff0000]Is[] [#ffff00]How[] [#88888]color[] [#ff00ff]works.[]"
-  },
-  "WrestlerMod:_MultiwordKeywordExample": {
-    "NAME": "MULTIWORD KEYWORD EXAMPLE",
-    "DESCRIPTION": "Gain !B! Block. NL WrestlerMod:Multiword_Keyword."
-  },
-  "WrestlerMod:DefaultCommonPower": {
-    "NAME": "Hold Place",
-    "DESCRIPTION": "Gain !M! WrestlerMod:Keyword.",
-    "UPGRADE_DESCRIPTION": "Gain !M! WrestlerMod:Keywords."
-  },
-  "WrestlerMod:DefaultUncommonAttack": {
-    "NAME": "Big slap",
-    "DESCRIPTION": "Deal !D! Damage."
-  },
-
-  "WrestlerMod:DefaultUncommonPower": {
-    "NAME": "Weirdness",
-    "DESCRIPTION": "Gain X WrestlerMod:Keywords.",
-    "UPGRADE_DESCRIPTION": "Gain X +1 WrestlerMod:Keywords."
-  },
-
-  "WrestlerMod:DefaultRareSkill": {
-    "NAME": "For Each Loop x2",
-    "DESCRIPTION": "Apply !M! vulnerable to all enemies, 2 times.",
-    "UPGRADE_DESCRIPTION": "Apply !M! vulnerable to all enemies, 3 times."
-  },
-
-  "WrestlerMod:DefaultAttackWithVariable": {
-    "NAME": "Special Strike",
-    "DESCRIPTION": "Deal !D! Damage [E] times. NL (Deal !WrestlerMod:ENERGY_DAMAGE! damage total.)"
-  },
-  "WrestlerMod:DefaultSecondMagicNumberSkill": {
-    "NAME": "Cool 2 Number Card",
-    "DESCRIPTION": "Apply !M! vulnerable and !WrestlerMod:SecondMagic! poison to an enemy."
-  },
-  "WrestlerMod:OrbSkill": {
-    "NAME": "Get Orb",
-    "DESCRIPTION": "Channel 1 Default Orb."
-  },
-
-
   "WrestlerMod:AlleyOop": {
     "NAME": "Alley Oop",
     "DESCRIPTION": "Put !M! random Attacks with cost ",
@@ -50,7 +6,6 @@
       " or less from your draw pile into your hand."
     ]
   },
-
 
   "WrestlerMod:AtomicDrop": {
     "NAME": "Atomic Drop",
@@ -78,7 +33,6 @@
     "DESCRIPTION": "If hand is empty, deal !D! Damage to ALL enemies and Exhaust. NL Else discard all cards and increase this card's damage by !M! this combat for each."
   },
 
-
   "WrestlerMod:Brainbuster": {
     "NAME": "Brainbuster",
     "DESCRIPTION": "Deal !D! Damage. NL The next ",
@@ -87,6 +41,11 @@
       "!M! times",
       " you attack that enemy this turn, draw 1 card."
     ]
+  },
+
+  "WrestlerMod:Butterfly": {
+    "NAME": "Butterfly",
+    "DESCRIPTION": "Remove !M! of the enemy's debuffs at random. NL Gain [E] for each debuff removed this way."
   },
 
   "WrestlerMod:CageMatch": {

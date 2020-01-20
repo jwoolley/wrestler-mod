@@ -38,8 +38,8 @@ public class OnApplyPowerPatchInsert {
       powerActionList.add(__instance);
       final AbstractPlayer player = AbstractDungeon.player;
 
-      if (player.hasRelic(Headgear.ID) && source == player &&
-          doesntAlreadyHaveDebuff(target, powerToApply, amountBeingApplied)) {
+      if (source == player && player.hasRelic(Headgear.ID) && !target.hasPower(ArtifactPower.POWER_ID) &&
+          doesntAlreadyHaveAnyDebuffs(target, powerToApply, amountBeingApplied)) {
         ((Headgear) AbstractDungeon.player.getRelic(Headgear.ID)).onApplyPower(powerToApply);
       }
     }

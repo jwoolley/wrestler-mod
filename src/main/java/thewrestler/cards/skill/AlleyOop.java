@@ -57,6 +57,7 @@ public class AlleyOop extends CustomCard {
   @Override
   public void upgrade() {
     if (!this.upgraded) {
+      this.upgradeName();
       this.upgradeMagicNumber(NUM_CARDS_UPGRADE);
       this.rawDescription = getDescription(MAX_CARD_COST);
       initializeDescription();

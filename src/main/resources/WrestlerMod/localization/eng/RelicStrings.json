@@ -32,7 +32,7 @@
     "NAME": "Shabby Headgear",
     "FLAVOR": "Flimsy protection—but it's better than nothing.",
     "DESCRIPTIONS": [
-      "Whenever you apply a debuff to an enemy that they don't already have, gain #b",
+      "Whenever you apply a debuff to an enemy that has no debuffs, gain #b",
       " #yBlock."
     ]
   },
