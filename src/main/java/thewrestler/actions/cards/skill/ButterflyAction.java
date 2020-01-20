@@ -2,6 +2,7 @@ package thewrestler.actions.cards.skill;
 
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
+import com.megacrit.cardcrawl.actions.common.DrawCardAction;
 import com.megacrit.cardcrawl.actions.common.GainEnergyAction;
 import com.megacrit.cardcrawl.actions.common.RemoveSpecificPowerAction;
 import com.megacrit.cardcrawl.actions.unique.RemoveDebuffsAction;
@@ -55,6 +56,7 @@ public class ButterflyAction extends AbstractGameAction  {
     else {
       if (numDebuffsRemoved > 0) {
         CardCrawlGame.sound.play("WING_FLUTTER_1");
+        AbstractDungeon.actionManager.addToBottom(new DrawCardAction(this.numDebuffsRemoved));
         AbstractDungeon.actionManager.addToBottom(new GainEnergyAction(this.numDebuffsRemoved));
       }
       this.isDone = true;

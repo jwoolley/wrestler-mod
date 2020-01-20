@@ -45,7 +45,7 @@
 
   "WrestlerMod:Butterfly": {
     "NAME": "Butterfly",
-    "DESCRIPTION": "Remove !M! of the enemy's debuffs at random. NL Gain [E] for each debuff removed this way."
+    "DESCRIPTION": "Remove !M! of the enemy's debuffs at random. NL Gain [E] and draw a card for each debuff removed."
   },
 
   "WrestlerMod:CageMatch": {
