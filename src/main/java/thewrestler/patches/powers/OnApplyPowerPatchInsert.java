@@ -12,6 +12,7 @@ import com.megacrit.cardcrawl.powers.ArtifactPower;
 import com.megacrit.cardcrawl.powers.StrengthPower;
 import thewrestler.WrestlerMod;
 import thewrestler.relics.Headgear;
+import thewrestler.util.CreatureUtils;
 
 import java.util.ArrayList;
 
@@ -31,22 +32,45 @@ public class OnApplyPowerPatchInsert {
     final boolean alreadyHandled = powerActionList.contains(__instance);
     WrestlerMod.logger.info("__instance: " + __instance + "; alreadyHandled: " + alreadyHandled);
 
+    final int amountBeingApplied = __instance.amount;
+
     if (!alreadyHandled) {
       powerActionList.add(__instance);
       final AbstractPlayer player = AbstractDungeon.player;
-      boolean hasBuffAlready = target != null && target.hasPower(powerToApply.ID);
 
-      if (player.hasRelic(Headgear.ID)
-          && source == player
-          && (target instanceof AbstractMonster)
-          && !target.isDeadOrEscaped()
-          && !target.hasPower(ArtifactPower.POWER_ID)
-          && powerToApply.type == AbstractPower.PowerType.DEBUFF
-          && (!hasBuffAlready || StrengthPower.POWER_ID.equals(powerToApply.ID) &&
-            target.getPower(StrengthPower.POWER_ID).amount >= 0 && __instance.amount < 0)) {
+      if (player.hasRelic(Headgear.ID) && source == player &&
+          doesntAlreadyHaveDebuff(target, powerToApply, amountBeingApplied)) {
         ((Headgear) AbstractDungeon.player.getRelic(Headgear.ID)).onApplyPower(powerToApply);
       }
     }
   }
+
+  private static boolean doesntAlreadyHaveAnyDebuffs(AbstractCreature target,
+                                                 AbstractPower powerToApply, int amountBeingApplied) {
+    boolean hasBuffAlready = target != null && target.hasPower(powerToApply.ID);
+    return (target instanceof AbstractMonster)
+        && !target.isDeadOrEscaped()
+        && CreatureUtils.getDebuffs(target).isEmpty()
+        && powerToApply.type == AbstractPower.PowerType.DEBUFF
+        && (!hasBuffAlready || isApplyingStrengthDebuff(target, powerToApply, amountBeingApplied));
+  }
+
+  private static boolean isApplyingStrengthDebuff(AbstractCreature target, AbstractPower powerToApply, int amountBeingApplied) {
+    return StrengthPower.POWER_ID.equals(powerToApply.ID) &&
+        target.getPower(StrengthPower.POWER_ID).amount >= 0 && amountBeingApplied < 0;
+  }
+
+
+  private static boolean doesntAlreadyHaveDebuff(AbstractCreature target,
+                                                 AbstractPower powerToApply, int amountBeingApplied) {
+    boolean hasBuffAlready = target != null && target.hasPower(powerToApply.ID);
+
+    return (target instanceof AbstractMonster)
+        && !target.isDeadOrEscaped()
+        && !target.hasPower(ArtifactPower.POWER_ID)
+        && powerToApply.type == AbstractPower.PowerType.DEBUFF
+        && (!hasBuffAlready || isApplyingStrengthDebuff(target, powerToApply, amountBeingApplied));
+  }
+
   public static final ArrayList<ApplyPowerAction> powerActionList = new ArrayList<ApplyPowerAction>();
 }
