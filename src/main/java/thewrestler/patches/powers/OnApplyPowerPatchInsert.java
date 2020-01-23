@@ -12,6 +12,7 @@ import com.megacrit.cardcrawl.powers.ArtifactPower;
 import com.megacrit.cardcrawl.powers.StrengthPower;
 import thewrestler.WrestlerMod;
 import thewrestler.relics.Headgear;
+import thewrestler.relics.ImprovedHeadgear;
 import thewrestler.util.CreatureUtils;
 
 import java.util.ArrayList;
@@ -42,17 +43,12 @@ public class OnApplyPowerPatchInsert {
           doesntAlreadyHaveAnyDebuffs(target, powerToApply, amountBeingApplied)) {
         ((Headgear) AbstractDungeon.player.getRelic(Headgear.ID)).onApplyPower(powerToApply);
       }
-    }
-  }
 
-  private static boolean doesntAlreadyHaveAnyDebuffs(AbstractCreature target,
-                                                 AbstractPower powerToApply, int amountBeingApplied) {
-    boolean hasBuffAlready = target != null && target.hasPower(powerToApply.ID);
-    return (target instanceof AbstractMonster)
-        && !target.isDeadOrEscaped()
-        && CreatureUtils.getDebuffs(target).isEmpty()
-        && powerToApply.type == AbstractPower.PowerType.DEBUFF
-        && (!hasBuffAlready || isApplyingStrengthDebuff(target, powerToApply, amountBeingApplied));
+      if (source == player && player.hasRelic(ImprovedHeadgear.ID) && !target.hasPower(ArtifactPower.POWER_ID) &&
+          doesntAlreadyHaveDebuff(target, powerToApply, amountBeingApplied)) {
+        ((ImprovedHeadgear) AbstractDungeon.player.getRelic(ImprovedHeadgear.ID)).onApplyPower(powerToApply);
+      }
+    }
   }
 
   private static boolean isApplyingStrengthDebuff(AbstractCreature target, AbstractPower powerToApply, int amountBeingApplied) {
@@ -60,6 +56,15 @@ public class OnApplyPowerPatchInsert {
         target.getPower(StrengthPower.POWER_ID).amount >= 0 && amountBeingApplied < 0;
   }
 
+  private static boolean doesntAlreadyHaveAnyDebuffs(AbstractCreature target,
+                                                     AbstractPower powerToApply, int amountBeingApplied) {
+    boolean hasBuffAlready = target != null && target.hasPower(powerToApply.ID);
+    return (target instanceof AbstractMonster)
+        && !target.isDeadOrEscaped()
+        && CreatureUtils.getDebuffs(target).isEmpty()
+        && powerToApply.type == AbstractPower.PowerType.DEBUFF
+        && (!hasBuffAlready || isApplyingStrengthDebuff(target, powerToApply, amountBeingApplied));
+  }
 
   private static boolean doesntAlreadyHaveDebuff(AbstractCreature target,
                                                  AbstractPower powerToApply, int amountBeingApplied) {
