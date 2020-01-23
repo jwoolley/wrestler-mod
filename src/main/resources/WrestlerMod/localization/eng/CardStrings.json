@@ -30,12 +30,7 @@
 
   "WrestlerMod:BlowOff": {
     "NAME": "Blow Off",
-    "DESCRIPTION": "If you play ",
-    "EXTENDED_DESCRIPTION": [
-      " Skills this turn with this in hand, increase damage by !M! this combat and Retain this turn. NL Deal !D! to ALL enemies. NL Exhaust.",
-      "Retain. NL If you play ",
-      " Skills in same turn with this in hand, increase damage by !M! this combat. NL Deal !D! to ALL enemies. NL Exhaust."
-    ]
+    "DESCRIPTION": "Whenever you play a Skill while this is in hand, increase this card's damage by !M! this combat. NL Deal !D! to ALL enemies. NL Exhaust."
   },
 
   "WrestlerMod:Brainbuster": {
