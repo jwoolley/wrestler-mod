@@ -29,16 +29,16 @@ public class Sharpshooter extends CustomCard {
 
   private static final int COST = 1;
   private static final int DAMAGE_PER_TRIGGER = 4;
-  private static final int DAMAGE_UPGRADE = 1;
   private static final int DEBUFF_STACKS = 1;
 
   // TODO: Add Keyword for Choked
 
   public Sharpshooter() {
-    super(ID, NAME, getCardResourcePath(IMG_PATH), COST, DESCRIPTION, TYPE,
+    super(ID, NAME, getCardResourcePath(IMG_PATH), COST, getDescription(true), TYPE,
         AbstractCardEnum.THE_WRESTLER_ORANGE, RARITY, TARGET);
     this.baseDamage = this.damage = DAMAGE_PER_TRIGGER;
     this.baseMagicNumber = this.magicNumber = DEBUFF_STACKS;
+    this.isEthereal = true;
   }
 
   @Override
@@ -58,8 +58,14 @@ public class Sharpshooter extends CustomCard {
   public void upgrade() {
     if (!this.upgraded) {
       this.upgradeName();
-      this.upgradeDamage(DAMAGE_UPGRADE);
+      this.isEthereal = false;
+      this.rawDescription = getDescription(false);
+      initializeDescription();
     }
+  }
+
+  public static String getDescription(boolean isEthereal) {
+    return (isEthereal ? EXTENDED_DESCRIPTION[0] : "") + DESCRIPTION;
   }
 
   static {

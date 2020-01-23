@@ -249,7 +249,10 @@
 
   "WrestlerMod:Sharpshooter": {
     "NAME": "Sharpshooter",
-    "DESCRIPTION": "Apply !M! Choked. NL Deal !D! Damage for each debuff applied to the enemy."
+    "DESCRIPTION": "Apply !M! Choked. NL Deal !D! Damage for each debuff applied to the enemy.",
+    "EXTENDED_DESCRIPTION": [
+      "Ethereal. NL "
+    ]
   },
 
   "WrestlerMod:SideRoll": {
