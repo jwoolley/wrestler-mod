@@ -37,6 +37,7 @@ import thewrestler.characters.WrestlerCharacter;
 import thewrestler.enums.AbstractCardEnum;
 import thewrestler.enums.WrestlerCharEnum;
 import thewrestler.patches.powers.OnApplyPowerPatchInsert;
+import thewrestler.potions.BravadoPotion;
 import thewrestler.potions.CobraPotion;
 import thewrestler.potions.GrapplePotion;
 import thewrestler.relics.*;
@@ -378,6 +379,9 @@ public class WrestlerMod implements
         logger.info("Beginning to edit potions");
 
         // If you want your potion to be class-specific, add the player class argument
+        BaseMod.addPotion(BravadoPotion.class, BravadoPotion.LIQUID_COLOR, BravadoPotion.HYBRID_COLOR,
+            BravadoPotion.SPOTS_COLOR, BravadoPotion.POTION_ID);
+
         BaseMod.addPotion(CobraPotion.class, CobraPotion.LIQUID_COLOR, CobraPotion.HYBRID_COLOR,
             CobraPotion.SPOTS_COLOR, CobraPotion.POTION_ID);
 

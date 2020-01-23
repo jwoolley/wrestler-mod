@@ -30,11 +30,11 @@ public class PiledriverMoveInfo extends AbstractSignatureMoveInfo {
   }
 
   @Override
-  public void atStartOfTurn() {
+  public void _atStartOfTurn() {
   }
 
   @Override
-  public void atEndOfTurn() {
+  public void _atEndOfTurn() {
     if (AbstractDungeon.player.drawPile.size() <= MAX_CARDS) {
       numTurns++;
       if (numTurns == TURNS_REQUIRED) {
@@ -44,12 +44,12 @@ public class PiledriverMoveInfo extends AbstractSignatureMoveInfo {
   }
 
   @Override
-  public void atStartOfCombat() {
+  public void _atStartOfCombat() {
     this.numTurns = 0;
   }
 
   @Override
-  public void atEndOfCombat() {
+  public void _atEndOfCombat() {
     this.numTurns = 0;
   }
 
@@ -70,7 +70,7 @@ public class PiledriverMoveInfo extends AbstractSignatureMoveInfo {
   }
 
   @Override
-  public boolean canStillTriggerCardGain() {
+  public boolean _canStillTriggerCardGain() {
     return numTurns < TURNS_REQUIRED;
   }
 

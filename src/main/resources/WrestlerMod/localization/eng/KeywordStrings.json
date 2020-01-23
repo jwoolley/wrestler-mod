@@ -40,6 +40,30 @@
     "DESCRIPTION": "Your #yFan #yApproval is less than #b0."
   },
 
+
+  "WrestlerMod:SignatureMove": {
+    "PROPER_NAME": "Trademark Move",
+    "NAMES": [
+      "Trademark Move", "trademark_move"
+    ],
+    "DESCRIPTION": "A special attack card that can be obtained during combat when the conditions are met."
+  },
+
+  "WrestlerMod:SignatureMoveCardIndicator": {
+    "PROPER_NAME": "Trademark Move Card",
+    "NAMES": [
+      "Trademark Move Card",
+      "trademark_move_Card"
+    ],
+    "DESCRIPTION": " Your trademark move this run is "
+  },
+
+  "WrestlerMod:SentenceEndPunctuation": {
+    "PROPER_NAME": "SentenceEndPunctuation",
+    "NAMES": [ "SentenceEndPunctuation" ],
+    "DESCRIPTION": "[#FFFFFF]."
+  },
+
   "WrestlerMod:Sprained": {
     "PROPER_NAME": "Sprained",
     "NAMES": [

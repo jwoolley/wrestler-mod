@@ -38,7 +38,7 @@ public class SprainPower extends AbstractWrestlerPower implements CloneablePower
         new DamageAction(this.owner, new DamageInfo(this.source, this.amount, DamageInfo.DamageType.THORNS),
             AbstractGameAction.AttackEffect.SMASH, false));
 
-    WrestlerMod.logger.info("SprainPower::atStartOfTurn called. setting keepSprained to false: " + this.keepSprained);
+    WrestlerMod.logger.info("SprainPower::_atStartOfTurn called. setting keepSprained to false: " + this.keepSprained);
 
     this.keepSprained = false;
   }
@@ -46,10 +46,10 @@ public class SprainPower extends AbstractWrestlerPower implements CloneablePower
   @Override
   public void atEndOfTurn(boolean isPlayer) {
 
-    WrestlerMod.logger.info("SprainPower::atEndOfTurn called. isPlayer: " + isPlayer
+    WrestlerMod.logger.info("SprainPower::_atEndOfTurn called. isPlayer: " + isPlayer
         + "; keepSprained: " + this.keepSprained + "; numAttacksPlayed: " + CombatInfo.getNumAttacksPlayed());
     if (!isPlayer && !this.keepSprained || isPlayer && CombatInfo.getNumAttacksPlayed() == 0) {
-      WrestlerMod.logger.info("SprainPower::atEndOfTurn removing power");
+      WrestlerMod.logger.info("SprainPower::_atEndOfTurn removing power");
       AbstractDungeon.actionManager.addToBottom(new RemoveSpecificPowerAction(this.owner, this.source, POWER_ID));
     } else {
       // this.flashWithoutSound();

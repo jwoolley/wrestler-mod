@@ -165,7 +165,7 @@ public class ApprovalInfo {
 
   public void atEndOfTurn(){
     checkIfDirtyCardsPlayed();
-    WrestlerMod.logger.info("ApprovalInfo::atEndOfTurn approval: " +this.amount);
+    WrestlerMod.logger.info("ApprovalInfo::_atEndOfTurn approval: " +this.amount);
   }
 
   public void atStartOfTurn(){

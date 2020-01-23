@@ -79,7 +79,7 @@ public class GrappledPower extends AbstractWrestlerPower implements CloneablePow
 
   @Override
   public void atEndOfTurn(boolean isPlayer) {
-    System.out.println("GrappledPower::atEndOfTurn triggered. isPlayer: " + isPlayer);
+    System.out.println("GrappledPower::_atEndOfTurn triggered. isPlayer: " + isPlayer);
     if (isPlayer) {
       System.out.println("GrappledPower::atStartOfTurnPostDraw reapplying MaintainGrapplePower to source: " + this.source);
       MaintainGrapplePower.apply(this.source, this.owner, this.amount, true);

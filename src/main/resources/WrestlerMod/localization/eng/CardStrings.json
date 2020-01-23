@@ -30,7 +30,12 @@
 
   "WrestlerMod:BlowOff": {
     "NAME": "Blow Off",
-    "DESCRIPTION": "If hand is empty, deal !D! Damage to ALL enemies and Exhaust. NL Else discard all cards and increase this card's damage by !M! this combat for each."
+    "DESCRIPTION": "If you play ",
+    "EXTENDED_DESCRIPTION": [
+      " Skills this turn with this in hand, increase damage by !M! this combat and Retain this turn. NL Deal !D! to ALL enemies. NL Exhaust.",
+      "Retain. NL If you play ",
+      " Skills in same turn with this in hand, increase damage by !M! this combat. NL Deal !D! to ALL enemies. NL Exhaust."
+    ]
   },
 
   "WrestlerMod:Brainbuster": {

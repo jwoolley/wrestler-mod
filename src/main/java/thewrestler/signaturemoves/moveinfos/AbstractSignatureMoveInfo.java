@@ -30,7 +30,7 @@ public abstract class AbstractSignatureMoveInfo {
     this.signatureMoveCard = signatureMoveCard.makeCopy();
     this.upgradeList = new SignatureMoveUpgradeList(upgradeList);
     this.isFirstInstance = isFirstInstance;
-
+    this.manuallyTriggeredCardGain = false;
     if (upgradeList != SignatureMoveUpgradeList.NO_UPGRADES) {
       this.signatureMoveCard.applyUpgrades(upgradeList);
     }
@@ -54,10 +54,10 @@ public abstract class AbstractSignatureMoveInfo {
 
   public abstract void onCardPlayed(AbstractCard card);
   public abstract void onCardExhausted(AbstractCard card);
-  public abstract void atStartOfTurn();
-  public abstract void atEndOfTurn();
-  public abstract void atStartOfCombat();
-  public abstract void atEndOfCombat();
+  protected abstract void _atStartOfTurn();
+  protected abstract void _atEndOfTurn();
+  protected abstract void _atStartOfCombat();
+  protected abstract void _atEndOfCombat();
   public abstract void upgradeMove(UpgradeType type);
   public abstract void onEnemyGrappled();
   public abstract String getDynamicConditionText();
@@ -73,7 +73,35 @@ public abstract class AbstractSignatureMoveInfo {
     AbstractDungeon.actionManager.addToBottom(new MakeTempCardInHandAction(this.signatureMoveCard));
   }
 
-  abstract public boolean canStillTriggerCardGain();
+  abstract public boolean _canStillTriggerCardGain();
+
+  protected boolean manuallyTriggeredCardGain;
+  public void manuallyTriggerCardGain() {
+    this.manuallyTriggeredCardGain = true;
+    triggerGainCard();
+  }
+
+  public void atStartOfTurn() {
+    this._atStartOfTurn();
+  }
+
+  public void atEndOfTurn() {
+    this._atEndOfTurn();
+  };
+
+  public void atStartOfCombat() {
+    this.manuallyTriggeredCardGain = false;
+    this._atStartOfCombat();
+  }
+
+  public void atEndOfCombat() {
+    this.manuallyTriggeredCardGain = false;
+    this._atEndOfCombat();
+  }
+
+  public boolean canStillTriggerCardGain() {
+    return !this.manuallyTriggeredCardGain && this._canStillTriggerCardGain();
+  };
 
   static class MoveCardCustomSavable implements CustomSavable<Integer> {
     @Override
