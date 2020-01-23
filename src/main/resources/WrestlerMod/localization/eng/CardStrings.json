@@ -58,6 +58,15 @@
     "DESCRIPTION": "Apply wrestlermod:Grappled. NL Stun all other enemies for 1 turn. NL Exhaust."
   },
 
+  "WrestlerMod:CheapHeat": {
+    "NAME": "Cheap Heat",
+    "DESCRIPTION": "wrestlermod:Dirty. NL Exhaust a card from your discard pile. NL Gain [E] equal to its cost.",
+
+    "EXTENDED_DESCRIPTION": [
+      "Choose a card to exhaust."
+    ]
+  },
+
   "WrestlerMod:CheapShot": {
     "NAME": "Cheap Shot",
     "DESCRIPTION": "Innate. wrestlermod:Dirty. NL Deal !D! damage. NL If the enemy intends to attack, apply !M! Vulnerable. NL Exhaust."

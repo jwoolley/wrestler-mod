@@ -23,6 +23,14 @@
     ]
   },
 
+  "WrestlerMod:CheapHeatAction": {
+    "TEXT": [
+      "Choose a Card to Exhaust.",
+      "Choose ",
+      " Cards to Exhaust."
+    ]
+  },
+
   "WrestlerMod:ChooseAndAddFilteredDiscardCardsToHandAction": {
     "TEXT": [
       "Choose a Card to Add to Your Hand.",
@@ -30,6 +38,7 @@
       " Cards to Add to Your Hand."
     ]
   },
+
   "WrestlerMod:SideRollAction": {
     "TEXT": [
       "Choose a Card to Discard."
