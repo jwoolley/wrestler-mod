@@ -280,7 +280,7 @@
 
   "WrestlerMod:SquareOff": {
     "NAME": "Square Off",
-    "DESCRIPTION": "Gain !B! Block. NL Apply !M! Weak. NL If you attack that enemy twice this turn, apply wrestlermod:Grappled."
+    "DESCRIPTION": "Apply !M! Weak. NL If you attack that enemy twice this turn, apply wrestlermod:Grappled."
   },
 
   "WrestlerMod:StomachClaw": {
