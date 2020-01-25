@@ -10,7 +10,8 @@
       "Played This Turn",
       "Attacks: ",
       "Skills: ",
-      "Powers: "
+      "Powers: ",
+      "Debuffs Applied: "
     ]
   },
 

@@ -39,7 +39,7 @@ public class WrestlerCombatInfoPanel implements CustomInfoPanel {
   private static final String UI_NAME = WrestlerMod.makeID("CombatInfoPanel");
   private static final String BACKGROUND_TEXURE_PATH = UiHelper.getUiImageResourcePath("combatinfopanel/background.png");
 
-  private static final BitmapFont INFO_FONT = FontHelper.charDescFont;
+  private static final BitmapFont INFO_FONT = FontHelper.tipBodyFont;
   private static final Color INFO_HEADER_COLOR = Color.valueOf("992200ff");
   private static final Color INFO_COLOR = Color.valueOf("e9e9e0cc");
   private final String uiName;
@@ -85,7 +85,8 @@ public class WrestlerCombatInfoPanel implements CustomInfoPanel {
       WrestlerMod.logger.info("WrestlerCombatInfoPanel::updateCardCounts called. updated counts: "
           + "attacks:  " + this.cardCounts.attacks
           + "skills:   " + this.cardCounts.skills
-          + "powers:   " + this.cardCounts.powers);
+          + "powers:   " + this.cardCounts.powers
+          + "debuffs:  " + this.cardCounts.debuffs);
       updateCardCountsFlag = false;
     }
   }
@@ -151,6 +152,14 @@ public class WrestlerCombatInfoPanel implements CustomInfoPanel {
         TEXT[3] + (this.cardCounts.powers >= 0 ? this.cardCounts.powers : ""),
         this.xOffset + this.xTextOffset,
         this.yOffset + this.yTextOffset - (yLineOffset * 3.075f),
+        color);
+
+    FontHelper.renderFontLeft(
+        sb,
+        font,
+        TEXT[4] + (this.cardCounts.powers >= 0 ? this.cardCounts.debuffs : ""),
+        this.xOffset + this.xTextOffset,
+        this.yOffset + this.yTextOffset - (yLineOffset * 4.075f),
         color);
   }
 

@@ -5,7 +5,15 @@
       "Fan Approval",
       "fan_approval"
     ],
-    "DESCRIPTION": "A measure of how well-liked you are by fans. Playing #yDirty cards affects your Fan Approval."
+    "DESCRIPTION": "A measure of how well-liked you are by fans. Playing #yDirty cards affects your Fan Approval, as does applying debuffs."
+  },
+
+  "WrestlerMod:CleanFighting": {
+    "PROPER_NAME": "Clean Fighting",
+    "NAMES": [
+      "dirty"
+    ],
+    "DESCRIPTION": "Ending your turn without applying a debuff increases your #yFan #yApproval by 5."
   },
 
   "WrestlerMod:Dirty": {
@@ -13,7 +21,7 @@
     "NAMES": [
       "dirty"
     ],
-    "DESCRIPTION": "Playing a Dirty card decreases your #yFan #yApproval by 5. Ending your turn without playing any Dirty cards increases it by 5."
+    "DESCRIPTION": "Playing a Dirty card decreases your #yFan #yApproval by 5."
   },
 
   "WrestlerMod:Elbow": {
@@ -38,6 +46,22 @@
       "unpopular"
     ],
     "DESCRIPTION": "Your #yFan #yApproval is less than #b0."
+  },
+
+  "WrestlerMod:Revered": {
+    "PROPER_NAME": "Revered",
+    "NAMES": [
+      "revered"
+    ],
+    "DESCRIPTION": "Your #yFan #yApproval is #b40 or greater."
+  },
+
+  "WrestlerMod:Despised": {
+    "PROPER_NAME": "Despised",
+    "NAMES": [
+      "despised"
+    ],
+    "DESCRIPTION": "Your #yFan #yApproval is #b-40 or less."
   },
 
 

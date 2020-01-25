@@ -51,6 +51,7 @@ import thewrestler.ui.WrestlerSignatureMovePanel;
 import thewrestler.util.BasicUtils;
 import thewrestler.util.IDCheckDontTouchPls;
 import thewrestler.util.TextureLoader;
+import thewrestler.util.info.CombatInfo;
 import thewrestler.util.info.approval.ApprovalInfo;
 import thewrestler.variables.DefaultCustomVariable;
 import thewrestler.variables.DefaultSecondMagicNumber;
@@ -701,6 +702,7 @@ public class WrestlerMod implements
             approvalInfoPanel.atEndOfCombat();
             signatureMovePanel.atStartOfCombat();
             WrestlerCharacter.getSignatureMoveInfo().atStartOfCombat();
+            CombatInfo.atStartOfCombat();
         }
 
         StartOfCombatListener.triggerStartOfCombatCards();
@@ -742,6 +744,7 @@ public class WrestlerMod implements
         signatureMovePanel.atStartOfTurn();
         WrestlerCharacter.getSignatureMoveInfo().atStartOfTurn();
         WrestlerCharacter.getApprovalInfo().atStartOfTurn();
+        CombatInfo.atStartOfTurn();
     }
 
     @Override
@@ -750,6 +753,7 @@ public class WrestlerMod implements
         combatInfoPanel.atEndOfCombat();
         signatureMovePanel.atEndOfCombat();
         WrestlerCharacter.getSignatureMoveInfo().atEndOfCombat();
+        CombatInfo.atEndOfCombat();
     }
 
     public static void atEndOfPlayerTurn() {

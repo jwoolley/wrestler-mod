@@ -14,6 +14,7 @@ import thewrestler.WrestlerMod;
 import thewrestler.relics.Headgear;
 import thewrestler.relics.ImprovedHeadgear;
 import thewrestler.util.CreatureUtils;
+import thewrestler.util.info.CombatInfo;
 
 import java.util.ArrayList;
 
@@ -48,6 +49,8 @@ public class OnApplyPowerPatchInsert {
           doesntAlreadyHaveDebuff(target, powerToApply, amountBeingApplied)) {
         ((ImprovedHeadgear) AbstractDungeon.player.getRelic(ImprovedHeadgear.ID)).onApplyPower(powerToApply);
       }
+
+      incrementDebuffsApplied(target, source, powerToApply);
     }
   }
 
@@ -75,6 +78,17 @@ public class OnApplyPowerPatchInsert {
         && !target.hasPower(ArtifactPower.POWER_ID)
         && powerToApply.type == AbstractPower.PowerType.DEBUFF
         && (!hasBuffAlready || isApplyingStrengthDebuff(target, powerToApply, amountBeingApplied));
+  }
+
+  private static void incrementDebuffsApplied(AbstractCreature target, AbstractCreature source,
+                                                 AbstractPower powerToApply) {
+    if (source == AbstractDungeon.player && !target.hasPower(ArtifactPower.POWER_ID)
+        && powerToApply.type == AbstractPower.PowerType.DEBUFF
+        && (target instanceof AbstractMonster)
+        && !target.isDeadOrEscaped()) {
+      CombatInfo.incrementDebuffsAppliedCount();
+      WrestlerMod.combatInfoPanel.updateCardCounts();
+    }
   }
 
   public static final ArrayList<ApplyPowerAction> powerActionList = new ArrayList<ApplyPowerAction>();

@@ -63,5 +63,17 @@
       " HP. If you're #yUnpopular, enemies reward #b",
       "% more Gold."
     ]
+  },
+
+  "WrestlerMod:RingCard2": {
+    "NAME": "Ring Card",
+    "FLAVOR": "Discarded from a long-forgotten fight. But you haven't forgotten.",
+    "DESCRIPTIONS": [
+      "At the end of combat, if you're #yPopular, heal #b",
+      " HP. If you're #yUnpopular, enemies reward #b",
+      "% more Gold. If you're #yRevered, gain #b",
+      "% less Gold. If you're #yDespised, lost #b",
+      " HP."
+    ]
   }
 }

@@ -49,7 +49,9 @@ public class WrestlerApprovalInfoPanel implements CustomInfoPanel {
   private static final Color NEUTRAL_APPROVAL_COLOR = Color.WHITE.cpy();
   private static final Color POSITIVE_APPROVAL_COLOR = Settings.GREEN_TEXT_COLOR.cpy();
 
-  private static final List<String> keywordList = Arrays.asList(ApprovalInfo.APPROVAL_KEYWORD_ID, ApprovalInfo.DIRTY_KEYWORD_ID);
+  private static final List<String> keywordList = Arrays.asList(
+      ApprovalInfo.APPROVAL_KEYWORD_ID, ApprovalInfo.CLEAN_FIGHTING_KEYWORD_ID, ApprovalInfo.DIRTY_KEYWORD_ID);
+
   private static final List<Keyword> baseGameKeywordList = new ArrayList<>();
   private ArrayList<PowerTip> keywordPowerTips;
 

@@ -5,21 +5,41 @@ import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 
 public class CombatInfo {
   public static final CardsPlayedCounts RESET_CARDS_PLAYED_COUNTS = new CardsPlayedCounts();
-  public static final CardsPlayedCounts UNINITIALIZED_CARDS_PLAYED_COUNTS = new CardsPlayedCounts(-1, -1, -1);
+  public static final CardsPlayedCounts UNINITIALIZED_CARDS_PLAYED_COUNTS = new CardsPlayedCounts(-1, -1, -1, -1);
 
   public static class CardsPlayedCounts {
     public CardsPlayedCounts() {
-      this(0, 0, 0);
+      this(0, 0, 0, 0);
     }
 
-    private CardsPlayedCounts(int attacks, int skills, int powers) {
+    private CardsPlayedCounts(int attacks, int skills, int powers, int debuffs) {
       this.attacks = attacks;
       this.skills = skills;
       this.powers = powers;
+      this.debuffs = debuffs;
     }
     public final int attacks;
     public final int skills;
     public final int powers;
+    public final int debuffs;
+  }
+
+  private static int debuffsAppliedThisTurn = 0;
+
+  public static void incrementDebuffsAppliedCount() {
+    debuffsAppliedThisTurn++;
+  }
+
+  public static void atStartOfTurn() {
+    debuffsAppliedThisTurn = 0;
+  }
+
+  public static void atStartOfCombat() {
+    debuffsAppliedThisTurn = 0;
+  }
+
+  public static void atEndOfCombat() {
+    debuffsAppliedThisTurn = 0;
   }
 
   public static int getNumAttacksPlayed() {
@@ -37,7 +57,12 @@ public class CombatInfo {
         .filter(c -> c.type == AbstractCard.CardType.POWER).count();
   }
 
+  public static int getDebuffsAppliedThisTurn() {
+    return debuffsAppliedThisTurn;
+  }
+
   public static CardsPlayedCounts getCardsPlayedCounts() {
-    return new CardsPlayedCounts(getNumAttacksPlayed(), getNumSkillsPlayed(), getNumPowersPlayed());
+    return new CardsPlayedCounts(getNumAttacksPlayed(), getNumSkillsPlayed(), getNumPowersPlayed(),
+        getDebuffsAppliedThisTurn());
   }
 }

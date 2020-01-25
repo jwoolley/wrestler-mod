@@ -9,6 +9,7 @@ import thewrestler.cards.WrestlerCardTags;
 import thewrestler.cards.skill.AbstractApprovalListener;
 import thewrestler.characters.WrestlerCharacter;
 import thewrestler.util.BasicUtils;
+import thewrestler.util.info.CombatInfo;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,7 +17,10 @@ import java.util.stream.Collectors;
 
 public class ApprovalInfo {
   public static final String APPROVAL_KEYWORD_ID = WrestlerMod.makeID("Approval");
+  public static final String CLEAN_FIGHTING_KEYWORD_ID = WrestlerMod.makeID("CleanFighting");
   public static final String DIRTY_KEYWORD_ID = WrestlerMod.makeID("Dirty");
+  public static final int MAX_ATTACKS_FOR_APPROVAL = 1;
+  public static final int MAX_DEBUFFS_FOR_APPROVAL = 0;
   private final static int STARTING_AMOUNT = 0;
   private final static int MIN_APPROVAL = -50;
   private final static int MAX_APPROVAL = 50;
@@ -152,7 +156,18 @@ public class ApprovalInfo {
 
   // TODO: add hook to make this call (or use PostBattleSubscriber hook)
   public void onVictory(AbstractCard card) {
-    checkIfDirtyCardsPlayed();
+    WrestlerMod.logger.info("ApprovalInfo:: onVictory called");
+    endOfTurnApprovalCheck();
+  }
+
+  public void atEndOfTurn(){
+    endOfTurnApprovalCheck();
+    WrestlerMod.logger.info("ApprovalInfo::_atEndOfTurn approval: " + this.amount);
+  }
+
+
+  private void endOfTurnApprovalCheck() {
+    checkNumAttacksPlayed();
   }
 
   private void checkIfDirtyCardsPlayed() {
@@ -163,9 +178,20 @@ public class ApprovalInfo {
     }
   }
 
-  public void atEndOfTurn(){
-    checkIfDirtyCardsPlayed();
-    WrestlerMod.logger.info("ApprovalInfo::_atEndOfTurn approval: " +this.amount);
+  private void checkNumAttacksPlayed() {
+    if (CombatInfo.getNumAttacksPlayed() <= MAX_ATTACKS_FOR_APPROVAL) {
+      WrestlerMod.logger.info("ApprovalInfo::checkNumAttacksPlayed " + CombatInfo.getNumAttacksPlayed() + " attack(s) played, increasing approval");
+      // TODO: display appropriate VFX/SFX
+      increaseApproval();
+    }
+  }
+
+  private void checkNumDebuffsApplied() {
+    if (CombatInfo.getDebuffsAppliedThisTurn() <= MAX_DEBUFFS_FOR_APPROVAL) {
+      WrestlerMod.logger.info("ApprovalInfo::checkNumDebuffsApplied " + CombatInfo.getNumAttacksPlayed() + " debuffs(s) applied, increasing approval");
+      // TODO: display appropriate VFX/SFX
+      increaseApproval();
+    }
   }
 
   public void atStartOfTurn(){
