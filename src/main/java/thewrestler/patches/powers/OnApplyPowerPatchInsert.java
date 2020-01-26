@@ -32,7 +32,7 @@ public class OnApplyPowerPatchInsert {
                             AbstractPower powerToApply) {
 
     final boolean alreadyHandled = powerActionList.contains(__instance);
-    WrestlerMod.logger.info("__instance: " + __instance + "; alreadyHandled: " + alreadyHandled);
+//    WrestlerMod.logger.info("__instance: " + __instance + "; alreadyHandled: " + alreadyHandled);
 
     final int amountBeingApplied = __instance.amount;
 

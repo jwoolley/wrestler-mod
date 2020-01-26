@@ -48,7 +48,8 @@ public class IronManPower extends AbstractWrestlerPower implements CloneablePowe
   @Override
   public boolean onPlayerDeath(AbstractPlayer abstractPlayer, DamageInfo damageInfo) {
     flash();
-    AbstractDungeon.actionManager.addToTop(new SFXAction("METAL_MAN_RIFF_1"));
+//    CardCrawlGame.sound.play("METAL_MAN_RIFF_2");
+    AbstractDungeon.actionManager.addToTop(new SFXAction("METAL_MAN_RIFF_2"));
     AbstractDungeon.player.heal(HEAL_AMOUNT, true);
     return false;
   }

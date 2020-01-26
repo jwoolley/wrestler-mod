@@ -293,6 +293,7 @@ public class WrestlerMod implements
         reflectedMap.put("WING_FLUTTER_1", new Sfx(getAudioResourcePath("TheWrestler_WingFlutter1.ogg")));
         reflectedMap.put("YELL_PAIN_1", new Sfx(getAudioResourcePath("TheWrestler_YellPain1.ogg")));
         reflectedMap.put("METAL_MAN_RIFF_1", new Sfx(getAudioResourcePath("music/TheWrestler_MetalManRiff1.ogg")));
+        reflectedMap.put("METAL_MAN_RIFF_2", new Sfx(getAudioResourcePath("music/TheWrestler_MetalManRiff2.ogg")));
     }
 
     // ======= /REGISTER ASSETS/ ========

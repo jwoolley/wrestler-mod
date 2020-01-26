@@ -84,11 +84,11 @@ public class WrestlerCombatInfoPanel implements CustomInfoPanel, StartOfCombatLi
     if (updateCardCountsFlag) {
       this.cardCounts = CombatInfo.getCardsPlayedCounts();
 
-      WrestlerMod.logger.info("WrestlerCombatInfoPanel::updateCardCounts called. updated counts: "
-          + "attacks:  " + this.cardCounts.attacks
-          + "skills:   " + this.cardCounts.skills
-          + "powers:   " + this.cardCounts.powers
-          + "debuffs:  " + this.cardCounts.debuffs);
+//      WrestlerMod.logger.info("WrestlerCombatInfoPanel::updateCardCounts called. updated counts: "
+//          + "attacks:  " + this.cardCounts.attacks
+//          + "skills:   " + this.cardCounts.skills
+//          + "powers:   " + this.cardCounts.powers
+//          + "debuffs:  " + this.cardCounts.debuffs);
       updateCardCountsFlag = false;
     }
   }
