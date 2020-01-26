@@ -11,11 +11,9 @@ import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.powers.IntangiblePlayerPower;
 import com.megacrit.cardcrawl.powers.StrengthPower;
-import thewrestler.actions.GainGoldAction;
 import thewrestler.cards.WrestlerCardTags;
 import thewrestler.characters.WrestlerCharacter;
 import thewrestler.enums.AbstractCardEnum;
-import thewrestler.util.BasicUtils;
 import thewrestler.util.info.approval.ApprovalInfo;
 
 import static thewrestler.WrestlerMod.getCardResourcePath;

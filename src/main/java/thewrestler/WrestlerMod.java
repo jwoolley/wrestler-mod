@@ -21,6 +21,7 @@ import com.megacrit.cardcrawl.cards.CardGroup;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.core.Settings;
+import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.helpers.CardHelper;
 import com.megacrit.cardcrawl.helpers.FontHelper;
 import com.megacrit.cardcrawl.localization.*;
@@ -50,6 +51,7 @@ import thewrestler.ui.WrestlerCombatInfoPanel;
 import thewrestler.ui.WrestlerSignatureMovePanel;
 import thewrestler.util.BasicUtils;
 import thewrestler.util.IDCheckDontTouchPls;
+import thewrestler.util.RefreshHandListener;
 import thewrestler.util.TextureLoader;
 import thewrestler.util.info.CombatInfo;
 import thewrestler.util.info.approval.ApprovalInfo;
@@ -467,6 +469,7 @@ public class WrestlerMod implements
         BaseMod.addCard(new HotShot());
         BaseMod.addCard(new IronMan());
         BaseMod.addCard(new Neckbreaker());
+        BaseMod.addCard(new NearFall());
         BaseMod.addCard(new OffTheRopes());
         BaseMod.addCard(new PlayToTheCrowd());
         BaseMod.addCard(new ProvenTactics());
@@ -523,6 +526,7 @@ public class WrestlerMod implements
         UnlockTracker.unlockCard(HeelTurn.ID);
         UnlockTracker.unlockCard(HotShot.ID);
         UnlockTracker.unlockCard(IronMan.ID);
+        UnlockTracker.unlockCard(NearFall.ID);
         UnlockTracker.unlockCard(Neckbreaker.ID);
         UnlockTracker.unlockCard(OffTheRopes.ID);
         UnlockTracker.unlockCard(PlayToTheCrowd.ID);
@@ -730,6 +734,7 @@ public class WrestlerMod implements
             CombatInfo.atStartOfCombat();
         }
 
+        StartOfCombatListener.triggerStartOfCombatPowers();
         StartOfCombatListener.triggerStartOfCombatCards();
     }
 

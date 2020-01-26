@@ -47,8 +47,8 @@ public class CleanFinish extends CustomCard {
   @Override
   public void use(AbstractPlayer p, AbstractMonster m) {
     List<AbstractCard> cards = p.hand.group.stream()
-        .filter(c -> c.type != CardType.STATUS && c.type != CardType.CURSE)
-        .filter(c -> c.cost != 0 && c.exhaust != true)
+        .filter(c -> c.type != CardType.CURSE)
+        .filter(c -> c.cost > 0)
         .collect(Collectors.toList());
 
     WrestlerMod.logger.info("CleanFinish:use filtered cards:" + cards.stream()

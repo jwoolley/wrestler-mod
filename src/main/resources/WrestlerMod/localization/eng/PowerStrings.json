@@ -92,6 +92,13 @@
     ]
   },
 
+  "WrestlerMod:NearFallPower": {
+    "NAME": "Near-Fall",
+    "DESCRIPTIONS": [
+      "Until end of turn, whenever you have no cards in hand, draw a card."
+    ]
+  },
+
   "WrestlerMod:ProvenTacticsPower": {
     "NAME": "Proven Tactics",
     "DESCRIPTIONS": [

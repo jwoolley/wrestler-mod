@@ -3,6 +3,7 @@ package thewrestler.cards;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import thewrestler.cards.skill.AbstractApprovalListener;
+import thewrestler.util.RefreshHandListener;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,5 +26,10 @@ public interface StartOfCombatListener {
         .filter(c -> c instanceof AbstractApprovalListener).map(c -> (StartOfCombatListener)c).collect(Collectors.toList()));
 
     cards.forEach(StartOfCombatListener::atStartOfCombat);
+  }
+
+  static public void triggerStartOfCombatPowers() {
+    AbstractDungeon.player.powers.stream().filter(p -> p instanceof StartOfCombatListener)
+        .forEach(p -> ((StartOfCombatListener)p).atStartOfCombat());
   }
 }

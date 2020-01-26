@@ -40,6 +40,12 @@
     ]
   },
 
+  "WrestlerMod:NearFallAction": {
+    "TEXT": [
+      "Choose a Card to Exhaust."
+    ]
+  },
+
   "WrestlerMod:SideRollAction": {
     "TEXT": [
       "Choose a Card to Discard."
