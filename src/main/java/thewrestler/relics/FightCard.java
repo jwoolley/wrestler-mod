@@ -33,7 +33,7 @@ public class FightCard extends CustomWrestlerRelic implements CustomSavable<Inte
   private static final Texture OUTLINE = TextureLoader.getTexture(makeRelicOutlinePath("fightcard.png"));
 
   private static final List<String> POWERTIP_KEYWORDS =
-      Arrays.asList(WrestlerMod.makeID("Liked"), WrestlerMod.makeID("Disliked"),
+      Arrays.asList(WrestlerMod.makeID("Admired"), WrestlerMod.makeID("Hated"),
                     WrestlerMod.makeID("PeoplesCrown"), WrestlerMod.makeID("BrutesTrophy"));
 
   private static AbstractRelic POPULAR_RELIC_REWARD = new PeoplesCrown();
@@ -60,10 +60,8 @@ public class FightCard extends CustomWrestlerRelic implements CustomSavable<Inte
     this.fightRecord = RELIC_USED_KEY;
     this.counter = -1;
 
-    if (BasicUtils.isPlayingAsWrestler()
-        && WrestlerCharacter.hasApprovalInfo()) {
-      ApprovalInfo info = WrestlerCharacter.getApprovalInfo();
-      return info.isLiked() ? POPULAR_RELIC_REWARD : UNPOPULAR_RELIC_REWARD;
+    if (WrestlerCharacter.hasApprovalInfo()) {
+      return ApprovalInfo.isAdmired() ? POPULAR_RELIC_REWARD : UNPOPULAR_RELIC_REWARD;
     }
 
     return AbstractDungeon.returnRandomRelic(AbstractDungeon.returnRandomRelicTier());
@@ -93,14 +91,14 @@ public class FightCard extends CustomWrestlerRelic implements CustomSavable<Inte
 
       ApprovalInfo info = WrestlerCharacter.getApprovalInfo();
 
-      if (info.isDisliked()) {
+      if (ApprovalInfo.isHated()) {
         triggerRelicTickEffect();
         if (this.fightRecord > 0) {
           this.fightRecord = -1;
         } else if (this.fightRecord > -THRESHOLD) {
           this.fightRecord--;
         }
-      } else if (info.isLiked()) {
+      } else if (ApprovalInfo.isAdmired()) {
         triggerRelicTickEffect();
         if (this.fightRecord < 0) {
           this.fightRecord = 1;

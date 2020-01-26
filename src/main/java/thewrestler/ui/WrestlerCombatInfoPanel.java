@@ -14,6 +14,8 @@ import com.megacrit.cardcrawl.helpers.PowerTip;
 import com.megacrit.cardcrawl.helpers.TipHelper;
 import com.megacrit.cardcrawl.localization.UIStrings;
 import thewrestler.WrestlerMod;
+import thewrestler.cards.EndOfCombatListener;
+import thewrestler.cards.StartOfCombatListener;
 import thewrestler.characters.WrestlerCharacter;
 import thewrestler.signaturemoves.cards.AbstractSignatureMoveCard;
 import thewrestler.util.BasicUtils;
@@ -22,7 +24,7 @@ import thewrestler.util.info.CombatInfo;
 
 import java.util.ArrayList;
 
-public class WrestlerCombatInfoPanel implements CustomInfoPanel {
+public class WrestlerCombatInfoPanel implements CustomInfoPanel, StartOfCombatListener, EndOfCombatListener {
   private static final String[] TEXT;
 
   private static final float WIDTH = 290;

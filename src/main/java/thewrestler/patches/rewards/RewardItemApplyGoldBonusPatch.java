@@ -8,6 +8,7 @@ import com.megacrit.cardcrawl.rooms.TreasureRoom;
 import thewrestler.characters.WrestlerCharacter;
 import thewrestler.relics.RingCard;
 import thewrestler.util.BasicUtils;
+import thewrestler.util.info.approval.ApprovalInfo;
 
 @SpirePatch(
     clz = RewardItem.class,
@@ -21,9 +22,7 @@ public class RewardItemApplyGoldBonusPatch {
   public static void Postfix(RewardItem __instance, boolean theft) {
     if (AbstractDungeon.player.hasRelic(RingCard.ID)) {
       if (!(AbstractDungeon.getCurrRoom() instanceof TreasureRoom) &&
-          (!BasicUtils.isPlayingAsWrestler()
-          || !WrestlerCharacter.hasApprovalInfo()
-          || WrestlerCharacter.getApprovalInfo().isDisliked())) {
+          (BasicUtils.isPlayingAsWrestler() && ApprovalInfo.isUnpopular())) {
 
         final int goldBonus = MathUtils.round(__instance.goldAmt * RingCard.REWARD_PERCENTAGE_BONUS / 100.0f);
 

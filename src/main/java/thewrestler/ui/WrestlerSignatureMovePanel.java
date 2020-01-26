@@ -16,6 +16,8 @@ import com.megacrit.cardcrawl.helpers.TipHelper;
 import com.megacrit.cardcrawl.helpers.input.InputHelper;
 import com.megacrit.cardcrawl.localization.UIStrings;
 import thewrestler.WrestlerMod;
+import thewrestler.cards.EndOfCombatListener;
+import thewrestler.cards.StartOfCombatListener;
 import thewrestler.characters.WrestlerCharacter;
 import thewrestler.signaturemoves.cards.AbstractSignatureMoveCard;
 import thewrestler.signaturemoves.moveinfos.AbstractSignatureMoveInfo;
@@ -26,7 +28,7 @@ import java.util.ArrayList;
 
 // TODO: subheader w/ Signature Move name (in yellow)
 
-public class WrestlerSignatureMovePanel implements CustomInfoPanel, CardPreviewElement {
+public class WrestlerSignatureMovePanel implements CustomInfoPanel, CardPreviewElement, StartOfCombatListener, EndOfCombatListener {
   private static final String[] TEXT;
 
   private static final float WIDTH = 290;

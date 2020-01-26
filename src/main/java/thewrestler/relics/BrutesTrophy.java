@@ -11,6 +11,7 @@ import thewrestler.WrestlerMod;
 import thewrestler.characters.WrestlerCharacter;
 import thewrestler.util.BasicUtils;
 import thewrestler.util.TextureLoader;
+import thewrestler.util.info.approval.ApprovalInfo;
 
 import java.util.Arrays;
 import java.util.List;
@@ -37,10 +38,7 @@ public class BrutesTrophy extends CustomWrestlerRelic {
   }
 
   public void atBattleStart() {
-
-    if (!BasicUtils.isPlayingAsWrestler()
-        || !WrestlerCharacter.hasApprovalInfo()
-        || WrestlerCharacter.getApprovalInfo().isDisliked()) {
+    if (BasicUtils.isPlayingAsWrestler() && ApprovalInfo.isHated()) {
 
       flash();
       AbstractDungeon.actionManager.addToBottom(

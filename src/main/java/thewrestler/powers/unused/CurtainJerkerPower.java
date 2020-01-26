@@ -14,7 +14,9 @@ import com.megacrit.cardcrawl.powers.DexterityPower;
 import com.megacrit.cardcrawl.powers.StrengthPower;
 import thewrestler.WrestlerMod;
 import thewrestler.actions.power.ApplyGrappledAction;
+import thewrestler.cards.skill.AbstractApprovalListener;
 import thewrestler.powers.AbstractWrestlerPower;
+import thewrestler.util.info.approval.ApprovalInfo;
 
 public class CurtainJerkerPower extends AbstractWrestlerPower implements CloneablePowerInterface {
   public static final String POWER_ID = WrestlerMod.makeID("CurtainJerkerPower");
@@ -29,18 +31,21 @@ public class CurtainJerkerPower extends AbstractWrestlerPower implements Cloneab
     super(POWER_ID, NAME, IMG, owner, owner, amount, POWER_TYPE);
   }
 
+
   @Override
-  public int onAttackedToChangeDamage(DamageInfo info, int damageAmount) {
-    if (damageAmount > 0 && info.owner != this.owner) {
-      flash();
-      AbstractDungeon.actionManager.addToTop(new RemoveSpecificPowerAction(this.owner, this.owner, this.ID));
-      AbstractDungeon.actionManager.addToBottom(
-          new ApplyPowerAction(this.owner, this.owner, new StrengthPower(this.owner, -this.amount), -this.amount));
-      AbstractDungeon.actionManager.addToBottom(
-          new ApplyPowerAction(this.owner, this.owner, new DexterityPower(this.owner, -this.amount), -this.amount));
+  public void atStartOfTurn() {
+    if (!ApprovalInfo.isAmateur()) {
+      triggerRemovePower();
     }
-    return damageAmount;
   }
+
+//  @Override
+//  public int onAttackedToChangeDamage(DamageInfo info, int damageAmount) {
+//    if (damageAmount > 0 && info.owner != this.owner) {
+//     triggerRemovePower();
+//    }
+//    return damageAmount;
+//  }
 
   @Override
   public void updateDescription() {
@@ -56,5 +61,14 @@ public class CurtainJerkerPower extends AbstractWrestlerPower implements Cloneab
     powerStrings = CardCrawlGame.languagePack.getPowerStrings(POWER_ID);
     NAME = powerStrings.NAME;
     DESCRIPTIONS = powerStrings.DESCRIPTIONS;
+  }
+
+  private void triggerRemovePower() {
+    flash();
+    AbstractDungeon.actionManager.addToTop(new RemoveSpecificPowerAction(this.owner, this.owner, this.ID));
+    AbstractDungeon.actionManager.addToBottom(
+        new ApplyPowerAction(this.owner, this.owner, new StrengthPower(this.owner, -this.amount), -this.amount));
+    AbstractDungeon.actionManager.addToBottom(
+        new ApplyPowerAction(this.owner, this.owner, new DexterityPower(this.owner, -this.amount), -this.amount));
   }
 }

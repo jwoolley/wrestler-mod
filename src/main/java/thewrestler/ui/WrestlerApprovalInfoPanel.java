@@ -15,6 +15,8 @@ import com.megacrit.cardcrawl.helpers.TipHelper;
 import com.megacrit.cardcrawl.localization.Keyword;
 import com.megacrit.cardcrawl.localization.UIStrings;
 import thewrestler.WrestlerMod;
+import thewrestler.cards.EndOfCombatListener;
+import thewrestler.cards.StartOfCombatListener;
 import thewrestler.characters.WrestlerCharacter;
 import thewrestler.util.BasicUtils;
 import thewrestler.util.TextureLoader;
@@ -25,7 +27,7 @@ import java.util.stream.Collectors;
 
 // TODO: VFX/SFX when approval changes (e.g. red or green border flash)
 
-public class WrestlerApprovalInfoPanel implements CustomInfoPanel {
+public class WrestlerApprovalInfoPanel implements CustomInfoPanel, StartOfCombatListener, EndOfCombatListener {
   private static final String[] TEXT;
 
   private static final float WIDTH = 290;

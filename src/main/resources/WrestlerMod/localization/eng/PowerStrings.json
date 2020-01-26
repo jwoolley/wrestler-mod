@@ -14,7 +14,7 @@
   "WrestlerMod:CurtainJerkerPower": {
     "NAME": "Curtain Jerker",
     "DESCRIPTIONS": [
-      "The next time you take attack damage, lose #b",
+      "At the start of your turn, if you're not #yAmateur, lose #b",
       " #yStrength and #b",
       " #yDexterity."
     ]

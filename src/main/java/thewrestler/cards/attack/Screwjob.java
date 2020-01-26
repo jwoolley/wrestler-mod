@@ -3,8 +3,6 @@ package thewrestler.cards.attack;
 import basemod.abstracts.CustomCard;
 import basemod.abstracts.CustomSavable;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
-import com.megacrit.cardcrawl.actions.common.DamageAction;
-import com.megacrit.cardcrawl.actions.common.LoseHPAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.cards.DamageInfo;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
@@ -15,7 +13,6 @@ import com.megacrit.cardcrawl.helpers.GetAllInBattleInstances;
 import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.vfx.combat.FlashAtkImgEffect;
-import thewrestler.cards.WrestlerCardTags;
 import thewrestler.enums.AbstractCardEnum;
 import thewrestler.util.info.approval.ApprovalInfo;
 
@@ -39,22 +36,22 @@ public class Screwjob extends CustomCard implements CustomSavable<Integer> {
   private static final int COST = 1;
   private static final int DAMAGE = 8;
 
-  private static final int DAMAGE_INCREASE = 3;
+  private static final int DAMAGE_INCREASE = 4;
 
   public Screwjob() {
-    super(ID, NAME, getCardResourcePath(IMG_PATH), COST, getDescription(true), TYPE,
+    super(ID, NAME, getCardResourcePath(IMG_PATH), COST, getDescription(false), TYPE,
         AbstractCardEnum.THE_WRESTLER_ORANGE, RARITY, TARGET);
     this.baseDamage = this.damage = this.misc = DAMAGE;
     this.baseMagicNumber = this.magicNumber = DAMAGE_INCREASE;
     this.exhaust = true;
-    this.isEthereal = true;
   }
 
   @Override
   public void use(AbstractPlayer p, AbstractMonster m) {
     AbstractDungeon.actionManager.addToBottom(
         new ScrewjobAction(
-            m, new DamageInfo(p, this.damage, damageTypeForTurn),  this.magicNumber, this.uuid, this));
+            m, new DamageInfo(p, this.damage, damageTypeForTurn),  this.magicNumber, this.uuid, this,
+            this.upgraded));
   }
 
   @Override
@@ -77,9 +74,11 @@ public class Screwjob extends CustomCard implements CustomSavable<Integer> {
     private UUID uuid;
     private boolean playedSound;
 
+    private final boolean popularThreshold;
     private Screwjob card;
 
-    public ScrewjobAction(AbstractCreature target, DamageInfo info, int incAmount, UUID targetUUID, Screwjob card) {
+    public ScrewjobAction(AbstractCreature target, DamageInfo info, int incAmount, UUID targetUUID, Screwjob card,
+                          boolean popularThreshold) {
       this.info = info;
       setValues(target, info);
       this.increaseAmount = incAmount;
@@ -88,12 +87,13 @@ public class Screwjob extends CustomCard implements CustomSavable<Integer> {
       this.uuid = targetUUID;
       this.playedSound = false;
       this.card = card;
+      this.popularThreshold = popularThreshold;
     }
 
     public void update() {
       if (this.target != null) {
         if (!this.playedSound && this.duration <= SOUND_DURATION) {
-          if (ApprovalInfo.isUnpopular()) {
+          if (ApprovalInfo.isHated()) {
             this.card.flash();
           }
           CardCrawlGame.sound.play("DRILL_SPIN_1");
@@ -102,7 +102,7 @@ public class Screwjob extends CustomCard implements CustomSavable<Integer> {
           AbstractDungeon.effectList.add(
               new FlashAtkImgEffect(this.target.hb.cX, this.target.hb.cY, AttackEffect.SLASH_DIAGONAL));
           this.target.damage(this.info);
-          if (ApprovalInfo.isUnpopular()) {
+          if ( ApprovalInfo.isHated() || this.popularThreshold && ApprovalInfo.isUnpopular()) {
             for (AbstractCard c : AbstractDungeon.player.masterDeck.group) {
               if (c.uuid.equals(this.uuid)) {
                 c.misc += this.increaseAmount;
@@ -138,14 +138,15 @@ public class Screwjob extends CustomCard implements CustomSavable<Integer> {
   public void upgrade() {
     if (!this.upgraded) {
       this.upgradeName();
-      this.isEthereal = false;
-      this.rawDescription = getDescription(false);
+      this.rawDescription = getDescription(true);
       this.initializeDescription();
     }
   }
 
-  private static String getDescription(boolean isEthereal) {
-    return (isEthereal ? EXTENDED_DESCRIPTION[0] : "") + DESCRIPTION;
+  private static String getDescription(boolean isUpgraded) {
+    return DESCRIPTION
+        + (!isUpgraded ? EXTENDED_DESCRIPTION[0] :  EXTENDED_DESCRIPTION[1])
+        + EXTENDED_DESCRIPTION[2];
   }
 
   static {

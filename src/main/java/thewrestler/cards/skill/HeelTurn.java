@@ -62,7 +62,7 @@ public class HeelTurn extends CustomCard {
         new ApplyPowerAction(p, p, new StrengthPower(p, this.magicNumber), this.magicNumber));
 
     if (wasLiked) {
-        WrestlerCharacter.getApprovalInfo().decreaseApproval(APPROVAL_LOSS);
+        WrestlerCharacter.getApprovalInfo().decreaseApproval(APPROVAL_LOSS, false);
     }
   }
 

@@ -7,6 +7,8 @@ import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import org.apache.commons.net.smtp.SMTP;
 import thewrestler.WrestlerMod;
+import thewrestler.cards.EndOfCombatListener;
+import thewrestler.cards.StartOfCombatListener;
 import thewrestler.characters.WrestlerCharacter;
 import thewrestler.signaturemoves.cards.AbstractSignatureMoveCard;
 import thewrestler.signaturemoves.cards.Chokeslam;
@@ -19,7 +21,7 @@ import thewrestler.signaturemoves.upgrades.UpgradeType;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 
-public abstract class AbstractSignatureMoveInfo {
+public abstract class AbstractSignatureMoveInfo implements StartOfCombatListener, EndOfCombatListener {
   public final boolean isFirstInstance;
 
   final AbstractSignatureMoveCard signatureMoveCard;

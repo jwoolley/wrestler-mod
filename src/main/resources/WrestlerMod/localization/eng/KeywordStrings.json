@@ -13,7 +13,7 @@
     "NAMES": [
       "dirty"
     ],
-    "DESCRIPTION": "Ending your turn without applying a debuff increases your #yFan #yApproval by 5."
+    "DESCRIPTION": "Ending your turn without playing more than 1 Attack increases your #yFan #yApproval by 5."
   },
 
   "WrestlerMod:Dirty": {
@@ -53,7 +53,7 @@
     "NAMES": [
       "admired"
     ],
-    "DESCRIPTION": "Your #yFan #yApproval is #b25 or greater."
+    "DESCRIPTION": "Your #yFan #yApproval is #g25 or greater."
   },
 
   "WrestlerMod:Hated": {
@@ -61,7 +61,7 @@
     "NAMES": [
       "hated"
     ],
-    "DESCRIPTION": "Your #yFan #yApproval is #b-25 or less."
+    "DESCRIPTION": "Your #yFan #yApproval is #r-25 or less."
   },
 
   "WrestlerMod:Revered": {
@@ -69,7 +69,7 @@
     "NAMES": [
       "revered"
     ],
-    "DESCRIPTION": "Your #yFan #yApproval is 50."
+    "DESCRIPTION": "Your #yFan #yApproval is #g50."
   },
 
   "WrestlerMod:Despised": {
@@ -77,7 +77,7 @@
     "NAMES": [
       "despised"
     ],
-    "DESCRIPTION": "Your #yFan #yApproval is #b-25 or less."
+    "DESCRIPTION": "Your #yFan #yApproval is #r-50."
   },
 
   "WrestlerMod:Amateur": {

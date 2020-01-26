@@ -12,7 +12,7 @@
     "NAME": "Brute's Trophy",
     "FLAVOR": "Imposing in its splendor.",
     "DESCRIPTIONS": [
-      "At the start of each combat, if you're #yUnpopular, gain #b",
+      "At the start of each combat, gain #b",
       " #yStrength."
     ]
   },
@@ -23,8 +23,8 @@
     "DESCRIPTIONS": [
       "On pickup, gain #b",
       " #yGold. If you win #b",
-      " combats in a row while #yPopular, gain the #yPeople's #yCrown. If you win #b",
-      " combats in a row while #yUnpopular, gain the #yBrute's #yTrophy."
+      " combats in a row with #yAdmired, gain the #yPeople's #yCrown. If you win #b",
+      " combats in a row with #yHated, gain the #yBrute's #yTrophy."
     ]
   },
 
@@ -50,7 +50,7 @@
     "NAME": "Peoples Crown",
     "FLAVOR": "Dignified in its simplicity.",
     "DESCRIPTIONS": [
-      "At the start of each combat, if you're #yPopular, gain #b",
+      "At the start of each combat, gain #b",
       " #yDexterity."
     ]
   },

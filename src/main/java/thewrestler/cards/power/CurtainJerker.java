@@ -11,8 +11,10 @@ import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.powers.DexterityPower;
 import com.megacrit.cardcrawl.powers.StrengthPower;
 import thewrestler.WrestlerMod;
+import thewrestler.cards.skill.AbstractApprovalListener;
 import thewrestler.enums.AbstractCardEnum;
 import thewrestler.powers.unused.CurtainJerkerPower;
+import thewrestler.util.info.approval.ApprovalInfo;
 
 import static thewrestler.WrestlerMod.getCardResourcePath;
 

@@ -24,12 +24,13 @@ public class ScrapperPower extends AbstractWrestlerPower implements CloneablePow
     super(POWER_ID, NAME, IMG, owner, owner, amount, POWER_TYPE);
   }
 
-  public void atStartOfTurnPostDraw() {
-      if (CombatInfo.getNumSkillsPlayed() == 0) {
-        flash();
-        AbstractDungeon.actionManager.addToBottom(
-            new ApplyPowerAction(this.owner, this.owner, new StrengthPower(this.owner, this.amount), this.amount));
-      }
+  @Override
+  public void atEndOfTurn(boolean isPlayer) {
+    if (isPlayer && CombatInfo.getNumSkillsPlayed() == 0) {
+      flash();
+      AbstractDungeon.actionManager.addToBottom(
+          new ApplyPowerAction(this.owner, this.owner, new StrengthPower(this.owner, this.amount), this.amount));
+    }
   }
 
   @Override

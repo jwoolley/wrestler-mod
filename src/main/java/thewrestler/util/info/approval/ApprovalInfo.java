@@ -5,6 +5,8 @@ import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import thewrestler.WrestlerMod;
+import thewrestler.cards.EndOfCombatListener;
+import thewrestler.cards.StartOfCombatListener;
 import thewrestler.cards.WrestlerCardTags;
 import thewrestler.cards.skill.AbstractApprovalListener;
 import thewrestler.characters.WrestlerCharacter;
@@ -15,7 +17,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class ApprovalInfo {
+public class ApprovalInfo implements StartOfCombatListener, EndOfCombatListener {
   public static final String APPROVAL_KEYWORD_ID = WrestlerMod.makeID("Approval");
   public static final String CLEAN_FIGHTING_KEYWORD_ID = WrestlerMod.makeID("CleanFighting");
   public static final String DIRTY_KEYWORD_ID = WrestlerMod.makeID("Dirty");
@@ -24,6 +26,13 @@ public class ApprovalInfo {
   private final static int STARTING_AMOUNT = 0;
   private final static int MIN_APPROVAL = -50;
   private final static int MAX_APPROVAL = 50;
+
+  private final static int AMATEUR_MIN_APPROVAL = -5;
+  private final static int AMATEUR_MAX_APPROVAL = 5;
+
+  private final static int ADMIRED_MIN = 25;
+  private final static int HATED_MAX = -25;
+
   private int amount;
 
   private int numDirtyCardsPlayed = 0;
@@ -35,12 +44,16 @@ public class ApprovalInfo {
   public final static int APPROVAL_DEFAULT_DELTA = 5;
 
   private void increaseApproval() {
-    increaseApproval(APPROVAL_DEFAULT_DELTA);
+    increaseApproval(APPROVAL_DEFAULT_DELTA, false);
   }
 
-  public void increaseApproval(int amount) {
+  private void increaseApproval(boolean isEndOfTurnCheck) {
+    increaseApproval(APPROVAL_DEFAULT_DELTA, isEndOfTurnCheck);
+  }
+
+  public void increaseApproval(int amount, boolean isEndOfTurnChange) {
     if (amount < 0) {
-      decreaseApproval(-amount);
+      decreaseApproval(-amount, isEndOfTurnChange);
       return;
     }
 
@@ -59,7 +72,7 @@ public class ApprovalInfo {
     if (actualChangeAmount > 0) {
       final int changeAmount = actualChangeAmount; // closure dictates that this needs to be final
       List<AbstractApprovalListener> cards = getApprovalListenerCards();
-      cards.forEach(c -> c.onApprovalChanged(changeAmount, this.amount));
+      cards.forEach(c -> c.onApprovalChanged(changeAmount, this.amount, isEndOfTurnChange));
 
       boolean becamePopular = previousAmount <= 0 && this.amount > 0;
       if (becamePopular) {
@@ -68,13 +81,17 @@ public class ApprovalInfo {
     }
   }
 
-  public void decreaseApproval() {
-    decreaseApproval(APPROVAL_DEFAULT_DELTA);
+  public void decreaseApproval(boolean isEndOfTurnChange) {
+    decreaseApproval(APPROVAL_DEFAULT_DELTA, isEndOfTurnChange);
   }
 
-  public void decreaseApproval(int amount) {
+  public void decreaseApproval() {
+    decreaseApproval(APPROVAL_DEFAULT_DELTA, false);
+  }
+
+  public void decreaseApproval(int amount, boolean isEndOfTurnChange) {
     if (amount < 0) {
-      increaseApproval(-amount);
+      increaseApproval(-amount, isEndOfTurnChange);
       return;
     }
 
@@ -95,7 +112,7 @@ public class ApprovalInfo {
       final int changeAmount = actualChangeAmount; // closure dictates that this needs to be final
 
       List<AbstractApprovalListener> cards = getApprovalListenerCards();
-      cards.forEach(c -> c.onApprovalChanged(-changeAmount, this.amount));
+      cards.forEach(c -> c.onApprovalChanged(-changeAmount, this.amount, isEndOfTurnChange));
 
       boolean becameUnpopular = previousAmount >= 0 && this.amount < 0;
       if (becameUnpopular) {
@@ -108,9 +125,38 @@ public class ApprovalInfo {
     return this.amount;
   }
 
-  public boolean isLiked() {
+  private boolean _isLiked() {
     return this.amount > 0;
   }
+
+  private boolean _isDisliked() {
+    return this.amount < 0;
+  }
+
+  public boolean _isAmateur() {
+    return _isAmateur(this.amount);
+  }
+
+  private static boolean _isAmateur(int _amount) {
+    return _amount >= AMATEUR_MIN_APPROVAL && _amount <= AMATEUR_MAX_APPROVAL;
+  }
+
+  private boolean _isHated() {
+    return this.amount <= HATED_MAX;
+  }
+
+  private boolean _isAdmired() {
+    return this.amount > 0;
+  }
+
+  private boolean _isDespised() {
+    return this.amount >= MIN_APPROVAL;
+  }
+
+  private boolean _isRevered() {
+    return this.amount <= MAX_APPROVAL;
+  }
+
 
   public static boolean hasApprovalInfo() {
     return BasicUtils.isPlayingAsWrestler() && WrestlerCharacter.hasApprovalInfo();
@@ -120,17 +166,36 @@ public class ApprovalInfo {
     return hasApprovalInfo() ? WrestlerCharacter.getApprovalInfo().getApprovalAmount() : 0;
   }
 
-
   public static boolean isPopular() {
-    return hasApprovalInfo() && WrestlerCharacter.getApprovalInfo().isLiked();
+    return hasApprovalInfo() && WrestlerCharacter.getApprovalInfo()._isLiked();
   }
 
   public static boolean isUnpopular() {
-    return hasApprovalInfo() && WrestlerCharacter.getApprovalInfo().isDisliked();
+    return hasApprovalInfo() && WrestlerCharacter.getApprovalInfo()._isDisliked();
   }
 
-  public boolean isDisliked() {
-    return this.amount < 0;
+  public static boolean isAdmired() {
+    return hasApprovalInfo() && WrestlerCharacter.getApprovalInfo()._isAdmired();
+  }
+
+  public static boolean isHated() {
+    return hasApprovalInfo() && WrestlerCharacter.getApprovalInfo()._isHated();
+  }
+
+  public static boolean isRevered() {
+    return hasApprovalInfo() && WrestlerCharacter.getApprovalInfo()._isRevered();
+  }
+
+  public static boolean isDespised() {
+    return hasApprovalInfo() && WrestlerCharacter.getApprovalInfo()._isDespised();
+  }
+
+  public static boolean isAmateur() {
+    return hasApprovalInfo() && isAmateur(WrestlerCharacter.getApprovalInfo().amount);
+  }
+
+  public static boolean isAmateur(int approvalAmount) {
+    return hasApprovalInfo() && WrestlerCharacter.getApprovalInfo()._isAmateur();
   }
 
   public void reset() {
@@ -167,7 +232,7 @@ public class ApprovalInfo {
 
 
   private void endOfTurnApprovalCheck() {
-    checkNumAttacksPlayed();
+    checkNumAttacksPlayed(true);
   }
 
   private void checkIfDirtyCardsPlayed() {
@@ -178,11 +243,11 @@ public class ApprovalInfo {
     }
   }
 
-  private void checkNumAttacksPlayed() {
+  private void checkNumAttacksPlayed(boolean isEndOfTurnCheck) {
     if (CombatInfo.getNumAttacksPlayed() <= MAX_ATTACKS_FOR_APPROVAL) {
       WrestlerMod.logger.info("ApprovalInfo::checkNumAttacksPlayed " + CombatInfo.getNumAttacksPlayed() + " attack(s) played, increasing approval");
       // TODO: display appropriate VFX/SFX
-      increaseApproval();
+      increaseApproval(isEndOfTurnCheck);
     }
   }
 
@@ -197,6 +262,13 @@ public class ApprovalInfo {
   public void atStartOfTurn(){
     numDirtyCardsPlayed = 0;
   }
+
+
+  public void atStartOfCombat(){
+    this.amount = 0;
+  }
+
+  public void atEndOfCombat(){ this.amount = 0; }
 
   public static List<AbstractCard> getPlayersDirtyCards() {
     final List<AbstractCard> dirtyCards = new ArrayList<>();

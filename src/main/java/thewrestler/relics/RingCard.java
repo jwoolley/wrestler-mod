@@ -9,6 +9,7 @@ import thewrestler.WrestlerMod;
 import thewrestler.characters.WrestlerCharacter;
 import thewrestler.util.BasicUtils;
 import thewrestler.util.TextureLoader;
+import thewrestler.util.info.approval.ApprovalInfo;
 
 import java.util.Arrays;
 import java.util.List;
@@ -39,9 +40,7 @@ public class RingCard extends CustomWrestlerRelic {
 
   @Override
   public void onVictory() {
-    if (!BasicUtils.isPlayingAsWrestler()
-        || !WrestlerCharacter.hasApprovalInfo()
-        || WrestlerCharacter.getApprovalInfo().isLiked()) {
+    if (BasicUtils.isPlayingAsWrestler() && ApprovalInfo.isPopular()) {
       flash();
       AbstractPlayer player = AbstractDungeon.player;
       addToTop(new RelicAboveCreatureAction(player, this));

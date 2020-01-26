@@ -47,15 +47,14 @@ public class Redemption extends CustomCard implements AbstractApprovalListener, 
   @Override
   public void use(AbstractPlayer p, AbstractMonster m) {
     AbstractDungeon.actionManager.addToBottom(new GainBlockAction(p, p, block));
-    ApprovalInfo info = WrestlerCharacter.getApprovalInfo();
-    if (info.isDisliked()) {
-      info.increaseApproval(APPROVAL_GAIN);
+    if (ApprovalInfo.isUnpopular()) {
+      WrestlerCharacter.getApprovalInfo().increaseApproval(APPROVAL_GAIN, false);
     }
   }
 
   private void calculateCost() {
     if (BasicUtils.isPlayerInCombat()) {
-      if (WrestlerCharacter.getApprovalInfo().isDisliked()) {
+      if (ApprovalInfo.isUnpopular()) {
         modifyCostForCombat(-DISCOUNT);
         this.update();
       }
@@ -88,7 +87,7 @@ public class Redemption extends CustomCard implements AbstractApprovalListener, 
   }
 
   @Override
-  public void onApprovalChanged(int changeAmount, int newValue) {
+  public void onApprovalChanged(int changeAmount, int newValue, boolean isEndOfTurnChange) {
     if (newValue == 0 && changeAmount > 0) {
       modifyCostForCombat(DISCOUNT);
       if (this.cost == COST) {

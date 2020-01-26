@@ -697,21 +697,6 @@ public class WrestlerMod implements
     }
 
     @Override
-    public void receiveOnBattleStart(AbstractRoom abstractRoom) {
-        if (BasicUtils.isPlayingAsWrestler()) {
-            OnApplyPowerPatchInsert.powerActionList.clear();
-            combatInfoPanel.atStartOfCombat();
-            approvalInfoPanel.atEndOfCombat();
-            signatureMovePanel.atStartOfCombat();
-            WrestlerCharacter.getSignatureMoveInfo().atStartOfCombat();
-            CombatInfo.atStartOfCombat();
-        }
-
-        StartOfCombatListener.triggerStartOfCombatCards();
-    }
-
-
-    @Override
     public void receiveStartGame() {
         approvalInfoPanel = new WrestlerApprovalInfoPanel();
         combatInfoPanel = new WrestlerCombatInfoPanel();
@@ -725,10 +710,27 @@ public class WrestlerMod implements
             WrestlerCharacter.setSignatureMoveInfo(WrestlerCharacter.initializeSignatureMoveInfo());
         }
 
-        WrestlerCharacter.initializeApprovalInfo();
-        if (ApprovalInfo.isSaveDataValid()) {
-            WrestlerCharacter.setApprovalInfoFromSave(ApprovalInfo.getApprovalFromSave());
+        if (BasicUtils.isPlayingAsWrestler()) {
+            WrestlerCharacter.initializeApprovalInfo();
+            if (ApprovalInfo.isSaveDataValid()) {
+                WrestlerCharacter.setApprovalInfoFromSave(ApprovalInfo.getApprovalFromSave());
+            }
         }
+    }
+
+    @Override
+    public void receiveOnBattleStart(AbstractRoom abstractRoom) {
+        if (BasicUtils.isPlayingAsWrestler()) {
+            OnApplyPowerPatchInsert.powerActionList.clear();
+            combatInfoPanel.atStartOfCombat();
+            approvalInfoPanel.atEndOfCombat();
+            signatureMovePanel.atStartOfCombat();
+            WrestlerCharacter.getSignatureMoveInfo().atStartOfCombat();
+            WrestlerCharacter.getApprovalInfo().atStartOfCombat();
+            CombatInfo.atStartOfCombat();
+        }
+
+        StartOfCombatListener.triggerStartOfCombatCards();
     }
 
     @Override
@@ -755,6 +757,7 @@ public class WrestlerMod implements
         combatInfoPanel.atEndOfCombat();
         signatureMovePanel.atEndOfCombat();
         WrestlerCharacter.getSignatureMoveInfo().atEndOfCombat();
+        WrestlerCharacter.getApprovalInfo().atEndOfCombat();
         CombatInfo.atEndOfCombat();
     }
 

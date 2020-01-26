@@ -79,7 +79,7 @@
 
   "WrestlerMod:CurtainJerker": {
     "NAME": "Curtain Jerker",
-    "DESCRIPTION": "Gain !M! Strength and !M! Dexterity which last until you take attack damage from an enemy.",
+    "DESCRIPTION": "Gain !M! Strength and !M! Dexterity. NL Remove at the start of your turn if you aren't wrestlermod:Amateur.",
     "EXTENDED_DESCRIPTION": [ "Innate. NL " ]
   },
 
@@ -265,9 +265,11 @@
 
   "WrestlerMod:Screwjob": {
     "NAME": "Screwjob",
-    "DESCRIPTION": "Deal !D! damage. If  wrestlermod:Unpopular, permanently increase this card's damage by !M!. NL Exhaust.",
+    "DESCRIPTION": "Deal !D! damage. If",
     "EXTENDED_DESCRIPTION": [
-      "Ethereal. NL "
+      " wrestlermod:Hated",
+      " wrestlermod:Unpopular",
+       ", permanently increase this card's damage by !M!. NL Exhaust."
     ]
   },
 
@@ -359,7 +361,6 @@
     "NAME": "Defend",
     "DESCRIPTION": "Gain !B! Block."
   },
-
 
   "WrestlerMod:Chokeslam": {
     "NAME": "Chokeslam",

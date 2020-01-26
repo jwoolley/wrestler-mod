@@ -169,7 +169,7 @@ public class WrestlerCharacter extends CustomPlayer {
     }
 
     public static ApprovalInfo getApprovalInfo() {
-        return approvalInfo;
+        return approvalInfo != null ? approvalInfo : new ApprovalInfo();
     }
 
 
