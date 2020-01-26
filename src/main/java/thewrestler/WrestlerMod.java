@@ -655,7 +655,6 @@ public class WrestlerMod implements
         // That is, in Card-Strings.json you would have #yA_Long_Keyword (#y highlights the keyword in yellow).
         // In Keyword-Strings.json you would have PROPER_NAME as A Long Keyword and the first element in NAMES be a long keyword, and the second element be a_long_keyword
 
-
         final Gson gson = new Gson();
         String language = getLanguageString();
 

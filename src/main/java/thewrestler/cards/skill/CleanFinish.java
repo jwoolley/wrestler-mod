@@ -49,6 +49,7 @@ public class CleanFinish extends CustomCard {
     List<AbstractCard> cards = p.hand.group.stream()
         .filter(c -> c.type != CardType.CURSE)
         .filter(c -> c.cost > 0)
+        .filter(c -> c.uuid != this.uuid)
         .collect(Collectors.toList());
 
     WrestlerMod.logger.info("CleanFinish:use filtered cards:" + cards.stream()

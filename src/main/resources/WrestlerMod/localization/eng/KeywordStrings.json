@@ -160,6 +160,14 @@
     "DESCRIPTION": "Cobra Clutches are 0-cost #yAttack cards which deal modest damage and apply #yPoison."
   },
 
+  "WrestlerMod:TemporaryBuffer": {
+    "PROPER_NAME": "Temporary Buffer",
+    "NAMES": [
+      "TemporaryBuffer", "temporary_buffer"
+    ],
+    "DESCRIPTION": "Prevents the next time your would lose HP this turn."
+  },
+
   "Choked": {
     "PROPER_NAME": "Choked",
     "NAMES": [

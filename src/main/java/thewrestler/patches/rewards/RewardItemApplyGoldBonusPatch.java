@@ -5,7 +5,6 @@ import com.evacipated.cardcrawl.modthespire.lib.SpirePatch;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.rewards.RewardItem;
 import com.megacrit.cardcrawl.rooms.TreasureRoom;
-import thewrestler.characters.WrestlerCharacter;
 import thewrestler.relics.RingCard;
 import thewrestler.util.BasicUtils;
 import thewrestler.util.info.approval.ApprovalInfo;

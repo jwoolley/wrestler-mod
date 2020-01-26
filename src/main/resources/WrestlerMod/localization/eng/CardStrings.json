@@ -156,9 +156,9 @@
 
   "WrestlerMod:IronMan": {
     "NAME": "Iron Man",
-    "DESCRIPTION": "The next time you would die this turn, heal for ",
+    "DESCRIPTION": "At the start of your turn, if your HP is ",
     "EXTENDED_DESCRIPTION": [
-      " HP instead. NL At the end of combat, heal !M! HP."
+      " or less, gain 1 wrestlermod:Temporary_Buffer. NL At the end of combat, heal !M! HP."
     ]
   },
 

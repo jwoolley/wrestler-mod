@@ -56,11 +56,9 @@
   "WrestlerMod:IronManPower": {
     "NAME": "Iron Man",
     "DESCRIPTIONS": [
-      "The next time",
-      "For the next #b",
-      " times",
-      " you would die this turn, heal for #b",
-      " HP instead."
+      "At the start of your turn, if your HP is ",
+      " or less, gain #b",
+      " #yTemporary #yBuffer."
     ]
   },
 
@@ -143,6 +141,16 @@
       "time ",
       "times ",
       "this turn, apply #yGrappled."
+    ]
+  },
+
+  "WrestlerMod:TemporaryBufferPower": {
+    "NAME": "Temporary Buffer",
+    "DESCRIPTIONS": [
+      "Prevent the next time",
+      "Prevent the next #b",
+      " times",
+      " you would lose HP this turn."
     ]
   },
 
