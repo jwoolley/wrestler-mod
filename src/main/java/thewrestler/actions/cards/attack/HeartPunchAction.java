@@ -45,7 +45,7 @@ public class HeartPunchAction extends AbstractGameAction {
         AbstractDungeon.effectsQueue.add(new BorderFlashEffect(Color.MAROON.cpy(), true));
         AbstractDungeon.actionManager.addToBottom(new SFXAction("HEART_SIMPLE"));
         CreatureUtils.queueRemoveAllDebuffsAction(this.target, this.source);
-        
+
         debuffs.forEach(debuff ->
             AbstractDungeon.actionManager.addToBottom(new HealAction(this.source, this.source, this.amount)));
       }

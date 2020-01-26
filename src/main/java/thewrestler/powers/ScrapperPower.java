@@ -9,6 +9,7 @@ import com.megacrit.cardcrawl.localization.PowerStrings;
 import com.megacrit.cardcrawl.powers.AbstractPower;
 import com.megacrit.cardcrawl.powers.StrengthPower;
 import thewrestler.WrestlerMod;
+import thewrestler.util.info.CombatInfo;
 
 public class ScrapperPower extends AbstractWrestlerPower implements CloneablePowerInterface {
   public static final String POWER_ID = WrestlerMod.makeID("ScrapperPower");
@@ -24,7 +25,7 @@ public class ScrapperPower extends AbstractWrestlerPower implements CloneablePow
   }
 
   public void atStartOfTurnPostDraw() {
-      if (!GrappledPower.getGrappledEnemies().isEmpty()) {
+      if (CombatInfo.getNumSkillsPlayed() == 0) {
         flash();
         AbstractDungeon.actionManager.addToBottom(
             new ApplyPowerAction(this.owner, this.owner, new StrengthPower(this.owner, this.amount), this.amount));

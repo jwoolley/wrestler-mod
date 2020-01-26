@@ -247,7 +247,7 @@
 
   "WrestlerMod:Scrapper": {
     "NAME": "Scrapper",
-    "DESCRIPTION": "At the start of your turn, if an enemy is wrestlermod:Grappled, gain !M! Strength."
+    "DESCRIPTION": "At the end of your turn, if you played no Skills, gain !M! Strength."
   },
 
   "WrestlerMod:Sharpshooter": {

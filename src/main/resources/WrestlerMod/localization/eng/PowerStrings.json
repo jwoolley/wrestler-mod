@@ -113,7 +113,7 @@
   "WrestlerMod:ScrapperPower": {
     "NAME": "Scrapper",
     "DESCRIPTIONS": [
-      "At the start of your turn, if an enemy is #yGrappled, gain #b",
+      "At the end of your turn, you played no Skills, #b",
       " #yStrength."
     ]
   },

@@ -48,12 +48,28 @@
     "DESCRIPTION": "Your #yFan #yApproval is less than #b0."
   },
 
+  "WrestlerMod:Admired": {
+    "PROPER_NAME": "Admired",
+    "NAMES": [
+      "admired"
+    ],
+    "DESCRIPTION": "Your #yFan #yApproval is #b25 or greater."
+  },
+
+  "WrestlerMod:Hated": {
+    "PROPER_NAME": "Hated",
+    "NAMES": [
+      "hated"
+    ],
+    "DESCRIPTION": "Your #yFan #yApproval is #b-25 or less."
+  },
+
   "WrestlerMod:Revered": {
     "PROPER_NAME": "Revered",
     "NAMES": [
       "revered"
     ],
-    "DESCRIPTION": "Your #yFan #yApproval is #b40 or greater."
+    "DESCRIPTION": "Your #yFan #yApproval is 50."
   },
 
   "WrestlerMod:Despised": {
@@ -61,7 +77,15 @@
     "NAMES": [
       "despised"
     ],
-    "DESCRIPTION": "Your #yFan #yApproval is #b-40 or less."
+    "DESCRIPTION": "Your #yFan #yApproval is #b-25 or less."
+  },
+
+  "WrestlerMod:Amateur": {
+    "PROPER_NAME": "Amateur",
+    "NAMES": [
+      "amateur"
+    ],
+    "DESCRIPTION": "Your #yFan #yApproval is between #b-5 and #b5."
   },
 
 
