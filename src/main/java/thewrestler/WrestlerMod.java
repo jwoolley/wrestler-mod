@@ -462,6 +462,7 @@ public class WrestlerMod implements
         BaseMod.addCard(new HairPull());
         BaseMod.addCard(new Hardway());
         BaseMod.addCard(new Headlock());
+        BaseMod.addCard(new HeartPunch());
         BaseMod.addCard(new HeelTurn());
         BaseMod.addCard(new HotShot());
         BaseMod.addCard(new IronMan());
@@ -518,6 +519,7 @@ public class WrestlerMod implements
         UnlockTracker.unlockCard(HairPull.ID);
         UnlockTracker.unlockCard(Hardway.ID);
         UnlockTracker.unlockCard(Headlock.ID);
+        UnlockTracker.unlockCard(HeartPunch.ID);
         UnlockTracker.unlockCard(HeelTurn.ID);
         UnlockTracker.unlockCard(HotShot.ID);
         UnlockTracker.unlockCard(IronMan.ID);

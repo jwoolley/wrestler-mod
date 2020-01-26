@@ -1,10 +1,13 @@
 package thewrestler.util;
 
+import com.megacrit.cardcrawl.actions.common.RemoveSpecificPowerAction;
+import com.megacrit.cardcrawl.actions.unique.RemoveDebuffsAction;
 import com.megacrit.cardcrawl.core.AbstractCreature;
 import com.megacrit.cardcrawl.core.Settings;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.powers.AbstractPower;
+import thewrestler.powers.WrestlerShackled;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -34,5 +37,13 @@ public class CreatureUtils {
     }
 
     return totalXCenter / monsters.size();
+  }
+
+  public static void queueRemoveAllDebuffsAction(AbstractCreature target, AbstractCreature source) {
+    AbstractDungeon.actionManager.addToBottom(new RemoveDebuffsAction(target));
+    if (target.hasPower(WrestlerShackled.POWER_ID)) {
+      AbstractDungeon.actionManager.addToBottom(
+          new RemoveSpecificPowerAction(target, source, WrestlerShackled.POWER_ID));
+    }
   }
 }

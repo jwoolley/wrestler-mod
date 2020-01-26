@@ -9,14 +9,11 @@
 
   "WrestlerMod:AtomicDrop": {
     "NAME": "Atomic Drop",
-    "DESCRIPTION": "Deal !D! Damage. NL",
+    "DESCRIPTION": "Deal !D! Damage. NL The next",
     "EXTENDED_DESCRIPTION": [
-      " The",
-      " For each enemy, the",
-      " next time you attack",
-      " the enemy",
-      " them",
-      " this turn, gain [E]."
+      " time",
+      " !M! times",
+      " you attack the enemy this turn, gain [E]."
     ]
   },
 
@@ -135,6 +132,12 @@
   "WrestlerMod:Headlock": {
     "NAME": "Headlock",
     "DESCRIPTION": "Deal !D! Damage. NL Enemy loses !M! Strength until end of turn."
+  },
+
+
+  "WrestlerMod:HeartPunch": {
+    "NAME": "Heart Punch",
+    "DESCRIPTION": "Deal !D! Damage. NL Remove all of the enemy's debuffs. NL Heal !M! HP for each debuff removed. NL Exhaust."
   },
 
   "WrestlerMod:HeelTurn": {

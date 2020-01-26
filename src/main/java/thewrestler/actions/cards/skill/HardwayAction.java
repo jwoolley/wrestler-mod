@@ -23,11 +23,7 @@ public class HardwayAction extends AbstractGameAction  {
   public void update() {
     if (this.duration == DURATION) {
       this.amount = CreatureUtils.getDebuffs(this.target).size();
-      AbstractDungeon.actionManager.addToBottom(new RemoveDebuffsAction(this.target));
-      if (this.target.hasPower(WrestlerShackled.POWER_ID)) {
-        AbstractDungeon.actionManager.addToBottom(
-            new RemoveSpecificPowerAction(this.target, this.source, WrestlerShackled.POWER_ID));
-      }
+      CreatureUtils.queueRemoveAllDebuffsAction(this.target, this.source);
     }
     else {
       AbstractDungeon.actionManager.addToBottom(
