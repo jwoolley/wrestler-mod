@@ -116,9 +116,14 @@ public abstract class AbstractSignatureMoveInfo implements StartOfCombatListener
 
     @Override
     public void onLoad(Integer serializedValue) {
-      infoFromSave.cardFromSave = SignatureMoveCardEnum.getCardCopy(serializedValue);
-      WrestlerMod.logger.info("Loaded MoveCardCustomSavable from serialized value: " + serializedValue
-          + "; card: " + (infoFromSave.cardFromSave != null ? infoFromSave.cardFromSave.cardID : " UNKNOWN"));
+      if (serializedValue != null) {
+        infoFromSave.cardFromSave = SignatureMoveCardEnum.getCardCopy(serializedValue);
+        WrestlerMod.logger.info("MoveCardCustomSavable::onLoad Loaded MoveCardCustomSavable from serialized value: "
+            + serializedValue + "; card: "
+            + (infoFromSave.cardFromSave != null ? infoFromSave.cardFromSave.cardID : " UNKNOWN"));
+      } else {
+        WrestlerMod.logger.info("MoveCardCustomSavable::onLoad serialized value not found in save data.");
+      }
     }
   }
 
@@ -126,19 +131,21 @@ public abstract class AbstractSignatureMoveInfo implements StartOfCombatListener
     @Override
     public Integer onSave() {
       SignatureMoveUpgradeList list = WrestlerCharacter.getSignatureMoveInfo().upgradeList;
-      WrestlerMod.logger.info("MoveUpgradeCustomSavable saving value: " + list.getSerializedUpgradeList() + " size: " + list.size());
+      WrestlerMod.logger.info("MoveUpgradeCustomSavable::onSave saving value: " + list.getSerializedUpgradeList() + " size: " + list.size());
       return list.getSerializedUpgradeList();
     }
 
     @Override
     public void onLoad(Integer serializedValue) {
-      infoFromSave.upgradeListFromSave = SignatureMoveUpgradeList.listFromSerializedData(serializedValue);
+      if (serializedValue != null) {
+        infoFromSave.upgradeListFromSave = SignatureMoveUpgradeList.listFromSerializedData(serializedValue);
 
-      WrestlerMod.logger.info(
-          "Loaded MoveUpgradeCustomSavable from serialized value: "
-          + serializedValue
-          + "; num upgrades: "
-          + (infoFromSave.upgradeListFromSave != null ? infoFromSave.upgradeListFromSave.size() : " UNKNOWN"));
+        WrestlerMod.logger.info(
+            "MoveCardCustomSavable::onLoad Loaded MoveUpgradeCustomSavable from serialized value: "
+                + serializedValue
+                + "; num upgrades: "
+                + (infoFromSave.upgradeListFromSave != null ? infoFromSave.upgradeListFromSave.size() : " UNKNOWN"));
+      }
     }
   }
 

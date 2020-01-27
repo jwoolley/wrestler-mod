@@ -28,10 +28,11 @@ public class BlowOff extends CustomCard {
   private static final CardRarity RARITY = CardRarity.RARE;
   private static final CardTarget TARGET = CardTarget.ALL_ENEMY;
 
-  private static final int DAMAGE = 1;
+  private static final int DAMAGE = 5;
   private static final int DAMAGE_INCREASE = 2;
+  private static final int DAMAGE_UPGRADE = 1;
+  private static final int DAMAGE_INCREASE_UPGRADE = 1;
   private static final int COST = 1;
-  private static final int UPGRADED_COST = 0;
 
   public BlowOff() {
     super(ID, NAME, getCardResourcePath(IMG_PATH), COST, getDescription(), TYPE,
@@ -39,6 +40,7 @@ public class BlowOff extends CustomCard {
     this.baseDamage = this.damage = this.misc = DAMAGE;
     this.baseMagicNumber = this.magicNumber = DAMAGE_INCREASE;
     this.isMultiDamage = true;
+    this.selfRetain = true;
     this.exhaust = true;
   }
 
@@ -50,13 +52,8 @@ public class BlowOff extends CustomCard {
   }
 
   @Override
-  public void onPlayCard(AbstractCard card, AbstractMonster target) {
-    final boolean isInHand = AbstractDungeon.player.hand.group.stream().anyMatch(c -> c.uuid == this.uuid);
-    if (isInHand && card.type == CardType.SKILL) {
-      AbstractDungeon.actionManager.addToTop(new ModifyDamageAction(this.uuid, this.magicNumber));
-      this.rawDescription = getDescription();
-      initializeDescription();
-    }
+  public void onRetained() {
+    upgradeDamage(this.magicNumber);
   }
 
   @Override
@@ -68,7 +65,8 @@ public class BlowOff extends CustomCard {
   public void upgrade() {
     if (!this.upgraded) {
       this.upgradeName();
-      this.upgradeBaseCost(UPGRADED_COST);
+      this.upgradeDamage(DAMAGE_UPGRADE);
+      this.upgradeMagicNumber(DAMAGE_INCREASE_UPGRADE);
       initializeDescription();
     }
   }

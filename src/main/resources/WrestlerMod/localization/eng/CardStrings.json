@@ -27,7 +27,7 @@
 
   "WrestlerMod:BlowOff": {
     "NAME": "Blow Off",
-    "DESCRIPTION": "Whenever you play a Skill while this is in hand, increase this card's damage by !M! this combat. NL Deal !D! to ALL enemies. NL Exhaust."
+    "DESCRIPTION": "Retain. NL Deal !D! damage to ALL enemies. NL When Retained, increase its damage by !M! this combat. NL Exhaust."
   },
 
   "WrestlerMod:Brainbuster": {
@@ -79,7 +79,7 @@
 
   "WrestlerMod:CurtainJerker": {
     "NAME": "Curtain Jerker",
-    "DESCRIPTION": "Gain !M! Strength and !M! Dexterity. NL Remove at the start of your turn if you aren't wrestlermod:Amateur.",
+    "DESCRIPTION": "Gain !M! Strength and !M! Dexterity. NL Remove at the start of your turn if you aren't an wrestlermod:Amateur.",
     "EXTENDED_DESCRIPTION": [ "Innate. NL " ]
   },
 
