@@ -24,14 +24,14 @@ public class ApprovalInfo implements StartOfCombatListener, EndOfCombatListener 
   public static final int MAX_ATTACKS_FOR_APPROVAL = 1;
   public static final int MAX_DEBUFFS_FOR_APPROVAL = 0;
   private final static int STARTING_AMOUNT = 0;
-  private final static int MIN_APPROVAL = -50;
-  private final static int MAX_APPROVAL = 50;
+  private final static int MIN_APPROVAL = -25;
+  private final static int MAX_APPROVAL = 25;
 
   private final static int AMATEUR_MIN_APPROVAL = -5;
   private final static int AMATEUR_MAX_APPROVAL = 5;
 
-  private final static int ADMIRED_MIN = 25;
-  private final static int HATED_MAX = -25;
+  private final static int ADMIRED_MIN = 10;
+  private final static int HATED_MAX = -10;
 
   private int amount;
 
@@ -146,7 +146,7 @@ public class ApprovalInfo implements StartOfCombatListener, EndOfCombatListener 
   }
 
   private boolean _isAdmired() {
-    return this.amount > 0;
+    return this.amount > ADMIRED_MIN;
   }
 
   private boolean _isDespised() {
