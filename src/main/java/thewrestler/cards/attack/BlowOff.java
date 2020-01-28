@@ -3,6 +3,7 @@ package thewrestler.cards.attack;
 import basemod.abstracts.CustomCard;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.common.DamageAllEnemiesAction;
+import com.megacrit.cardcrawl.actions.common.DrawCardAction;
 import com.megacrit.cardcrawl.actions.common.ModifyDamageAction;
 import com.megacrit.cardcrawl.actions.utility.SFXAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
@@ -53,6 +54,10 @@ public class BlowOff extends CustomCard {
 
   @Override
   public void onRetained() {
+  }
+
+  @Override
+  public void triggerOnManualDiscard() {
     upgradeDamage(this.magicNumber);
   }
 

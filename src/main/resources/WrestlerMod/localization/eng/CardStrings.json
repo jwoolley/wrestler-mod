@@ -1,7 +1,7 @@
 {
   "WrestlerMod:AlleyOop": {
     "NAME": "Alley Oop",
-    "DESCRIPTION": "Put !M! random Attacks with cost ",
+    "DESCRIPTION": "Put !M! random cards with cost ",
     "EXTENDED_DESCRIPTION": [
       " or less from your draw pile into your hand."
     ]
@@ -27,7 +27,7 @@
 
   "WrestlerMod:BlowOff": {
     "NAME": "Blow Off",
-    "DESCRIPTION": "Retain. NL Deal !D! damage to ALL enemies. NL When Retained, increase its damage by !M! this combat. NL Exhaust."
+    "DESCRIPTION": "Retain. NL Deal !D! damage to ALL enemies. NL When Retained or discarded, increase its damage by !M! this combat. Exhaust."
   },
 
   "WrestlerMod:Brainbuster": {
@@ -197,6 +197,14 @@
     "NAME": "Play to the Crowd",
     "DESCRIPTION": "If wrestlermod:Popular, gain !B! Block. NL If wrestlermod:Unpopular, add a *Knee to your hand. NL If neither, do both.",
     "UPGRADE_DESCRIPTION":  "If wrestlermod:Popular, gain !B! Block. NL If wrestlermod:Unpopular, add a *Knee+ to your hand. NL If neither, do both."
+  },
+
+  "WrestlerMod:PhantomBump": {
+    "NAME": "Phantom Bump",
+    "DESCRIPTION": "Gain !M! wrestlermod:Temporary_Buffer.",
+    "EXTENDED_DESCRIPTION": [
+      "Ethereal. NL "
+    ]
   },
 
   "WrestlerMod:Powerbomb": {

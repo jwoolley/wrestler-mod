@@ -31,7 +31,7 @@ public class Headlock extends CustomCard {
   private static final CardTarget TARGET = CardTarget.ENEMY;
 
   private static final int COST = 1;
-  private static final int DAMAGE = 5;
+  private static final int DAMAGE = 6;
   private static final int DAMAGE_UPGRADE = 3;
   private static final int LOSE_STRENGTH_AMOUNT = 3;
 
