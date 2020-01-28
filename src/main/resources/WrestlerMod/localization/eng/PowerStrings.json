@@ -32,6 +32,15 @@
     ]
   },
 
+  "WrestlerMod:FloatOverPower": {
+    "NAME": "Scrapper",
+    "DESCRIPTIONS": [
+      "At the end of your turn, if your hand is empty, gain #b",
+      " #yTemporary #yBuffer."
+    ]
+  },
+
+
   "WrestlerMod:GrappledPower": {
     "NAME": "Grappled",
     "DESCRIPTIONS": [
@@ -118,7 +127,7 @@
   "WrestlerMod:ScrapperPower": {
     "NAME": "Scrapper",
     "DESCRIPTIONS": [
-      "At the end of your turn, you played no Skills, #b",
+      "At the end of your turn, you played no Skills, gain #b",
       " #yStrength."
     ]
   },

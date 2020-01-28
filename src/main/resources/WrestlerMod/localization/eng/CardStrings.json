@@ -111,6 +111,13 @@
     ]
   },
 
+
+  "WrestlerMod:FloatOver": {
+    "NAME": "Float Over",
+    "DESCRIPTION": "At the end of your turn, if your hand is empty, gain !M! wrestlermod:Temporary_Buffer."
+  },
+
+
   "WrestlerMod:FrogSplash": {
     "NAME": "Frog Splash",
     "DESCRIPTION": "Deal !D! Damage and apply !M! Weak to ALL enemies. NL Exhaust."
@@ -165,6 +172,11 @@
   "WrestlerMod:Knee": {
     "NAME": "Knee",
     "DESCRIPTION": "Ethereal. NL Deal !D! Damage. NL Exhaust."
+  },
+
+  "WrestlerMod:MainEvent": {
+    "NAME": "Main Event",
+    "DESCRIPTION": "If you've already gained your wrestlermod:Trademark_Move this combat, put it into your hand. NL Otherwise, add it into your discard pile. NL Exhaust."
   },
 
   "WrestlerMod:NearFall": {

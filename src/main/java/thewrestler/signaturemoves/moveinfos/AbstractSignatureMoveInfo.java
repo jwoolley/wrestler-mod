@@ -2,6 +2,7 @@ package thewrestler.signaturemoves.moveinfos;
 
 import basemod.BaseMod;
 import basemod.abstracts.CustomSavable;
+import com.megacrit.cardcrawl.actions.common.MakeTempCardInDiscardAction;
 import com.megacrit.cardcrawl.actions.common.MakeTempCardInHandAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
@@ -70,17 +71,26 @@ public abstract class AbstractSignatureMoveInfo implements StartOfCombatListener
   }
 
   public void triggerGainCard() {
+    triggerGainCard(false);
+  }
+
+  public void triggerGainCard(boolean toDiscard) {
     AbstractSignatureMoveCard card = this.signatureMoveCard.makeCopy();
     card.setCostForTurn(0);
-    AbstractDungeon.actionManager.addToBottom(new MakeTempCardInHandAction(this.signatureMoveCard));
+
+    if (toDiscard) {
+      AbstractDungeon.actionManager.addToBottom(new MakeTempCardInDiscardAction(this.signatureMoveCard, 1));
+    } else {
+      AbstractDungeon.actionManager.addToBottom(new MakeTempCardInHandAction(this.signatureMoveCard));
+    }
   }
 
   abstract public boolean _canStillTriggerCardGain();
 
   protected boolean manuallyTriggeredCardGain;
-  public void manuallyTriggerCardGain() {
+  public void manuallyTriggerCardGain(boolean toDiscard) {
     this.manuallyTriggeredCardGain = true;
-    triggerGainCard();
+    triggerGainCard(toDiscard);
   }
 
   public void atStartOfTurn() {

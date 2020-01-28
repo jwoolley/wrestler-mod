@@ -461,6 +461,7 @@ public class WrestlerMod implements
         BaseMod.addCard(new EyePoke());
         BaseMod.addCard(new Facewash());
         BaseMod.addCard(new FanFavorite());
+        BaseMod.addCard(new FloatOver());
         BaseMod.addCard(new FrogSplash());
         BaseMod.addCard(new HairPull());
         BaseMod.addCard(new Hardway());
@@ -469,6 +470,7 @@ public class WrestlerMod implements
         BaseMod.addCard(new HeelTurn());
         BaseMod.addCard(new HotShot());
         BaseMod.addCard(new IronMan());
+        BaseMod.addCard(new MainEvent());
         BaseMod.addCard(new Neckbreaker());
         BaseMod.addCard(new NearFall());
         BaseMod.addCard(new OffTheRopes());
@@ -520,6 +522,7 @@ public class WrestlerMod implements
         UnlockTracker.unlockCard(EyePoke.ID);
         UnlockTracker.unlockCard(Facewash.ID);
         UnlockTracker.unlockCard(FanFavorite.ID);
+        UnlockTracker.unlockCard(FloatOver.ID);
         UnlockTracker.unlockCard(FrogSplash.ID);
         UnlockTracker.unlockCard(HairPull.ID);
         UnlockTracker.unlockCard(Hardway.ID);
@@ -528,6 +531,7 @@ public class WrestlerMod implements
         UnlockTracker.unlockCard(HeelTurn.ID);
         UnlockTracker.unlockCard(HotShot.ID);
         UnlockTracker.unlockCard(IronMan.ID);
+        UnlockTracker.unlockCard(MainEvent.ID);
         UnlockTracker.unlockCard(NearFall.ID);
         UnlockTracker.unlockCard(Neckbreaker.ID);
         UnlockTracker.unlockCard(OffTheRopes.ID);
