@@ -8,17 +8,18 @@ import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
-import thewrestler.actions.cards.skill.SideRollAction;
+import thewrestler.cards.StartOfCombatListener;
 import thewrestler.enums.AbstractCardEnum;
+import thewrestler.util.info.approval.ApprovalInfo;
 
 import static thewrestler.WrestlerMod.getCardResourcePath;
 
-public class SideRoll extends CustomCard {
-  public static final String ID = "WrestlerMod:SideRoll";
+public class Pinfall extends CustomCard implements AbstractApprovalListener, StartOfCombatListener {
+  public static final String ID = "WrestlerMod:Pinfall";
   public static final String NAME;
   public static final String DESCRIPTION;
   public static final String[] EXTENDED_DESCRIPTION;
-  public static final String IMG_PATH = "sideroll.png";
+  public static final String IMG_PATH = "pinfall.png";
 
   private static final CardStrings cardStrings;
 
@@ -26,25 +27,33 @@ public class SideRoll extends CustomCard {
   private static final CardRarity RARITY = CardRarity.COMMON;
   private static final CardTarget TARGET = CardTarget.SELF;
 
-  private static final int BLOCK_AMOUNT = 7;
+  private static final int BLOCK_AMOUNT = 6;
   private static final int BLOCK_AMOUNT_UPGRADE = 3;
   private static final int COST = 1;
 
-  public SideRoll() {
+  public Pinfall() {
     super(ID, NAME, getCardResourcePath(IMG_PATH), COST, getDescription(), TYPE, AbstractCardEnum.THE_WRESTLER_ORANGE,
         RARITY, TARGET);
     this.baseBlock = this.block = BLOCK_AMOUNT;
+    this.selfRetain = ApprovalInfo.isPopular();
   }
 
   @Override
   public void use(AbstractPlayer p, AbstractMonster m) {
     AbstractDungeon.actionManager.addToBottom(new GainBlockAction(p, p, block));
-    AbstractDungeon.actionManager.addToBottom(new SideRollAction());
+  }
+
+  @Override
+  public void triggerOnEndOfPlayerTurn() {
+    super.triggerOnEndOfPlayerTurn();
+    if (this.selfRetain) {
+      this.flash();
+    }
   }
 
   @Override
   public AbstractCard makeCopy() {
-    return new SideRoll();
+    return new Pinfall();
   }
 
   @Override
@@ -65,5 +74,32 @@ public class SideRoll extends CustomCard {
     NAME = cardStrings.NAME;
     DESCRIPTION = cardStrings.DESCRIPTION;
     EXTENDED_DESCRIPTION = cardStrings.EXTENDED_DESCRIPTION;
+  }
+
+  @Override
+  public void atStartOfCombat() {
+    this.selfRetain = ApprovalInfo.isPopular();
+  }
+
+  @Override
+  public void atTurnStartPreDraw() {
+    this.selfRetain = ApprovalInfo.isPopular();
+  }
+
+  @Override
+  public void onApprovalChanged(int changeAmount, int newValue, boolean isEndOfTurnChange) {
+    if (!isEndOfTurnChange) {
+      this.selfRetain = ApprovalInfo.isPopular();
+    }
+  }
+
+  @Override
+  public void onBecomeLiked() {
+
+  }
+
+  @Override
+  public void onBecomeDisliked() {
+
   }
 }

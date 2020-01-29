@@ -37,8 +37,8 @@ public class PlayToTheCrowd extends CustomCard {
   private static final CardTarget TARGET = CardTarget.SELF;
 
   private static final int COST = 0;
-  private static final int BLOCK = 3;
-  private static final int BLOCK_UPGRADE = 3;
+  private static final int BLOCK = 4;
+  private static final int BLOCK_UPGRADE = 2;
 
   private boolean upgradeKnee;
 
