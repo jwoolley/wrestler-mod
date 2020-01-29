@@ -205,10 +205,12 @@
     ]
   },
 
-  "WrestlerMod:PlayToTheCrowd": {
-    "NAME": "Play to the Crowd",
-    "DESCRIPTION": "If wrestlermod:Popular, gain !B! Block. NL If wrestlermod:Unpopular, add a *Knee to your hand. NL If neither, do both.",
-    "UPGRADE_DESCRIPTION":  "If wrestlermod:Popular, gain !B! Block. NL If wrestlermod:Unpopular, add a *Knee+ to your hand. NL If neither, do both."
+  "WrestlerMod:Pendulum": {
+    "NAME": "Pendulum",
+    "DESCRIPTION": "Draw X cards. NL Gain X [E]. NL You cannot draw additional cards this turn.",
+    "EXTENDED_DESCRIPTION": [
+      " NL Exhaust."
+    ]
   },
 
   "WrestlerMod:PhantomBump": {
@@ -217,6 +219,12 @@
     "EXTENDED_DESCRIPTION": [
       "Ethereal. NL "
     ]
+  },
+
+  "WrestlerMod:PlayToTheCrowd": {
+    "NAME": "Play to the Crowd",
+    "DESCRIPTION": "If wrestlermod:Popular, gain !B! Block. NL If wrestlermod:Unpopular, add a *Knee to your hand. NL If neither, do both.",
+    "UPGRADE_DESCRIPTION":  "If wrestlermod:Popular, gain !B! Block. NL If wrestlermod:Unpopular, add a *Knee+ to your hand. NL If neither, do both."
   },
 
   "WrestlerMod:Powerbomb": {

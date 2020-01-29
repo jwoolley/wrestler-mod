@@ -24,7 +24,7 @@ public class BrutesTrophy extends CustomWrestlerRelic {
   private static final Texture IMG = TextureLoader.getTexture(makeRelicPath("brutestrophy.png"));
   private static final Texture OUTLINE = TextureLoader.getTexture(makeRelicOutlinePath("brutestrophy.png"));
 
-  private static final List<String> POWERTIP_KEYWORDS = Arrays.asList(WrestlerMod.makeID("Disliked"));
+  private static final List<String> POWERTIP_KEYWORDS = Arrays.asList(/*WrestlerMod.makeID("Disliked"))*/);
 
   public static final int STRENGTH_AMOUNT = 2;
 
@@ -38,15 +38,11 @@ public class BrutesTrophy extends CustomWrestlerRelic {
   }
 
   public void atBattleStart() {
-    if (BasicUtils.isPlayingAsWrestler() && ApprovalInfo.isHated()) {
-
       flash();
       AbstractDungeon.actionManager.addToBottom(
           new ApplyPowerAction(AbstractDungeon.player, AbstractDungeon.player,
               new StrengthPower(AbstractDungeon.player, STRENGTH_AMOUNT), STRENGTH_AMOUNT));
-
       AbstractDungeon.actionManager.addToBottom(new RelicAboveCreatureAction(AbstractDungeon.player, this));
-    }
   }
 
   @Override

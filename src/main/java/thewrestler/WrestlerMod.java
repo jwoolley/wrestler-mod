@@ -474,6 +474,7 @@ public class WrestlerMod implements
         BaseMod.addCard(new Neckbreaker());
         BaseMod.addCard(new NearFall());
         BaseMod.addCard(new OffTheRopes());
+        BaseMod.addCard(new Pendulum());
         BaseMod.addCard(new PhantomBump());
         BaseMod.addCard(new PlayToTheCrowd());
         BaseMod.addCard(new ProvenTactics());
@@ -535,6 +536,7 @@ public class WrestlerMod implements
         UnlockTracker.unlockCard(NearFall.ID);
         UnlockTracker.unlockCard(Neckbreaker.ID);
         UnlockTracker.unlockCard(OffTheRopes.ID);
+        UnlockTracker.unlockCard(Pendulum.ID);
         UnlockTracker.unlockCard(PhantomBump.ID);
         UnlockTracker.unlockCard(PlayToTheCrowd.ID);
         UnlockTracker.unlockCard(ProvenTactics.ID);

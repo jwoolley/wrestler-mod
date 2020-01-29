@@ -23,7 +23,7 @@ public class PeoplesCrown extends CustomWrestlerRelic {
   private static final Texture IMG = TextureLoader.getTexture(makeRelicPath("peoplescrown.png"));
   private static final Texture OUTLINE = TextureLoader.getTexture(makeRelicOutlinePath("peoplescrown.png"));
 
-  private static final List<String> POWERTIP_KEYWORDS = Arrays.asList(WrestlerMod.makeID("Liked"));
+  private static final List<String> POWERTIP_KEYWORDS = Arrays.asList(/*WrestlerMod.makeID("Liked")*/);
 
   public static final int DEX_AMOUNT = 2;
 
@@ -37,15 +37,12 @@ public class PeoplesCrown extends CustomWrestlerRelic {
   }
 
   public void atBattleStart() {
-    if (BasicUtils.isPlayingAsWrestler() && ApprovalInfo.isAdmired()) {
+    flash();
+    AbstractDungeon.actionManager.addToBottom(
+        new ApplyPowerAction(AbstractDungeon.player, AbstractDungeon.player,
+            new DexterityPower(AbstractDungeon.player, DEX_AMOUNT), DEX_AMOUNT));
 
-      flash();
-      AbstractDungeon.actionManager.addToBottom(
-          new ApplyPowerAction(AbstractDungeon.player, AbstractDungeon.player,
-              new DexterityPower(AbstractDungeon.player, DEX_AMOUNT), DEX_AMOUNT));
-
-      AbstractDungeon.actionManager.addToBottom(new RelicAboveCreatureAction(AbstractDungeon.player, this));
-    }
+    AbstractDungeon.actionManager.addToBottom(new RelicAboveCreatureAction(AbstractDungeon.player, this));
   }
 
   @Override

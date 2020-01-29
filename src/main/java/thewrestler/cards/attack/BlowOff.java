@@ -54,6 +54,7 @@ public class BlowOff extends CustomCard {
 
   @Override
   public void onRetained() {
+    upgradeDamage(this.magicNumber);
   }
 
   @Override
@@ -74,6 +75,12 @@ public class BlowOff extends CustomCard {
       this.upgradeMagicNumber(DAMAGE_INCREASE_UPGRADE);
       initializeDescription();
     }
+  }
+
+  @Override
+  public void upgradeDamage(int damageAmount) {
+    super.upgradeDamage(damageAmount);
+    initializeDescription();
   }
 
   public static String getDescription() {

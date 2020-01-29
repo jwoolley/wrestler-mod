@@ -33,7 +33,7 @@
   },
 
   "WrestlerMod:FloatOverPower": {
-    "NAME": "Scrapper",
+    "NAME": "Float Over",
     "DESCRIPTIONS": [
       "At the end of your turn, if your hand is empty, gain #b",
       " #yTemporary #yBuffer."
