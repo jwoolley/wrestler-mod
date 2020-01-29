@@ -294,6 +294,15 @@
     ]
   },
 
+
+  "WrestlerMod:Shortarm": {
+    "NAME": "Shortarm",
+    "DESCRIPTION": "Deal !D! damage. NL Your next Attack this turn applies !M! wrestlermod:Sprained. NL If it's wrestlermod:Dirty, apply ",
+    "EXTENDED_DESCRIPTION": [
+      " wrestlermod:Sprained instead."
+    ]
+  },
+
   "WrestlerMod:SideRoll": {
     "NAME": "Side Roll",
     "DESCRIPTION": "Gain !B! Block. NL Discard 1 card. NL If you discarded an Attack this way, Draw 1 card."

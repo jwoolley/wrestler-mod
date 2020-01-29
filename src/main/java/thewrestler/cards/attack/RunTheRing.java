@@ -1,6 +1,8 @@
 package thewrestler.cards.attack;
 
 import basemod.abstracts.CustomCard;
+import com.megacrit.cardcrawl.actions.AbstractGameAction;
+import com.megacrit.cardcrawl.actions.common.DamageAllEnemiesAction;
 import com.megacrit.cardcrawl.actions.common.DiscardAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
@@ -45,13 +47,13 @@ public class RunTheRing extends CustomCard {
     AbstractDungeon.actionManager.addToBottom(
         new DiscardAction(AbstractDungeon.player, AbstractDungeon.player, this.magicNumber, true));
 
-    AbstractDungeon.actionManager.addToBottom(
-        new RunTheRingAction(p, this.multiDamage, this.damageTypeForTurn, this.magicNumber));
+    if (!AbstractDungeon.getCurrRoom().monsters.areMonstersBasicallyDead()) {
+      for (int i = 0; i < this.magicNumber; i++) {
+        AbstractDungeon.actionManager.addToBottom(new DamageAllEnemiesAction(
+            p, this.multiDamage, this.damageType, AbstractGameAction.AttackEffect.BLUNT_LIGHT, true));
+      };
+    }
   }
-
-//    AbstractDungeon.actionManager.addToBottom(
-//        new RunTheRingAction(p, this.multiDamage, this.damageTypeForTurn, this.magicNumber, this.magicNumber));
-//  }
 
   @Override
   public AbstractCard makeCopy() {

@@ -132,6 +132,15 @@
     ]
   },
 
+  "WrestlerMod:ShortarmPower": {
+    "NAME": "Shortarm",
+    "DESCRIPTIONS": [
+      "Your next Attack also applies #b",
+      " #ySprained. If it's #yDirty, apply #b",
+      " Sprained instead."
+    ]
+  },
+
   "WrestlerMod:SprainPower": {
     "NAME": "Sprained",
     "DESCRIPTIONS": [
