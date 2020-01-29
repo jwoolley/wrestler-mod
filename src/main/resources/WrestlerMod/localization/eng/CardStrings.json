@@ -272,7 +272,7 @@
 
   "WrestlerMod:RunTheRing": {
     "NAME": "Run the Ring",
-    "DESCRIPTION": "Discard !M! cards at random. NL Deal !D! damage to ALL enemies",
+    "DESCRIPTION": "Discard !M! cards at random. NL Deal !D! damage to a random enemy",
     "EXTENDED_DESCRIPTION": [
       " twice.",
       " !M! times."

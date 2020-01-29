@@ -2,6 +2,7 @@ package thewrestler.cards.attack;
 
 import basemod.abstracts.CustomCard;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
+import com.megacrit.cardcrawl.actions.common.AttackDamageRandomEnemyAction;
 import com.megacrit.cardcrawl.actions.common.DamageAllEnemiesAction;
 import com.megacrit.cardcrawl.actions.common.DiscardAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
@@ -25,11 +26,11 @@ public class RunTheRing extends CustomCard {
   private static final CardStrings cardStrings;
 
   private static final CardType TYPE = CardType.ATTACK;
-  private static final CardRarity RARITY = CardRarity.UNCOMMON;
+  private static final CardRarity RARITY = CardRarity.COMMON;
   private static final CardTarget TARGET = CardTarget.ALL_ENEMY;
 
   private static final int COST = 1;
-  private static final int DAMAGE_PER_TRIGGER = 4;
+  private static final int DAMAGE_PER_TRIGGER = 5;
 
   private static final int NUM_DISCARDED_AND_ATTACKS = 2;
   private static final int NUM_DISCARDED_AND_ATTACKS_UPGRADE = 1;
@@ -39,7 +40,6 @@ public class RunTheRing extends CustomCard {
         AbstractCardEnum.THE_WRESTLER_ORANGE, RARITY, TARGET);
     this.baseDamage = this.damage = DAMAGE_PER_TRIGGER;
     this.baseMagicNumber = this.magicNumber = NUM_DISCARDED_AND_ATTACKS;
-    this.isMultiDamage = true;
   }
 
   @Override
@@ -47,11 +47,9 @@ public class RunTheRing extends CustomCard {
     AbstractDungeon.actionManager.addToBottom(
         new DiscardAction(AbstractDungeon.player, AbstractDungeon.player, this.magicNumber, true));
 
-    if (!AbstractDungeon.getCurrRoom().monsters.areMonstersBasicallyDead()) {
       for (int i = 0; i < this.magicNumber; i++) {
-        AbstractDungeon.actionManager.addToBottom(new DamageAllEnemiesAction(
-            p, this.multiDamage, this.damageType, AbstractGameAction.AttackEffect.BLUNT_LIGHT, true));
-      };
+        AbstractDungeon.actionManager.addToBottom(new AttackDamageRandomEnemyAction(this,
+            AbstractGameAction.AttackEffect.BLUNT_LIGHT));
     }
   }
 
