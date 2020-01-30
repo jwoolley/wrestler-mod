@@ -23,13 +23,12 @@ public class ShortarmPower extends AbstractWrestlerPower implements CloneablePow
 
   public static final PowerType POWER_TYPE = PowerType.BUFF;
 
-  private boolean isEnhanced;
+  private boolean attackWasDirty;
   private boolean usedAttack;
 
   public ShortarmPower(AbstractCreature owner, int sprainAmount) {
-    super(POWER_ID, NAME, IMG, owner, owner, 0, POWER_TYPE);
-    this.amount = sprainAmount;
-    this.isEnhanced = false;
+    super(POWER_ID, NAME, IMG, owner, owner, sprainAmount, POWER_TYPE);
+    this.attackWasDirty = false;
     this.usedAttack = false;
   }
 
@@ -41,11 +40,11 @@ public class ShortarmPower extends AbstractWrestlerPower implements CloneablePow
   @Override
   public void onAttack(DamageInfo info, int damageAmount, AbstractCreature target) {
     if ((damageAmount > 0) && (target != this.owner) && (info.type == DamageInfo.DamageType.NORMAL)) {
-      final int sprainAmount = this.isEnhanced ? getEnhancedSprainAmount() : this.amount;
-
-      this.flash();
-      AbstractDungeon.actionManager.addToBottom(
-          new ApplyPowerAction(target, this.owner, new SprainPower(target, sprainAmount), sprainAmount));
+      if (this.attackWasDirty) {
+        this.flash();
+        AbstractDungeon.actionManager.addToBottom(
+            new ApplyPowerAction(target, this.owner, new SprainPower(target, this.amount), this.amount));
+      }
       this.usedAttack = true;
     }
   }
@@ -53,14 +52,10 @@ public class ShortarmPower extends AbstractWrestlerPower implements CloneablePow
   @Override
   public void onUseCard(AbstractCard card, UseCardAction action) {
     if (card.type == AbstractCard.CardType.ATTACK && card.hasTag(WrestlerCardTags.DIRTY)) {
-      this.isEnhanced = true;
+      this.attackWasDirty = true;
     } else {
-      this.isEnhanced = false;
+      this.attackWasDirty = false;
     }
-  }
-
-  private int getEnhancedSprainAmount() {
-    return 2 * this.amount;
   }
 
   @Override
@@ -72,8 +67,7 @@ public class ShortarmPower extends AbstractWrestlerPower implements CloneablePow
 
   @Override
   public void updateDescription() {
-    this.description = DESCRIPTIONS[0] + this.amount + DESCRIPTIONS[1] + getEnhancedSprainAmount()
-        + DESCRIPTIONS[2];
+    this.description = DESCRIPTIONS[0] + this.amount + DESCRIPTIONS[1];
   }
 
   @Override

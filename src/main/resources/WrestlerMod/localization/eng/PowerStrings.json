@@ -136,8 +136,7 @@
     "NAME": "Shortarm",
     "DESCRIPTIONS": [
       "Your next Attack also applies #b",
-      " #ySprained. If it's #yDirty, apply #b",
-      " Sprained instead."
+      " #ySprained if it's #yDirty."
     ]
   },
 

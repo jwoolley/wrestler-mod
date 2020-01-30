@@ -290,6 +290,7 @@ public class WrestlerMod implements
         reflectedMap.put("THUD_MEDIUM_1", new Sfx(getAudioResourcePath("TheWrestler_ThudMedium1.ogg")));
         reflectedMap.put("TONE_ELECTRONIC_1", new Sfx(getAudioResourcePath("TheWrestler_ToneElectronic1.ogg")));
         reflectedMap.put("WHISTLE_STEAM_1", new Sfx(getAudioResourcePath("TheWrestler_WhistleSteam1.ogg")));
+        reflectedMap.put("WHOOSH_ROCKET_1", new Sfx(getAudioResourcePath("TheWrestler_WhooshRocket1.ogg")));
         reflectedMap.put("WING_FLUTTER_1", new Sfx(getAudioResourcePath("TheWrestler_WingFlutter1.ogg")));
         reflectedMap.put("YELL_PAIN_1", new Sfx(getAudioResourcePath("TheWrestler_YellPain1.ogg")));
         reflectedMap.put("METAL_MAN_RIFF_1", new Sfx(getAudioResourcePath("music/TheWrestler_MetalManRiff1.ogg")));
@@ -458,6 +459,7 @@ public class WrestlerMod implements
         BaseMod.addCard(new CobraClutch());
         BaseMod.addCard(new CurtainJerker());
         BaseMod.addCard(new DivingStomp());
+        BaseMod.addCard(new ElbowDrop());
         BaseMod.addCard(new EyePoke());
         BaseMod.addCard(new Facewash());
         BaseMod.addCard(new FanFavorite());
@@ -492,6 +494,7 @@ public class WrestlerMod implements
         BaseMod.addCard(new Springboard());
         BaseMod.addCard(new SquareOff());
         BaseMod.addCard(new StomachClaw());
+        BaseMod.addCard(new Swerve());
         BaseMod.addCard(new TagIn());
         BaseMod.addCard(new TakeAPowder());
         BaseMod.addCard(new TakeToTheMat());
@@ -523,6 +526,7 @@ public class WrestlerMod implements
         UnlockTracker.unlockCard(CobraClutch.ID);
         UnlockTracker.unlockCard(CurtainJerker.ID);
         UnlockTracker.unlockCard(DivingStomp.ID);
+        UnlockTracker.unlockCard(ElbowDrop.ID);
         UnlockTracker.unlockCard(EyePoke.ID);
         UnlockTracker.unlockCard(Facewash.ID);
         UnlockTracker.unlockCard(FanFavorite.ID);
@@ -557,6 +561,7 @@ public class WrestlerMod implements
         UnlockTracker.unlockCard(Springboard.ID);
         UnlockTracker.unlockCard(SquareOff.ID);
         UnlockTracker.unlockCard(StomachClaw.ID);
+        UnlockTracker.unlockCard(Swerve.ID);
         UnlockTracker.unlockCard(TagIn.ID);
         UnlockTracker.unlockCard(TakeAPowder.ID);
         UnlockTracker.unlockCard(TakeToTheMat.ID);
