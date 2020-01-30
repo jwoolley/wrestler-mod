@@ -213,7 +213,7 @@
 
   "WrestlerMod:Pendulum": {
     "NAME": "Pendulum",
-    "DESCRIPTION": "Draw X cards. NL Gain X [E]. NL You cannot draw additional cards this turn.",
+    "DESCRIPTION": "Discard your hand. NL Draw X cards and NL Gain X [E]. NL You can't draw additional cards this turn.",
     "EXTENDED_DESCRIPTION": [
       " NL Exhaust."
     ]

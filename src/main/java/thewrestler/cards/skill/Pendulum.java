@@ -2,10 +2,7 @@ package thewrestler.cards.skill;
 
 import basemod.abstracts.CustomCard;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
-import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
-import com.megacrit.cardcrawl.actions.common.DamageAllEnemiesAction;
-import com.megacrit.cardcrawl.actions.common.DrawCardAction;
-import com.megacrit.cardcrawl.actions.common.GainEnergyAction;
+import com.megacrit.cardcrawl.actions.common.*;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.cards.DamageInfo;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
@@ -38,7 +35,7 @@ public class Pendulum extends CustomCard {
   private static final CardStrings cardStrings;
 
   private static final CardType TYPE = CardType.SKILL;
-  private static final CardRarity RARITY = CardRarity.RARE;
+  private static final CardRarity RARITY = CardRarity.UNCOMMON;
   private static final CardTarget TARGET = CardTarget.SELF;
 
   private static final int COST = -1;
@@ -71,13 +68,18 @@ public class Pendulum extends CustomCard {
     @Override
     public void update() {
       if (this.duration <= DURATION) {
+        AbstractDungeon.actionManager.addToBottom(
+            new DiscardAction(this.player, this.player, this.player.hand.size(), true));
+
         int effect = EnergyPanel.totalCount;
         if (this.energyOnUse != -1) {
           effect = this.energyOnUse;
         }
         if (this.player.hasRelic("Chemical X")) {
           effect += 2;
-          this.player.getRelic("Chemical X").flash(); }
+          this.player.getRelic("Chemical X").flash();
+        }
+
         if (effect > 0) {
           AbstractDungeon.actionManager.addToBottom(new GainEnergyAction(effect));
           AbstractDungeon.actionManager.addToBottom(new DrawCardAction(this.player, effect));
