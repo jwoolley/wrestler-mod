@@ -32,9 +32,9 @@ public class Shortarm extends CustomCard {
 
   private static final int COST = 1;
   private static final int DAMAGE = 6;
-  private static final int DAMAGE_UPGRADE = 1;
-  private static final int SPRAIN_AMOUNT = 3;
-  private static final int SPRAIN_AMOUNT_UPGRADE = 2;
+  private static final int DAMAGE_UPGRADE = 7;
+  private static final int SPRAIN_AMOUNT = 6;
+  private static final int SPRAIN_AMOUNT_UPGRADE = 7;
 
   public Shortarm() {
     super(ID, NAME, getCardResourcePath(IMG_PATH), COST, getDescription(), TYPE,

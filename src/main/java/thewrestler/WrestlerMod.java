@@ -279,10 +279,12 @@ public class WrestlerMod implements
         reflectedMap.put("DOOR_HATCH_OPEN_1", new Sfx(getAudioResourcePath("TheWrestler_DoorHatchOpen1.ogg")));
         reflectedMap.put("DRILL_SPIN_1", new Sfx(getAudioResourcePath("TheWrestler_DrillSpin1.ogg")));
         reflectedMap.put("ELECTRO_INTERFERENCE_1", new Sfx(getAudioResourcePath("TheWrestler_ElectroInterference1.ogg")));
+        reflectedMap.put("GATE_OPEN_RUSTY_1", new Sfx(getAudioResourcePath("TheWrestler_GateRustyOpen1.ogg")));
         reflectedMap.put("GONG_STRIKE_1", new Sfx(getAudioResourcePath("TheWrestler_GongStrike1.ogg")));
         reflectedMap.put("GONG_STRIKE_2", new Sfx(getAudioResourcePath("TheWrestler_GongStrike2.ogg")));
         reflectedMap.put("GRUNT_SHORT_1", new Sfx(getAudioResourcePath("TheWrestler_GruntShort1.ogg")));
         reflectedMap.put("GRUNT_SHORT_2", new Sfx(getAudioResourcePath("TheWrestler_GruntShort2.ogg")));
+        reflectedMap.put("GUILLOTINE_1", new Sfx(getAudioResourcePath("TheWrestler_Guillotine1.ogg")));
         reflectedMap.put("LASER_SHORT_1", new Sfx(getAudioResourcePath("TheWrestler_LaserShort1.ogg")));
         reflectedMap.put("SNAP_LIGAMENT_1", new Sfx(getAudioResourcePath("TheWrestler_SnapLigament1.ogg")));
         reflectedMap.put("SPLAT_WET_1", new Sfx(getAudioResourcePath("TheWrestler_SplatWet1.ogg")));
@@ -465,6 +467,7 @@ public class WrestlerMod implements
         BaseMod.addCard(new FanFavorite());
         BaseMod.addCard(new FloatOver());
         BaseMod.addCard(new FrogSplash());
+        BaseMod.addCard(new Guillotine());
         BaseMod.addCard(new HairPull());
         BaseMod.addCard(new Hardway());
         BaseMod.addCard(new Headlock());
@@ -532,6 +535,7 @@ public class WrestlerMod implements
         UnlockTracker.unlockCard(FanFavorite.ID);
         UnlockTracker.unlockCard(FloatOver.ID);
         UnlockTracker.unlockCard(FrogSplash.ID);
+        UnlockTracker.unlockCard(Guillotine.ID);
         UnlockTracker.unlockCard(HairPull.ID);
         UnlockTracker.unlockCard(Hardway.ID);
         UnlockTracker.unlockCard(Headlock.ID);

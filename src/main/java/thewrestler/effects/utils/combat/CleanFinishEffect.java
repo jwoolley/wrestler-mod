@@ -16,22 +16,33 @@ public class CleanFinishEffect extends AbstractGameEffect {
     private static final String CAMERA_SFX_KEY = "CAMERA_SHUTTER_1";
 
     private static float ACTION_DURATION = Settings.ACTION_DUR_FAST;
+
+    private static float DEFAULT_FLASH_DURATION = 1.0f;
+
     private int actionCounter;
 
     private Logger logger;
 
     private final String sfxKey;
     private final Color flashColor;
+    private final float flashDuration;
+    private final boolean renderBehind;
 
     public CleanFinishEffect() {
-      this(WHITE_CAMERA_FLASH, CAMERA_SFX_KEY, ACTION_DURATION);
+      this(WHITE_CAMERA_FLASH, CAMERA_SFX_KEY, ACTION_DURATION, DEFAULT_FLASH_DURATION, false);
     }
 
-    public CleanFinishEffect(Color color, String sfxKey, float duration) {
-      this.duration = ACTION_DURATION;
+  public CleanFinishEffect(Color color, String sfxKey, float duration) {
+      this(color, sfxKey, duration, DEFAULT_FLASH_DURATION, false);
+  }
+
+    public CleanFinishEffect(Color color, String sfxKey, float duration, float flashDuration, boolean renderBehind) {
+      this.duration = duration;
+      this.flashDuration = flashDuration;
       this.actionCounter = 24;
       this.flashColor = color.cpy();
       this.sfxKey = sfxKey;
+      this.renderBehind = renderBehind;
     }
 
     @Override
@@ -52,16 +63,14 @@ public class CleanFinishEffect extends AbstractGameEffect {
           return;
         }
 
-        if (Settings.FAST_MODE) {
-          // do all the stuff quickly
-        }
-
         if (actionCounter == 24) {
-          AbstractDungeon.effectsQueue.add(new RoomTintEffect(Color.BLACK.cpy(), 0.9F));
-        } else if (actionCounter == 20) {
+          AbstractDungeon.effectsQueue.add(
+              new RoomTintEffect(Color.BLACK.cpy(), 0.9F, this.flashDuration, true));
+        } else if ((actionCounter == 20 || Settings.FAST_MODE && actionCounter == 22) && sfxKey != null) {
           AbstractDungeon.actionManager.addToTop(new SFXAction(this.sfxKey));
-        } else if (actionCounter < 16) {
-          AbstractDungeon.effectsQueue.add(new RoomTintEffect(this.flashColor, 0.99F));
+        } else if (actionCounter < 16 || Settings.FAST_MODE && actionCounter == 20) {
+          AbstractDungeon.effectsQueue.add(
+              new RoomTintEffect(this.flashColor, 0.99F, this.flashDuration, true));
           AbstractDungeon.effectsQueue.add(new BorderFlashEffect(Color.WHITE.cpy(), false));
           this.isDone = true;
         }

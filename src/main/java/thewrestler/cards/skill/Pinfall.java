@@ -88,7 +88,7 @@ public class Pinfall extends CustomCard implements AbstractApprovalListener, Sta
 
   @Override
   public void onApprovalChanged(int changeAmount, int newValue, boolean isEndOfTurnChange) {
-    if (!isEndOfTurnChange) {
+    if (!isEndOfTurnChange || isEndOfTurnChange) {
       this.selfRetain = ApprovalInfo.isPopular();
     }
   }

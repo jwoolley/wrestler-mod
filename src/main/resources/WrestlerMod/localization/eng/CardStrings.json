@@ -129,6 +129,11 @@
     "DESCRIPTION": "Deal !D! Damage and apply !M! Weak to ALL enemies. NL Exhaust."
   },
 
+  "WrestlerMod:Guillotine": {
+    "NAME": "Guillotine",
+    "DESCRIPTION": "wrestlermod:Dirty. NL Deal !D! damage to ALL enemies. NL If your hand is empty, deal !D! damage again."
+  },
+
   "WrestlerMod:HairPull": {
     "NAME": "Hair Pull",
     "DESCRIPTION": "wrestlermod:Dirty. NL Deal !D! damage. NL If the enemy is wrestlermod:Grappled, gain [E]."
