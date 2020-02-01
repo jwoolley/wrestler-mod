@@ -46,6 +46,13 @@
     ]
   },
 
+  "WrestlerMod:ShowboatAction": {
+    "TEXT": [
+      "Choose a Card to Put on top of Your Draw Pile.",
+      "Dirty. NL "
+    ]
+  },
+
   "WrestlerMod:SideRollAction": {
     "TEXT": [
       "Choose a Card to Discard."

@@ -38,7 +38,7 @@ public class ElbowDrop extends CustomCard {
 
   private static final int COST = 2;
   private static final int DAMAGE = 11;
-  private static final int DAMAGE_UPGRADE = 2;
+  private static final int DAMAGE_UPGRADE = 3;
   private static final int DRAW_AMOUNT = 1;
 
   private int costReduction;

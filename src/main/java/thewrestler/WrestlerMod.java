@@ -493,6 +493,7 @@ public class WrestlerMod implements
         BaseMod.addCard(new Screwjob());
         BaseMod.addCard(new Sharpshooter());
         BaseMod.addCard(new Shortarm());
+        BaseMod.addCard(new Showboat());
         BaseMod.addCard(new SideRoll());
         BaseMod.addCard(new Springboard());
         BaseMod.addCard(new SquareOff());
@@ -561,6 +562,7 @@ public class WrestlerMod implements
         UnlockTracker.unlockCard(Screwjob.ID);
         UnlockTracker.unlockCard(Sharpshooter.ID);
         UnlockTracker.unlockCard(Shortarm.ID);
+        UnlockTracker.unlockCard(Showboat.ID);
         UnlockTracker.unlockCard(SideRoll.ID);
         UnlockTracker.unlockCard(Springboard.ID);
         UnlockTracker.unlockCard(SquareOff.ID);

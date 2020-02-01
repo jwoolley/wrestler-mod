@@ -31,9 +31,10 @@ public class Headlock extends CustomCard {
   private static final CardTarget TARGET = CardTarget.ENEMY;
 
   private static final int COST = 1;
-  private static final int DAMAGE = 6;
+  private static final int DAMAGE = 5;
   private static final int DAMAGE_UPGRADE = 3;
-  private static final int LOSE_STRENGTH_AMOUNT = 3;
+  private static final int LOSE_STRENGTH_AMOUNT = 2;
+  private static final int LOSE_STRENGTH_AMOUNT_UPGRADE = 1;
 
   public Headlock() {
     super(ID, NAME, getCardResourcePath(IMG_PATH), COST, DESCRIPTION, TYPE,
@@ -69,6 +70,7 @@ public class Headlock extends CustomCard {
     if (!this.upgraded) {
       this.upgradeName();
       this.upgradeDamage(DAMAGE_UPGRADE);
+      this.upgradeMagicNumber(LOSE_STRENGTH_AMOUNT_UPGRADE);
     }
   }
 

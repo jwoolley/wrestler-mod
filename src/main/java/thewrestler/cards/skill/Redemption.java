@@ -30,7 +30,7 @@ public class Redemption extends CustomCard implements AbstractApprovalListener, 
   private static final CardRarity RARITY = CardRarity.UNCOMMON;
   private static final CardTarget TARGET = CardTarget.SELF;
 
-  private static final int BLOCK_AMOUNT = 12;
+  private static final int BLOCK_AMOUNT = 13;
   private static final int BLOCK_AMOUNT_UPGRADE = 3;
   private static final int COST = 2;
   private static final int DISCOUNT = 1;
