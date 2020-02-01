@@ -17,6 +17,14 @@
     ]
   },
 
+  "WrestlerMod:FancyFootgear": {
+    "NAME": "Fancy Footgear",
+    "FLAVOR": "Float like a Bronze Orb, sting like a Byrd.",
+    "DESCRIPTIONS": [
+      "Whenever an enemy dies, gain 1 #yTemporary #yBuffer."
+    ]
+  },
+
   "WrestlerMod:FightCard": {
     "NAME": "Fight Card",
     "FLAVOR": "The venue isn't glamorous, but the money is good.",
@@ -46,6 +54,14 @@
     ]
   },
 
+  "WrestlerMod:LuckyTrunks": {
+    "NAME": "Lucky Trunks",
+    "FLAVOR": "Comfortable and flattering. Though perhaps not so lucky for the previous owner.",
+    "DESCRIPTIONS": [
+      "At the start of your turn, if you're #yPopular, gain [E] ."
+    ]
+  },
+
   "WrestlerMod:PeoplesCrown": {
     "NAME": "Peoples Crown",
     "FLAVOR": "Dignified in its simplicity.",
@@ -55,9 +71,18 @@
     ]
   },
 
+  "WrestlerMod:RefereesWhistle": {
+    "NAME": "Referee's Whistle",
+    "FLAVOR": "Property of association officials. Unauthorized possession will be met with swift punishment.",
+
+    "DESCRIPTIONS": [
+      "At the start of your turn, if you're #yUnpopular, draw a card."
+    ]
+  },
+
   "WrestlerMod:RingCard": {
     "NAME": "Ring Card",
-    "FLAVOR": "Discarded from a long-forgotten fight. But you haven't forgotten.",
+    "FLAVOR": "Discarded from a long-forgotten fight. Except you haven't forgotten.",
     "DESCRIPTIONS": [
       "At the end of combat, if you're #yPopular, heal #b",
       " HP. If you're #yUnpopular, enemies reward #b",

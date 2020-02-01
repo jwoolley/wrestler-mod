@@ -4,6 +4,7 @@ import basemod.BaseMod;
 import basemod.ModLabeledToggleButton;
 import basemod.ModPanel;
 import basemod.ReflectionHacks;
+import basemod.helpers.RelicType;
 import basemod.interfaces.*;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.files.FileHandle;
@@ -415,8 +416,12 @@ public class WrestlerMod implements
         BaseMod.addRelicToCustomPool(new FightCard(), AbstractCardEnum.THE_WRESTLER_ORANGE);
         BaseMod.addRelicToCustomPool(new PeoplesCrown(), AbstractCardEnum.THE_WRESTLER_ORANGE);
 
+        BaseMod.addRelicToCustomPool(new LuckyTrunks(), AbstractCardEnum.THE_WRESTLER_ORANGE);
+        BaseMod.addRelicToCustomPool(new RefereesWhistle(), AbstractCardEnum.THE_WRESTLER_ORANGE);
+
         // This adds a relic to the Shared pool. Every character can find this relic.
-        //  BaseMod.addRelic(new Headgear(), RelicType.SHARED);
+        // TODO: put this behind a Config flag, a la Hayseed
+        BaseMod.addRelic(new FancyFootgear(), RelicType.SHARED);
 
         // Mark relics as seen (the others are all starters so they're marked as seen in the character file
         // UnlockTracker.markRelicAsSeen(Headgear.ID);
