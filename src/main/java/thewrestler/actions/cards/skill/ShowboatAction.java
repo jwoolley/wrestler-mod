@@ -27,9 +27,7 @@ public class ShowboatAction  extends AbstractGameAction {
 
       if ((discardPile.isEmpty())) {
         this.isDone = true;
-      }
-
-      if ((discardPile.size() == 1)) {
+      } else if ((discardPile.size() == 1)) {
         this.cardToMove = discardPile.group.get(0);
       } else {
         GridSelectScreenShowboatPatch.enableShowboatGrid();
