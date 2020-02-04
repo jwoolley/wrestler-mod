@@ -257,11 +257,15 @@
     ]
   },
 
+  "WrestlerMod:Predictable": {
+    "NAME": "Predictable",
+    "DESCRIPTION": "Unplayable. NL At the end of your turn, apply !M! Artifact to a random enemy."
+  },
+
   "WrestlerMod:ProvenTactics": {
     "NAME": "Proven Tactics",
     "DESCRIPTION": "At the start of your turn, randomly add a Flex, Neutralize, or Beam_Cell to your hand. It gains Exhaust."
   },
-
 
   "WrestlerMod:Redemption": {
     "NAME": "Redemption",

@@ -22,7 +22,6 @@ import com.megacrit.cardcrawl.cards.CardGroup;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.core.Settings;
-import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.helpers.CardHelper;
 import com.megacrit.cardcrawl.helpers.FontHelper;
 import com.megacrit.cardcrawl.localization.*;
@@ -33,6 +32,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import thewrestler.cards.StartOfCombatListener;
 import thewrestler.cards.attack.*;
+import thewrestler.cards.curse.Predictable;
 import thewrestler.cards.power.*;
 import thewrestler.cards.skill.*;
 import thewrestler.characters.WrestlerCharacter;
@@ -52,7 +52,6 @@ import thewrestler.ui.WrestlerCombatInfoPanel;
 import thewrestler.ui.WrestlerSignatureMovePanel;
 import thewrestler.util.BasicUtils;
 import thewrestler.util.IDCheckDontTouchPls;
-import thewrestler.util.RefreshHandListener;
 import thewrestler.util.TextureLoader;
 import thewrestler.util.info.CombatInfo;
 import thewrestler.util.info.approval.ApprovalInfo;
@@ -579,6 +578,9 @@ public class WrestlerMod implements
         UnlockTracker.unlockCard(TriangleChoke.ID);
         UnlockTracker.unlockCard(TripleThreat.ID);
         UnlockTracker.unlockCard(WindUpKick.ID);
+
+        BaseMod.addCard(new Predictable());
+        UnlockTracker.unlockCard(Predictable.ID);
 
         // FOR PLAYTESTING
         BaseMod.addCard(new Chokeslam());
