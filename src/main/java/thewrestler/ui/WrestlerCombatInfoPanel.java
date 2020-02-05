@@ -31,10 +31,10 @@ public class WrestlerCombatInfoPanel implements CustomInfoPanel, StartOfCombatLi
   private static final float HEIGHT = 160;
   private static final float X_OFFSET = 24;
   private static final float Y_OFFSET = 626 + HEIGHT;
-  private static final float Y_OFFSET_WIDESCREEN = 207 + HEIGHT;
+  private static final float Y_OFFSET_WIDESCREEN = 626 + HEIGHT;
   private static final float X_TEXT_OFFSET = 10;
-  private static final float Y_TEXT_OFFSET =  HEIGHT - 20;
-  private static final float Y_TEXT_OFFSET_WIDESCREEN = Y_TEXT_OFFSET + 0;
+  private static final float Y_TEXT_OFFSET_WIDESCREEN = HEIGHT - 20;
+  private static final float Y_TEXT_OFFSET =  Y_TEXT_OFFSET_WIDESCREEN + 0;
   private static final float TOOLTIP_X_OFFSET = 16.0F;
   private static final float TOOLTIP_Y_OFFSET = -32.0F;
 

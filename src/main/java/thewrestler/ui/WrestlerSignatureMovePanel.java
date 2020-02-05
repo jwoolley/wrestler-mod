@@ -35,10 +35,10 @@ public class WrestlerSignatureMovePanel implements CustomInfoPanel, CardPreviewE
   private static final float HEIGHT = 185;
   private static final float X_OFFSET = 24;
   private static final float Y_OFFSET = 441 + HEIGHT;
-  private static final float Y_OFFSET_WIDESCREEN = 207 + HEIGHT;
+  private static final float Y_OFFSET_WIDESCREEN = 441 + HEIGHT;
   private static final float X_TEXT_OFFSET = 10;
-  private static final float Y_TEXT_OFFSET =  HEIGHT - 20;
-  private static final float Y_TEXT_OFFSET_WIDESCREEN = Y_TEXT_OFFSET + 0;
+  private static final float Y_TEXT_OFFSET_WIDESCREEN = HEIGHT - 20;
+  private static final float Y_TEXT_OFFSET =  Y_TEXT_OFFSET_WIDESCREEN + 0;
   private static final float TOOLTIP_X_OFFSET = 108.0F;
   private static final float TOOLTIP_Y_OFFSET = -8.0F;
 

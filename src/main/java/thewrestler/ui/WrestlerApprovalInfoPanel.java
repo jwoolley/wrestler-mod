@@ -34,9 +34,9 @@ public class WrestlerApprovalInfoPanel implements CustomInfoPanel, StartOfCombat
   private static final float HEIGHT = 104;
   private static final float X_OFFSET = 24;
   private static final float Y_OFFSET = 786 + HEIGHT;
-  private static final float Y_OFFSET_WIDESCREEN = 207 + HEIGHT;
-  private static final float Y_TEXT_OFFSET =  HEIGHT - 20;
-  private static final float Y_TEXT_OFFSET_WIDESCREEN = Y_TEXT_OFFSET + 0;
+  private static final float Y_OFFSET_WIDESCREEN = 786 + HEIGHT;
+  private static final float Y_TEXT_OFFSET_WIDESCREEN = HEIGHT - 20;
+  private static final float Y_TEXT_OFFSET = Y_TEXT_OFFSET_WIDESCREEN + 0;
   private static final float TOOLTIP_X_OFFSET = WIDTH + 16.0F;
   private static final float TOOLTIP_Y_OFFSET = -(HEIGHT + 64.0f);
 
