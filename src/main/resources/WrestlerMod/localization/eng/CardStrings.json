@@ -190,10 +190,14 @@
     "DESCRIPTION": "Deal !D! Damage. NL If you're wrestlermod:Unpopular at the end of turn, Retain."
   },
 
-
   "WrestlerMod:MainEvent": {
     "NAME": "Main Event",
-    "DESCRIPTION": "If you've already gained your wrestlermod:Trademark_Move, put it into your hand. NL Otherwise, add it into your discard pile. NL Exhaust."
+    "DESCRIPTION": "If you've already gained your wrestlermod:Trademark_Move, put it into your hand. NL Otherwise,",
+    "EXTENDED_DESCRIPTION": [
+      " shuffle it into",
+      " put it on top of",
+      " your draw pile. NL Exhaust."
+    ]
   },
 
   "WrestlerMod:NearFall": {

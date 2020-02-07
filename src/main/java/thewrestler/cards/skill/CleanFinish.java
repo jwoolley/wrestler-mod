@@ -36,7 +36,6 @@ public class CleanFinish extends CustomCard {
   private static final int NUM_DISCOUNTED_CARDS = 3;
   private static final int NUM_DISCOUNTED_CARDS_UPGRADE = 1;
 
-
   public CleanFinish() {
     super(ID, NAME, getCardResourcePath(IMG_PATH), COST, getDescription(), TYPE, AbstractCardEnum.THE_WRESTLER_ORANGE,
         RARITY, TARGET);

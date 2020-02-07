@@ -3,6 +3,7 @@ package thewrestler.signaturemoves.moveinfos;
 import basemod.BaseMod;
 import basemod.abstracts.CustomSavable;
 import com.megacrit.cardcrawl.actions.common.MakeTempCardInDiscardAction;
+import com.megacrit.cardcrawl.actions.common.MakeTempCardInDrawPileAction;
 import com.megacrit.cardcrawl.actions.common.MakeTempCardInHandAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
@@ -71,26 +72,28 @@ public abstract class AbstractSignatureMoveInfo implements StartOfCombatListener
   }
 
   public void triggerGainCard() {
-    triggerGainCard(false);
+    if (this.canStillTriggerCardGain()) {
+      triggerGainCard(false,false);
+    }
   }
 
-  public void triggerGainCard(boolean toDiscard) {
+  protected void triggerGainCard(boolean toDeck, boolean onTop) {
     AbstractSignatureMoveCard card = this.signatureMoveCard.makeCopy();
     card.setCostForTurn(0);
 
-    if (toDiscard) {
-      AbstractDungeon.actionManager.addToBottom(new MakeTempCardInDiscardAction(this.signatureMoveCard, 1));
+    if (toDeck) {
+      AbstractDungeon.actionManager.addToBottom(new MakeTempCardInDrawPileAction(this.signatureMoveCard, 1, !onTop, onTop));
     } else {
       AbstractDungeon.actionManager.addToBottom(new MakeTempCardInHandAction(this.signatureMoveCard));
     }
   }
 
-  abstract public boolean _canStillTriggerCardGain();
+  abstract protected boolean _canStillTriggerCardGain();
 
   protected boolean manuallyTriggeredCardGain;
-  public void manuallyTriggerCardGain(boolean toDiscard) {
+  public void manuallyTriggerCardGain(boolean toDeck, boolean onTop) {
     this.manuallyTriggeredCardGain = true;
-    triggerGainCard(toDiscard);
+    triggerGainCard(toDeck, onTop);
   }
 
   public void atStartOfTurn() {
@@ -113,7 +116,7 @@ public abstract class AbstractSignatureMoveInfo implements StartOfCombatListener
 
   public boolean canStillTriggerCardGain() {
     return !this.manuallyTriggeredCardGain && this._canStillTriggerCardGain();
-  };
+  }
 
   static class MoveCardCustomSavable implements CustomSavable<Integer> {
     @Override

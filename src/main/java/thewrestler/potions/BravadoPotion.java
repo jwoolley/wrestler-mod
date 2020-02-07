@@ -77,7 +77,7 @@ public class BravadoPotion extends AbstractPotion {
    if (BasicUtils.isPlayingAsWrestler() && WrestlerCharacter.hasSignatureMoveInfo()
        && WrestlerCharacter.getSignatureMoveInfo().canStillTriggerCardGain()) {
      for (int i = 0; i < this.potency; i++) {
-       WrestlerCharacter.getSignatureMoveInfo().manuallyTriggerCardGain(false);
+       WrestlerCharacter.getSignatureMoveInfo().manuallyTriggerCardGain(false, false);
      }
    }
   }

@@ -43,12 +43,11 @@ public class MainEvent extends CustomCard {
   private static final CardRarity RARITY = CardRarity.RARE;
   private static final CardTarget TARGET = CardTarget.NONE;
 
-  private static final int COST = 2;
-  private static final int UPGRADED_COST = 1;
+  private static final int COST = 1;
 
   public MainEvent() {
-    super(ID, NAME, getCardResourcePath(IMG_PATH), COST, getDescription(), TYPE, AbstractCardEnum.THE_WRESTLER_ORANGE,
-        RARITY, TARGET);
+    super(ID, NAME, getCardResourcePath(IMG_PATH), COST, getDescription(false), TYPE,
+        AbstractCardEnum.THE_WRESTLER_ORANGE, RARITY, TARGET);
     this.exhaust = true;
   }
 
@@ -56,7 +55,7 @@ public class MainEvent extends CustomCard {
   public void use(AbstractPlayer p, AbstractMonster m) {
     if (WrestlerCharacter.hasSignatureMoveInfo()) {
       if (WrestlerCharacter.getSignatureMoveInfo().canStillTriggerCardGain()) {
-        WrestlerCharacter.getSignatureMoveInfo().manuallyTriggerCardGain(true);
+        WrestlerCharacter.getSignatureMoveInfo().manuallyTriggerCardGain(true, this.upgraded);
       } else {
         HashMap<CardGroup, AbstractCard> cardMap = CardUtil.getAllInBattleInstances(
             WrestlerCharacter.getSignatureMoveInfo().getSignatureMoveCard().cardID);
@@ -84,18 +83,6 @@ public class MainEvent extends CustomCard {
     }
   }
 
-  private void handleExhaustToPlay(AbstractCard card) {
-    AbstractPlayer player = AbstractDungeon.player;
-    if ((AbstractDungeon.player.hasPower("Corruption")) && (card.type == AbstractCard.CardType.SKILL)) {
-      card.setCostForTurn(-9);
-    }
-    card.stopGlowing();
-    card.unhover();
-    card.unfadeOut();
-    player.exhaustPile.removeCard(card);
-    player.hand.refreshHandLayout();
-  }
-
   @Override
   public AbstractCard makeCopy() {
     return new MainEvent();
@@ -105,12 +92,15 @@ public class MainEvent extends CustomCard {
   public void upgrade() {
     if (!this.upgraded) {
       this.upgradeName();
-      this.upgradeBaseCost(UPGRADED_COST);
+      this.rawDescription = getDescription(this.upgraded);
+      initializeDescription();
     }
   }
 
-  public static String getDescription() {
-    return DESCRIPTION;
+  public static String getDescription(boolean isUpgraded) {
+    return DESCRIPTION
+        + (!isUpgraded ? EXTENDED_DESCRIPTION[0] : EXTENDED_DESCRIPTION[1])
+        + EXTENDED_DESCRIPTION[2];
   }
 
   static {

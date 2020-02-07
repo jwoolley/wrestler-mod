@@ -27,7 +27,7 @@ public class Pinfall extends CustomCard implements AbstractApprovalListener, Sta
   private static final CardRarity RARITY = CardRarity.COMMON;
   private static final CardTarget TARGET = CardTarget.SELF;
 
-  private static final int BLOCK_AMOUNT = 6;
+  private static final int BLOCK_AMOUNT = 8;
   private static final int BLOCK_AMOUNT_UPGRADE = 3;
   private static final int COST = 1;
 
