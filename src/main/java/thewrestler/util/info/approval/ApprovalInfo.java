@@ -21,8 +21,9 @@ public class ApprovalInfo implements StartOfCombatListener, EndOfCombatListener 
   public static final String APPROVAL_KEYWORD_ID = WrestlerMod.makeID("Approval");
   public static final String CLEAN_FIGHTING_KEYWORD_ID = WrestlerMod.makeID("CleanFighting");
   public static final String DIRTY_KEYWORD_ID = WrestlerMod.makeID("Dirty");
-  public static final int MAX_ATTACKS_FOR_APPROVAL = 1;
+  public static final int MAX_ATTACKS_FOR_APPROVAL = 0;
   public static final int MAX_DEBUFFS_FOR_APPROVAL = 0;
+  public static final int DIRTY_CARD_APPROVAL_LOSS_THRESHOLD = 2;
   private final static int STARTING_AMOUNT = 0;
   private final static int MIN_APPROVAL = -25;
   private final static int MAX_APPROVAL = 25;
@@ -34,8 +35,6 @@ public class ApprovalInfo implements StartOfCombatListener, EndOfCombatListener 
   private final static int HATED_MAX = -10;
 
   private int amount;
-
-  private int numDirtyCardsPlayed = 0;
 
   public ApprovalInfo() {
     this.amount = STARTING_AMOUNT;
@@ -211,11 +210,14 @@ public class ApprovalInfo implements StartOfCombatListener, EndOfCombatListener 
     this.amount = amount;
   }
 
+  // TODO: does the decrement logic still belong here?
   public void onCardUsed(AbstractCard card) {
     if (card.hasTag(WrestlerCardTags.DIRTY)) {
-      WrestlerMod.logger.info("ApprovalInfo::onCardUsed dirty card played, decreasing approval");
-      numDirtyCardsPlayed++;
-      decreaseApproval();
+      CombatInfo.incrementDirtyCardsPlayedCount();
+      if (CombatInfo.getDirtyCardsPlayed() == DIRTY_CARD_APPROVAL_LOSS_THRESHOLD) {
+        WrestlerMod.logger.info("ApprovalInfo::onCardUsed dirty card played, decreasing approval");
+        decreaseApproval();
+      }
     }
   }
 
@@ -235,14 +237,6 @@ public class ApprovalInfo implements StartOfCombatListener, EndOfCombatListener 
     checkNumAttacksPlayed(true);
   }
 
-  private void checkIfDirtyCardsPlayed() {
-    if (numDirtyCardsPlayed == 0) {
-      WrestlerMod.logger.info("ApprovalInfo::checkIfDirtyCardsPlayed no dirty cards played, increasing approval");
-      // TODO: display appropriate VFX/SFX
-      increaseApproval();
-    }
-  }
-
   private void checkNumAttacksPlayed(boolean isEndOfTurnCheck) {
     if (CombatInfo.getNumAttacksPlayed() <= MAX_ATTACKS_FOR_APPROVAL) {
       WrestlerMod.logger.info("ApprovalInfo::checkNumAttacksPlayed " + CombatInfo.getNumAttacksPlayed() + " attack(s) played, increasing approval");
@@ -260,7 +254,7 @@ public class ApprovalInfo implements StartOfCombatListener, EndOfCombatListener 
   }
 
   public void atStartOfTurn(){
-    numDirtyCardsPlayed = 0;
+
   }
 
 

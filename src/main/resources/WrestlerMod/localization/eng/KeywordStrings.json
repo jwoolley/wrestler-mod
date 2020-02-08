@@ -5,7 +5,7 @@
       "Fan Approval",
       "fan_approval"
     ],
-    "DESCRIPTION": "A measure of how well-liked you are by fans. Playing #yDirty cards affects your Fan Approval, as does applying debuffs."
+    "DESCRIPTION": "A measure of how well-liked you are by fans. Playing #yDirty cards affects your Fan Approval, as does not playing attacks"
   },
 
   "WrestlerMod:CleanFighting": {
@@ -13,7 +13,7 @@
     "NAMES": [
       "dirty"
     ],
-    "DESCRIPTION": "Ending your turn without playing more than 1 Attack increases your #yFan #yApproval by 5."
+    "DESCRIPTION": "Ending your turn without playing any attacks increases your #yFan #yApproval by 5."
   },
 
   "WrestlerMod:Dirty": {
@@ -21,7 +21,7 @@
     "NAMES": [
       "dirty"
     ],
-    "DESCRIPTION": "Playing a Dirty card decreases your #yFan #yApproval by 5."
+    "DESCRIPTION": "Playing two #yDirty cards in the same turn decreases your #yFan #yApproval by 5."
   },
 
   "WrestlerMod:Elbow": {

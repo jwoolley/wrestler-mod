@@ -159,7 +159,7 @@ public class WrestlerCombatInfoPanel implements CustomInfoPanel, StartOfCombatLi
     FontHelper.renderFontLeft(
         sb,
         font,
-        TEXT[4] + (this.cardCounts.powers >= 0 ? this.cardCounts.debuffs : ""),
+        TEXT[4] + (this.cardCounts.powers >= 0 ? this.cardCounts.dirtyCards : ""),
         this.xOffset + this.xTextOffset,
         this.yOffset + this.yTextOffset - (yLineOffset * 4.075f),
         color);
