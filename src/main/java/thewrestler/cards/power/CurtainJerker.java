@@ -33,10 +33,11 @@ public class CurtainJerker extends CustomCard {
   private static final CardTarget TARGET = CardTarget.NONE;
 
   private static final int COST = 1;
-  private static final int STRENGTH_AND_DEX_GAIN = 2;
+  private static final int STRENGTH_AND_DEX_GAIN = 1;
+  private static final int STRENGTH_AND_DEX_GAIN_UPGRADE = 1;
 
   public CurtainJerker() {
-    super(ID, NAME, getCardResourcePath(IMG_PATH), COST, getDescription(false), TYPE,
+    super(ID, NAME, getCardResourcePath(IMG_PATH), COST, getDescription(), TYPE,
         AbstractCardEnum.THE_WRESTLER_ORANGE, RARITY, TARGET);
     this.baseMagicNumber = this.magicNumber = STRENGTH_AND_DEX_GAIN;
   }
@@ -60,14 +61,14 @@ public class CurtainJerker extends CustomCard {
   public void upgrade() {
     if (!this.upgraded) {
       this.upgradeName();
-      this.isInnate = true;
-      this.rawDescription = getDescription(true);
+      this.upgradeMagicNumber(STRENGTH_AND_DEX_GAIN_UPGRADE);
+      this.rawDescription = getDescription();
       initializeDescription();
     }
   }
 
-  public static String getDescription(boolean isInnate) {
-    return (isInnate ? EXTENDED_DESCRIPTION[0] : "") + DESCRIPTION;
+  public static String getDescription() {
+    return DESCRIPTION;
   }
 
   static {

@@ -79,8 +79,7 @@
 
   "WrestlerMod:CurtainJerker": {
     "NAME": "Curtain Jerker",
-    "DESCRIPTION": "Gain !M! Strength and !M! Dexterity. NL Remove at the start of your turn if you aren't an wrestlermod:Amateur.",
-    "EXTENDED_DESCRIPTION": [ "Innate. NL " ]
+    "DESCRIPTION": "Gain !M! Strength and !M! Dexterity. The next time your wrestlermod:Fan_Approval changes, lose !M! Strength and !M! Dexterity."
   },
 
   "WrestlerMod:DivingStomp": {

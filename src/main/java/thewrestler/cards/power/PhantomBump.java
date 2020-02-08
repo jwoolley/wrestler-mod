@@ -31,6 +31,7 @@ public class PhantomBump extends CustomCard {
 
   private static final int COST = 1;
   private static final int BUFFER_STACKS = 1;
+  private static final int UPGRADED_BUFFER_STACKS = 1;
 
   public PhantomBump() {
     super(ID, NAME, getCardResourcePath(IMG_PATH), COST, getDescription(true), TYPE, AbstractCardEnum.THE_WRESTLER_ORANGE,
@@ -54,8 +55,8 @@ public class PhantomBump extends CustomCard {
   public void upgrade() {
     if (!this.upgraded) {
       this.upgradeName();
-      this.isEthereal = false;
-      this.rawDescription = getDescription(false);
+      this.upgradeMagicNumber(UPGRADED_BUFFER_STACKS);
+      this.rawDescription = getDescription(true);
       initializeDescription();
     }
   }

@@ -16,9 +16,10 @@ import thewrestler.WrestlerMod;
 import thewrestler.actions.power.ApplyGrappledAction;
 import thewrestler.cards.skill.AbstractApprovalListener;
 import thewrestler.powers.AbstractWrestlerPower;
+import thewrestler.util.info.CombatInfo;
 import thewrestler.util.info.approval.ApprovalInfo;
 
-public class CurtainJerkerPower extends AbstractWrestlerPower implements CloneablePowerInterface {
+public class CurtainJerkerPower extends AbstractWrestlerPower implements CloneablePowerInterface, AbstractApprovalListener {
   public static final String POWER_ID = WrestlerMod.makeID("CurtainJerkerPower");
   public static final String IMG = "curtainjerker.png";
   private static final PowerStrings powerStrings;
@@ -70,5 +71,21 @@ public class CurtainJerkerPower extends AbstractWrestlerPower implements Cloneab
         new ApplyPowerAction(this.owner, this.owner, new StrengthPower(this.owner, -this.amount), -this.amount));
     AbstractDungeon.actionManager.addToBottom(
         new ApplyPowerAction(this.owner, this.owner, new DexterityPower(this.owner, -this.amount), -this.amount));
+  }
+
+  @Override
+  public void onApprovalChanged(int changeAmount, int newValue, boolean isEndOfTurnChange) {
+    if (changeAmount == 0) {
+      AbstractDungeon.actionManager.addToBottom(new RemoveSpecificPowerAction(this.owner, this.source, ID));
+    }
+  }
+  @Override
+  public void onBecomeLiked() {
+
+  }
+
+  @Override
+  public void onBecomeDisliked() {
+
   }
 }
