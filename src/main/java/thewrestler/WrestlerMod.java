@@ -479,6 +479,7 @@ public class WrestlerMod implements
         BaseMod.addCard(new HeelTurn());
         BaseMod.addCard(new HotShot());
         BaseMod.addCard(new IronMan());
+        BaseMod.addCard(new Kayfabe());
         BaseMod.addCard(new LowBlow());
         BaseMod.addCard(new MainEvent());
         BaseMod.addCard(new Neckbreaker());
@@ -488,6 +489,7 @@ public class WrestlerMod implements
         BaseMod.addCard(new PhantomBump());
         BaseMod.addCard(new Pinfall());
         BaseMod.addCard(new PlayToTheCrowd());
+        BaseMod.addCard(new Powerbomb());
         BaseMod.addCard(new ProvenTactics());
         BaseMod.addCard(new Redemption());
         BaseMod.addCard(new Ropewalk());
@@ -548,6 +550,7 @@ public class WrestlerMod implements
         UnlockTracker.unlockCard(HeelTurn.ID);
         UnlockTracker.unlockCard(HotShot.ID);
         UnlockTracker.unlockCard(IronMan.ID);
+        UnlockTracker.unlockCard(Kayfabe.ID);
         UnlockTracker.unlockCard(LowBlow.ID);
         UnlockTracker.unlockCard(MainEvent.ID);
         UnlockTracker.unlockCard(NearFall.ID);
@@ -557,6 +560,7 @@ public class WrestlerMod implements
         UnlockTracker.unlockCard(PhantomBump.ID);
         UnlockTracker.unlockCard(Pinfall.ID);
         UnlockTracker.unlockCard(PlayToTheCrowd.ID);
+        UnlockTracker.unlockCard(Powerbomb.ID);
         UnlockTracker.unlockCard(ProvenTactics.ID);
         UnlockTracker.unlockCard(Redemption.ID);
         UnlockTracker.unlockCard(Ropewalk.ID);
@@ -592,12 +596,7 @@ public class WrestlerMod implements
         BaseMod.addCard(new Piledriver());
         UnlockTracker.unlockCard(Piledriver.ID);
 
-
 //        UnlockTracker.unlockCard(SafetyTag.ID);
-
-        // TODO: Remove this once card pool is sufficiently large
-        BaseMod.addCard(new Powerbomb());
-        UnlockTracker.unlockCard(Powerbomb.ID);
 
         logger.info("Done adding cards!");
 

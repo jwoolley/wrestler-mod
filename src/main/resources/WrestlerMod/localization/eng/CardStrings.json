@@ -179,6 +179,19 @@
     ]
   },
 
+
+  "WrestlerMod:Kayfabe": {
+    "NAME": "Kayfabe",
+    "DESCRIPTION": "Gain ",
+    "EXTENDED_DESCRIPTION": [
+      "[E] ",
+      ". NL Gain ",
+      "  wrestlermod:Fan_Approval.",
+      " NL Next turn, lose ",
+      " NL Exhaust."
+    ]
+  },
+
   "WrestlerMod:Knee": {
     "NAME": "Knee",
     "DESCRIPTION": "Ethereal. NL Deal !D! Damage. NL Exhaust."

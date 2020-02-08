@@ -161,11 +161,19 @@
     ]
   },
 
+  "WrestlerMod:TarnishedReputationPower": {
+    "NAME": "Tarnished Reputation",
+    "DESCRIPTIONS": [
+      "At the start of your next turn, lose #b",
+      " #yFan #yApproval."
+    ]
+  },
+
   "WrestlerMod:TemporaryBufferPower": {
     "NAME": "Temporary Buffer",
     "DESCRIPTIONS": [
       "Prevent the next time",
-      "Prevent the next #b",
+      "Prevent the next #b" ,
       " times",
       " you would lose HP this turn."
     ]
