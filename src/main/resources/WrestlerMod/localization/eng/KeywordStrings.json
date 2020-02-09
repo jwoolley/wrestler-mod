@@ -29,7 +29,7 @@
     "NAMES": [
       "elbow", "elbows"
     ],
-    "DESCRIPTION": "A 1-cost #yAttack card with #yEthereal and #yExhaust that deals modest damage."
+    "DESCRIPTION": "A 0-cost #yAttack card with #yExhaust that deals modest damage and draws a card."
   },
 
   "WrestlerMod:Liked": {

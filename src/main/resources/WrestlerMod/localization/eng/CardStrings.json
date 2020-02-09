@@ -17,6 +17,11 @@
     ]
   },
 
+  "WrestlerMod:Backfist": {
+    "NAME": "Backfist",
+    "DESCRIPTION": "Deal !D! damage. NL Shuffle an *Elbow into your draw pile."
+  },
+
   "WrestlerMod:BearHug": {
     "NAME": "Bear Hug",
     "DESCRIPTION": "Deal !D! Damage. NL Whenever you play a Skill this turn, apply !M! Vulnerable and !M! Weak.",
@@ -87,6 +92,11 @@
     "DESCRIPTION": "Deal !D! Damage. NL Apply !M! wrestlermod:Sprained."
   },
 
+  "WrestlerMod:Elbow": {
+    "NAME": "Elbow",
+    "DESCRIPTION": "Deal !D! Damage. NL Draw a card. NL Exhaust."
+  },
+
   "WrestlerMod:EyePoke": {
     "NAME": "Eye Poke",
     "DESCRIPTION": "wrestlermod:Dirty. NL Apply !M! Weak and !M! Vulnerable. NL Exhaust."
@@ -136,6 +146,16 @@
   "WrestlerMod:HairPull": {
     "NAME": "Hair Pull",
     "DESCRIPTION": "wrestlermod:Dirty. NL Deal !D! damage. NL If the enemy is wrestlermod:Grappled, gain [E]."
+  },
+
+  "WrestlerMod:Hammerlock": {
+    "NAME": "Hammerlock",
+    "DESCRIPTION": "Gain !B! Block. NL Put ",
+    "EXTENDED_DESCRIPTION": [
+      "an *Elbow",
+      " *Elbows",
+      " on top of your draw pile."
+    ]
   },
 
   "WrestlerMod:Hardway": {

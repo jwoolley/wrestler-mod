@@ -454,6 +454,7 @@ public class WrestlerMod implements
 
         BaseMod.addCard(new AlleyOop());
         BaseMod.addCard(new AtomicDrop());
+        BaseMod.addCard(new Backfist());
         BaseMod.addCard(new BearHug());
         BaseMod.addCard(new BlowOff());
         BaseMod.addCard(new Butterfly());
@@ -473,6 +474,7 @@ public class WrestlerMod implements
         BaseMod.addCard(new FrogSplash());
         BaseMod.addCard(new Guillotine());
         BaseMod.addCard(new HairPull());
+        BaseMod.addCard(new Hammerlock());
         BaseMod.addCard(new Hardway());
         BaseMod.addCard(new Headlock());
         BaseMod.addCard(new HeartPunch());
@@ -526,6 +528,7 @@ public class WrestlerMod implements
 
         UnlockTracker.unlockCard(AlleyOop.ID);
         UnlockTracker.unlockCard(AtomicDrop.ID);
+        UnlockTracker.unlockCard(Backfist.ID);
         UnlockTracker.unlockCard(BearHug.ID);
         UnlockTracker.unlockCard(BlowOff.ID);
         UnlockTracker.unlockCard(Brainbuster.ID);
@@ -544,6 +547,7 @@ public class WrestlerMod implements
         UnlockTracker.unlockCard(FrogSplash.ID);
         UnlockTracker.unlockCard(Guillotine.ID);
         UnlockTracker.unlockCard(HairPull.ID);
+        UnlockTracker.unlockCard(Hammerlock.ID);
         UnlockTracker.unlockCard(Hardway.ID);
         UnlockTracker.unlockCard(Headlock.ID);
         UnlockTracker.unlockCard(HeartPunch.ID);

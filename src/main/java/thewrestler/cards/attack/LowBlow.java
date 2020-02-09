@@ -34,9 +34,9 @@ public class LowBlow extends CustomCard implements AbstractApprovalListener, Sta
   private static final CardRarity RARITY = CardRarity.COMMON;
   private static final CardTarget TARGET = CardTarget.ENEMY;
 
-  private static final int DAMAGE = 7;
-  private static final int DAMAGE_UPGRADE = 3;
-  private static final int COST = 1;
+  private static final int DAMAGE = 15;
+  private static final int DAMAGE_UPGRADE = 5;
+  private static final int COST = 2;
 
   public LowBlow() {
     super(ID, NAME, getCardResourcePath(IMG_PATH), COST, getDescription(), TYPE,
