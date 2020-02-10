@@ -126,6 +126,13 @@
     ]
   },
 
+  "WrestlerMod:Feud": {
+    "NAME": "Feud",
+    "DESCRIPTION": "At the start of your turn, shuffle an *Elbow into your draw pile.",
+    "EXTENDED_DESCRIPTION": [
+      "Innate. NL"
+    ]
+  },
 
   "WrestlerMod:FloatOver": {
     "NAME": "Float Over",

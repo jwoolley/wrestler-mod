@@ -32,6 +32,16 @@
     ]
   },
 
+  "WrestlerMod:FeudPower": {
+    "NAME": "Feud",
+    "DESCRIPTIONS": [
+      "At the start of your turn, shuffle #b",
+      " #yElbow",
+      " #yElbows",
+      " into your draw pile."
+    ]
+  },
+
   "WrestlerMod:FloatOverPower": {
     "NAME": "Float Over",
     "DESCRIPTIONS": [
