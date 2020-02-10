@@ -10,6 +10,7 @@ import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import thewrestler.WrestlerMod;
 import thewrestler.enums.AbstractCardEnum;
+import thewrestler.powers.FeudPower;
 import thewrestler.powers.ProvenTacticsPower;
 
 import static thewrestler.WrestlerMod.getCardResourcePath;
@@ -40,7 +41,7 @@ public class Feud extends CustomCard {
   @Override
   public void use(AbstractPlayer p, AbstractMonster m) {
     AbstractDungeon.actionManager.addToBottom(
-        new ApplyPowerAction(p, p, new ProvenTacticsPower(p, this.magicNumber), this.magicNumber));
+        new ApplyPowerAction(p, p, new FeudPower(p, this.magicNumber), this.magicNumber));
   }
 
   @Override

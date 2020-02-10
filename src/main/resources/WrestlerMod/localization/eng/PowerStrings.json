@@ -145,8 +145,8 @@
   "WrestlerMod:ShortarmPower": {
     "NAME": "Shortarm",
     "DESCRIPTIONS": [
-      "Your next Attack also applies #b",
-      " #ySprained if it's #yDirty."
+      "Your #yDirty #yAttacks also apply #b",
+      " #ySprained this turn."
     ]
   },
 

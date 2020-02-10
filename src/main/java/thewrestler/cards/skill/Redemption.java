@@ -30,11 +30,11 @@ public class Redemption extends CustomCard implements AbstractApprovalListener, 
   private static final CardRarity RARITY = CardRarity.UNCOMMON;
   private static final CardTarget TARGET = CardTarget.SELF;
 
-  private static final int BLOCK_AMOUNT = 13;
-  private static final int BLOCK_AMOUNT_UPGRADE = 3;
+  private static final int BLOCK_AMOUNT = 20;
+  private static final int BLOCK_AMOUNT_UPGRADE = 6;
   private static final int COST = 2;
   private static final int DISCOUNT = 1;
-  private static final int APPROVAL_GAIN = 5;
+  private static final int APPROVAL_GAIN = 10;
 
   public Redemption() {
     super(ID, NAME, getCardResourcePath(IMG_PATH), COST, getDescription(DISCOUNT), TYPE, AbstractCardEnum.THE_WRESTLER_ORANGE,
@@ -42,14 +42,13 @@ public class Redemption extends CustomCard implements AbstractApprovalListener, 
     this.baseBlock = this.block = BLOCK_AMOUNT;
     this.baseMagicNumber = this.magicNumber = APPROVAL_GAIN;
     calculateCost();
+    this.exhaust = true;
   }
 
   @Override
   public void use(AbstractPlayer p, AbstractMonster m) {
     AbstractDungeon.actionManager.addToBottom(new GainBlockAction(p, p, block));
-    if (ApprovalInfo.isUnpopular()) {
-      WrestlerCharacter.getApprovalInfo().increaseApproval(APPROVAL_GAIN, false);
-    }
+    WrestlerCharacter.getApprovalInfo().increaseApproval(APPROVAL_GAIN, false);
   }
 
   private void calculateCost() {

@@ -315,7 +315,7 @@
     "DESCRIPTION": "Costs ",
     "EXTENDED_DESCRIPTION": [
       "[E]",
-      "  less and increases !M! wrestlermod:Fan_Approval by !M! if wrestlermod:Unpopular. NL Gain !B! Block."
+      "  less if wrestlermod:Unpopular. NL Gain !B! Block and !M! wrestlermod:Fan_Approval. NL Exhaust."
     ]
   },
 
@@ -365,7 +365,7 @@
 
   "WrestlerMod:Shortarm": {
     "NAME": "Shortarm",
-    "DESCRIPTION": "Deal !D! damage. NL If your next Attack this turn is wrestlermod:Dirty, it also applies !M! wrestlermod:Sprained."
+    "DESCRIPTION": "Deal !D! damage. NL Your wrestlermod:Dirty attacks this turn also apply !M! wrestlermod:Sprained."
   },
 
   "WrestlerMod:Showboat": {

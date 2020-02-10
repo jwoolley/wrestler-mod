@@ -51,7 +51,7 @@ public class Hammerlock extends CustomCard {
 
   @Override
   public AbstractCard makeCopy() {
-    return new SideRoll();
+    return new Hammerlock();
   }
 
   @Override
