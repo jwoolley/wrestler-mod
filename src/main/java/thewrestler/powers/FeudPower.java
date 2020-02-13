@@ -16,6 +16,8 @@ import com.megacrit.cardcrawl.powers.AbstractPower;
 import com.megacrit.cardcrawl.unlock.UnlockTracker;
 import thewrestler.WrestlerMod;
 import thewrestler.cards.colorless.attack.Elbow;
+import thewrestler.util.info.CombatInfo;
+import thewrestler.util.info.approval.ApprovalInfo;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -29,24 +31,29 @@ public class FeudPower extends AbstractWrestlerPower implements CloneablePowerIn
   public static final String[] DESCRIPTIONS;
 
   public static final PowerType POWER_TYPE = PowerType.BUFF;
+  public static final int NUM_ATTACKS_REQUIRED = 3;
 
   public FeudPower(AbstractCreature owner, int amount) {
     super(POWER_ID, NAME, IMG, owner, owner, amount, POWER_TYPE);
   }
 
   @Override
-  public void atStartOfTurnPostDraw() {
-    flash();
-    AbstractDungeon.actionManager.addToBottom(
-        new MakeTempCardInDrawPileAction(new Elbow(), this.amount, true, true));
+  public void atEndOfTurn(boolean isPlayer) {
+    if (isPlayer && CombatInfo.getNumAttacksPlayed() >= NUM_ATTACKS_REQUIRED) {
+      flash();
+      AbstractDungeon.actionManager.addToBottom(
+          new MakeTempCardInDrawPileAction(new Elbow(), this.amount, true, true));
+    }
   }
 
   @Override
   public void updateDescription() {
     this.description = DESCRIPTIONS[0]
+        + NUM_ATTACKS_REQUIRED
+        + DESCRIPTIONS[1]
         + this.amount
-        + (this.amount == 1 ? DESCRIPTIONS[1] : DESCRIPTIONS[2])
-        + DESCRIPTIONS[3];
+        + (this.amount == 1 ? DESCRIPTIONS[2] : DESCRIPTIONS[3])
+        + DESCRIPTIONS[4];
   }
 
   @Override

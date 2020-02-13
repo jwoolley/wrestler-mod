@@ -35,10 +35,11 @@
   "WrestlerMod:FeudPower": {
     "NAME": "Feud",
     "DESCRIPTIONS": [
-      "At the start of your turn, shuffle #b",
+      "At the end of your turn, if you played #b",
+      " or more attacks, put #b",
       " #yElbow",
       " #yElbows",
-      " into your draw pile."
+      " on top of your draw pile."
     ]
   },
 

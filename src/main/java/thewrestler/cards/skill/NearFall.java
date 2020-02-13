@@ -32,10 +32,10 @@ public class NearFall extends CustomCard {
 
   private static final int COST = 1;
 
-  private static final int NUM_CARDS_EXHAUST = 1;
+  private static final int NUM_CARDS_EXHAUST = 2;
 
   public NearFall() {
-    super(ID, NAME, getCardResourcePath(IMG_PATH), COST, getDescription(true), TYPE,
+    super(ID, NAME, getCardResourcePath(IMG_PATH), COST, getDescription(true, NUM_CARDS_EXHAUST), TYPE,
         AbstractCardEnum.THE_WRESTLER_ORANGE, RARITY, TARGET);
     this.magicNumber = this.baseMagicNumber = NUM_CARDS_EXHAUST;
     this.isEthereal = true;
@@ -56,12 +56,15 @@ public class NearFall extends CustomCard {
   public void upgrade() {
     if (!this.upgraded) {
       this.upgradeName();
-      this.rawDescription = getDescription(false);
+      this.rawDescription = getDescription(false, this.magicNumber);
       initializeDescription();
     }
   }
-  public static String getDescription(boolean isEthereal) {
-    return (isEthereal ? EXTENDED_DESCRIPTION[0] : "") + DESCRIPTION;
+  public static String getDescription(boolean isEthereal, int numCards) {
+    return (isEthereal ? EXTENDED_DESCRIPTION[3] : "")
+        + DESCRIPTION
+        + (numCards == 1 ? EXTENDED_DESCRIPTION[0] : EXTENDED_DESCRIPTION[1])
+        + EXTENDED_DESCRIPTION[2];
   }
 
   static {

@@ -52,7 +52,7 @@ public class HairPull extends CustomCard {
 
     if (GrappledPower.enemyWillHaveGrappleAfterAttack(m)) {
       AbstractDungeon.actionManager.addToBottom(new GainEnergyAction(ENERGY_PER_TRIGGER));
-      AbstractDungeon.actionManager.addToTop(new SFXAction("YELL_PAIN_1", 0.95f));
+      AbstractDungeon.actionManager.addToTop(new SFXAction("YELL_PAIN_1", 0.98f));
     }
   }
 

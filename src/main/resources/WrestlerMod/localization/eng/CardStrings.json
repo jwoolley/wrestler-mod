@@ -128,7 +128,7 @@
 
   "WrestlerMod:Feud": {
     "NAME": "Feud",
-    "DESCRIPTION": "At the start of your turn, shuffle an *Elbow into your draw pile.",
+    "DESCRIPTION": "At the end of your turn, if you played !M! or more attacks, put an *Elbow on top of your draw pile.",
     "EXTENDED_DESCRIPTION": [
       "Innate. NL "
     ]
@@ -241,8 +241,11 @@
 
   "WrestlerMod:NearFall": {
     "NAME": "Near-Fall",
-    "DESCRIPTION": "Exhaust a card in hand. NL Until end of turn, whenever you have no cards in hand, draw a card.",
+    "DESCRIPTION": "Exhaust !M!",
     "EXTENDED_DESCRIPTION": [
+      " card",
+      " cards",
+      " in hand. NL Until end of turn, whenever you have no cards in hand, draw a card.",
       "Ethereal. NL "
     ]
   },

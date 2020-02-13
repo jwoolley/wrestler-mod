@@ -12,6 +12,9 @@ import thewrestler.powers.NearFallPower;
 )
 
 public class GameActionManagerGetNextActionListener {
+  /*
+  DISABLING TO TRY NEAR-FALL REWORK;
+  TODO: REMOVE THIS CLASS IF NOT USED
   public static void Prefix(GameActionManager __instance) {
     // player has the Near-Fall power
     // logically this check should be in the center of the conditions,
@@ -31,4 +34,5 @@ public class GameActionManagerGetNextActionListener {
       }
     }
   }
+  */
 }

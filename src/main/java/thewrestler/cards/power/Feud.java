@@ -9,13 +9,14 @@ import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import thewrestler.WrestlerMod;
+import thewrestler.cards.AbstractCardWithPreviewCard;
+import thewrestler.cards.colorless.attack.Elbow;
 import thewrestler.enums.AbstractCardEnum;
 import thewrestler.powers.FeudPower;
-import thewrestler.powers.ProvenTacticsPower;
 
 import static thewrestler.WrestlerMod.getCardResourcePath;
 
-public class Feud extends CustomCard {
+public class Feud extends AbstractCardWithPreviewCard {
   public static final String ID = WrestlerMod.makeID("Feud");
 
   public static final String NAME;
@@ -28,20 +29,21 @@ public class Feud extends CustomCard {
   private static final CardType TYPE = CardType.POWER;
   private static final CardRarity RARITY = CardRarity.UNCOMMON;
   private static final CardTarget TARGET = CardTarget.NONE;
+  private static AbstractCard PREVIEW_CARD;
 
-  private static final int COST = 1;
+  private static final int COST = 0;
   private static final int CARDS_PER_TURN = 1;
 
   public Feud() {
     super(ID, NAME, getCardResourcePath(IMG_PATH), COST, getDescription(false), TYPE,
         AbstractCardEnum.THE_WRESTLER_ORANGE, RARITY, TARGET);
-    this.baseMagicNumber = this.magicNumber = CARDS_PER_TURN;
+    this.baseMagicNumber = this.magicNumber = FeudPower.NUM_ATTACKS_REQUIRED;
   }
 
   @Override
   public void use(AbstractPlayer p, AbstractMonster m) {
     AbstractDungeon.actionManager.addToBottom(
-        new ApplyPowerAction(p, p, new FeudPower(p, this.magicNumber), this.magicNumber));
+        new ApplyPowerAction(p, p, new FeudPower(p, CARDS_PER_TURN), CARDS_PER_TURN));
   }
 
   @Override
@@ -57,6 +59,18 @@ public class Feud extends CustomCard {
       this.rawDescription = getDescription(true);
       initializeDescription();
     }
+  }
+
+  @Override
+  public AbstractCard getPreviewCard() {
+    return PREVIEW_CARD;
+  }
+
+  private static AbstractCard getBonusCard() {
+    if (PREVIEW_CARD == null) {
+      PREVIEW_CARD = new Elbow();
+    }
+    return PREVIEW_CARD;
   }
 
   public static String getDescription(boolean isInnate) {

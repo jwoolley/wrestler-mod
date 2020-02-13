@@ -1,8 +1,6 @@
 package thewrestler.cards.attack;
 
-import basemod.abstracts.CustomCard;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
-import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
 import com.megacrit.cardcrawl.actions.common.DamageAction;
 import com.megacrit.cardcrawl.actions.common.MakeTempCardInDrawPileAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
@@ -12,14 +10,13 @@ import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
-import com.megacrit.cardcrawl.powers.StrengthPower;
+import thewrestler.cards.AbstractCardWithPreviewCard;
 import thewrestler.cards.colorless.attack.Elbow;
-import thewrestler.powers.WrestlerShackled;
 import thewrestler.enums.AbstractCardEnum;
 
 import static thewrestler.WrestlerMod.getCardResourcePath;
 
-public class Backfist extends CustomCard {
+public class Backfist extends AbstractCardWithPreviewCard {
   public static final String ID = "WrestlerMod:Backfist";
   public static final String NAME;
   public static final String DESCRIPTION;
@@ -31,6 +28,7 @@ public class Backfist extends CustomCard {
   private static final CardType TYPE = CardType.ATTACK;
   private static final CardRarity RARITY = CardRarity.COMMON;
   private static final CardTarget TARGET = CardTarget.ENEMY;
+  private static AbstractCard PREVIEW_CARD;
 
   private static final int COST = 1;
   private static final int DAMAGE = 7;
@@ -65,6 +63,18 @@ public class Backfist extends CustomCard {
       this.upgradeName();
       this.upgradeDamage(DAMAGE_UPGRADE);
     }
+  }
+
+  @Override
+  public AbstractCard getPreviewCard() {
+    return PREVIEW_CARD;
+  }
+
+  private static AbstractCard getBonusCard() {
+    if (PREVIEW_CARD == null) {
+      PREVIEW_CARD = new Elbow();
+    }
+    return PREVIEW_CARD;
   }
 
   static {
