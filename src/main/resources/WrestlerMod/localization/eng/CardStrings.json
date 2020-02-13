@@ -278,10 +278,7 @@
 
   "WrestlerMod:PhantomBump": {
     "NAME": "Phantom Bump",
-    "DESCRIPTION": "Gain !M! wrestlermod:Temporary_Buffer.",
-    "EXTENDED_DESCRIPTION": [
-      "Ethereal. NL "
-    ]
+    "DESCRIPTION": "Gain !M! wrestlermod:Temporary_Buffer."
   },
 
   "WrestlerMod:Pinfall": {

@@ -34,10 +34,9 @@ public class PhantomBump extends CustomCard {
   private static final int UPGRADED_BUFFER_STACKS = 1;
 
   public PhantomBump() {
-    super(ID, NAME, getCardResourcePath(IMG_PATH), COST, getDescription(true), TYPE, AbstractCardEnum.THE_WRESTLER_ORANGE,
+    super(ID, NAME, getCardResourcePath(IMG_PATH), COST, getDescription(), TYPE, AbstractCardEnum.THE_WRESTLER_ORANGE,
         RARITY, TARGET);
     this.baseMagicNumber = this.magicNumber = BUFFER_STACKS;
-    this.isEthereal = true;
   }
 
   @Override
@@ -56,13 +55,13 @@ public class PhantomBump extends CustomCard {
     if (!this.upgraded) {
       this.upgradeName();
       this.upgradeMagicNumber(UPGRADED_BUFFER_STACKS);
-      this.rawDescription = getDescription(true);
+      this.rawDescription = getDescription();
       initializeDescription();
     }
   }
 
-  public static String getDescription(boolean isEthereal) {
-    return (isEthereal ? EXTENDED_DESCRIPTION[0] : "") + DESCRIPTION;
+  public static String getDescription() {
+    return DESCRIPTION;
   }
 
   static {
