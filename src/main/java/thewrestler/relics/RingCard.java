@@ -81,6 +81,9 @@ public class RingCard extends CustomWrestlerRelic {
   }
 
   private RelicTier getRandomRelicTier() {
+    return RelicTier.COMMON;
+
+    /*
     int roll = AbstractDungeon.relicRng.random(0, 99);
     if (roll < 50) {
       return AbstractRelic.RelicTier.COMMON;
@@ -89,6 +92,7 @@ public class RingCard extends CustomWrestlerRelic {
       return AbstractRelic.RelicTier.RARE;
     }
     return AbstractRelic.RelicTier.UNCOMMON;
+    */
   }
 
   @Override

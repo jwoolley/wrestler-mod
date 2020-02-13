@@ -86,7 +86,7 @@
     "DESCRIPTIONS": [
       "At the end of combat, if you're #yPopular, heal #b",
       " HP. If you're #yUnpopular, normal enemies have a #b",
-      "% chance to award a random relic."
+      "% chance to award a random common relic."
     ]
   },
 
