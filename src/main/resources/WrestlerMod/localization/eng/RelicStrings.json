@@ -85,8 +85,8 @@
     "FLAVOR": "Discarded from a long-forgotten fight. Except you haven't forgotten.",
     "DESCRIPTIONS": [
       "At the end of combat, if you're #yPopular, heal #b",
-      " HP. If you're #yUnpopular, enemies reward #b",
-      "% more Gold."
+      " HP. If you're #yUnpopular, normal enemies have a #b",
+      "% chance to award a random relic."
     ]
   },
 

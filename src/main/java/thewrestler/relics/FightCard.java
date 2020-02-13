@@ -113,6 +113,7 @@ public class FightCard extends CustomWrestlerRelic implements CustomSavable<Inte
     setCounter(Math.abs(this.fightRecord));
   }
 
+
   public void renderCounter(SpriteBatch sb, boolean inTopPanel) {
     if (this.counter > 0) {
       final Color color = this.fightRecord > 0 ? Color.GREEN.cpy() : Color.RED.cpy();

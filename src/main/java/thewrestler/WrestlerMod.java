@@ -754,7 +754,7 @@ public class WrestlerMod implements
         if (BasicUtils.isPlayingAsWrestler()) {
             WrestlerCharacter.initializeApprovalInfo();
             if (ApprovalInfo.isSaveDataValid()) {
-                WrestlerCharacter.setApprovalInfoFromSave(ApprovalInfo.getApprovalFromSave());
+                WrestlerCharacter.setApprovalInfoFromSave(ApprovalInfo.getApprovalEndOfCombatFromSave());
             }
         }
     }

@@ -11,7 +11,9 @@
       "Attacks: ",
       "Skills: ",
       "Powers: ",
-      "Dirty Cards: "
+      "Dirty: ",
+      " (Combat total: ",
+      ")"
     ]
   },
 

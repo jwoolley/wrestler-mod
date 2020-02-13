@@ -21,7 +21,7 @@ public class RewardItemApplyGoldBonusPatch {
   public static void Postfix(RewardItem __instance, boolean theft) {
     if (AbstractDungeon.player.hasRelic(RingCard.ID)) {
       if (!(AbstractDungeon.getCurrRoom() instanceof TreasureRoom) &&
-          (BasicUtils.isPlayingAsWrestler() && ApprovalInfo.isUnpopular())) {
+          ((RingCard)AbstractDungeon.player.getRelic(RingCard.ID)).shouldRewardGold()) {
 
         final int goldBonus = MathUtils.round(__instance.goldAmt * RingCard.REWARD_PERCENTAGE_BONUS / 100.0f);
 

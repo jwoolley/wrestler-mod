@@ -5,6 +5,10 @@ import com.megacrit.cardcrawl.actions.common.RelicAboveCreatureAction;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.Keyword;
+import com.megacrit.cardcrawl.relics.AbstractRelic;
+import com.megacrit.cardcrawl.rooms.MonsterRoom;
+import com.megacrit.cardcrawl.rooms.MonsterRoomBoss;
+import com.megacrit.cardcrawl.rooms.MonsterRoomElite;
 import thewrestler.WrestlerMod;
 import thewrestler.characters.WrestlerCharacter;
 import thewrestler.util.BasicUtils;
@@ -28,6 +32,23 @@ public class RingCard extends CustomWrestlerRelic {
 
   public static final int HEAL_AMOUNT = 3;
   public static final int REWARD_PERCENTAGE_BONUS = 20;
+  public static final int RELIC_PERCENTAGE_CHANCE = 25;
+
+  public boolean shouldRewardGold() {
+    return false;
+    // DISABLING IN FAVOR OF RELIC REWARD
+    // return BasicUtils.isPlayingAsWrestler() && ApprovalInfo.isUnpopular();
+  }
+
+  private boolean shouldAwardCombatRelic() {
+    if (!WrestlerCharacter.hasApprovalInfo()) {
+      return  false;
+    }
+    return !(AbstractDungeon.getCurrRoom() instanceof MonsterRoomBoss)
+        && !(AbstractDungeon.getCurrRoom() instanceof MonsterRoomElite)
+        && ApprovalInfo.isAmountUnpopular(WrestlerCharacter.getApprovalInfo().getApprovalAtEndOfCombat())
+        && AbstractDungeon.relicRng.random(0, 99) < RELIC_PERCENTAGE_CHANCE;
+  }
 
   public RingCard() {
     super(ID, IMG, OUTLINE, RelicTier.STARTER, LandingSound.CLINK);
@@ -35,7 +56,8 @@ public class RingCard extends CustomWrestlerRelic {
 
   @Override
   public String getUpdatedDescription() {
-    return DESCRIPTIONS[0] + HEAL_AMOUNT + DESCRIPTIONS[1] + REWARD_PERCENTAGE_BONUS + DESCRIPTIONS[2];
+//    return DESCRIPTIONS[0] + HEAL_AMOUNT + DESCRIPTIONS[1] + REWARD_PERCENTAGE_BONUS + DESCRIPTIONS[2];
+    return DESCRIPTIONS[0] + HEAL_AMOUNT + DESCRIPTIONS[1] + RELIC_PERCENTAGE_CHANCE + DESCRIPTIONS[2];
   }
 
   @Override
@@ -48,6 +70,25 @@ public class RingCard extends CustomWrestlerRelic {
         player.heal(HEAL_AMOUNT);
       }
     }
+    if (shouldAwardCombatRelic()) {
+      flash();
+      awardRandomRelic();
+    }
+  }
+
+  private void awardRandomRelic() {
+     AbstractDungeon.getCurrRoom().addRelicToRewards(getRandomRelicTier());
+  }
+
+  private RelicTier getRandomRelicTier() {
+    int roll = AbstractDungeon.relicRng.random(0, 99);
+    if (roll < 50) {
+      return AbstractRelic.RelicTier.COMMON;
+    }
+    if (roll > 85) {
+      return AbstractRelic.RelicTier.RARE;
+    }
+    return AbstractRelic.RelicTier.UNCOMMON;
   }
 
   @Override

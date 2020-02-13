@@ -16,8 +16,6 @@ import com.megacrit.cardcrawl.localization.UIStrings;
 import thewrestler.WrestlerMod;
 import thewrestler.cards.EndOfCombatListener;
 import thewrestler.cards.StartOfCombatListener;
-import thewrestler.characters.WrestlerCharacter;
-import thewrestler.signaturemoves.cards.AbstractSignatureMoveCard;
 import thewrestler.util.BasicUtils;
 import thewrestler.util.TextureLoader;
 import thewrestler.util.info.CombatInfo;
@@ -54,6 +52,7 @@ public class WrestlerCombatInfoPanel implements CustomInfoPanel, StartOfCombatLi
   private Hitbox hb;
 
   private CombatInfo.CardsPlayedCounts cardCounts;
+  private boolean isFirstTurn = true;
 
   // TODO: define imgName as static named BACKGROUND_IMAGE_PATH;
   // TODO: for SignatureMoveInfoPanel, take uiName argument and load labels from there
@@ -159,7 +158,9 @@ public class WrestlerCombatInfoPanel implements CustomInfoPanel, StartOfCombatLi
     FontHelper.renderFontLeft(
         sb,
         font,
-        TEXT[4] + (this.cardCounts.powers >= 0 ? this.cardCounts.dirtyCards : ""),
+        TEXT[4] + (this.cardCounts.dirtyCards >= 0 ? this.cardCounts.dirtyCards : "")
+            + TEXT[5] + (this.cardCounts.dirtyCardsThisCombat >= 0 ? this.cardCounts.dirtyCardsThisCombat : "")
+            + TEXT[6],
         this.xOffset + this.xTextOffset,
         this.yOffset + this.yTextOffset - (yLineOffset * 4.075f),
         color);
@@ -177,16 +178,23 @@ public class WrestlerCombatInfoPanel implements CustomInfoPanel, StartOfCombatLi
   @Override
   public void atStartOfTurn() {
     this.cardCounts = CombatInfo.RESET_CARDS_PLAYED_COUNTS;
+
+    if (!isFirstTurn) {
+      this.cardCounts.dirtyCardsThisCombat = CombatInfo.getCardsPlayedCounts().dirtyCardsThisCombat;
+    }
   }
 
   @Override
   public void atEndOfTurn() {
     this.cardCounts = CombatInfo.RESET_CARDS_PLAYED_COUNTS;
+    this.cardCounts.dirtyCardsThisCombat = CombatInfo.getCardsPlayedCounts().dirtyCardsThisCombat;
+    isFirstTurn = false;
   }
 
   @Override
   public void atStartOfCombat() {
     this.cardCounts = CombatInfo.RESET_CARDS_PLAYED_COUNTS;
+    this.isFirstTurn = true;
   }
 
   @Override

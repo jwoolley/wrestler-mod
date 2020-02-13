@@ -187,7 +187,7 @@ public class WrestlerCharacter extends CustomPlayer {
     }
 
     public static void setApprovalInfoFromSave(int approvalAmount) {
-        approvalInfo.setApprovalValueFromSave(approvalAmount);
+        approvalInfo.setApprovalEndOfCombatValueFromSave(approvalAmount);
     }
 
     @Override

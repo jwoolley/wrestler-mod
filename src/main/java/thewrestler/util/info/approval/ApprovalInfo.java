@@ -35,9 +35,11 @@ public class ApprovalInfo implements StartOfCombatListener, EndOfCombatListener 
   private final static int HATED_MAX = -10;
 
   private int amount;
+  private int amountEndOfLastCombat;
 
   public ApprovalInfo() {
     this.amount = STARTING_AMOUNT;
+    this.amountEndOfLastCombat = STARTING_AMOUNT;
   }
 
   public final static int APPROVAL_DEFAULT_DELTA = 5;
@@ -78,6 +80,8 @@ public class ApprovalInfo implements StartOfCombatListener, EndOfCombatListener 
         cards.forEach(AbstractApprovalListener::onBecomeLiked);
       }
     }
+
+    this.amountEndOfLastCombat = this.amount;
   }
 
   public void decreaseApproval(boolean isEndOfTurnChange) {
@@ -118,10 +122,16 @@ public class ApprovalInfo implements StartOfCombatListener, EndOfCombatListener 
         cards.forEach(AbstractApprovalListener::onBecomeDisliked);
       }
     }
+
+    this.amountEndOfLastCombat = this.amount;
   }
 
   public int getApprovalAmount() {
     return this.amount;
+  }
+
+  public int getApprovalAtEndOfCombat() {
+    return this.amountEndOfLastCombat;
   }
 
   private boolean _isLiked() {
@@ -173,6 +183,10 @@ public class ApprovalInfo implements StartOfCombatListener, EndOfCombatListener 
     return hasApprovalInfo() && WrestlerCharacter.getApprovalInfo()._isDisliked();
   }
 
+  public static boolean isAmountUnpopular(int amount) {
+    return amount < 0;
+  }
+
   public static boolean isAdmired() {
     return hasApprovalInfo() && WrestlerCharacter.getApprovalInfo()._isAdmired();
   }
@@ -198,16 +212,17 @@ public class ApprovalInfo implements StartOfCombatListener, EndOfCombatListener 
   }
 
   public void reset() {
-    this.amount = 0;
+    this.amount = STARTING_AMOUNT;
+    this.amountEndOfLastCombat = STARTING_AMOUNT;
   }
 
-  public void setApprovalValueFromSave(int amount) {
+  public void setApprovalEndOfCombatValueFromSave(int amount) {
     if (amount > MAX_APPROVAL || amount < MIN_APPROVAL) {
-      WrestlerMod.logger.warn("ApprovalInfo::setApprovalValueFromSave attempted to set invalid value: " + amount + "; setting to 0.");
-      this.amount = 0;
+      WrestlerMod.logger.warn("ApprovalInfo::setApprovalEndOfCombatValueFromSave attempted to set invalid value: " + amount + "; setting to 0.");
+      this.amountEndOfLastCombat = 0;
       return;
     }
-    this.amount = amount;
+    this.amountEndOfLastCombat = amountEndOfLastCombat;
   }
 
   // TODO: does the decrement logic still belong here?
@@ -259,10 +274,14 @@ public class ApprovalInfo implements StartOfCombatListener, EndOfCombatListener 
 
 
   public void atStartOfCombat(){
-    this.amount = 0;
+    this.amount = STARTING_AMOUNT;
+    this.amountEndOfLastCombat = STARTING_AMOUNT;
   }
 
-  public void atEndOfCombat(){ this.amount = 0; }
+  public void atEndOfCombat() {
+    this.amountEndOfLastCombat = amount;
+    this.amount = STARTING_AMOUNT;
+  }
 
   public static List<AbstractCard> getPlayersDirtyCards() {
     final List<AbstractCard> dirtyCards = new ArrayList<>();
@@ -297,13 +316,13 @@ public class ApprovalInfo implements StartOfCombatListener, EndOfCombatListener 
     public Integer onSave() {
       isStartOfRun = false;
       WrestlerMod.logger.info("ApprovalCustomSavable saving value: " + WrestlerCharacter.getApprovalInfo().amount);
-      return WrestlerCharacter.getApprovalInfo().amount;
+      return WrestlerCharacter.getApprovalInfo().amountEndOfLastCombat;
     }
 
     @Override
     public void onLoad(Integer serializedValue) {
-      infoFromSave.approvalFromSave = serializedValue;
-      WrestlerMod.logger.info("Loaded ApprovalCustomSavable from save : " + infoFromSave.approvalFromSave);
+      infoFromSave.approvalEndOfCombatFromSave = serializedValue;
+      WrestlerMod.logger.info("Loaded ApprovalCustomSavable from save : " + infoFromSave.approvalEndOfCombatFromSave);
     }
   }
 
@@ -313,15 +332,15 @@ public class ApprovalInfo implements StartOfCombatListener, EndOfCombatListener 
     if (infoFromSave.hasCompleteData()) {
       WrestlerMod.logger.info("ApprovalCustomSavable::loadSaveData save data found. loading from save");
       WrestlerCharacter.resetApprovalInfo();
-      WrestlerCharacter.setApprovalInfoFromSave(infoFromSave.approvalFromSave);
+      WrestlerCharacter.setApprovalInfoFromSave(infoFromSave.approvalEndOfCombatFromSave);
     }
   }
 
   static class InfoDataFromSave {
-    Integer approvalFromSave;
+    Integer approvalEndOfCombatFromSave;
 
     boolean hasCompleteData() {
-      return approvalFromSave != null;
+      return approvalEndOfCombatFromSave != null;
     }
   }
 
@@ -330,14 +349,14 @@ public class ApprovalInfo implements StartOfCombatListener, EndOfCombatListener 
   private static boolean isStartOfRun = false;
 
   public static boolean isSaveDataValid() {
-    return !isStartOfRun && infoFromSave.approvalFromSave != null;
+    return !isStartOfRun && infoFromSave.approvalEndOfCombatFromSave != null;
   }
 
-  public static int getApprovalFromSave() {
+  public static int getApprovalEndOfCombatFromSave() {
     if (!isSaveDataValid()) {
       return 0;
     } else {
-      return infoFromSave.approvalFromSave;
+      return infoFromSave.approvalEndOfCombatFromSave;
     }
   }
 
