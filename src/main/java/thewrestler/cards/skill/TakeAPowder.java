@@ -30,13 +30,13 @@ public class TakeAPowder extends CustomCard {
   private static final CardTarget TARGET = CardTarget.SELF;
 
   private static final int COST = 2;
-  private static final int UPGRADED_COST = 1;
-  private static final int BUFFER_AMOUNT = 1;
+  private static final int BUFFER_OR_POTION_AMOUNT = 1;
+  private static final int BUFFER_OR_POTION_AMOUNT_UPGRADE = 1;
 
   public TakeAPowder() {
     super(ID, NAME, getCardResourcePath(IMG_PATH), COST, DESCRIPTION, TYPE,
         AbstractCardEnum.THE_WRESTLER_ORANGE, RARITY, TARGET);
-    this. baseMagicNumber = this.magicNumber = BUFFER_AMOUNT;
+    this. baseMagicNumber = this.magicNumber = BUFFER_OR_POTION_AMOUNT;
     this.tags.add(AbstractCard.CardTags.HEALING);
     this.exhaust = true;
   }
@@ -62,7 +62,7 @@ public class TakeAPowder extends CustomCard {
   public void upgrade() {
     if (!this.upgraded) {
       this.upgradeName();
-      this.upgradeBaseCost(UPGRADED_COST);
+      this.upgradeMagicNumber(BUFFER_OR_POTION_AMOUNT_UPGRADE);
       this.initializeDescription();
     }
   }

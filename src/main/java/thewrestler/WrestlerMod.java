@@ -486,6 +486,7 @@ public class WrestlerMod implements
         BaseMod.addCard(new Kayfabe());
         BaseMod.addCard(new LowBlow());
         BaseMod.addCard(new MainEvent());
+        BaseMod.addCard(new Matrix());
         BaseMod.addCard(new Neckbreaker());
         BaseMod.addCard(new NearFall());
         BaseMod.addCard(new OffTheRopes());
@@ -561,6 +562,7 @@ public class WrestlerMod implements
         UnlockTracker.unlockCard(Kayfabe.ID);
         UnlockTracker.unlockCard(LowBlow.ID);
         UnlockTracker.unlockCard(MainEvent.ID);
+        UnlockTracker.unlockCard(Matrix.ID);
         UnlockTracker.unlockCard(NearFall.ID);
         UnlockTracker.unlockCard(Neckbreaker.ID);
         UnlockTracker.unlockCard(OffTheRopes.ID);

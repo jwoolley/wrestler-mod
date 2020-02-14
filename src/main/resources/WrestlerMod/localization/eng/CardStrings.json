@@ -265,6 +265,12 @@
     ]
   },
 
+  "WrestlerMod:Matrix": {
+    "NAME": "Matrix",
+    "DESCRIPTION": "Apply X random debuffs to ALL enemies, then double all enemies' debuffs. NL Exhaust.",
+    "UPGRADE_DESCRIPTION":  "Apply X+1 random debuffs to ALL enemies, then double all enemies' debuffs. NL Exhaust."
+  },
+
   "WrestlerMod:NearFall": {
     "NAME": "Near-Fall",
     "DESCRIPTION": "Exhaust !M!",

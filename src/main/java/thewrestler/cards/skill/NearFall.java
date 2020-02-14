@@ -30,9 +30,9 @@ public class NearFall extends CustomCard {
   private static final CardRarity RARITY = CardRarity.RARE;
   private static final CardTarget TARGET = CardTarget.SELF;
 
-  private static final int COST = 1;
+  private static final int COST = 0;
 
-  private static final int NUM_CARDS_EXHAUST = 2;
+  private static final int NUM_CARDS_EXHAUST = 1;
 
   public NearFall() {
     super(ID, NAME, getCardResourcePath(IMG_PATH), COST, getDescription(true, NUM_CARDS_EXHAUST), TYPE,
