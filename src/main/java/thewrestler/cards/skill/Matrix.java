@@ -16,6 +16,7 @@ import com.megacrit.cardcrawl.ui.panels.EnergyPanel;
 import thewrestler.WrestlerMod;
 import thewrestler.actions.power.ApplyGrappledAction;
 import thewrestler.enums.AbstractCardEnum;
+import thewrestler.powers.GrappledPower;
 import thewrestler.powers.SprainPower;
 import thewrestler.powers.WrestlerShackled;
 import thewrestler.util.CreatureUtils;
@@ -154,8 +155,13 @@ public class Matrix extends CustomCard {
                 AbstractGameAction.AttackEffect.NONE)));
           break;
         case 2:
-          targets.forEach(target ->
-              AbstractDungeon.actionManager.addToBottom(new ApplyGrappledAction(target, source)));
+          // only apply Grappled to one target, and reroll if any target is Grappled already
+          if (targets.stream().noneMatch(t -> t.hasPower(GrappledPower.POWER_ID))) {
+            AbstractMonster target = AbstractDungeon.getRandomMonster();
+            AbstractDungeon.actionManager.addToBottom(new ApplyGrappledAction(target, source));
+          } else {
+            applyRandomDebuff(targets, source);
+          }
           break;
         case 3:
         default:
