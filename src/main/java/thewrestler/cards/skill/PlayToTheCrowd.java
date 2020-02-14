@@ -3,22 +3,20 @@ package thewrestler.cards.skill;
 import basemod.abstracts.CustomCard;
 import com.megacrit.cardcrawl.actions.common.GainBlockAction;
 import com.megacrit.cardcrawl.actions.common.MakeTempCardInHandAction;
+import com.megacrit.cardcrawl.actions.watcher.ChooseOneAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
-import thewrestler.actions.ChooseAndAddFilteredDiscardCardsToHandAction;
-import thewrestler.actions.MoveRandomCardsFromDiscardToHandAction;
-import thewrestler.actions.MoveRandomCardsFromDrawPileToHandAction;
-import thewrestler.cards.AbstractCardWithPreviewCard;
 import thewrestler.cards.colorless.attack.Knee;
+import thewrestler.cards.colorless.skill.KneedAFriend;
+import thewrestler.cards.colorless.skill.Sidestep;
 import thewrestler.enums.AbstractCardEnum;
 import thewrestler.util.info.approval.ApprovalInfo;
 
-import java.util.Arrays;
-import java.util.function.Predicate;
+import java.util.ArrayList;
 
 import static thewrestler.WrestlerMod.getCardResourcePath;
 
@@ -52,16 +50,22 @@ public class PlayToTheCrowd extends CustomCard {
 
   @Override
   public void use(AbstractPlayer p, AbstractMonster m) {
-    if (!ApprovalInfo.isUnpopular()) {
+    if (ApprovalInfo.isPopular()) {
       AbstractDungeon.actionManager.addToBottom(new GainBlockAction(p, p, block));
-    }
-
-    if (!ApprovalInfo.isPopular()) {
+    } else if (ApprovalInfo.isUnpopular()) {
       AbstractCard card = this.cardsToPreview.makeStatEquivalentCopy();
       if (this.upgradeKnee) {
         card.upgrade();
       }
       AbstractDungeon.actionManager.addToBottom(new MakeTempCardInHandAction(card));
+    } else {
+      ArrayList<AbstractCard> options = new ArrayList<>();
+      options.add(new Sidestep());
+      options.add(new KneedAFriend());
+      if (this.upgraded) {
+        options.forEach(c -> c.upgrade());
+      }
+      AbstractDungeon.actionManager.addToBottom(new ChooseOneAction(options));
     }
   }
 
@@ -75,7 +79,6 @@ public class PlayToTheCrowd extends CustomCard {
     if (!this.upgraded) {
       this.upgradeName();
       this.upgradeBlock(BLOCK_UPGRADE);
-
       this.cardsToPreview.upgrade();
       upgradeKnee = true;
       this.rawDescription = cardStrings.UPGRADE_DESCRIPTION;

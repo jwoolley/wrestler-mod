@@ -67,7 +67,7 @@ public class Hammerlock extends AbstractCardWithPreviewCard {
 
   @Override
   public AbstractCard getPreviewCard() {
-    return PREVIEW_CARD;
+    return getBonusCard();
   }
 
   private static AbstractCard getBonusCard() {

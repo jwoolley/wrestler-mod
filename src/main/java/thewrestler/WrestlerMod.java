@@ -473,6 +473,7 @@ public class WrestlerMod implements
         BaseMod.addCard(new Feud());
         BaseMod.addCard(new FloatOver());
         BaseMod.addCard(new FrogSplash());
+        BaseMod.addCard(new FullNelson());
         BaseMod.addCard(new Guillotine());
         BaseMod.addCard(new HairPull());
         BaseMod.addCard(new Hammerlock());
@@ -547,6 +548,7 @@ public class WrestlerMod implements
         UnlockTracker.unlockCard(Feud.ID);
         UnlockTracker.unlockCard(FloatOver.ID);
         UnlockTracker.unlockCard(FrogSplash.ID);
+        UnlockTracker.unlockCard(FullNelson.ID);
         UnlockTracker.unlockCard(Guillotine.ID);
         UnlockTracker.unlockCard(HairPull.ID);
         UnlockTracker.unlockCard(Hammerlock.ID);

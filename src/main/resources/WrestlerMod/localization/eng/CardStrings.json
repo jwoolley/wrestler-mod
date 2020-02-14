@@ -97,6 +97,14 @@
     "DESCRIPTION": "Deal !D! Damage. NL Draw a card. NL Exhaust."
   },
 
+  "WrestlerMod:ElbowGrease": {
+    "NAME": "Elbow Grease",
+    "DESCRIPTION": "Add an ",
+    "EXTENDED_DESCRIPTION": [
+      " to your hand."
+    ]
+  },
+
   "WrestlerMod:EyePoke": {
     "NAME": "Eye Poke",
     "DESCRIPTION": "wrestlermod:Dirty. NL Apply !M! Weak and !M! Vulnerable. NL Exhaust."
@@ -143,6 +151,16 @@
   "WrestlerMod:FrogSplash": {
     "NAME": "Frog Splash",
     "DESCRIPTION": "Deal !D! Damage and apply !M! Weak to ALL enemies. NL Exhaust."
+  },
+
+  "WrestlerMod:FullNelson": {
+    "NAME": "Full Nelson",
+    "DESCRIPTION": "wrestlermod:Dirty. NL Apply wrestlermod:Grappled. NL Draw ",
+    "EXTENDED_DESCRIPTION": [
+      " less card",
+      " less cards",
+      " next turn. NL Exhaust."
+      ]
   },
 
   "WrestlerMod:Guillotine": {
@@ -224,6 +242,14 @@
     "DESCRIPTION": "Ethereal. NL Deal !D! Damage. NL Exhaust."
   },
 
+  "WrestlerMod:KneedAFriend": {
+    "NAME": "Kneed a Friend",
+    "DESCRIPTION": "Add a ",
+    "EXTENDED_DESCRIPTION": [
+      " to your hand."
+    ]
+  },
+
   "WrestlerMod:LowBlow": {
     "NAME": "Low Blow",
     "DESCRIPTION": "Deal !D! Damage. NL If you're wrestlermod:Unpopular at the end of turn, Retain."
@@ -288,8 +314,8 @@
 
   "WrestlerMod:PlayToTheCrowd": {
     "NAME": "Play to the Crowd",
-    "DESCRIPTION": "If wrestlermod:Popular, gain !B! Block. NL If wrestlermod:Unpopular, add a *Knee to your hand. NL If neither, do both.",
-    "UPGRADE_DESCRIPTION":  "If wrestlermod:Popular, gain !B! Block. NL If wrestlermod:Unpopular, add a *Knee+ to your hand. NL If neither, do both."
+    "DESCRIPTION": "If wrestlermod:Popular, gain !B! Block. NL If wrestlermod:Unpopular, add a *Knee to your hand. NL If neither, choose one.",
+    "UPGRADE_DESCRIPTION":  "If wrestlermod:Popular, gain !B! Block. NL If wrestlermod:Unpopular, add a *Knee+ to your hand. NL If neither, choose one."
   },
 
   "WrestlerMod:Powerbomb": {
@@ -376,6 +402,11 @@
   "WrestlerMod:SideRoll": {
     "NAME": "Side Roll",
     "DESCRIPTION": "Gain !B! Block. NL Discard 1 card. NL If you discarded an Attack this way, Draw 1 card."
+  },
+
+  "WrestlerMod:Sidestep": {
+    "NAME": "Sidestep",
+    "DESCRIPTION": "Gain !B! Block."
   },
 
   "WrestlerMod:Screwjob": {

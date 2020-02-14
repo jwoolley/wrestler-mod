@@ -98,7 +98,7 @@ public class DragonGate extends AbstractSignatureMoveCard {
     // TODO: splashy dragon gate effect (two transparent dragons + sinister noise?)
 
     AbstractDungeon.actionManager.addToTop(
-        new VFXAction(new CleanFinishEffect(Color.GOLDENROD.cpy(), "GONG_STRIKE_1", Settings.ACTION_DUR_XFAST)));
+        new VFXAction(new CleanFinishEffect(Color.GOLDENROD.cpy(), "INTIMIDATE", Settings.ACTION_DUR_XFAST)));
 
     AbstractDungeon.actionManager.addToBottom(
         new DragonGateAction(this.magicNumber));
