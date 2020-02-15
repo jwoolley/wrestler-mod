@@ -3,6 +3,7 @@ package thewrestler.cards.skill;
 import basemod.abstracts.CustomCard;
 import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
 import com.megacrit.cardcrawl.actions.common.ObtainPotionAction;
+import com.megacrit.cardcrawl.actions.watcher.ChooseOneAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
@@ -10,8 +11,11 @@ import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.powers.BufferPower;
+import thewrestler.cards.colorless.skill.*;
 import thewrestler.enums.AbstractCardEnum;
 import thewrestler.util.info.approval.ApprovalInfo;
+
+import java.util.ArrayList;
 
 import static thewrestler.WrestlerMod.getCardResourcePath;
 
@@ -43,13 +47,23 @@ public class TakeAPowder extends CustomCard {
 
   @Override
   public void use(AbstractPlayer p, AbstractMonster m) {
-    if (!ApprovalInfo.isUnpopular()) {
+    if (ApprovalInfo.isPopular()) {
       AbstractDungeon.actionManager.addToBottom(
           new ApplyPowerAction(p, p, new BufferPower(p, this.magicNumber), this.magicNumber));
-    }
-
-    if (!ApprovalInfo.isPopular()) {
+    } else if (ApprovalInfo.isUnpopular()) {
       AbstractDungeon.actionManager.addToBottom(new ObtainPotionAction(AbstractDungeon.returnRandomPotion(true)));
+    } else {
+      ArrayList<AbstractCard> options = new ArrayList<>();
+
+      if (this.upgraded) {
+        options.add(new PowderBufferUpgraded());
+        options.add(new PowderHybrid());
+        options.add(new PowderPotionUpgraded());
+      } else {
+        options.add(new PowderBuffer());
+        options.add(new PowderPotion());
+      }
+      AbstractDungeon.actionManager.addToBottom(new ChooseOneAction(options));
     }
   }
 
@@ -63,6 +77,7 @@ public class TakeAPowder extends CustomCard {
     if (!this.upgraded) {
       this.upgradeName();
       this.upgradeMagicNumber(BUFFER_OR_POTION_AMOUNT_UPGRADE);
+      this.rawDescription = cardStrings.UPGRADE_DESCRIPTION;
       this.initializeDescription();
     }
   }

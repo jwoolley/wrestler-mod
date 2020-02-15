@@ -324,6 +324,28 @@
     "UPGRADE_DESCRIPTION":  "If wrestlermod:Popular, gain !B! Block. NL If wrestlermod:Unpopular, add a *Knee+ to your hand. NL If neither, choose one."
   },
 
+  "WrestlerMod:PowderBuffer": {
+    "NAME": "Clutch",
+    "DESCRIPTION": "Gain !M! Buffer.",
+    "EXTENDED_DESCRIPTION": [
+      "Double Clutch"
+    ]
+  },
+
+  "WrestlerMod:PowderHybrid": {
+    "NAME": "Buffer Solution",
+    "DESCRIPTION": "Gain !M! Buffer. NL Gain !M! random potion."
+  },
+
+  "WrestlerMod:PowderPotion": {
+    "NAME": "Bubble",
+    "DESCRIPTION": "Gain !M! random potion.",
+    "EXTENDED_DESCRIPTION": [
+      "Double Bubble",
+      "Gain !M! random potions."
+    ]
+  },
+
   "WrestlerMod:Powerbomb": {
     "NAME": "Power Bomb",
     "DESCRIPTION": "Deal !D! Damage to ALL enemies. NL Apply !M! Vulnerable and ",
@@ -468,7 +490,8 @@
 
   "WrestlerMod:TakeAPowder": {
     "NAME": "Take a Powder",
-    "DESCRIPTION": "If wrestlermod:Popular, gain !M! Buffer. NL If wrestlermod:Unpopular, obtain a random potion. NL If neither, do both. NL Exhaust."
+    "DESCRIPTION": "If wrestlermod:Popular, gain !M! Buffer. NL If wrestlermod:Unpopular, obtain a random potion. NL If neither, choose one. NL Exhaust",
+    "UPGRADE_DESCRIPTION":  "If wrestlermod:Popular, gain !M! Buffer. NL If wrestlermod:Unpopular, obtain !M! random potions. NL If neither, choose either or one of each. NL Exhaust"
   },
 
   "WrestlerMod:TakeToTheMat": {
