@@ -1,6 +1,7 @@
 package thewrestler.cards.skill;
 
 import com.megacrit.cardcrawl.actions.common.GainBlockAction;
+import com.megacrit.cardcrawl.actions.common.MakeTempCardInDiscardAction;
 import com.megacrit.cardcrawl.actions.common.MakeTempCardInDrawPileAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
@@ -30,7 +31,7 @@ public class Hammerlock extends AbstractCardWithPreviewCard {
 
   private static final int BLOCK_AMOUNT = 13;
   private static final int BLOCK_AMOUNT_UPGRADE = 1;
-  private static final int CARD_AMOUNT = 1;
+  private static final int CARD_AMOUNT = 2;
   private static final int CARD_AMOUNT_UPGRADE = 1;
   private static final int COST = 2;
 
@@ -46,7 +47,7 @@ public class Hammerlock extends AbstractCardWithPreviewCard {
     AbstractDungeon.actionManager.addToBottom(new GainBlockAction(p, p, block));
 
     AbstractDungeon.actionManager.addToBottom(
-        new MakeTempCardInDrawPileAction(new Elbow(), this.magicNumber, false, true, false));
+        new MakeTempCardInDiscardAction(new Elbow(), this.magicNumber));
   }
 
   @Override

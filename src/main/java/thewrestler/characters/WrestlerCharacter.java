@@ -27,6 +27,7 @@ import thewrestler.cards.skill.EyePoke;
 import thewrestler.cards.skill.WrestlerDefend;
 import thewrestler.enums.AbstractCardEnum;
 import thewrestler.relics.Headgear;
+import thewrestler.relics.ImprovedHeadgear;
 import thewrestler.relics.RingCard;
 import thewrestler.signaturemoves.cards.SignatureMoveCardEnum;
 import thewrestler.signaturemoves.moveinfos.AbstractSignatureMoveInfo;
@@ -139,7 +140,7 @@ public class WrestlerCharacter extends CustomPlayer {
     // Starting Relics	
     public ArrayList<String> getStartingRelics() {
         ArrayList<String> retVal = new ArrayList<>();
-        retVal.add(Headgear.ID);
+        retVal.add(ImprovedHeadgear.ID);
         retVal.add(RingCard.ID);
         UnlockTracker.markRelicAsSeen(Headgear.ID);
         UnlockTracker.markRelicAsSeen(RingCard.ID);

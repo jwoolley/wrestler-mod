@@ -175,11 +175,11 @@
 
   "WrestlerMod:Hammerlock": {
     "NAME": "Hammerlock",
-    "DESCRIPTION": "Gain !B! Block. NL Put ",
+    "DESCRIPTION": "Gain !B! Block. NL Add ",
     "EXTENDED_DESCRIPTION": [
       "an *Elbow",
       " *Elbows",
-      " on top of your draw pile."
+      " to your discard pile."
     ]
   },
 
@@ -490,8 +490,8 @@
 
   "WrestlerMod:TakeAPowder": {
     "NAME": "Take a Powder",
-    "DESCRIPTION": "If wrestlermod:Popular, gain !M! Buffer. NL If wrestlermod:Unpopular, obtain a random potion. NL If neither, choose one. NL Exhaust",
-    "UPGRADE_DESCRIPTION":  "If wrestlermod:Popular, gain !M! Buffer. NL If wrestlermod:Unpopular, obtain !M! random potions. NL If neither, choose either or one of each. NL Exhaust"
+    "DESCRIPTION": "If wrestlermod:Popular, gain !M! Buffer. NL If wrestlermod:Unpopular, obtain a random potion. NL Otherwise, choose one. NL Exhaust.",
+    "UPGRADE_DESCRIPTION":  "If wrestlermod:Popular, gain !M! Buffer. NL If wrestlermod:Unpopular, obtain !M! random potions. NL Otherwise, gain 1 Buffer and 1 random potion. NL Exhaust."
   },
 
   "WrestlerMod:TakeToTheMat": {

@@ -49,6 +49,8 @@
     "NAME": "Rugged Headgear",
     "FLAVOR": "Improved protection—but you can still only take so many blows to the head.",
     "DESCRIPTIONS": [
+      "Whenever you apply a debuff to an enemy that it doesn't already have, gain #b",
+      " #yBlock.",
       "Replaces #rShabby #rHeadgear. Whenever you apply a debuff to an enemy that it doesn't already have, gain #b",
       " #yBlock."
     ]

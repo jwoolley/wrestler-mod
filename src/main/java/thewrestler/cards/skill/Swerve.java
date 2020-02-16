@@ -29,7 +29,7 @@ public class Swerve extends CustomCard {
 
   private static final int BLOCK_AMOUNT = 6;
   private static final int BLOCK_AMOUNT_UPGRADE = 2;
-  private static final int BLOCK_ON_DISCARD = 2;
+  private static final int BLOCK_ON_DISCARD = 3;
   private static final int BLOCK_ON_DISCARD_UPGRADE = 1;
   private static final int COST = 1;
 

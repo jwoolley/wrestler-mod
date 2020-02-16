@@ -33,7 +33,7 @@ public class TakeAPowder extends CustomCard {
   private static final CardRarity RARITY = CardRarity.RARE;
   private static final CardTarget TARGET = CardTarget.SELF;
 
-  private static final int COST = 2;
+  private static final int COST = 1;
   private static final int BUFFER_OR_POTION_AMOUNT = 1;
   private static final int BUFFER_OR_POTION_AMOUNT_UPGRADE = 1;
 
@@ -53,17 +53,21 @@ public class TakeAPowder extends CustomCard {
     } else if (ApprovalInfo.isUnpopular()) {
       AbstractDungeon.actionManager.addToBottom(new ObtainPotionAction(AbstractDungeon.returnRandomPotion(true)));
     } else {
-      ArrayList<AbstractCard> options = new ArrayList<>();
 
-      if (this.upgraded) {
-        options.add(new PowderBufferUpgraded());
-        options.add(new PowderHybrid());
-        options.add(new PowderPotionUpgraded());
-      } else {
+
+      if (!this.upgraded) {
+        ArrayList<AbstractCard> options = new ArrayList<>();
         options.add(new PowderBuffer());
         options.add(new PowderPotion());
+        AbstractDungeon.actionManager.addToBottom(new ChooseOneAction(options));
+      } else {
+        AbstractDungeon.actionManager.addToBottom(
+            new ApplyPowerAction(p, p, new BufferPower(p, 1),1));
+        AbstractDungeon.actionManager.addToBottom(
+            new ObtainPotionAction(AbstractDungeon.returnRandomPotion(true)));
       }
-      AbstractDungeon.actionManager.addToBottom(new ChooseOneAction(options));
+
+
     }
   }
 

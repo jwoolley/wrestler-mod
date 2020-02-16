@@ -18,14 +18,14 @@ import static thewrestler.WrestlerMod.makeRelicOutlinePath;
 import static thewrestler.WrestlerMod.makeRelicPath;
 
 public class ImprovedHeadgear extends CustomWrestlerRelic {
-  // ID, images, text.
+  // ID, images, tex
   public static final String ID = WrestlerMod.makeID("ImprovedHeadgear");
 
   private static final Texture IMG = TextureLoader.getTexture(makeRelicPath("ruggedheadgear.png"));
   private static final Texture OUTLINE = TextureLoader.getTexture(makeRelicOutlinePath("ruggedheadgear.png"));
 
   public ImprovedHeadgear() {
-    super(ID, IMG, OUTLINE, RelicTier.BOSS, LandingSound.FLAT);
+    super(ID, IMG, OUTLINE, RelicTier.STARTER, LandingSound.FLAT);
   }
 
   private static final int BLOCK_AMOUNT = 3;

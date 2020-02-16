@@ -33,8 +33,8 @@ public class Kayfabe extends CustomCard {
   private static final int ENERGY_AMOUNT = 2;
   private static final int ENERGY_UPGRADE = 1;
 
-  private static final int APPROVAL_GAIN = 10;
-  private static final int APPROVAL_LOSS = 20;
+  private static final int APPROVAL_GAIN = 5;
+  private static final int APPROVAL_LOSS = 10;
 
   public Kayfabe() {
     super(ID, NAME, getCardResourcePath(IMG_PATH), COST, getDescription(ENERGY_AMOUNT), TYPE,
