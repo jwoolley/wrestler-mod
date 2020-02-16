@@ -531,6 +531,11 @@
     ]
   },
 
+  "WrestlerMod:WrestlerDirtyStrike": {
+    "NAME": "Dirty Strike",
+    "DESCRIPTION": "wrestlermod:Dirty. NL Deal !D! Damage."
+  },
+
   "WrestlerMod:WrestlerStrike": {
     "NAME": "Strike",
     "DESCRIPTION": "Deal !D! Damage."

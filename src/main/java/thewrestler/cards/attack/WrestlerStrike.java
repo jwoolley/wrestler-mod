@@ -12,6 +12,7 @@ import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import thewrestler.WrestlerMod;
 import thewrestler.enums.AbstractCardEnum;
+import thewrestler.powers.WrestlerShackled;
 
 import static thewrestler.WrestlerMod.getCardResourcePath;
 // "How come this card extends CustomCard and not DynamicCard like all the rest?"
@@ -29,7 +30,7 @@ public class WrestlerStrike extends CustomCard {
     public static final String ID = WrestlerMod.makeID(WrestlerStrike.class.getSimpleName());
     private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(ID);
 
-    public static final String IMG = getCardResourcePath("Attack.png");
+    public static final String IMG = "Attack.png";
 
     public static final String NAME = cardStrings.NAME;
     public static final String DESCRIPTION = cardStrings.DESCRIPTION;
@@ -42,8 +43,13 @@ public class WrestlerStrike extends CustomCard {
     private static final int COST = 1;
     private static final int DAMAGE = 6;
     private static final int UPGRADE_PLUS_DMG = 3;
+
     public WrestlerStrike() {
-        super(ID, NAME, IMG, COST, DESCRIPTION, TYPE, COLOR, RARITY, TARGET);
+        this(ID, NAME, DESCRIPTION, IMG);
+    }
+
+    public WrestlerStrike(String id, String name, String description, String imgPath) {
+        super(id, name, getCardResourcePath(imgPath), COST, description, TYPE, COLOR, RARITY, TARGET);
         baseDamage = DAMAGE;
         this.tags.add(BaseModCardTags.BASIC_STRIKE);
         this.tags.add(CardTags.STRIKE);

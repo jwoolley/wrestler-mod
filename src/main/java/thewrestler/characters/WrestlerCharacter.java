@@ -22,6 +22,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import thewrestler.WrestlerMod;
 import thewrestler.cards.attack.TakeToTheMat;
+import thewrestler.cards.attack.WrestlerDirtyStrike;
 import thewrestler.cards.attack.WrestlerStrike;
 import thewrestler.cards.skill.EyePoke;
 import thewrestler.cards.skill.WrestlerDefend;
@@ -123,8 +124,8 @@ public class WrestlerCharacter extends CustomPlayer {
 
         retVal.add(WrestlerStrike.ID);
         retVal.add(WrestlerStrike.ID);
-        retVal.add(WrestlerStrike.ID);
-        retVal.add(WrestlerStrike.ID);
+        retVal.add(WrestlerDirtyStrike.ID);
+        retVal.add(WrestlerDirtyStrike.ID);
 
         retVal.add(WrestlerDefend.ID);
         retVal.add(WrestlerDefend.ID);

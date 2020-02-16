@@ -450,6 +450,7 @@ public class WrestlerMod implements
 
         // TODO: rename these
         BaseMod.addCard(new WrestlerStrike());
+        BaseMod.addCard(new WrestlerDirtyStrike());
         BaseMod.addCard(new WrestlerDefend());
 
         BaseMod.addCard(new AlleyOop());
@@ -527,6 +528,7 @@ public class WrestlerMod implements
         // TODO: create "addCardToBasePool" method for cards that begin unlocked
 
         UnlockTracker.unlockCard(WrestlerStrike.ID);
+        UnlockTracker.unlockCard(WrestlerDirtyStrike.ID);
         UnlockTracker.unlockCard(WrestlerDefend.ID);
 
         UnlockTracker.unlockCard(AlleyOop.ID);
