@@ -2,9 +2,9 @@ package thewrestler.powers.unused;
 
 import basemod.interfaces.CloneablePowerInterface;
 import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
-import com.megacrit.cardcrawl.actions.common.ReducePowerAction;
 import com.megacrit.cardcrawl.actions.common.RemoveSpecificPowerAction;
-import com.megacrit.cardcrawl.cards.DamageInfo;
+import com.megacrit.cardcrawl.actions.utility.UseCardAction;
+import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.core.AbstractCreature;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
@@ -13,13 +13,11 @@ import com.megacrit.cardcrawl.powers.AbstractPower;
 import com.megacrit.cardcrawl.powers.DexterityPower;
 import com.megacrit.cardcrawl.powers.StrengthPower;
 import thewrestler.WrestlerMod;
-import thewrestler.actions.power.ApplyGrappledAction;
-import thewrestler.cards.skill.AbstractApprovalListener;
+import thewrestler.cards.skill.AbstractSportsmanshipListener;
 import thewrestler.powers.AbstractWrestlerPower;
-import thewrestler.util.info.CombatInfo;
-import thewrestler.util.info.approval.ApprovalInfo;
+import thewrestler.util.info.sportsmanship.SportsmanshipInfo;
 
-public class CurtainJerkerPower extends AbstractWrestlerPower implements CloneablePowerInterface, AbstractApprovalListener {
+public class CurtainJerkerPower extends AbstractWrestlerPower implements CloneablePowerInterface {
   public static final String POWER_ID = WrestlerMod.makeID("CurtainJerkerPower");
   public static final String IMG = "curtainjerker.png";
   private static final PowerStrings powerStrings;
@@ -30,14 +28,6 @@ public class CurtainJerkerPower extends AbstractWrestlerPower implements Cloneab
 
   public CurtainJerkerPower(AbstractCreature owner, int amount) {
     super(POWER_ID, NAME, IMG, owner, owner, amount, POWER_TYPE);
-  }
-
-
-  @Override
-  public void atStartOfTurn() {
-    if (!ApprovalInfo.isAmateur()) {
-      triggerRemovePower();
-    }
   }
 
 //  @Override
@@ -71,21 +61,13 @@ public class CurtainJerkerPower extends AbstractWrestlerPower implements Cloneab
         new ApplyPowerAction(this.owner, this.owner, new StrengthPower(this.owner, -this.amount), -this.amount));
     AbstractDungeon.actionManager.addToBottom(
         new ApplyPowerAction(this.owner, this.owner, new DexterityPower(this.owner, -this.amount), -this.amount));
+
   }
 
   @Override
-  public void onApprovalChanged(int changeAmount, int newValue, boolean isEndOfTurnChange) {
-    if (changeAmount == 0) {
-      AbstractDungeon.actionManager.addToBottom(new RemoveSpecificPowerAction(this.owner, this.source, ID));
+  public void onUseCard(AbstractCard card, UseCardAction action) {
+    if (card.type == AbstractCard.CardType.POWER) {
+      AbstractDungeon.actionManager.addToTop(new RemoveSpecificPowerAction(this.owner, this.owner, this.ID));
     }
-  }
-  @Override
-  public void onBecomeLiked() {
-
-  }
-
-  @Override
-  public void onBecomeDisliked() {
-
   }
 }

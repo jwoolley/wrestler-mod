@@ -13,11 +13,11 @@ import thewrestler.cards.StartOfCombatListener;
 import thewrestler.characters.WrestlerCharacter;
 import thewrestler.enums.AbstractCardEnum;
 import thewrestler.util.BasicUtils;
-import thewrestler.util.info.approval.ApprovalInfo;
+import thewrestler.util.info.sportsmanship.SportsmanshipInfo;
 
 import static thewrestler.WrestlerMod.getCardResourcePath;
 
-public class Redemption extends CustomCard implements AbstractApprovalListener, StartOfCombatListener {
+public class Redemption extends CustomCard implements AbstractSportsmanshipListener, StartOfCombatListener {
   public static final String ID = "WrestlerMod:Redemption";
   public static final String NAME;
   public static final String DESCRIPTION;
@@ -33,14 +33,11 @@ public class Redemption extends CustomCard implements AbstractApprovalListener, 
   private static final int BLOCK_AMOUNT = 20;
   private static final int BLOCK_AMOUNT_UPGRADE = 6;
   private static final int COST = 2;
-  private static final int DISCOUNT = 1;
-  private static final int APPROVAL_GAIN = 10;
 
   public Redemption() {
-    super(ID, NAME, getCardResourcePath(IMG_PATH), COST, getDescription(DISCOUNT), TYPE, AbstractCardEnum.THE_WRESTLER_ORANGE,
+    super(ID, NAME, getCardResourcePath(IMG_PATH), COST, getDescription(), TYPE, AbstractCardEnum.THE_WRESTLER_ORANGE,
         RARITY, TARGET);
     this.baseBlock = this.block = BLOCK_AMOUNT;
-    this.baseMagicNumber = this.magicNumber = APPROVAL_GAIN;
     calculateCost();
     this.exhaust = true;
   }
@@ -48,13 +45,13 @@ public class Redemption extends CustomCard implements AbstractApprovalListener, 
   @Override
   public void use(AbstractPlayer p, AbstractMonster m) {
     AbstractDungeon.actionManager.addToBottom(new GainBlockAction(p, p, block));
-    WrestlerCharacter.getApprovalInfo().increaseApproval(APPROVAL_GAIN, false);
+    WrestlerCharacter.getSportsmanshipInfo().resetUnsporting(false);
   }
 
   private void calculateCost() {
     if (BasicUtils.isPlayerInCombat()) {
-      if (ApprovalInfo.isUnpopular()) {
-        modifyCostForCombat(-DISCOUNT);
+      if (SportsmanshipInfo.isUnsporting()) {
+        modifyCostForCombat(SportsmanshipInfo.getAmount());
         this.update();
       }
     }
@@ -65,8 +62,8 @@ public class Redemption extends CustomCard implements AbstractApprovalListener, 
     return new Redemption();
   }
 
-  public static String getDescription(int discount) {
-    return DESCRIPTION + StringUtils.repeat(EXTENDED_DESCRIPTION[0], discount) + EXTENDED_DESCRIPTION[1];
+  public static String getDescription() {
+    return DESCRIPTION;
   }
 
   @Override
@@ -86,9 +83,9 @@ public class Redemption extends CustomCard implements AbstractApprovalListener, 
   }
 
   @Override
-  public void onApprovalChanged(int changeAmount, int newValue, boolean isEndOfTurnChange) {
+  public void onUnsportingChanged(int changeAmount, int newValue, boolean isEndOfTurnChange) {
     if (newValue == 0 && changeAmount > 0) {
-      modifyCostForCombat(DISCOUNT);
+      modifyCostForCombat(SportsmanshipInfo.getAmount());
       if (this.cost == COST) {
         this.isCostModified = false;
       }
@@ -96,11 +93,11 @@ public class Redemption extends CustomCard implements AbstractApprovalListener, 
   }
 
   @Override
-  public void onBecomeLiked() { }
+  public void onBecomeSporting() { }
 
   @Override
-  public void onBecomeDisliked() {
-    modifyCostForCombat(-DISCOUNT);
+  public void onBecomeUnsporting() {
+    modifyCostForCombat(-SportsmanshipInfo.getAmount());
   }
 
   @Override

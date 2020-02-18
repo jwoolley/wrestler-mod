@@ -11,9 +11,11 @@ import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.powers.BufferPower;
+import thewrestler.actions.GainGoldAction;
 import thewrestler.cards.colorless.skill.*;
 import thewrestler.enums.AbstractCardEnum;
-import thewrestler.util.info.approval.ApprovalInfo;
+import thewrestler.powers.TemporaryBufferPower;
+import thewrestler.util.info.sportsmanship.SportsmanshipInfo;
 
 import java.util.ArrayList;
 
@@ -33,41 +35,32 @@ public class TakeAPowder extends CustomCard {
   private static final CardRarity RARITY = CardRarity.RARE;
   private static final CardTarget TARGET = CardTarget.SELF;
 
-  private static final int COST = 1;
-  private static final int BUFFER_OR_POTION_AMOUNT = 1;
-  private static final int BUFFER_OR_POTION_AMOUNT_UPGRADE = 1;
+  private static final int COST = 2;
+  private static final int TEMP_BUFFER_AMOUNT = 2;
+  private static final int TEMP_BUFFER_AMOUNT_UPGRADE = 1;
+  private static final int GOLD_AMOUNT = 10;
+
+  private int goldAmount;
 
   public TakeAPowder() {
-    super(ID, NAME, getCardResourcePath(IMG_PATH), COST, DESCRIPTION, TYPE,
+    super(ID, NAME, getCardResourcePath(IMG_PATH), COST, getDescription(GOLD_AMOUNT, false), TYPE,
         AbstractCardEnum.THE_WRESTLER_ORANGE, RARITY, TARGET);
-    this. baseMagicNumber = this.magicNumber = BUFFER_OR_POTION_AMOUNT;
+    this. baseMagicNumber = this.magicNumber = TEMP_BUFFER_AMOUNT;
+    this.goldAmount = GOLD_AMOUNT;
     this.tags.add(AbstractCard.CardTags.HEALING);
     this.exhaust = true;
   }
 
   @Override
   public void use(AbstractPlayer p, AbstractMonster m) {
-    if (ApprovalInfo.isPopular()) {
+    if (SportsmanshipInfo.isSporting()) {
       AbstractDungeon.actionManager.addToBottom(
-          new ApplyPowerAction(p, p, new BufferPower(p, this.magicNumber), this.magicNumber));
-    } else if (ApprovalInfo.isUnpopular()) {
-      AbstractDungeon.actionManager.addToBottom(new ObtainPotionAction(AbstractDungeon.returnRandomPotion(true)));
+          new ApplyPowerAction(p, p, new TemporaryBufferPower(p, this.magicNumber), this.magicNumber));
     } else {
-
-
-      if (!this.upgraded) {
-        ArrayList<AbstractCard> options = new ArrayList<>();
-        options.add(new PowderBuffer());
-        options.add(new PowderPotion());
-        AbstractDungeon.actionManager.addToBottom(new ChooseOneAction(options));
-      } else {
-        AbstractDungeon.actionManager.addToBottom(
-            new ApplyPowerAction(p, p, new BufferPower(p, 1),1));
-        AbstractDungeon.actionManager.addToBottom(
-            new ObtainPotionAction(AbstractDungeon.returnRandomPotion(true)));
+      AbstractDungeon.actionManager.addToBottom(new GainGoldAction(this.goldAmount));
+      if (this.upgraded) {
+        AbstractDungeon.actionManager.addToBottom(new ObtainPotionAction(AbstractDungeon.returnRandomPotion(true)));
       }
-
-
     }
   }
 
@@ -80,10 +73,18 @@ public class TakeAPowder extends CustomCard {
   public void upgrade() {
     if (!this.upgraded) {
       this.upgradeName();
-      this.upgradeMagicNumber(BUFFER_OR_POTION_AMOUNT_UPGRADE);
+      this.upgradeMagicNumber(TEMP_BUFFER_AMOUNT_UPGRADE);
       this.rawDescription = cardStrings.UPGRADE_DESCRIPTION;
+      this.rawDescription = getDescription(this.goldAmount, true);
       this.initializeDescription();
     }
+  }
+
+
+  private static String getDescription(int goldAmount, boolean isUpgraded) {
+    return DESCRIPTION + goldAmount
+        + (!isUpgraded ? EXTENDED_DESCRIPTION[0] :  EXTENDED_DESCRIPTION[1])
+        + EXTENDED_DESCRIPTION[2];
   }
 
   static {

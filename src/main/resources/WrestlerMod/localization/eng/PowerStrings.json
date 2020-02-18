@@ -14,7 +14,7 @@
   "WrestlerMod:CurtainJerkerPower": {
     "NAME": "Curtain Jerker",
     "DESCRIPTIONS": [
-      "The next time you gain or lose #yFan #yApproval, lose #b",
+      "The next time you play a power, lose #b",
       " #yStrength and #b",
       " #yDexterity."
     ]
@@ -175,8 +175,8 @@
   "WrestlerMod:TarnishedReputationPower": {
     "NAME": "Tarnished Reputation",
     "DESCRIPTIONS": [
-      "At the start of your next turn, lose #b",
-      " #yFan #yApproval."
+      "At the start of your next turn, gain #b",
+      " #Unsporting."
     ]
   },
 

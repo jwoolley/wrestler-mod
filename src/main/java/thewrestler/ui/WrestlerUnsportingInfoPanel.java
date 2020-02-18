@@ -20,14 +20,14 @@ import thewrestler.cards.StartOfCombatListener;
 import thewrestler.characters.WrestlerCharacter;
 import thewrestler.util.BasicUtils;
 import thewrestler.util.TextureLoader;
-import thewrestler.util.info.approval.ApprovalInfo;
+import thewrestler.util.info.sportsmanship.SportsmanshipInfo;
 
 import java.util.*;
 import java.util.stream.Collectors;
 
-// TODO: VFX/SFX when approval changes (e.g. red or green border flash)
+// TODO: VFX/SFX when sportsmanship changes (e.g. red or green border flash)
 
-public class WrestlerApprovalInfoPanel implements CustomInfoPanel, StartOfCombatListener, EndOfCombatListener {
+public class WrestlerUnsportingInfoPanel implements CustomInfoPanel, StartOfCombatListener, EndOfCombatListener {
   private static final String[] TEXT;
 
   private static final float WIDTH = 290;
@@ -38,21 +38,21 @@ public class WrestlerApprovalInfoPanel implements CustomInfoPanel, StartOfCombat
   private static final float Y_TEXT_OFFSET_WIDESCREEN = HEIGHT - 20;
   private static final float Y_TEXT_OFFSET = Y_TEXT_OFFSET_WIDESCREEN + 0;
   private static final float TOOLTIP_X_OFFSET = WIDTH + 16.0F;
-  private static final float TOOLTIP_Y_OFFSET = -(HEIGHT + 64.0f);
+  private static final float TOOLTIP_Y_OFFSET = -(HEIGHT + 180.0f);
 
-  private static final String UI_NAME = WrestlerMod.makeID("ApprovalInfoPanel");
-  private static final String BACKGROUND_TEXTURE_PATH = UiHelper.getUiImageResourcePath("approvalinfopanel/background.png");
+  private static final String UI_NAME = WrestlerMod.makeID("SportsmanshipInfoPanel");
+  private static final String BACKGROUND_TEXTURE_PATH = UiHelper.getUiImageResourcePath("sportsmanshipinfopanel/background.png");
 
   private static final BitmapFont INFO_HEADER_FONT = FontHelper.charDescFont;
   private static final BitmapFont INFO_FONT = FontHelper.losePowerFont;
   private static final Color INFO_HEADER_COLOR = Color.valueOf("992200ff");
 
-  private static final Color NEGATIVE_APPROVAL_COLOR = Settings.RED_TEXT_COLOR.cpy();
-  private static final Color NEUTRAL_APPROVAL_COLOR = Color.WHITE.cpy();
-  private static final Color POSITIVE_APPROVAL_COLOR = Settings.GREEN_TEXT_COLOR.cpy();
+  private static final Color NEGATIVE_UNSPORTING_COLOR = Settings.GREEN_TEXT_COLOR.cpy();
+  private static final Color NEUTRAL_UNSPORTING_COLOR = Color.WHITE.cpy();
+  private static final Color POSITIVE_UNSPORTING_COLOR = Settings.RED_TEXT_COLOR.cpy();
 
   private static final List<String> keywordList = Arrays.asList(
-      ApprovalInfo.APPROVAL_KEYWORD_ID, ApprovalInfo.CLEAN_FIGHTING_KEYWORD_ID, ApprovalInfo.DIRTY_KEYWORD_ID);
+      SportsmanshipInfo.SPORTSMANSHIP_KEYWORD_ID, SportsmanshipInfo.UNSPORTING_KEYWORD_ID, SportsmanshipInfo.DIRTY_KEYWORD_ID);
 
   private static final List<Keyword> baseGameKeywordList = new ArrayList<>();
   private ArrayList<PowerTip> keywordPowerTips;
@@ -65,10 +65,10 @@ public class WrestlerApprovalInfoPanel implements CustomInfoPanel, StartOfCombat
   private final int yTextOffset;
   private Hitbox hb;
 
-  private boolean updateApprovalValueFlag = false;
-  private int approvalValue;
+  private boolean updateUnsportingValueFlag = false;
+  private int unsportingValue;
 
-  public WrestlerApprovalInfoPanel() {
+  public WrestlerUnsportingInfoPanel() {
     this.uiName = UI_NAME;
     this.backgroundImgPath = BACKGROUND_TEXTURE_PATH;
 
@@ -81,14 +81,14 @@ public class WrestlerApprovalInfoPanel implements CustomInfoPanel, StartOfCombat
 
     this.hb = new Hitbox(WIDTH * SettingsHelper.getScaleX(), HEIGHT * SettingsHelper.getScaleY());
     hb.translate(xOffset, yOffset);
-    this.approvalValue = 0;
+    this.unsportingValue = 0;
   }
 
   @Override
   public void update() {
     this.hb.update();
-    if (updateApprovalValueFlag) {
-      this.approvalValue = WrestlerCharacter.getApprovalInfo().getApprovalAmount();
+    if (updateUnsportingValueFlag) {
+      this.unsportingValue = WrestlerCharacter.getSportsmanshipInfo().getUnsportingAmount();
     }
   }
 
@@ -120,18 +120,18 @@ public class WrestlerApprovalInfoPanel implements CustomInfoPanel, StartOfCombat
     final BitmapFont headerFont = INFO_HEADER_FONT;
     final BitmapFont font = INFO_FONT;
     final Color headerColor = INFO_HEADER_COLOR;
-    final Color color = this.approvalValue > 0
-        ? POSITIVE_APPROVAL_COLOR
-        : (this.approvalValue < 0 ? NEGATIVE_APPROVAL_COLOR : NEUTRAL_APPROVAL_COLOR);
+    final Color color = this.unsportingValue > 0
+        ? POSITIVE_UNSPORTING_COLOR
+        : (this.unsportingValue < 0 ? NEGATIVE_UNSPORTING_COLOR : NEUTRAL_UNSPORTING_COLOR);
 
     final int yLineOffset = (int)(INFO_FONT.getLineHeight() * (Settings.isSixteenByTen ? 1.05f : 0.95f));
 
-    final double amountTextWidth = INFO_FONT.getSpaceWidth()
-        * (2.5f * (this.approvalValue == 0 ? 1 : Math.floor(Math.log10(Math.abs(this.approvalValue))) + 1));
+    final String separatorString = "/";
 
-    final float negativeSignTextWidth =  INFO_FONT.getSpaceWidth() * (this.approvalValue < 0 ? 1 : 0);
+    final double amountTextWidth = INFO_FONT.getSpaceWidth() * 0.75f;
+    final float negativeSignTextWidth =  INFO_FONT.getSpaceWidth() * (float)(this.unsportingValue < 0 ? 1 : 0);
 
-    final int xApprovalTextOffset =
+    final int xUnsportingTextOffset =
         (int)((this.hb.width - (amountTextWidth + negativeSignTextWidth))/2.0f);
 
     FontHelper.renderFontLeft(
@@ -144,8 +144,8 @@ public class WrestlerApprovalInfoPanel implements CustomInfoPanel, StartOfCombat
 
     FontHelper.renderFontLeft(
         sb,
-        font, this.approvalValue + "",
-        this.xOffset + xApprovalTextOffset,
+        font, this.unsportingValue + separatorString + SportsmanshipInfo.MAX_UNSPORTING,
+        this.xOffset + xUnsportingTextOffset,
         this.yOffset + this.yTextOffset - (yLineOffset * 1.035f),
         color);
   }
@@ -164,23 +164,23 @@ public class WrestlerApprovalInfoPanel implements CustomInfoPanel, StartOfCombat
 
   }
 
-  private void refreshApprovalAmount() {
-    this.updateApprovalValueFlag = true;
+  private void refreshUnsportingAmount() {
+    this.updateUnsportingValueFlag = true;
   }
 
   @Override
-  public void atEndOfTurn() { refreshApprovalAmount(); }
+  public void atEndOfTurn() { refreshUnsportingAmount(); }
 
   @Override
-  public void atStartOfCombat() { refreshApprovalAmount(); }
+  public void atStartOfCombat() { refreshUnsportingAmount(); }
 
   @Override
   public void onCardUsed(AbstractCard card) {
-    refreshApprovalAmount();
+    refreshUnsportingAmount();
   }
 
                          @Override
-  public void atEndOfCombat() { refreshApprovalAmount(); }
+  public void atEndOfCombat() { refreshUnsportingAmount(); }
 
   private ArrayList<PowerTip> getPowerTips() {
     if (keywordPowerTips == null) {

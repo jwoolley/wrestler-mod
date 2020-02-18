@@ -47,14 +47,14 @@ import thewrestler.signaturemoves.cards.Chokeslam;
 import thewrestler.signaturemoves.cards.DragonGate;
 import thewrestler.signaturemoves.cards.Piledriver;
 import thewrestler.signaturemoves.moveinfos.AbstractSignatureMoveInfo;
-import thewrestler.ui.WrestlerApprovalInfoPanel;
+import thewrestler.ui.WrestlerUnsportingInfoPanel;
 import thewrestler.ui.WrestlerCombatInfoPanel;
 import thewrestler.ui.WrestlerSignatureMovePanel;
 import thewrestler.util.BasicUtils;
 import thewrestler.util.IDCheckDontTouchPls;
 import thewrestler.util.TextureLoader;
 import thewrestler.util.info.CombatInfo;
-import thewrestler.util.info.approval.ApprovalInfo;
+import thewrestler.util.info.sportsmanship.SportsmanshipInfo;
 import thewrestler.variables.DefaultCustomVariable;
 import thewrestler.variables.DefaultSecondMagicNumber;
 
@@ -144,7 +144,7 @@ public class WrestlerMod implements
     private static Map<String, Keyword> keywords;
 
 
-    public static WrestlerApprovalInfoPanel approvalInfoPanel;
+    public static WrestlerUnsportingInfoPanel SportsmanshipInfoPanel;
     public static WrestlerCombatInfoPanel combatInfoPanel;
     public static WrestlerSignatureMovePanel signatureMovePanel;
 
@@ -409,10 +409,12 @@ public class WrestlerMod implements
         // This adds a character specific relic. Only when you play with the mentioned color, will you get this relic.
         BaseMod.addRelicToCustomPool(new Headgear(), AbstractCardEnum.THE_WRESTLER_ORANGE);
         BaseMod.addRelicToCustomPool(new ImprovedHeadgear(), AbstractCardEnum.THE_WRESTLER_ORANGE);
-        BaseMod.addRelicToCustomPool(new RingCard(), AbstractCardEnum.THE_WRESTLER_ORANGE);
+        BaseMod.addRelicToCustomPool(new PenaltyCard(), AbstractCardEnum.THE_WRESTLER_ORANGE);
 
         BaseMod.addRelicToCustomPool(new BrutesTrophy(), AbstractCardEnum.THE_WRESTLER_ORANGE);
-        BaseMod.addRelicToCustomPool(new FightCard(), AbstractCardEnum.THE_WRESTLER_ORANGE);
+
+        // TODO: fix this or remove it
+        //  BaseMod.addRelicToCustomPool(new FightCard(), AbstractCardEnum.THE_WRESTLER_ORANGE);
         BaseMod.addRelicToCustomPool(new PeoplesCrown(), AbstractCardEnum.THE_WRESTLER_ORANGE);
 
         BaseMod.addRelicToCustomPool(new LuckyTrunks(), AbstractCardEnum.THE_WRESTLER_ORANGE);
@@ -617,7 +619,7 @@ public class WrestlerMod implements
         BaseMod.addSaveField(AbstractSignatureMoveInfo.SIGNATURE_UPGRADE_SAVABLE_KEY,
             AbstractSignatureMoveInfo.getUpgradeSavable());
 
-        BaseMod.addSaveField(ApprovalInfo.APPROVAL_SAVABLE_KEY, ApprovalInfo.getApprovalSavable());
+        BaseMod.addSaveField(SportsmanshipInfo.UNSPORTING_SAVABLE_KEY, SportsmanshipInfo.getUnsportingSavable());
     }
 
     // There are better ways to do this than listing every single individual card, but I do not want to complicate things
@@ -745,7 +747,7 @@ public class WrestlerMod implements
 
     @Override
     public void receiveStartGame() {
-        approvalInfoPanel = new WrestlerApprovalInfoPanel();
+        SportsmanshipInfoPanel = new WrestlerUnsportingInfoPanel();
         combatInfoPanel = new WrestlerCombatInfoPanel();
         signatureMovePanel = new WrestlerSignatureMovePanel();
         logger.info("WresterMod:receiveStartGame called");
@@ -758,9 +760,9 @@ public class WrestlerMod implements
         }
 
         if (BasicUtils.isPlayingAsWrestler()) {
-            WrestlerCharacter.initializeApprovalInfo();
-            if (ApprovalInfo.isSaveDataValid()) {
-                WrestlerCharacter.setApprovalInfoFromSave(ApprovalInfo.getApprovalEndOfCombatFromSave());
+            WrestlerCharacter.initializeSportsmanshipInfo();
+            if (SportsmanshipInfo.isSaveDataValid()) {
+                WrestlerCharacter.setSportsmanShipInfoFromSave(SportsmanshipInfo.getUnsportingEndOfCombatFromSave());
             }
         }
     }
@@ -770,10 +772,10 @@ public class WrestlerMod implements
         if (BasicUtils.isPlayingAsWrestler()) {
             OnApplyPowerPatchInsert.powerActionList.clear();
             combatInfoPanel.atStartOfCombat();
-            approvalInfoPanel.atEndOfCombat();
+            SportsmanshipInfoPanel.atEndOfCombat();
             signatureMovePanel.atStartOfCombat();
             WrestlerCharacter.getSignatureMoveInfo().atStartOfCombat();
-            WrestlerCharacter.getApprovalInfo().atStartOfCombat();
+            WrestlerCharacter.getSportsmanshipInfo().atStartOfCombat();
             CombatInfo.atStartOfCombat();
         }
 
@@ -785,38 +787,38 @@ public class WrestlerMod implements
     public void receiveCardUsed(AbstractCard abstractCard) {
         combatInfoPanel.updateCardCounts();
         signatureMovePanel.onCardUsed(abstractCard);
-        approvalInfoPanel.onCardUsed(abstractCard);
-        WrestlerCharacter.getApprovalInfo().onCardUsed(abstractCard);
+        SportsmanshipInfoPanel.onCardUsed(abstractCard);
+        WrestlerCharacter.getSportsmanshipInfo().onCardUsed(abstractCard);
     }
 
     @Override
     public void receivePostEnergyRecharge() {
-        approvalInfoPanel.atStartOfTurn();
+        SportsmanshipInfoPanel.atStartOfTurn();
         combatInfoPanel.atStartOfTurn();
         signatureMovePanel.atStartOfTurn();
         WrestlerCharacter.getSignatureMoveInfo().atStartOfTurn();
-        WrestlerCharacter.getApprovalInfo().atStartOfTurn();
+        WrestlerCharacter.getSportsmanshipInfo().atStartOfTurn();
         CombatInfo.atStartOfTurn();
     }
 
     @Override
     public void receivePostBattle(AbstractRoom abstractRoom) {
-        approvalInfoPanel.atEndOfCombat();
+        SportsmanshipInfoPanel.atEndOfCombat();
         combatInfoPanel.atEndOfCombat();
         signatureMovePanel.atEndOfCombat();
         WrestlerCharacter.getSignatureMoveInfo().atEndOfCombat();
-        WrestlerCharacter.getApprovalInfo().atEndOfCombat();
+        WrestlerCharacter.getSportsmanshipInfo().atEndOfCombat();
         CombatInfo.atEndOfCombat();
     }
 
     public static void atEndOfPlayerTurn() {
         WrestlerCharacter.getSignatureMoveInfo().atEndOfTurn();
-        WrestlerCharacter.getApprovalInfo().atEndOfTurn();
+        WrestlerCharacter.getSportsmanshipInfo().atEndOfTurn();
     }
 
     @Override
     public boolean receivePreMonsterTurn(AbstractMonster abstractMonster) {
-        approvalInfoPanel.atEndOfTurn();
+        SportsmanshipInfoPanel.atEndOfTurn();
         combatInfoPanel.atEndOfTurn();
         signatureMovePanel.atEndOfTurn();
         return true;
@@ -833,8 +835,8 @@ public class WrestlerMod implements
     @Override
     public void receivePostCreateStartingDeck(AbstractPlayer.PlayerClass playerClass, CardGroup cardGroup) {
         AbstractSignatureMoveInfo.resetForNewRun();
-        ApprovalInfo.resetForNewRun();
-        WrestlerCharacter.resetApprovalInfo();
+        SportsmanshipInfo.resetForNewRun();
+        WrestlerCharacter.resetSportsmanshipInfo();
     }
 
     @Override

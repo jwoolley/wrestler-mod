@@ -10,11 +10,11 @@ import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import thewrestler.cards.StartOfCombatListener;
 import thewrestler.enums.AbstractCardEnum;
-import thewrestler.util.info.approval.ApprovalInfo;
+import thewrestler.util.info.sportsmanship.SportsmanshipInfo;
 
 import static thewrestler.WrestlerMod.getCardResourcePath;
 
-public class Pinfall extends CustomCard implements AbstractApprovalListener, StartOfCombatListener {
+public class Pinfall extends CustomCard implements AbstractSportsmanshipListener, StartOfCombatListener {
   public static final String ID = "WrestlerMod:Pinfall";
   public static final String NAME;
   public static final String DESCRIPTION;
@@ -35,7 +35,7 @@ public class Pinfall extends CustomCard implements AbstractApprovalListener, Sta
     super(ID, NAME, getCardResourcePath(IMG_PATH), COST, getDescription(), TYPE, AbstractCardEnum.THE_WRESTLER_ORANGE,
         RARITY, TARGET);
     this.baseBlock = this.block = BLOCK_AMOUNT;
-    this.selfRetain = ApprovalInfo.isPopular();
+    this.selfRetain = SportsmanshipInfo.isSporting();
   }
 
   @Override
@@ -78,28 +78,28 @@ public class Pinfall extends CustomCard implements AbstractApprovalListener, Sta
 
   @Override
   public void atStartOfCombat() {
-    this.selfRetain = ApprovalInfo.isPopular();
+    this.selfRetain = SportsmanshipInfo.isSporting();
   }
 
   @Override
   public void atTurnStartPreDraw() {
-    this.selfRetain = ApprovalInfo.isPopular();
+    this.selfRetain = SportsmanshipInfo.isSporting();
   }
 
   @Override
-  public void onApprovalChanged(int changeAmount, int newValue, boolean isEndOfTurnChange) {
+  public void onUnsportingChanged(int changeAmount, int newValue, boolean isEndOfTurnChange) {
     if (!isEndOfTurnChange || isEndOfTurnChange) {
-      this.selfRetain = ApprovalInfo.isPopular();
+      this.selfRetain = SportsmanshipInfo.isSporting();
     }
   }
 
   @Override
-  public void onBecomeLiked() {
+  public void onBecomeSporting() {
 
   }
 
   @Override
-  public void onBecomeDisliked() {
+  public void onBecomeUnsporting() {
 
   }
 }

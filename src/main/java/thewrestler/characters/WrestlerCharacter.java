@@ -29,11 +29,12 @@ import thewrestler.cards.skill.WrestlerDefend;
 import thewrestler.enums.AbstractCardEnum;
 import thewrestler.relics.Headgear;
 import thewrestler.relics.ImprovedHeadgear;
+import thewrestler.relics.PenaltyCard;
 import thewrestler.relics.RingCard;
 import thewrestler.signaturemoves.cards.SignatureMoveCardEnum;
 import thewrestler.signaturemoves.moveinfos.AbstractSignatureMoveInfo;
 import thewrestler.signaturemoves.upgrades.SignatureMoveUpgradeList;
-import thewrestler.util.info.approval.ApprovalInfo;
+import thewrestler.util.info.sportsmanship.SportsmanshipInfo;
 
 import java.util.ArrayList;
 import java.util.Random;
@@ -58,7 +59,7 @@ public class WrestlerCharacter extends CustomPlayer {
     public static final int CARD_DRAW = 5;
     public static final int ORB_SLOTS = 0;
 
-    public static final int STARTING_APPROVAL = 0;
+    public static final int STARTING_UNSPORTING = 0;
 
     private static final String ID = makeID("TheWrestler"); // needs to be the key from CharacterStrings.json
     private static final CharacterStrings characterStrings = CardCrawlGame.languagePack.getCharacterString(ID);
@@ -89,7 +90,7 @@ public class WrestlerCharacter extends CustomPlayer {
 
     // custom metadata
     private static AbstractSignatureMoveInfo signatureMoveInfo;
-    private static ApprovalInfo approvalInfo;
+    private static SportsmanshipInfo sportsmanshipInfo;
 
     public WrestlerCharacter(String name, PlayerClass setClass) {
         super(name, setClass, orbTextures,
@@ -142,9 +143,9 @@ public class WrestlerCharacter extends CustomPlayer {
     public ArrayList<String> getStartingRelics() {
         ArrayList<String> retVal = new ArrayList<>();
         retVal.add(ImprovedHeadgear.ID);
-        retVal.add(RingCard.ID);
+        retVal.add(PenaltyCard.ID);
         UnlockTracker.markRelicAsSeen(Headgear.ID);
-        UnlockTracker.markRelicAsSeen(RingCard.ID);
+        UnlockTracker.markRelicAsSeen(PenaltyCard.ID);
         return retVal;
     }
 
@@ -166,30 +167,30 @@ public class WrestlerCharacter extends CustomPlayer {
     }
 
 
-    public static boolean hasApprovalInfo() {
-        return approvalInfo != null;
+    public static boolean hasSportsmanshipInfo() {
+        return sportsmanshipInfo != null;
     }
 
-    public static ApprovalInfo getApprovalInfo() {
-        return approvalInfo != null ? approvalInfo : new ApprovalInfo();
+    public static SportsmanshipInfo getSportsmanshipInfo() {
+        return sportsmanshipInfo != null ? sportsmanshipInfo : new SportsmanshipInfo();
     }
 
 
-    public static void resetApprovalInfo() {
-        if (hasApprovalInfo()) {
-            approvalInfo.reset();
+    public static void resetSportsmanshipInfo() {
+        if (hasSportsmanshipInfo()) {
+            sportsmanshipInfo.reset();
         } else {
-            initializeApprovalInfo();
+            initializeSportsmanshipInfo();
         }
     }
 
-    public static ApprovalInfo initializeApprovalInfo() {
-        approvalInfo = new ApprovalInfo();
-        return approvalInfo;
+    public static SportsmanshipInfo initializeSportsmanshipInfo() {
+        sportsmanshipInfo = new SportsmanshipInfo();
+        return sportsmanshipInfo;
     }
 
-    public static void setApprovalInfoFromSave(int approvalAmount) {
-        approvalInfo.setApprovalEndOfCombatValueFromSave(approvalAmount);
+    public static void setSportsmanShipInfoFromSave(int unsportingAmount) {
+        // sportsmanshipInfo.setUnsportingEndOfCombatValueFromSave(unsportingAmount);
     }
 
     @Override

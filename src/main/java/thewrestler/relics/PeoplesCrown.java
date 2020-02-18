@@ -7,10 +7,7 @@ import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.Keyword;
 import com.megacrit.cardcrawl.powers.DexterityPower;
 import thewrestler.WrestlerMod;
-import thewrestler.characters.WrestlerCharacter;
-import thewrestler.util.BasicUtils;
 import thewrestler.util.TextureLoader;
-import thewrestler.util.info.approval.ApprovalInfo;
 
 import java.util.Arrays;
 import java.util.List;

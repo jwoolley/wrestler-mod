@@ -3,10 +3,6 @@ package thewrestler.cards.attack;
 import basemod.abstracts.CustomCard;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.common.DamageAction;
-import com.megacrit.cardcrawl.actions.common.DamageAllEnemiesAction;
-import com.megacrit.cardcrawl.actions.common.DrawCardAction;
-import com.megacrit.cardcrawl.actions.common.ModifyDamageAction;
-import com.megacrit.cardcrawl.actions.utility.SFXAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.cards.DamageInfo;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
@@ -15,13 +11,13 @@ import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import thewrestler.cards.StartOfCombatListener;
-import thewrestler.cards.skill.AbstractApprovalListener;
+import thewrestler.cards.skill.AbstractSportsmanshipListener;
 import thewrestler.enums.AbstractCardEnum;
-import thewrestler.util.info.approval.ApprovalInfo;
+import thewrestler.util.info.sportsmanship.SportsmanshipInfo;
 
 import static thewrestler.WrestlerMod.getCardResourcePath;
 
-public class LowBlow extends CustomCard implements AbstractApprovalListener, StartOfCombatListener {
+public class LowBlow extends CustomCard implements AbstractSportsmanshipListener, StartOfCombatListener {
   public static final String ID = "WrestlerMod:LowBlow";
   public static final String NAME;
   public static final String DESCRIPTION;
@@ -42,7 +38,7 @@ public class LowBlow extends CustomCard implements AbstractApprovalListener, Sta
     super(ID, NAME, getCardResourcePath(IMG_PATH), COST, getDescription(), TYPE,
         AbstractCardEnum.THE_WRESTLER_ORANGE, RARITY, TARGET);
     this.baseDamage = this.damage = DAMAGE;
-    this.selfRetain = ApprovalInfo.isUnpopular();
+    this.selfRetain = SportsmanshipInfo.isUnsporting();
   }
 
   @Override
@@ -92,27 +88,27 @@ public class LowBlow extends CustomCard implements AbstractApprovalListener, Sta
 
   @Override
   public void atStartOfCombat() {
-    this.selfRetain = ApprovalInfo.isUnpopular();
+    this.selfRetain = SportsmanshipInfo.isUnsporting();
   }
 
   @Override
   public void atTurnStartPreDraw() {
-    this.selfRetain = ApprovalInfo.isUnpopular();
+    this.selfRetain = SportsmanshipInfo.isUnsporting();
   }
 
   @Override
-  public void onApprovalChanged(int changeAmount, int newValue, boolean isEndOfTurnChange) {
+  public void onUnsportingChanged(int changeAmount, int newValue, boolean isEndOfTurnChange) {
     if (!isEndOfTurnChange) {
-      this.selfRetain = ApprovalInfo.isUnpopular();
+      this.selfRetain = SportsmanshipInfo.isUnsporting();
     }
   }
 
   @Override
-  public void onBecomeLiked() {
+  public void onBecomeSporting() {
 
   }
 
   @Override
-  public void onBecomeDisliked() {
+  public void onBecomeUnsporting() {
   }
 }

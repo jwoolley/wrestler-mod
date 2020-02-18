@@ -5,15 +5,13 @@ import com.megacrit.cardcrawl.actions.common.RelicAboveCreatureAction;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.Keyword;
-import com.megacrit.cardcrawl.relics.AbstractRelic;
-import com.megacrit.cardcrawl.rooms.MonsterRoom;
 import com.megacrit.cardcrawl.rooms.MonsterRoomBoss;
 import com.megacrit.cardcrawl.rooms.MonsterRoomElite;
 import thewrestler.WrestlerMod;
 import thewrestler.characters.WrestlerCharacter;
 import thewrestler.util.BasicUtils;
 import thewrestler.util.TextureLoader;
-import thewrestler.util.info.approval.ApprovalInfo;
+import thewrestler.util.info.sportsmanship.SportsmanshipInfo;
 
 import java.util.Arrays;
 import java.util.List;
@@ -37,16 +35,16 @@ public class RingCard extends CustomWrestlerRelic {
   public boolean shouldRewardGold() {
     return false;
     // DISABLING IN FAVOR OF RELIC REWARD
-    // return BasicUtils.isPlayingAsWrestler() && ApprovalInfo.isUnpopular();
+    // return BasicUtils.isPlayingAsWrestler() && ApprovalInfo.isUnsporting();
   }
 
   private boolean shouldAwardCombatRelic() {
-    if (!WrestlerCharacter.hasApprovalInfo()) {
+    if (!WrestlerCharacter.hasSportsmanshipInfo()) {
       return  false;
     }
     return !(AbstractDungeon.getCurrRoom() instanceof MonsterRoomBoss)
         && !(AbstractDungeon.getCurrRoom() instanceof MonsterRoomElite)
-        && ApprovalInfo.isAmountUnpopular(WrestlerCharacter.getApprovalInfo().getApprovalAtEndOfCombat())
+        && SportsmanshipInfo.isAmountUnpopular(WrestlerCharacter.getSportsmanshipInfo().getUnsportingAtEndOfCombat())
         && AbstractDungeon.relicRng.random(0, 99) < RELIC_PERCENTAGE_CHANCE;
   }
 
@@ -62,7 +60,7 @@ public class RingCard extends CustomWrestlerRelic {
 
   @Override
   public void onVictory() {
-    if (BasicUtils.isPlayingAsWrestler() && ApprovalInfo.isPopular()) {
+    if (BasicUtils.isPlayingAsWrestler() && SportsmanshipInfo.isSporting()) {
       flash();
       AbstractPlayer player = AbstractDungeon.player;
       addToTop(new RelicAboveCreatureAction(player, this));

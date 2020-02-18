@@ -11,10 +11,8 @@ import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.powers.DexterityPower;
 import com.megacrit.cardcrawl.powers.StrengthPower;
 import thewrestler.WrestlerMod;
-import thewrestler.cards.skill.AbstractApprovalListener;
 import thewrestler.enums.AbstractCardEnum;
 import thewrestler.powers.unused.CurtainJerkerPower;
-import thewrestler.util.info.approval.ApprovalInfo;
 
 import static thewrestler.WrestlerMod.getCardResourcePath;
 
@@ -33,7 +31,7 @@ public class CurtainJerker extends CustomCard {
   private static final CardTarget TARGET = CardTarget.NONE;
 
   private static final int COST = 1;
-  private static final int STRENGTH_AND_DEX_GAIN = 1;
+  private static final int STRENGTH_AND_DEX_GAIN = 2;
   private static final int STRENGTH_AND_DEX_GAIN_UPGRADE = 1;
 
   public CurtainJerker() {

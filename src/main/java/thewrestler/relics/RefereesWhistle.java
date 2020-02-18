@@ -1,19 +1,12 @@
 package thewrestler.relics;
 
 import com.badlogic.gdx.graphics.Texture;
-import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
 import com.megacrit.cardcrawl.actions.common.DrawCardAction;
-import com.megacrit.cardcrawl.actions.common.GainEnergyAction;
-import com.megacrit.cardcrawl.actions.common.RelicAboveCreatureAction;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.Keyword;
-import com.megacrit.cardcrawl.powers.DexterityPower;
-import com.megacrit.cardcrawl.powers.StrengthPower;
 import thewrestler.WrestlerMod;
-import thewrestler.characters.WrestlerCharacter;
-import thewrestler.util.BasicUtils;
 import thewrestler.util.TextureLoader;
-import thewrestler.util.info.approval.ApprovalInfo;
+import thewrestler.util.info.sportsmanship.SportsmanshipInfo;
 
 import java.util.Arrays;
 import java.util.List;
@@ -41,7 +34,7 @@ public class RefereesWhistle extends CustomWrestlerRelic {
   }
 
   public void atTurnStart() {
-    if (ApprovalInfo.hasApprovalInfo() && ApprovalInfo.isUnpopular()) {
+    if (SportsmanshipInfo.hasSportsmanshipInfo() && SportsmanshipInfo.isUnsporting()) {
       flash();
       AbstractDungeon.actionManager.addToBottom(new DrawCardAction(CARD_AMOUNT));
     }
@@ -49,7 +42,7 @@ public class RefereesWhistle extends CustomWrestlerRelic {
 
   @Override
   public boolean canSpawn() {
-    return ApprovalInfo.hasApprovalInfo() && !AbstractDungeon.player.hasRelic(LuckyTrunks.ID);
+    return SportsmanshipInfo.hasSportsmanshipInfo() && !AbstractDungeon.player.hasRelic(LuckyTrunks.ID);
   }
 
   @Override

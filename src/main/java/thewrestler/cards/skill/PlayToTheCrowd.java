@@ -14,7 +14,7 @@ import thewrestler.cards.colorless.attack.Knee;
 import thewrestler.cards.colorless.skill.KneedAFriend;
 import thewrestler.cards.colorless.skill.Sidestep;
 import thewrestler.enums.AbstractCardEnum;
-import thewrestler.util.info.approval.ApprovalInfo;
+import thewrestler.util.info.sportsmanship.SportsmanshipInfo;
 
 import java.util.ArrayList;
 
@@ -31,7 +31,7 @@ public class PlayToTheCrowd extends CustomCard {
   private static final CardStrings cardStrings;
 
   private static final CardType TYPE = CardType.SKILL;
-  private static final CardRarity RARITY = CardRarity.COMMON;
+  private static final CardRarity RARITY = CardRarity.UNCOMMON;
   private static final CardTarget TARGET = CardTarget.SELF;
 
   private static final int COST = 0;
@@ -50,22 +50,14 @@ public class PlayToTheCrowd extends CustomCard {
 
   @Override
   public void use(AbstractPlayer p, AbstractMonster m) {
-    if (ApprovalInfo.isPopular()) {
-      AbstractDungeon.actionManager.addToBottom(new GainBlockAction(p, p, block));
-    } else if (ApprovalInfo.isUnpopular()) {
+    if (SportsmanshipInfo.hasSportsmanshipInfo() && SportsmanshipInfo.isUnsporting()) {
       AbstractCard card = this.cardsToPreview.makeStatEquivalentCopy();
       if (this.upgradeKnee) {
         card.upgrade();
       }
-      AbstractDungeon.actionManager.addToBottom(new MakeTempCardInHandAction(card));
+      AbstractDungeon.actionManager.addToBottom(new MakeTempCardInHandAction(card, SportsmanshipInfo.getAmount()));
     } else {
-      ArrayList<AbstractCard> options = new ArrayList<>();
-      options.add(new Sidestep());
-      options.add(new KneedAFriend());
-      if (this.upgraded) {
-        options.forEach(c -> c.upgrade());
-      }
-      AbstractDungeon.actionManager.addToBottom(new ChooseOneAction(options));
+      AbstractDungeon.actionManager.addToBottom(new GainBlockAction(p, p, block));
     }
   }
 

@@ -10,7 +10,8 @@ import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import org.apache.commons.lang3.StringUtils;
-import thewrestler.actions.GainApprovalAction;
+import thewrestler.actions.GainUnsportingAction;
+import thewrestler.actions.LoseUnsportingAction;
 import thewrestler.enums.AbstractCardEnum;
 import thewrestler.powers.TarnishedReputationPower;
 
@@ -33,8 +34,8 @@ public class Kayfabe extends CustomCard {
   private static final int ENERGY_AMOUNT = 2;
   private static final int ENERGY_UPGRADE = 1;
 
-  private static final int APPROVAL_GAIN = 5;
-  private static final int APPROVAL_LOSS = 10;
+  private static final int UNSPORTING_LOSS = 1;
+  private static final int UNSPORTING_GAIN = 2;
 
   public Kayfabe() {
     super(ID, NAME, getCardResourcePath(IMG_PATH), COST, getDescription(ENERGY_AMOUNT), TYPE,
@@ -46,9 +47,9 @@ public class Kayfabe extends CustomCard {
   @Override
   public void use(AbstractPlayer p, AbstractMonster m) {
     AbstractDungeon.actionManager.addToBottom(new GainEnergyAction(this.magicNumber));
-    AbstractDungeon.actionManager.addToBottom(new GainApprovalAction(APPROVAL_GAIN));
+    AbstractDungeon.actionManager.addToBottom(new LoseUnsportingAction(UNSPORTING_LOSS));
     AbstractDungeon.actionManager.addToBottom(
-        new ApplyPowerAction(p, p, new TarnishedReputationPower(APPROVAL_LOSS), APPROVAL_LOSS));
+        new ApplyPowerAction(p, p, new TarnishedReputationPower(UNSPORTING_GAIN), UNSPORTING_GAIN));
   }
 
   @Override
@@ -68,8 +69,8 @@ public class Kayfabe extends CustomCard {
   public static String getDescription(int energyAmount) {
     return DESCRIPTION
         + StringUtils.repeat(EXTENDED_DESCRIPTION[0], energyAmount)
-        + EXTENDED_DESCRIPTION[1] + APPROVAL_GAIN + EXTENDED_DESCRIPTION[2]
-        + EXTENDED_DESCRIPTION[3] + APPROVAL_LOSS + EXTENDED_DESCRIPTION[2]
+        + EXTENDED_DESCRIPTION[1] + UNSPORTING_GAIN + EXTENDED_DESCRIPTION[2]
+        + EXTENDED_DESCRIPTION[3] + UNSPORTING_LOSS + EXTENDED_DESCRIPTION[2]
         + EXTENDED_DESCRIPTION[4];
   }
 

@@ -2,8 +2,7 @@ package thewrestler.cards;
 
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
-import thewrestler.cards.skill.AbstractApprovalListener;
-import thewrestler.util.RefreshHandListener;
+import thewrestler.cards.skill.AbstractSportsmanshipListener;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,13 +16,13 @@ public interface StartOfCombatListener {
 
     AbstractPlayer player = AbstractDungeon.player;
     cards.addAll(player.drawPile.group.stream()
-        .filter(c -> c instanceof AbstractApprovalListener).map(c -> (StartOfCombatListener)c).collect(Collectors.toList()));
+        .filter(c -> c instanceof AbstractSportsmanshipListener).map(c -> (StartOfCombatListener)c).collect(Collectors.toList()));
     cards.addAll(player.hand.group.stream()
-        .filter(c -> c instanceof AbstractApprovalListener).map(c -> (StartOfCombatListener)c).collect(Collectors.toList()));
+        .filter(c -> c instanceof AbstractSportsmanshipListener).map(c -> (StartOfCombatListener)c).collect(Collectors.toList()));
     cards.addAll(player.discardPile.group.stream()
-        .filter(c -> c instanceof AbstractApprovalListener).map(c -> (StartOfCombatListener)c).collect(Collectors.toList()));
+        .filter(c -> c instanceof AbstractSportsmanshipListener).map(c -> (StartOfCombatListener)c).collect(Collectors.toList()));
     cards.addAll(player.exhaustPile.group.stream()
-        .filter(c -> c instanceof AbstractApprovalListener).map(c -> (StartOfCombatListener)c).collect(Collectors.toList()));
+        .filter(c -> c instanceof AbstractSportsmanshipListener).map(c -> (StartOfCombatListener)c).collect(Collectors.toList()));
 
     cards.forEach(StartOfCombatListener::atStartOfCombat);
   }

@@ -4,7 +4,6 @@ import basemod.abstracts.CustomSavable;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.megacrit.cardcrawl.actions.common.RelicAboveCreatureAction;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.core.Settings;
@@ -12,12 +11,11 @@ import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.helpers.FontHelper;
 import com.megacrit.cardcrawl.localization.Keyword;
 import com.megacrit.cardcrawl.relics.AbstractRelic;
-import com.megacrit.cardcrawl.rewards.RewardItem;
 import thewrestler.WrestlerMod;
 import thewrestler.characters.WrestlerCharacter;
 import thewrestler.util.BasicUtils;
 import thewrestler.util.TextureLoader;
-import thewrestler.util.info.approval.ApprovalInfo;
+import thewrestler.util.info.sportsmanship.SportsmanshipInfo;
 
 import java.util.Arrays;
 import java.util.List;
@@ -60,8 +58,10 @@ public class FightCard extends CustomWrestlerRelic implements CustomSavable<Inte
     this.fightRecord = RELIC_USED_KEY;
     this.counter = -1;
 
-    if (WrestlerCharacter.hasApprovalInfo()) {
-      return ApprovalInfo.isAdmired() ? POPULAR_RELIC_REWARD : UNPOPULAR_RELIC_REWARD;
+    if (WrestlerCharacter.hasSportsmanshipInfo()) {
+      // TODO: fix this!
+      return AbstractDungeon.relicRng.randomBoolean() ? POPULAR_RELIC_REWARD : UNPOPULAR_RELIC_REWARD;
+//      return UnsportingInfo.isAdmired() ? POPULAR_RELIC_REWARD : UNPOPULAR_RELIC_REWARD;
     }
 
     return AbstractDungeon.returnRandomRelic(AbstractDungeon.returnRandomRelicTier());
@@ -87,18 +87,19 @@ public class FightCard extends CustomWrestlerRelic implements CustomSavable<Inte
     }
 
     if (!this.usedUp && BasicUtils.isPlayingAsWrestler()
-        && WrestlerCharacter.hasApprovalInfo()) {
+        && WrestlerCharacter.hasSportsmanshipInfo()) {
 
-      ApprovalInfo info = WrestlerCharacter.getApprovalInfo();
+      SportsmanshipInfo info = WrestlerCharacter.getSportsmanshipInfo();
 
-      if (ApprovalInfo.isHated()) {
+      /*
+      if (UnsportingInfo.isHated()) {
         triggerRelicTickEffect();
         if (this.fightRecord > 0) {
           this.fightRecord = -1;
         } else if (this.fightRecord > -THRESHOLD) {
           this.fightRecord--;
         }
-      } else if (ApprovalInfo.isAdmired()) {
+      } else if (UnsportingInfo.isAdmired()) {
         triggerRelicTickEffect();
         if (this.fightRecord < 0) {
           this.fightRecord = 1;
@@ -109,6 +110,7 @@ public class FightCard extends CustomWrestlerRelic implements CustomSavable<Inte
         this.fightRecord = 0;
         this.counter = -1;
       }
+      */
     }
     setCounter(Math.abs(this.fightRecord));
   }

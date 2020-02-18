@@ -74,11 +74,11 @@ public class CombatInfo {
         .filter(c -> c.type == AbstractCard.CardType.POWER).count();
   }
 
-  public static int getDebuffsAppliedThisTurn() {
+  public static int getNumDebuffsAppliedThisTurn() {
     return debuffsAppliedThisTurn;
   }
 
-  public static int getDirtyCardsPlayed() {
+  public static int getNumDirtyCardsPlayed() {
     return dirtyCardsPlayedThisTurn;
   }
 
@@ -88,6 +88,6 @@ public class CombatInfo {
 
   public static CardsPlayedCounts getCardsPlayedCounts() {
     return new CardsPlayedCounts(getNumAttacksPlayed(), getNumSkillsPlayed(), getNumPowersPlayed(),
-        getDebuffsAppliedThisTurn(), getDirtyCardsPlayed(), getNumDirtyCardsPlayedThisCombat());
+        getNumDebuffsAppliedThisTurn(), getNumDirtyCardsPlayed(), getNumDirtyCardsPlayedThisCombat());
   }
 }

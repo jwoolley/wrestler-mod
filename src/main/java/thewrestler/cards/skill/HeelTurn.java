@@ -14,7 +14,7 @@ import com.megacrit.cardcrawl.powers.StrengthPower;
 import thewrestler.cards.WrestlerCardTags;
 import thewrestler.characters.WrestlerCharacter;
 import thewrestler.enums.AbstractCardEnum;
-import thewrestler.util.info.approval.ApprovalInfo;
+import thewrestler.util.info.sportsmanship.SportsmanshipInfo;
 
 import static thewrestler.WrestlerMod.getCardResourcePath;
 
@@ -36,7 +36,7 @@ public class HeelTurn extends CustomCard {
   private static final int INTANGIBLE_AMOUNT = 1;
   private static final int STRENGTH_AMOUNT = 2;
   private static final int STRENGTH_AMOUNT_UPGRADE = 1;
-  private static final int APPROVAL_LOSS = 10;
+  private static final int UNSPORTING_GAIN = 1;
 
   public HeelTurn() {
     super(ID, NAME, getCardResourcePath(IMG_PATH), COST, getDescription(), TYPE,
@@ -48,8 +48,8 @@ public class HeelTurn extends CustomCard {
 
   @Override
   public void use(AbstractPlayer p, AbstractMonster m) {
-    boolean wasLiked = ApprovalInfo.isPopular()
-        || ApprovalInfo.hasApprovalInfo() && ApprovalInfo.getAmount() + ApprovalInfo.APPROVAL_DEFAULT_DELTA > 0;
+    boolean wasSporting = SportsmanshipInfo.isSporting()
+        || SportsmanshipInfo.hasSportsmanshipInfo() && SportsmanshipInfo.getAmount() + 1 > 0;
 
     AbstractDungeon.actionManager.addToBottom(new SFXAction("BOO_CROWD_1"));
 
@@ -59,8 +59,8 @@ public class HeelTurn extends CustomCard {
     AbstractDungeon.actionManager.addToBottom(
         new ApplyPowerAction(p, p, new StrengthPower(p, this.magicNumber), this.magicNumber));
 
-    if (wasLiked) {
-        WrestlerCharacter.getApprovalInfo().decreaseApproval(APPROVAL_LOSS, false);
+    if (wasSporting) {
+        WrestlerCharacter.getSportsmanshipInfo().decreaseUnsporting(UNSPORTING_GAIN, false);
     }
   }
 
@@ -80,7 +80,7 @@ public class HeelTurn extends CustomCard {
   }
 
   public static String getDescription() {
-    return DESCRIPTION + INTANGIBLE_AMOUNT + EXTENDED_DESCRIPTION[0] + APPROVAL_LOSS + EXTENDED_DESCRIPTION[1];
+    return DESCRIPTION + INTANGIBLE_AMOUNT + EXTENDED_DESCRIPTION[0] + UNSPORTING_GAIN + EXTENDED_DESCRIPTION[1];
   }
 
   static {

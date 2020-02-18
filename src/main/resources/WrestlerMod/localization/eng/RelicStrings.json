@@ -60,7 +60,20 @@
     "NAME": "Lucky Trunks",
     "FLAVOR": "Comfortable and flattering. Though perhaps not so lucky for the previous owner.",
     "DESCRIPTIONS": [
-      "At the start of your turn, if you're #yPopular, gain [E] ."
+      "At the start of your turn, if you're #yRespectable, gain [E] ."
+    ]
+  },
+
+
+  "WrestlerMod:PenaltyCard": {
+    "NAME": "Penalty Card",
+    "FLAVOR": "Dignified in its simplicity.",
+    "DESCRIPTIONS": [
+      "At the start of your turn, if you're #yUnderhanded, draw ",
+      "a card",
+      " cards",
+      " and lose ",
+      " HP."
     ]
   },
 
@@ -78,7 +91,7 @@
     "FLAVOR": "Property of association officials. Unauthorized possession will be met with swift punishment.",
 
     "DESCRIPTIONS": [
-      "At the start of your turn, if you're #yUnpopular, draw a card."
+      "At the start of your turn, if you're #yUnderhanded, draw an additional card."
     ]
   },
 
@@ -86,21 +99,9 @@
     "NAME": "Ring Card",
     "FLAVOR": "Discarded from a long-forgotten fight. Except you haven't forgotten.",
     "DESCRIPTIONS": [
-      "At the end of combat, if you're #yPopular, heal #b",
-      " HP. If you're #yUnpopular, normal enemies have a #b",
+      "At the end of combat, if you're #yRespectable, heal #b",
+      " HP. If you're #yUnderhanded, normal enemies have a #b",
       "% chance to award a random common relic."
-    ]
-  },
-
-  "WrestlerMod:RingCard2": {
-    "NAME": "Ring Card",
-    "FLAVOR": "Discarded from a long-forgotten fight. But you haven't forgotten.",
-    "DESCRIPTIONS": [
-      "At the end of combat, if you're #yPopular, heal #b",
-      " HP. If you're #yUnpopular, enemies reward #b",
-      "% more Gold. If you're #yRevered, gain #b",
-      "% less Gold. If you're #yDespised, lost #b",
-      " HP."
     ]
   }
 }
