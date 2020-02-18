@@ -60,16 +60,16 @@
     "NAME": "Lucky Trunks",
     "FLAVOR": "Comfortable and flattering. Though perhaps not so lucky for the previous owner.",
     "DESCRIPTIONS": [
-      "At the start of your turn, if you're #yRespectable, gain [E] ."
+      "At the start of your turn, if you're #ySporting, gain [E] ."
     ]
   },
 
 
   "WrestlerMod:PenaltyCard": {
-    "NAME": "Penalty Card",
-    "FLAVOR": "Dignified in its simplicity.",
+    "NAME": "Referee's Whistle",
+    "FLAVOR": "Property of association officials. Unauthorized possession will be met with swift punishment.",
     "DESCRIPTIONS": [
-      "At the start of your turn, if you're #yUnderhanded, draw ",
+      "At the start of your turn, if you're #yUnsporting, draw ",
       "a card",
       " cards",
       " and lose ",
@@ -91,7 +91,7 @@
     "FLAVOR": "Property of association officials. Unauthorized possession will be met with swift punishment.",
 
     "DESCRIPTIONS": [
-      "At the start of your turn, if you're #yUnderhanded, draw an additional card."
+      "At the start of your turn, if you're #yUnsporting, draw an additional card."
     ]
   },
 
@@ -99,8 +99,8 @@
     "NAME": "Ring Card",
     "FLAVOR": "Discarded from a long-forgotten fight. Except you haven't forgotten.",
     "DESCRIPTIONS": [
-      "At the end of combat, if you're #yRespectable, heal #b",
-      " HP. If you're #yUnderhanded, normal enemies have a #b",
+      "At the end of combat, if you're #ySporting, heal #b",
+      " HP. If you're #yUnsporting, normal enemies have a #b",
       "% chance to award a random common relic."
     ]
   }

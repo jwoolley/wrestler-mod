@@ -14,8 +14,13 @@ public class CustomGlyph {
   private static Map<CustomGlyphEnum, TextureAtlas.AtlasRegion> customGlyphAtlasRegionMap = new HashMap<>();
   private static Map<CustomGlyphEnum, String> customGlyphMap = new HashMap<>();
 
-  private enum CustomGlyphEnum {
+  public enum CustomGlyphEnum {
     PENALTY_CARD;
+  }
+
+  public static CustomGlyph getGlyph(CustomGlyphEnum glyphEnum) {
+    Optional<CustomGlyph> opt = glyphList.stream().filter(g -> g.key.equals(glyphEnum)).findFirst();
+    return opt.orElse(null);
   }
 
   private static final List<CustomGlyph> glyphList = Arrays.asList(

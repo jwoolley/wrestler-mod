@@ -31,7 +31,7 @@ public class TarnishedReputationPower extends AbstractWrestlerPower implements C
 
   @Override
   public void updateDescription() {
-    this.description = DESCRIPTIONS[0] + this.amount + DESCRIPTIONS[1];
+    this.description = DESCRIPTIONS[0] + this.amount + (this.amount == 1 ? DESCRIPTIONS[1] : DESCRIPTIONS[2]);
   }
 
   @Override

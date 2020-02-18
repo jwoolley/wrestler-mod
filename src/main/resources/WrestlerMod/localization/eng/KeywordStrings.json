@@ -2,9 +2,9 @@
   "WrestlerMod:Sportsmanship": {
     "PROPER_NAME": "Sportsmanship",
     "NAMES": [
-      "dirty"
+      "sportsmanship"
     ],
-    "DESCRIPTION": "At end of turn, gain a point of #yUnsporting if you played #b2 or more #yDirty cards. If you played no Dirty cards, lose a point instead."
+    "DESCRIPTION": "Gain a #yPenalty #yCard at end of turn if you played #b2 or more #yDirty cards. If you played no Dirty cards, lose one instead."
   },
 
   "WrestlerMod:Dirty": {
@@ -12,7 +12,7 @@
     "NAMES": [
       "dirty"
     ],
-    "DESCRIPTION": "Playing #b2 or more #yDirty cards in the same turn increases your #yUnsporting score by 1 at end of turn."
+    "DESCRIPTION": "Playing two or more #yDirty cards in the same turn will earn a #yPenalty #yCard at the end of turn."
   },
 
   "WrestlerMod:Elbow": {
@@ -23,12 +23,12 @@
     "DESCRIPTION": "A 0-cost #yAttack card with #yExhaust that deals modest damage and draws a card."
   },
 
-  "WrestlerMod:Respectable": {
-    "PROPER_NAME": "Respectable",
+  "WrestlerMod:Sporting": {
+    "PROPER_NAME": "Sporting",
     "NAMES": [
-      "respectable"
+      "sporting"
     ],
-    "DESCRIPTION": "Your #yUnsporting score is #b0."
+    "DESCRIPTION": "You have no #yPenalty #yCards."
   },
 
   "WrestlerMod:SignatureMove": {
@@ -62,29 +62,20 @@
     "DESCRIPTION": "Sprained creatures lose HP at the start of their turn, and remain Sprained if they attack."
   },
 
+  "WrestlerMod:PenaltyCard": {
+    "PROPER_NAME": "Penalty Card",
+    "NAMES": [
+      "Penalty Card", "penalty_card"
+    ],
+    "DESCRIPTION": "Issued at end of turn if #b2 or more #yDirty cards were played."
+  },
+
   "WrestlerMod:Unsporting": {
     "PROPER_NAME": "Unsporting",
     "NAMES": [
       "unsporting"
     ],
-    "DESCRIPTION": "A measure of your disregard for rules and fair play. The number of #yDirty cards you play affects your Unsporting score."
-  },
-
-  "WrestlerMod:UnsportingScore": {
-    "PROPER_NAME": "Unsporting Score",
-    "NAMES": [
-      "Unsporting Score", "unsporting_score", "unsporting"
-    ],
-    "DESCRIPTION": "A measure of your disregard for rules and fair play. The number of #yDirty cards you play affects your Unsporting score."
-  },
-
-
-  "WrestlerMod:Underhanded": {
-    "PROPER_NAME": "Underhanded",
-    "NAMES": [
-      "underhanded"
-    ],
-    "DESCRIPTION": "Your #yUnporting score is #b1 or more."
+    "DESCRIPTION": "You have at least one #yPenalty #yCard."
   },
 
   "WrestlerMod:Grappled": {

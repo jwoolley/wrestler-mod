@@ -1,6 +1,7 @@
 package thewrestler.cards.skill;
 
 import basemod.abstracts.CustomCard;
+import basemod.helpers.TooltipInfo;
 import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
 import com.megacrit.cardcrawl.actions.utility.SFXAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
@@ -14,7 +15,13 @@ import com.megacrit.cardcrawl.powers.StrengthPower;
 import thewrestler.cards.WrestlerCardTags;
 import thewrestler.characters.WrestlerCharacter;
 import thewrestler.enums.AbstractCardEnum;
+import thewrestler.keywords.AbstractTooltipKeyword;
+import thewrestler.keywords.CustomTooltipKeywords;
+import thewrestler.keywords.TooltipKeywords;
 import thewrestler.util.info.sportsmanship.SportsmanshipInfo;
+
+import java.util.Arrays;
+import java.util.List;
 
 import static thewrestler.WrestlerMod.getCardResourcePath;
 
@@ -60,7 +67,7 @@ public class HeelTurn extends CustomCard {
         new ApplyPowerAction(p, p, new StrengthPower(p, this.magicNumber), this.magicNumber));
 
     if (wasSporting) {
-        WrestlerCharacter.getSportsmanshipInfo().decreaseUnsporting(UNSPORTING_GAIN, false);
+        WrestlerCharacter.getSportsmanshipInfo().increaseUnsporting(UNSPORTING_GAIN, false);
     }
   }
 
@@ -80,7 +87,18 @@ public class HeelTurn extends CustomCard {
   }
 
   public static String getDescription() {
-    return DESCRIPTION + INTANGIBLE_AMOUNT + EXTENDED_DESCRIPTION[0] + UNSPORTING_GAIN + EXTENDED_DESCRIPTION[1];
+    return DESCRIPTION + INTANGIBLE_AMOUNT + EXTENDED_DESCRIPTION[0]
+        + (UNSPORTING_GAIN == 1 ? EXTENDED_DESCRIPTION[1] : UNSPORTING_GAIN)
+        + EXTENDED_DESCRIPTION[2];
+  }
+
+  private static List<AbstractTooltipKeyword> EXTRA_KEYWORDS = Arrays.asList(
+      CustomTooltipKeywords.getTooltipKeyword(CustomTooltipKeywords.PENALTY_CARD)
+  );
+
+  @Override
+  public List<TooltipInfo> getCustomTooltips() {
+    return TooltipKeywords.getTooltipInfos(EXTRA_KEYWORDS);
   }
 
   static {

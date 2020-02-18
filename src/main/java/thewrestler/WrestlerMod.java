@@ -47,7 +47,7 @@ import thewrestler.signaturemoves.cards.Chokeslam;
 import thewrestler.signaturemoves.cards.DragonGate;
 import thewrestler.signaturemoves.cards.Piledriver;
 import thewrestler.signaturemoves.moveinfos.AbstractSignatureMoveInfo;
-import thewrestler.ui.WrestlerUnsportingInfoPanel;
+import thewrestler.ui.WrestlerPenaltyCardInfoPanel;
 import thewrestler.ui.WrestlerCombatInfoPanel;
 import thewrestler.ui.WrestlerSignatureMovePanel;
 import thewrestler.util.BasicUtils;
@@ -144,7 +144,7 @@ public class WrestlerMod implements
     private static Map<String, Keyword> keywords;
 
 
-    public static WrestlerUnsportingInfoPanel SportsmanshipInfoPanel;
+    public static WrestlerPenaltyCardInfoPanel penaltyCardInfoPanel;
     public static WrestlerCombatInfoPanel combatInfoPanel;
     public static WrestlerSignatureMovePanel signatureMovePanel;
 
@@ -418,7 +418,9 @@ public class WrestlerMod implements
         BaseMod.addRelicToCustomPool(new PeoplesCrown(), AbstractCardEnum.THE_WRESTLER_ORANGE);
 
         BaseMod.addRelicToCustomPool(new LuckyTrunks(), AbstractCardEnum.THE_WRESTLER_ORANGE);
-        BaseMod.addRelicToCustomPool(new RefereesWhistle(), AbstractCardEnum.THE_WRESTLER_ORANGE);
+
+        // TODO: reflavor and reenable this (since its flavor was appropriated for the starter relic)
+//        BaseMod.addRelicToCustomPool(new RefereesWhistle(), AbstractCardEnum.THE_WRESTLER_ORANGE);
 
         // This adds a relic to the Shared pool. Every character can find this relic.
         // TODO: put this behind a Config flag, a la Hayseed
@@ -694,9 +696,9 @@ public class WrestlerMod implements
     public void receiveEditKeywords() {
         // Keywords on cards are supposed to be Capitalized, while in Keyword-String.json they're lowercase
         //
-        // Multiword keywords on cards are done With_Underscores
+        // Multiword thewrestler.keywords on cards are done With_Underscores
         //
-        // If you're using multiword keywords, the first element in your NAMES array in your keywords-strings.json has to be the same as the PROPER_NAME.
+        // If you're using multiword thewrestler.keywords, the first element in your NAMES array in your thewrestler.keywords-strings.json has to be the same as the PROPER_NAME.
         // That is, in Card-Strings.json you would have #yA_Long_Keyword (#y highlights the keyword in yellow).
         // In Keyword-Strings.json you would have PROPER_NAME as A Long Keyword and the first element in NAMES be a long keyword, and the second element be a_long_keyword
 
@@ -747,7 +749,7 @@ public class WrestlerMod implements
 
     @Override
     public void receiveStartGame() {
-        SportsmanshipInfoPanel = new WrestlerUnsportingInfoPanel();
+        penaltyCardInfoPanel = new WrestlerPenaltyCardInfoPanel();
         combatInfoPanel = new WrestlerCombatInfoPanel();
         signatureMovePanel = new WrestlerSignatureMovePanel();
         logger.info("WresterMod:receiveStartGame called");
@@ -772,7 +774,7 @@ public class WrestlerMod implements
         if (BasicUtils.isPlayingAsWrestler()) {
             OnApplyPowerPatchInsert.powerActionList.clear();
             combatInfoPanel.atStartOfCombat();
-            SportsmanshipInfoPanel.atEndOfCombat();
+            penaltyCardInfoPanel.atEndOfCombat();
             signatureMovePanel.atStartOfCombat();
             WrestlerCharacter.getSignatureMoveInfo().atStartOfCombat();
             WrestlerCharacter.getSportsmanshipInfo().atStartOfCombat();
@@ -787,13 +789,13 @@ public class WrestlerMod implements
     public void receiveCardUsed(AbstractCard abstractCard) {
         combatInfoPanel.updateCardCounts();
         signatureMovePanel.onCardUsed(abstractCard);
-        SportsmanshipInfoPanel.onCardUsed(abstractCard);
+        penaltyCardInfoPanel.onCardUsed(abstractCard);
         WrestlerCharacter.getSportsmanshipInfo().onCardUsed(abstractCard);
     }
 
     @Override
     public void receivePostEnergyRecharge() {
-        SportsmanshipInfoPanel.atStartOfTurn();
+        penaltyCardInfoPanel.atStartOfTurn();
         combatInfoPanel.atStartOfTurn();
         signatureMovePanel.atStartOfTurn();
         WrestlerCharacter.getSignatureMoveInfo().atStartOfTurn();
@@ -803,7 +805,7 @@ public class WrestlerMod implements
 
     @Override
     public void receivePostBattle(AbstractRoom abstractRoom) {
-        SportsmanshipInfoPanel.atEndOfCombat();
+        penaltyCardInfoPanel.atEndOfCombat();
         combatInfoPanel.atEndOfCombat();
         signatureMovePanel.atEndOfCombat();
         WrestlerCharacter.getSignatureMoveInfo().atEndOfCombat();
@@ -818,7 +820,7 @@ public class WrestlerMod implements
 
     @Override
     public boolean receivePreMonsterTurn(AbstractMonster abstractMonster) {
-        SportsmanshipInfoPanel.atEndOfTurn();
+        penaltyCardInfoPanel.atEndOfTurn();
         combatInfoPanel.atEndOfTurn();
         signatureMovePanel.atEndOfTurn();
         return true;

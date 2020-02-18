@@ -18,6 +18,10 @@ import thewrestler.WrestlerMod;
 import thewrestler.cards.EndOfCombatListener;
 import thewrestler.cards.StartOfCombatListener;
 import thewrestler.characters.WrestlerCharacter;
+import thewrestler.keywords.AbstractTooltipKeyword;
+import thewrestler.keywords.CustomTooltipKeyword;
+import thewrestler.keywords.CustomTooltipKeywords;
+import thewrestler.keywords.TooltipKeywords;
 import thewrestler.util.BasicUtils;
 import thewrestler.util.TextureLoader;
 import thewrestler.util.info.sportsmanship.SportsmanshipInfo;
@@ -27,7 +31,7 @@ import java.util.stream.Collectors;
 
 // TODO: VFX/SFX when sportsmanship changes (e.g. red or green border flash)
 
-public class WrestlerUnsportingInfoPanel implements CustomInfoPanel, StartOfCombatListener, EndOfCombatListener {
+public class WrestlerPenaltyCardInfoPanel implements CustomInfoPanel, StartOfCombatListener, EndOfCombatListener {
   private static final String[] TEXT;
 
   private static final float WIDTH = 290;
@@ -40,8 +44,8 @@ public class WrestlerUnsportingInfoPanel implements CustomInfoPanel, StartOfComb
   private static final float TOOLTIP_X_OFFSET = WIDTH + 16.0F;
   private static final float TOOLTIP_Y_OFFSET = -(HEIGHT + 180.0f);
 
-  private static final String UI_NAME = WrestlerMod.makeID("SportsmanshipInfoPanel");
-  private static final String BACKGROUND_TEXTURE_PATH = UiHelper.getUiImageResourcePath("sportsmanshipinfopanel/background.png");
+  private static final String UI_NAME = WrestlerMod.makeID("PenaltyCardInfoPanel");
+  private static final String BACKGROUND_TEXTURE_PATH = UiHelper.getUiImageResourcePath("penaltycardinfopanel/background.png");
 
   private static final BitmapFont INFO_HEADER_FONT = FontHelper.charDescFont;
   private static final BitmapFont INFO_FONT = FontHelper.losePowerFont;
@@ -52,7 +56,7 @@ public class WrestlerUnsportingInfoPanel implements CustomInfoPanel, StartOfComb
   private static final Color POSITIVE_UNSPORTING_COLOR = Settings.RED_TEXT_COLOR.cpy();
 
   private static final List<String> keywordList = Arrays.asList(
-      SportsmanshipInfo.SPORTSMANSHIP_KEYWORD_ID, SportsmanshipInfo.UNSPORTING_KEYWORD_ID, SportsmanshipInfo.DIRTY_KEYWORD_ID);
+      CustomTooltipKeywords.PENALTY_CARD, CustomTooltipKeywords.SPORTSMANSHIP);
 
   private static final List<Keyword> baseGameKeywordList = new ArrayList<>();
   private ArrayList<PowerTip> keywordPowerTips;
@@ -68,7 +72,7 @@ public class WrestlerUnsportingInfoPanel implements CustomInfoPanel, StartOfComb
   private boolean updateUnsportingValueFlag = false;
   private int unsportingValue;
 
-  public WrestlerUnsportingInfoPanel() {
+  public WrestlerPenaltyCardInfoPanel() {
     this.uiName = UI_NAME;
     this.backgroundImgPath = BACKGROUND_TEXTURE_PATH;
 
@@ -179,7 +183,7 @@ public class WrestlerUnsportingInfoPanel implements CustomInfoPanel, StartOfComb
     refreshUnsportingAmount();
   }
 
-                         @Override
+  @Override
   public void atEndOfCombat() { refreshUnsportingAmount(); }
 
   private ArrayList<PowerTip> getPowerTips() {
@@ -187,24 +191,18 @@ public class WrestlerUnsportingInfoPanel implements CustomInfoPanel, StartOfComb
       keywordPowerTips = new ArrayList<>();
 
       // crop keyword tooltips
-      for (Map.Entry<String,String> entry : getKeywords().entrySet()) {
-        keywordPowerTips.add(new PowerTip(TipHelper.capitalize(entry.getKey()), entry.getValue()));
+      for (AbstractTooltipKeyword kw : TooltipKeywords.getTooltipKeywords(keywordList, baseGameKeywordList)) {
+        final String name = TipHelper.capitalize(kw.getProperName());
+        final String description = kw.getDescription();
+
+        if (kw.hasGlyph()) {
+          keywordPowerTips.add(new PowerTip(TipHelper.capitalize(name), description, kw.getGlyph().getGlyphAtlasRegion()));
+        } else {
+          keywordPowerTips.add(new PowerTip(TipHelper.capitalize(name), description));
+        }
       }
     }
     return keywordPowerTips;
-  }
-
-
-  private Map<String, String> getKeywords() {
-    Map<String, String> keywords = keywordList.stream()
-        .map(k -> WrestlerMod.getKeyword(k))
-        .filter(Objects::nonNull)
-        .collect(Collectors.toMap(kw -> kw.PROPER_NAME, kw -> kw.DESCRIPTION));
-
-    keywords.putAll(baseGameKeywordList.stream()
-        .collect(Collectors.toMap(kw -> kw.NAMES[0], kw -> kw.DESCRIPTION)));
-
-    return keywords;
   }
 
   private Texture getPanelBackgroundImage() {

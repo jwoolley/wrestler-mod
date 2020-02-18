@@ -176,7 +176,8 @@
     "NAME": "Tarnished Reputation",
     "DESCRIPTIONS": [
       "At the start of your next turn, gain #b",
-      " #Unsporting."
+      " #yPenalty #yCard.",
+      " #yPenalty #yCards."
     ]
   },
 

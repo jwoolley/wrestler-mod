@@ -18,7 +18,6 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class SportsmanshipInfo implements StartOfCombatListener, EndOfCombatListener {
-  public static final String UNSPORTING_KEYWORD_ID = WrestlerMod.makeID("Unsporting");
   public static final String SPORTSMANSHIP_KEYWORD_ID = WrestlerMod.makeID("Sportsmanship");
   public static final String DIRTY_KEYWORD_ID = WrestlerMod.makeID("Dirty");
 

@@ -13,7 +13,7 @@ import java.util.Map;
 // TODO: implement getTooltips() method for explanatory tooltips
 //  (and append any additional tooltips specified in the subclass)
 
-// TODO: color text highlighting on cardnames, keywords
+// TODO: color text highlighting on cardnames, thewrestler.keywords
 
 import static thewrestler.WrestlerMod.getCardResourcePath;
 

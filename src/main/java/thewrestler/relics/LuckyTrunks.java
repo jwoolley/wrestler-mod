@@ -20,7 +20,7 @@ public class LuckyTrunks extends CustomWrestlerRelic {
   private static final Texture OUTLINE = TextureLoader.getTexture(makeRelicOutlinePath("luckytrunks.png"));
   private static final RelicTier RELIC_TIER = RelicTier.BOSS;
 
-  private static final List<String> POWERTIP_KEYWORDS = Arrays.asList(WrestlerMod.makeID("Liked"));
+  private static final List<String> POWERTIP_KEYWORDS = Arrays.asList(WrestlerMod.makeID("Sporting"));
 
   public static final int ENERGY_AMOUNT = 1;
 

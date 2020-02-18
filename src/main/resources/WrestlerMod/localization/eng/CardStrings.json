@@ -207,7 +207,8 @@
     "DESCRIPTION": "wrestlermod:Dirty. NL Gain ",
     "EXTENDED_DESCRIPTION": [
       " Intangible. NL Gain !M! Strength. NL Gain ",
-      " additional wrestlermod:Unsporting if wrestlermod:Respectable. NL Exhaust."
+      "an",
+      " additional [P] if you're wrestlermod:Sporting. NL Exhaust."
     ]
   },
 
@@ -230,7 +231,7 @@
     "EXTENDED_DESCRIPTION": [
       "[E] ",
       ". NL Lose ",
-      "  wrestlermod:Unsporting.",
+      "  [P] .",
       " NL Next turn, gain ",
       " NL Exhaust."
     ]
@@ -251,7 +252,7 @@
 
   "WrestlerMod:LowBlow": {
     "NAME": "Low Blow",
-    "DESCRIPTION": "Deal !D! Damage. NL If you're wrestlermod:Underhanded at the end of turn, Retain."
+    "DESCRIPTION": "Deal !D! Damage. NL If you're wrestlermod:Unsporting at the end of turn, Retain."
   },
 
   "WrestlerMod:MainEvent": {
@@ -314,13 +315,13 @@
 
   "WrestlerMod:Pinfall": {
     "NAME": "Pinfall",
-    "DESCRIPTION": "Gain !B! Block. NL If you're wrestlermod:Respectable at the end of turn, Retain."
+    "DESCRIPTION": "Gain !B! Block. NL If you're wrestlermod:Sporting at the end of turn, Retain."
   },
 
   "WrestlerMod:PlayToTheCrowd": {
     "NAME": "Play to the Crowd",
-    "DESCRIPTION": "If wrestlermod:Respectable, gain !B! Block. NL Otherwise add a *Knee to your hand for each point of wrestlermod:Unsporting.",
-    "UPGRADE_DESCRIPTION":  "If wrestlermod:Respectable, gain !B! Block. NL Otherwise add a *Knee+ to your hand for each point of wrestlermod:Unsporting."
+    "DESCRIPTION": "If wrestlermod:Sporting, gain !B! Block. NL Otherwise, add a *Knee to your hand for each [P} you have.",
+    "UPGRADE_DESCRIPTION":  "If wrestlermod:Sporting, gain !B! Block. NL Otherwise, add a *Knee+ to your hand for each [P} you have."
   },
 
   "WrestlerMod:PowderBuffer": {
@@ -434,7 +435,7 @@
 
   "WrestlerMod:Screwjob": {
     "NAME": "Screwjob",
-    "DESCRIPTION": "wrestlermod:Dirty. NL Deal !D! damage twice. NL Permanently increase this card's by !M! for each point of wrestlermod:Unsporting score. NL Exhaust."
+    "DESCRIPTION": "wrestlermod:Dirty. NL Deal !D! damage twice. NL Permanently increase this card's damage by !M! for each [P]. NL Exhaust."
   },
 
   "WrestlerMod:Springboard": {
@@ -480,7 +481,7 @@
 
   "WrestlerMod:TakeAPowder": {
     "NAME": "Take a Powder",
-    "DESCRIPTION": "If wrestlermod:Respectable, gain !M! wrestlermod:Temporary_Buffer. NL Otherwise, gain ",
+    "DESCRIPTION": "If wrestlermod:Sporting, gain !M! wrestlermod:Temporary_Buffer. NL Otherwise, gain ",
     "EXTENDED_DESCRIPTION": [
       " gold.",
       " gold and a random potion.",

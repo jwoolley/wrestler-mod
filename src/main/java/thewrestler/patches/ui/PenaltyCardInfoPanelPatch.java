@@ -6,18 +6,18 @@ import com.evacipated.cardcrawl.modthespire.lib.SpirePostfixPatch;
 import com.evacipated.cardcrawl.modthespire.lib.SpirePrefixPatch;
 import com.megacrit.cardcrawl.ui.panels.EnergyPanel;
 import thewrestler.WrestlerMod;
-import thewrestler.ui.WrestlerUnsportingInfoPanel;
+import thewrestler.ui.WrestlerPenaltyCardInfoPanel;
 import thewrestler.util.BasicUtils;
 
-public class SportsmanshipInfoPanelPatch {
+public class PenaltyCardInfoPanelPatch {
 
   @SpirePatch(clz = EnergyPanel.class, method = "update")
-  public static class SportsmanshipInfoPanelUpdatePatch  {
+  public static class PenaltyCardInfoPanelUpdatePatch  {
     @SpirePrefixPatch
     public static void Prefix(EnergyPanel __instance) {
       if (BasicUtils.isPlayingAsWrestler()) {
-        if (WrestlerUnsportingInfoPanel.shouldRender()) {
-          WrestlerMod.SportsmanshipInfoPanel.update();
+        if (WrestlerPenaltyCardInfoPanel.shouldRender()) {
+          WrestlerMod.penaltyCardInfoPanel.update();
         }
       }
     }
@@ -25,12 +25,12 @@ public class SportsmanshipInfoPanelPatch {
 
   // for rendering in combat
   @SpirePatch(clz = EnergyPanel.class, method = "renderOrb")
-  public static class SportsmanshipPanelRenderPatch {
+  public static class PenaltyCardPanelRenderPatch {
     @SpirePostfixPatch
     public static void Postfix(EnergyPanel __instance, SpriteBatch sb) {
       if (BasicUtils.isPlayingAsWrestler()) {
-        if (WrestlerUnsportingInfoPanel.shouldRender()) {
-          WrestlerMod.SportsmanshipInfoPanel.render(sb);
+        if (WrestlerPenaltyCardInfoPanel.shouldRender()) {
+          WrestlerMod.penaltyCardInfoPanel.render(sb);
         }
       }
     }

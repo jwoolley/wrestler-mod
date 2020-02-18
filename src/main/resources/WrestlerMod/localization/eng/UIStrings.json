@@ -1,7 +1,7 @@
 {
-  "WrestlerMod:SportsmanshipInfoPanel": {
+  "WrestlerMod:PenaltyCardInfoPanel": {
     "TEXT": [
-      "Unsporting Score"
+      "Penalty Cards"
     ]
   },
 

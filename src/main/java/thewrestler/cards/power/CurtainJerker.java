@@ -30,9 +30,9 @@ public class CurtainJerker extends CustomCard {
   private static final CardRarity RARITY = CardRarity.UNCOMMON;
   private static final CardTarget TARGET = CardTarget.NONE;
 
-  private static final int COST = 1;
+  private static final int COST = 2;
+  private static final int UPGRADED_COST = 1;
   private static final int STRENGTH_AND_DEX_GAIN = 2;
-  private static final int STRENGTH_AND_DEX_GAIN_UPGRADE = 1;
 
   public CurtainJerker() {
     super(ID, NAME, getCardResourcePath(IMG_PATH), COST, getDescription(), TYPE,
@@ -59,7 +59,7 @@ public class CurtainJerker extends CustomCard {
   public void upgrade() {
     if (!this.upgraded) {
       this.upgradeName();
-      this.upgradeMagicNumber(STRENGTH_AND_DEX_GAIN_UPGRADE);
+      this.upgradeBaseCost(UPGRADED_COST);
       this.rawDescription = getDescription();
       initializeDescription();
     }

@@ -14,7 +14,6 @@ import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import thewrestler.enums.AbstractCardEnum;
 import thewrestler.powers.IrradiatedPower;
-import thewrestler.util.CreatureUtils;
 
 import static thewrestler.WrestlerMod.getCardResourcePath;
 

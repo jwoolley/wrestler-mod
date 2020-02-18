@@ -15,7 +15,7 @@ import com.megacrit.cardcrawl.powers.ChokePower;
 import thewrestler.cards.colorless.attack.Knee;
 import thewrestler.signaturemoves.upgrades.SignatureMoveUpgradeList;
 
-// TODO: implement getTooltips() method for Grapple and Knee keywords
+// TODO: implement getTooltips() method for Grapple and Knee thewrestler.keywords
 
 public class Chokeslam extends AbstractSignatureMoveCard {
   public static final String ID = "WrestlerMod:Chokeslam";

@@ -1,6 +1,7 @@
 package thewrestler.cards.skill;
 
 import basemod.abstracts.CustomCard;
+import basemod.helpers.TooltipInfo;
 import com.megacrit.cardcrawl.actions.common.GainBlockAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
@@ -8,12 +9,17 @@ import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
-import org.apache.commons.lang3.StringUtils;
 import thewrestler.cards.StartOfCombatListener;
 import thewrestler.characters.WrestlerCharacter;
 import thewrestler.enums.AbstractCardEnum;
+import thewrestler.keywords.AbstractTooltipKeyword;
+import thewrestler.keywords.CustomTooltipKeywords;
+import thewrestler.keywords.TooltipKeywords;
 import thewrestler.util.BasicUtils;
 import thewrestler.util.info.sportsmanship.SportsmanshipInfo;
+
+import java.util.Arrays;
+import java.util.List;
 
 import static thewrestler.WrestlerMod.getCardResourcePath;
 
@@ -51,10 +57,33 @@ public class Redemption extends CustomCard implements AbstractSportsmanshipListe
   private void calculateCost() {
     if (BasicUtils.isPlayerInCombat()) {
       if (SportsmanshipInfo.isUnsporting()) {
-        modifyCostForCombat(SportsmanshipInfo.getAmount());
+        modifyCostForCombat(-SportsmanshipInfo.getAmount());
         this.update();
       }
     }
+  }
+
+  @Override
+  public void onUnsportingChanged(int changeAmount, int newValue, boolean isEndOfTurnChange) {
+    if (newValue == 0 && changeAmount > 0) {
+      modifyCostForCombat(-SportsmanshipInfo.getAmount());
+      if (this.cost == COST) {
+        this.isCostModified = false;
+      }
+    }
+  }
+
+  @Override
+  public void onBecomeSporting() { }
+
+  @Override
+  public void onBecomeUnsporting() {
+    modifyCostForCombat(-SportsmanshipInfo.getAmount());
+  }
+
+  @Override
+  public void atStartOfCombat() {
+    calculateCost();
   }
 
   @Override
@@ -75,33 +104,19 @@ public class Redemption extends CustomCard implements AbstractSportsmanshipListe
     }
   }
 
+  private static List<AbstractTooltipKeyword> EXTRA_KEYWORDS = Arrays.asList(
+      CustomTooltipKeywords.getTooltipKeyword(CustomTooltipKeywords.PENALTY_CARD)
+  );
+
+  @Override
+  public List<TooltipInfo> getCustomTooltips() {
+    return TooltipKeywords.getTooltipInfos(EXTRA_KEYWORDS);
+  }
+
   static {
     cardStrings = CardCrawlGame.languagePack.getCardStrings(ID);
     NAME = cardStrings.NAME;
     DESCRIPTION = cardStrings.DESCRIPTION;
     EXTENDED_DESCRIPTION = cardStrings.EXTENDED_DESCRIPTION;
-  }
-
-  @Override
-  public void onUnsportingChanged(int changeAmount, int newValue, boolean isEndOfTurnChange) {
-    if (newValue == 0 && changeAmount > 0) {
-      modifyCostForCombat(SportsmanshipInfo.getAmount());
-      if (this.cost == COST) {
-        this.isCostModified = false;
-      }
-    }
-  }
-
-  @Override
-  public void onBecomeSporting() { }
-
-  @Override
-  public void onBecomeUnsporting() {
-    modifyCostForCombat(-SportsmanshipInfo.getAmount());
-  }
-
-  @Override
-  public void atStartOfCombat() {
-    calculateCost();
   }
 }
