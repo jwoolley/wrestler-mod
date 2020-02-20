@@ -320,8 +320,8 @@
 
   "WrestlerMod:PlayToTheCrowd": {
     "NAME": "Play to the Crowd",
-    "DESCRIPTION": "If wrestlermod:Sporting, gain !B! Block. NL Otherwise, add a *Knee to your hand for each [P} you have.",
-    "UPGRADE_DESCRIPTION":  "If wrestlermod:Sporting, gain !B! Block. NL Otherwise, add a *Knee+ to your hand for each [P} you have."
+    "DESCRIPTION": "If wrestlermod:Sporting, gain !B! Block. NL Otherwise, add a *Knee to your hand for each [P] you have.",
+    "UPGRADE_DESCRIPTION":  "If wrestlermod:Sporting, gain !B! Block. NL Otherwise, add a *Knee+ to your hand for each [P] you have."
   },
 
   "WrestlerMod:PowderBuffer": {

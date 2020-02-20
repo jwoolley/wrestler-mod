@@ -19,14 +19,15 @@ import thewrestler.cards.EndOfCombatListener;
 import thewrestler.cards.StartOfCombatListener;
 import thewrestler.characters.WrestlerCharacter;
 import thewrestler.keywords.AbstractTooltipKeyword;
-import thewrestler.keywords.CustomTooltipKeyword;
 import thewrestler.keywords.CustomTooltipKeywords;
 import thewrestler.keywords.TooltipKeywords;
 import thewrestler.util.BasicUtils;
 import thewrestler.util.TextureLoader;
 import thewrestler.util.info.sportsmanship.SportsmanshipInfo;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import java.util.stream.Collectors;
 
 // TODO: VFX/SFX when sportsmanship changes (e.g. red or green border flash)
@@ -45,7 +46,12 @@ public class WrestlerPenaltyCardInfoPanel implements CustomInfoPanel, StartOfCom
   private static final float TOOLTIP_Y_OFFSET = -(HEIGHT + 180.0f);
 
   private static final String UI_NAME = WrestlerMod.makeID("PenaltyCardInfoPanel");
-  private static final String BACKGROUND_TEXTURE_PATH = UiHelper.getUiImageResourcePath("penaltycardinfopanel/background.png");
+
+  private static final String BACKGROUND_IMG_DIR_PATH = "penaltycardinfopanel/";
+  private static final List<String> BACKGROUND_IMG_FILENAMES = Arrays.asList(
+    "background-zero-cards.png", "background-one-card.png", "background-two-cards.png", "background-three-cards.png");
+  private static List<String> BACKGROUND_IMG_FILEPATHS = BACKGROUND_IMG_FILENAMES.stream()
+      .map(f -> UiHelper.getUiImageResourcePath(BACKGROUND_IMG_DIR_PATH + f)).collect(Collectors.toList());
 
   private static final BitmapFont INFO_HEADER_FONT = FontHelper.charDescFont;
   private static final BitmapFont INFO_FONT = FontHelper.losePowerFont;
@@ -62,8 +68,7 @@ public class WrestlerPenaltyCardInfoPanel implements CustomInfoPanel, StartOfCom
   private ArrayList<PowerTip> keywordPowerTips;
 
   private final String uiName;
-  private final String backgroundImgPath;
-  private Texture panelBackgroundImage;
+  private Texture[] panelBackgroundImage = new Texture[BACKGROUND_IMG_FILEPATHS.size()];
   private final int xOffset;
   private final int yOffset;
   private final int yTextOffset;
@@ -74,7 +79,6 @@ public class WrestlerPenaltyCardInfoPanel implements CustomInfoPanel, StartOfCom
 
   public WrestlerPenaltyCardInfoPanel() {
     this.uiName = UI_NAME;
-    this.backgroundImgPath = BACKGROUND_TEXTURE_PATH;
 
     this.xOffset = Math.round(X_OFFSET * SettingsHelper.getScaleX());
 
@@ -106,7 +110,7 @@ public class WrestlerPenaltyCardInfoPanel implements CustomInfoPanel, StartOfCom
             hb.y - TOOLTIP_Y_OFFSET * SettingsHelper.getScaleY(), getPowerTips());
       }
 
-      Texture backgroundImage = getPanelBackgroundImage();
+      Texture backgroundImage = getPanelBackgroundImage(this.unsportingValue);
       sb.draw(backgroundImage,
           this.xOffset, this.yOffset,
           backgroundImage.getWidth() * SettingsHelper.getScaleX(),  backgroundImage.getHeight() * SettingsHelper.getScaleY(),
@@ -146,12 +150,12 @@ public class WrestlerPenaltyCardInfoPanel implements CustomInfoPanel, StartOfCom
         this.yOffset + this.yTextOffset,
         headerColor);
 
-    FontHelper.renderFontLeft(
-        sb,
-        font, this.unsportingValue + separatorString + SportsmanshipInfo.MAX_UNSPORTING,
-        this.xOffset + xUnsportingTextOffset,
-        this.yOffset + this.yTextOffset - (yLineOffset * 1.035f),
-        color);
+        //    FontHelper.renderFontLeft(
+        //        sb,
+        //        font, this.unsportingValue + separatorString + SportsmanshipInfo.MAX_UNSPORTING,
+        //        this.xOffset + xUnsportingTextOffset,
+        //        this.yOffset + this.yTextOffset - (yLineOffset * 1.035f),
+        //        color);
   }
 
   public boolean shouldRenderPanel() {
@@ -205,11 +209,14 @@ public class WrestlerPenaltyCardInfoPanel implements CustomInfoPanel, StartOfCom
     return keywordPowerTips;
   }
 
-  private Texture getPanelBackgroundImage() {
-    if (panelBackgroundImage == null) {
-      panelBackgroundImage = TextureLoader.getTexture(this.backgroundImgPath);
+  private Texture getPanelBackgroundImage(int numPenaltyCards) {
+    final int index = Math.max(0, Math.min(numPenaltyCards, BACKGROUND_IMG_FILENAMES.size()));
+
+
+    if (panelBackgroundImage[index] == null) {
+      panelBackgroundImage[index] = TextureLoader.getTexture(BACKGROUND_IMG_FILEPATHS.get(index));
     }
-    return panelBackgroundImage;
+    return panelBackgroundImage[index];
   }
 
   static {
