@@ -185,10 +185,7 @@
 
   "WrestlerMod:Hardway": {
     "NAME": "Hardway",
-    "DESCRIPTION": "wrestlermod:Dirty. NL Remove all of the enemy's debuffs. NL They lose 1 Strength for each debuff removed. NL Exhaust.",
-    "EXTENDED_DESCRIPTION": [
-      "Ethereal. "
-    ]
+    "DESCRIPTION": "wrestlermod:Dirty. NL Remove all of the enemy's debuffs. NL They lose 1 Strength for each debuff removed. NL Exhaust."
   },
 
   "WrestlerMod:Headlock": {
@@ -435,7 +432,11 @@
 
   "WrestlerMod:Screwjob": {
     "NAME": "Screwjob",
-    "DESCRIPTION": "wrestlermod:Dirty. NL Deal !D! damage twice. NL Permanently increase this card's damage by !M! for each [P]. NL Exhaust."
+    "DESCRIPTION": "Deal !D! damage ",
+    "EXTENDED_DESCRIPTION": [
+      " times. NL Permanently increase damage by !M! for each [P] you have. NL Exhaust.",
+      "Ethereal. NL "
+    ]
   },
 
   "WrestlerMod:Springboard": {

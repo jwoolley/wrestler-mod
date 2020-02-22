@@ -4,6 +4,7 @@ import basemod.abstracts.CustomCard;
 import basemod.abstracts.CustomSavable;
 import basemod.helpers.TooltipInfo;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
+import com.megacrit.cardcrawl.actions.common.DamageAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.cards.DamageInfo;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
@@ -13,7 +14,6 @@ import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.helpers.GetAllInBattleInstances;
 import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
-import com.megacrit.cardcrawl.vfx.combat.FlashAtkImgEffect;
 import thewrestler.enums.AbstractCardEnum;
 import thewrestler.keywords.AbstractTooltipKeyword;
 import thewrestler.keywords.CustomTooltipKeywords;
@@ -40,24 +40,25 @@ public class Screwjob extends CustomCard implements CustomSavable<Integer> {
   private static final CardTarget TARGET = CardTarget.ENEMY;
 
   private static final int COST = 1;
-  private static final int DAMAGE = 5;
+  private static final int DAMAGE = 2;
+
+  private static final int NUM_REPS = 3;
 
   private static final int DAMAGE_INCREASE_PER_UNSPORTING = 1;
 
   public Screwjob() {
-    super(ID, NAME, getCardResourcePath(IMG_PATH), COST, getDescription(), TYPE,
+    super(ID, NAME, getCardResourcePath(IMG_PATH), COST, getDescription(true, NUM_REPS), TYPE,
         AbstractCardEnum.THE_WRESTLER_ORANGE, RARITY, TARGET);
     this.baseDamage = this.damage = this.misc = DAMAGE;
     this.baseMagicNumber = this.magicNumber = DAMAGE_INCREASE_PER_UNSPORTING;
     this.exhaust = true;
+    this.isEthereal = true;
   }
 
   @Override
   public void use(AbstractPlayer p, AbstractMonster m) {
     AbstractDungeon.actionManager.addToBottom(
-        new ScrewjobAction(
-            m, new DamageInfo(p, this.damage, damageTypeForTurn),
-            this.magicNumber * (this.upgraded ? 2 : 1), this.uuid, this));
+        new ScrewjobAction(m, this.damage, NUM_REPS, true, this.magicNumber, this.uuid, this));
   }
 
   @Override
@@ -68,73 +69,77 @@ public class Screwjob extends CustomCard implements CustomSavable<Integer> {
   @Override
   public void onLoad(Integer baseDamage) {
     this.baseDamage = this.damage = this.misc = baseDamage;
-    this.rawDescription = getDescription();
+    this.rawDescription = getDescription(this.isEthereal, NUM_REPS);
     this.initializeDescription();
   }
 
   private static class ScrewjobAction extends AbstractGameAction {
-    private static final float SOUND_DURATION = 0.35f;
+    private static final float EFFECT_DURATION = 0.1f;
     private static final float DAMAGE_DURATION = 0.1f;
+    private static final DamageInfo.DamageType DAMAGE_TYPE = DamageInfo.DamageType.NORMAL;
     private int increasePerUnsporting;
-    private DamageInfo info;
+    private final int damage;
+    private final int numReps;
+    private boolean isFirstRep;
+
     private UUID uuid;
-    private boolean playedSound;
-    private boolean tickedDamageOnce = false;
     private Screwjob card;
 
-    public ScrewjobAction(AbstractCreature target, DamageInfo info, int incAmount, UUID targetUUID, Screwjob card) {
-      this.info = info;
-      setValues(target, info);
+    public ScrewjobAction(AbstractCreature target, int damage, int numReps, boolean isFirstRep, int incAmount,
+                          UUID targetUUID, Screwjob card) {
+      this.target = target;
+      this.damage = damage;
+      this.numReps = numReps;
+      this.isFirstRep = isFirstRep;
       this.increasePerUnsporting = incAmount;
       this.actionType = AbstractGameAction.ActionType.DAMAGE;
-      this.duration = SOUND_DURATION + DAMAGE_DURATION;
+      this.duration = EFFECT_DURATION + DAMAGE_DURATION;
       this.uuid = targetUUID;
-      this.playedSound = false;
       this.card = card;
     }
 
     public void update() {
-      if (this.target != null) {
-        if (!this.playedSound && this.duration <= SOUND_DURATION) {
+      if (numReps <= 0 || this.target == null) {
+        this.isDone = true;
+        return;
+      }
+
+      if (this.isFirstRep) {
           if (SportsmanshipInfo.isUnsporting()) {
             this.card.flash();
+            this.upgradeCardDamage();
           }
           CardCrawlGame.sound.play("DRILL_SPIN_1");
-          playedSound = true;
-        } else if (this.duration <= DAMAGE_DURATION ) {
-          AbstractDungeon.effectList.add(
-              new FlashAtkImgEffect(this.target.hb.cX, this.target.hb.cY, AttackEffect.SLASH_DIAGONAL));
-          this.target.damage(this.info);
-
-          if (!tickedDamageOnce) {
-            tickedDamageOnce = true;
-          } else {
-            if (SportsmanshipInfo.isUnsporting()) {
-              final int damageIncrease = SportsmanshipInfo.getAmount() * this.increasePerUnsporting;
-              for (AbstractCard c : AbstractDungeon.player.masterDeck.group) {
-                if (c.uuid.equals(this.uuid)) {
-                  c.misc += damageIncrease;
-                  c.applyPowers();
-                  c.baseDamage = c.misc;
-                  c.isDamageModified = false;
-                }
-              }
-              for (AbstractCard c : GetAllInBattleInstances.get(this.uuid)) {
-                c.misc += damageIncrease;
-                c.applyPowers();
-                c.baseDamage = c.misc;
-              }
-            }
-            if (AbstractDungeon.getCurrRoom().monsters.areMonstersBasicallyDead()) {
-              AbstractDungeon.actionManager.clearPostCombatActions();
-            }
-            this.isDone = true;
-          }
-        }
-      } else {
-        this.isDone = true;
       }
-      tickDuration();
+      final DamageInfo info =  new DamageInfo(AbstractDungeon.player, this.damage, DAMAGE_TYPE);
+      AbstractDungeon.actionManager.addToBottom(new DamageAction(this.target, info, AttackEffect.SLASH_HORIZONTAL,
+          true));
+
+        if (!AbstractDungeon.getCurrRoom().monsters.areMonstersBasicallyDead()) {
+          AbstractDungeon.actionManager.addToBottom(
+              new ScrewjobAction(this.target, this.damage, this.numReps - 1, false,
+                  0, null, null));
+        } else {
+          AbstractDungeon.actionManager.clearPostCombatActions();
+        }
+        this.isDone = true;
+    }
+
+    private void upgradeCardDamage() {
+      final int damageIncrease = SportsmanshipInfo.getAmount() * this.increasePerUnsporting;
+      for (AbstractCard c : AbstractDungeon.player.masterDeck.group) {
+        if (c.uuid.equals(this.uuid)) {
+          c.misc += damageIncrease;
+          c.applyPowers();
+          c.baseDamage = c.misc;
+          c.isDamageModified = false;
+        }
+      }
+      for (AbstractCard c : GetAllInBattleInstances.get(this.uuid)) {
+        c.misc += damageIncrease;
+        c.applyPowers();
+        c.baseDamage = c.misc;
+      }
     }
   }
 
@@ -147,13 +152,14 @@ public class Screwjob extends CustomCard implements CustomSavable<Integer> {
   public void upgrade() {
     if (!this.upgraded) {
       this.upgradeName();
-      this.rawDescription = getDescription();
+      this.isEthereal = false;
+      this.rawDescription = getDescription(false, NUM_REPS);
       this.initializeDescription();
     }
   }
 
-  private static String getDescription() {
-    return DESCRIPTION;
+  public static String getDescription(boolean isEthereal, int numDamageTriggers) {
+    return (isEthereal ? EXTENDED_DESCRIPTION[1] : "") + DESCRIPTION  + numDamageTriggers + EXTENDED_DESCRIPTION[0];
   }
 
   private static List<AbstractTooltipKeyword> EXTRA_KEYWORDS = Arrays.asList(

@@ -27,12 +27,12 @@ public class Hardway extends CustomCard {
   private static final CardTarget TARGET = CardTarget.ENEMY;
 
   private static final int COST = 1;
+  private static final int UPGRADED_COST = 0;
 
   public Hardway() {
-    super(ID, NAME, getCardResourcePath(IMG_PATH), COST, getDescription(true), TYPE, AbstractCardEnum.THE_WRESTLER_ORANGE,
+    super(ID, NAME, getCardResourcePath(IMG_PATH), COST, getDescription(), TYPE, AbstractCardEnum.THE_WRESTLER_ORANGE,
         RARITY, TARGET);
     this.exhaust = true;
-    this.isEthereal = true;
     tags.add(WrestlerCardTags.DIRTY);
   }
 
@@ -53,14 +53,14 @@ public class Hardway extends CustomCard {
   public void upgrade() {
     if (!this.upgraded) {
       this.upgradeName();
-      this.isEthereal = false;
-      this.rawDescription = getDescription(false);
+      this.upgradeBaseCost(UPGRADED_COST);
+      this.rawDescription = getDescription();
       initializeDescription();
     }
   }
 
-  public static String getDescription(boolean isEthereal) {
-    return (isEthereal ? EXTENDED_DESCRIPTION[0] : "") + DESCRIPTION;
+  public static String getDescription() {
+    return DESCRIPTION;
   }
 
   static {
