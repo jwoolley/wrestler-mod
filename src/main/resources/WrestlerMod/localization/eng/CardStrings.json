@@ -1,7 +1,7 @@
 {
   "WrestlerMod:AlleyOop": {
     "NAME": "Alley Oop",
-    "DESCRIPTION": "Put !M! random cards with cost ",
+    "DESCRIPTION": "Put !M! random attacks with cost ",
     "EXTENDED_DESCRIPTION": [
       " or less from your draw pile into your hand."
     ]
@@ -402,6 +402,15 @@
     "DESCRIPTION": "At the end of your turn, if you played no Skills, gain !M! Strength."
   },
 
+  "WrestlerMod:Screwjob": {
+    "NAME": "Screwjob",
+    "DESCRIPTION": "Deal !D! damage ",
+    "EXTENDED_DESCRIPTION": [
+      " times. NL Permanently increase damage by !M! for each [P] you have. NL Exhaust.",
+      "Ethereal. NL "
+    ]
+  },
+
   "WrestlerMod:Sharpshooter": {
     "NAME": "Sharpshooter",
     "DESCRIPTION": "Apply !M! Choked. NL Deal !D! Damage for each debuff applied to the enemy.",
@@ -430,12 +439,12 @@
     "DESCRIPTION": "Gain !B! Block."
   },
 
-  "WrestlerMod:Screwjob": {
-    "NAME": "Screwjob",
-    "DESCRIPTION": "Deal !D! damage ",
+  "WrestlerMod:SleeperHold": {
+    "NAME": "Sleeper Hold",
+    "DESCRIPTION": "Apply wrestlermod:Grappled. NL Reduce the cost of non-Attack cards in your hand by !M! this ",
     "EXTENDED_DESCRIPTION": [
-      " times. NL Permanently increase damage by !M! for each [P] you have. NL Exhaust.",
-      "Ethereal. NL "
+      "turn.",
+      "combat."
     ]
   },
 
@@ -513,7 +522,10 @@
 
   "WrestlerMod:TriangleChoke": {
     "NAME": "Triangle Choke",
-    "DESCRIPTION": "Deal !D! Damage. NL If you have played a Power and a Skill this turn, apply wrestlermod:Grappled."
+    "DESCRIPTION": "Deal !D! Damage. NL If you've played a Power and a Skill this turn, gain !B! Block and ",
+    "EXTENDED_DESCRIPTION": [
+      " Artifact."
+    ]
   },
 
   "WrestlerMod:WindUpKick": {

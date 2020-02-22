@@ -2,7 +2,9 @@ package thewrestler.cards.attack;
 
 import basemod.abstracts.CustomCard;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
+import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
 import com.megacrit.cardcrawl.actions.common.DamageAction;
+import com.megacrit.cardcrawl.actions.common.GainBlockAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.cards.DamageInfo;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
@@ -10,6 +12,7 @@ import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
+import com.megacrit.cardcrawl.powers.ArtifactPower;
 import thewrestler.actions.power.ApplyGrappledAction;
 import thewrestler.enums.AbstractCardEnum;
 
@@ -30,12 +33,15 @@ public class TriangleChoke extends CustomCard {
 
   private static final int COST = 1;
   private static final int DAMAGE = 7;
-  private static final int DAMAGE_UPGRADE = 3;
+  private static final int BLOCK = 7;
+  private static final int DAMAGE__AND_BLOCK_UPGRADE = 3;
+  private static final int ARTIFACT_AMOUNT = 1;
 
   public TriangleChoke() {
-    super(ID, NAME, getCardResourcePath(IMG_PATH), COST, DESCRIPTION, TYPE,
+    super(ID, NAME, getCardResourcePath(IMG_PATH), COST, getDescription(ARTIFACT_AMOUNT), TYPE,
         AbstractCardEnum.THE_WRESTLER_ORANGE, RARITY, TARGET);
     this.baseDamage = this.damage = DAMAGE;
+    this.baseBlock = this.block = BLOCK;
   }
 
   @Override
@@ -45,7 +51,9 @@ public class TriangleChoke extends CustomCard {
             AbstractGameAction.AttackEffect.SLASH_HORIZONTAL));
 
     if (getNumPowersPlayed() > 0 && getNumSkillsPlayed() > 0) {
-      AbstractDungeon.actionManager.addToBottom(new ApplyGrappledAction(m, p));
+      AbstractDungeon.actionManager.addToBottom(new GainBlockAction(p, p, this.block));
+      AbstractDungeon.actionManager.addToBottom(
+          new ApplyPowerAction(p, p, new ArtifactPower(p, ARTIFACT_AMOUNT), ARTIFACT_AMOUNT));
     }
   }
 
@@ -58,7 +66,10 @@ public class TriangleChoke extends CustomCard {
   public void upgrade() {
     if (!this.upgraded) {
       this.upgradeName();
-      this.upgradeDamage(DAMAGE_UPGRADE);
+      this.upgradeDamage(DAMAGE__AND_BLOCK_UPGRADE);
+      this.upgradeBlock(DAMAGE__AND_BLOCK_UPGRADE);
+      this.rawDescription = getDescription(ARTIFACT_AMOUNT);
+      this.initializeDescription();
     }
   }
 
@@ -72,6 +83,10 @@ public class TriangleChoke extends CustomCard {
   private static int getNumSkillsPlayed() {
     return (int) AbstractDungeon.actionManager.cardsPlayedThisTurn.stream()
         .filter(c -> c.type == CardType.SKILL).count();
+  }
+
+  private static String getDescription(int numArtifact) {
+    return DESCRIPTION + numArtifact + EXTENDED_DESCRIPTION[0];
   }
 
   static {

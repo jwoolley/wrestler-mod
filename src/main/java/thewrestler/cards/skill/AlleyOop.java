@@ -34,7 +34,7 @@ public class AlleyOop extends CustomCard {
   private static final int COST = 1;
   private static final int NUM_CARDS = 2;
   private static final int MAX_CARD_COST = 1;
-  private static final int NUM_CARDS_UPGRADE = 1;
+  private static final int UPGRADED_COST = 0;
 
   public AlleyOop() {
     super(ID, NAME, getCardResourcePath(IMG_PATH), COST, getDescription(MAX_CARD_COST), TYPE,
@@ -44,7 +44,7 @@ public class AlleyOop extends CustomCard {
 
   @Override
   public void use(AbstractPlayer p, AbstractMonster m) {
-    Predicate<AbstractCard> predicate =  c -> c.cost <= MAX_CARD_COST;
+    Predicate<AbstractCard> predicate =  c -> c.cost <= MAX_CARD_COST && c.type == CardType.ATTACK;
     AbstractDungeon.actionManager.addToBottom(
         new MoveRandomCardsFromDrawPileToHandAction(this.magicNumber, predicate));
   }
@@ -58,7 +58,7 @@ public class AlleyOop extends CustomCard {
   public void upgrade() {
     if (!this.upgraded) {
       this.upgradeName();
-      this.upgradeMagicNumber(NUM_CARDS_UPGRADE);
+      this.upgradeBaseCost(UPGRADED_COST);
       this.rawDescription = getDescription(MAX_CARD_COST);
       initializeDescription();
     }
