@@ -8,6 +8,7 @@ import thewrestler.signaturemoves.upgrades.UpgradeType;
 public class DragonGateMoveInfo extends AbstractSignatureMoveInfo {
   private static final int NUM_CARDS_REQUIRED = 5;
   private int numCardsExhausted = 0;
+  private boolean alreadyGainedThisCombat;
 
   public DragonGateMoveInfo() {
     this(SignatureMoveUpgradeList.NO_UPGRADES, true);
@@ -15,6 +16,21 @@ public class DragonGateMoveInfo extends AbstractSignatureMoveInfo {
 
   public DragonGateMoveInfo(SignatureMoveUpgradeList upgradeList, boolean isFirstInstance) {
     super(new DragonGate(), upgradeList, isFirstInstance);
+  }
+
+  @Override
+  public boolean gainedCardThisCombat() {
+    return alreadyGainedThisCombat;
+  }
+
+  @Override
+  public void flagCardAsGained() {
+    alreadyGainedThisCombat = true;
+  }
+
+  @Override
+  public void resetForNewCombat() {
+    alreadyGainedThisCombat = false;
   }
 
   @Override

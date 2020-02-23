@@ -7,9 +7,10 @@ import thewrestler.signaturemoves.upgrades.SignatureMoveUpgradeList;
 import thewrestler.signaturemoves.upgrades.UpgradeType;
 
 public class PiledriverMoveInfo extends AbstractSignatureMoveInfo {
-  private static final int TURNS_REQUIRED = 1;
-  private static final int MAX_CARDS = 1;
+  private static final int TURNS_REQUIRED = 2;
+  private static final int MAX_CARDS = 3;
   private int numTurns = 0;
+  private boolean alreadyGainedThisCombat;
 
   public PiledriverMoveInfo() {
     this(SignatureMoveUpgradeList.NO_UPGRADES, true);
@@ -17,6 +18,21 @@ public class PiledriverMoveInfo extends AbstractSignatureMoveInfo {
 
   public PiledriverMoveInfo(SignatureMoveUpgradeList upgradeList, boolean isFirstInstance) {
     super(new Piledriver(), upgradeList, isFirstInstance);
+  }
+
+  @Override
+  public boolean gainedCardThisCombat() {
+    return alreadyGainedThisCombat;
+  }
+
+  @Override
+  public void flagCardAsGained() {
+    alreadyGainedThisCombat = true;
+  }
+
+  @Override
+  public void resetForNewCombat() {
+    alreadyGainedThisCombat = false;
   }
 
   @Override
@@ -69,7 +85,7 @@ public class PiledriverMoveInfo extends AbstractSignatureMoveInfo {
 
   @Override
   public boolean _canStillTriggerCardGain() {
-    return numTurns < TURNS_REQUIRED;
+    return numTurns <= TURNS_REQUIRED;
   }
 
   private int getTurnsRemaining() {

@@ -8,6 +8,7 @@ import thewrestler.signaturemoves.upgrades.UpgradeType;
 public class ChokeslamMoveInfo extends AbstractSignatureMoveInfo {
   private static final int GRAPPLES_REQUIRED = 2;
   private int grappledCount = 0;
+  private boolean alreadyGainedThisCombat;
 
   public ChokeslamMoveInfo() {
     this(SignatureMoveUpgradeList.NO_UPGRADES, true);
@@ -15,6 +16,22 @@ public class ChokeslamMoveInfo extends AbstractSignatureMoveInfo {
 
   public ChokeslamMoveInfo(SignatureMoveUpgradeList upgradeList, boolean isFirstInstance) {
     super(new Chokeslam(), upgradeList, isFirstInstance);
+    alreadyGainedThisCombat = false;
+  }
+
+  @Override
+  public boolean gainedCardThisCombat() {
+    return alreadyGainedThisCombat;
+  }
+
+  @Override
+  public void flagCardAsGained() {
+    alreadyGainedThisCombat = true;
+  }
+
+  @Override
+  public void resetForNewCombat() {
+    alreadyGainedThisCombat = false;
   }
 
   @Override

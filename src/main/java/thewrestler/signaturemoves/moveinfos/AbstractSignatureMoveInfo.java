@@ -34,11 +34,15 @@ public abstract class AbstractSignatureMoveInfo implements StartOfCombatListener
     this.signatureMoveCard = signatureMoveCard.makeCopy();
     this.upgradeList = new SignatureMoveUpgradeList(upgradeList);
     this.isFirstInstance = isFirstInstance;
-    this.manuallyTriggeredCardGain = false;
+    this.resetForNewCombat();
     if (upgradeList != SignatureMoveUpgradeList.NO_UPGRADES) {
       this.signatureMoveCard.applyUpgrades(upgradeList);
     }
   }
+
+  public abstract boolean gainedCardThisCombat();
+  public abstract void flagCardAsGained();
+  public abstract void resetForNewCombat();
 
   public AbstractSignatureMoveInfo makeCopy() {
     return this.makeCopy(this.upgradeList);
@@ -86,13 +90,13 @@ public abstract class AbstractSignatureMoveInfo implements StartOfCombatListener
     } else {
       AbstractDungeon.actionManager.addToBottom(new MakeTempCardInHandAction(this.signatureMoveCard));
     }
+
+    this.flagCardAsGained();
   }
 
   abstract protected boolean _canStillTriggerCardGain();
 
-  protected boolean manuallyTriggeredCardGain;
   public void manuallyTriggerCardGain(boolean toDeck, boolean onTop) {
-    this.manuallyTriggeredCardGain = true;
     triggerGainCard(toDeck, onTop);
   }
 
@@ -105,17 +109,17 @@ public abstract class AbstractSignatureMoveInfo implements StartOfCombatListener
   };
 
   public void atStartOfCombat() {
-    this.manuallyTriggeredCardGain = false;
+    this.resetForNewCombat();
     this._atStartOfCombat();
   }
 
   public void atEndOfCombat() {
-    this.manuallyTriggeredCardGain = false;
+    this.resetForNewCombat();
     this._atEndOfCombat();
   }
 
   public boolean canStillTriggerCardGain() {
-    return !this.manuallyTriggeredCardGain && this._canStillTriggerCardGain();
+    return !this.gainedCardThisCombat() && this._canStillTriggerCardGain();
   }
 
   static class MoveCardCustomSavable implements CustomSavable<Integer> {
