@@ -1,9 +1,13 @@
 package thewrestler.util.info.sportsmanship;
 
 import basemod.abstracts.CustomSavable;
+import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
+import com.megacrit.cardcrawl.cards.DamageInfo;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
+import com.megacrit.cardcrawl.core.Settings;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
+import com.sun.org.apache.bcel.internal.generic.ACONST_NULL;
 import thewrestler.WrestlerMod;
 import thewrestler.cards.EndOfCombatListener;
 import thewrestler.cards.StartOfCombatListener;
@@ -12,6 +16,8 @@ import thewrestler.cards.skill.AbstractSportsmanshipListener;
 import thewrestler.characters.WrestlerCharacter;
 import thewrestler.util.BasicUtils;
 import thewrestler.util.info.CombatInfo;
+import thewrestler.util.info.penaltycard.AbstractPenaltyCard;
+import thewrestler.util.info.penaltycard.PenaltyCardGroup;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,20 +29,21 @@ public class SportsmanshipInfo implements StartOfCombatListener, EndOfCombatList
 
   public static final int DIRTY_CARD_UNSPORTING_INCREASE_THRESHOLD = 2;
   public static final int MAX_DIRTY_CARDS_FOR_UNSPORTING_REDUCTION = 0;
-  private final static int STARTING_AMOUNT = 0;
-  public final static int MIN_UNSPORTING = 0;
   public final static int MAX_UNSPORTING = 3;
 
-  private int amount;
+  private final PenaltyCardGroup penaltyCardGroup;
 
   public SportsmanshipInfo() {
-    this.amount = STARTING_AMOUNT;
+    penaltyCardGroup = new PenaltyCardGroup();
+  }
+
+  public PenaltyCardGroup getPenaltyCards() {
+    return penaltyCardGroup;
   }
 
   public void resetUnsporting(boolean isEndOfTurnChange) {
-    decreaseUnsporting(this.amount, isEndOfTurnChange);
+    decreaseUnsporting(this.penaltyCardGroup.size(), isEndOfTurnChange);
   }
-
 
   private void increaseUnsporting() {
     increaseUnsporting(1, false);
@@ -52,24 +59,23 @@ public class SportsmanshipInfo implements StartOfCombatListener, EndOfCombatList
       return;
     }
 
-    if (this.amount >= MAX_UNSPORTING) {
+    if (getNumPenaltyCards() >= MAX_UNSPORTING) {
       return;
     }
 
-    final int previousAmount = this.amount;
-    if (this.amount + amount > MAX_UNSPORTING) {
-      this.amount = MAX_UNSPORTING;
-    } else {
-      this.amount += amount;
-    }
-    final int actualChangeAmount = this.amount - previousAmount;
+    final int changeAmount = (getNumPenaltyCards() + amount) >= MAX_UNSPORTING ? MAX_UNSPORTING - getNumPenaltyCards() : amount;
 
-    if (actualChangeAmount > 0) {
-      final int changeAmount = actualChangeAmount; // closure dictates that this needs to be final
+    boolean wasSporting = this._isSporting();
+
+
+
+    if (changeAmount > 0) {
       List<AbstractSportsmanshipListener> cards = getUnsportingListenerCards();
-      cards.forEach(c -> c.onUnsportingChanged(changeAmount, this.amount, isEndOfTurnChange));
+      cards.forEach(c -> c.onUnsportingChanged(changeAmount, getNumPenaltyCards(), isEndOfTurnChange));
 
-      boolean becameUnsporting = previousAmount == 0 && this.amount > 0;
+      AbstractDungeon.actionManager.addToBottom(new RemovePenaltyCardAction(this.penaltyCardGroup, changeAmount));
+
+      boolean becameUnsporting = wasSporting && _isUnsporting();
       if (becameUnsporting) {
         cards.forEach(AbstractSportsmanshipListener::onBecomeUnsporting);
       }
@@ -84,53 +90,100 @@ public class SportsmanshipInfo implements StartOfCombatListener, EndOfCombatList
     decreaseUnsporting(1, false);
   }
 
+  private int getNumPenaltyCards() {
+    return this.penaltyCardGroup.size();
+  }
+
   public void decreaseUnsporting(int amount, boolean isEndOfTurnChange) {
     if (amount < 0) {
       increaseUnsporting(-amount, isEndOfTurnChange);
       return;
     }
 
-    if (this.amount <= MIN_UNSPORTING) {
+    if (this.penaltyCardGroup.isEmpty()) {
       return;
     }
 
-    final int previousAmount = this.amount;
-    if (this.amount - amount < MIN_UNSPORTING) {
-      this.amount = MIN_UNSPORTING;
-    } else {
-      this.amount -= amount;
-    }
+    final int previousAmount = getNumPenaltyCards();
+    final int changeAmount = (previousAmount - amount < 0) ? previousAmount : amount;
 
-    final int actualChangeAmount = previousAmount - this.amount; // this is an absolute (hence positive) value
+    boolean wasSporting = this._isSporting();
 
-    if (actualChangeAmount > 0) {
-      final int changeAmount = actualChangeAmount; // closure dictates that this needs to be final
+    AbstractDungeon.actionManager.addToBottom(new RemovePenaltyCardAction(this.penaltyCardGroup, changeAmount));
 
+    if (changeAmount > 0) {
       List<AbstractSportsmanshipListener> cards = getUnsportingListenerCards();
-      cards.forEach(c -> c.onUnsportingChanged(-changeAmount, this.amount, isEndOfTurnChange));
+      cards.forEach(c -> c.onUnsportingChanged(-changeAmount, getNumPenaltyCards(), isEndOfTurnChange));
 
-      // TODO: need to rename this and flip it around
-      boolean becameSporting = previousAmount > 0 && this.amount == 0;
+      boolean becameSporting = !wasSporting && _isSporting();
       if (becameSporting) {
         cards.forEach(AbstractSportsmanshipListener::onBecomeSporting);
       }
     }
   }
 
+  static class RemovePenaltyCardAction extends AbstractGameAction {
+    private final static float ACTION_DURATION =  Settings.ACTION_DUR_XFAST;
+    private final PenaltyCardGroup penaltyCardGroup;
+    public RemovePenaltyCardAction(PenaltyCardGroup penaltyCardGroup, int amount) {
+      this.duration = Settings.ACTION_DUR_XFAST;;
+      this.actionType = AbstractGameAction.ActionType.SPECIAL;
+      this.penaltyCardGroup = penaltyCardGroup;
+      this.amount = amount;
+    }
+    @Override
+    public void update() {
+      if (this.duration < ACTION_DURATION) {
+        penaltyCardGroup.remove();
+        if (this.amount > 1) {
+          AbstractDungeon.actionManager.addToBottom(
+              new RemovePenaltyCardAction(penaltyCardGroup, this.amount - 1));
+        }
+        this.isDone = true;
+        return;
+      }
+      tickDuration();
+    }
+  }
+
+  static class AddPenaltyCardAction extends AbstractGameAction {
+    private final static float ACTION_DURATION =  Settings.ACTION_DUR_XFAST;
+    private final PenaltyCardGroup penaltyCardGroup;
+    public AddPenaltyCardAction(PenaltyCardGroup penaltyCardGroup, int amount) {
+      this.duration = Settings.ACTION_DUR_XFAST;;
+      this.actionType = AbstractGameAction.ActionType.SPECIAL;
+      this.penaltyCardGroup = penaltyCardGroup;
+      this.amount = amount;
+    }
+    @Override
+    public void update() {
+      if (this.duration < ACTION_DURATION) {
+        penaltyCardGroup.remove();
+        if (this.amount > 1) {
+          AbstractDungeon.actionManager.addToBottom(
+              new AddPenaltyCardAction(penaltyCardGroup, this.amount - 1));
+        }
+        this.isDone = true;
+        return;
+      }
+      tickDuration();
+    }
+  }
+
   public int getUnsportingAmount() {
-    return this.amount;
+    return getNumPenaltyCards();
   }
 
   public int getUnsportingAtEndOfCombat() {
-    return this.amount;
+    return getNumPenaltyCards();
   }
 
   private boolean _isSporting() {
-    return this.amount == 0;
+    return this.penaltyCardGroup.isEmpty();
   }
 
   private boolean _isUnsporting() {
-    return this.amount > 0;
+    return !this.penaltyCardGroup.isEmpty();
   }
 
   public static boolean hasSportsmanshipInfo() {
@@ -154,7 +207,7 @@ public class SportsmanshipInfo implements StartOfCombatListener, EndOfCombatList
   }
 
   public void reset() {
-    this.amount = STARTING_AMOUNT;
+    this.penaltyCardGroup.clear();
   }
 //
 //  public void setUnsportingEndOfCombatValueFromSave(int amount) {
@@ -185,7 +238,7 @@ public class SportsmanshipInfo implements StartOfCombatListener, EndOfCombatList
 
   public void atEndOfTurn(){
     endOfTurnUnsportingCheck();
-    WrestlerMod.logger.info("UnsportingInfo::_atEndOfTurn sportsmanship: " + this.amount);
+    WrestlerMod.logger.info("UnsportingInfo::_atEndOfTurn sportsmanship: " + getNumPenaltyCards());
   }
 
 
@@ -205,16 +258,16 @@ public class SportsmanshipInfo implements StartOfCombatListener, EndOfCombatList
   }
 
   public void atStartOfTurn(){
-
+    penaltyCardGroup.forEach(AbstractPenaltyCard::atStartOfTurn);
   }
 
 
   public void atStartOfCombat(){
-    this.amount = STARTING_AMOUNT;
+    penaltyCardGroup.clear();
   }
 
   public void atEndOfCombat() {
-    this.amount = STARTING_AMOUNT;
+    penaltyCardGroup.clear();
   }
 
   public static List<AbstractCard> getPlayersDirtyCards() {
@@ -249,10 +302,10 @@ public class SportsmanshipInfo implements StartOfCombatListener, EndOfCombatList
     @Override
     public Integer onSave() {
       isStartOfRun = false;
-      WrestlerMod.logger.info("UnsportingCustomSavable saving value: " + WrestlerCharacter.getSportsmanshipInfo().amount);
+      WrestlerMod.logger.info("UnsportingCustomSavable saving value: " + WrestlerCharacter.getSportsmanshipInfo().getNumPenaltyCards());
 
-     // TODO: reintroduce "amountAtEndOfTurn"
-      return WrestlerCharacter.getSportsmanshipInfo().amount;
+     // TODO: need to track the penatlty cards (use enum and key id)
+      return WrestlerCharacter.getSportsmanshipInfo().getNumPenaltyCards();
     }
 
     @Override

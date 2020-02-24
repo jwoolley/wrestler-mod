@@ -30,7 +30,6 @@ import thewrestler.enums.AbstractCardEnum;
 import thewrestler.relics.Headgear;
 import thewrestler.relics.ImprovedHeadgear;
 import thewrestler.relics.PenaltyCard;
-import thewrestler.relics.RingCard;
 import thewrestler.signaturemoves.cards.SignatureMoveCardEnum;
 import thewrestler.signaturemoves.moveinfos.AbstractSignatureMoveInfo;
 import thewrestler.signaturemoves.upgrades.SignatureMoveUpgradeList;
