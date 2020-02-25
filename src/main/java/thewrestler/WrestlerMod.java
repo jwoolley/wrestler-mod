@@ -409,7 +409,7 @@ public class WrestlerMod implements
         // This adds a character specific relic. Only when you play with the mentioned color, will you get this relic.
         BaseMod.addRelicToCustomPool(new Headgear(), AbstractCardEnum.THE_WRESTLER_ORANGE);
         BaseMod.addRelicToCustomPool(new ImprovedHeadgear(), AbstractCardEnum.THE_WRESTLER_ORANGE);
-        BaseMod.addRelicToCustomPool(new PenaltyCard(), AbstractCardEnum.THE_WRESTLER_ORANGE);
+        BaseMod.addRelicToCustomPool(new PenaltyCardRelic(), AbstractCardEnum.THE_WRESTLER_ORANGE);
 
         BaseMod.addRelicToCustomPool(new BrutesTrophy(), AbstractCardEnum.THE_WRESTLER_ORANGE);
 
@@ -830,6 +830,7 @@ public class WrestlerMod implements
 
     static public void onExhaustCardHook(AbstractCard card) {
         WrestlerCharacter.getSignatureMoveInfo().onCardExhausted(card);
+        WrestlerCharacter.getSportsmanshipInfo().onCardExhausted(card);
     }
 
     public static Keyword getKeyword(String key) {

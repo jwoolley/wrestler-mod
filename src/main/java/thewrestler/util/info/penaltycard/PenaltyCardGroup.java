@@ -1,10 +1,39 @@
 package thewrestler.util.info.penaltycard;
 
-import thewrestler.relics.PenaltyCard;
+import com.megacrit.cardcrawl.cards.AbstractCard;
+import thewrestler.util.info.sportsmanship.SportsmanshipInfo;
 
 import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class PenaltyCardGroup extends ArrayList<AbstractPenaltyCard> {
+
+  // TODO: this almost certainly doesn't belong here; probably put on SportsmanshipInfo (which exposes a getStrategy())
+  private AbstractPenaltyCardStrategy strategy = new AbstractPenaltyCardStrategy(SportsmanshipInfo.MAX_PENALTY_CARDS) {
+    @Override
+    public AbstractPenaltyCard getNextCard() {
+      return new RedPenaltyCard();
+    }
+
+    @Override
+    public AbstractPenaltyCard previewNextCard() {
+      // this is extraordinarily sloppy and is only a placeholder until there's a real strategy (where is can be
+      //  backed by a list)
+      return new RedPenaltyCard();
+    }
+
+    @Override
+    public List<AbstractPenaltyCard> previewNextCards() {
+      return Stream.generate(RedPenaltyCard::new).limit(this.maxCards - SportsmanshipInfo.getAmount()).collect(Collectors.toList());
+    }
+
+    @Override
+    public void resetForCombat() {
+
+    }
+  };
 
   public void remove() {
     if (!this.isEmpty()) {
@@ -13,11 +42,56 @@ public class PenaltyCardGroup extends ArrayList<AbstractPenaltyCard> {
     }
   }
 
-  public void addPenaltyCard() {
-
+  private AbstractPenaltyCard getNextCardToBeGained() {
+    return this.strategy.getNextCard();
   }
 
-  protected AbstractPenaltyCard getNextPenatlyCard() {
-    return new RedPenaltyCard();
+  public void gainCard() {
+    if (this.size() < SportsmanshipInfo.MAX_PENALTY_CARDS) {
+      this.add(getNextCardToBeGained());
+    }
+  }
+
+  public AbstractPenaltyCardStrategy getStrategy() {
+    return this.strategy;
+  }
+
+  public enum PenaltyCardEnum {
+    RED(new RedPenaltyCard());
+
+    private PenaltyCardEnum(AbstractPenaltyCard card) {
+      this.card = card.makeCopy();
+    }
+
+    private AbstractPenaltyCard card;
+  }
+
+
+  public void atStartOfTurn() {
+    this.forEach(AbstractPenaltyCard::atStartOfTurn);
+  }
+  public void atEndOfTurn() {
+    this.forEach(AbstractPenaltyCard::atEndOfTurn);
+  }
+
+  public void onCardUsed(AbstractCard card) {
+    this.forEach(c -> c.onCardUsed(card));
+  }
+
+  public void onCardExhausted(AbstractCard card) {
+    this.forEach(c -> c.onCardExhausted(card));
+  }
+
+  public static abstract class AbstractPenaltyCardStrategy {
+    protected final int maxCards;
+
+    public AbstractPenaltyCardStrategy(int maxCards) {
+      this.maxCards = maxCards;
+    }
+
+    public abstract AbstractPenaltyCard getNextCard();
+    public abstract AbstractPenaltyCard previewNextCard();
+    public abstract List<AbstractPenaltyCard> previewNextCards();
+    public abstract void resetForCombat();
   }
 }

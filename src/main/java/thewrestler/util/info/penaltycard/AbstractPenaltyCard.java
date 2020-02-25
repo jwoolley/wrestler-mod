@@ -27,12 +27,23 @@ public abstract class AbstractPenaltyCard {
     return getTextureFromMap(this.id, this.imgFilePath);
   }
 
+  public abstract AbstractPenaltyCard makeCopy();
+
   public abstract void onGained();
   public abstract void onRemoved();
   public abstract void atStartOfTurn();
   public abstract void atEndOfTurn();
-  public abstract void onCardPlayed(AbstractCard card);
+  public abstract void onCardUsed(AbstractCard card);
   public abstract void onCardExhausted(AbstractCard card);
+
+  // TODO: implement this
+  public void flash() {
+
+  }
+
+  public String getDebugDescription() {
+    return this.name + " : " + this.description;
+  }
 
   private static Texture getTextureFromMap(String id, String filePath) {
     if (!cardIconTextures.containsKey(id)) {

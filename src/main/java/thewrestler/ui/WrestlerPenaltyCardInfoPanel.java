@@ -23,7 +23,6 @@ import thewrestler.keywords.CustomTooltipKeywords;
 import thewrestler.keywords.TooltipKeywords;
 import thewrestler.util.BasicUtils;
 import thewrestler.util.TextureLoader;
-import thewrestler.util.info.sportsmanship.SportsmanshipInfo;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -152,7 +151,7 @@ public class WrestlerPenaltyCardInfoPanel implements CustomInfoPanel, StartOfCom
 
         //    FontHelper.renderFontLeft(
         //        sb,
-        //        font, this.unsportingValue + separatorString + SportsmanshipInfo.MAX_UNSPORTING,
+        //        font, this.unsportingValue + separatorString + SportsmanshipInfo.MAX_PENALTY_CARDS,
         //        this.xOffset + xUnsportingTextOffset,
         //        this.yOffset + this.yTextOffset - (yLineOffset * 1.035f),
         //        color);

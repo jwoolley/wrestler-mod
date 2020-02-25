@@ -5,6 +5,14 @@
     ]
   },
 
+  "WrestlerMod:RedPenaltyCard": {
+    "TEXT": [
+      "Red Penalty Card",
+      "At the end of your turn, lose #b",
+      " HP."
+    ]
+  },
+
   "WrestlerMod:CombatInfoPanel": {
     "TEXT": [
       "Played This Turn",

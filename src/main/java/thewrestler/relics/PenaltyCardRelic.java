@@ -2,7 +2,6 @@ package thewrestler.relics;
 
 import com.badlogic.gdx.graphics.Texture;
 import com.megacrit.cardcrawl.actions.common.DrawCardAction;
-import com.megacrit.cardcrawl.actions.common.GainEnergyAction;
 import com.megacrit.cardcrawl.actions.common.LoseHPAction;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
@@ -17,7 +16,7 @@ import java.util.List;
 import static thewrestler.WrestlerMod.makeRelicOutlinePath;
 import static thewrestler.WrestlerMod.makeRelicPath;
 
-public class PenaltyCard extends CustomWrestlerRelic {
+public class PenaltyCardRelic extends CustomWrestlerRelic {
   public static final String ID = WrestlerMod.makeID("PenaltyCard");
   private static final Texture IMG = TextureLoader.getTexture(makeRelicPath("penaltycard.png"));
   private static final Texture OUTLINE = TextureLoader.getTexture(makeRelicOutlinePath("penaltycard.png"));
@@ -28,7 +27,7 @@ public class PenaltyCard extends CustomWrestlerRelic {
   public static final int CARD_AMOUNT = 1;
   public static final int HP_LOSS_AMOUNT = 1;
 
-  public PenaltyCard() {
+  public PenaltyCardRelic() {
     super(ID, IMG, OUTLINE, RELIC_TIER, LandingSound.FLAT);
   }
 
@@ -44,7 +43,7 @@ public class PenaltyCard extends CustomWrestlerRelic {
       flash();
       AbstractPlayer player = AbstractDungeon.player;
       AbstractDungeon.actionManager.addToBottom(new DrawCardAction(CARD_AMOUNT));
-      AbstractDungeon.actionManager.addToBottom(new LoseHPAction(player, player, HP_LOSS_AMOUNT));
+//      AbstractDungeon.actionManager.addToBottom(new LoseHPAction(player, player, HP_LOSS_AMOUNT));
     }
   }
 
