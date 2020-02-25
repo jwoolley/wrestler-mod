@@ -34,8 +34,7 @@ public class PenaltyCardRelic extends CustomWrestlerRelic {
   @Override
   public String getUpdatedDescription() {
     return DESCRIPTIONS[0]
-        + (CARD_AMOUNT  == 1 ? DESCRIPTIONS[1] : DESCRIPTIONS[2])
-        + DESCRIPTIONS[3] + HP_LOSS_AMOUNT + DESCRIPTIONS[4];
+        + (CARD_AMOUNT  == 1 ? DESCRIPTIONS[1] : DESCRIPTIONS[2]);
   }
 
   public void atTurnStart() {

@@ -23,6 +23,7 @@ import thewrestler.keywords.CustomTooltipKeywords;
 import thewrestler.keywords.TooltipKeywords;
 import thewrestler.util.BasicUtils;
 import thewrestler.util.TextureLoader;
+import thewrestler.util.info.penaltycard.AbstractPenaltyCard;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -43,6 +44,9 @@ public class WrestlerPenaltyCardInfoPanel implements CustomInfoPanel, StartOfCom
   private static final float Y_TEXT_OFFSET = Y_TEXT_OFFSET_WIDESCREEN + 0;
   private static final float TOOLTIP_X_OFFSET = WIDTH + 16.0F;
   private static final float TOOLTIP_Y_OFFSET = -(HEIGHT + 180.0f);
+  private static final int PENALTY_CARD_X_OFFSET = 84;
+  private static final int PENALTY_CARD_X_DELTA_OFFSET = 14;
+  private static final int PENALTY_CARD_Y_OFFSET = -12;
 
   private static final String UI_NAME = WrestlerMod.makeID("PenaltyCardInfoPanel");
 
@@ -60,11 +64,15 @@ public class WrestlerPenaltyCardInfoPanel implements CustomInfoPanel, StartOfCom
   private static final Color NEUTRAL_UNSPORTING_COLOR = Color.WHITE.cpy();
   private static final Color POSITIVE_UNSPORTING_COLOR = Settings.RED_TEXT_COLOR.cpy();
 
-  private static final List<String> keywordList = Arrays.asList(
-      CustomTooltipKeywords.PENALTY_CARD, CustomTooltipKeywords.SPORTSMANSHIP);
+  //  private static final List<String> keywordList = Arrays.asList(
+  //      CustomTooltipKeywords.PENALTY_CARD, CustomTooltipKeywords.SPORTSMANSHIP);
+
+  // TODO: only show Penalty Cards tooltip if no specific Penalty Card tooltip is shown (i.e. none are hovered)
+  private static final List<String> keywordList = Arrays.asList(CustomTooltipKeywords.SPORTSMANSHIP, CustomTooltipKeywords.PENALTY_CARDS_NO_GLYPH);
 
   private static final List<Keyword> baseGameKeywordList = new ArrayList<>();
   private ArrayList<PowerTip> keywordPowerTips;
+  private ArrayList<PowerTip> currentPowerTips = new ArrayList<>(getPowerTips());
 
   private final String uiName;
   private Texture[] panelBackgroundImage = new Texture[BACKGROUND_IMG_FILEPATHS.size()];
@@ -97,25 +105,53 @@ public class WrestlerPenaltyCardInfoPanel implements CustomInfoPanel, StartOfCom
     if (updateUnsportingValueFlag) {
       this.unsportingValue = WrestlerCharacter.getSportsmanshipInfo().getUnsportingAmount();
     }
+
+    WrestlerCharacter.getSportsmanshipInfo().getPenaltyCards().forEach(AbstractPenaltyCard::update);
   }
 
   @Override
   public void render(SpriteBatch sb) {
     if (shouldRender()) {
+      // use the empty panel as background image. remove other bg images once dynamic penatly cards are in place
+      Texture backgroundImage = getPanelBackgroundImage(0);
+      // Texture backgroundImage = getPanelBackgroundImage(this.unsportingValue);
+      List<PowerTip> powerTips = new ArrayList<>(getPowerTips());
 
-      if (this.hb.hovered) {
-        TipHelper.queuePowerTips(
-            hb.x + TOOLTIP_X_OFFSET * SettingsHelper.getScaleX(),
-            hb.y - TOOLTIP_Y_OFFSET * SettingsHelper.getScaleY(), getPowerTips());
-      }
-
-      Texture backgroundImage = getPanelBackgroundImage(this.unsportingValue);
       sb.draw(backgroundImage,
           this.xOffset, this.yOffset,
           backgroundImage.getWidth() * SettingsHelper.getScaleX(),  backgroundImage.getHeight() * SettingsHelper.getScaleY(),
           0, 0,
           backgroundImage.getWidth(),  backgroundImage.getHeight(),
           false, false);
+
+      List<AbstractPenaltyCard> cards = WrestlerCharacter.getSportsmanshipInfo().getPenaltyCards();
+
+      if (!cards.isEmpty()) {
+        cards.get(0).setPosition(this.xOffset + PENALTY_CARD_X_OFFSET, this.yOffset - PENALTY_CARD_Y_OFFSET);
+
+        for (int i = 1; i < cards.size(); i++) {
+          AbstractPenaltyCard card = cards.get(i);
+          card.setPosition(this.xOffset
+                  + PENALTY_CARD_X_OFFSET + (PENALTY_CARD_X_DELTA_OFFSET + AbstractPenaltyCard.WIDTH) * i,
+                  this.yOffset - PENALTY_CARD_Y_OFFSET);
+        }
+
+        currentPowerTips.clear();
+        currentPowerTips.addAll(getPowerTips());
+
+        cards.forEach(c -> {
+          c.render(sb);
+          if (c.isHovered()) {
+            currentPowerTips.add(c.getPowerTip());
+          }
+        });
+      }
+
+      if (this.hb.hovered) {
+        TipHelper.queuePowerTips(
+            hb.x + TOOLTIP_X_OFFSET * SettingsHelper.getScaleX(),
+            hb.y - TOOLTIP_Y_OFFSET * SettingsHelper.getScaleY(), currentPowerTips);
+      }
 
       renderInfoText(sb);
 

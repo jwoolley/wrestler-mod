@@ -48,7 +48,9 @@ public class PenaltyCardGroup extends ArrayList<AbstractPenaltyCard> {
 
   public void gainCard() {
     if (this.size() < SportsmanshipInfo.MAX_PENALTY_CARDS) {
-      this.add(getNextCardToBeGained());
+      AbstractPenaltyCard card = getNextCardToBeGained();
+      this.add(card);
+      card.onGained();
     }
   }
 

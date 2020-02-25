@@ -4,7 +4,7 @@
     "NAMES": [
       "sportsmanship"
     ],
-    "DESCRIPTION": "Gain a #yPenalty #yCard at end of turn if you played #b2 or more #yDirty cards. If you played no Dirty cards, lose one instead."
+    "DESCRIPTION": "Gain a #yPenalty #yCard at end of turn if you played #b2 or more #yDirty cards. If you diidn't play any, lose one instead."
   },
 
   "WrestlerMod:Dirty": {
@@ -67,7 +67,15 @@
     "NAMES": [
       "Penalty Card", "penalty_card"
     ],
-    "DESCRIPTION": "Issued at end of turn if #b2 or more #yDirty cards were played."
+    "DESCRIPTION": "Generate various negative effects. The more you have, the higher the likelihood of more severe penalties."
+  },
+
+  "WrestlerMod:PenaltyCardsNoGlyph": {
+    "PROPER_NAME": "Penalty Cards",
+    "NAMES": [
+      "Penalty Cards", "penalty_cards"
+    ],
+    "DESCRIPTION": "Generate various negative effects. The more you have, the higher the likelihood of more severe penalties."
   },
 
   "WrestlerMod:Unsporting": {

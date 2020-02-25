@@ -5,6 +5,8 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.megacrit.cardcrawl.helpers.ImageMaster;
 import thewrestler.WrestlerMod;
+import thewrestler.util.info.penaltycard.AbstractPenaltyCard;
+import thewrestler.util.info.penaltycard.RedPenaltyCard;
 
 import java.util.*;
 
@@ -15,7 +17,8 @@ public class CustomGlyph {
   private static Map<CustomGlyphEnum, String> customGlyphMap = new HashMap<>();
 
   public enum CustomGlyphEnum {
-    PENALTY_CARD;
+    PENALTY_CARD,
+    PENALTY_CARD_RED;
   }
 
   public static CustomGlyph getGlyph(CustomGlyphEnum glyphEnum) {
@@ -24,7 +27,9 @@ public class CustomGlyph {
   }
 
   private static final List<CustomGlyph> glyphList = Arrays.asList(
-      new CustomGlyph(CustomGlyphEnum.PENALTY_CARD, "penaltycard.png", 'P')
+      new CustomGlyph(CustomGlyphEnum.PENALTY_CARD, "penaltycard.png", 'P'),
+      new CustomGlyph(CustomGlyphEnum.PENALTY_CARD_RED, AbstractPenaltyCard.GLYPH_DIR_PATH,
+          RedPenaltyCard.GLYPH_IMG_FILENAME, '~')
   );
 
   public static TextureAtlas.AtlasRegion getAtlasRegion(CustomGlyphEnum key) {
@@ -45,11 +50,15 @@ public class CustomGlyph {
   private final String filepath;
   private final char inlineCodeLetter;
 
-  public CustomGlyph(CustomGlyphEnum key, String imageFilename, char inlineCodeLetter) {
+  public CustomGlyph(CustomGlyphEnum key, String glyphSubdirectory, String imageFilename, char inlineCodeLetter) {
     this.key = key;
-    this.filepath = CUSTOM_GLYPH_BASE_DIR + imageFilename;
+    this.filepath = glyphSubdirectory + imageFilename;
     this.inlineCodeLetter = inlineCodeLetter;
     customGlyphMap.put(this.key, this.filepath);
+  }
+
+  public CustomGlyph(CustomGlyphEnum key, String imageFilename, char inlineCodeLetter) {
+    this(key, CUSTOM_GLYPH_BASE_DIR, imageFilename, inlineCodeLetter);
   }
 
   public char getCodeLetter() {

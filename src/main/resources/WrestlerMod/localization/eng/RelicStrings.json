@@ -70,10 +70,8 @@
     "FLAVOR": "Property of association officials. Unauthorized possession will be met with swift punishment.",
     "DESCRIPTIONS": [
       "At the start of your turn, if you're #yUnsporting, draw ",
-      "a card",
-      " cards",
-      " and lose ",
-      " HP."
+      "a card.",
+      " cards."
     ]
   },
 
