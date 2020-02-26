@@ -4,7 +4,7 @@
     "NAMES": [
       "sportsmanship"
     ],
-    "DESCRIPTION": "Gain a #yPenalty #yCard at end of turn if you played #b2 or more #yDirty cards. If you diidn't play any, lose one instead."
+    "DESCRIPTION": "Gain a #yPenalty #yCard at end of turn if you played #b2 or more #yDirty cards. If you didn't play any, lose one instead."
   },
 
   "WrestlerMod:Dirty": {

@@ -44,8 +44,8 @@ public class WrestlerPenaltyCardInfoPanel implements CustomInfoPanel, StartOfCom
   private static final float Y_TEXT_OFFSET = Y_TEXT_OFFSET_WIDESCREEN + 0;
   private static final float TOOLTIP_X_OFFSET = WIDTH + 16.0F;
   private static final float TOOLTIP_Y_OFFSET = -(HEIGHT + 180.0f);
-  private static final int PENALTY_CARD_X_OFFSET = 84;
-  private static final int PENALTY_CARD_X_DELTA_OFFSET = 14;
+  private static final int PENALTY_CARD_X_OFFSET = 83;
+  private static final int PENALTY_CARD_X_DELTA_OFFSET = 15;
   private static final int PENALTY_CARD_Y_OFFSET = -16;
   private static final int PENALTY_CARD_Y_OFFSET_WIDSCREEN = -12;
 

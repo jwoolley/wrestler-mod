@@ -5,6 +5,22 @@
     ]
   },
 
+  "WrestlerMod:BluePenaltyCard": {
+    "TEXT": [
+      "Blue Penalty Card",
+      "At the start of your turn, a random enemy gains #b",
+      " #yBlock."
+    ]
+  },
+
+  "WrestlerMod:OrangePenaltyCard": {
+    "TEXT": [
+      "Orange Penalty Card",
+      "At the start of your turn, increase the cost of a random card in your hand by #b",
+      " until end of turn."
+    ]
+  },
+
   "WrestlerMod:RedPenaltyCard": {
     "TEXT": [
       "Red Penalty Card",
@@ -12,8 +28,6 @@
       " HP."
     ]
   },
-
-
 
   "WrestlerMod:YellowPenaltyCard": {
     "TEXT": [

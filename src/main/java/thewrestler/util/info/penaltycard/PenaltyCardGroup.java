@@ -15,7 +15,9 @@ public class PenaltyCardGroup extends ArrayList<AbstractPenaltyCard> {
   private AbstractPenaltyCardStrategy strategy = new AbstractPenaltyCardStrategy(SportsmanshipInfo.MAX_PENALTY_CARDS) {
     @Override
     public AbstractPenaltyCard getNextCard() {
-      return AbstractDungeon.miscRng.randomBoolean() ?  new RedPenaltyCard() : new YellowPenatlyCard();
+      return (AbstractDungeon.miscRng.randomBoolean()
+          ? AbstractDungeon.miscRng.randomBoolean() ?  new RedPenaltyCard() : new YellowPenatlyCard()
+          : AbstractDungeon.miscRng.randomBoolean() ? new BluePenaltyCard() : new OrangePenaltyCard());
     }
 
     @Override
@@ -58,17 +60,6 @@ public class PenaltyCardGroup extends ArrayList<AbstractPenaltyCard> {
   public AbstractPenaltyCardStrategy getStrategy() {
     return this.strategy;
   }
-
-  public enum PenaltyCardEnum {
-    RED(new RedPenaltyCard());
-
-    private PenaltyCardEnum(AbstractPenaltyCard card) {
-      this.card = card.makeCopy();
-    }
-
-    private AbstractPenaltyCard card;
-  }
-
 
   public void atStartOfTurn() {
     this.forEach(AbstractPenaltyCard::atStartOfTurn);

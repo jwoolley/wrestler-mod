@@ -5,9 +5,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.megacrit.cardcrawl.helpers.ImageMaster;
 import thewrestler.WrestlerMod;
-import thewrestler.util.info.penaltycard.AbstractPenaltyCard;
-import thewrestler.util.info.penaltycard.RedPenaltyCard;
-import thewrestler.util.info.penaltycard.YellowPenatlyCard;
+import thewrestler.util.info.penaltycard.*;
 
 import java.util.*;
 
@@ -19,6 +17,8 @@ public class CustomGlyph {
 
   public enum CustomGlyphEnum {
     PENALTY_CARD,
+    PENALTY_CARD_BLUE,
+    PENALTY_CARD_ORANGE,
     PENALTY_CARD_RED,
     PENALTY_CARD_YELLOW;
   }
@@ -31,6 +31,10 @@ public class CustomGlyph {
   private static final List<CustomGlyph> glyphList = Arrays.asList(
       new CustomGlyph(CustomGlyphEnum.PENALTY_CARD, "penaltycard.png", 'P'),
 
+      new CustomGlyph(CustomGlyphEnum.PENALTY_CARD_BLUE, AbstractPenaltyCard.GLYPH_DIR_PATH,
+          BluePenaltyCard.GLYPH_IMG_FILENAME, '~'),
+      new CustomGlyph(CustomGlyphEnum.PENALTY_CARD_ORANGE, AbstractPenaltyCard.GLYPH_DIR_PATH,
+          OrangePenaltyCard.GLYPH_IMG_FILENAME, '~'),
       new CustomGlyph(CustomGlyphEnum.PENALTY_CARD_RED, AbstractPenaltyCard.GLYPH_DIR_PATH,
           RedPenaltyCard.GLYPH_IMG_FILENAME, '~'),
       new CustomGlyph(CustomGlyphEnum.PENALTY_CARD_YELLOW, AbstractPenaltyCard.GLYPH_DIR_PATH,
