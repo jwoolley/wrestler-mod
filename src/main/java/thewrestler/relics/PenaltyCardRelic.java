@@ -22,7 +22,7 @@ public class PenaltyCardRelic extends CustomWrestlerRelic {
   private static final Texture OUTLINE = TextureLoader.getTexture(makeRelicOutlinePath("penaltycard.png"));
   private static final RelicTier RELIC_TIER = RelicTier.STARTER;
 
-  private static final List<String> POWERTIP_KEYWORDS = Arrays.asList(WrestlerMod.makeID("Unsporting"), WrestlerMod.makeID("PenaltyCard"));
+  private static final List<String> POWERTIP_KEYWORDS = Arrays.asList(WrestlerMod.makeID("Unsporting"));
 
   public static final int CARD_AMOUNT = 1;
   public static final int HP_LOSS_AMOUNT = 1;

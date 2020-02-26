@@ -7,6 +7,7 @@ import com.megacrit.cardcrawl.helpers.ImageMaster;
 import thewrestler.WrestlerMod;
 import thewrestler.util.info.penaltycard.AbstractPenaltyCard;
 import thewrestler.util.info.penaltycard.RedPenaltyCard;
+import thewrestler.util.info.penaltycard.YellowPenatlyCard;
 
 import java.util.*;
 
@@ -18,7 +19,8 @@ public class CustomGlyph {
 
   public enum CustomGlyphEnum {
     PENALTY_CARD,
-    PENALTY_CARD_RED;
+    PENALTY_CARD_RED,
+    PENALTY_CARD_YELLOW;
   }
 
   public static CustomGlyph getGlyph(CustomGlyphEnum glyphEnum) {
@@ -28,8 +30,11 @@ public class CustomGlyph {
 
   private static final List<CustomGlyph> glyphList = Arrays.asList(
       new CustomGlyph(CustomGlyphEnum.PENALTY_CARD, "penaltycard.png", 'P'),
+
       new CustomGlyph(CustomGlyphEnum.PENALTY_CARD_RED, AbstractPenaltyCard.GLYPH_DIR_PATH,
-          RedPenaltyCard.GLYPH_IMG_FILENAME, '~')
+          RedPenaltyCard.GLYPH_IMG_FILENAME, '~'),
+      new CustomGlyph(CustomGlyphEnum.PENALTY_CARD_YELLOW, AbstractPenaltyCard.GLYPH_DIR_PATH,
+          YellowPenatlyCard.GLYPH_IMG_FILENAME, '~')
   );
 
   public static TextureAtlas.AtlasRegion getAtlasRegion(CustomGlyphEnum key) {

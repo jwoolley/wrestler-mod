@@ -24,7 +24,7 @@
   },
 
   "WrestlerMod:Sporting": {
-    "PROPER_NAME": "Sporting",
+    "PROPER_NAME": "Clean",
     "NAMES": [
       "sporting"
     ],
@@ -79,7 +79,7 @@
   },
 
   "WrestlerMod:Unsporting": {
-    "PROPER_NAME": "Unsporting",
+    "PROPER_NAME": "Penalized",
     "NAMES": [
       "unsporting"
     ],

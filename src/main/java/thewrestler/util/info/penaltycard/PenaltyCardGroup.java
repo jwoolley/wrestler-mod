@@ -1,6 +1,7 @@
 package thewrestler.util.info.penaltycard;
 
 import com.megacrit.cardcrawl.cards.AbstractCard;
+import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import thewrestler.util.info.sportsmanship.SportsmanshipInfo;
 
 import java.util.ArrayList;
@@ -14,7 +15,7 @@ public class PenaltyCardGroup extends ArrayList<AbstractPenaltyCard> {
   private AbstractPenaltyCardStrategy strategy = new AbstractPenaltyCardStrategy(SportsmanshipInfo.MAX_PENALTY_CARDS) {
     @Override
     public AbstractPenaltyCard getNextCard() {
-      return new RedPenaltyCard();
+      return AbstractDungeon.miscRng.randomBoolean() ?  new RedPenaltyCard() : new YellowPenatlyCard();
     }
 
     @Override

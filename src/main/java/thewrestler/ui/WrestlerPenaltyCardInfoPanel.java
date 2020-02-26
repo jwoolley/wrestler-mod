@@ -46,7 +46,8 @@ public class WrestlerPenaltyCardInfoPanel implements CustomInfoPanel, StartOfCom
   private static final float TOOLTIP_Y_OFFSET = -(HEIGHT + 180.0f);
   private static final int PENALTY_CARD_X_OFFSET = 84;
   private static final int PENALTY_CARD_X_DELTA_OFFSET = 14;
-  private static final int PENALTY_CARD_Y_OFFSET = -12;
+  private static final int PENALTY_CARD_Y_OFFSET = -16;
+  private static final int PENALTY_CARD_Y_OFFSET_WIDSCREEN = -12;
 
   private static final String UI_NAME = WrestlerMod.makeID("PenaltyCardInfoPanel");
 
@@ -79,6 +80,7 @@ public class WrestlerPenaltyCardInfoPanel implements CustomInfoPanel, StartOfCom
   private final int xOffset;
   private final int yOffset;
   private final int yTextOffset;
+  private final int yPenaltyCardOffset;
   private Hitbox hb;
 
   private boolean updateUnsportingValueFlag = false;
@@ -93,6 +95,9 @@ public class WrestlerPenaltyCardInfoPanel implements CustomInfoPanel, StartOfCom
         (Settings.HEIGHT - (Settings.isSixteenByTen ? Y_OFFSET : Y_OFFSET_WIDESCREEN) * SettingsHelper.getScaleY()));
     this.yTextOffset =  Math.round(
         (Settings.isSixteenByTen ? Y_TEXT_OFFSET : Y_TEXT_OFFSET_WIDESCREEN) * SettingsHelper.getScaleY());
+
+    this.yPenaltyCardOffset =  Math.round(
+        (Settings.isSixteenByTen ? PENALTY_CARD_Y_OFFSET : PENALTY_CARD_Y_OFFSET_WIDSCREEN) * SettingsHelper.getScaleY());
 
     this.hb = new Hitbox(WIDTH * SettingsHelper.getScaleX(), HEIGHT * SettingsHelper.getScaleY());
     hb.translate(xOffset, yOffset);
@@ -127,13 +132,13 @@ public class WrestlerPenaltyCardInfoPanel implements CustomInfoPanel, StartOfCom
       List<AbstractPenaltyCard> cards = WrestlerCharacter.getSportsmanshipInfo().getPenaltyCards();
 
       if (!cards.isEmpty()) {
-        cards.get(0).setPosition(this.xOffset + PENALTY_CARD_X_OFFSET, this.yOffset - PENALTY_CARD_Y_OFFSET);
+        cards.get(0).setPosition(this.xOffset + PENALTY_CARD_X_OFFSET, this.yOffset - yPenaltyCardOffset);
 
         for (int i = 1; i < cards.size(); i++) {
           AbstractPenaltyCard card = cards.get(i);
           card.setPosition(this.xOffset
                   + PENALTY_CARD_X_OFFSET + (PENALTY_CARD_X_DELTA_OFFSET + AbstractPenaltyCard.WIDTH) * i,
-                  this.yOffset - PENALTY_CARD_Y_OFFSET);
+                  this.yOffset - yPenaltyCardOffset);
         }
 
         currentPowerTips.clear();

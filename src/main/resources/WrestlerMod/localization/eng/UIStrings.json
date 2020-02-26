@@ -13,6 +13,15 @@
     ]
   },
 
+
+
+  "WrestlerMod:YellowPenaltyCard": {
+    "TEXT": [
+      "Yellow Penalty Card",
+      "At the end of your turn, add a #yDazed to your draw pile"
+    ]
+  },
+
   "WrestlerMod:CombatInfoPanel": {
     "TEXT": [
       "Played This Turn",
