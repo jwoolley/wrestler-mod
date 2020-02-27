@@ -2,9 +2,10 @@ package thewrestler.util.info.penaltycard;
 
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
-import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.core.Settings;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
+import org.apache.logging.log4j.Logger;
+import thewrestler.WrestlerMod;
 import thewrestler.util.info.sportsmanship.SportsmanshipInfo;
 
 import java.util.ArrayList;
@@ -65,11 +66,11 @@ public class PenaltyCardGroup extends ArrayList<AbstractPenaltyCard> {
   }
 
   public void atStartOfTurn() {
-    AbstractDungeon.actionManager.addToBottom(new TriggerPenaltyCardsStartOfTurnAction(this));
+    AbstractDungeon.actionManager.addToBottom(new PenaltyCardsStartOfTurnAction(this));
   }
 
   public void atEndOfTurn() {
-    AbstractDungeon.actionManager.addToBottom(new TriggerPenaltyCardsEndOfTurnAction(this));
+    AbstractDungeon.actionManager.addToBottom(new PenaltyCardsEndOfTurnAction(this));
   }
 
   public void onCardUsed(AbstractCard card) {
@@ -93,11 +94,11 @@ public class PenaltyCardGroup extends ArrayList<AbstractPenaltyCard> {
     public abstract void resetForCombat();
   }
 
-  static class TriggerPenaltyCardsStartOfTurnAction extends AbstractGameAction {
-    private final static float ACTION_DURATION =  Settings.ACTION_DUR_MED;
+  static class PenaltyCardsStartOfTurnAction extends AbstractGameAction {
+    private final static float ACTION_DURATION =  Settings.ACTION_DUR_XFAST;
     private final List<AbstractPenaltyCard> penaltyCardList;
     private boolean triggeredCard;
-    public TriggerPenaltyCardsStartOfTurnAction(List<AbstractPenaltyCard> penaltyCardGroup) {
+    public PenaltyCardsStartOfTurnAction(List<AbstractPenaltyCard> penaltyCardGroup) {
       this.duration = ACTION_DURATION;
       this.actionType = AbstractGameAction.ActionType.SPECIAL;
       this.penaltyCardList = penaltyCardGroup;
@@ -105,16 +106,25 @@ public class PenaltyCardGroup extends ArrayList<AbstractPenaltyCard> {
     }
     @Override
     public void update() {
+      Logger logger = WrestlerMod.logger;
+      logger.info("PenaltyCardsStartOfTurnAction::update [" + this.penaltyCardList.size() + "] duration: " + this.duration);
+
       if (this.duration < ACTION_DURATION) {
         if (!this.triggeredCard && this.penaltyCardList.size() > 0) {
+          logger.info("PenaltyCardsStartOfTurnAction::update [" + this.penaltyCardList.size() + "] triggering card");
+
           penaltyCardList.get(0).atStartOfTurn();
           this.triggeredCard = true;
         }
         if (this.penaltyCardList.size() <= 1) {
+          logger.info("PenaltyCardsStartOfTurnAction::update [" + this.penaltyCardList.size() + "] finished");
+
           this.isDone = true;
-        } else if (this.duration < 0.1f) {
+        } else if (this.duration < 0.15f) {
+          logger.info("PenaltyCardsStartOfTurnAction::update [" + this.penaltyCardList.size() + "] queueing next card");
+
           AbstractDungeon.actionManager.addToBottom(
-              new TriggerPenaltyCardsStartOfTurnAction(penaltyCardList.subList(1, penaltyCardList.size())));
+              new PenaltyCardsStartOfTurnAction(penaltyCardList.subList(1, penaltyCardList.size())));
           this.isDone = true;
         }
       }
@@ -123,11 +133,11 @@ public class PenaltyCardGroup extends ArrayList<AbstractPenaltyCard> {
   }
 
 
-  static class TriggerPenaltyCardsEndOfTurnAction extends AbstractGameAction {
-    private final static float ACTION_DURATION =  Settings.ACTION_DUR_MED;
+  static class PenaltyCardsEndOfTurnAction extends AbstractGameAction {
+    private final static float ACTION_DURATION = Settings.ACTION_DUR_FAST;
     private final List<AbstractPenaltyCard> penaltyCardList;
     private boolean triggeredCard;
-    public TriggerPenaltyCardsEndOfTurnAction(List<AbstractPenaltyCard> penaltyCardGroup) {
+    public PenaltyCardsEndOfTurnAction(List<AbstractPenaltyCard> penaltyCardGroup) {
       this.duration = ACTION_DURATION;
       this.actionType = AbstractGameAction.ActionType.SPECIAL;
       this.penaltyCardList = penaltyCardGroup;
@@ -135,16 +145,17 @@ public class PenaltyCardGroup extends ArrayList<AbstractPenaltyCard> {
     }
     @Override
     public void update() {
+      Logger logger = WrestlerMod.logger;
       if (this.duration < ACTION_DURATION) {
         if (!this.triggeredCard && this.penaltyCardList.size() > 0) {
-          penaltyCardList.get(0).atEndOfTurn();
+          this.penaltyCardList.get(0).atEndOfTurn();
           this.triggeredCard = true;
         }
         if (this.penaltyCardList.size() <= 1) {
           this.isDone = true;
         } else if (this.duration < 0.1f) {
           AbstractDungeon.actionManager.addToBottom(
-              new TriggerPenaltyCardsEndOfTurnAction(penaltyCardList.subList(1, penaltyCardList.size())));
+              new PenaltyCardsEndOfTurnAction(this.penaltyCardList.subList(1, this.penaltyCardList.size())));
           this.isDone = true;
         }
       }

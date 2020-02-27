@@ -251,7 +251,7 @@ public class SportsmanshipInfo implements StartOfCombatListener, EndOfCombatList
     endOfTurnUnsportingCheck();
 
     // trigger penalty cards AFTER they're gained (i.e. same turn)
-    AbstractDungeon.actionManager.addToBottom(new TriggerPenaltyCardEndOfTurnAction(this.penaltyCardGroup));
+    penaltyCardGroup.atEndOfTurn();
     WrestlerMod.logger.info("UnsportingInfo::_atEndOfTurn sportsmanship: " + getNumPenaltyCards());
   }
 
@@ -291,8 +291,8 @@ public class SportsmanshipInfo implements StartOfCombatListener, EndOfCombatList
     }
   }
 
-  public void atStartOfTurn(){
-    penaltyCardGroup.forEach(AbstractPenaltyCard::atStartOfTurn);
+  public void atStartOfTurn() {
+    penaltyCardGroup.atStartOfTurn();
   }
 
 

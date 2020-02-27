@@ -276,6 +276,7 @@ public class WrestlerMod implements
         reflectedMap.put("CAMERA_SHUTTER_1", new Sfx(getAudioResourcePath("TheWrestler_CameraShutter1.ogg")));
         reflectedMap.put("CHALK_WRITING_1", new Sfx(getAudioResourcePath("TheWrestler_ChalkWriting1.ogg")));
         reflectedMap.put("CHEER_CROWD_1", new Sfx(getAudioResourcePath("TheWrestler_CheerCrowd1.ogg")));
+        reflectedMap.put("COWBELL_1", new Sfx(getAudioResourcePath("TheWrestler_Cowbell1.ogg")));
         reflectedMap.put("DOOR_HATCH_OPEN_1", new Sfx(getAudioResourcePath("TheWrestler_DoorHatchOpen1.ogg")));
         reflectedMap.put("DRILL_SPIN_1", new Sfx(getAudioResourcePath("TheWrestler_DrillSpin1.ogg")));
         reflectedMap.put("ELECTRO_INTERFERENCE_1", new Sfx(getAudioResourcePath("TheWrestler_ElectroInterference1.ogg")));
@@ -294,6 +295,7 @@ public class WrestlerMod implements
         reflectedMap.put("WHISTLE_BLOW_1", new Sfx(getAudioResourcePath("TheWrestler_WhistleBlow1.ogg")));
         reflectedMap.put("WHISTLE_STEAM_1", new Sfx(getAudioResourcePath("TheWrestler_WhistleSteam1.ogg")));
         reflectedMap.put("WHOOSH_ROCKET_1", new Sfx(getAudioResourcePath("TheWrestler_WhooshRocket1.ogg")));
+        reflectedMap.put("WHOOSH_ROPE_1", new Sfx(getAudioResourcePath("TheWrestler_WhooshRope1.ogg")));
         reflectedMap.put("WING_FLUTTER_1", new Sfx(getAudioResourcePath("TheWrestler_WingFlutter1.ogg")));
         reflectedMap.put("YELL_PAIN_1", new Sfx(getAudioResourcePath("TheWrestler_YellPain1.ogg")));
         reflectedMap.put("METAL_MAN_RIFF_1", new Sfx(getAudioResourcePath("music/TheWrestler_MetalManRiff1.ogg")));

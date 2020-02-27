@@ -115,7 +115,7 @@ public abstract class AbstractPenaltyCard {
   public abstract void onCardExhausted(AbstractCard card);
 
   static void playTriggerSfx() {
-    CardCrawlGame.sound.play("WHISTLE_BLOW_1");
+    CardCrawlGame.sound.play("COWBELL_1");
   }
 
   public void flash() {
