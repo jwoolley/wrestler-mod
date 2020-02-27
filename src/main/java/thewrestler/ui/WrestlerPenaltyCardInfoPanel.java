@@ -24,6 +24,7 @@ import thewrestler.keywords.TooltipKeywords;
 import thewrestler.util.BasicUtils;
 import thewrestler.util.TextureLoader;
 import thewrestler.util.info.penaltycard.AbstractPenaltyCard;
+import thewrestler.util.info.sportsmanship.SportsmanshipInfo;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -209,11 +210,13 @@ public class WrestlerPenaltyCardInfoPanel implements CustomInfoPanel, StartOfCom
 
   @Override
   public void atStartOfTurn() {
-
+    wasGainingPenaltyCard = false;
   }
 
+  private boolean wasGainingPenaltyCard;
+
   private void refreshUnsportingAmount() {
-    this.updateUnsportingValueFlag = true;
+    this.updateUnsportingValueFlag = false;
   }
 
   @Override
@@ -225,6 +228,17 @@ public class WrestlerPenaltyCardInfoPanel implements CustomInfoPanel, StartOfCom
   @Override
   public void onCardUsed(AbstractCard card) {
     refreshUnsportingAmount();
+    final boolean willGainPenaltyCard =  WrestlerCharacter.getSportsmanshipInfo().willGainPenaltyCard();
+    if (!wasGainingPenaltyCard && willGainPenaltyCard) {
+      triggerWillGainCardAtEndOfTurn();
+    }
+    this.wasGainingPenaltyCard = willGainPenaltyCard;
+  }
+
+  private void triggerWillGainCardAtEndOfTurn() {
+    CardCrawlGame.sound.play("WHISTLE_BLOW_1");
+
+    // TODO: flash / pulse next penalty card (move forward/backward or disable as # penalty cards changes)
   }
 
   @Override

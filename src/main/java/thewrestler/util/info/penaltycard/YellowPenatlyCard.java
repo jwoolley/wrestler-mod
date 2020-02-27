@@ -62,7 +62,7 @@ public class YellowPenatlyCard extends AbstractPenaltyCard {
     WrestlerMod.logger.info("Triggered penalty card [" + getDebugDescription() + "]");
     AbstractPlayer player = AbstractDungeon.player;
 
-    AbstractDungeon.actionManager.addToBottom(
+    AbstractDungeon.actionManager.addToTop(
         new MakeTempCardInDiscardAction(new Dazed(), NUM_CARDS));
   }
 

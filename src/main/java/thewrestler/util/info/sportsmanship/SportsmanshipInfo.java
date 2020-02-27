@@ -247,6 +247,11 @@ public class SportsmanshipInfo implements StartOfCombatListener, EndOfCombatList
     endOfTurnUnsportingCheck();
   }
 
+  public boolean willGainPenaltyCard() {
+    return this.getUnsportingAmount() < MAX_PENALTY_CARDS
+        && CombatInfo.getNumDirtyCardsPlayed() >= DIRTY_CARD_UNSPORTING_INCREASE_THRESHOLD;
+  }
+
   public void atEndOfTurn(){
     endOfTurnUnsportingCheck();
 

@@ -95,7 +95,7 @@ public class PenaltyCardGroup extends ArrayList<AbstractPenaltyCard> {
   }
 
   static class PenaltyCardsStartOfTurnAction extends AbstractGameAction {
-    private final static float ACTION_DURATION =  Settings.ACTION_DUR_XFAST;
+    private final static float ACTION_DURATION =  Settings.ACTION_DUR_FAST;
     private final List<AbstractPenaltyCard> penaltyCardList;
     private boolean triggeredCard;
     public PenaltyCardsStartOfTurnAction(List<AbstractPenaltyCard> penaltyCardGroup) {
@@ -120,10 +120,10 @@ public class PenaltyCardGroup extends ArrayList<AbstractPenaltyCard> {
           logger.info("PenaltyCardsStartOfTurnAction::update [" + this.penaltyCardList.size() + "] finished");
 
           this.isDone = true;
-        } else if (this.duration < 0.15f) {
+        } else if (this.duration < 0.125f) {
           logger.info("PenaltyCardsStartOfTurnAction::update [" + this.penaltyCardList.size() + "] queueing next card");
 
-          AbstractDungeon.actionManager.addToBottom(
+          AbstractDungeon.actionManager.addToTop(
               new PenaltyCardsStartOfTurnAction(penaltyCardList.subList(1, penaltyCardList.size())));
           this.isDone = true;
         }

@@ -794,8 +794,8 @@ public class WrestlerMod implements
     public void receiveCardUsed(AbstractCard abstractCard) {
         combatInfoPanel.updateCardCounts();
         signatureMovePanel.onCardUsed(abstractCard);
-        penaltyCardInfoPanel.onCardUsed(abstractCard);
         WrestlerCharacter.getSportsmanshipInfo().onCardUsed(abstractCard);
+        penaltyCardInfoPanel.onCardUsed(abstractCard);
     }
 
     @Override
