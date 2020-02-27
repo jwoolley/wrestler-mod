@@ -24,7 +24,7 @@
   "WrestlerMod:RedPenaltyCard": {
     "TEXT": [
       "Red Penalty Card",
-      "At the end of your turn, lose #b",
+      "At the start of your turn, lose #b",
       " HP."
     ]
   },
@@ -32,7 +32,7 @@
   "WrestlerMod:YellowPenaltyCard": {
     "TEXT": [
       "Yellow Penalty Card",
-      "At the end of your turn, add a #yDazed to your draw pile"
+      "At the start of your turn, add a #yDazed to your draw pile"
     ]
   },
 

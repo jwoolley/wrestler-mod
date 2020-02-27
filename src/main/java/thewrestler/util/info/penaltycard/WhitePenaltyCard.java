@@ -11,19 +11,19 @@ import thewrestler.glyphs.custom.CustomGlyph;
 
 import java.util.Arrays;
 
-public class RedPenaltyCard extends AbstractPenaltyCard {
+public class WhitePenaltyCard extends AbstractPenaltyCard {
   private static final UIStrings uiStrings;
 
-  public static final String ID = "WrestlerMod:RedPenaltyCard";
-  public static final String IMG_FILENAME = "red.png";
-  public static final String GLYPH_IMG_FILENAME = "red.png";
-  public static CustomGlyph.CustomGlyphEnum GLYPH_ENUM = CustomGlyph.CustomGlyphEnum.PENALTY_CARD_RED;
+  public static final String ID = "WrestlerMod:WhitePenaltyCard";
+  public static final String IMG_FILENAME = "white.png";
+  public static final String GLYPH_IMG_FILENAME = "white.png";
+  public static CustomGlyph.CustomGlyphEnum GLYPH_ENUM = CustomGlyph.CustomGlyphEnum.PENALTY_CARD_WHITE;
   public static final String NAME;
   public static final String[] TEXT;
 
   private static final int HP_LOSS = 1;
 
-  public RedPenaltyCard() {
+  public WhitePenaltyCard() {
     super(ID, NAME, getDescription(), IMG_FILENAME);
   }
 
@@ -38,7 +38,7 @@ public class RedPenaltyCard extends AbstractPenaltyCard {
 
   @Override
   public AbstractPenaltyCard makeCopy() {
-    return new RedPenaltyCard();
+    return new WhitePenaltyCard();
   }
 
   @Override

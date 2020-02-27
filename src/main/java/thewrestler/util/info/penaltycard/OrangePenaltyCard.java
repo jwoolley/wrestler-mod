@@ -61,6 +61,7 @@ public class OrangePenaltyCard extends AbstractPenaltyCard {
   @Override
   public void atStartOfTurn() {
     this.flash();
+    playTriggerSfx();
     WrestlerMod.logger.info("Triggered penalty card [" + getDebugDescription() + "]");
     AbstractDungeon.actionManager.addToBottom(new OrangePenaltyCardAction(NUM_AFFECTED_CARDS));
   }

@@ -60,6 +60,7 @@ public class BluePenaltyCard extends AbstractPenaltyCard {
   @Override
   public void atStartOfTurn() {
     this.flash();
+    playTriggerSfx();
     WrestlerMod.logger.info("Triggered penalty card [" + getDebugDescription() + "]");
     AbstractDungeon.actionManager.addToBottom(new GainBlockRandomMonsterAction(AbstractDungeon.player, BLOCK_GAIN));
   }

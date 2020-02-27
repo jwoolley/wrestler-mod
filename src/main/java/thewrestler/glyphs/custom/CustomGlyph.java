@@ -20,7 +20,8 @@ public class CustomGlyph {
     PENALTY_CARD_BLUE,
     PENALTY_CARD_ORANGE,
     PENALTY_CARD_RED,
-    PENALTY_CARD_YELLOW;
+    PENALTY_CARD_YELLOW,
+    PENALTY_CARD_WHITE;
   }
 
   public static CustomGlyph getGlyph(CustomGlyphEnum glyphEnum) {
@@ -38,7 +39,9 @@ public class CustomGlyph {
       new CustomGlyph(CustomGlyphEnum.PENALTY_CARD_RED, AbstractPenaltyCard.GLYPH_DIR_PATH,
           RedPenaltyCard.GLYPH_IMG_FILENAME, '~'),
       new CustomGlyph(CustomGlyphEnum.PENALTY_CARD_YELLOW, AbstractPenaltyCard.GLYPH_DIR_PATH,
-          YellowPenatlyCard.GLYPH_IMG_FILENAME, '~')
+          YellowPenatlyCard.GLYPH_IMG_FILENAME, '~'),
+      new CustomGlyph(CustomGlyphEnum.PENALTY_CARD_WHITE, AbstractPenaltyCard.GLYPH_DIR_PATH,
+                      WhitePenaltyCard.GLYPH_IMG_FILENAME, '~')
   );
 
   public static TextureAtlas.AtlasRegion getAtlasRegion(CustomGlyphEnum key) {

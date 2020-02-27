@@ -4,6 +4,7 @@ import basemod.abstracts.CustomSavable;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
+import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.core.Settings;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import thewrestler.WrestlerMod;
@@ -151,21 +152,28 @@ public class SportsmanshipInfo implements StartOfCombatListener, EndOfCombatList
   static class GainPenaltyCardAction extends AbstractGameAction {
     private final static float ACTION_DURATION =  Settings.ACTION_DUR_XFAST;
     private final PenaltyCardGroup penaltyCardGroup;
+    private boolean gainedCard;
     public GainPenaltyCardAction(PenaltyCardGroup penaltyCardGroup, int amount) {
-      this.duration = Settings.ACTION_DUR_XFAST;;
+      this.duration = ACTION_DURATION;
       this.actionType = AbstractGameAction.ActionType.SPECIAL;
       this.penaltyCardGroup = penaltyCardGroup;
       this.amount = amount;
+      this.gainedCard = false;
     }
     @Override
     public void update() {
       if (this.duration < ACTION_DURATION) {
-        penaltyCardGroup.gainCard();
-        if (this.amount > 1) {
+        if (!this.gainedCard) {
+          penaltyCardGroup.gainCard();
+          this.gainedCard = true;
+        }
+        if (this.amount <= 1) {
+          this.isDone = true;
+        } else if (this.duration < 0.1f) {
           AbstractDungeon.actionManager.addToBottom(
               new GainPenaltyCardAction(penaltyCardGroup, this.amount - 1));
+          this.isDone = true;
         }
-        this.isDone = true;
         return;
       }
       tickDuration();
