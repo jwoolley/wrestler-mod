@@ -28,7 +28,7 @@ public class ImprovedHeadgear extends CustomWrestlerRelic {
     super(ID, IMG, OUTLINE, RelicTier.STARTER, LandingSound.FLAT);
   }
 
-  private static final int BLOCK_AMOUNT = 3;
+  private static final int BLOCK_AMOUNT = 2;
 
   public void onApplyPower(AbstractPower power) {
     AbstractPlayer player = AbstractDungeon.player;
