@@ -28,16 +28,17 @@ public class Showboat extends CustomCard {
   private static final CardTarget TARGET = CardTarget.NONE;
 
   private static final int COST = 1;
-  private static final int UPGRADED_COST = 0;
+
+  private boolean shouldUpgrade = false;
 
   public Showboat() {
-    super(ID, NAME, getCardResourcePath(IMG_PATH), COST, getDescription(), TYPE, AbstractCardEnum.THE_WRESTLER_ORANGE,
+    super(ID, NAME, getCardResourcePath(IMG_PATH), COST, getDescription(false), TYPE, AbstractCardEnum.THE_WRESTLER_ORANGE,
         RARITY, TARGET);
   }
 
   @Override
   public void use(AbstractPlayer p, AbstractMonster m) {
-    AbstractDungeon.actionManager.addToBottom(new ShowboatAction());
+    AbstractDungeon.actionManager.addToBottom(new ShowboatAction(this.shouldUpgrade));
   }
 
   @Override
@@ -49,12 +50,15 @@ public class Showboat extends CustomCard {
   public void upgrade() {
     if (!this.upgraded) {
       this.upgradeName();
-      this.upgradeBaseCost(UPGRADED_COST);
+      this.shouldUpgrade = true;
+      this.rawDescription = getDescription(true);
       initializeDescription();
     }
   }
-  public static String getDescription() {
-    return DESCRIPTION;
+  public static String getDescription(boolean shouldUpgrade) {
+    return DESCRIPTION
+        + (shouldUpgrade ? EXTENDED_DESCRIPTION[0] : "")
+        + EXTENDED_DESCRIPTION[1];
   }
 
   static {

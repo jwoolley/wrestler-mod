@@ -24,12 +24,12 @@ public class Hammerlock extends AbstractCardWithPreviewCard {
   private static final CardStrings cardStrings;
 
   private static final CardType TYPE = CardType.SKILL;
-  private static final CardRarity RARITY = CardRarity.COMMON;
+  private static final CardRarity RARITY = CardRarity.UNCOMMON;
   private static final CardTarget TARGET = CardTarget.SELF;
   private static AbstractCard PREVIEW_CARD;
 
   private static final int BLOCK_AMOUNT = 12;
-  private static final int BLOCK_AMOUNT_UPGRADE = 3;
+  private static final int BLOCK_AMOUNT_UPGRADE = 2;
   private static final int CARD_AMOUNT = 2;
   private static final int CARD_AMOUNT_UPGRADE = 1;
   private static final int COST = 2;
@@ -59,7 +59,7 @@ public class Hammerlock extends AbstractCardWithPreviewCard {
     if (!this.upgraded) {
       this.upgradeName();
       this.upgradeBlock(BLOCK_AMOUNT_UPGRADE);
-//      this.upgradeMagicNumber(CARD_AMOUNT_UPGRADE);
+      this.upgradeMagicNumber(CARD_AMOUNT_UPGRADE);
       this.rawDescription = getDescription(this.magicNumber);
       initializeDescription();
     }

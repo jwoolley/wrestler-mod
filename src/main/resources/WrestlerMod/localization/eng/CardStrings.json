@@ -426,12 +426,16 @@
 
   "WrestlerMod:Showboat": {
     "NAME": "Showboat",
-    "DESCRIPTION": "Put a card from your discard pile on top of your draw pile. NL It's upgraded, gains wrestlermod:Dirty, and costs 0 until played."
+    "DESCRIPTION": "Put a card from your discard pile on top of your draw pile",
+    "EXTENDED_DESCRIPTION": [
+      " and upgrade it",
+      ". NL It costs 0 until played."
+    ]
   },
 
   "WrestlerMod:SideRoll": {
     "NAME": "Side Roll",
-    "DESCRIPTION": "Gain !B! Block. NL Discard 1 card. NL If you discarded an Attack this way, Draw 1 card."
+    "DESCRIPTION": "Gain !B! Block. NL Discard 1 card. NL Draw !M! cards if you discard an Attack this way."
   },
 
   "WrestlerMod:Sidestep": {
@@ -441,10 +445,12 @@
 
   "WrestlerMod:SleeperHold": {
     "NAME": "Sleeper Hold",
-    "DESCRIPTION": "Apply wrestlermod:Grappled. NL Reduce the cost of non-Attack cards in your hand by !M! this ",
+    "DESCRIPTION": "Apply wrestlermod:Grappled. NL Reduce the cost of ",
     "EXTENDED_DESCRIPTION": [
-      "turn.",
-      "combat."
+      " a random ",
+      " !M! random ",
+      " non-Attack cards in your hand by ",
+      " this turn."
     ]
   },
 

@@ -12,6 +12,10 @@ import thewrestler.WrestlerMod;
 import thewrestler.actions.power.ApplyGrappledAction;
 import thewrestler.enums.AbstractCardEnum;
 
+import java.util.Collections;
+import java.util.List;
+import java.util.stream.Collectors;
+
 import static thewrestler.WrestlerMod.getCardResourcePath;
 
 public class SleeperHold extends CustomCard {
@@ -28,13 +32,13 @@ public class SleeperHold extends CustomCard {
   private static final CardRarity RARITY = CardRarity.UNCOMMON;
   private static final CardTarget TARGET = CardTarget.ENEMY;
 
-  private static final int COST = 3;
-  private static final int UPGRADED_COST = 2;
+  private static final int COST = 2;
+  private static final int NUM_CARDS = 1;
+  private static final int NUM_CARDS_UPGRADE = 1;
   private static final int COST_REDUCTION = 1;
-  private final boolean reduceCostForCombat = false;
 
   public SleeperHold() {
-    super(ID, NAME, getCardResourcePath(IMG_PATH), COST, getDescription(false), TYPE,
+    super(ID, NAME, getCardResourcePath(IMG_PATH), COST, getDescription(NUM_CARDS), TYPE,
         AbstractCardEnum.THE_WRESTLER_ORANGE, RARITY, TARGET);
     this.magicNumber = this.baseMagicNumber = COST_REDUCTION;
   }
@@ -43,16 +47,19 @@ public class SleeperHold extends CustomCard {
   public void use(AbstractPlayer p, AbstractMonster m) {
     AbstractDungeon.actionManager.addToBottom(new ApplyGrappledAction(m, p));
 
-    AbstractDungeon.player.hand.group.stream()
-        .filter(c -> c.type != CardType.ATTACK && c.uuid != this.uuid)
-        .forEach(c -> {
-          if (this.reduceCostForCombat) {
-            c.modifyCostForCombat(-COST_REDUCTION);
-          } else {
+    List<AbstractCard> eligibleCards = AbstractDungeon.player.hand.group.stream()
+        .filter(c -> c.type != CardType.ATTACK && c.costForTurn > 0 && c.uuid != this.uuid)
+        .collect(Collectors.toList());
+
+    if (!eligibleCards.isEmpty()) {
+      Collections.shuffle(eligibleCards);
+      eligibleCards.stream()
+          .limit(this.magicNumber)
+          .forEach(c -> {
             c.setCostForTurn(c.cost - COST_REDUCTION);
-          }
-          c.superFlash(Color.TEAL);
-        });
+            c.superFlash(Color.TEAL);
+          });
+    }
   }
 
   @Override
@@ -64,14 +71,16 @@ public class SleeperHold extends CustomCard {
   public void upgrade() {
     if (!this.upgraded) {
       this.upgradeName();
-      this.upgradeBaseCost(UPGRADED_COST);
-      this.rawDescription = getDescription(this.reduceCostForCombat);
+      this.upgradeMagicNumber(NUM_CARDS_UPGRADE);
+      this.rawDescription = getDescription(this.magicNumber);
       initializeDescription();
     }
   }
 
-  public static String getDescription(boolean reduceCostForCombat) {
-    return DESCRIPTION + (!reduceCostForCombat ? EXTENDED_DESCRIPTION[0] : EXTENDED_DESCRIPTION[1]);
+  public static String getDescription(int numCards) {
+    return DESCRIPTION
+        + (numCards == 1 ? EXTENDED_DESCRIPTION[0] : EXTENDED_DESCRIPTION[1])
+        + EXTENDED_DESCRIPTION[2] + COST_REDUCTION + EXTENDED_DESCRIPTION[3];
   }
 
   static {

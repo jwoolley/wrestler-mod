@@ -4,6 +4,8 @@ import com.badlogic.gdx.graphics.Color;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.cards.CardGroup;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
+import thewrestler.WrestlerMod;
+import thewrestler.cards.WrestlerCardTags;
 
 import java.util.*;
 
@@ -57,5 +59,15 @@ public class CardUtil {
       }
     }
     return cards;
+  }
+
+  public static AbstractCard applyDirtyModifier(AbstractCard card) {
+    final String DIRTY_KEYWORD_ID = WrestlerMod.makeID("Dirty");
+    if (!card.hasTag(WrestlerCardTags.DIRTY)) {
+      card.tags.add(WrestlerCardTags.DIRTY);
+      card.rawDescription =  WrestlerMod.getKeyword(DIRTY_KEYWORD_ID).PROPER_NAME + card.rawDescription;
+      card.initializeDescription();
+    }
+    return  card;
   }
 }

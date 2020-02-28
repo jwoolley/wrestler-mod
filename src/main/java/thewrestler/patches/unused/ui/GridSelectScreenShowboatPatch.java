@@ -1,4 +1,4 @@
-package thewrestler.patches.ui;
+package thewrestler.patches.unused.ui;
 
 import com.evacipated.cardcrawl.modthespire.lib.SpirePatch;
 import com.evacipated.cardcrawl.modthespire.lib.SpirePostfixPatch;
@@ -7,9 +7,12 @@ import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.screens.select.GridCardSelectScreen;
 import thewrestler.actions.cards.skill.ShowboatAction;
+import thewrestler.util.CardUtil;
+
+import javax.swing.text.DefaultEditorKit;
 
 public class GridSelectScreenShowboatPatch {
-
+  /*
   private static boolean shouldDisplayShowboatUpgrade = false;
 
   private static AbstractCard originalPreviewCard;
@@ -58,7 +61,7 @@ public class GridSelectScreenShowboatPatch {
       if (shouldDisplayShowboatUpgrade && __instance.upgradePreviewCard != null && originalPreviewCard == null) {
         originalPreviewCard = __instance.upgradePreviewCard;
         __instance.upgradePreviewCard = __instance.upgradePreviewCard.makeStatEquivalentCopy();
-        ShowboatAction.applyShowboatModifier(__instance.upgradePreviewCard);
+        CardUtil.applyDirtyModifier(__instance.upgradePreviewCard);
       }
     }
   }
@@ -73,4 +76,5 @@ public class GridSelectScreenShowboatPatch {
       }
     }
   }
+  */
 }

@@ -28,7 +28,7 @@ public class Elbow extends CustomCard {
   private static final CardTarget TARGET = CardTarget.ENEMY;
 
   private static final int COST = 0;
-  private static final int DAMAGE = 4;
+  private static final int DAMAGE = 3;
   private static final int DAMAGE_UPGRADE = 2;
 
   public Elbow() {
@@ -40,6 +40,9 @@ public class Elbow extends CustomCard {
 
   @Override
   public void use(AbstractPlayer p, AbstractMonster m) {
+
+
+
     AbstractDungeon.actionManager.addToBottom(
         new DamageAction(m, new DamageInfo(p, damage, damageTypeForTurn),
             AbstractGameAction.AttackEffect.BLUNT_LIGHT));

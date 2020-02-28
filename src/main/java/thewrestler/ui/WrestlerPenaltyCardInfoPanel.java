@@ -228,17 +228,18 @@ public class WrestlerPenaltyCardInfoPanel implements CustomInfoPanel, StartOfCom
   @Override
   public void onCardUsed(AbstractCard card) {
     refreshUnsportingAmount();
-    final boolean willGainPenaltyCard =  WrestlerCharacter.getSportsmanshipInfo().willGainPenaltyCard();
-    if (!wasGainingPenaltyCard && willGainPenaltyCard) {
+    final boolean willGainPenaltyCard = WrestlerCharacter.getSportsmanshipInfo().willGainPenaltyCard();
+    if (!wasGainingPenaltyCard && willGainPenaltyCard
+      && !AbstractDungeon.getCurrRoom().monsters.areMonstersBasicallyDead()) {
       triggerWillGainCardAtEndOfTurn();
     }
     this.wasGainingPenaltyCard = willGainPenaltyCard;
   }
 
   private void triggerWillGainCardAtEndOfTurn() {
-    CardCrawlGame.sound.play("WHISTLE_BLOW_1");
-
-    // TODO: flash / pulse next penalty card (move forward/backward or disable as # penalty cards changes)
+      CardCrawlGame.sound.play("WHISTLE_BLOW_1");
+      // TODO: flash / pulse next penalty card (move forward/backward or disable as # penalty cards changes)
+      //       (also reverse-pulse if will lose card)
   }
 
   @Override

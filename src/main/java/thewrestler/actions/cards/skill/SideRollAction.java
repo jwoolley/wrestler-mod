@@ -21,10 +21,11 @@ public class SideRollAction extends AbstractGameAction  {
   private AbstractCard selectedCard;
   private boolean cardSelectionFinished;
 
-  public SideRollAction() {
+  public SideRollAction(int numCardsDrawn) {
     this.source = this.target = this.player = AbstractDungeon.player;
     this.actionType = AbstractGameAction.ActionType.DISCARD;
     this.duration = DURATION;
+    this.amount = numCardsDrawn;
   }
 
   public void update() {
@@ -66,7 +67,7 @@ public class SideRollAction extends AbstractGameAction  {
       AbstractDungeon.handCardSelectScreen.wereCardsRetrieved = true;
     } else if (cardSelectionFinished) {
       if (selectedCard != null && selectedCard.type == AbstractCard.CardType.ATTACK) {
-        AbstractDungeon.actionManager.addToBottom(new DrawCardAction(this.player, 1));
+        AbstractDungeon.actionManager.addToBottom(new DrawCardAction(this.player, this.amount));
       }
       this.isDone = true;
       this.tickDuration();
