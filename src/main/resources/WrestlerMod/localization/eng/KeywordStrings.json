@@ -23,10 +23,10 @@
     "DESCRIPTION": "A 0-cost #yAttack card with #yExhaust that deals modest damage and draws a card."
   },
 
-  "WrestlerMod:Sporting": {
+  "WrestlerMod:Clean": {
     "PROPER_NAME": "Clean",
     "NAMES": [
-      "sporting"
+      "clean"
     ],
     "DESCRIPTION": "You have no #yPenalty #yCards."
   },

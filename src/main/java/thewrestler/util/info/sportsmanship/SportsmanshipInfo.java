@@ -71,12 +71,14 @@ public class SportsmanshipInfo implements StartOfCombatListener, EndOfCombatList
     if (changeAmount > 0) {
       AbstractDungeon.actionManager.addToBottom(new GainPenaltyCardAction(this.penaltyCardGroup, changeAmount));
 
-      List<AbstractSportsmanshipListener> cards = getUnsportingListenerCards();
-      cards.forEach(c -> c.onUnsportingChanged(changeAmount, getNumPenaltyCards(), isEndOfTurnChange));
+      List<AbstractSportsmanshipListener> listeners = getUnsportingListenerCards();
+      listeners.addAll(getUnsportingListenerPowers());
+
+      listeners.forEach(l -> l.onUnsportingChanged(changeAmount, getNumPenaltyCards(), isEndOfTurnChange));
 
       boolean becameUnsporting = wasSporting && _isUnsporting();
       if (becameUnsporting) {
-        cards.forEach(AbstractSportsmanshipListener::onBecomeUnsporting);
+        listeners.forEach(AbstractSportsmanshipListener::onBecomeUnsporting);
       }
     }
   }
@@ -111,12 +113,13 @@ public class SportsmanshipInfo implements StartOfCombatListener, EndOfCombatList
     if (changeAmount > 0) {
       AbstractDungeon.actionManager.addToBottom(new RemovePenaltyCardAction(this.penaltyCardGroup, changeAmount));
 
-      List<AbstractSportsmanshipListener> cards = getUnsportingListenerCards();
-      cards.forEach(c -> c.onUnsportingChanged(-changeAmount, getNumPenaltyCards(), isEndOfTurnChange));
+      List<AbstractSportsmanshipListener> listeners = getUnsportingListenerCards();
+      listeners.addAll(getUnsportingListenerPowers());
+      listeners.forEach(l -> l.onUnsportingChanged(-changeAmount, getNumPenaltyCards(), isEndOfTurnChange));
 
       boolean becameSporting = !wasSporting && _isSporting();
       if (becameSporting) {
-        cards.forEach(AbstractSportsmanshipListener::onBecomeSporting);
+        listeners.forEach(AbstractSportsmanshipListener::onBecomeSporting);
       }
     }
   }
@@ -323,7 +326,13 @@ public class SportsmanshipInfo implements StartOfCombatListener, EndOfCombatList
     return dirtyCards;
   }
 
-  public static List<AbstractSportsmanshipListener> getUnsportingListenerCards() {
+  public static List<AbstractSportsmanshipListener> getUnsportingListenerPowers() {
+    return AbstractDungeon.player.powers.stream()
+        .filter(p -> p instanceof AbstractSportsmanshipListener)
+        .map(p -> (AbstractSportsmanshipListener)p).collect(Collectors.toList());
+  }
+
+    public static List<AbstractSportsmanshipListener> getUnsportingListenerCards() {
     final List<AbstractSportsmanshipListener> cards = new ArrayList<>();
 
     AbstractPlayer player = AbstractDungeon.player;

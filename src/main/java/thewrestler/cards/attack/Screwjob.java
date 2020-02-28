@@ -40,9 +40,9 @@ public class Screwjob extends CustomCard implements CustomSavable<Integer> {
   private static final CardTarget TARGET = CardTarget.ENEMY;
 
   private static final int COST = 1;
-  private static final int DAMAGE = 2;
+  private static final int DAMAGE = 3;
 
-  private static final int NUM_REPS = 3;
+  private static final int NUM_REPS = 2;
 
   private static final int DAMAGE_INCREASE_PER_UNSPORTING = 1;
 

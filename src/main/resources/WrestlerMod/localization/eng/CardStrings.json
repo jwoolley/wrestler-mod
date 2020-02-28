@@ -205,7 +205,7 @@
     "EXTENDED_DESCRIPTION": [
       " Intangible. NL Gain !M! Strength. NL Gain ",
       "a",
-      " [P] if you're wrestlermod:Sporting. NL Exhaust."
+      " [P] if you're wrestlermod:Clean. NL Exhaust."
     ]
   },
 
@@ -297,6 +297,11 @@
     ]
   },
 
+  "WrestlerMod:Opportunist": {
+    "NAME": "Opportunist",
+    "DESCRIPTION": "Whenever you lose a [P] or gain a [P] , gain !M! Block."
+  },
+
   "WrestlerMod:Pendulum": {
     "NAME": "Pendulum",
     "DESCRIPTION": "Discard your hand. NL Draw X cards and NL Gain X [E]. NL You can't draw additional cards this turn.",
@@ -312,13 +317,13 @@
 
   "WrestlerMod:Pinfall": {
     "NAME": "Pinfall",
-    "DESCRIPTION": "Gain !B! Block. NL If you're wrestlermod:Sporting at the end of turn, Retain."
+    "DESCRIPTION": "Gain !B! Block. NL If you're wrestlermod:Clean at the end of turn, Retain."
   },
 
   "WrestlerMod:PlayToTheCrowd": {
     "NAME": "Play to the Crowd",
-    "DESCRIPTION": "If wrestlermod:Sporting, gain !B! Block. NL Otherwise, add a *Knee to your hand for each [P] you have.",
-    "UPGRADE_DESCRIPTION":  "If wrestlermod:Sporting, gain !B! Block. NL Otherwise, add a *Knee+ to your hand for each [P] you have."
+    "DESCRIPTION": "If wrestlermod:Clean, gain !B! Block. NL Otherwise, add a *Knee to your hand for each [P] you have.",
+    "UPGRADE_DESCRIPTION":  "If wrestlermod:Clean, gain !B! Block. NL Otherwise, add a *Knee+ to your hand for each [P] you have."
   },
 
   "WrestlerMod:PowderBuffer": {
@@ -497,7 +502,7 @@
 
   "WrestlerMod:TakeAPowder": {
     "NAME": "Take a Powder",
-    "DESCRIPTION": "If wrestlermod:Sporting, gain !M! wrestlermod:Temporary_Buffer. NL Otherwise, gain ",
+    "DESCRIPTION": "If wrestlermod:Clean, gain !M! wrestlermod:Temporary_Buffer. NL Otherwise, gain ",
     "EXTENDED_DESCRIPTION": [
       " gold.",
       " gold and a random potion.",
