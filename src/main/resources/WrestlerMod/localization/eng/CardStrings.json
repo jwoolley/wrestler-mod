@@ -1,8 +1,12 @@
 {
   "WrestlerMod:AlleyOop": {
     "NAME": "Alley Oop",
-    "DESCRIPTION": "Put !M! random attacks with cost ",
+    "DESCRIPTION": "Discard !M! ",
     "EXTENDED_DESCRIPTION": [
+      "card",
+      "cards",
+      ". NL Put !M! random ",
+      " with cost ",
       " or less from your draw pile into your hand."
     ]
   },
@@ -249,7 +253,7 @@
 
   "WrestlerMod:LowBlow": {
     "NAME": "Low Blow",
-    "DESCRIPTION": "Deal !D! Damage. NL When you lose a [P] , return this from the discard pile to your hand."
+    "DESCRIPTION": "Deal !D! Damage. NL When you gain a [P] , return this from your discard pile to your hand."
   },
 
   "WrestlerMod:MainEvent": {
@@ -317,7 +321,7 @@
 
   "WrestlerMod:Pinfall": {
     "NAME": "Pinfall",
-    "DESCRIPTION": "Gain !B! Block. NL When you gain a [P] , return this from the discard pile to your hand."
+    "DESCRIPTION": "Gain !B! Block. NL When you lose a [P] , return this from your discard pile to your hand."
   },
 
   "WrestlerMod:PlayToTheCrowd": {

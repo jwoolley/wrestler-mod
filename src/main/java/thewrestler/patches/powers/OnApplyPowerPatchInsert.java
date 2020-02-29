@@ -40,19 +40,15 @@ public class OnApplyPowerPatchInsert {
       powerActionList.add(__instance);
       final AbstractPlayer player = AbstractDungeon.player;
 
-      if (source == player && player.hasRelic(Headgear.ID) && !target.hasPower(ArtifactPower.POWER_ID) &&
+      if (source == player && target != player &&  player.hasRelic(Headgear.ID)
+          && !target.hasPower(ArtifactPower.POWER_ID) &&
           doesntAlreadyHaveAnyDebuffs(target, powerToApply, amountBeingApplied)) {
         ((Headgear) AbstractDungeon.player.getRelic(Headgear.ID)).onApplyPower(powerToApply);
       }
 
-      if (source == player && player.hasRelic(ImprovedHeadgear.ID) && !target.hasPower(ArtifactPower.POWER_ID)) {
+      if (source == player && target != player && player.hasRelic(ImprovedHeadgear.ID) && !target.hasPower(ArtifactPower.POWER_ID)) {
         ((ImprovedHeadgear) AbstractDungeon.player.getRelic(ImprovedHeadgear.ID)).onApplyPower(powerToApply);
       }
-
-//      if (source == player && player.hasRelic(ImprovedHeadgear.ID) && !target.hasPower(ArtifactPower.POWER_ID) &&
-//          doesntAlreadyHaveDebuff(target, powerToApply, amountBeingApplied)) {
-//        ((ImprovedHeadgear) AbstractDungeon.player.getRelic(ImprovedHeadgear.ID)).onApplyPower(powerToApply);
-//      }
 
       incrementDebuffsApplied(target, source, powerToApply);
     }

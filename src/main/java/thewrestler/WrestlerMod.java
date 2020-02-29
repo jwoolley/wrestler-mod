@@ -269,6 +269,8 @@ public class WrestlerMod implements
     private void registerSfx() {
         HashMap<String, Sfx> reflectedMap = getSoundsMap();
         reflectedMap.put("BOMB_DROP_EXPLODE_1", new Sfx(getAudioResourcePath("TheWrestler_BombDropExplode1.ogg")));
+        reflectedMap.put("BONE_CRUNCH_1", new Sfx(getAudioResourcePath("TheWrestler_BoneCrunch1.ogg")));
+        reflectedMap.put("BONE_CRUNCH_2", new Sfx(getAudioResourcePath("TheWrestler_BoneCrunch2.ogg")));
         reflectedMap.put("BOO_CROWD_1", new Sfx(getAudioResourcePath("TheWrestler_BooCrowd1.ogg")));
         reflectedMap.put("BOOM_LOWFREQ_1", new Sfx(getAudioResourcePath("TheWrestler_ExplosionBombLowFrequency1.ogg")));
         reflectedMap.put("BOUNCE_METALLIC_1", new Sfx(getAudioResourcePath("TheWrestler_BounceMetallic1.ogg")));
