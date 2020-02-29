@@ -116,7 +116,7 @@
     "EXTENDED_DESCRIPTION": [
       "a card",
       "!M! cards",
-      ", then discard a card at random. NL If it's an Attack, play it."
+      ". NL Gain !B! Block for each Attack drawn."
     ]
   },
 

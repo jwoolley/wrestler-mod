@@ -1,6 +1,7 @@
 package thewrestler.cards.skill;
 
 import basemod.abstracts.CustomCard;
+import com.megacrit.cardcrawl.actions.common.DrawCardAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
@@ -26,6 +27,7 @@ public class Facewash extends CustomCard {
   private static final CardTarget TARGET = CardTarget.SELF;
 
   private static final int CARD_DRAW_AMOUNT = 2;
+  private static final int BLOCK_AMOUNT_PER_CARD = 3;
   private static final int CARD_DRAW_AMOUNT_UPGRADE = 1;
   private static final int COST = 1;
 
@@ -33,11 +35,13 @@ public class Facewash extends CustomCard {
     super(ID, NAME, getCardResourcePath(IMG_PATH), COST, getDescription(CARD_DRAW_AMOUNT), TYPE,
         AbstractCardEnum.THE_WRESTLER_ORANGE, RARITY, TARGET);
     this.baseMagicNumber = this.magicNumber = CARD_DRAW_AMOUNT;
+    this.baseBlock = this.block = BLOCK_AMOUNT_PER_CARD;
   }
 
   @Override
   public void use(AbstractPlayer p, AbstractMonster m) {
-    AbstractDungeon.actionManager.addToBottom(new FacewashAction(this.magicNumber));
+    AbstractDungeon.actionManager.addToBottom(
+        new DrawCardAction(this.magicNumber, new FacewashAction(this.block)));
   }
 
   @Override
