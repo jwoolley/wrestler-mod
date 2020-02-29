@@ -249,7 +249,7 @@
 
   "WrestlerMod:LowBlow": {
     "NAME": "Low Blow",
-    "DESCRIPTION": "Deal !D! Damage. NL If you're wrestlermod:Unsporting at the end of turn, Retain."
+    "DESCRIPTION": "Deal !D! Damage. NL When you gain a [P],  return this from the discard pile to your hand."
   },
 
   "WrestlerMod:MainEvent": {

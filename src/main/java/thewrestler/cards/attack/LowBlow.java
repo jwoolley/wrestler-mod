@@ -1,8 +1,11 @@
 package thewrestler.cards.attack;
 
 import basemod.abstracts.CustomCard;
+import basemod.devcommands.deck.Deck;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.common.DamageAction;
+import com.megacrit.cardcrawl.actions.unique.DeckToHandAction;
+import com.megacrit.cardcrawl.actions.utility.DiscardToHandAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.cards.DamageInfo;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
@@ -88,18 +91,27 @@ public class LowBlow extends CustomCard implements AbstractSportsmanshipListener
 
   @Override
   public void atStartOfCombat() {
-    this.selfRetain = SportsmanshipInfo.isUnsporting();
+
   }
 
   @Override
-  public void atTurnStartPreDraw() {
-    this.selfRetain = SportsmanshipInfo.isUnsporting();
+  public void atTurnStartPreDraw(){
+    if (this.selfRetained) {
+      this.selfRetain = this.selfRetained = false;
+    }
   }
+
+  private boolean selfRetained = false;
 
   @Override
   public void onUnsportingChanged(int changeAmount, int newValue, boolean isEndOfTurnChange) {
-    if (!isEndOfTurnChange) {
-      this.selfRetain = SportsmanshipInfo.isUnsporting();
+    if (changeAmount  > 0) {
+      AbstractDungeon.actionManager.addToBottom(new DiscardToHandAction(this));
+      if (isEndOfTurnChange && !this.selfRetain) {
+        this.selfRetain = true;
+        this.selfRetained = true;
+      }
+      //this.selfRetain = SportsmanshipInfo.isUnsporting();
     }
   }
 
