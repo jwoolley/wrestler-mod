@@ -2,6 +2,7 @@ package thewrestler.cards.skill;
 
 import basemod.abstracts.CustomCard;
 import com.megacrit.cardcrawl.actions.common.GainBlockAction;
+import com.megacrit.cardcrawl.actions.utility.DiscardToHandAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
@@ -27,9 +28,11 @@ public class Pinfall extends CustomCard implements AbstractSportsmanshipListener
   private static final CardRarity RARITY = CardRarity.COMMON;
   private static final CardTarget TARGET = CardTarget.SELF;
 
-  private static final int BLOCK_AMOUNT = 8;
-  private static final int BLOCK_AMOUNT_UPGRADE = 3;
-  private static final int COST = 1;
+  private static final int BLOCK_AMOUNT = 3;
+  private static final int BLOCK_AMOUNT_UPGRADE = 2;
+  private static final int COST = 0;
+
+  private boolean selfRetained = false;
 
   public Pinfall() {
     super(ID, NAME, getCardResourcePath(IMG_PATH), COST, getDescription(), TYPE, AbstractCardEnum.THE_WRESTLER_ORANGE,
@@ -78,18 +81,23 @@ public class Pinfall extends CustomCard implements AbstractSportsmanshipListener
 
   @Override
   public void atStartOfCombat() {
-    this.selfRetain = SportsmanshipInfo.isSporting();
   }
 
   @Override
   public void atTurnStartPreDraw() {
-    this.selfRetain = SportsmanshipInfo.isSporting();
+    if (this.selfRetained) {
+      this.selfRetain = this.selfRetained = false;
+    }
   }
 
   @Override
   public void onUnsportingChanged(int changeAmount, int newValue, boolean isEndOfTurnChange) {
-    if (!isEndOfTurnChange || isEndOfTurnChange) {
-      this.selfRetain = SportsmanshipInfo.isSporting();
+    if (changeAmount  < 0) {
+      AbstractDungeon.actionManager.addToBottom(new DiscardToHandAction(this));
+      if (isEndOfTurnChange && !this.selfRetain) {
+        this.selfRetain = true;
+        this.selfRetained = true;
+      }
     }
   }
 

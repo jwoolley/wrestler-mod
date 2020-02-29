@@ -37,6 +37,8 @@ public class LowBlow extends CustomCard implements AbstractSportsmanshipListener
   private static final int DAMAGE_UPGRADE = 5;
   private static final int COST = 2;
 
+  private boolean selfRetained = false;
+
   public LowBlow() {
     super(ID, NAME, getCardResourcePath(IMG_PATH), COST, getDescription(), TYPE,
         AbstractCardEnum.THE_WRESTLER_ORANGE, RARITY, TARGET);
@@ -101,7 +103,7 @@ public class LowBlow extends CustomCard implements AbstractSportsmanshipListener
     }
   }
 
-  private boolean selfRetained = false;
+
 
   @Override
   public void onUnsportingChanged(int changeAmount, int newValue, boolean isEndOfTurnChange) {
@@ -111,7 +113,6 @@ public class LowBlow extends CustomCard implements AbstractSportsmanshipListener
         this.selfRetain = true;
         this.selfRetained = true;
       }
-      //this.selfRetain = SportsmanshipInfo.isUnsporting();
     }
   }
 
