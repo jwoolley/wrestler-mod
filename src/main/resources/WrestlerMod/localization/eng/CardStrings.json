@@ -130,6 +130,11 @@
   },
 
 
+  "WrestlerMod:FairPlay": {
+    "NAME": "Fair Play",
+    "DESCRIPTION": "Gain !B! Block."
+  },
+
   "WrestlerMod:FanFavorite": {
     "NAME": "Fan Favorite",
     "DESCRIPTION": "Every time you play ",
@@ -151,6 +156,13 @@
     "DESCRIPTION": "At the end of your turn, if your hand is empty, gain !M! wrestlermod:Temporary_Buffer."
   },
 
+  "WrestlerMod:FoulPlay": {
+    "NAME": "Foul Play",
+    "DESCRIPTION": "Add a ",
+    "EXTENDED_DESCRIPTION": [
+      " to your hand."
+    ]
+  },
 
   "WrestlerMod:FrogSplash": {
     "NAME": "Frog Splash",
@@ -240,7 +252,7 @@
 
   "WrestlerMod:Knee": {
     "NAME": "Knee",
-    "DESCRIPTION": "Ethereal. NL Deal !D! Damage. NL Exhaust."
+    "DESCRIPTION": "Ethereal. NL wrestlermod:Dirty. NL Deal !D! Damage. NL Exhaust."
   },
 
   "WrestlerMod:KneedAFriend": {
@@ -326,8 +338,8 @@
 
   "WrestlerMod:PlayToTheCrowd": {
     "NAME": "Play to the Crowd",
-    "DESCRIPTION": "If wrestlermod:Clean, gain !B! Block. NL Otherwise, add a *Knee to your hand for each [P] you have.",
-    "UPGRADE_DESCRIPTION":  "If wrestlermod:Clean, gain !B! Block. NL Otherwise, add a *Knee+ to your hand for each [P] you have."
+    "DESCRIPTION": "Choose one: NL Gain !B! Block, or add a *Knee to your hand. NL Exhaust.",
+    "UPGRADE_DESCRIPTION":  "Choose one: NL Gain !B! Block, or add a *Knee+ to your hand. NL Exhaust."
   },
 
   "WrestlerMod:PowderBuffer": {
