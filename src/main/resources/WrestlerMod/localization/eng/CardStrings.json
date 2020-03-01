@@ -413,11 +413,7 @@
 
   "WrestlerMod:Screwjob": {
     "NAME": "Screwjob",
-    "DESCRIPTION": "Deal !D! damage ",
-    "EXTENDED_DESCRIPTION": [
-      " times. NL Permanently increase damage by !M! for each [P] you have. NL Exhaust.",
-      "Ethereal. NL "
-    ]
+    "DESCRIPTION": "When you gain a [P] , increase this card's damage by !M! this combat. NL Deal !D! damage three times. Exhaust."
   },
 
   "WrestlerMod:Sharpshooter": {
