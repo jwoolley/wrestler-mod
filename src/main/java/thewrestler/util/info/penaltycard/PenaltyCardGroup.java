@@ -145,7 +145,6 @@ public class PenaltyCardGroup extends ArrayList<AbstractPenaltyCard> {
     }
     @Override
     public void update() {
-      Logger logger = WrestlerMod.logger;
       if (this.duration < ACTION_DURATION) {
         if (!this.triggeredCard && this.penaltyCardList.size() > 0) {
           this.penaltyCardList.get(0).atEndOfTurn();

@@ -295,6 +295,7 @@ public class WrestlerMod implements
         reflectedMap.put("THUD_MEDIUM_1", new Sfx(getAudioResourcePath("TheWrestler_ThudMedium1.ogg")));
         reflectedMap.put("TONE_ELECTRONIC_1", new Sfx(getAudioResourcePath("TheWrestler_ToneElectronic1.ogg")));
         reflectedMap.put("WHISTLE_BLOW_1", new Sfx(getAudioResourcePath("TheWrestler_WhistleBlow1.ogg")));
+        reflectedMap.put("WHISTLE_BLOW_SHORT_1", new Sfx(getAudioResourcePath("TheWrestler_WhistleBlowShort1.ogg")));
         reflectedMap.put("WHISTLE_STEAM_1", new Sfx(getAudioResourcePath("TheWrestler_WhistleSteam1.ogg")));
         reflectedMap.put("WHOOSH_ROCKET_1", new Sfx(getAudioResourcePath("TheWrestler_WhooshRocket1.ogg")));
         reflectedMap.put("WHOOSH_ROPE_1", new Sfx(getAudioResourcePath("TheWrestler_WhooshRope1.ogg")));

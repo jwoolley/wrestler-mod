@@ -167,6 +167,7 @@ public class SportsmanshipInfo implements StartOfCombatListener, EndOfCombatList
     public void update() {
       if (this.duration < ACTION_DURATION) {
         if (!this.gainedCard) {
+          CardCrawlGame.sound.play("WHISTLE_BLOW_SHORT_1");
           penaltyCardGroup.gainCard();
           this.gainedCard = true;
         }
