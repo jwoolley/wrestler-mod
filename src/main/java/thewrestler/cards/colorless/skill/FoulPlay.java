@@ -32,6 +32,7 @@ public class FoulPlay extends CustomCard {
   public FoulPlay() {
     super(ID, NAME, getCardResourcePath(IMG_PATH), COST, getDescription(Knee.NAME), TYPE,
         CardColor.COLORLESS, RARITY, TARGET);
+    this.cardsToPreview = new Knee();
   }
 
   @Override
@@ -60,6 +61,8 @@ public class FoulPlay extends CustomCard {
       bonusCard.upgrade();
       this.rawDescription = getDescription(bonusCard.name);
       initializeDescription();
+
+      this.cardsToPreview.upgrade();
     }
   }
 

@@ -32,7 +32,7 @@ public class FairPlay extends CustomCard {
   public static final int BLOCK_AMOUNT_UPGRADE = 4;
 
   public FairPlay() {
-    super(ID, NAME, getCardResourcePath(IMG_PATH), COST, getDescription(Knee.NAME), TYPE,
+    super(ID, NAME, getCardResourcePath(IMG_PATH), COST, getDescription(), TYPE,
         CardColor.COLORLESS, RARITY, TARGET);
     this.baseBlock = this.block = BLOCK_AMOUNT;
   }
@@ -61,7 +61,7 @@ public class FairPlay extends CustomCard {
     }
   }
 
-  private static String getDescription(String bonusCardName) {
+  private static String getDescription() {
     return DESCRIPTION;
   }
 
