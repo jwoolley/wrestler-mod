@@ -497,7 +497,7 @@ public class WrestlerMod implements
         BaseMod.addCard(new IronMan());
         BaseMod.addCard(new Kayfabe());
         BaseMod.addCard(new LowBlow());
-        BaseMod.addCard(new MainEvent());
+//        BaseMod.addCard(new MainEvent());
         BaseMod.addCard(new Matrix());
         BaseMod.addCard(new Neckbreaker());
 //        BaseMod.addCard(new NearFall());
