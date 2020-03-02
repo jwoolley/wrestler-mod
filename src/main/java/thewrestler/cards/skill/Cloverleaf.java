@@ -1,7 +1,7 @@
 package thewrestler.cards.skill;
 
 import basemod.abstracts.CustomCard;
-import com.evacipated.cardcrawl.mod.stslib.powers.StunMonsterPower;
+import com.badlogic.gdx.graphics.Color;
 import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
@@ -9,22 +9,25 @@ import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
-import com.megacrit.cardcrawl.powers.DrawReductionPower;
+import com.megacrit.cardcrawl.powers.VulnerablePower;
 import thewrestler.WrestlerMod;
 import thewrestler.actions.power.ApplyGrappledAction;
-import thewrestler.cards.WrestlerCardTags;
 import thewrestler.enums.AbstractCardEnum;
-import thewrestler.util.CreatureUtils;
+import thewrestler.powers.CloverleafPower;
+
+import java.util.Collections;
+import java.util.List;
+import java.util.stream.Collectors;
 
 import static thewrestler.WrestlerMod.getCardResourcePath;
 
-public class FullNelson extends CustomCard {
-  public static final String ID = WrestlerMod.makeID("FullNelson");
+public class Cloverleaf extends CustomCard {
+  public static final String ID = WrestlerMod.makeID("Cloverleaf");
 
   public static final String NAME;
   public static final String DESCRIPTION;
   public static final String[] EXTENDED_DESCRIPTION;
-  public static final String IMG_PATH = "halfnelson.png";
+  public static final String IMG_PATH = "cloverleaf.png";
 
   private static final CardStrings cardStrings;
 
@@ -33,42 +36,46 @@ public class FullNelson extends CustomCard {
   private static final CardTarget TARGET = CardTarget.ENEMY;
 
   private static final int COST = 1;
-  private static final int CARD_REDUCTION = 2;
-  private static final int CARD_REDUCTION_UPGRADE = -1;
+  private static final int VULNERABLE_AMOUNT = 1;
+  private static final int VULNERABLE_AMOUNT_UPGRADE = 1;
 
-  public FullNelson() {
-    super(ID, NAME, getCardResourcePath(IMG_PATH), COST, getDescription(CARD_REDUCTION), TYPE,
+  private static final int BLOCK_AMOUNT = 3;
+  private static final int BLOCK_AMOUNT_UPGRADE = 1;
+
+  public Cloverleaf() {
+    super(ID, NAME, getCardResourcePath(IMG_PATH), COST, getDescription(BLOCK_AMOUNT), TYPE,
         AbstractCardEnum.THE_WRESTLER_ORANGE, RARITY, TARGET);
-    this.magicNumber = this.baseMagicNumber = CARD_REDUCTION;
+    this.magicNumber = this.baseMagicNumber = VULNERABLE_AMOUNT;
+    this.misc = BLOCK_AMOUNT;
     this.exhaust = true;
-    tags.add(WrestlerCardTags.DIRTY);
   }
 
   @Override
   public void use(AbstractPlayer p, AbstractMonster m) {
-    AbstractDungeon.actionManager.addToBottom(new ApplyGrappledAction(m, p));
-    AbstractDungeon.actionManager.addToBottom(new ApplyPowerAction(p, p, new DrawReductionPower(p, this.magicNumber)));
+    AbstractDungeon.actionManager.addToBottom(
+        new ApplyPowerAction(m, p, new VulnerablePower(p, this.magicNumber, false), this.magicNumber));
+    AbstractDungeon.actionManager.addToBottom(
+        new ApplyPowerAction(m, p, new CloverleafPower(p, this.misc), this.misc));
   }
 
   @Override
   public AbstractCard makeCopy() {
-    return new FullNelson();
+    return new Cloverleaf();
   }
 
   @Override
   public void upgrade() {
     if (!this.upgraded) {
       this.upgradeName();
-      this.upgradeMagicNumber(CARD_REDUCTION_UPGRADE);
-      this.rawDescription = getDescription(this.magicNumber);
+      this.upgradeMagicNumber(VULNERABLE_AMOUNT_UPGRADE);
+      this.misc += BLOCK_AMOUNT_UPGRADE;
+      this.rawDescription = getDescription(this.misc);
       initializeDescription();
     }
   }
 
-  public static String getDescription(int numCards) {
-    return DESCRIPTION + numCards
-        + (numCards == 1 ? EXTENDED_DESCRIPTION[0] : EXTENDED_DESCRIPTION[1])
-        + EXTENDED_DESCRIPTION[2];
+  public static String getDescription(int bloackAmount) {
+    return DESCRIPTION + bloackAmount + EXTENDED_DESCRIPTION[0];
   }
 
   static {

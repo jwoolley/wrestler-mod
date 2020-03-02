@@ -81,6 +81,15 @@
     ]
   },
 
+  "WrestlerMod:Cloverleaf": {
+    "NAME": "Cloverleaf",
+    "DESCRIPTION": "Apply !M! Vulnerable. NL Whenever you apply a debuff to this enemy, gain ",
+    "EXTENDED_DESCRIPTION": [
+      " Block. NL Exhaust."
+    ]
+  },
+
+
   "WrestlerMod:CobraClutch": {
     "NAME": "Cobra Clutch",
     "DESCRIPTION": "Deal !D! damage. NL Apply !M! Poison."
@@ -145,7 +154,7 @@
 
   "WrestlerMod:Feud": {
     "NAME": "Feud",
-    "DESCRIPTION": "At the end of your turn, if you played !M! or more attacks, put an *Elbow on top of your draw pile.",
+    "DESCRIPTION": "At the end of your turn, put an *Elbow on the bottom of your draw pile.",
     "EXTENDED_DESCRIPTION": [
       "Innate. NL "
     ]
@@ -169,14 +178,9 @@
     "DESCRIPTION": "Deal !D! Damage and apply !M! Weak to ALL enemies. NL Exhaust."
   },
 
-  "WrestlerMod:FullNelson": {
-    "NAME": "Full Nelson",
-    "DESCRIPTION": "wrestlermod:Dirty. NL Apply wrestlermod:Grappled. NL Draw ",
-    "EXTENDED_DESCRIPTION": [
-      " less card",
-      " less cards",
-      " next turn. NL Exhaust."
-      ]
+  "WrestlerMod:HalfNelson": {
+    "NAME": "Half Nelson",
+    "DESCRIPTION": "Deal 6 damage. Whenever you apply a debuff to this enemy, gain !B! Block."
   },
 
   "WrestlerMod:Guillotine": {
@@ -186,7 +190,10 @@
 
   "WrestlerMod:HairPull": {
     "NAME": "Hair Pull",
-    "DESCRIPTION": "wrestlermod:Dirty. NL Deal !D! damage. NL If the enemy is wrestlermod:Grappled, gain [E]."
+    "DESCRIPTION": "wrestlermod:Dirty. NL Deal !D! damage. NL If the enemy has ",
+    "EXTENDED_DESCRIPTION": [
+      " or more debuffs,  gain [E] and draw 1 card."
+    ]
   },
 
   "WrestlerMod:Hammerlock": {

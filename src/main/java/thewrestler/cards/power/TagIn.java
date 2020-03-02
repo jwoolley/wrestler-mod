@@ -29,9 +29,9 @@ public class TagIn extends AbstractCardWithPreviewCard {
   private static AbstractCard PREVIEW_CARD;
   private static AbstractCard UPGRADED_PREVIEW_CARD;
 
-  private static final int COST = 2;
-  private static final int STRENGTH_GAIN = 2;
-  private static final int UPGRADED_COST = 1;
+  private static final int COST = 1;
+  private static final int STRENGTH_GAIN = 1;
+  private static final int UPGRADED_STRENGTH_GAIN = 1;
 
   public TagIn() {
     super(ID, NAME, getCardResourcePath(IMG_PATH), COST, getDescription(TagOut.NAME), TYPE, AbstractCardEnum.THE_WRESTLER_ORANGE,
@@ -60,7 +60,7 @@ public class TagIn extends AbstractCardWithPreviewCard {
   public void upgrade() {
     if (!this.upgraded) {
       this.upgradeName();
-      this.upgradeBaseCost(UPGRADED_COST);
+      this.upgradeMagicNumber(UPGRADED_STRENGTH_GAIN);
       this.rawDescription = getDescription(this.getPreviewCard().name);
       initializeDescription();
     }

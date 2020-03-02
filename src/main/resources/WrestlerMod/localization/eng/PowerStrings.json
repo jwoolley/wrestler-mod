@@ -6,6 +6,13 @@
       " damage."]
   },
 
+  "WrestlerMod:CloverleafPower": {
+    "NAME": "Cloverleaf",
+    "DESCRIPTIONS": [
+      "Whenever you apply a debuff to this enemy, you gain #b",
+      " #yBlock."]
+  },
+
   "WrestlerMod:CommonPower": {
           "NAME": "Wrestler Power",
           "DESCRIPTIONS": ["You applied #b", " keyword.", " keywords."]
@@ -35,11 +42,10 @@
   "WrestlerMod:FeudPower": {
     "NAME": "Feud",
     "DESCRIPTIONS": [
-      "At the end of your turn, if you played #b",
-      " or more attacks, put #b",
+      "At the end of your turn, put #b",
       " #yElbow",
       " #yElbows",
-      " on top of your draw pile."
+      " on the bottom of your draw pile."
     ]
   },
 

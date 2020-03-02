@@ -25,7 +25,7 @@ public class ImprovedHeadgear extends CustomWrestlerRelic {
   private static final Texture OUTLINE = TextureLoader.getTexture(makeRelicOutlinePath("ruggedheadgear.png"));
 
   public ImprovedHeadgear() {
-    super(ID, IMG, OUTLINE, RelicTier.STARTER, LandingSound.FLAT);
+    super(ID, IMG, OUTLINE, RelicTier.UNCOMMON, LandingSound.FLAT);
   }
 
   private static final int BLOCK_AMOUNT = 2;

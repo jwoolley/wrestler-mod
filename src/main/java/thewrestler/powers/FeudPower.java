@@ -27,21 +27,17 @@ public class FeudPower extends AbstractWrestlerPower implements CloneablePowerIn
 
   @Override
   public void atEndOfTurn(boolean isPlayer) {
-    if (isPlayer && CombatInfo.getNumAttacksPlayed() >= NUM_ATTACKS_REQUIRED) {
       flash();
       AbstractDungeon.actionManager.addToBottom(
-          new MakeTempCardInDrawPileAction(new Elbow(), this.amount, true, true));
-    }
+          new MakeTempCardInDrawPileAction(new Elbow(), this.amount, false, false, true));
   }
 
   @Override
   public void updateDescription() {
     this.description = DESCRIPTIONS[0]
-        + NUM_ATTACKS_REQUIRED
-        + DESCRIPTIONS[1]
         + this.amount
-        + (this.amount == 1 ? DESCRIPTIONS[2] : DESCRIPTIONS[3])
-        + DESCRIPTIONS[4];
+        + (this.amount == 1 ? DESCRIPTIONS[1] : DESCRIPTIONS[1])
+        + DESCRIPTIONS[3];
   }
 
   @Override

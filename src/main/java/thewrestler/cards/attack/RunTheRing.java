@@ -30,7 +30,7 @@ public class RunTheRing extends CustomCard {
   private static final CardTarget TARGET = CardTarget.ALL_ENEMY;
 
   private static final int COST = 1;
-  private static final int DAMAGE_PER_TRIGGER = 5;
+  private static final int DAMAGE_PER_TRIGGER = 6;
 
   private static final int NUM_DISCARDED_AND_ATTACKS = 2;
   private static final int NUM_DISCARDED_AND_ATTACKS_UPGRADE = 1;

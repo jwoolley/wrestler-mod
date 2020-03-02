@@ -16,6 +16,7 @@ import com.megacrit.cardcrawl.ui.panels.EnergyPanel;
 import thewrestler.WrestlerMod;
 import thewrestler.actions.power.ApplyGrappledAction;
 import thewrestler.enums.AbstractCardEnum;
+import thewrestler.powers.CloverleafPower;
 import thewrestler.powers.GrappledPower;
 import thewrestler.powers.SprainPower;
 import thewrestler.powers.WrestlerShackled;
@@ -131,6 +132,11 @@ public class Matrix extends CustomCard {
           });
           break;
         case 5:
+          targets.forEach(target ->
+              AbstractDungeon.actionManager.addToBottom(
+                  new ApplyPowerAction(target, source,new CloverleafPower(target, 1), 1,
+                      true, AbstractGameAction.AttackEffect.NONE)));
+        case 6:
         default:
           targets.forEach(target ->
             AbstractDungeon.actionManager.addToBottom(
