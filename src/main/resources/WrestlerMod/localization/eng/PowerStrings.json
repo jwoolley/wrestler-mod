@@ -42,10 +42,11 @@
   "WrestlerMod:FeudPower": {
     "NAME": "Feud",
     "DESCRIPTIONS": [
-      "At the end of your turn, put #b",
+      "At the end of your turn, if you played exactly #b",
+      " #yAttacks, shuffle #b",
       " #yElbow",
       " #yElbows",
-      " on the bottom of your draw pile."
+      " on into your draw pile."
     ]
   },
 

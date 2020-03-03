@@ -16,13 +16,13 @@ public interface StartOfCombatListener {
 
     AbstractPlayer player = AbstractDungeon.player;
     cards.addAll(player.drawPile.group.stream()
-        .filter(c -> c instanceof AbstractSportsmanshipListener).map(c -> (StartOfCombatListener)c).collect(Collectors.toList()));
+        .filter(c -> c instanceof StartOfCombatListener).map(c -> (StartOfCombatListener)c).collect(Collectors.toList()));
     cards.addAll(player.hand.group.stream()
-        .filter(c -> c instanceof AbstractSportsmanshipListener).map(c -> (StartOfCombatListener)c).collect(Collectors.toList()));
+        .filter(c -> c instanceof StartOfCombatListener).map(c -> (StartOfCombatListener)c).collect(Collectors.toList()));
     cards.addAll(player.discardPile.group.stream()
-        .filter(c -> c instanceof AbstractSportsmanshipListener).map(c -> (StartOfCombatListener)c).collect(Collectors.toList()));
+        .filter(c -> c instanceof StartOfCombatListener).map(c -> (StartOfCombatListener)c).collect(Collectors.toList()));
     cards.addAll(player.exhaustPile.group.stream()
-        .filter(c -> c instanceof AbstractSportsmanshipListener).map(c -> (StartOfCombatListener)c).collect(Collectors.toList()));
+        .filter(c -> c instanceof StartOfCombatListener).map(c -> (StartOfCombatListener)c).collect(Collectors.toList()));
 
     cards.forEach(StartOfCombatListener::atStartOfCombat);
   }

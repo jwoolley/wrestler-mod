@@ -82,7 +82,6 @@ public class Screwjob extends CustomCard implements AbstractSportsmanshipListene
     private static final float EFFECT_DURATION = 0.1f;
     private static final float DAMAGE_DURATION = 0.1f;
     private static final DamageInfo.DamageType DAMAGE_TYPE = DamageInfo.DamageType.NORMAL;
-    private int increasePerUnsporting;
     private final int damage;
     private final int numReps;
     private boolean isFirstRep;
@@ -96,7 +95,6 @@ public class Screwjob extends CustomCard implements AbstractSportsmanshipListene
       this.damage = damage;
       this.numReps = numReps;
       this.isFirstRep = isFirstRep;
-      this.increasePerUnsporting = incAmount;
       this.actionType = AbstractGameAction.ActionType.DAMAGE;
       this.duration = EFFECT_DURATION + DAMAGE_DURATION;
       this.uuid = targetUUID;
@@ -110,11 +108,8 @@ public class Screwjob extends CustomCard implements AbstractSportsmanshipListene
       }
 
       if (this.isFirstRep) {
-          if (SportsmanshipInfo.isUnsporting()) {
-            this.card.flash();
-            this.upgradeCardDamage();
-          }
-          CardCrawlGame.sound.play("DRILL_SPIN_1");
+        this.card.flash();
+        CardCrawlGame.sound.play("DRILL_SPIN_1");
       }
       final DamageInfo info =  new DamageInfo(AbstractDungeon.player, this.damage, DAMAGE_TYPE);
       AbstractDungeon.actionManager.addToBottom(new DamageAction(this.target, info, AttackEffect.SLASH_HORIZONTAL,
@@ -130,6 +125,7 @@ public class Screwjob extends CustomCard implements AbstractSportsmanshipListene
         this.isDone = true;
     }
 
+    /*
     private void upgradeCardDamage() {
       final int damageIncrease = SportsmanshipInfo.getAmount() * this.increasePerUnsporting;
       for (AbstractCard c : AbstractDungeon.player.masterDeck.group) {
@@ -146,6 +142,7 @@ public class Screwjob extends CustomCard implements AbstractSportsmanshipListene
         c.baseDamage = c.misc;
       }
     }
+    */
   }
 
   @Override

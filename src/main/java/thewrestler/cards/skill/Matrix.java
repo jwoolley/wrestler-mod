@@ -154,11 +154,15 @@ public class Matrix extends CustomCard {
       final int index = AbstractDungeon.cardRandomRng.random(2);
       switch (index) {
         case 1:
-          targets.forEach(target ->
-            AbstractDungeon.actionManager.addToBottom(
-            new ApplyPowerAction(target, source,
-                new CorpseExplosionPower(target), 1, true,
-                AbstractGameAction.AttackEffect.NONE)));
+          if (targets.size() > 1) {
+            targets.forEach(target ->
+                AbstractDungeon.actionManager.addToBottom(
+                    new ApplyPowerAction(target, source,
+                        new CorpseExplosionPower(target), 1, true,
+                        AbstractGameAction.AttackEffect.NONE)));
+          } else {
+            applyRandomUncommonDebuff(targets, source);
+          }
           break;
         case 2:
           // only apply Grappled to one target, and reroll if any target is Grappled already

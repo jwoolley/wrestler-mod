@@ -471,10 +471,12 @@ public class WrestlerMod implements
         BaseMod.addCard(new Butterfly());
         BaseMod.addCard(new Brainbuster());
         BaseMod.addCard(new CageMatch());
+        BaseMod.addCard(new CannedHeat());
         BaseMod.addCard(new CheapHeat());
         BaseMod.addCard(new CheapShot());
         BaseMod.addCard(new CleanFinish());
-        BaseMod.addCard(new Cloverleaf());
+//        BaseMod.addCard(new Cloverleaf());
+        BaseMod.addCard(new CloverleafAttack());
         BaseMod.addCard(new CobraClutch());
         BaseMod.addCard(new CurtainJerker());
         BaseMod.addCard(new DivingStomp());
@@ -550,10 +552,13 @@ public class WrestlerMod implements
         UnlockTracker.unlockCard(BearHug.ID);
         UnlockTracker.unlockCard(BlowOff.ID);
         UnlockTracker.unlockCard(Brainbuster.ID);
-        UnlockTracker.unlockCard(CageMatch.ID);
+        UnlockTracker.unlockCard(CageMatch.ID);;
+        UnlockTracker.unlockCard(CannedHeat.ID);
         UnlockTracker.unlockCard(CheapHeat.ID);
         UnlockTracker.unlockCard(CheapShot.ID);
         UnlockTracker.unlockCard(CleanFinish.ID);
+//        UnlockTracker.unlockCard(Cloverleaf.ID);
+        UnlockTracker.unlockCard(CloverleafAttack.ID);
         UnlockTracker.unlockCard(CobraClutch.ID);
         UnlockTracker.unlockCard(CurtainJerker.ID);
         UnlockTracker.unlockCard(DivingStomp.ID);

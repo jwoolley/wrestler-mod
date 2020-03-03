@@ -2,6 +2,7 @@ package thewrestler.cards.attack;
 
 import basemod.abstracts.CustomCard;
 import basemod.devcommands.deck.Deck;
+import basemod.helpers.TooltipInfo;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.common.DamageAction;
 import com.megacrit.cardcrawl.actions.unique.DeckToHandAction;
@@ -16,7 +17,13 @@ import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import thewrestler.cards.StartOfCombatListener;
 import thewrestler.cards.skill.AbstractSportsmanshipListener;
 import thewrestler.enums.AbstractCardEnum;
+import thewrestler.keywords.AbstractTooltipKeyword;
+import thewrestler.keywords.CustomTooltipKeywords;
+import thewrestler.keywords.TooltipKeywords;
 import thewrestler.util.info.sportsmanship.SportsmanshipInfo;
+
+import java.util.Arrays;
+import java.util.List;
 
 import static thewrestler.WrestlerMod.getCardResourcePath;
 
@@ -37,13 +44,10 @@ public class LowBlow extends CustomCard implements AbstractSportsmanshipListener
   private static final int DAMAGE_UPGRADE = 5;
   private static final int COST = 2;
 
-  private boolean selfRetained = false;
-
   public LowBlow() {
     super(ID, NAME, getCardResourcePath(IMG_PATH), COST, getDescription(), TYPE,
         AbstractCardEnum.THE_WRESTLER_ORANGE, RARITY, TARGET);
     this.baseDamage = this.damage = DAMAGE;
-    this.selfRetain = SportsmanshipInfo.isUnsporting();
   }
 
   @Override
@@ -91,6 +95,15 @@ public class LowBlow extends CustomCard implements AbstractSportsmanshipListener
     EXTENDED_DESCRIPTION = cardStrings.EXTENDED_DESCRIPTION;
   }
 
+  private static List<AbstractTooltipKeyword> EXTRA_KEYWORDS = Arrays.asList(
+      CustomTooltipKeywords.getTooltipKeyword(CustomTooltipKeywords.PENALTY_CARD)
+  );
+
+  @Override
+  public List<TooltipInfo> getCustomTooltips() {
+    return TooltipKeywords.getTooltipInfos(EXTRA_KEYWORDS);
+  }
+
   @Override
   public void atStartOfCombat() {
 
@@ -98,9 +111,7 @@ public class LowBlow extends CustomCard implements AbstractSportsmanshipListener
 
   @Override
   public void atTurnStartPreDraw(){
-    if (this.selfRetained) {
-      this.selfRetain = this.selfRetained = false;
-    }
+    this.selfRetain = false;
   }
 
 
@@ -111,7 +122,6 @@ public class LowBlow extends CustomCard implements AbstractSportsmanshipListener
       AbstractDungeon.actionManager.addToBottom(new DiscardToHandAction(this));
       if (isEndOfTurnChange && !this.selfRetain) {
         this.selfRetain = true;
-        this.selfRetained = true;
       }
     }
   }

@@ -2,6 +2,8 @@ package thewrestler.powers;
 
 import basemod.interfaces.CloneablePowerInterface;
 import com.megacrit.cardcrawl.actions.common.MakeTempCardInDrawPileAction;
+import com.megacrit.cardcrawl.actions.utility.UseCardAction;
+import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.core.AbstractCreature;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
@@ -19,7 +21,7 @@ public class FeudPower extends AbstractWrestlerPower implements CloneablePowerIn
   public static final String[] DESCRIPTIONS;
 
   public static final PowerType POWER_TYPE = PowerType.BUFF;
-  public static final int NUM_ATTACKS_REQUIRED = 3;
+  public static final int NUM_ATTACKS_REQUIRED = 2;
 
   public FeudPower(AbstractCreature owner, int amount) {
     super(POWER_ID, NAME, IMG, owner, owner, amount, POWER_TYPE);
@@ -27,22 +29,33 @@ public class FeudPower extends AbstractWrestlerPower implements CloneablePowerIn
 
   @Override
   public void atEndOfTurn(boolean isPlayer) {
+    if (isPlayer && CombatInfo.getNumAttacksPlayed() == NUM_ATTACKS_REQUIRED) {
       flash();
       AbstractDungeon.actionManager.addToBottom(
-          new MakeTempCardInDrawPileAction(new Elbow(), this.amount, false, false, true));
+        new MakeTempCardInDrawPileAction(new Elbow(), this.amount, true, true));
+    }
+  }
+
+  @Override
+  public void onUseCard(AbstractCard card, UseCardAction action) {
+    if (card.type == AbstractCard.CardType.ATTACK && CombatInfo.getNumAttacksPlayed() == NUM_ATTACKS_REQUIRED) {
+      this.flashWithoutSound();
+    }
   }
 
   @Override
   public void updateDescription() {
     this.description = DESCRIPTIONS[0]
-        + this.amount
-        + (this.amount == 1 ? DESCRIPTIONS[1] : DESCRIPTIONS[1])
-        + DESCRIPTIONS[3];
+      + NUM_ATTACKS_REQUIRED
+      + DESCRIPTIONS[1]
+      + this.amount
+      + (this.amount == 1 ? DESCRIPTIONS[2] : DESCRIPTIONS[3])
+      + DESCRIPTIONS[4];
   }
 
   @Override
   public AbstractPower makeCopy() {
-    return new ProvenTacticsPower(owner, amount);
+    return new FeudPower(owner, amount);
   }
 
   static {

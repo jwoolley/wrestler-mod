@@ -38,8 +38,8 @@ public class Opportunist extends CustomCard {
   private static final CardTarget TARGET = CardTarget.NONE;
 
   private static final int COST = 1;
-  private static final int BLOCK_AMOUNT = 10;
-  private static final int BLOCK_AMOUNT_UPGRADE = 5;
+  private static final int BLOCK_AMOUNT = 8;
+  private static final int BLOCK_AMOUNT_UPGRADE = 4;
 
   public Opportunist() {
     super(ID, NAME, getCardResourcePath(IMG_PATH), COST, DESCRIPTION, TYPE, AbstractCardEnum.THE_WRESTLER_ORANGE,

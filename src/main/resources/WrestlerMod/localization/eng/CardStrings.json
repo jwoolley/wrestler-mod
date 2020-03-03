@@ -56,7 +56,22 @@
 
   "WrestlerMod:CageMatch": {
     "NAME": "Cage Match",
-    "DESCRIPTION": "Apply wrestlermod:Grappled. NL Stun all other enemies for 1 turn. NL Exhaust."
+    "DESCRIPTION": "Apply wrestlermod:Grappled. NL Stun !M! other random",
+    "EXTENDED_DESCRIPTION": [
+      " enemy.",
+      " enemies.",
+      " NL Exhaust."
+    ]
+  },
+
+  "WrestlerMod:CannedHeat": {
+    "NAME": "Canned Heat",
+    "DESCRIPTION": "wrestlermod:Dirty. NL Discard !M!",
+    "EXTENDED_DESCRIPTION": [
+      " card.",
+      " cards.",
+      " NL Gain [E] for each [P] you have."
+    ]
   },
 
   "WrestlerMod:CheapHeat": {
@@ -89,6 +104,13 @@
     ]
   },
 
+  "WrestlerMod:CloverleafAttack": {
+    "NAME": "Cloverleaf",
+    "DESCRIPTION": "Deal !D! damage. NL Whenever you apply a debuff to this enemy, gain ",
+    "EXTENDED_DESCRIPTION": [
+      " Block. NL Exhaust."
+    ]
+  },
 
   "WrestlerMod:CobraClutch": {
     "NAME": "Cobra Clutch",
@@ -123,15 +145,15 @@
     "DESCRIPTION": "wrestlermod:Dirty. NL Apply !M! Weak and !M! Vulnerable. NL Exhaust."
   },
 
-  "WrestlerMod:Facewash": {
-    "NAME": "Facewash",
-    "DESCRIPTION": "Draw ",
-    "EXTENDED_DESCRIPTION": [
-      "a card",
-      "!M! cards",
-      ". NL Gain !B! Block for each Attack drawn."
-    ]
-  },
+    "WrestlerMod:Facewash": {
+      "NAME": "Facewash",
+      "DESCRIPTION": "Draw ",
+      "EXTENDED_DESCRIPTION": [
+        "a card",
+        "!M! cards",
+        ". NL Gain !B! Block for each Attack drawn."
+      ]
+    },
 
   "WrestlerMod:ElbowDrop": {
     "NAME": "Elbow Drop",
@@ -154,7 +176,7 @@
 
   "WrestlerMod:Feud": {
     "NAME": "Feud",
-    "DESCRIPTION": "At the end of your turn, put an *Elbow on the bottom of your draw pile.",
+    "DESCRIPTION": "At the end of your turn, if you played exactly !M! attacks, shuffle an *Elbow into your draw pile.",
     "EXTENDED_DESCRIPTION": [
       "Innate. NL "
     ]
@@ -304,7 +326,10 @@
 
   "WrestlerMod:Neckbreaker": {
     "NAME": "Neckbreaker",
-    "DESCRIPTION": "Deal !D! damage. NL If the enemy is wrestlermod:Grappled, apply !M! Vulnerable, !M! Weak, and !M! Frail."
+    "DESCRIPTION": "Deal !D! damage. NL If the enemy is wrestlermod:Grappled, apply !M! Vulnerable, !M! Weak, and ",
+    "EXTENDED_DESCRIPTION": [
+      " wrestlermod:Sprained."
+    ]
   },
 
   "WrestlerMod:OffTheRopes": {

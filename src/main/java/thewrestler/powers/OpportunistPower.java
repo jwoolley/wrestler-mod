@@ -43,13 +43,6 @@ public class OpportunistPower extends AbstractWrestlerPower implements Cloneable
     this.description = DESCRIPTIONS[0] + this.amount + DESCRIPTIONS[1];
   }
 
-  public int onAttackedToChangeDamage(DamageInfo info, int damageAmount) {
-    if (damageAmount > 0) {
-      AbstractDungeon.actionManager.addToTop(new ReducePowerAction(this.owner, this.owner, this.ID, 1));
-    }
-    return 0;
-  }
-
   @Override
   public AbstractPower makeCopy() {
     return new OpportunistPower(owner, this.blockAmount);

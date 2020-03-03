@@ -19,9 +19,9 @@ public class PenaltyCardGroup extends ArrayList<AbstractPenaltyCard> {
   private AbstractPenaltyCardStrategy strategy = new AbstractPenaltyCardStrategy(SportsmanshipInfo.MAX_PENALTY_CARDS) {
     @Override
     public AbstractPenaltyCard getNextCard() {
-      return (AbstractDungeon.miscRng.randomBoolean()
+        return AbstractDungeon.miscRng.randomBoolean()
           ? AbstractDungeon.miscRng.randomBoolean() ?  new RedPenaltyCard() : new YellowPenatlyCard()
-          : AbstractDungeon.miscRng.randomBoolean() ? new BluePenaltyCard() : new OrangePenaltyCard());
+          : AbstractDungeon.miscRng.randomBoolean() ? new BluePenaltyCard() : getNextCard();
     }
 
     @Override
