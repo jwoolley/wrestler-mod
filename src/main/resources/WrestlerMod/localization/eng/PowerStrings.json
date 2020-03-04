@@ -2,20 +2,23 @@
   "WrestlerMod:BearHugPower": {
     "NAME": "Bear Hug",
     "DESCRIPTIONS": [
-      "Whenever you play a #ySkill this turn, takes #b",
-      " damage."]
+      "Whenever you play a #yNon-Attack card this turn, gains #b",
+      " #yConstricted and you gain #b",
+      " #yBlock."
+    ]
   },
 
   "WrestlerMod:CloverleafPower": {
     "NAME": "Cloverleaf",
     "DESCRIPTIONS": [
       "Whenever you apply a debuff to this enemy, you gain #b",
-      " #yBlock."]
+      " #yBlock."
+    ]
   },
 
   "WrestlerMod:CommonPower": {
-          "NAME": "Wrestler Power",
-          "DESCRIPTIONS": ["You applied #b", " keyword.", " keywords."]
+      "NAME": "Wrestler Power",
+      "DESCRIPTIONS": ["You applied #b", " keyword.", " keywords."]
   },
 
   "WrestlerMod:CurtainJerkerPower": {
@@ -194,6 +197,14 @@
       "At the start of your next turn, gain #b",
       " #yPenalty #yCard.",
       " #yPenalty #yCards."
+    ]
+  },
+
+  "WrestlerMod:TechnicianPower": {
+    "NAME": "Technician",
+    "DESCRIPTIONS": [
+      "Whenever you apply a debuff to an enemy that it doesn't already have, gain #b",
+      " #yBlock."
     ]
   },
 

@@ -28,7 +28,7 @@
 
   "WrestlerMod:BearHug": {
     "NAME": "Bear Hug",
-    "DESCRIPTION": "Deal !D! Damage. NL Whenever you play a Skill this turn, apply !M! Vulnerable and !M! Weak.",
+    "DESCRIPTION": "Deal !D! Damage. NL Whenever you play a non-Attack card this turn, apply !M! Constricted and you gain !M! Block.",
     "EXTENDED_DESCRIPTION": [
       " NL Exhaust."
     ]
@@ -462,7 +462,7 @@
 
   "WrestlerMod:Sharpshooter": {
     "NAME": "Sharpshooter",
-    "DESCRIPTION": "Apply !M! Choked. NL Deal !D! Damage for each debuff applied to the enemy.",
+    "DESCRIPTION": "Apply !M! Constricted. NL Deal !D! Damage for each debuff applied to the enemy.",
     "EXTENDED_DESCRIPTION": [
       "Ethereal. NL "
     ]
@@ -557,6 +557,11 @@
   "WrestlerMod:TakeToTheMat": {
     "NAME": "Take to the Mat",
     "DESCRIPTION": "Deal !D! Damage. NL If the enemy has !M! % health or less, they become wrestlermod:Grappled."
+  },
+
+  "WrestlerMod:Technician": {
+    "NAME": "Technician",
+    "DESCRIPTION": "Whenever you apply a debuff to an enemy that it doesn't already have, Gain !M! Block."
   },
 
   "WrestlerMod:TornadoTag": {

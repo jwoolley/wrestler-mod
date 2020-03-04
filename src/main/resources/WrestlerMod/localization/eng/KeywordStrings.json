@@ -143,6 +143,16 @@
     "DESCRIPTION": "Whenever you play a card this turn, loses HP."
   },
 
+  "Constricted": {
+    "PROPER_NAME": "Constricted",
+    "NAMES": [
+      "constricted"
+    ],
+    "DESCRIPTION": "Constricted creatures take damage at the end of their turn."
+
+  },
+
+
   "Beam_Cell": {
     "PROPER_NAME": "Beam Cell",
     "NAMES": [

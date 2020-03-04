@@ -2,6 +2,7 @@ package thewrestler.powers;
 
 import basemod.interfaces.CloneablePowerInterface;
 import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
+import com.megacrit.cardcrawl.actions.common.GainBlockAction;
 import com.megacrit.cardcrawl.actions.common.RemoveSpecificPowerAction;
 import com.megacrit.cardcrawl.actions.utility.SFXAction;
 import com.megacrit.cardcrawl.actions.utility.UseCardAction;
@@ -11,6 +12,7 @@ import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.PowerStrings;
 import com.megacrit.cardcrawl.powers.AbstractPower;
+import com.megacrit.cardcrawl.powers.ConstrictedPower;
 import com.megacrit.cardcrawl.powers.VulnerablePower;
 import com.megacrit.cardcrawl.powers.WeakPower;
 import thewrestler.WrestlerMod;
@@ -30,12 +32,12 @@ public class BearHugPower extends AbstractWrestlerPower implements CloneablePowe
 
     @Override
     public void updateDescription() {
-      this.description = DESCRIPTIONS[0] + this.amount + DESCRIPTIONS[1];
+      this.description = DESCRIPTIONS[0] + this.amount + DESCRIPTIONS[1] + this.amount + DESCRIPTIONS[2];
     }
 
     @Override
     public void onUseCard(AbstractCard card, UseCardAction action) {
-      if (card.type == AbstractCard.CardType.SKILL) {
+      if (card.type != AbstractCard.CardType.ATTACK) {
         this.flash();
         this.applyTrigger();
       }
@@ -48,16 +50,14 @@ public class BearHugPower extends AbstractWrestlerPower implements CloneablePowe
 
     private void applyTrigger() {
       flash();
-
       AbstractDungeon.actionManager.addToTop(new SFXAction("GRUNT_SHORT_1"));
 
       AbstractDungeon.actionManager.addToBottom(
-          new ApplyPowerAction(this.owner, this.source, new VulnerablePower(this.owner, this.amount, false)));
-
+          new GainBlockAction(this.source, this.source, this.amount));
 
       AbstractDungeon.actionManager.addToBottom(
-          new ApplyPowerAction(this.owner, this.source, new WeakPower(this.owner, this.amount, false)));
-
+          new ApplyPowerAction(this.owner, this.source,
+              new ConstrictedPower(this.owner, this.source, this.amount)));
     }
 
     @Override

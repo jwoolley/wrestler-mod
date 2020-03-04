@@ -32,13 +32,15 @@ public class BearHug extends CustomCard {
   private static final int COST = 2;
   private static final int DAMAGE = 9;
   private static final int DAMAGE_UPGRADE = 4;
-  private static final int DEBUFFS_PER_SKILL = 1;
+
+  private static final int DEBUFF_PER_CARD = 2;
+  private static final int DEBUFF_PER_CARD_UPGRADE = 1;
 
   public BearHug() {
-    super(ID, NAME, getCardResourcePath(IMG_PATH), COST, getDescription(false), TYPE,
+    super(ID, NAME, getCardResourcePath(IMG_PATH), COST, getDescription(), TYPE,
         AbstractCardEnum.THE_WRESTLER_ORANGE, RARITY, TARGET);
     this.baseDamage = this.damage = DAMAGE;
-    this.baseMagicNumber = this.magicNumber = DEBUFFS_PER_SKILL;
+    this.baseMagicNumber = this.magicNumber = DEBUFF_PER_CARD;
   }
 
   @Override
@@ -60,13 +62,14 @@ public class BearHug extends CustomCard {
     if (!this.upgraded) {
       this.upgradeName();
       this.upgradeDamage(DAMAGE_UPGRADE);
-      this.rawDescription = getDescription(false);
+      this.upgradeMagicNumber(DEBUFF_PER_CARD_UPGRADE);
+      this.rawDescription = getDescription();
       this.initializeDescription();
     }
   }
 
-  public static String getDescription(boolean hasExhaust) {
-    return DESCRIPTION + (hasExhaust ? EXTENDED_DESCRIPTION[0] : "");
+  public static String getDescription() {
+    return DESCRIPTION;
   }
 
   static {

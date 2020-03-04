@@ -487,7 +487,7 @@ public class WrestlerMod implements
         BaseMod.addCard(new Feud());
         BaseMod.addCard(new FloatOver());
         BaseMod.addCard(new FrogSplash());
-//        BaseMod.addCard(new FullNelson());
+//        BaseMod.addCard(new HalfNelson());
         BaseMod.addCard(new Guillotine());
         BaseMod.addCard(new HairPull());
         BaseMod.addCard(new Hammerlock());
@@ -529,6 +529,7 @@ public class WrestlerMod implements
         BaseMod.addCard(new TagIn());
 //        BaseMod.addCard(new TakeAPowder());
         BaseMod.addCard(new TakeToTheMat());
+        BaseMod.addCard(new Technician());
         BaseMod.addCard(new TriangleChoke());
         BaseMod.addCard(new TripleThreat());
         BaseMod.addCard(new WindUpKick());
@@ -557,7 +558,7 @@ public class WrestlerMod implements
         UnlockTracker.unlockCard(CheapHeat.ID);
         UnlockTracker.unlockCard(CheapShot.ID);
         UnlockTracker.unlockCard(CleanFinish.ID);
-//        UnlockTracker.unlockCard(Cloverleaf.ID);
+        UnlockTracker.unlockCard(Cloverleaf.ID);
         UnlockTracker.unlockCard(CloverleafAttack.ID);
         UnlockTracker.unlockCard(CobraClutch.ID);
         UnlockTracker.unlockCard(CurtainJerker.ID);
@@ -569,7 +570,7 @@ public class WrestlerMod implements
         UnlockTracker.unlockCard(Feud.ID);
         UnlockTracker.unlockCard(FloatOver.ID);
         UnlockTracker.unlockCard(FrogSplash.ID);
-//        UnlockTracker.unlockCard(FullNelson.ID);
+        UnlockTracker.unlockCard(HalfNelson.ID);
         UnlockTracker.unlockCard(Guillotine.ID);
         UnlockTracker.unlockCard(HairPull.ID);
         UnlockTracker.unlockCard(Hammerlock.ID);
@@ -611,6 +612,7 @@ public class WrestlerMod implements
         UnlockTracker.unlockCard(TagIn.ID);
         UnlockTracker.unlockCard(TakeAPowder.ID);
         UnlockTracker.unlockCard(TakeToTheMat.ID);
+        UnlockTracker.unlockCard(Technician.ID);
         UnlockTracker.unlockCard(TriangleChoke.ID);
         UnlockTracker.unlockCard(TripleThreat.ID);
         UnlockTracker.unlockCard(WindUpKick.ID);

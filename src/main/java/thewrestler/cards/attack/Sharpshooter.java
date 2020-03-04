@@ -9,6 +9,7 @@ import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.powers.ChokePower;
+import com.megacrit.cardcrawl.powers.ConstrictedPower;
 import thewrestler.actions.cards.attack.SharpshooterAction;
 import thewrestler.enums.AbstractCardEnum;
 
@@ -28,7 +29,7 @@ public class Sharpshooter extends CustomCard {
   private static final CardTarget TARGET = CardTarget.ENEMY;
 
   private static final int COST = 1;
-  private static final int DAMAGE_PER_TRIGGER = 4;
+  private static final int DAMAGE_PER_TRIGGER = 3;
   private static final int DEBUFF_STACKS = 1;
 
   // TODO: Add Keyword for Choked
@@ -44,7 +45,7 @@ public class Sharpshooter extends CustomCard {
   @Override
   public void use(AbstractPlayer p, AbstractMonster m) {
     AbstractDungeon.actionManager.addToBottom(
-        new ApplyPowerAction(m, p, new ChokePower(m, this.magicNumber), this.magicNumber));
+        new ApplyPowerAction(m, p, new ConstrictedPower(m, p, 1), this.magicNumber));
 
     AbstractDungeon.actionManager.addToBottom(new SharpshooterAction(m, p, this.damage));
   }

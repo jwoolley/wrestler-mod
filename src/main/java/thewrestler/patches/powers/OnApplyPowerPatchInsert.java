@@ -12,6 +12,7 @@ import com.megacrit.cardcrawl.powers.ArtifactPower;
 import com.megacrit.cardcrawl.powers.StrengthPower;
 import thewrestler.WrestlerMod;
 import thewrestler.powers.CloverleafPower;
+import thewrestler.powers.TechnicianPower;
 import thewrestler.relics.Headgear;
 import thewrestler.relics.ImprovedHeadgear;
 import thewrestler.util.CreatureUtils;
@@ -45,6 +46,12 @@ public class OnApplyPowerPatchInsert {
           && !target.hasPower(ArtifactPower.POWER_ID) &&
           doesntAlreadyHaveAnyDebuffs(target, powerToApply, amountBeingApplied)) {
         ((Headgear) AbstractDungeon.player.getRelic(Headgear.ID)).onApplyPower(powerToApply);
+      }
+
+      if (source == player && target != player &&  player.hasPower(TechnicianPower.POWER_ID)
+          && !target.hasPower(ArtifactPower.POWER_ID) &&
+          doesntAlreadyHaveDebuff(target, powerToApply, amountBeingApplied)) {
+        ((TechnicianPower) AbstractDungeon.player.getPower(TechnicianPower.POWER_ID)).onApplyPower(powerToApply);
       }
 
       if (source == player && target != player && player.hasRelic(ImprovedHeadgear.ID) && !target.hasPower(ArtifactPower.POWER_ID)) {
