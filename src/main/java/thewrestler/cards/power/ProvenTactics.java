@@ -28,8 +28,8 @@ public class ProvenTactics extends CustomCard {
   private static final CardRarity RARITY = CardRarity.RARE;
   private static final CardTarget TARGET = CardTarget.NONE;
 
-  private static final int COST = 2;
-  private static final int UPGRADED_COST = 1;
+  private static final int COST = 1;
+  private static final int UPGRADED_COST = 0;
   private static final int CARDS_PER_TURN = 1;
 
   public ProvenTactics() {

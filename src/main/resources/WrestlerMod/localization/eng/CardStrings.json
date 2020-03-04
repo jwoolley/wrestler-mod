@@ -332,6 +332,15 @@
     ]
   },
 
+  "WrestlerMod:Octopus": {
+    "NAME": "Octopus",
+    "DESCRIPTION": "Apply !M! wrestlermod:Sprained ",
+    "EXTENDED_DESCRIPTION": [
+      " times.",
+      " times. NL Exahust."
+    ]
+  },
+
   "WrestlerMod:OffTheRopes": {
     "NAME": "Off the Ropes",
     "DESCRIPTION": "Gain !B! Block. NL Return",
@@ -561,7 +570,7 @@
 
   "WrestlerMod:Technician": {
     "NAME": "Technician",
-    "DESCRIPTION": "Whenever you apply a debuff to an enemy that it doesn't already have, Gain !M! Block."
+    "DESCRIPTION": "Whenever you apply a debuff to an enemy that it doesn't already have, gain !M! Block."
   },
 
   "WrestlerMod:TornadoTag": {

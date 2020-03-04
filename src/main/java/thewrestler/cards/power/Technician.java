@@ -40,7 +40,7 @@ public class Technician extends CustomCard {
 
   private static final int COST = 1;
   private static final int BLOCK_AMOUNT = 3;
-  private static final int BLOCK_AMOUNT_UPGRADE = 5;
+  private static final int BLOCK_AMOUNT_UPGRADE = 2;
 
   public Technician() {
     super(ID, NAME, getCardResourcePath(IMG_PATH), COST, DESCRIPTION, TYPE, AbstractCardEnum.THE_WRESTLER_ORANGE,

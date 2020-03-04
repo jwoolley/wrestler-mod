@@ -30,7 +30,7 @@ public class PhantomBump extends CustomCard {
   private static final CardTarget TARGET = CardTarget.NONE;
 
   private static final int COST = 1;
-  private static final int BUFFER_STACKS = 2;
+  private static final int BUFFER_STACKS = 1;
   private static final int UPGRADED_BUFFER_STACKS = 1;
 
   public PhantomBump() {

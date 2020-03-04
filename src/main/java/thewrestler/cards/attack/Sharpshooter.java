@@ -45,7 +45,7 @@ public class Sharpshooter extends CustomCard {
   @Override
   public void use(AbstractPlayer p, AbstractMonster m) {
     AbstractDungeon.actionManager.addToBottom(
-        new ApplyPowerAction(m, p, new ConstrictedPower(m, p, 1), this.magicNumber));
+        new ApplyPowerAction(m, p, new ConstrictedPower(m, p, this.magicNumber), this.magicNumber));
 
     AbstractDungeon.actionManager.addToBottom(new SharpshooterAction(m, p, this.damage));
   }

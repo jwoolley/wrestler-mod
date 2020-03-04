@@ -22,7 +22,7 @@ public class IrradiatedPower extends AbstractWrestlerPower implements CloneableP
 
   public static final int ENERGY_PER_TRIGGER = 1;
 
-  public static final PowerType POWER_TYPE = PowerType.BUFF;
+  public static final PowerType POWER_TYPE = PowerType.DEBUFF;
 
   public IrradiatedPower(AbstractCreature owner, int amount) {
     super(POWER_ID, NAME, IMG, owner, AbstractDungeon.player, amount, POWER_TYPE);

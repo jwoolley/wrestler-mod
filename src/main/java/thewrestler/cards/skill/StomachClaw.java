@@ -31,12 +31,12 @@ public class StomachClaw extends CustomCard {
   public static final String IMG_PATH = "stomachclaw.png";
 
   private static final int DEBUFF_AMOUNT = 6;
-  private static final int DEBUFF_AMOUNT_UPGRADE  = 2;
+  private static final int DEBUFF_AMOUNT_UPGRADE  = 1;
 
   private static final CardStrings cardStrings;
 
   private static final CardType TYPE = CardType.SKILL;
-  private static final CardRarity RARITY = CardRarity.UNCOMMON;
+  private static final CardRarity RARITY = CardRarity.COMMON;
   private static final CardTarget TARGET = CardTarget.ENEMY;
 
   private static final int COST = 1;
