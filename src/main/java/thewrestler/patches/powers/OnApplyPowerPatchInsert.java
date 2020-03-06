@@ -12,6 +12,7 @@ import com.megacrit.cardcrawl.powers.ArtifactPower;
 import com.megacrit.cardcrawl.powers.StrengthPower;
 import thewrestler.WrestlerMod;
 import thewrestler.powers.CloverleafPower;
+import thewrestler.powers.SqueezePower;
 import thewrestler.powers.TechnicianPower;
 import thewrestler.relics.Headgear;
 import thewrestler.relics.ImprovedHeadgear;
@@ -34,7 +35,6 @@ public class OnApplyPowerPatchInsert {
                             AbstractPower powerToApply) {
 
     final boolean alreadyHandled = powerActionList.contains(__instance);
-//    WrestlerMod.logger.info("__instance: " + __instance + "; alreadyHandled: " + alreadyHandled);
 
     final int amountBeingApplied = __instance.amount;
 
@@ -48,14 +48,24 @@ public class OnApplyPowerPatchInsert {
         ((Headgear) AbstractDungeon.player.getRelic(Headgear.ID)).onApplyPower(powerToApply);
       }
 
-      if (source == player && target != player &&  player.hasPower(TechnicianPower.POWER_ID)
-          && !target.hasPower(ArtifactPower.POWER_ID) &&
-          doesntAlreadyHaveDebuff(target, powerToApply, amountBeingApplied)) {
-        ((TechnicianPower) AbstractDungeon.player.getPower(TechnicianPower.POWER_ID)).onApplyPower(powerToApply);
+      if (source == player && target != player && player.hasRelic(ImprovedHeadgear.ID)
+          && !target.hasPower(ArtifactPower.POWER_ID)) {
+        ((ImprovedHeadgear) AbstractDungeon.player.getRelic(ImprovedHeadgear.ID)).onApplyPower(powerToApply);
       }
 
-      if (source == player && target != player && player.hasRelic(ImprovedHeadgear.ID) && !target.hasPower(ArtifactPower.POWER_ID)) {
-        ((ImprovedHeadgear) AbstractDungeon.player.getRelic(ImprovedHeadgear.ID)).onApplyPower(powerToApply);
+      if (source == player && target != player && !target.hasPower(ArtifactPower.POWER_ID) &&
+          doesntAlreadyHaveDebuff(target, powerToApply, amountBeingApplied)) {
+        if (player.hasPower(CloverleafPower.POWER_ID)) {
+          ((CloverleafPower) AbstractDungeon.player.getPower(CloverleafPower.POWER_ID)).onApplyPower(powerToApply);
+        }
+
+        if (player.hasPower(SqueezePower.POWER_ID)) {
+          ((SqueezePower) AbstractDungeon.player.getPower(SqueezePower.POWER_ID)).onApplyPower(powerToApply);
+        }
+
+        if (player.hasPower(TechnicianPower.POWER_ID)) {
+          ((TechnicianPower) AbstractDungeon.player.getPower(TechnicianPower.POWER_ID)).onApplyPower(powerToApply);
+        }
       }
 
       if (source == player && target != player && target.hasPower(CloverleafPower.POWER_ID) && !target.hasPower(ArtifactPower.POWER_ID)) {

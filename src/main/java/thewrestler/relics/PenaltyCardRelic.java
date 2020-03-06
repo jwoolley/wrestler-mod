@@ -22,10 +22,9 @@ public class PenaltyCardRelic extends CustomWrestlerRelic {
   private static final Texture OUTLINE = TextureLoader.getTexture(makeRelicOutlinePath("penaltycard.png"));
   private static final RelicTier RELIC_TIER = RelicTier.STARTER;
 
-  private static final List<String> POWERTIP_KEYWORDS = Arrays.asList(WrestlerMod.makeID("Unsporting"));
+  private static final List<String> POWERTIP_KEYWORDS = Arrays.asList(WrestlerMod.makeID("PenaltyCard"));
 
   public static final int CARD_AMOUNT = 1;
-  public static final int HP_LOSS_AMOUNT = 1;
 
   public PenaltyCardRelic() {
     super(ID, IMG, OUTLINE, RELIC_TIER, LandingSound.FLAT);
@@ -33,8 +32,7 @@ public class PenaltyCardRelic extends CustomWrestlerRelic {
 
   @Override
   public String getUpdatedDescription() {
-    return DESCRIPTIONS[0]
-        + (CARD_AMOUNT  == 1 ? DESCRIPTIONS[1] : DESCRIPTIONS[2]);
+    return DESCRIPTIONS[0];
   }
 
   public void atTurnStart() {
@@ -42,7 +40,6 @@ public class PenaltyCardRelic extends CustomWrestlerRelic {
       flash();
       AbstractPlayer player = AbstractDungeon.player;
       AbstractDungeon.actionManager.addToBottom(new DrawCardAction(CARD_AMOUNT));
-//      AbstractDungeon.actionManager.addToBottom(new LoseHPAction(player, player, HP_LOSS_AMOUNT));
     }
   }
 

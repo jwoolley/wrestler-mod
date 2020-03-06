@@ -98,7 +98,7 @@
 
   "WrestlerMod:Cloverleaf": {
     "NAME": "Cloverleaf",
-    "DESCRIPTION": "Apply !M! Vulnerable. NL Whenever you apply a debuff to this enemy, gain ",
+    "DESCRIPTION": "Apply !M! Vulnerable. NL Whenever you apply a debuff to this enemy that it doesn't already have, gain ",
     "EXTENDED_DESCRIPTION": [
       " Block. NL Exhaust."
     ]
@@ -106,7 +106,7 @@
 
   "WrestlerMod:CloverleafAttack": {
     "NAME": "Cloverleaf",
-    "DESCRIPTION": "Deal !D! damage. NL Whenever you apply a debuff to this enemy, gain ",
+    "DESCRIPTION": "Deal !D! damage. NL Whenever you apply a debuff to this enemy that it doesn't already have, gain ",
     "EXTENDED_DESCRIPTION": [
       " Block. NL Exhaust."
     ]
@@ -334,7 +334,7 @@
 
   "WrestlerMod:Octopus": {
     "NAME": "Octopus",
-    "DESCRIPTION": "Apply !M! wrestlermod:Sprained ",
+    "DESCRIPTION": "Apply !M! wrestlermod:Sprained to a random enemy ",
     "EXTENDED_DESCRIPTION": [
       " times.",
       " times. NL Exahust."
@@ -527,6 +527,11 @@
     "DESCRIPTION": "Apply !M! Weak. NL If you attack that enemy twice this turn, apply wrestlermod:Grappled."
   },
 
+  "WrestlerMod:Squeeze": {
+    "NAME": "Squeeze",
+    "DESCRIPTION": "Whenever you apply a debuff to an enemy this turn that it doesn't already have, gain !B! Block."
+  },
+
   "WrestlerMod:StomachClaw": {
     "NAME": "Stomach Claw",
     "DESCRIPTION": "wrestlermod:Dirty. NL Apply !M! wrestlermod:Sprained."
@@ -570,7 +575,11 @@
 
   "WrestlerMod:Technician": {
     "NAME": "Technician",
-    "DESCRIPTION": "Whenever you apply a debuff to an enemy that it doesn't already have, gain !M! Block."
+    "DESCRIPTION": "Whenever you apply a debuff to an enemy that it doesn't already have, draw !M!",
+    "EXTENDED_DESCRIPTION": [
+      " card.",
+      " cards."
+    ]
   },
 
   "WrestlerMod:TornadoTag": {

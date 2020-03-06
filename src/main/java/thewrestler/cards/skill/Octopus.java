@@ -7,6 +7,7 @@ import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.AbstractCreature;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
+import com.megacrit.cardcrawl.core.Settings;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
@@ -52,15 +53,14 @@ public class Octopus extends CustomCard {
   }
 
   private static class OctopusAction extends AbstractGameAction {
-    private static final float EFFECT_DURATION = 0.05f;
-    private static final float DAMAGE_DURATION = 0.05f;
+    private static final float EFFECT_DURATION = 0.01f;
     private final int numReps;
 
     public OctopusAction(AbstractCreature target, int amountPerRep, int numReps) {
       this.target = target;
       this.amount = amountPerRep;
       this.numReps = numReps;
-      this.duration = EFFECT_DURATION + DAMAGE_DURATION;
+      this.duration = EFFECT_DURATION;
     }
 
     public void update() {
@@ -71,14 +71,9 @@ public class Octopus extends CustomCard {
         return;
       }
 
-      AbstractDungeon.effectList.add(new FlashAtkImgEffect(this.target.hb.cX, this.target.hb.cY,
-          AbstractGameAction.AttackEffect.BLUNT_LIGHT,this.target.hasPower(ArtifactPower.POWER_ID)));
-
-      AbstractDungeon.actionManager.addToBottom(
-          new ApplyPowerAction(this.target, AbstractDungeon.player, new SprainPower(this.target, this.amount),
-              this.amount));
-
       if (!AbstractDungeon.getCurrRoom().monsters.areMonstersBasicallyDead()) {
+        trigger();
+
         AbstractDungeon.actionManager.addToBottom(
             new OctopusAction(this.target, this.amount, this.numReps - 1));
       } else {
@@ -86,8 +81,16 @@ public class Octopus extends CustomCard {
       }
       this.isDone = true;
     }
-  }
 
+    private void trigger() {
+      AbstractDungeon.effectList.add(new FlashAtkImgEffect(this.target.hb.cX, this.target.hb.cY,
+          AbstractGameAction.AttackEffect.BLUNT_LIGHT,this.target.hasPower(ArtifactPower.POWER_ID)));
+
+      AbstractDungeon.actionManager.addToBottom(
+          new ApplyPowerAction(this.target, AbstractDungeon.player, new SprainPower(this.target, this.amount),
+              this.amount));
+    }
+  }
 
   @Override
   public AbstractCard makeCopy() {

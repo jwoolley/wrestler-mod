@@ -27,7 +27,7 @@ import thewrestler.cards.attack.WrestlerStrike;
 import thewrestler.cards.skill.EyePoke;
 import thewrestler.cards.skill.WrestlerDefend;
 import thewrestler.enums.AbstractCardEnum;
-import thewrestler.relics.Headgear;
+import thewrestler.relics.ImprovedHeadgear;
 import thewrestler.relics.PenaltyCardRelic;
 import thewrestler.signaturemoves.cards.SignatureMoveCardEnum;
 import thewrestler.signaturemoves.moveinfos.AbstractSignatureMoveInfo;
@@ -63,7 +63,6 @@ public class WrestlerCharacter extends CustomPlayer {
     private static final CharacterStrings characterStrings = CardCrawlGame.languagePack.getCharacterString(ID);
     private static final String[] NAMES = characterStrings.NAMES;
     private static final String[] TEXT = characterStrings.TEXT;
-
 
     private static String getCharacterOrbImagePath(String filename) {
         return getImageResourcePath("char/wrestler/orb/" + filename);
@@ -141,8 +140,9 @@ public class WrestlerCharacter extends CustomPlayer {
     public ArrayList<String> getStartingRelics() {
         ArrayList<String> retVal = new ArrayList<>();
         retVal.add(PenaltyCardRelic.ID);
-        UnlockTracker.markRelicAsSeen(Headgear.ID);
+        retVal.add(ImprovedHeadgear.ID);
         UnlockTracker.markRelicAsSeen(PenaltyCardRelic.ID);
+        UnlockTracker.markRelicAsSeen(ImprovedHeadgear.ID);
         return retVal;
     }
 
@@ -162,7 +162,6 @@ public class WrestlerCharacter extends CustomPlayer {
         final int index = (new Random()).nextInt(SignatureMoveCardEnum.values().length);
         return SignatureMoveCardEnum.values()[index].getInfoCopy(SignatureMoveUpgradeList.NO_UPGRADES);
     }
-
 
     public static boolean hasSportsmanshipInfo() {
         return sportsmanshipInfo != null;

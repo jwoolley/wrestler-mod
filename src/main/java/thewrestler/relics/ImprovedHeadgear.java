@@ -2,12 +2,14 @@ package thewrestler.relics;
 
 import basemod.abstracts.CustomRelic;
 import com.badlogic.gdx.graphics.Texture;
+import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
 import com.megacrit.cardcrawl.actions.common.GainBlockAction;
 import com.megacrit.cardcrawl.actions.utility.SFXAction;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.Keyword;
 import com.megacrit.cardcrawl.powers.AbstractPower;
+import com.megacrit.cardcrawl.powers.NextTurnBlockPower;
 import thewrestler.WrestlerMod;
 import thewrestler.util.TextureLoader;
 
@@ -28,11 +30,15 @@ public class ImprovedHeadgear extends CustomWrestlerRelic {
     super(ID, IMG, OUTLINE, RelicTier.UNCOMMON, LandingSound.FLAT);
   }
 
-  private static final int BLOCK_AMOUNT = 2;
+  private static final int BLOCK_AMOUNT = 1;
 
   public void onApplyPower(AbstractPower power) {
     AbstractPlayer player = AbstractDungeon.player;
     AbstractDungeon.actionManager.addToBottom(new GainBlockAction(player, player, BLOCK_AMOUNT));
+
+//    AbstractDungeon.actionManager.addToBottom(
+//        new ApplyPowerAction(player, player, new NextTurnBlockPower(player, BLOCK_AMOUNT), BLOCK_AMOUNT));
+
     triggerEffects();
   }
 

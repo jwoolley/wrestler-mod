@@ -1,7 +1,6 @@
 package thewrestler.cards.power;
 
 import basemod.abstracts.CustomCard;
-import basemod.helpers.TooltipInfo;
 import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
@@ -11,16 +10,7 @@ import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import thewrestler.WrestlerMod;
 import thewrestler.enums.AbstractCardEnum;
-import thewrestler.keywords.AbstractTooltipKeyword;
-import thewrestler.keywords.CustomTooltipKeywords;
-import thewrestler.keywords.TooltipKeywords;
-import thewrestler.powers.OpportunistPower;
-import thewrestler.powers.ProvenTacticsPower;
 import thewrestler.powers.TechnicianPower;
-import thewrestler.signaturemoves.upgrades.UpgradeType;
-
-import java.util.Arrays;
-import java.util.List;
 
 import static thewrestler.WrestlerMod.getCardResourcePath;
 
@@ -38,14 +28,14 @@ public class Technician extends CustomCard {
   private static final CardRarity RARITY = CardRarity.UNCOMMON;
   private static final CardTarget TARGET = CardTarget.NONE;
 
-  private static final int COST = 1;
-  private static final int BLOCK_AMOUNT = 3;
-  private static final int BLOCK_AMOUNT_UPGRADE = 2;
+  private static final int COST = 2;
+  private static final int UPGRADED_COST = 1;
+  private static final int CARD_DRAW_AMOUNT = 1;
 
   public Technician() {
-    super(ID, NAME, getCardResourcePath(IMG_PATH), COST, DESCRIPTION, TYPE, AbstractCardEnum.THE_WRESTLER_ORANGE,
+    super(ID, NAME, getCardResourcePath(IMG_PATH), COST, getDescription(CARD_DRAW_AMOUNT), TYPE, AbstractCardEnum.THE_WRESTLER_ORANGE,
         RARITY, TARGET);
-    this.baseMagicNumber = this.magicNumber = BLOCK_AMOUNT;
+    this.baseMagicNumber = this.magicNumber = CARD_DRAW_AMOUNT;
   }
 
   @Override
@@ -63,9 +53,14 @@ public class Technician extends CustomCard {
   public void upgrade() {
     if (!this.upgraded) {
       this.upgradeName();
+      this.upgradeBaseCost(UPGRADED_COST);
+      this.rawDescription = getDescription(this.magicNumber);
       initializeDescription();
-      this.upgradeMagicNumber(BLOCK_AMOUNT_UPGRADE);
     }
+  }
+
+  private static String getDescription(int drawAmount) {
+    return DESCRIPTION  + (drawAmount == 1 ? EXTENDED_DESCRIPTION[0] : EXTENDED_DESCRIPTION[1]);
   }
 
   static {

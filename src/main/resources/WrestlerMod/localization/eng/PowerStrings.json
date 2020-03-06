@@ -191,6 +191,14 @@
     ]
   },
 
+  "WrestlerMod:SqueezePower": {
+    "NAME": "Squeeze",
+    "DESCRIPTIONS": [
+      "Whenever you apply a debuff to an enemy this turn that it doesn't already have, gain #b",
+      " #yBlock."
+    ]
+  },
+
   "WrestlerMod:TarnishedReputationPower": {
     "NAME": "Tarnished Reputation",
     "DESCRIPTIONS": [
@@ -203,8 +211,9 @@
   "WrestlerMod:TechnicianPower": {
     "NAME": "Technician",
     "DESCRIPTIONS": [
-      "Whenever you apply a debuff to an enemy that it doesn't already have, gain #b",
-      " #yBlock."
+      "Whenever you apply a debuff to an enemy that it doesn't already have, draw #b",
+      " card.",
+      " cards."
     ]
   },
 

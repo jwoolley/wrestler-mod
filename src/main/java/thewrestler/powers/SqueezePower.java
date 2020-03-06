@@ -1,12 +1,8 @@
 package thewrestler.powers;
 
 import basemod.interfaces.CloneablePowerInterface;
-import com.megacrit.cardcrawl.actions.AbstractGameAction;
-import com.megacrit.cardcrawl.actions.common.DamageAction;
-import com.megacrit.cardcrawl.actions.common.DrawCardAction;
 import com.megacrit.cardcrawl.actions.common.GainBlockAction;
 import com.megacrit.cardcrawl.actions.common.RemoveSpecificPowerAction;
-import com.megacrit.cardcrawl.cards.DamageInfo;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.AbstractCreature;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
@@ -14,26 +10,29 @@ import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.PowerStrings;
 import com.megacrit.cardcrawl.powers.AbstractPower;
 import thewrestler.WrestlerMod;
-import thewrestler.util.info.CombatInfo;
 
-public class TechnicianPower extends AbstractWrestlerPower implements CloneablePowerInterface {
-  public static final String POWER_ID = WrestlerMod.makeID("TechnicianPower");
-  public static final String IMG = "technician.png";
+public class SqueezePower extends AbstractWrestlerPower implements CloneablePowerInterface {
+  public static final String POWER_ID = WrestlerMod.makeID("SqueezePower");
+  public static final String IMG = "squeeze.png";
   private static final PowerStrings powerStrings;
   public static final String NAME;
   public static final String[] DESCRIPTIONS;
 
   public static final PowerType POWER_TYPE = PowerType.BUFF;
 
-  public TechnicianPower(AbstractCreature owner, int amount) {
+  public SqueezePower(AbstractCreature owner, int amount) {
     super(POWER_ID, NAME, IMG, owner, owner, amount, POWER_TYPE);
   }
 
   public void onApplyPower(AbstractPower power) {
     AbstractPlayer player = AbstractDungeon.player;
-    AbstractDungeon.actionManager.addToBottom(new DrawCardAction(player, this.amount));
-//    AbstractDungeon.actionManager.addToBottom(new GainBlockAction(player, player, this.amount));
+    AbstractDungeon.actionManager.addToBottom(new GainBlockAction(player, player, this.amount));
     this.flash();
+  }
+
+  @Override
+  public void atEndOfTurn(boolean isPlayer) {
+    AbstractDungeon.actionManager.addToBottom(new RemoveSpecificPowerAction(this.owner, this.owner, POWER_ID));
   }
 
   @Override
@@ -43,7 +42,7 @@ public class TechnicianPower extends AbstractWrestlerPower implements CloneableP
 
   @Override
   public AbstractPower makeCopy() {
-    return new TechnicianPower(owner, amount);
+    return new SqueezePower(owner, amount);
   }
 
   static {
