@@ -664,5 +664,13 @@
       " cards.",
       "a "
     ]
+  },
+
+  "WrestlerMod:RedPenaltyStatusCard": {
+    "NAME": "Red Penalty Card",
+    "DESCRIPTION": "When this card is drawn, gain !M! Strength. NL At the end of your turn, lose ",
+    "EXTENDED_DESCRIPTION": [
+      " HP."
+    ]
   }
 }
