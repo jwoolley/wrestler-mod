@@ -21,7 +21,6 @@ import thewrestler.characters.WrestlerCharacter;
 import thewrestler.keywords.AbstractTooltipKeyword;
 import thewrestler.keywords.CustomTooltipKeywords;
 import thewrestler.keywords.TooltipKeywords;
-import thewrestler.ui.trademarkmovepanel.WrestlerSignatureMovePanelInterface;
 import thewrestler.util.BasicUtils;
 import thewrestler.util.TextureLoader;
 import thewrestler.util.info.penaltycard.AbstractPenaltyCardSprite;
@@ -53,8 +52,14 @@ public class WrestlerPenaltyCardInfoPanel implements CustomInfoPanel, StartOfCom
   private static final String UI_NAME = WrestlerMod.makeID("PenaltyCardInfoPanel");
 
   private static final String BACKGROUND_IMG_DIR_PATH = "penaltycardinfopanel/";
+
+//  private static final List<String> BACKGROUND_IMG_FILENAMES = Arrays.asList(
+//    "background-zero-cards.png", "background-one-card.png", "background-two-cards.png", "background-three-cards.png");
+
+
   private static final List<String> BACKGROUND_IMG_FILENAMES = Arrays.asList(
-    "background-zero-cards.png", "background-one-card.png", "background-two-cards.png", "background-three-cards.png");
+      "background-no-warning.png", "background-with-warning.png", "background-two-cards.png", "background-three-cards.png");
+
   private static List<String> BACKGROUND_IMG_FILEPATHS = BACKGROUND_IMG_FILENAMES.stream()
       .map(f -> UiHelper.getUiImageResourcePath(BACKGROUND_IMG_DIR_PATH + f)).collect(Collectors.toList());
 
@@ -66,11 +71,11 @@ public class WrestlerPenaltyCardInfoPanel implements CustomInfoPanel, StartOfCom
   private static final Color NEUTRAL_UNSPORTING_COLOR = Color.WHITE.cpy();
   private static final Color POSITIVE_UNSPORTING_COLOR = Settings.RED_TEXT_COLOR.cpy();
 
-  //  private static final List<String> keywordList = Arrays.asList(
-  //      CustomTooltipKeywords.PENALTY_CARD, CustomTooltipKeywords.SPORTSMANSHIP);
-
   // TODO: only show Penalty Cards tooltip if no specific Penalty Card tooltip is shown (i.e. none are hovered)
-  private static final List<String> keywordList = Arrays.asList(CustomTooltipKeywords.SPORTSMANSHIP, CustomTooltipKeywords.PENALTY_CARDS_NO_GLYPH);
+  private static final List<String> keywordList = Arrays.asList(
+      CustomTooltipKeywords.SPORTSMANSHIP,
+      CustomTooltipKeywords.PENALTY_CARDS_NO_GLYPH,
+      CustomTooltipKeywords.DIRTY);
 
   private static final List<Keyword> baseGameKeywordList = new ArrayList<>();
   private ArrayList<PowerTip> keywordPowerTips;

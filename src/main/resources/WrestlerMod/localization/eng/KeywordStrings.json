@@ -1,10 +1,10 @@
 {
   "WrestlerMod:Sportsmanship": {
-    "PROPER_NAME": "Sportsmanship",
+    "PROPER_NAME": "Regulation Fighting",
     "NAMES": [
       "sportsmanship"
     ],
-    "DESCRIPTION": "Gain a #yPenalty #yCard at end of turn if you played #b2 or more #yDirty cards. If you didn't play any, lose one instead."
+    "DESCRIPTION": "For every #b2 #yDirty cards you play in the same turn, gain a #yPenalty #yCard."
   },
 
   "WrestlerMod:Dirty": {
@@ -12,7 +12,7 @@
     "NAMES": [
       "dirty"
     ],
-    "DESCRIPTION": "Playing two or more #yDirty cards in the same turn will earn a #yPenalty #yCard at the end of turn."
+    "DESCRIPTION": "Playing multiple #yDirty cards in the same turn will earn #yPenalty #yCards."
   },
 
   "WrestlerMod:Elbow": {
@@ -67,23 +67,15 @@
     "NAMES": [
       "Penalty Card", "penalty_card"
     ],
-    "DESCRIPTION": "Generate various negative effects. The more you have, the higher the likelihood of more severe penalties."
+    "DESCRIPTION": "Status card with one of several negative effects. Provides a beneficial effect when drawn."
   },
 
   "WrestlerMod:PenaltyCardsNoGlyph": {
-    "PROPER_NAME": "Penalty Cards",
+    "PROPER_NAME": "Penalty Card",
     "NAMES": [
       "Penalty Cards", "penalty_cards"
     ],
-    "DESCRIPTION": "Generate various negative effects. The more you have, the higher the likelihood of more severe penalties."
-  },
-
-  "WrestlerMod:Unsporting": {
-    "PROPER_NAME": "Penalized",
-    "NAMES": [
-      "unsporting"
-    ],
-    "DESCRIPTION": "You have at least one #yPenalty #yCard."
+    "DESCRIPTION": "Status card with one of several negative effects. Provides a beneficial effect when drawn."
   },
 
   "WrestlerMod:Grappled": {
