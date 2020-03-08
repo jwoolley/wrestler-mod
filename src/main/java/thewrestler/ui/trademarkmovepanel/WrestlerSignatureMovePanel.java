@@ -1,4 +1,4 @@
-package thewrestler.ui;
+package thewrestler.ui.trademarkmovepanel;
 
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
@@ -16,11 +16,12 @@ import com.megacrit.cardcrawl.helpers.TipHelper;
 import com.megacrit.cardcrawl.helpers.input.InputHelper;
 import com.megacrit.cardcrawl.localization.UIStrings;
 import thewrestler.WrestlerMod;
-import thewrestler.cards.EndOfCombatListener;
-import thewrestler.cards.StartOfCombatListener;
 import thewrestler.characters.WrestlerCharacter;
 import thewrestler.signaturemoves.cards.AbstractSignatureMoveCard;
 import thewrestler.signaturemoves.moveinfos.AbstractSignatureMoveInfo;
+import thewrestler.signaturemoves.moveinfos.AbstractSignatureMoveInfoInterface;
+import thewrestler.ui.SettingsHelper;
+import thewrestler.ui.UiHelper;
 import thewrestler.util.BasicUtils;
 import thewrestler.util.TextureLoader;
 
@@ -28,7 +29,7 @@ import java.util.ArrayList;
 
 // TODO: subheader w/ Signature Move name (in yellow)
 
-public class WrestlerSignatureMovePanel implements CustomInfoPanel, CardPreviewElement, StartOfCombatListener, EndOfCombatListener {
+public class WrestlerSignatureMovePanel implements WrestlerSignatureMovePanelInterface {
   private static final String[] TEXT;
 
   private static final float WIDTH = 290;
@@ -185,7 +186,7 @@ public class WrestlerSignatureMovePanel implements CustomInfoPanel, CardPreviewE
   // if in combat and signature move card can still be gained, show the dynamic description;
   // if in combat and signature move card can no longer be gained, show the "already gained" text
   private String getMoveGainConditionText() {
-    final AbstractSignatureMoveInfo moveInfo = WrestlerCharacter.getSignatureMoveInfo();
+    final AbstractSignatureMoveInfoInterface moveInfo = WrestlerCharacter.getSignatureMoveInfo();
     return !BasicUtils.isPlayerInCombat()
         ? getStaticConditionText()
         : ( moveInfo.canStillTriggerCardGain() ? getDynamicConditionText() : TEXT[3]);
@@ -271,6 +272,50 @@ public class WrestlerSignatureMovePanel implements CustomInfoPanel, CardPreviewE
     return true;
   }
 
+  public static WrestlerSignatureMovePanelInterface getPanel() {
+    return AbstractSignatureMoveInfo.SIGNATURE_MOVES_ENABLED ? new WrestlerSignatureMovePanel()
+        : new WrestlerSignatureMovePanelInterface() {
+      @Override
+      public AbstractCard getPreviewCard() { return null; }
+
+      @Override
+      public void renderPreviewCardTip(SpriteBatch sb) { }
+
+      @Override
+      public float getPreviewXOffset() { return 0; }
+
+      @Override
+      public float getPreviewYOffset() { return 0; }
+
+      @Override
+      public boolean shouldRenderPreviewCard() { return false; }
+
+      @Override
+      public void update() { }
+
+      @Override
+      public void render(SpriteBatch sb) { }
+
+      @Override
+      public boolean shouldRenderPanel() { return false; }
+
+      @Override
+      public void atStartOfTurn() { }
+
+      @Override
+      public void atEndOfTurn() { }
+
+      @Override
+      public void atStartOfCombat() { }
+
+      @Override
+      public void onCardUsed(AbstractCard card) { }
+
+      @Override
+      public void atEndOfCombat() { }
+    };
+  }
+
   private static String getStaticConditionText() {
     return getMoveInfo().getStaticConditionText() + TEXT[1]
         + getMoveInfo().getSignatureMoveCard().getIndefiniteCardName() + TEXT[2];
@@ -281,7 +326,7 @@ public class WrestlerSignatureMovePanel implements CustomInfoPanel, CardPreviewE
         + getMoveInfo().getSignatureMoveCard().getIndefiniteCardName()+ TEXT[2];
   }
 
-  private static AbstractSignatureMoveInfo getMoveInfo() {
+  private static AbstractSignatureMoveInfoInterface getMoveInfo() {
     return WrestlerCharacter.getSignatureMoveInfo();
   }
 }

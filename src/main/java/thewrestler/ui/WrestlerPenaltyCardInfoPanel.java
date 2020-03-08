@@ -21,6 +21,7 @@ import thewrestler.characters.WrestlerCharacter;
 import thewrestler.keywords.AbstractTooltipKeyword;
 import thewrestler.keywords.CustomTooltipKeywords;
 import thewrestler.keywords.TooltipKeywords;
+import thewrestler.ui.trademarkmovepanel.WrestlerSignatureMovePanelInterface;
 import thewrestler.util.BasicUtils;
 import thewrestler.util.TextureLoader;
 import thewrestler.util.info.penaltycard.AbstractPenaltyCardSprite;

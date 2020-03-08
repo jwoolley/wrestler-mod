@@ -39,7 +39,7 @@ public class PenaltyCardInfo implements StartOfCombatListener, EndOfCombatListen
   }
 
   public void gainPenaltyCard() {
-    // TODO: gainPenaltyCardAction
+      // TODO: gainPenaltyCardAction
       AbstractDungeon.actionManager.addToBottom(new GainPenaltyCardsAction(1));
       List<AbstractPenaltyCardListener> listeners = new ArrayList<>();
       listeners.addAll(getPenaltyCardListenerCards());
@@ -124,12 +124,15 @@ public class PenaltyCardInfo implements StartOfCombatListener, EndOfCombatListen
   }
 
   public void atStartOfTurn() {
+    //  USE THIS CHECK IF warning card should "carry over" if 1 Dirty card was played
+    //    if (CombatInfo.getNumDirtyCardsPlayed() == 0) {
+    //      reset();
+    //    }
+    reset();
   }
 
   public void atEndOfTurn() {
-    if (CombatInfo.getNumDirtyCardsPlayed() == 0) {
-      reset();
-    }
+
   }
   public void atStartOfCombat(){
     reset();

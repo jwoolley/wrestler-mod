@@ -1,30 +1,24 @@
 package thewrestler.signaturemoves.moveinfos;
 
-import basemod.BaseMod;
 import basemod.abstracts.CustomSavable;
-import com.megacrit.cardcrawl.actions.common.MakeTempCardInDiscardAction;
 import com.megacrit.cardcrawl.actions.common.MakeTempCardInDrawPileAction;
 import com.megacrit.cardcrawl.actions.common.MakeTempCardInHandAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
-import org.apache.commons.net.smtp.SMTP;
 import thewrestler.WrestlerMod;
-import thewrestler.cards.EndOfCombatListener;
-import thewrestler.cards.StartOfCombatListener;
 import thewrestler.characters.WrestlerCharacter;
 import thewrestler.signaturemoves.cards.AbstractSignatureMoveCard;
-import thewrestler.signaturemoves.cards.Chokeslam;
 import thewrestler.signaturemoves.cards.SignatureMoveCardEnum;
-import thewrestler.signaturemoves.upgrades.AbstractSignatureMoveUpgrade;
-import thewrestler.signaturemoves.upgrades.SerializedSignatureMoveUpgrade;
 import thewrestler.signaturemoves.upgrades.SignatureMoveUpgradeList;
 import thewrestler.signaturemoves.upgrades.UpgradeType;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 
-public abstract class AbstractSignatureMoveInfo implements StartOfCombatListener, EndOfCombatListener {
+public abstract class AbstractSignatureMoveInfo implements AbstractSignatureMoveInfoInterface {
   public final boolean isFirstInstance;
+
+  public static final boolean SIGNATURE_MOVES_ENABLED = false;
 
   final AbstractSignatureMoveCard signatureMoveCard;
   final SignatureMoveUpgradeList upgradeList;
@@ -60,20 +54,21 @@ public abstract class AbstractSignatureMoveInfo implements StartOfCombatListener
     }
   }
 
-  public abstract void onCardPlayed(AbstractCard card);
-  public abstract void onCardExhausted(AbstractCard card);
   protected abstract void _atStartOfTurn();
   protected abstract void _atEndOfTurn();
   protected abstract void _atStartOfCombat();
   protected abstract void _atEndOfCombat();
-  public abstract void upgradeMove(UpgradeType type);
-  public abstract void onEnemyGrappled();
-  public abstract String getDynamicConditionText();
-  public abstract String getStaticConditionText();
 
+  @Override
   public AbstractSignatureMoveCard getSignatureMoveCard() {
     return this.signatureMoveCard;
   }
+
+  @Override
+  public SignatureMoveUpgradeList getUpgradeList() {
+    return this.upgradeList;
+  }
+
 
   public void triggerGainCard() {
     if (this.canStillTriggerCardGain()) {
@@ -118,6 +113,7 @@ public abstract class AbstractSignatureMoveInfo implements StartOfCombatListener
     this._atEndOfCombat();
   }
 
+  @Override
   public boolean canStillTriggerCardGain() {
     return !this.gainedCardThisCombat() && this._canStillTriggerCardGain();
   }
@@ -126,9 +122,9 @@ public abstract class AbstractSignatureMoveInfo implements StartOfCombatListener
     @Override
     public Integer onSave() {
       isStartOfRun = false;
-      AbstractSignatureMoveCard card = WrestlerCharacter.getSignatureMoveInfo().signatureMoveCard;
+      AbstractSignatureMoveCard card = WrestlerCharacter.getSignatureMoveInfo().getSignatureMoveCard();
       WrestlerMod.logger.info("MoveCardCustomSavable saving value: " + SignatureMoveCardEnum.getOrdinal(card) + " card: " + card.name);
-      return SignatureMoveCardEnum.getOrdinal(WrestlerCharacter.getSignatureMoveInfo().signatureMoveCard);
+      return SignatureMoveCardEnum.getOrdinal(WrestlerCharacter.getSignatureMoveInfo().getSignatureMoveCard());
     }
 
     @Override
@@ -147,7 +143,7 @@ public abstract class AbstractSignatureMoveInfo implements StartOfCombatListener
   static class MoveUpgradeCustomSavable implements CustomSavable<Integer> {
     @Override
     public Integer onSave() {
-      SignatureMoveUpgradeList list = WrestlerCharacter.getSignatureMoveInfo().upgradeList;
+      SignatureMoveUpgradeList list = WrestlerCharacter.getSignatureMoveInfo().getUpgradeList();
       WrestlerMod.logger.info("MoveUpgradeCustomSavable::onSave saving value: " + list.getSerializedUpgradeList() + " size: " + list.size());
       return list.getSerializedUpgradeList();
     }
@@ -190,7 +186,7 @@ public abstract class AbstractSignatureMoveInfo implements StartOfCombatListener
   public static void loadSaveData() {
     WrestlerMod.logger.info("AbstractSignatureMoveInfo::loadSaveData called");
 
-    if (infoFromSave.hasCompleteData()) {
+    if (SIGNATURE_MOVES_ENABLED && infoFromSave.hasCompleteData()) {
       // TODO: load save data into WrestlerCharacter.signatureMoveInfo
       WrestlerMod.logger.info("AbstractSignatureMoveInfo::loadSaveData save data found. loading from save");
       SignatureMoveCardEnum cardEnum = SignatureMoveCardEnum.getEnum(infoFromSave.cardFromSave);
@@ -203,18 +199,29 @@ public abstract class AbstractSignatureMoveInfo implements StartOfCombatListener
   private static boolean isStartOfRun = false;
 
   public static boolean isSaveDataValid() {
-    return !isStartOfRun && hasCompleteSaveData();
+    return SIGNATURE_MOVES_ENABLED && !isStartOfRun && hasCompleteSaveData();
   }
 
   public static void resetForNewRun() {
-    resetSavables();
-    isStartOfRun = true;
+    if (SIGNATURE_MOVES_ENABLED) {
+      resetSavables();
+      isStartOfRun = true;
+    }
   }
 
   public static final String SIGNATURE_CARD_SAVABLE_KEY = WrestlerMod.makeID("SignatureCardCustomSavable");
   public static final String SIGNATURE_UPGRADE_SAVABLE_KEY = WrestlerMod.makeID("SignatureUpgradeCustomSavable");
-  private static MoveCardCustomSavable cardSavable = new MoveCardCustomSavable();
-  private static MoveUpgradeCustomSavable upgradeSavable = new MoveUpgradeCustomSavable();
+
+  private static MoveCardCustomSavable createCardCustomSavable() {
+    return SIGNATURE_MOVES_ENABLED ? new MoveCardCustomSavable() : null;
+  }
+
+  private static MoveUpgradeCustomSavable createUpgradeCustomSavable() {
+    return SIGNATURE_MOVES_ENABLED ? new MoveUpgradeCustomSavable() : null;
+  }
+
+  private static MoveCardCustomSavable cardSavable = createCardCustomSavable();
+  private static MoveUpgradeCustomSavable upgradeSavable = createUpgradeCustomSavable();
 
   public static MoveCardCustomSavable getCardSavable() {
     return cardSavable;

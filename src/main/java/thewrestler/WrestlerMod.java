@@ -49,7 +49,8 @@ import thewrestler.signaturemoves.cards.Piledriver;
 import thewrestler.signaturemoves.moveinfos.AbstractSignatureMoveInfo;
 import thewrestler.ui.WrestlerPenaltyCardInfoPanel;
 import thewrestler.ui.WrestlerCombatInfoPanel;
-import thewrestler.ui.WrestlerSignatureMovePanel;
+import thewrestler.ui.trademarkmovepanel.WrestlerSignatureMovePanel;
+import thewrestler.ui.trademarkmovepanel.WrestlerSignatureMovePanelInterface;
 import thewrestler.util.BasicUtils;
 import thewrestler.util.IDCheckDontTouchPls;
 import thewrestler.util.TextureLoader;
@@ -97,7 +98,7 @@ public class WrestlerMod implements
 
     //This is for the in-game mod settings panel.
     private static final String MODNAME = "The Wrestler";
-    private static final String AUTHOR = "Author";
+    private static final String AUTHOR = "jwoolley";
     private static final String DESCRIPTION = "A base for Slay the Spire to my own mod from, featuring The Wrestler.";
 
     // =============== INPUT TEXTURE LOCATION =================
@@ -146,7 +147,7 @@ public class WrestlerMod implements
 
     public static WrestlerPenaltyCardInfoPanel penaltyCardInfoPanel;
     public static WrestlerCombatInfoPanel combatInfoPanel;
-    public static WrestlerSignatureMovePanel signatureMovePanel;
+    public static WrestlerSignatureMovePanelInterface signatureMovePanel;
 
     // =============== MAKE IMAGE PATHS =================
 
@@ -643,10 +644,12 @@ public class WrestlerMod implements
 
         logger.info("Done adding cards!");
 
-        BaseMod.addSaveField(AbstractSignatureMoveInfo.SIGNATURE_CARD_SAVABLE_KEY,
-            AbstractSignatureMoveInfo.getCardSavable());
-        BaseMod.addSaveField(AbstractSignatureMoveInfo.SIGNATURE_UPGRADE_SAVABLE_KEY,
-            AbstractSignatureMoveInfo.getUpgradeSavable());
+        if (AbstractSignatureMoveInfo.SIGNATURE_MOVES_ENABLED) {
+            BaseMod.addSaveField(AbstractSignatureMoveInfo.SIGNATURE_CARD_SAVABLE_KEY,
+                AbstractSignatureMoveInfo.getCardSavable());
+            BaseMod.addSaveField(AbstractSignatureMoveInfo.SIGNATURE_UPGRADE_SAVABLE_KEY,
+                AbstractSignatureMoveInfo.getUpgradeSavable());
+        }
     }
 
     // There are better ways to do this than listing every single individual card, but I do not want to complicate things
@@ -776,14 +779,18 @@ public class WrestlerMod implements
     public void receiveStartGame() {
         penaltyCardInfoPanel = new WrestlerPenaltyCardInfoPanel();
         combatInfoPanel = new WrestlerCombatInfoPanel();
-        signatureMovePanel = new WrestlerSignatureMovePanel();
         logger.info("WresterMod:receiveStartGame called");
-        if (AbstractSignatureMoveInfo.isSaveDataValid()) {
-            AbstractSignatureMoveInfo.loadSaveData();
-            WrestlerMod.logger.info("WrestlerCharacter:setSignatureMoveInfo set info from save: " + WrestlerCharacter.getSignatureMoveInfo());
-        } else {
-            WrestlerMod.logger.info("WrestlerMod::receiveOnBattleStart initializing signatureMoveInfo");
-            WrestlerCharacter.setSignatureMoveInfo(WrestlerCharacter.initializeSignatureMoveInfo());
+
+        WrestlerCharacter.setSignatureMoveInfo(WrestlerCharacter.initializeSignatureMoveInfo());
+        signatureMovePanel = WrestlerSignatureMovePanel.getPanel();
+
+        if (AbstractSignatureMoveInfo.SIGNATURE_MOVES_ENABLED) {
+            if (AbstractSignatureMoveInfo.isSaveDataValid()) {
+                AbstractSignatureMoveInfo.loadSaveData();
+                WrestlerMod.logger.info("WrestlerCharacter:setSignatureMoveInfo set info from save: " + WrestlerCharacter.getSignatureMoveInfo());
+            } else {
+                WrestlerMod.logger.info("WrestlerMod::receiveOnBattleStart initializing signatureMoveInfo");
+            }
         }
 
         if (BasicUtils.isPlayingAsWrestler()) {

@@ -28,9 +28,12 @@ import thewrestler.cards.skill.EyePoke;
 import thewrestler.cards.skill.WrestlerDefend;
 import thewrestler.enums.AbstractCardEnum;
 import thewrestler.relics.ImprovedHeadgear;
+import thewrestler.signaturemoves.cards.AbstractSignatureMoveCard;
 import thewrestler.signaturemoves.cards.SignatureMoveCardEnum;
 import thewrestler.signaturemoves.moveinfos.AbstractSignatureMoveInfo;
+import thewrestler.signaturemoves.moveinfos.AbstractSignatureMoveInfoInterface;
 import thewrestler.signaturemoves.upgrades.SignatureMoveUpgradeList;
+import thewrestler.signaturemoves.upgrades.UpgradeType;
 import thewrestler.util.info.penaltycard.PenaltyCardInfo;
 
 import java.util.ArrayList;
@@ -83,7 +86,7 @@ public class WrestlerCharacter extends CustomPlayer {
     private static final String ANIMATION_PATH = "character/wrestler.scml";
 
     // custom metadata
-    private static AbstractSignatureMoveInfo signatureMoveInfo;
+    private static AbstractSignatureMoveInfoInterface signatureMoveInfo;
     private static PenaltyCardInfo penaltyCardInfo;
 
     public WrestlerCharacter(String name, PlayerClass setClass) {
@@ -145,17 +148,91 @@ public class WrestlerCharacter extends CustomPlayer {
         return signatureMoveInfo != null;
     }
 
-    public static AbstractSignatureMoveInfo getSignatureMoveInfo() {
+    public static AbstractSignatureMoveInfoInterface getSignatureMoveInfo() {
         return signatureMoveInfo;
     }
 
-    public static void setSignatureMoveInfo(AbstractSignatureMoveInfo _signatureMoveInfo) {
+    public static void setSignatureMoveInfo(AbstractSignatureMoveInfoInterface _signatureMoveInfo) {
         signatureMoveInfo = _signatureMoveInfo;
     }
 
-    public static AbstractSignatureMoveInfo initializeSignatureMoveInfo() {
-        final int index = (new Random()).nextInt(SignatureMoveCardEnum.values().length);
-        return SignatureMoveCardEnum.values()[index].getInfoCopy(SignatureMoveUpgradeList.NO_UPGRADES);
+    public static AbstractSignatureMoveInfoInterface initializeSignatureMoveInfo() {
+        if (AbstractSignatureMoveInfo.SIGNATURE_MOVES_ENABLED) {
+            final int index = (new Random()).nextInt(SignatureMoveCardEnum.values().length);
+            return SignatureMoveCardEnum.values()[index].getInfoCopy(SignatureMoveUpgradeList.NO_UPGRADES);
+        } else {
+            return new AbstractSignatureMoveInfoInterface() {
+                @Override
+                public AbstractSignatureMoveCard getSignatureMoveCard() {
+                    return null;
+                }
+
+                @Override
+                public SignatureMoveUpgradeList getUpgradeList() {
+                    return null;
+                }
+
+                @Override
+                public void onCardPlayed(AbstractCard card) {
+
+                }
+
+                @Override
+                public void onCardExhausted(AbstractCard card) {
+
+                }
+
+                @Override
+                public void upgradeMove(UpgradeType type) {
+
+                }
+
+                @Override
+                public void onEnemyGrappled() {
+
+                }
+
+                @Override
+                public String getDynamicConditionText() {
+                    return null;
+                }
+
+                @Override
+                public String getStaticConditionText() {
+                    return null;
+                }
+
+                @Override
+                public boolean canStillTriggerCardGain() {
+                    return false;
+                }
+
+                @Override
+                public void manuallyTriggerCardGain(boolean toDeck, boolean onTop) {
+
+                }
+
+                @Override
+                public void atStartOfTurn() {
+
+                }
+
+                @Override
+                public void atEndOfTurn() {
+
+                }
+
+                @Override
+                public void atStartOfCombat() {
+
+                }
+
+                @Override
+                public void atEndOfCombat() {
+
+                }
+            };
+        }
     }
 
     public static boolean hasPenaltyCardInfo() {
@@ -165,7 +242,6 @@ public class WrestlerCharacter extends CustomPlayer {
     public static PenaltyCardInfo getPenaltyCardInfo() {
         return penaltyCardInfo != null ? penaltyCardInfo : new PenaltyCardInfo();
     }
-
 
     public static void resetPenaltyCardInfo() {
         if (hasPenaltyCardInfo()) {

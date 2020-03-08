@@ -6,6 +6,7 @@ import com.evacipated.cardcrawl.modthespire.lib.SpirePostfixPatch;
 import com.evacipated.cardcrawl.modthespire.lib.SpirePrefixPatch;
 import com.megacrit.cardcrawl.ui.panels.EnergyPanel;
 import thewrestler.WrestlerMod;
+import thewrestler.signaturemoves.moveinfos.AbstractSignatureMoveInfo;
 import thewrestler.ui.WrestlerCombatInfoPanel;
 import thewrestler.util.BasicUtils;
 
@@ -14,7 +15,7 @@ public class SignatureMovePanelPatch {
   public static class SignatureMovePanelUpdatePatch {
     @SpirePrefixPatch
     public static void Prefix(EnergyPanel __instance) {
-      if (BasicUtils.isPlayingAsWrestler()) {
+      if (BasicUtils.isPlayingAsWrestler() && AbstractSignatureMoveInfo.SIGNATURE_MOVES_ENABLED) {
         if (WrestlerCombatInfoPanel.shouldRender()) {
           WrestlerMod.signatureMovePanel.update();
         }
@@ -28,7 +29,7 @@ public class SignatureMovePanelPatch {
     @SpirePostfixPatch
     public static void Postfix(EnergyPanel __instance, SpriteBatch sb) {
       if (BasicUtils.isPlayingAsWrestler()) {
-        if (WrestlerCombatInfoPanel.shouldRender()) {
+        if (WrestlerCombatInfoPanel.shouldRender()&& AbstractSignatureMoveInfo.SIGNATURE_MOVES_ENABLED) {
           WrestlerMod.signatureMovePanel.render(sb);
         }
       }
