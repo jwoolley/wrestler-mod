@@ -1,11 +1,9 @@
 package thewrestler.cards.attack;
 
 import basemod.abstracts.CustomCard;
-import basemod.devcommands.deck.Deck;
 import basemod.helpers.TooltipInfo;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.common.DamageAction;
-import com.megacrit.cardcrawl.actions.unique.DeckToHandAction;
 import com.megacrit.cardcrawl.actions.utility.DiscardToHandAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.cards.DamageInfo;
@@ -15,19 +13,18 @@ import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import thewrestler.cards.StartOfCombatListener;
-import thewrestler.cards.skill.AbstractSportsmanshipListener;
+import thewrestler.cards.skill.AbstractPenaltyCardListener;
 import thewrestler.enums.AbstractCardEnum;
 import thewrestler.keywords.AbstractTooltipKeyword;
 import thewrestler.keywords.CustomTooltipKeywords;
 import thewrestler.keywords.TooltipKeywords;
-import thewrestler.util.info.sportsmanship.SportsmanshipInfo;
 
 import java.util.Arrays;
 import java.util.List;
 
 import static thewrestler.WrestlerMod.getCardResourcePath;
 
-public class LowBlow extends CustomCard implements AbstractSportsmanshipListener, StartOfCombatListener {
+public class LowBlow extends CustomCard implements AbstractPenaltyCardListener, StartOfCombatListener {
   public static final String ID = "WrestlerMod:LowBlow";
   public static final String NAME;
   public static final String DESCRIPTION;
@@ -54,6 +51,7 @@ public class LowBlow extends CustomCard implements AbstractSportsmanshipListener
   public void use(AbstractPlayer p, AbstractMonster m) {
     AbstractDungeon.actionManager.addToBottom(
         new DamageAction(m, new DamageInfo(p, damage, damageTypeForTurn), AbstractGameAction.AttackEffect.BLUNT_LIGHT));
+    this.selfRetain = false;
   }
 
   @Override
@@ -115,23 +113,14 @@ public class LowBlow extends CustomCard implements AbstractSportsmanshipListener
   }
 
 
-
   @Override
-  public void onUnsportingChanged(int changeAmount, int newValue, boolean isEndOfTurnChange) {
-    if (changeAmount  > 0) {
-      AbstractDungeon.actionManager.addToBottom(new DiscardToHandAction(this));
-      if (isEndOfTurnChange && !this.selfRetain) {
-        this.selfRetain = true;
-      }
-    }
-  }
-
-  @Override
-  public void onBecomeSporting() {
+  public void onGainedWarningCard() {
 
   }
 
   @Override
-  public void onBecomeUnsporting() {
+  public void onGainedPenaltyCard() {
+    AbstractDungeon.actionManager.addToBottom(new DiscardToHandAction(this));
+    this.selfRetain = true;
   }
 }

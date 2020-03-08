@@ -15,14 +15,13 @@ import thewrestler.enums.AbstractCardEnum;
 import thewrestler.keywords.AbstractTooltipKeyword;
 import thewrestler.keywords.CustomTooltipKeywords;
 import thewrestler.keywords.TooltipKeywords;
-import thewrestler.util.info.sportsmanship.SportsmanshipInfo;
 
 import java.util.Arrays;
 import java.util.List;
 
 import static thewrestler.WrestlerMod.getCardResourcePath;
 
-public class Pinfall extends CustomCard implements AbstractSportsmanshipListener, StartOfCombatListener {
+public class Pinfall extends CustomCard implements AbstractPenaltyCardListener, StartOfCombatListener {
   public static final String ID = "WrestlerMod:Pinfall";
   public static final String NAME;
   public static final String DESCRIPTION;
@@ -49,6 +48,7 @@ public class Pinfall extends CustomCard implements AbstractSportsmanshipListener
   @Override
   public void use(AbstractPlayer p, AbstractMonster m) {
     AbstractDungeon.actionManager.addToBottom(new GainBlockAction(p, p, block));
+    this.selfRetain = false;
   }
 
   @Override
@@ -96,30 +96,21 @@ public class Pinfall extends CustomCard implements AbstractSportsmanshipListener
 
   @Override
   public void atStartOfCombat() {
+    this.selfRetain = false;
   }
 
   @Override
   public void atTurnStartPreDraw() {
     this.selfRetain = false;
   }
-
   @Override
-  public void onUnsportingChanged(int changeAmount, int newValue, boolean isEndOfTurnChange) {
-    if (changeAmount  < 0) {
-      AbstractDungeon.actionManager.addToBottom(new DiscardToHandAction(this));
-      if (isEndOfTurnChange && !this.selfRetain) {
-        this.selfRetain = true;
-      }
-    }
-  }
-
-  @Override
-  public void onBecomeSporting() {
+  public void onGainedWarningCard() {
 
   }
 
   @Override
-  public void onBecomeUnsporting() {
-
+  public void onGainedPenaltyCard() {
+    AbstractDungeon.actionManager.addToBottom(new DiscardToHandAction(this));
+    this.selfRetain = true;
   }
 }

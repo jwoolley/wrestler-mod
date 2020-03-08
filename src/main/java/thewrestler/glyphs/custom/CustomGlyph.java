@@ -6,7 +6,6 @@ import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.megacrit.cardcrawl.helpers.ImageMaster;
 import thewrestler.WrestlerMod;
 import thewrestler.util.info.penaltycard.*;
-
 import java.util.*;
 
 public class CustomGlyph {
@@ -31,17 +30,8 @@ public class CustomGlyph {
 
   private static final List<CustomGlyph> glyphList = Arrays.asList(
       new CustomGlyph(CustomGlyphEnum.PENALTY_CARD, "penaltycard.png", 'P'),
-
-      new CustomGlyph(CustomGlyphEnum.PENALTY_CARD_BLUE, AbstractPenaltyCard.GLYPH_DIR_PATH,
-          BluePenaltyCard.GLYPH_IMG_FILENAME, '~'),
-      new CustomGlyph(CustomGlyphEnum.PENALTY_CARD_ORANGE, AbstractPenaltyCard.GLYPH_DIR_PATH,
-          OrangePenaltyCard.GLYPH_IMG_FILENAME, '~'),
-      new CustomGlyph(CustomGlyphEnum.PENALTY_CARD_RED, AbstractPenaltyCard.GLYPH_DIR_PATH,
-          RedPenaltyCard.GLYPH_IMG_FILENAME, '~'),
-      new CustomGlyph(CustomGlyphEnum.PENALTY_CARD_YELLOW, AbstractPenaltyCard.GLYPH_DIR_PATH,
-          YellowPenatlyCard.GLYPH_IMG_FILENAME, '~'),
-      new CustomGlyph(CustomGlyphEnum.PENALTY_CARD_WHITE, AbstractPenaltyCard.GLYPH_DIR_PATH,
-                      WhitePenaltyCard.GLYPH_IMG_FILENAME, '~')
+      new CustomGlyph(CustomGlyphEnum.PENALTY_CARD_WHITE, AbstractPenaltyCardSprite.GLYPH_DIR_PATH,
+                      WhitePenaltyCardSprite.GLYPH_IMG_FILENAME, '~')
   );
 
   public static TextureAtlas.AtlasRegion getAtlasRegion(CustomGlyphEnum key) {

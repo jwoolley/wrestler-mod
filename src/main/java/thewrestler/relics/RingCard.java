@@ -11,7 +11,6 @@ import thewrestler.WrestlerMod;
 import thewrestler.characters.WrestlerCharacter;
 import thewrestler.util.BasicUtils;
 import thewrestler.util.TextureLoader;
-import thewrestler.util.info.sportsmanship.SportsmanshipInfo;
 
 import java.util.Arrays;
 import java.util.List;
@@ -39,12 +38,11 @@ public class RingCard extends CustomWrestlerRelic {
   }
 
   private boolean shouldAwardCombatRelic() {
-    if (!WrestlerCharacter.hasSportsmanshipInfo()) {
+    if (!WrestlerCharacter.hasPenaltyCardInfo()) {
       return  false;
     }
     return !(AbstractDungeon.getCurrRoom() instanceof MonsterRoomBoss)
         && !(AbstractDungeon.getCurrRoom() instanceof MonsterRoomElite)
-        && SportsmanshipInfo.isAmountUnpopular(WrestlerCharacter.getSportsmanshipInfo().getUnsportingAtEndOfCombat())
         && AbstractDungeon.relicRng.random(0, 99) < RELIC_PERCENTAGE_CHANCE;
   }
 
@@ -60,7 +58,9 @@ public class RingCard extends CustomWrestlerRelic {
 
   @Override
   public void onVictory() {
-    if (BasicUtils.isPlayingAsWrestler() && SportsmanshipInfo.isSporting()) {
+
+    // TODO: add new condition & effect
+    if (BasicUtils.isPlayingAsWrestler()) {
       flash();
       AbstractPlayer player = AbstractDungeon.player;
       addToTop(new RelicAboveCreatureAction(player, this));

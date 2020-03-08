@@ -6,7 +6,7 @@ import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.Keyword;
 import thewrestler.WrestlerMod;
 import thewrestler.util.TextureLoader;
-import thewrestler.util.info.sportsmanship.SportsmanshipInfo;
+import thewrestler.util.info.penaltycard.PenaltyCardInfo;
 
 import java.util.Arrays;
 import java.util.List;
@@ -33,8 +33,9 @@ public class LuckyTrunks extends CustomWrestlerRelic {
     return DESCRIPTIONS[0];
   }
 
+  // TODO: when do these trigger
   public void atTurnStart() {
-    if (SportsmanshipInfo.hasSportsmanshipInfo() && SportsmanshipInfo.isSporting()) {
+    if (PenaltyCardInfo.hasPenatlyCardInfo()) {
       flash();
       AbstractDungeon.actionManager.addToBottom(new GainEnergyAction(ENERGY_AMOUNT));
     }
@@ -42,7 +43,7 @@ public class LuckyTrunks extends CustomWrestlerRelic {
 
   @Override
   public boolean canSpawn() {
-    return SportsmanshipInfo.hasSportsmanshipInfo() && !AbstractDungeon.player.hasRelic(RefereesWhistle.ID);
+    return PenaltyCardInfo.hasPenatlyCardInfo() && !AbstractDungeon.player.hasRelic(RefereesWhistle.ID);
   }
 
   @Override

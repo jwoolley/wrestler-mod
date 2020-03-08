@@ -1,6 +1,7 @@
 package thewrestler.cards.colorless.status.penalty;
 
 import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
+import com.megacrit.cardcrawl.actions.common.DrawCardAction;
 import com.megacrit.cardcrawl.actions.common.LoseHPAction;
 import com.megacrit.cardcrawl.cards.CardQueueItem;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
@@ -9,41 +10,40 @@ import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.powers.GainStrengthPower;
+import thewrestler.actions.power.GainPlatedArmorRandomMonsterAction;
 
-public class RedPenaltyStatusCard extends AbstractPenaltyStatusCard {
-  public static final String ID = "WrestlerMod:RedPenaltyStatusCard";
+public class BluePenaltyStatusCard extends AbstractPenaltyStatusCard {
+  public static final String ID = "WrestlerMod:BluePenaltyStatusCard";
   public static final String NAME;
   public static final String DESCRIPTION;
   public static final String[] EXTENDED_DESCRIPTION;
-  public static final String IMG_PATH = getPenaltyCardImgPath("red.png");
+  public static final String IMG_PATH = getPenaltyCardImgPath("blue.png");
 
   private static final CardStrings cardStrings;
 
-  private static final int STRENGTH_GAIN = 1;
-  private static final int HP_LOSS = 2;
+  private static final int CARD_DRAW_AMOUNT = 2;
+  private static final int ENEMY_PLATED_ARMOR_GAIN = 2;
 
-  public RedPenaltyStatusCard() {
+  public BluePenaltyStatusCard() {
     super(ID, NAME, IMG_PATH, getDescription());
-    this.magicNumber = this.baseMagicNumber = STRENGTH_GAIN;
+    this.magicNumber = this.baseMagicNumber = CARD_DRAW_AMOUNT;
   }
 
   @Override
   public void use(AbstractPlayer p, AbstractMonster m) {
     if (this.dontTriggerOnUseCard) {
-      AbstractDungeon.actionManager.addToBottom(new LoseHPAction(p, p, HP_LOSS));
+      AbstractDungeon.actionManager.addToBottom(new GainPlatedArmorRandomMonsterAction(p, ENEMY_PLATED_ARMOR_GAIN));
     }
   }
 
   @Override
   public void triggerWhenDrawn(){
-    AbstractPlayer p = AbstractDungeon.player;
-    AbstractDungeon.actionManager.addToBottom(
-        new ApplyPowerAction(p, p, new GainStrengthPower(p, STRENGTH_GAIN), STRENGTH_GAIN));
+    AbstractDungeon.actionManager.addToBottom(new DrawCardAction(this.magicNumber));
   }
 
   @Override
   public AbstractPenaltyStatusCard makeCopy() {
-    return new RedPenaltyStatusCard();
+    return new BluePenaltyStatusCard();
   }
 
   public void triggerOnEndOfTurnForPlayingCard() {
@@ -52,7 +52,7 @@ public class RedPenaltyStatusCard extends AbstractPenaltyStatusCard {
   }
 
   private static String getDescription() {
-    return DESCRIPTION + HP_LOSS + EXTENDED_DESCRIPTION[0];
+    return DESCRIPTION + ENEMY_PLATED_ARMOR_GAIN + EXTENDED_DESCRIPTION[0];
   }
 
   @Override

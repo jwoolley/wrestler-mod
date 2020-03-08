@@ -2,7 +2,6 @@ package thewrestler.cards;
 
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
-import thewrestler.cards.skill.AbstractSportsmanshipListener;
 
 import java.util.ArrayList;
 import java.util.List;

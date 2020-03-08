@@ -1,7 +1,6 @@
 package thewrestler.cards.attack;
 
 import basemod.abstracts.CustomCard;
-import basemod.abstracts.CustomSavable;
 import basemod.helpers.TooltipInfo;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.common.DamageAction;
@@ -12,15 +11,13 @@ import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.AbstractCreature;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
-import com.megacrit.cardcrawl.helpers.GetAllInBattleInstances;
 import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
-import thewrestler.cards.skill.AbstractSportsmanshipListener;
+import thewrestler.cards.skill.AbstractPenaltyCardListener;
 import thewrestler.enums.AbstractCardEnum;
 import thewrestler.keywords.AbstractTooltipKeyword;
 import thewrestler.keywords.CustomTooltipKeywords;
 import thewrestler.keywords.TooltipKeywords;
-import thewrestler.util.info.sportsmanship.SportsmanshipInfo;
 
 import java.util.Arrays;
 import java.util.List;
@@ -28,7 +25,7 @@ import java.util.UUID;
 
 import static thewrestler.WrestlerMod.getCardResourcePath;
 
-public class Screwjob extends CustomCard implements AbstractSportsmanshipListener {
+public class Screwjob extends CustomCard implements AbstractPenaltyCardListener {
   public static final String ID = "WrestlerMod:Screwjob";
   public static final String NAME;
   public static final String DESCRIPTION;
@@ -62,20 +59,13 @@ public class Screwjob extends CustomCard implements AbstractSportsmanshipListene
   }
 
   @Override
-  public void onUnsportingChanged(int changeAmount, int newValue, boolean isEndOfTurnChange) {
-    if (changeAmount > 0) {
-      AbstractDungeon.actionManager.addToBottom(new ModifyDamageAction(this.uuid, this.magicNumber * changeAmount));
-    }
-  }
-
-  @Override
-  public void onBecomeSporting() {
+  public void onGainedWarningCard() {
 
   }
 
   @Override
-  public void onBecomeUnsporting() {
-
+  public void onGainedPenaltyCard() {
+    AbstractDungeon.actionManager.addToBottom(new ModifyDamageAction(this.uuid, this.magicNumber));
   }
 
   private static class ScrewjobAction extends AbstractGameAction {

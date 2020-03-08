@@ -2,13 +2,12 @@ package thewrestler.relics;
 
 import com.badlogic.gdx.graphics.Texture;
 import com.megacrit.cardcrawl.actions.common.DrawCardAction;
-import com.megacrit.cardcrawl.actions.common.LoseHPAction;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.Keyword;
 import thewrestler.WrestlerMod;
 import thewrestler.util.TextureLoader;
-import thewrestler.util.info.sportsmanship.SportsmanshipInfo;
+import thewrestler.util.info.penaltycard.PenaltyCardInfo;
 
 import java.util.Arrays;
 import java.util.List;
@@ -36,7 +35,7 @@ public class PenaltyCardRelic extends CustomWrestlerRelic {
   }
 
   public void atTurnStart() {
-    if (SportsmanshipInfo.hasSportsmanshipInfo() && SportsmanshipInfo.isUnsporting()) {
+    if (PenaltyCardInfo.hasPenatlyCardInfo()) {
       flash();
       AbstractPlayer player = AbstractDungeon.player;
       AbstractDungeon.actionManager.addToBottom(new DrawCardAction(CARD_AMOUNT));

@@ -3,7 +3,6 @@ package thewrestler.cards.skill;
 import basemod.abstracts.CustomCard;
 import basemod.helpers.TooltipInfo;
 import com.megacrit.cardcrawl.actions.common.DiscardAction;
-import com.megacrit.cardcrawl.actions.common.GainEnergyAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
@@ -15,7 +14,6 @@ import thewrestler.enums.AbstractCardEnum;
 import thewrestler.keywords.AbstractTooltipKeyword;
 import thewrestler.keywords.CustomTooltipKeywords;
 import thewrestler.keywords.TooltipKeywords;
-import thewrestler.util.info.sportsmanship.SportsmanshipInfo;
 
 import java.util.Arrays;
 import java.util.List;
@@ -52,10 +50,10 @@ public class CannedHeat extends CustomCard {
     AbstractDungeon.actionManager.addToBottom(
         new DiscardAction(p, p, this.magicNumber, false));
 
-    if (SportsmanshipInfo.isUnsporting()) {
-      AbstractDungeon.actionManager.addToBottom(
-          new GainEnergyAction(ENERGY_PER_PENALTY_CARD * SportsmanshipInfo.getAmount()));
-    }
+//    if (SportsmanshipInfo.isUnsporting()) {
+//      AbstractDungeon.actionManager.addToBottom(
+//          new GainEnergyAction(ENERGY_PER_PENALTY_CARD * SportsmanshipInfo.getAmount()));
+//    }
   }
 
   @Override

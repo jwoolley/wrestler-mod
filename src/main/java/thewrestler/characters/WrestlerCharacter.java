@@ -28,11 +28,10 @@ import thewrestler.cards.skill.EyePoke;
 import thewrestler.cards.skill.WrestlerDefend;
 import thewrestler.enums.AbstractCardEnum;
 import thewrestler.relics.ImprovedHeadgear;
-import thewrestler.relics.PenaltyCardRelic;
 import thewrestler.signaturemoves.cards.SignatureMoveCardEnum;
 import thewrestler.signaturemoves.moveinfos.AbstractSignatureMoveInfo;
 import thewrestler.signaturemoves.upgrades.SignatureMoveUpgradeList;
-import thewrestler.util.info.sportsmanship.SportsmanshipInfo;
+import thewrestler.util.info.penaltycard.PenaltyCardInfo;
 
 import java.util.ArrayList;
 import java.util.Random;
@@ -56,8 +55,6 @@ public class WrestlerCharacter extends CustomPlayer {
     public static final int STARTING_GOLD = 99;
     public static final int CARD_DRAW = 5;
     public static final int ORB_SLOTS = 0;
-
-    public static final int STARTING_UNSPORTING = 0;
 
     private static final String ID = makeID("TheWrestler"); // needs to be the key from CharacterStrings.json
     private static final CharacterStrings characterStrings = CardCrawlGame.languagePack.getCharacterString(ID);
@@ -87,7 +84,7 @@ public class WrestlerCharacter extends CustomPlayer {
 
     // custom metadata
     private static AbstractSignatureMoveInfo signatureMoveInfo;
-    private static SportsmanshipInfo sportsmanshipInfo;
+    private static PenaltyCardInfo penaltyCardInfo;
 
     public WrestlerCharacter(String name, PlayerClass setClass) {
         super(name, setClass, orbTextures,
@@ -139,9 +136,7 @@ public class WrestlerCharacter extends CustomPlayer {
     // Starting Relics	
     public ArrayList<String> getStartingRelics() {
         ArrayList<String> retVal = new ArrayList<>();
-        retVal.add(PenaltyCardRelic.ID);
         retVal.add(ImprovedHeadgear.ID);
-        UnlockTracker.markRelicAsSeen(PenaltyCardRelic.ID);
         UnlockTracker.markRelicAsSeen(ImprovedHeadgear.ID);
         return retVal;
     }
@@ -163,30 +158,26 @@ public class WrestlerCharacter extends CustomPlayer {
         return SignatureMoveCardEnum.values()[index].getInfoCopy(SignatureMoveUpgradeList.NO_UPGRADES);
     }
 
-    public static boolean hasSportsmanshipInfo() {
-        return sportsmanshipInfo != null;
+    public static boolean hasPenaltyCardInfo() {
+        return penaltyCardInfo != null;
     }
 
-    public static SportsmanshipInfo getSportsmanshipInfo() {
-        return sportsmanshipInfo != null ? sportsmanshipInfo : new SportsmanshipInfo();
+    public static PenaltyCardInfo getPenaltyCardInfo() {
+        return penaltyCardInfo != null ? penaltyCardInfo : new PenaltyCardInfo();
     }
 
 
-    public static void resetSportsmanshipInfo() {
-        if (hasSportsmanshipInfo()) {
-            sportsmanshipInfo.reset();
+    public static void resetPenaltyCardInfo() {
+        if (hasPenaltyCardInfo()) {
+            penaltyCardInfo.reset();
         } else {
-            initializeSportsmanshipInfo();
+            initializePenaltyCardInfo();
         }
     }
 
-    public static SportsmanshipInfo initializeSportsmanshipInfo() {
-        sportsmanshipInfo = new SportsmanshipInfo();
-        return sportsmanshipInfo;
-    }
-
-    public static void setSportsmanShipInfoFromSave(int unsportingAmount) {
-        // sportsmanshipInfo.setUnsportingEndOfCombatValueFromSave(unsportingAmount);
+    public static PenaltyCardInfo initializePenaltyCardInfo() {
+        penaltyCardInfo = new PenaltyCardInfo();
+        return penaltyCardInfo;
     }
 
     @Override

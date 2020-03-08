@@ -16,14 +16,14 @@ import thewrestler.keywords.AbstractTooltipKeyword;
 import thewrestler.keywords.CustomTooltipKeywords;
 import thewrestler.keywords.TooltipKeywords;
 import thewrestler.util.BasicUtils;
-import thewrestler.util.info.sportsmanship.SportsmanshipInfo;
+import thewrestler.util.info.CombatInfo;
 
 import java.util.Arrays;
 import java.util.List;
 
 import static thewrestler.WrestlerMod.getCardResourcePath;
 
-public class Redemption extends CustomCard implements AbstractSportsmanshipListener, StartOfCombatListener {
+public class Redemption extends CustomCard implements AbstractPenaltyCardListener, StartOfCombatListener {
   public static final String ID = "WrestlerMod:Redemption";
   public static final String NAME;
   public static final String DESCRIPTION;
@@ -51,34 +51,26 @@ public class Redemption extends CustomCard implements AbstractSportsmanshipListe
   @Override
   public void use(AbstractPlayer p, AbstractMonster m) {
     AbstractDungeon.actionManager.addToBottom(new GainBlockAction(p, p, block));
-    WrestlerCharacter.getSportsmanshipInfo().resetUnsporting(false);
+    WrestlerCharacter.getPenaltyCardInfo().reset();
   }
 
   private void calculateCost() {
     if (BasicUtils.isPlayerInCombat()) {
-      if (SportsmanshipInfo.isUnsporting()) {
-        modifyCostForCombat(-SportsmanshipInfo.getAmount());
-        this.update();
-      }
+
+      // TODO:
+
+      CombatInfo.getNumDirtyCardsPlayedThisCombat();
+      //  modifyCostForCombat(0);
+      this.update();
     }
   }
 
   @Override
-  public void onUnsportingChanged(int changeAmount, int newValue, boolean isEndOfTurnChange) {
-    if (newValue == 0 && changeAmount > 0) {
-      modifyCostForCombat(-SportsmanshipInfo.getAmount());
-      if (this.cost == COST) {
-        this.isCostModified = false;
-      }
-    }
-  }
+  public void onGainedWarningCard() { }
 
   @Override
-  public void onBecomeSporting() { }
-
-  @Override
-  public void onBecomeUnsporting() {
-    modifyCostForCombat(-SportsmanshipInfo.getAmount());
+  public void onGainedPenaltyCard() {
+    modifyCostForCombat(-1);
   }
 
   @Override

@@ -7,7 +7,7 @@ import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.PowerStrings;
 import com.megacrit.cardcrawl.powers.AbstractPower;
 import thewrestler.WrestlerMod;
-import thewrestler.actions.GainUnsportingAction;
+import thewrestler.actions.GainPenaltyCardAction;
 
 public class TarnishedReputationPower extends AbstractWrestlerPower implements CloneablePowerInterface {
   public static final String POWER_ID = WrestlerMod.makeID("TarnishedReputationPower");
@@ -25,7 +25,7 @@ public class TarnishedReputationPower extends AbstractWrestlerPower implements C
   @Override
   public void atStartOfTurnPostDraw() {
     flash();
-    AbstractDungeon.actionManager.addToBottom(new GainUnsportingAction(this.amount));
+    AbstractDungeon.actionManager.addToBottom(new GainPenaltyCardAction());
     AbstractDungeon.actionManager.addToBottom(new RemoveSpecificPowerAction(this.owner, this.source, POWER_ID));
   }
 

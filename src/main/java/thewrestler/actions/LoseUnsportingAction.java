@@ -5,6 +5,8 @@ import com.megacrit.cardcrawl.core.Settings;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import thewrestler.characters.WrestlerCharacter;
 
+// TODO: this doesn't *do* anything now. should it?
+
 public class LoseUnsportingAction extends AbstractGameAction {
   private static float ACTION_DURATION = Settings.ACTION_DUR_XFAST;
 
@@ -19,8 +21,7 @@ public class LoseUnsportingAction extends AbstractGameAction {
   @Override
   public void update() {
     if (this.duration <= ACTION_DURATION) {
-      if (WrestlerCharacter.hasSportsmanshipInfo()) {
-        WrestlerCharacter.getSportsmanshipInfo().decreaseUnsporting(this.amount, false);
+      if (WrestlerCharacter.hasPenaltyCardInfo()) {
       }
       this.isDone = true;
     }

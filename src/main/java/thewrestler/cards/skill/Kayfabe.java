@@ -53,6 +53,8 @@ public class Kayfabe extends CustomCard {
   @Override
   public void use(AbstractPlayer p, AbstractMonster m) {
     AbstractDungeon.actionManager.addToBottom(new GainEnergyAction(this.magicNumber));
+
+    // TODO: LoseUnsportingAction - what does it do now? exhaust penalty cards?
     AbstractDungeon.actionManager.addToBottom(new LoseUnsportingAction(UNSPORTING_LOSS));
     AbstractDungeon.actionManager.addToBottom(
         new ApplyPowerAction(p, p, new TarnishedReputationPower(UNSPORTING_GAIN), UNSPORTING_GAIN));

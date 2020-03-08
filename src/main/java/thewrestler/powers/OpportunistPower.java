@@ -2,22 +2,15 @@ package thewrestler.powers;
 
 import basemod.interfaces.CloneablePowerInterface;
 import com.megacrit.cardcrawl.actions.common.GainBlockAction;
-import com.megacrit.cardcrawl.actions.common.ReducePowerAction;
-import com.megacrit.cardcrawl.actions.common.RemoveSpecificPowerAction;
-import com.megacrit.cardcrawl.actions.utility.SFXAction;
-import com.megacrit.cardcrawl.actions.utility.UseCardAction;
-import com.megacrit.cardcrawl.audio.SoundMaster;
-import com.megacrit.cardcrawl.cards.AbstractCard;
-import com.megacrit.cardcrawl.cards.DamageInfo;
 import com.megacrit.cardcrawl.core.AbstractCreature;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.PowerStrings;
 import com.megacrit.cardcrawl.powers.AbstractPower;
 import thewrestler.WrestlerMod;
-import thewrestler.cards.skill.AbstractSportsmanshipListener;
+import thewrestler.cards.skill.AbstractPenaltyCardListener;
 
-public class OpportunistPower extends AbstractWrestlerPower implements CloneablePowerInterface, AbstractSportsmanshipListener {
+public class OpportunistPower extends AbstractWrestlerPower implements CloneablePowerInterface, AbstractPenaltyCardListener {
   public static final String POWER_ID = WrestlerMod.makeID("OpportunistPower");
   public static final String IMG = "opportunist.png";
   private static final PowerStrings powerStrings;
@@ -55,21 +48,14 @@ public class OpportunistPower extends AbstractWrestlerPower implements Cloneable
   }
 
   @Override
-  public void onUnsportingChanged(int changeAmount, int newValue, boolean isEndOfTurnChange) {
-    if (changeAmount != 0) {
-      this.flash();
-      AbstractDungeon.actionManager.addToBottom(new GainBlockAction(this.owner, this.owner,
-          this.amount * Math.abs(changeAmount)));
-    }
-  }
-
-  @Override
-  public void onBecomeSporting() {
+  public void onGainedWarningCard() {
 
   }
 
   @Override
-  public void onBecomeUnsporting() {
-
+  public void onGainedPenaltyCard() {
+    this.flash();
+    AbstractDungeon.actionManager.addToBottom(new GainBlockAction(this.owner, this.owner,
+        this.amount));
   }
 }

@@ -13,9 +13,7 @@ import com.megacrit.cardcrawl.powers.AbstractPower;
 import com.megacrit.cardcrawl.powers.DexterityPower;
 import com.megacrit.cardcrawl.powers.StrengthPower;
 import thewrestler.WrestlerMod;
-import thewrestler.cards.skill.AbstractSportsmanshipListener;
 import thewrestler.powers.AbstractWrestlerPower;
-import thewrestler.util.info.sportsmanship.SportsmanshipInfo;
 
 public class CurtainJerkerPower extends AbstractWrestlerPower implements CloneablePowerInterface {
   public static final String POWER_ID = WrestlerMod.makeID("CurtainJerkerPower");

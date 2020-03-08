@@ -3,21 +3,16 @@ package thewrestler.cards.skill;
 import basemod.abstracts.CustomCard;
 import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
 import com.megacrit.cardcrawl.actions.common.ObtainPotionAction;
-import com.megacrit.cardcrawl.actions.watcher.ChooseOneAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
-import com.megacrit.cardcrawl.powers.BufferPower;
 import thewrestler.actions.GainGoldAction;
-import thewrestler.cards.colorless.skill.*;
 import thewrestler.enums.AbstractCardEnum;
 import thewrestler.powers.TemporaryBufferPower;
-import thewrestler.util.info.sportsmanship.SportsmanshipInfo;
-
-import java.util.ArrayList;
+import thewrestler.util.info.penaltycard.PenaltyCardInfo;
 
 import static thewrestler.WrestlerMod.getCardResourcePath;
 
@@ -53,7 +48,7 @@ public class TakeAPowder extends CustomCard {
 
   @Override
   public void use(AbstractPlayer p, AbstractMonster m) {
-    if (SportsmanshipInfo.isSporting()) {
+    if (PenaltyCardInfo.hasPenatlyCardInfo()) {
       AbstractDungeon.actionManager.addToBottom(
           new ApplyPowerAction(p, p, new TemporaryBufferPower(p, this.magicNumber), this.magicNumber));
     } else {

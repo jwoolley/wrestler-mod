@@ -1,12 +1,11 @@
 package thewrestler.relics;
 
 import com.badlogic.gdx.graphics.Texture;
-import com.megacrit.cardcrawl.actions.common.DrawCardAction;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.Keyword;
 import thewrestler.WrestlerMod;
 import thewrestler.util.TextureLoader;
-import thewrestler.util.info.sportsmanship.SportsmanshipInfo;
+import thewrestler.util.info.penaltycard.PenaltyCardInfo;
 
 import java.util.Arrays;
 import java.util.List;
@@ -34,15 +33,12 @@ public class RefereesWhistle extends CustomWrestlerRelic {
   }
 
   public void atTurnStart() {
-    if (SportsmanshipInfo.hasSportsmanshipInfo() && SportsmanshipInfo.isUnsporting()) {
-      flash();
-      AbstractDungeon.actionManager.addToBottom(new DrawCardAction(CARD_AMOUNT));
-    }
+
   }
 
   @Override
   public boolean canSpawn() {
-    return SportsmanshipInfo.hasSportsmanshipInfo() && !AbstractDungeon.player.hasRelic(LuckyTrunks.ID);
+    return PenaltyCardInfo.hasPenatlyCardInfo() && !AbstractDungeon.player.hasRelic(LuckyTrunks.ID);
   }
 
   @Override

@@ -30,7 +30,7 @@ public class StomachClaw extends CustomCard {
   public static final String[] EXTENDED_DESCRIPTION;
   public static final String IMG_PATH = "stomachclaw.png";
 
-  private static final int DEBUFF_AMOUNT = 6;
+  private static final int DEBUFF_AMOUNT = 5;
   private static final int DEBUFF_AMOUNT_UPGRADE  = 1;
 
   private static final CardStrings cardStrings;

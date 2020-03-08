@@ -18,7 +18,6 @@ import thewrestler.enums.AbstractCardEnum;
 import thewrestler.keywords.AbstractTooltipKeyword;
 import thewrestler.keywords.CustomTooltipKeywords;
 import thewrestler.keywords.TooltipKeywords;
-import thewrestler.util.info.sportsmanship.SportsmanshipInfo;
 
 import java.util.Arrays;
 import java.util.List;
@@ -55,9 +54,6 @@ public class HeelTurn extends CustomCard {
 
   @Override
   public void use(AbstractPlayer p, AbstractMonster m) {
-    boolean wasSporting = SportsmanshipInfo.isSporting()
-        || SportsmanshipInfo.hasSportsmanshipInfo() && SportsmanshipInfo.getAmount() + 1 > 0;
-
     AbstractDungeon.actionManager.addToBottom(new SFXAction("BOO_CROWD_1"));
 
     AbstractDungeon.actionManager.addToBottom(
@@ -66,9 +62,7 @@ public class HeelTurn extends CustomCard {
     AbstractDungeon.actionManager.addToBottom(
         new ApplyPowerAction(p, p, new StrengthPower(p, this.magicNumber), this.magicNumber));
 
-    if (wasSporting) {
-        WrestlerCharacter.getSportsmanshipInfo().increaseUnsporting(UNSPORTING_GAIN, false);
-    }
+    WrestlerCharacter.getPenaltyCardInfo().gainPenaltyCard();
   }
 
   @Override

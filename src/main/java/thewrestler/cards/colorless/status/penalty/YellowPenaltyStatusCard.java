@@ -1,49 +1,59 @@
 package thewrestler.cards.colorless.status.penalty;
 
-import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
-import com.megacrit.cardcrawl.actions.common.LoseHPAction;
+import com.megacrit.cardcrawl.actions.common.GainEnergyAction;
+import com.megacrit.cardcrawl.actions.common.MakeTempCardInDrawPileAction;
+import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.cards.CardQueueItem;
+import com.megacrit.cardcrawl.cards.status.Dazed;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
-import com.megacrit.cardcrawl.powers.GainStrengthPower;
 
-public class RedPenaltyStatusCard extends AbstractPenaltyStatusCard {
-  public static final String ID = "WrestlerMod:RedPenaltyStatusCard";
+public class YellowPenaltyStatusCard extends AbstractPenaltyStatusCard {
+  public static final String ID = "WrestlerMod:YellowPenaltyStatusCard";
   public static final String NAME;
   public static final String DESCRIPTION;
   public static final String[] EXTENDED_DESCRIPTION;
-  public static final String IMG_PATH = getPenaltyCardImgPath("red.png");
+  public static final String IMG_PATH = getPenaltyCardImgPath("yellow.png");
 
   private static final CardStrings cardStrings;
 
-  private static final int STRENGTH_GAIN = 1;
-  private static final int HP_LOSS = 2;
+  private static final int ENERGY_GAIN = 1;
+  private static final int DZ = 2;
 
-  public RedPenaltyStatusCard() {
+  public YellowPenaltyStatusCard() {
     super(ID, NAME, IMG_PATH, getDescription());
-    this.magicNumber = this.baseMagicNumber = STRENGTH_GAIN;
+    this.magicNumber = this.baseMagicNumber = ENERGY_GAIN;
+    this.cardsToPreview = getPreviewCard();
+  }
+
+  private static AbstractCard previewCard;
+  private static AbstractCard getPreviewCard() {
+    if (previewCard == null) {
+      previewCard = new Dazed();
+    }
+    return previewCard;
   }
 
   @Override
   public void use(AbstractPlayer p, AbstractMonster m) {
     if (this.dontTriggerOnUseCard) {
-      AbstractDungeon.actionManager.addToBottom(new LoseHPAction(p, p, HP_LOSS));
+      AbstractDungeon.actionManager.addToBottom(
+          new MakeTempCardInDrawPileAction(getPreviewCard().makeCopy(), 1, true, true));
     }
   }
 
   @Override
   public void triggerWhenDrawn(){
     AbstractPlayer p = AbstractDungeon.player;
-    AbstractDungeon.actionManager.addToBottom(
-        new ApplyPowerAction(p, p, new GainStrengthPower(p, STRENGTH_GAIN), STRENGTH_GAIN));
+    AbstractDungeon.actionManager.addToBottom(new GainEnergyAction(this.magicNumber));
   }
 
   @Override
   public AbstractPenaltyStatusCard makeCopy() {
-    return new RedPenaltyStatusCard();
+    return new YellowPenaltyStatusCard();
   }
 
   public void triggerOnEndOfTurnForPlayingCard() {
@@ -52,7 +62,7 @@ public class RedPenaltyStatusCard extends AbstractPenaltyStatusCard {
   }
 
   private static String getDescription() {
-    return DESCRIPTION + HP_LOSS + EXTENDED_DESCRIPTION[0];
+    return DESCRIPTION;
   }
 
   @Override

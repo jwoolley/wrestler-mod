@@ -250,7 +250,7 @@
     "EXTENDED_DESCRIPTION": [
       " Intangible. NL Gain !M! Strength. NL Gain ",
       "a",
-      " [P] if you're wrestlermod:Clean. NL Exhaust."
+      " [P] . NL Exhaust."
     ]
   },
 
@@ -374,7 +374,7 @@
 
   "WrestlerMod:Pinfall": {
     "NAME": "Pinfall",
-    "DESCRIPTION": "Gain !B! Block. NL When you lose a [P] , return this from your discard pile to your hand."
+    "DESCRIPTION": "Gain !B! Block. NL When you gain a [P] , return this from your discard pile to your hand."
   },
 
   "WrestlerMod:PlayToTheCrowd": {
@@ -668,9 +668,22 @@
 
   "WrestlerMod:RedPenaltyStatusCard": {
     "NAME": "Red Penalty Card",
-    "DESCRIPTION": "When this card is drawn, gain !M! Strength. NL At the end of your turn, lose ",
+    "DESCRIPTION": "Unplayable. When this card is drawn, gain !M! Strength. NL At the end of your turn, lose ",
     "EXTENDED_DESCRIPTION": [
       " HP."
     ]
+  },
+
+  "WrestlerMod:BluePenaltyStatusCard": {
+    "NAME": "Blue Penalty Card",
+    "DESCRIPTION": "Unplayable. NL When this card is drawn, draw !M! cards. NL At the end of your turn, a random enemy gains ",
+    "EXTENDED_DESCRIPTION": [
+      " Plated Armor."
+    ]
+  },
+
+  "WrestlerMod:YellowPenaltyStatusCard": {
+    "NAME": "Yellow Penalty Card",
+    "DESCRIPTION": "Unplayable. NL When this card is drawn, gain [E] . NL At the end of your turn, shuffle a *Dazed into your draw pile."
   }
 }

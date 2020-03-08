@@ -15,7 +15,7 @@ import thewrestler.WrestlerMod;
 import thewrestler.characters.WrestlerCharacter;
 import thewrestler.util.BasicUtils;
 import thewrestler.util.TextureLoader;
-import thewrestler.util.info.sportsmanship.SportsmanshipInfo;
+import thewrestler.util.info.penaltycard.PenaltyCardInfo;
 
 import java.util.Arrays;
 import java.util.List;
@@ -58,7 +58,7 @@ public class FightCard extends CustomWrestlerRelic implements CustomSavable<Inte
     this.fightRecord = RELIC_USED_KEY;
     this.counter = -1;
 
-    if (WrestlerCharacter.hasSportsmanshipInfo()) {
+    if (WrestlerCharacter.hasPenaltyCardInfo()) {
       // TODO: fix this!
       return AbstractDungeon.relicRng.randomBoolean() ? POPULAR_RELIC_REWARD : UNPOPULAR_RELIC_REWARD;
 //      return UnsportingInfo.isAdmired() ? POPULAR_RELIC_REWARD : UNPOPULAR_RELIC_REWARD;
@@ -87,9 +87,9 @@ public class FightCard extends CustomWrestlerRelic implements CustomSavable<Inte
     }
 
     if (!this.usedUp && BasicUtils.isPlayingAsWrestler()
-        && WrestlerCharacter.hasSportsmanshipInfo()) {
+        && WrestlerCharacter.hasPenaltyCardInfo()) {
 
-      SportsmanshipInfo info = WrestlerCharacter.getSportsmanshipInfo();
+      PenaltyCardInfo info = WrestlerCharacter.getPenaltyCardInfo();
 
       /*
       if (UnsportingInfo.isHated()) {

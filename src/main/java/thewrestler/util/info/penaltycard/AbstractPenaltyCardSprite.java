@@ -17,7 +17,7 @@ import thewrestler.WrestlerMod;
 import java.util.HashMap;
 import java.util.Map;
 
-public abstract class AbstractPenaltyCard {
+public abstract class AbstractPenaltyCardSprite {
   public static final float WIDTH = 32;
   public static final float HEIGHT = 38;
   public static final String GLYPH_DIR_PATH = WrestlerMod.getImageResourcePath("ui/penaltycards/tooltipglyph/");
@@ -39,7 +39,7 @@ public abstract class AbstractPenaltyCard {
   private final String imgFilePath;
   private final Hitbox hb;
 
-  public AbstractPenaltyCard(String id, String name, String description, String imgFilePath, int xPos, int yPos) {
+  public AbstractPenaltyCardSprite(String id, String name, String description, String imgFilePath, int xPos, int yPos) {
     this.id = id;
     this.name = name;
     this.description = description;
@@ -52,7 +52,7 @@ public abstract class AbstractPenaltyCard {
     this.hb.y = y;
   }
 
-  public AbstractPenaltyCard(String id, String name, String description, String imgFilePath) {
+  public AbstractPenaltyCardSprite(String id, String name, String description, String imgFilePath) {
     this(id, name, description, imgFilePath, 0,  0);
   }
 
@@ -70,7 +70,7 @@ public abstract class AbstractPenaltyCard {
 
   public Texture getTexture() {
     if (this.flashTimer > 0.0f) {
-      return getTextureFromMap(WhitePenaltyCard.ID, WhitePenaltyCard.IMG_FILENAME);
+      return getTextureFromMap(WhitePenaltyCardSprite.ID, WhitePenaltyCardSprite.IMG_FILENAME);
     } else {
       return getTextureFromMap(this.id, this.imgFilePath);
     }
@@ -105,7 +105,7 @@ public abstract class AbstractPenaltyCard {
     return this.hb.hovered;
   }
 
-  public abstract AbstractPenaltyCard makeCopy();
+  public abstract AbstractPenaltyCardSprite makeCopy();
 
   public abstract void onGained();
   public abstract void onRemoved();
@@ -114,7 +114,7 @@ public abstract class AbstractPenaltyCard {
   public abstract void onCardUsed(AbstractCard card);
   public abstract void onCardExhausted(AbstractCard card);
 
-  static void playTriggerSfx() {
+  protected static void playTriggerSfx() {
     CardCrawlGame.sound.play("CARD_POWER_IMPACT");
   }
 

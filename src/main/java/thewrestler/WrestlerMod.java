@@ -54,7 +54,7 @@ import thewrestler.util.BasicUtils;
 import thewrestler.util.IDCheckDontTouchPls;
 import thewrestler.util.TextureLoader;
 import thewrestler.util.info.CombatInfo;
-import thewrestler.util.info.sportsmanship.SportsmanshipInfo;
+import thewrestler.util.info.penaltycard.PenaltyCardInfo;
 import thewrestler.variables.DefaultCustomVariable;
 import thewrestler.variables.DefaultSecondMagicNumber;
 
@@ -471,11 +471,9 @@ public class WrestlerMod implements
         BaseMod.addCard(new Butterfly());
         BaseMod.addCard(new Brainbuster());
         BaseMod.addCard(new CageMatch());
-        BaseMod.addCard(new CannedHeat());
         BaseMod.addCard(new CheapHeat());
         BaseMod.addCard(new CheapShot());
         BaseMod.addCard(new CleanFinish());
-//        BaseMod.addCard(new Cloverleaf());
         BaseMod.addCard(new CloverleafAttack());
         BaseMod.addCard(new CobraClutch());
         BaseMod.addCard(new CurtainJerker());
@@ -487,7 +485,6 @@ public class WrestlerMod implements
         BaseMod.addCard(new Feud());
         BaseMod.addCard(new FloatOver());
         BaseMod.addCard(new FrogSplash());
-//        BaseMod.addCard(new HalfNelson());
         BaseMod.addCard(new Guillotine());
         BaseMod.addCard(new HairPull());
         BaseMod.addCard(new Hammerlock());
@@ -499,10 +496,8 @@ public class WrestlerMod implements
         BaseMod.addCard(new IronMan());
         BaseMod.addCard(new Kayfabe());
         BaseMod.addCard(new LowBlow());
-//        BaseMod.addCard(new MainEvent());
         BaseMod.addCard(new Matrix());
         BaseMod.addCard(new Neckbreaker());
-//        BaseMod.addCard(new NearFall());
         BaseMod.addCard(new Octopus());
         BaseMod.addCard(new OffTheRopes());
         BaseMod.addCard(new Opportunist());
@@ -522,21 +517,32 @@ public class WrestlerMod implements
         BaseMod.addCard(new Shortarm());
         BaseMod.addCard(new Showboat());
         BaseMod.addCard(new SideRoll());
-//        BaseMod.addCard(new SleeperHold());
         BaseMod.addCard(new Springboard());
         BaseMod.addCard(new SquareOff());
         BaseMod.addCard(new Squeeze());
         BaseMod.addCard(new StomachClaw());
         BaseMod.addCard(new Swerve());
         BaseMod.addCard(new TagIn());
-//        BaseMod.addCard(new TakeAPowder());
         BaseMod.addCard(new TakeToTheMat());
         BaseMod.addCard(new Technician());
         BaseMod.addCard(new TriangleChoke());
         BaseMod.addCard(new TripleThreat());
         BaseMod.addCard(new WindUpKick());
 
-//        BaseMod.addCard(new SafetyTag());
+        //        BaseMod.addCard(new HalfNelson());
+        //        BaseMod.addCard(new SleeperHold());
+        //        BaseMod.addCard(new NearFall());
+        //        BaseMod.addCard(new MainEvent());
+
+
+        //        BaseMod.addCard(new SafetyTag());
+        //        BaseMod.addCard(new TakeAPowder());
+
+
+        // NEED REWORK BECAUSE OF PENALTY CARD REWORK
+        // BaseMod.addCard(new CannedHeat());
+
+
 
         logger.info("Making sure the cards are unlocked.");
         // Unlock the cards
@@ -642,8 +648,6 @@ public class WrestlerMod implements
             AbstractSignatureMoveInfo.getCardSavable());
         BaseMod.addSaveField(AbstractSignatureMoveInfo.SIGNATURE_UPGRADE_SAVABLE_KEY,
             AbstractSignatureMoveInfo.getUpgradeSavable());
-
-        BaseMod.addSaveField(SportsmanshipInfo.UNSPORTING_SAVABLE_KEY, SportsmanshipInfo.getUnsportingSavable());
     }
 
     // There are better ways to do this than listing every single individual card, but I do not want to complicate things
@@ -784,10 +788,7 @@ public class WrestlerMod implements
         }
 
         if (BasicUtils.isPlayingAsWrestler()) {
-            WrestlerCharacter.initializeSportsmanshipInfo();
-            if (SportsmanshipInfo.isSaveDataValid()) {
-                WrestlerCharacter.setSportsmanShipInfoFromSave(SportsmanshipInfo.getUnsportingEndOfCombatFromSave());
-            }
+            WrestlerCharacter.initializePenaltyCardInfo();
         }
     }
 
@@ -799,7 +800,7 @@ public class WrestlerMod implements
             penaltyCardInfoPanel.atEndOfCombat();
             signatureMovePanel.atStartOfCombat();
             WrestlerCharacter.getSignatureMoveInfo().atStartOfCombat();
-            WrestlerCharacter.getSportsmanshipInfo().atStartOfCombat();
+            WrestlerCharacter.getPenaltyCardInfo().atStartOfCombat();
             CombatInfo.atStartOfCombat();
         }
 
@@ -811,7 +812,7 @@ public class WrestlerMod implements
     public void receiveCardUsed(AbstractCard abstractCard) {
         combatInfoPanel.updateCardCounts();
         signatureMovePanel.onCardUsed(abstractCard);
-        WrestlerCharacter.getSportsmanshipInfo().onCardUsed(abstractCard);
+        WrestlerCharacter.getPenaltyCardInfo().onCardUsed(abstractCard);
         penaltyCardInfoPanel.onCardUsed(abstractCard);
     }
 
@@ -821,7 +822,7 @@ public class WrestlerMod implements
         combatInfoPanel.atStartOfTurn();
         signatureMovePanel.atStartOfTurn();
         WrestlerCharacter.getSignatureMoveInfo().atStartOfTurn();
-        WrestlerCharacter.getSportsmanshipInfo().atStartOfTurn();
+        WrestlerCharacter.getPenaltyCardInfo().atStartOfTurn();
         CombatInfo.atStartOfTurn();
     }
 
@@ -831,13 +832,13 @@ public class WrestlerMod implements
         combatInfoPanel.atEndOfCombat();
         signatureMovePanel.atEndOfCombat();
         WrestlerCharacter.getSignatureMoveInfo().atEndOfCombat();
-        WrestlerCharacter.getSportsmanshipInfo().atEndOfCombat();
+        WrestlerCharacter.getPenaltyCardInfo().atEndOfCombat();
         CombatInfo.atEndOfCombat();
     }
 
     public static void atEndOfPlayerTurn() {
         WrestlerCharacter.getSignatureMoveInfo().atEndOfTurn();
-        WrestlerCharacter.getSportsmanshipInfo().atEndOfTurn();
+        WrestlerCharacter.getPenaltyCardInfo().atEndOfTurn();
     }
 
     @Override
@@ -850,7 +851,7 @@ public class WrestlerMod implements
 
     static public void onExhaustCardHook(AbstractCard card) {
         WrestlerCharacter.getSignatureMoveInfo().onCardExhausted(card);
-        WrestlerCharacter.getSportsmanshipInfo().onCardExhausted(card);
+        WrestlerCharacter.getPenaltyCardInfo().onCardExhausted(card);
     }
 
     public static Keyword getKeyword(String key) {
@@ -860,8 +861,8 @@ public class WrestlerMod implements
     @Override
     public void receivePostCreateStartingDeck(AbstractPlayer.PlayerClass playerClass, CardGroup cardGroup) {
         AbstractSignatureMoveInfo.resetForNewRun();
-        SportsmanshipInfo.resetForNewRun();
-        WrestlerCharacter.resetSportsmanshipInfo();
+        PenaltyCardInfo.resetForNewCombat();
+        WrestlerCharacter.resetPenaltyCardInfo();
     }
 
     @Override
