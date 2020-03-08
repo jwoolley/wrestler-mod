@@ -48,13 +48,12 @@ public class OnApplyPowerPatchInsert {
         ((Headgear) AbstractDungeon.player.getRelic(Headgear.ID)).onApplyPower(powerToApply);
       }
 
-      if (source == player && target != player && player.hasRelic(ImprovedHeadgear.ID)
-          && !target.hasPower(ArtifactPower.POWER_ID)) {
-        ((ImprovedHeadgear) AbstractDungeon.player.getRelic(ImprovedHeadgear.ID)).onApplyPower(powerToApply);
-      }
-
       if (source == player && target != player && !target.hasPower(ArtifactPower.POWER_ID) &&
           doesntAlreadyHaveDebuff(target, powerToApply, amountBeingApplied)) {
+        if (player.hasRelic(ImprovedHeadgear.ID)) {
+          ((ImprovedHeadgear) AbstractDungeon.player.getRelic(ImprovedHeadgear.ID)).onApplyPower(powerToApply);
+        }
+
         if (player.hasPower(CloverleafPower.POWER_ID)) {
           ((CloverleafPower) AbstractDungeon.player.getPower(CloverleafPower.POWER_ID)).onApplyPower(powerToApply);
         }

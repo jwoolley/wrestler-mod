@@ -1,6 +1,7 @@
 package thewrestler.cards.colorless.status.penalty;
 
 import basemod.abstracts.CustomCard;
+import thewrestler.cards.WrestlerCardTags;
 
 import static thewrestler.WrestlerMod.getCardResourcePath;
 
@@ -13,6 +14,7 @@ public abstract class AbstractPenaltyStatusCard extends CustomCard {
 
   public AbstractPenaltyStatusCard(String id, String name, String imgPath, String description) {
     super(id, name, imgPath,-2, description, TYPE, CardColor.COLORLESS, RARITY, TARGET);
+    this.tags.add(WrestlerCardTags.PENALTY);
   }
 
   static String getPenaltyCardImgPath(String imgFilename) {

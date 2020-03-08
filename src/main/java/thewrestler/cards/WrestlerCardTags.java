@@ -6,4 +6,5 @@ import com.megacrit.cardcrawl.cards.AbstractCard;
 public class WrestlerCardTags {
   @SpireEnum
   public static AbstractCard.CardTags DIRTY;
+  public static AbstractCard.CardTags PENALTY;
 }

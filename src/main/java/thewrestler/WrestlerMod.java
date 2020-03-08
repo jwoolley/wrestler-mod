@@ -415,7 +415,7 @@ public class WrestlerMod implements
         // This adds a character specific relic. Only when you play with the mentioned color, will you get this relic.
         BaseMod.addRelicToCustomPool(new Headgear(), AbstractCardEnum.THE_WRESTLER_ORANGE);
         BaseMod.addRelicToCustomPool(new ImprovedHeadgear(), AbstractCardEnum.THE_WRESTLER_ORANGE);
-        BaseMod.addRelicToCustomPool(new PenaltyCardRelic(), AbstractCardEnum.THE_WRESTLER_ORANGE);
+        BaseMod.addRelicToCustomPool(new RefereesWhistle(), AbstractCardEnum.THE_WRESTLER_ORANGE);
 
         BaseMod.addRelicToCustomPool(new BrutesTrophy(), AbstractCardEnum.THE_WRESTLER_ORANGE);
 
@@ -426,7 +426,6 @@ public class WrestlerMod implements
         BaseMod.addRelicToCustomPool(new LuckyTrunks(), AbstractCardEnum.THE_WRESTLER_ORANGE);
 
         // TODO: reflavor and reenable this (since its flavor was appropriated for the starter relic)
-//        BaseMod.addRelicToCustomPool(new RefereesWhistle(), AbstractCardEnum.THE_WRESTLER_ORANGE);
 
         // This adds a relic to the Shared pool. Every character can find this relic.
         // TODO: put this behind a Config flag, a la Hayseed

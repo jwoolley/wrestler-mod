@@ -21,7 +21,7 @@ public class FancyFootgear extends CustomWrestlerRelic {
   public static final String ID = WrestlerMod.makeID("FancyFootgear");
   private static final Texture IMG = TextureLoader.getTexture(makeRelicPath("fancyfootgear.png"));
   private static final Texture OUTLINE = TextureLoader.getTexture(makeRelicOutlinePath("fancyfootgear.png"));
-  private static final RelicTier RELIC_TIER = RelicTier.RARE;
+  private static final RelicTier RELIC_TIER = RelicTier.UNCOMMON;
 
   private static final List<String> POWERTIP_KEYWORDS = Arrays.asList(WrestlerMod.makeID("TemporaryBuffer"));
 

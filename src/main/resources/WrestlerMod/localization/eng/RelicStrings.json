@@ -19,7 +19,7 @@
 
   "WrestlerMod:FancyFootgear": {
     "NAME": "Fancy Footgear",
-    "FLAVOR": "Float like a Bronze Orb, sting like a Byrd.",
+    "FLAVOR": "Float like a Bronze Orb, sting like a Spiker.",
     "DESCRIPTIONS": [
       "Whenever an enemy dies, gain 1 #yTemporary #yBuffer."
     ]
@@ -49,7 +49,7 @@
     "NAME": "Rugged Headgear",
     "FLAVOR": "Improved protection—but you can still only take so many blows to the head.",
     "DESCRIPTIONS": [
-      "Whenever you apply a debuff to an enemy, gain #b",
+      "Whenever you apply a debuff to an enemy that it doesn't already have, gain #b",
       " #yBlock.",
       "Replaces #rShabby #rHeadgear. Whenever you apply a debuff to an enemy that it doesn't already have, gain #b",
       " #yBlock."
@@ -61,14 +61,6 @@
     "FLAVOR": "Comfortable and flattering. Though perhaps not so lucky for the previous owner.",
     "DESCRIPTIONS": [
       "At the start of your turn, if you're #yClean, gain [E] ."
-    ]
-  },
-
-  "WrestlerMod:PenaltyCard": {
-    "NAME": "Referee's Whistle",
-    "FLAVOR": "Property of association officials. Unauthorized possession will be met with swift punishment.",
-    "DESCRIPTIONS": [
-      "At the start of your turn, draw a card for each #yPenalty #yCard you have."
     ]
   },
 
@@ -86,7 +78,9 @@
     "FLAVOR": "Property of association officials. Unauthorized possession will be met with swift punishment.",
 
     "DESCRIPTIONS": [
-      "At the start of your turn, if you're #yPenalized, draw an additional card."
+      "Whenever you draw a #yPenalty #yCard, draw #b",
+      " card.",
+      " cards."
     ]
   },
 
