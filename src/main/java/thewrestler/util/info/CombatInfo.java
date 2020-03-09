@@ -95,7 +95,7 @@ public class CombatInfo {
     return dirtyCardsPlayedThisCombat;
   }
 
-  public static int getNumPenaltyCardsPlayedThisCombat() {
+  public static int getNumPenaltyCardsGainedThisCombat() {
     return penaltyCardsGainedThisCombat;
   }
 
@@ -103,6 +103,6 @@ public class CombatInfo {
   public static CardsPlayedCounts getCardsPlayedCounts() {
     return new CardsPlayedCounts(getNumAttacksPlayed(), getNumSkillsPlayed(), getNumPowersPlayed(),
         getNumDebuffsAppliedThisTurn(), getNumDirtyCardsPlayed(), getNumDirtyCardsPlayedThisCombat(),
-        getNumPenaltyCardsPlayedThisCombat());
+        getNumPenaltyCardsGainedThisCombat());
   }
 }

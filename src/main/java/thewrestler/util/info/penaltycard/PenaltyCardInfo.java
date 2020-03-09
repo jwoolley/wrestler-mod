@@ -38,11 +38,13 @@ public class PenaltyCardInfo implements StartOfCombatListener, EndOfCombatListen
   public void gainPenaltyCard() {
     // TODO: gainPenaltyCardAction
     if (!AbstractDungeon.player.hasPower(NoPenaltyPower.POWER_ID)) {
+      reset();
       AbstractDungeon.actionManager.addToBottom(new GainPenaltyCardsAction(1));
       List<AbstractPenaltyCardListener> listeners = new ArrayList<>();
       listeners.addAll(getPenaltyCardListenerCards());
       listeners.addAll(getPenaltyCardListenerPowers());
       listeners.forEach(AbstractPenaltyCardListener::onGainedPenaltyCard);
+      CombatInfo.incrementPenaltyCardsGainedThisCombatCount();
     } else {
       AbstractDungeon.player.getPower(NoPenaltyPower.POWER_ID).flashWithoutSound();
     }
@@ -119,7 +121,6 @@ public class PenaltyCardInfo implements StartOfCombatListener, EndOfCombatListen
 
   private void handleDirtyCardPlayed() {
     if (this.hasWarningCard) {
-      this.hasWarningCard = false;
       gainPenaltyCard();
     } else {
       this.hasWarningCard = true;

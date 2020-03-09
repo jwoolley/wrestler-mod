@@ -425,7 +425,7 @@
 
   "WrestlerMod:Redemption": {
     "NAME": "Redemption",
-    "DESCRIPTION": "Costs [E] less for each [P] you have. NL Gain !B! Block and lose all [P]. NL Exhaust."
+    "DESCRIPTION": "Costs [E] less for each [P] gained this combat. NL Gain !B! Block. NL Exhaust all [P] gained this combat. NL Exhaust."
   },
 
   "WrestlerMod:Ropewalk": {
