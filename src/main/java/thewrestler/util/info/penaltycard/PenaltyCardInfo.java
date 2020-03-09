@@ -13,6 +13,7 @@ import thewrestler.cards.StartOfCombatListener;
 import thewrestler.cards.WrestlerCardTags;
 import thewrestler.cards.skill.AbstractPenaltyCardListener;
 import thewrestler.characters.WrestlerCharacter;
+import thewrestler.powers.NoPenaltyPower;
 import thewrestler.util.BasicUtils;
 import thewrestler.util.info.CombatInfo;
 
@@ -35,12 +36,16 @@ public class PenaltyCardInfo implements StartOfCombatListener, EndOfCombatListen
   }
 
   public void gainPenaltyCard() {
-      // TODO: gainPenaltyCardAction
+    // TODO: gainPenaltyCardAction
+    if (!AbstractDungeon.player.hasPower(NoPenaltyPower.POWER_ID)) {
       AbstractDungeon.actionManager.addToBottom(new GainPenaltyCardsAction(1));
       List<AbstractPenaltyCardListener> listeners = new ArrayList<>();
       listeners.addAll(getPenaltyCardListenerCards());
       listeners.addAll(getPenaltyCardListenerPowers());
       listeners.forEach(AbstractPenaltyCardListener::onGainedPenaltyCard);
+    } else {
+      AbstractDungeon.player.getPower(NoPenaltyPower.POWER_ID).flashWithoutSound();
+    }
   }
 
   private final static AbstractPenaltyCardStrategy DEFAULT_STRATEGY = new DefaultPenaltyCardStrategy();

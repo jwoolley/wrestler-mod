@@ -272,10 +272,10 @@
     "DESCRIPTION": "Gain ",
     "EXTENDED_DESCRIPTION": [
       "[E] ",
-      ". NL Lose ",
-      "  [P] .",
-      " NL Next turn, gain ",
-      " NL Exhaust."
+      ". NL Next turn, gain",
+      ". NL You can't gain",
+      " [P] ",
+      "this turn. NL Exhaust."
     ]
   },
 

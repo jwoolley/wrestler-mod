@@ -9,16 +9,16 @@ import com.megacrit.cardcrawl.powers.AbstractPower;
 import thewrestler.WrestlerMod;
 import thewrestler.actions.GainPenaltyCardAction;
 
-public class TarnishedReputationPower extends AbstractWrestlerPower implements CloneablePowerInterface {
-  public static final String POWER_ID = WrestlerMod.makeID("TarnishedReputationPower");
-  public static final String IMG = "approvaldown.png";
+public class RetroactivePenaltyPower extends AbstractWrestlerPower implements CloneablePowerInterface {
+  public static final String POWER_ID = WrestlerMod.makeID("RetroactivePenaltyPower");
+  public static final String IMG = "penaltynextturn.png";
   private static final PowerStrings powerStrings;
   public static final String NAME;
   public static final String[] DESCRIPTIONS;
 
   public static final PowerType POWER_TYPE = PowerType.DEBUFF;
 
-  public TarnishedReputationPower(int amount) {
+  public RetroactivePenaltyPower(int amount) {
     super(POWER_ID, NAME, IMG, AbstractDungeon.player, AbstractDungeon.player, amount, POWER_TYPE);
   }
 
@@ -36,7 +36,7 @@ public class TarnishedReputationPower extends AbstractWrestlerPower implements C
 
   @Override
   public AbstractPower makeCopy() {
-    return new TarnishedReputationPower(amount);
+    return new RetroactivePenaltyPower(amount);
   }
 
   static {

@@ -127,6 +127,13 @@
     ]
   },
 
+  "WrestlerMod:NoPenaltyPower": {
+    "NAME": "Above Reproach",
+    "DESCRIPTIONS": [
+      "You can't gain #yPenalty #yCards this turn."
+    ]
+  },
+
   "WrestlerMod:OpportunistPower": {
     "NAME": "Opportunist",
     "DESCRIPTIONS": [
@@ -199,8 +206,8 @@
     ]
   },
 
-  "WrestlerMod:TarnishedReputationPower": {
-    "NAME": "Tarnished Reputation",
+  "WrestlerMod:RetroactivePenaltyPower": {
+    "NAME": "Retroactive Penalty",
     "DESCRIPTIONS": [
       "At the start of your next turn, gain #b",
       " #yPenalty #yCard.",

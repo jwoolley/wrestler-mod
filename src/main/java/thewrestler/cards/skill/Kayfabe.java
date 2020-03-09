@@ -11,12 +11,12 @@ import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import org.apache.commons.lang3.StringUtils;
-import thewrestler.actions.LoseUnsportingAction;
 import thewrestler.enums.AbstractCardEnum;
 import thewrestler.keywords.AbstractTooltipKeyword;
 import thewrestler.keywords.CustomTooltipKeywords;
 import thewrestler.keywords.TooltipKeywords;
-import thewrestler.powers.TarnishedReputationPower;
+import thewrestler.powers.NoPenaltyPower;
+import thewrestler.powers.RetroactivePenaltyPower;
 
 import java.util.Arrays;
 import java.util.List;
@@ -41,7 +41,7 @@ public class Kayfabe extends CustomCard {
   private static final int ENERGY_UPGRADE = 1;
 
   private static final int UNSPORTING_LOSS = 1;
-  private static final int UNSPORTING_GAIN = 2;
+  private static final int PENALTY_CARD_GAIN = 2;
 
   public Kayfabe() {
     super(ID, NAME, getCardResourcePath(IMG_PATH), COST, getDescription(ENERGY_AMOUNT), TYPE,
@@ -53,11 +53,9 @@ public class Kayfabe extends CustomCard {
   @Override
   public void use(AbstractPlayer p, AbstractMonster m) {
     AbstractDungeon.actionManager.addToBottom(new GainEnergyAction(this.magicNumber));
-
-    // TODO: LoseUnsportingAction - what does it do now? exhaust penalty cards?
-    AbstractDungeon.actionManager.addToBottom(new LoseUnsportingAction(UNSPORTING_LOSS));
+    AbstractDungeon.actionManager.addToBottom(new ApplyPowerAction(p, p, new NoPenaltyPower()));
     AbstractDungeon.actionManager.addToBottom(
-        new ApplyPowerAction(p, p, new TarnishedReputationPower(UNSPORTING_GAIN), UNSPORTING_GAIN));
+        new ApplyPowerAction(p, p, new RetroactivePenaltyPower(PENALTY_CARD_GAIN), PENALTY_CARD_GAIN));
   }
 
   @Override
@@ -87,9 +85,8 @@ public class Kayfabe extends CustomCard {
   public static String getDescription(int energyAmount) {
     return DESCRIPTION
         + StringUtils.repeat(EXTENDED_DESCRIPTION[0], energyAmount)
-        + EXTENDED_DESCRIPTION[1] + UNSPORTING_GAIN + EXTENDED_DESCRIPTION[2]
-        + EXTENDED_DESCRIPTION[3] + UNSPORTING_LOSS + EXTENDED_DESCRIPTION[2]
-        + EXTENDED_DESCRIPTION[4];
+        + EXTENDED_DESCRIPTION[1] +  StringUtils.repeat(EXTENDED_DESCRIPTION[3], PENALTY_CARD_GAIN)
+        + EXTENDED_DESCRIPTION[2] + EXTENDED_DESCRIPTION[3] + EXTENDED_DESCRIPTION[4];
   }
 
   static {
