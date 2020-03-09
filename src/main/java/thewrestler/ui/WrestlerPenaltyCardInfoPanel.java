@@ -24,6 +24,7 @@ import thewrestler.keywords.TooltipKeywords;
 import thewrestler.util.BasicUtils;
 import thewrestler.util.TextureLoader;
 import thewrestler.util.info.penaltycard.AbstractPenaltyCardSprite;
+import thewrestler.util.info.penaltycard.PenaltyCardInfo;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -269,8 +270,7 @@ public class WrestlerPenaltyCardInfoPanel implements CustomInfoPanel, StartOfCom
   }
 
   private Texture getPanelBackgroundImage(int numPenaltyCards) {
-    final int index = Math.max(0, Math.min(numPenaltyCards, BACKGROUND_IMG_FILENAMES.size()));
-
+    final int index = PenaltyCardInfo.hasWarningCard() ? 1 : 0;
 
     if (panelBackgroundImage[index] == null) {
       panelBackgroundImage[index] = TextureLoader.getTexture(BACKGROUND_IMG_FILEPATHS.get(index));

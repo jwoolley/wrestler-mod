@@ -48,7 +48,7 @@ public class TakeAPowder extends CustomCard {
 
   @Override
   public void use(AbstractPlayer p, AbstractMonster m) {
-    if (PenaltyCardInfo.hasPenatlyCardInfo()) {
+    if (PenaltyCardInfo.hasPenaltyCardInfo()) {
       AbstractDungeon.actionManager.addToBottom(
           new ApplyPowerAction(p, p, new TemporaryBufferPower(p, this.magicNumber), this.magicNumber));
     } else {

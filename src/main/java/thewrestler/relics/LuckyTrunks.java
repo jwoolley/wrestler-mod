@@ -35,7 +35,7 @@ public class LuckyTrunks extends CustomWrestlerRelic {
 
   // TODO: when do these trigger
   public void atTurnStart() {
-    if (PenaltyCardInfo.hasPenatlyCardInfo()) {
+    if (PenaltyCardInfo.hasPenaltyCardInfo()) {
       flash();
       AbstractDungeon.actionManager.addToBottom(new GainEnergyAction(ENERGY_AMOUNT));
     }
@@ -43,7 +43,7 @@ public class LuckyTrunks extends CustomWrestlerRelic {
 
   @Override
   public boolean canSpawn() {
-    return PenaltyCardInfo.hasPenatlyCardInfo() && !AbstractDungeon.player.hasRelic(RefereesWhistle.ID);
+    return PenaltyCardInfo.hasPenaltyCardInfo() && !AbstractDungeon.player.hasRelic(RefereesWhistle.ID);
   }
 
   @Override

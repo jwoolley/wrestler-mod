@@ -34,10 +34,6 @@ public class PenaltyCardInfo implements StartOfCombatListener, EndOfCombatListen
     hasWarningCard = false;
   }
 
-  public boolean hasWarningCard() {
-    return this.hasWarningCard;
-  }
-
   public void gainPenaltyCard() {
       // TODO: gainPenaltyCardAction
       AbstractDungeon.actionManager.addToBottom(new GainPenaltyCardsAction(1));
@@ -54,7 +50,7 @@ public class PenaltyCardInfo implements StartOfCombatListener, EndOfCombatListen
   }
 
   static AbstractPenaltyCardStrategy getPenaltyCardStrategy() {
-    return hasPenatlyCardInfo() ? WrestlerCharacter.getPenaltyCardInfo().getStrategy() : DEFAULT_STRATEGY;
+    return hasPenaltyCardInfo() ? getInfo().getStrategy() : DEFAULT_STRATEGY;
   }
 
   public void onCardExhausted(AbstractCard card) {
@@ -90,13 +86,17 @@ public class PenaltyCardInfo implements StartOfCombatListener, EndOfCombatListen
     }
   }
 
-  public static boolean hasPenatlyCardInfo() {
+  public static boolean hasPenaltyCardInfo() {
     return BasicUtils.isPlayingAsWrestler() && WrestlerCharacter.hasPenaltyCardInfo();
+  }
+
+  public static boolean hasWarningCard() {
+    return hasPenaltyCardInfo() && getInfo().hasWarningCard;
   }
 
   public static void resetForNewCombat() {
     if (WrestlerCharacter.hasPenaltyCardInfo()) {
-      WrestlerCharacter.getPenaltyCardInfo().reset();
+      getInfo().reset();
     }
   }
 
@@ -106,6 +106,10 @@ public class PenaltyCardInfo implements StartOfCombatListener, EndOfCombatListen
       handleDirtyCardPlayed();
       CombatInfo.incrementDirtyCardsPlayedCount();
     }
+  }
+
+  private static PenaltyCardInfo getInfo() {
+    return hasPenaltyCardInfo() ? WrestlerCharacter.getPenaltyCardInfo() : null;
   }
 
   private void handleDirtyCardPlayed() {
