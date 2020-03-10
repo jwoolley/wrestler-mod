@@ -34,7 +34,9 @@ public class OrangePenaltyStatusCard extends AbstractPenaltyStatusCard {
   @Override
   public void use(AbstractPlayer p, AbstractMonster m) {
     if (this.dontTriggerOnUseCard) {
-      AbstractDungeon.actionManager.addToBottom(new ApplyPowerAction(p, p, new FrailPower(p, this.magicNumber, false)));
+      // setting isSourceMonster to true prevents the frail from falling off immediately
+      AbstractDungeon.actionManager.addToBottom(
+          new ApplyPowerAction(p, p, new FrailPower(p, this.magicNumber, true)));
     }
   }
 
