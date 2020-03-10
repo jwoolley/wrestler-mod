@@ -70,6 +70,14 @@
     "DESCRIPTION": "Status card with one of several negative effects. Provides a beneficial effect when drawn."
   },
 
+  "WrestlerMod:PenaltyCardGreen": {
+    "PROPER_NAME": "Green Penalty Card",
+    "NAMES": [
+      "Green Penalty Card", "green_penalty_card"
+    ],
+    "DESCRIPTION": "Lose #yGold at end of turn. Gain #yDexterity when drawn."
+  },
+
   "WrestlerMod:PenaltyCardsNoGlyph": {
     "PROPER_NAME": "Penalty Card",
     "NAMES": [

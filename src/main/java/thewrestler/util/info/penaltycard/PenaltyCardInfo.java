@@ -38,10 +38,10 @@ public class PenaltyCardInfo implements StartOfCombatListener, EndOfCombatListen
     penaltyCardStrategy.resetForCombat();
   }
 
-  public void gainPenaltyCard() {
+  public static void gainPenaltyCard() {
     // TODO: gainPenaltyCardAction
     if (!AbstractDungeon.player.hasPower(NoPenaltyPower.POWER_ID)) {
-      reset();
+      WrestlerCharacter.getPenaltyCardInfo().reset();
       AbstractDungeon.actionManager.addToBottom(new GainPenaltyCardsAction(1));
       List<AbstractPenaltyCardListener> listeners = new ArrayList<>();
       listeners.addAll(getPenaltyCardListenerCards());
@@ -89,8 +89,7 @@ public class PenaltyCardInfo implements StartOfCombatListener, EndOfCombatListen
       if (this.duration < ACTION_DURATION) {
         if (!this.gainedCard) {
           CardCrawlGame.sound.play(this.amount == 1 ? "WHISTLE_BLOW_1" : "WHISTLE_BLOW_SHORT_1");
-          AbstractDungeon.actionManager.addToBottom(
-              new MakeTempCardInHandAction(getNextPenaltyCard()));
+          AbstractDungeon.actionManager.addToBottom(new MakeTempCardInHandAction(getNextPenaltyCard()));
           this.gainedCard = true;
         }
         if (this.amount <= 1) {

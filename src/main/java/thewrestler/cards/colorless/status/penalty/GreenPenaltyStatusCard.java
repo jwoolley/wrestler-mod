@@ -36,9 +36,15 @@ public class GreenPenaltyStatusCard extends AbstractPenaltyStatusCard {
       AbstractDungeon.actionManager.addToBottom(new AbstractGameAction() {
         @Override
         public void update() {
-          p.loseGold(GOLD_LOSS);
-          AbstractDungeon.effectList.add(new GainPennyEffect(p, p.hb.cX, p.hb.cY, p.hb.cX, Settings.HEIGHT,
-              false));
+          if (p.gold > 0) {
+            CardCrawlGame.sound.play("GOLD_JINGLE");
+
+            p.loseGold(Math.min(GOLD_LOSS, p.gold));
+            AbstractDungeon.effectList.add(new GainPennyEffect(p, p.hb.cX, p.hb.cY, p.hb.cX, Settings.HEIGHT * .9f,
+                false));
+          }
+
+          this.isDone = true;
         }
       });
     }
@@ -53,7 +59,7 @@ public class GreenPenaltyStatusCard extends AbstractPenaltyStatusCard {
 
   @Override
   public AbstractPenaltyStatusCard makeCopy() {
-    return new RedPenaltyStatusCard();
+    return new GreenPenaltyStatusCard();
   }
 
   public void triggerOnEndOfTurnForPlayingCard() {

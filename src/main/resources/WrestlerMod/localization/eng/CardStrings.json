@@ -106,10 +106,7 @@
 
   "WrestlerMod:CloverleafAttack": {
     "NAME": "Cloverleaf",
-    "DESCRIPTION": "Deal !D! damage. NL Whenever you apply a debuff to this enemy that it doesn't already have, gain ",
-    "EXTENDED_DESCRIPTION": [
-      " Block. NL Exhaust."
-    ]
+    "DESCRIPTION": "Deal !D! damage. NL The next time you would gain a random [P] this combat, gain a [N] instead."
   },
 
   "WrestlerMod:CobraClutch": {

@@ -20,6 +20,7 @@ public class CustomGlyph {
     PENALTY_CARD_ORANGE,
     PENALTY_CARD_RED,
     PENALTY_CARD_YELLOW,
+    PENALTY_CARD_GREEN,
     PENALTY_CARD_WHITE;
   }
 
@@ -30,6 +31,8 @@ public class CustomGlyph {
 
   private static final List<CustomGlyph> glyphList = Arrays.asList(
       new CustomGlyph(CustomGlyphEnum.PENALTY_CARD, "penaltycard.png", 'P'),
+      new CustomGlyph(CustomGlyphEnum.PENALTY_CARD_GREEN, AbstractPenaltyCardSprite.GLYPH_DIR_PATH,
+          GreenPenaltyCardSprite.GLYPH_IMG_FILENAME, 'N'),
       new CustomGlyph(CustomGlyphEnum.PENALTY_CARD_WHITE, AbstractPenaltyCardSprite.GLYPH_DIR_PATH,
                       WhitePenaltyCardSprite.GLYPH_IMG_FILENAME, '~')
   );

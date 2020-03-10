@@ -118,10 +118,10 @@ public abstract class EnqueuedPenaltyCardPower extends AbstractWrestlerPower imp
   @Override
   public void updateDescription() {
     this.description = DESCRIPTIONS[0]
-        + (this.amount == 1 ? DESCRIPTIONS[1] : this.amount + DESCRIPTIONS[1])
-        + DESCRIPTIONS[2]
-        + (this.cardName != null ? this.cardName.replaceAll("(\\s)", "#y ") : "")
-        + DESCRIPTIONS[3];
+        + (this.amount == 1 ? DESCRIPTIONS[1] : this.amount + DESCRIPTIONS[2])
+        + DESCRIPTIONS[3]
+        + (this.cardName != null ? "#y" + this.cardName.replaceAll("(\\s)", " #y") : "")
+        + DESCRIPTIONS[4];
   }
 
   protected abstract AbstractPenaltyStatusCard getCard();

@@ -1,6 +1,7 @@
 package thewrestler.cards.attack;
 
 import basemod.abstracts.CustomCard;
+import basemod.helpers.TooltipInfo;
 import com.badlogic.gdx.graphics.Color;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
@@ -21,8 +22,13 @@ import thewrestler.cards.colorless.status.penalty.AbstractPenaltyStatusCard;
 import thewrestler.cards.colorless.status.penalty.GreenPenaltyStatusCard;
 import thewrestler.cards.skill.Cloverleaf;
 import thewrestler.enums.AbstractCardEnum;
+import thewrestler.keywords.AbstractTooltipKeyword;
+import thewrestler.keywords.CustomTooltipKeyword;
+import thewrestler.keywords.CustomTooltipKeywords;
+import thewrestler.keywords.TooltipKeywords;
 import thewrestler.powers.CloverleafPower;
 
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -46,16 +52,11 @@ public class CloverleafAttack extends CustomCard {
   private static final int COST = 1;
   private static final int DAMAGE_AMOUNT = 6;
   private static final int DAMAGE_AMOUNT_UPGRADE = 2;
-  private static final int BLOCK_AMOUNT = 3;
-  private static final int BLOCK_AMOUNT_UPGRADE = 1;
 
   public CloverleafAttack() {
-    super(ID, NAME, getCardResourcePath(IMG_PATH), COST, getDescription(BLOCK_AMOUNT), TYPE,
+    super(ID, NAME, getCardResourcePath(IMG_PATH), COST, getDescription(), TYPE,
         AbstractCardEnum.THE_WRESTLER_ORANGE, RARITY, TARGET);
     this.damage = this.baseDamage = DAMAGE_AMOUNT;
-    this.misc = BLOCK_AMOUNT;
-    this.exhaust = true;
-
     this.cardsToPreview = new GreenPenaltyStatusCard();
   }
 
@@ -81,14 +82,22 @@ public class CloverleafAttack extends CustomCard {
     if (!this.upgraded) {
       this.upgradeName();
       this.upgradeDamage(DAMAGE_AMOUNT_UPGRADE);
-      this.misc += BLOCK_AMOUNT_UPGRADE;
-      this.rawDescription = getDescription(this.misc);
       initializeDescription();
     }
   }
 
-  public static String getDescription(int bloackAmount) {
-    return DESCRIPTION + bloackAmount + EXTENDED_DESCRIPTION[0];
+  private static List<AbstractTooltipKeyword> EXTRA_KEYWORDS = Arrays.asList(
+      CustomTooltipKeywords.getTooltipKeyword(CustomTooltipKeywords.PENALTY_CARD),
+      CustomTooltipKeywords.getTooltipKeyword(CustomTooltipKeywords.PENALTY_CARD_GREEN)
+  );
+
+  @Override
+  public List<TooltipInfo> getCustomTooltips() {
+    return TooltipKeywords.getTooltipInfos(EXTRA_KEYWORDS);
+  }
+
+  public static String getDescription() {
+    return DESCRIPTION;
   }
 
   static {
