@@ -31,8 +31,22 @@ public class CustomGlyph {
 
   private static final List<CustomGlyph> glyphList = Arrays.asList(
       new CustomGlyph(CustomGlyphEnum.PENALTY_CARD, "penaltycard.png", 'P'),
+
+      new CustomGlyph(CustomGlyphEnum.PENALTY_CARD_BLUE, AbstractPenaltyCardSprite.GLYPH_DIR_PATH,
+          BluePenaltyCardSprite.GLYPH_IMG_FILENAME, 'L'),
+
       new CustomGlyph(CustomGlyphEnum.PENALTY_CARD_GREEN, AbstractPenaltyCardSprite.GLYPH_DIR_PATH,
           GreenPenaltyCardSprite.GLYPH_IMG_FILENAME, 'N'),
+
+      new CustomGlyph(CustomGlyphEnum.PENALTY_CARD_ORANGE, AbstractPenaltyCardSprite.GLYPH_DIR_PATH,
+          OrangePenaltyCardSprite.GLYPH_IMG_FILENAME, 'O'),
+
+      new CustomGlyph(CustomGlyphEnum.PENALTY_CARD_RED, AbstractPenaltyCardSprite.GLYPH_DIR_PATH,
+          RedPenaltyCardSprite.GLYPH_IMG_FILENAME, 'D'),
+
+      new CustomGlyph(CustomGlyphEnum.PENALTY_CARD_YELLOW, AbstractPenaltyCardSprite.GLYPH_DIR_PATH,
+          YellowPenaltyCardSprite.GLYPH_IMG_FILENAME, 'Y'),
+
       new CustomGlyph(CustomGlyphEnum.PENALTY_CARD_WHITE, AbstractPenaltyCardSprite.GLYPH_DIR_PATH,
                       WhitePenaltyCardSprite.GLYPH_IMG_FILENAME, '~')
   );

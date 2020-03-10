@@ -1,6 +1,8 @@
 package thewrestler.cards.attack;
 
 import basemod.abstracts.CustomCard;
+import basemod.helpers.TooltipInfo;
+import com.gikk.twirk.SETTINGS;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.animations.VFXAction;
 import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
@@ -16,11 +18,22 @@ import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.powers.VulnerablePower;
 import com.megacrit.cardcrawl.vfx.combat.WeightyImpactEffect;
+import thewrestler.cards.colorless.status.penalty.AbstractPenaltyStatusCard;
+import thewrestler.cards.colorless.status.penalty.OrangePenaltyStatusCard;
+import thewrestler.cards.colorless.status.penalty.RedPenaltyStatusCard;
+import thewrestler.cards.colorless.status.penalty.YellowPenaltyStatusCard;
+import thewrestler.characters.WrestlerCharacter;
 import thewrestler.enums.AbstractCardEnum;
-import thewrestler.powers.SprainPower;
+import thewrestler.keywords.AbstractTooltipKeyword;
+import thewrestler.keywords.CustomTooltipKeywords;
+import thewrestler.keywords.TooltipKeywords;
+import thewrestler.ui.WrestlerPenaltyCardInfoPanel;
 import thewrestler.util.CreatureUtils;
+import thewrestler.util.info.penaltycard.PenaltyCardInfo;
 
 import java.util.Arrays;
+import java.util.List;
+import java.util.Set;
 
 import static thewrestler.WrestlerMod.getCardResourcePath;
 
@@ -39,25 +52,17 @@ public class Powerbomb extends CustomCard {
 
     private static final int COST = 3;
 
-    private static final int DAMAGE = 18;
+    private static final int DAMAGE = 24;
     private static final int DAMAGE_UPGRADE = 6;
-    private static final int DEBUFF_AMOUNT_1 = 2;
-    private static final int DEBUFF_AMOUNT_2 = 4;
-    private static final int DEBUFF_AMOUNT_1_UPGRADE = 1;
-    private static final int DEBUFF_AMOUNT_2_UPGRADE = 2;
-
-    // TODO: make dynamic variable for sprained amount (so it will be highlighted on card updates).
-    private final int baseSprainedAmount;
-    private int sprainedAmount;
-
+    private static final int DEBUFF_AMOUNT = 2;
+    private static final int DEBUFF_AMOUNT_UPGRADE = 1;
 
     public Powerbomb() {
-        super(ID, NAME, IMG_PATH, COST, getDescription(DEBUFF_AMOUNT_2), TYPE, AbstractCardEnum.THE_WRESTLER_ORANGE,
+        super(ID, NAME, IMG_PATH, COST, getDescription(), TYPE, AbstractCardEnum.THE_WRESTLER_ORANGE,
             RARITY, TARGET);
         this.baseDamage = this.damage = DAMAGE;
         this.isMultiDamage = true;
-        this.baseMagicNumber = this.magicNumber = DEBUFF_AMOUNT_1;
-        this.baseSprainedAmount = this.sprainedAmount = DEBUFF_AMOUNT_2;
+        this.baseMagicNumber = this.magicNumber = DEBUFF_AMOUNT;
     }
 
     @Override
@@ -68,12 +73,12 @@ public class Powerbomb extends CustomCard {
         AbstractDungeon.actionManager.addToBottom((new WaitAction(0.8F)));
 
         AbstractDungeon.actionManager.addToBottom(new PowerbombAction(p, this.multiDamage, this.damageType,
-            AbstractGameAction.AttackEffect.FIRE, this.magicNumber, this.sprainedAmount, false));
+            AbstractGameAction.AttackEffect.FIRE, this.magicNumber, Settings.FAST_MODE));
 
     }
 
-    public static String getDescription(int sprainedAmount) {
-        return DESCRIPTION + sprainedAmount + EXTENDED_DESCRIPTION[0];
+    public static String getDescription() {
+        return DESCRIPTION;
     }
 
     @Override
@@ -81,9 +86,9 @@ public class Powerbomb extends CustomCard {
         if (!upgraded) {
             upgradeName();
             upgradeDamage(DAMAGE_UPGRADE);
-            upgradeMagicNumber(DEBUFF_AMOUNT_1_UPGRADE);
-            this.sprainedAmount += DEBUFF_AMOUNT_2_UPGRADE;
-            this.rawDescription = getDescription(this.sprainedAmount);
+            upgradeMagicNumber(DEBUFF_AMOUNT_UPGRADE);
+            this.rawDescription = getDescription();
+            initializeDescription();
         }
     }
 
@@ -92,18 +97,16 @@ public class Powerbomb extends CustomCard {
         private static final float DURATION_2 = 0.6f;
         private final int[] multiDamage;
         private final int numDebuffs;
-        private final int numSprained;
         private final boolean isFast;
 
         PowerbombAction(AbstractPlayer source, int[] multiDamage, DamageInfo.DamageType damageType,
-                        AttackEffect attackEffect, int numDebuffs, int numSprained, boolean isFast) {
+                        AttackEffect attackEffect, int numDebuffs, boolean isFast) {
             this.duration = DURATION_2 + DURATION_1;
             this.actionType = ActionType.DAMAGE;
             this.source = source;
             this.multiDamage = Arrays.copyOf(multiDamage, multiDamage.length);
             this.damageType = damageType;
             this.numDebuffs = numDebuffs;
-            this.numSprained = numSprained;
             this.attackEffect = attackEffect;
             this.isFast = isFast;
         }
@@ -116,15 +119,14 @@ public class Powerbomb extends CustomCard {
                         this.source, this.multiDamage, this.damageType, this.attackEffect, this.isFast));
 
                 CreatureUtils.getLivingMonsters().forEach(mo -> {
-
                     AbstractDungeon.actionManager.addToBottom(
                         new ApplyPowerAction(mo, this.source,
                             new VulnerablePower(mo, this.numDebuffs, false), this.numDebuffs));
-
-                    AbstractDungeon.actionManager.addToBottom(
-                        new ApplyPowerAction(mo, this.source,
-                            new SprainPower(mo, this.numSprained), this.numSprained));
                 });
+
+               PenaltyCardInfo.gainPenaltyCards(Arrays.asList(
+                   new RedPenaltyStatusCard(), new YellowPenaltyStatusCard(), new OrangePenaltyStatusCard()));
+
                 this.isDone = true;
             }
             this.tickDuration();
@@ -136,5 +138,18 @@ public class Powerbomb extends CustomCard {
         NAME = cardStrings.NAME;
         DESCRIPTION = cardStrings.DESCRIPTION;
         EXTENDED_DESCRIPTION = cardStrings.EXTENDED_DESCRIPTION;
+    }
+
+
+    private static List<AbstractTooltipKeyword> EXTRA_KEYWORDS = Arrays.asList(
+        CustomTooltipKeywords.getTooltipKeyword(CustomTooltipKeywords.PENALTY_CARD),
+        CustomTooltipKeywords.getTooltipKeyword(CustomTooltipKeywords.PENALTY_CARD_RED),
+        CustomTooltipKeywords.getTooltipKeyword(CustomTooltipKeywords.PENALTY_CARD_YELLOW),
+        CustomTooltipKeywords.getTooltipKeyword(CustomTooltipKeywords.PENALTY_CARD_ORANGE)
+    );
+
+    @Override
+    public List<TooltipInfo> getCustomTooltips() {
+        return TooltipKeywords.getTooltipInfos(EXTRA_KEYWORDS);
     }
 }

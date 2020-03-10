@@ -2,54 +2,52 @@ package thewrestler.cards.colorless.status.penalty;
 
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
-import com.megacrit.cardcrawl.actions.common.DamageAction;
-import com.megacrit.cardcrawl.actions.common.LoseHPAction;
+import com.megacrit.cardcrawl.actions.common.DamageAllEnemiesAction;
 import com.megacrit.cardcrawl.cards.CardQueueItem;
-import com.megacrit.cardcrawl.cards.DamageInfo;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
-import com.megacrit.cardcrawl.powers.StrengthPower;
+import com.megacrit.cardcrawl.powers.FrailPower;
 import thewrestler.powers.enqueuedpenaltycard.EnqueuedPenaltyCardPower;
 
-public class RedPenaltyStatusCard extends AbstractPenaltyStatusCard {
-  public static final String ID = "WrestlerMod:RedPenaltyStatusCard";
+public class OrangePenaltyStatusCard extends AbstractPenaltyStatusCard {
+  public static final String ID = "WrestlerMod:OrangePenaltyStatusCard";
   public static final String NAME;
   public static final String DESCRIPTION;
   public static final String[] EXTENDED_DESCRIPTION;
-  public static final String IMG_PATH = getPenaltyCardImgPath("red.png");
+  public static final String IMG_PATH = getPenaltyCardImgPath("orange.png");
 
   private static final CardStrings cardStrings;
 
-  private static final int STRENGTH_GAIN = 1;
-  private static final int DAMAGE = 2;
+  private static final int DAMAGE = 5;
+  private static final int FRAIL_AMOUNT = 1;
 
-  public RedPenaltyStatusCard() {
+  public OrangePenaltyStatusCard() {
     super(ID, NAME, IMG_PATH, getDescription());
-    this.magicNumber = this.baseMagicNumber = STRENGTH_GAIN;
+    this.damage = this.baseDamage = DAMAGE;
+    this.magicNumber = this.baseMagicNumber = FRAIL_AMOUNT;
+    this.isMultiDamage = true;
   }
 
   @Override
   public void use(AbstractPlayer p, AbstractMonster m) {
     if (this.dontTriggerOnUseCard) {
-      AbstractDungeon.actionManager.addToBottom(
-          new DamageAction(p, new DamageInfo(p, DAMAGE, DamageInfo.DamageType.THORNS),
-              AbstractGameAction.AttackEffect.FIRE));
+      AbstractDungeon.actionManager.addToBottom(new ApplyPowerAction(p, p, new FrailPower(p, this.magicNumber, false)));
     }
   }
 
   @Override
   public void triggerWhenDrawn(){
     AbstractPlayer p = AbstractDungeon.player;
-    AbstractDungeon.actionManager.addToBottom(
-        new ApplyPowerAction(p, p, new StrengthPower(p, STRENGTH_GAIN), STRENGTH_GAIN));
+    AbstractDungeon.actionManager.addToBottom(new DamageAllEnemiesAction(p, this.multiDamage, this.damageType,
+        AbstractGameAction.AttackEffect.FIRE, true));
   }
 
   @Override
   public AbstractPenaltyStatusCard makeCopy() {
-    return new RedPenaltyStatusCard();
+    return new OrangePenaltyStatusCard();
   }
 
   public void triggerOnEndOfTurnForPlayingCard() {
@@ -58,7 +56,7 @@ public class RedPenaltyStatusCard extends AbstractPenaltyStatusCard {
   }
 
   private static String getDescription() {
-    return DESCRIPTION + DAMAGE + EXTENDED_DESCRIPTION[0];
+    return DESCRIPTION;
   }
 
   @Override
@@ -71,8 +69,8 @@ public class RedPenaltyStatusCard extends AbstractPenaltyStatusCard {
     EXTENDED_DESCRIPTION = cardStrings.EXTENDED_DESCRIPTION;
   }
 
-  private static final String ENQUEUE_POWER_ID = "WrestlerMod:EnqueueRedCardPower";
-  private static final String ENQUEUE_POWER_IMG_NAME = getPenaltyCardImgPath("enqueuered.png");
+  private static final String ENQUEUE_POWER_ID = "WrestlerMod:EnqueueOrangeCardPower";
+  private static final String ENQUEUE_POWER_IMG_NAME = getPenaltyCardImgPath("enqueueorange.png");
   @Override
   protected EnqueuedPenaltyCardPower getEneueuedCardPower(int amount) {
     return new EnqueueCardPower(amount, ENQUEUE_POWER_ID, NAME, ENQUEUE_POWER_IMG_NAME);

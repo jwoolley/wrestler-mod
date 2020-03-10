@@ -39,10 +39,17 @@ public class PenaltyCardInfo implements StartOfCombatListener, EndOfCombatListen
   }
 
   public static void gainPenaltyCard() {
-    // TODO: gainPenaltyCardAction
+    gainPenaltyCard(null);
+  }
+
+  public static void gainPenaltyCards(List<AbstractPenaltyStatusCard> penaltyCards) {
+    penaltyCards.forEach(PenaltyCardInfo::gainPenaltyCard);
+  }
+
+  public static void gainPenaltyCard(AbstractPenaltyStatusCard penaltyCard) {
     if (!AbstractDungeon.player.hasPower(NoPenaltyPower.POWER_ID)) {
       WrestlerCharacter.getPenaltyCardInfo().reset();
-      AbstractDungeon.actionManager.addToBottom(new GainPenaltyCardsAction(1));
+      AbstractDungeon.actionManager.addToBottom(new GainPenaltyCardsAction(1, penaltyCard));
       List<AbstractPenaltyCardListener> listeners = new ArrayList<>();
       listeners.addAll(getPenaltyCardListenerCards());
       listeners.addAll(getPenaltyCardListenerPowers());
@@ -76,10 +83,17 @@ public class PenaltyCardInfo implements StartOfCombatListener, EndOfCombatListen
 
   static class GainPenaltyCardsAction extends AbstractGameAction {
     private final static float ACTION_DURATION =  Settings.ACTION_DUR_XFAST;
+    final private AbstractPenaltyStatusCard penaltyCard;
     private boolean gainedCard;
+
     public GainPenaltyCardsAction(int amount) {
+      this(amount, null);
+    }
+
+    public GainPenaltyCardsAction(int amount, AbstractPenaltyStatusCard penaltyCard) {
       this.duration = ACTION_DURATION;
       this.amount = amount;
+      this.penaltyCard = penaltyCard;
       this.actionType = AbstractGameAction.ActionType.SPECIAL;
       this.gainedCard = false;
     }
@@ -89,7 +103,10 @@ public class PenaltyCardInfo implements StartOfCombatListener, EndOfCombatListen
       if (this.duration < ACTION_DURATION) {
         if (!this.gainedCard) {
           CardCrawlGame.sound.play(this.amount == 1 ? "WHISTLE_BLOW_1" : "WHISTLE_BLOW_SHORT_1");
-          AbstractDungeon.actionManager.addToBottom(new MakeTempCardInHandAction(getNextPenaltyCard()));
+
+          final AbstractPenaltyStatusCard cardToGain = this.penaltyCard == null ? getNextPenaltyCard() : this.penaltyCard;
+
+          AbstractDungeon.actionManager.addToBottom(new MakeTempCardInHandAction(cardToGain));
           this.gainedCard = true;
         }
         if (this.amount <= 1) {

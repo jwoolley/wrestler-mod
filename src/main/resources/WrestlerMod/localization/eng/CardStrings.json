@@ -404,10 +404,7 @@
 
   "WrestlerMod:Powerbomb": {
     "NAME": "Power Bomb",
-    "DESCRIPTION": "Deal !D! Damage to ALL enemies. NL Apply !M! Vulnerable and ",
-    "EXTENDED_DESCRIPTION": [
-      " wrestlermod:Sprained to ALL enemies."
-    ]
+    "DESCRIPTION": "Deal !D! Damage and Apply !M! Vulnerable to ALL enemies. NL Gain [D] [Y] [O] ."
   },
 
   "WrestlerMod:Predictable": {
@@ -679,11 +676,16 @@
     ]
   },
 
+  "WrestlerMod:OrangePenaltyStatusCard": {
+    "NAME": "Orange Penalty Card",
+    "DESCRIPTION": "Unplayable. When this card is drawn, deal !D! damage to ALL enemies. NL At the end of your turn, gain !M! Frail."
+  },
+
   "WrestlerMod:RedPenaltyStatusCard": {
     "NAME": "Red Penalty Card",
-    "DESCRIPTION": "Unplayable. When this card is drawn, gain !M! Strength. NL At the end of your turn, lose ",
+    "DESCRIPTION": "Unplayable. When this card is drawn, gain !M! Strength. NL At the end of your turn, take ",
     "EXTENDED_DESCRIPTION": [
-      " HP."
+      " damage."
     ]
   },
 
