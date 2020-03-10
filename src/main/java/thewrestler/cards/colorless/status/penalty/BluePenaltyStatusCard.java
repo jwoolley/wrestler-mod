@@ -11,6 +11,7 @@ import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.powers.GainStrengthPower;
 import thewrestler.actions.power.GainPlatedArmorRandomMonsterAction;
+import thewrestler.powers.enqueuedpenaltycard.EnqueuedPenaltyCardPower;
 
 public class BluePenaltyStatusCard extends AbstractPenaltyStatusCard {
   public static final String ID = "WrestlerMod:BluePenaltyStatusCard";
@@ -63,5 +64,12 @@ public class BluePenaltyStatusCard extends AbstractPenaltyStatusCard {
     NAME = cardStrings.NAME;
     DESCRIPTION = cardStrings.DESCRIPTION;
     EXTENDED_DESCRIPTION = cardStrings.EXTENDED_DESCRIPTION;
+  }
+
+  private static final String ENQUEUE_POWER_ID = "WrestlerMod:EnqueueBlueCardPower";
+  private static final String ENQUEUE_POWER_IMG_NAME = getPenaltyCardImgPath("enqueueblue.png");
+  @Override
+  protected EnqueuedPenaltyCardPower getEneueuedCardPower(int amount) {
+    return new EnqueueCardPower(amount, ENQUEUE_POWER_ID, NAME, ENQUEUE_POWER_IMG_NAME);
   }
 }

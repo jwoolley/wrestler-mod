@@ -31,8 +31,8 @@ public class GrayMatterPower extends AbstractWrestlerPower implements CloneableP
   @Override
   public void updateDescription() {
     this.description = DESCRIPTIONS[0]
-        + (this.amount == 1 ? DESCRIPTIONS[1] : DESCRIPTIONS[2] + this.amount + DESCRIPTIONS[3])
-        + DESCRIPTIONS[4];
+      + (this.amount == 1 ? DESCRIPTIONS[1] : DESCRIPTIONS[2] + this.amount + DESCRIPTIONS[3])
+      + DESCRIPTIONS[4];
   }
 
   @Override

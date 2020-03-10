@@ -666,19 +666,27 @@
     ]
   },
 
-  "WrestlerMod:RedPenaltyStatusCard": {
-    "NAME": "Red Penalty Card",
-    "DESCRIPTION": "Unplayable. When this card is drawn, gain !M! Strength. NL At the end of your turn, lose ",
-    "EXTENDED_DESCRIPTION": [
-      " HP."
-    ]
-  },
-
   "WrestlerMod:BluePenaltyStatusCard": {
     "NAME": "Blue Penalty Card",
     "DESCRIPTION": "Unplayable. NL When this card is drawn, draw !M! cards. NL At the end of your turn, a random enemy gains ",
     "EXTENDED_DESCRIPTION": [
       " Plated Armor."
+    ]
+  },
+
+  "WrestlerMod:GreenPenaltyStatusCard": {
+    "NAME": "Green Penalty Card",
+    "DESCRIPTION": "Unplayable. When this card is drawn, gain !M! Dexterity. NL At the end of your turn, lose ",
+    "EXTENDED_DESCRIPTION": [
+      " Gold."
+    ]
+  },
+
+  "WrestlerMod:RedPenaltyStatusCard": {
+    "NAME": "Red Penalty Card",
+    "DESCRIPTION": "Unplayable. When this card is drawn, gain !M! Strength. NL At the end of your turn, lose ",
+    "EXTENDED_DESCRIPTION": [
+      " HP."
     ]
   },
 

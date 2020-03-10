@@ -13,8 +13,12 @@ import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.powers.VulnerablePower;
+import sun.nio.cs.ext.PCK;
 import thewrestler.WrestlerMod;
 import thewrestler.actions.power.ApplyGrappledAction;
+import thewrestler.cards.colorless.attack.Knee;
+import thewrestler.cards.colorless.status.penalty.AbstractPenaltyStatusCard;
+import thewrestler.cards.colorless.status.penalty.GreenPenaltyStatusCard;
 import thewrestler.cards.skill.Cloverleaf;
 import thewrestler.enums.AbstractCardEnum;
 import thewrestler.powers.CloverleafPower;
@@ -51,6 +55,8 @@ public class CloverleafAttack extends CustomCard {
     this.damage = this.baseDamage = DAMAGE_AMOUNT;
     this.misc = BLOCK_AMOUNT;
     this.exhaust = true;
+
+    this.cardsToPreview = new GreenPenaltyStatusCard();
   }
 
   @Override
@@ -59,8 +65,10 @@ public class CloverleafAttack extends CustomCard {
         new DamageAction(m, new DamageInfo(p, this.damage, DamageInfo.DamageType.NORMAL),
             AbstractGameAction.AttackEffect.SLASH_HEAVY));
 
-    AbstractDungeon.actionManager.addToBottom(
-        new ApplyPowerAction(m, p, new CloverleafPower(p, this.misc), this.misc));
+//    AbstractDungeon.actionManager.addToBottom(
+//        new ApplyPowerAction(m, p, new CloverleafPower(p, this.misc), this.misc));
+    AbstractPenaltyStatusCard penaltyCard = new GreenPenaltyStatusCard();
+    penaltyCard.applyEnqueuedCardPower(1);
   }
 
   @Override

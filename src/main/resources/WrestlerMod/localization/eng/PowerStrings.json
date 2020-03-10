@@ -30,6 +30,17 @@
     ]
   },
 
+  "WrestlerMod:EnqueuedPenaltyCardPower": {
+    "NAME": "Gain ",
+    "DESCRIPTIONS": [
+      "The next ",
+      "time",
+      " times",
+      " you would gain a random #yPenalty #yCard this combat, gain a ",
+      " instead."
+    ]
+  },
+
   "WrestlerMod:FanFavoritePower": {
     "NAME": "Fan Favorite",
     "DESCRIPTIONS": [

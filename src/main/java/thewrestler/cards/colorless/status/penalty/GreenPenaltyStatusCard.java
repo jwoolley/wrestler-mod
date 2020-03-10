@@ -1,60 +1,59 @@
 package thewrestler.cards.colorless.status.penalty;
 
-import com.megacrit.cardcrawl.actions.common.GainEnergyAction;
-import com.megacrit.cardcrawl.actions.common.MakeTempCardInDrawPileAction;
-import com.megacrit.cardcrawl.cards.AbstractCard;
+import com.megacrit.cardcrawl.actions.AbstractGameAction;
+import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
 import com.megacrit.cardcrawl.cards.CardQueueItem;
-import com.megacrit.cardcrawl.cards.status.Dazed;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
+import com.megacrit.cardcrawl.core.Settings;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
+import com.megacrit.cardcrawl.powers.DexterityPower;
+import com.megacrit.cardcrawl.vfx.GainPennyEffect;
 import thewrestler.powers.enqueuedpenaltycard.EnqueuedPenaltyCardPower;
 
-public class YellowPenaltyStatusCard extends AbstractPenaltyStatusCard {
-  public static final String ID = "WrestlerMod:YellowPenaltyStatusCard";
+public class GreenPenaltyStatusCard extends AbstractPenaltyStatusCard {
+  public static final String ID = "WrestlerMod:GreenPenaltyStatusCard";
   public static final String NAME;
   public static final String DESCRIPTION;
   public static final String[] EXTENDED_DESCRIPTION;
-  public static final String IMG_PATH = getPenaltyCardImgPath("yellow.png");
+  public static final String IMG_PATH = getPenaltyCardImgPath("green.png");
 
   private static final CardStrings cardStrings;
 
-  private static final int ENERGY_GAIN = 1;
-  private static final int DZ = 2;
+  private static final int DEX_GAIN = 1;
+  private static final int GOLD_LOSS = 2;
 
-  public YellowPenaltyStatusCard() {
+  public GreenPenaltyStatusCard() {
     super(ID, NAME, IMG_PATH, getDescription());
-    this.magicNumber = this.baseMagicNumber = ENERGY_GAIN;
-    this.cardsToPreview = getPreviewCard();
-  }
-
-  private static AbstractCard previewCard;
-  private static AbstractCard getPreviewCard() {
-    if (previewCard == null) {
-      previewCard = new Dazed();
-    }
-    return previewCard;
+    this.magicNumber = this.baseMagicNumber = DEX_GAIN;
   }
 
   @Override
   public void use(AbstractPlayer p, AbstractMonster m) {
     if (this.dontTriggerOnUseCard) {
-      AbstractDungeon.actionManager.addToBottom(
-          new MakeTempCardInDrawPileAction(getPreviewCard().makeCopy(), 1, true, true));
+      AbstractDungeon.actionManager.addToBottom(new AbstractGameAction() {
+        @Override
+        public void update() {
+          p.loseGold(GOLD_LOSS);
+          AbstractDungeon.effectList.add(new GainPennyEffect(p, p.hb.cX, p.hb.cY, p.hb.cX, Settings.HEIGHT,
+              false));
+        }
+      });
     }
   }
 
   @Override
   public void triggerWhenDrawn(){
     AbstractPlayer p = AbstractDungeon.player;
-    AbstractDungeon.actionManager.addToBottom(new GainEnergyAction(this.magicNumber));
+    AbstractDungeon.actionManager.addToBottom(
+        new ApplyPowerAction(p, p, new DexterityPower(p, DEX_GAIN), DEX_GAIN));
   }
 
   @Override
   public AbstractPenaltyStatusCard makeCopy() {
-    return new YellowPenaltyStatusCard();
+    return new RedPenaltyStatusCard();
   }
 
   public void triggerOnEndOfTurnForPlayingCard() {
@@ -63,7 +62,7 @@ public class YellowPenaltyStatusCard extends AbstractPenaltyStatusCard {
   }
 
   private static String getDescription() {
-    return DESCRIPTION;
+    return DESCRIPTION + GOLD_LOSS + EXTENDED_DESCRIPTION[0];
   }
 
   @Override
@@ -76,8 +75,9 @@ public class YellowPenaltyStatusCard extends AbstractPenaltyStatusCard {
     EXTENDED_DESCRIPTION = cardStrings.EXTENDED_DESCRIPTION;
   }
 
-  private static final String ENQUEUE_POWER_ID = "WrestlerMod:EnqueueYellowCardPower";
-  private static final String ENQUEUE_POWER_IMG_NAME = getPenaltyCardImgPath("enqueueyellow.png");
+
+  private static final String ENQUEUE_POWER_ID = "WrestlerMod:EnqueueGreenCardPower";
+  private static final String ENQUEUE_POWER_IMG_NAME = "enqueuegreen.png";
   @Override
   protected EnqueuedPenaltyCardPower getEneueuedCardPower(int amount) {
     return new EnqueueCardPower(amount, ENQUEUE_POWER_ID, NAME, ENQUEUE_POWER_IMG_NAME);

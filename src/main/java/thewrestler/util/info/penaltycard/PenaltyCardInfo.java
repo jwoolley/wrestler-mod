@@ -11,9 +11,11 @@ import thewrestler.WrestlerMod;
 import thewrestler.cards.EndOfCombatListener;
 import thewrestler.cards.StartOfCombatListener;
 import thewrestler.cards.WrestlerCardTags;
+import thewrestler.cards.colorless.status.penalty.AbstractPenaltyStatusCard;
 import thewrestler.cards.skill.AbstractPenaltyCardListener;
 import thewrestler.characters.WrestlerCharacter;
 import thewrestler.powers.NoPenaltyPower;
+import thewrestler.powers.enqueuedpenaltycard.EnqueuedPenaltyCardPower;
 import thewrestler.util.BasicUtils;
 import thewrestler.util.info.CombatInfo;
 
@@ -33,6 +35,7 @@ public class PenaltyCardInfo implements StartOfCombatListener, EndOfCombatListen
 
   public void reset() {
     hasWarningCard = false;
+    penaltyCardStrategy.resetForCombat();
   }
 
   public void gainPenaltyCard() {
@@ -63,6 +66,14 @@ public class PenaltyCardInfo implements StartOfCombatListener, EndOfCombatListen
   public void onCardExhausted(AbstractCard card) {
   }
 
+  private static AbstractPenaltyStatusCard getNextPenaltyCard() {
+    if  (EnqueuedPenaltyCardPower.playerHasAnyCardsEnqueued()) {
+      return EnqueuedPenaltyCardPower.getNextCard();
+    } else {
+      return getPenaltyCardStrategy().getNextCard();
+    }
+  }
+
   static class GainPenaltyCardsAction extends AbstractGameAction {
     private final static float ACTION_DURATION =  Settings.ACTION_DUR_XFAST;
     private boolean gainedCard;
@@ -72,13 +83,14 @@ public class PenaltyCardInfo implements StartOfCombatListener, EndOfCombatListen
       this.actionType = AbstractGameAction.ActionType.SPECIAL;
       this.gainedCard = false;
     }
+
     @Override
     public void update() {
       if (this.duration < ACTION_DURATION) {
         if (!this.gainedCard) {
           CardCrawlGame.sound.play(this.amount == 1 ? "WHISTLE_BLOW_1" : "WHISTLE_BLOW_SHORT_1");
           AbstractDungeon.actionManager.addToBottom(
-              new MakeTempCardInHandAction(getPenaltyCardStrategy().getNextCard()));
+              new MakeTempCardInHandAction(getNextPenaltyCard()));
           this.gainedCard = true;
         }
         if (this.amount <= 1) {
@@ -104,6 +116,7 @@ public class PenaltyCardInfo implements StartOfCombatListener, EndOfCombatListen
   public static void resetForNewCombat() {
     if (WrestlerCharacter.hasPenaltyCardInfo()) {
       getInfo().reset();
+      EnqueuedPenaltyCardPower.resetForCombat();
     }
   }
 
