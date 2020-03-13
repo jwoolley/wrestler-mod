@@ -28,11 +28,13 @@ public class GreenPenaltyStatusCard extends AbstractPenaltyStatusCard {
   public GreenPenaltyStatusCard() {
     super(ID, NAME, IMG_PATH, getDescription());
     this.magicNumber = this.baseMagicNumber = DEX_GAIN;
+    this.exhaust = true;
   }
 
   @Override
   public void use(AbstractPlayer p, AbstractMonster m) {
     if (this.dontTriggerOnUseCard) {
+      this.exhaust = false;
       AbstractDungeon.actionManager.addToBottom(new AbstractGameAction() {
         @Override
         public void update() {
@@ -47,6 +49,8 @@ public class GreenPenaltyStatusCard extends AbstractPenaltyStatusCard {
           this.isDone = true;
         }
       });
+    } else {
+      this.exhaust = true;
     }
   }
 

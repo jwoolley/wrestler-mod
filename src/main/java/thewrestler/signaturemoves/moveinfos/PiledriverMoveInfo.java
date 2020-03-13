@@ -52,7 +52,7 @@ public class PiledriverMoveInfo extends AbstractSignatureMoveInfo {
     if (AbstractDungeon.player.drawPile.size() <= MAX_CARDS) {
       numTurns++;
       if (numTurns == TURNS_REQUIRED) {
-        triggerGainCard();
+        //        triggerGainCard();
       }
     }
   }

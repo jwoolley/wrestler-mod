@@ -17,6 +17,15 @@
     ]
   },
 
+  "WrestlerMod:DentedTrophy": {
+    "NAME": "Dented Trophy",
+    "FLAVOR": "A reminder of past glory.",
+    "DESCRIPTIONS": [
+      "At the start of your turn, gain #b",
+      " #yBravado."
+    ]
+  },
+
   "WrestlerMod:FancyFootgear": {
     "NAME": "Fancy Footgear",
     "FLAVOR": "Float like a Bronze Orb, sting like a Spiker.",

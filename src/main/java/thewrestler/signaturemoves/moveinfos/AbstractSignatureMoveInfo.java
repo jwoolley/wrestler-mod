@@ -3,14 +3,12 @@ package thewrestler.signaturemoves.moveinfos;
 import basemod.abstracts.CustomSavable;
 import com.megacrit.cardcrawl.actions.common.MakeTempCardInDrawPileAction;
 import com.megacrit.cardcrawl.actions.common.MakeTempCardInHandAction;
-import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import thewrestler.WrestlerMod;
 import thewrestler.characters.WrestlerCharacter;
 import thewrestler.signaturemoves.cards.AbstractSignatureMoveCard;
 import thewrestler.signaturemoves.cards.SignatureMoveCardEnum;
 import thewrestler.signaturemoves.upgrades.SignatureMoveUpgradeList;
-import thewrestler.signaturemoves.upgrades.UpgradeType;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
@@ -18,7 +16,7 @@ import java.lang.reflect.InvocationTargetException;
 public abstract class AbstractSignatureMoveInfo implements AbstractSignatureMoveInfoInterface {
   public final boolean isFirstInstance;
 
-  public static final boolean SIGNATURE_MOVES_ENABLED = false;
+  public static final boolean SIGNATURE_MOVES_ENABLED = true;
 
   final AbstractSignatureMoveCard signatureMoveCard;
   final SignatureMoveUpgradeList upgradeList;
@@ -32,6 +30,10 @@ public abstract class AbstractSignatureMoveInfo implements AbstractSignatureMove
     if (upgradeList != SignatureMoveUpgradeList.NO_UPGRADES) {
       this.signatureMoveCard.applyUpgrades(upgradeList);
     }
+  }
+
+  public void triggerGainTrademarkMove() {
+    this.triggerGainCard();
   }
 
   public abstract boolean gainedCardThisCombat();
@@ -60,7 +62,7 @@ public abstract class AbstractSignatureMoveInfo implements AbstractSignatureMove
   protected abstract void _atEndOfCombat();
 
   @Override
-  public AbstractSignatureMoveCard getSignatureMoveCard() {
+  public AbstractSignatureMoveCard getSignatureMoveCardReference() {
     return this.signatureMoveCard;
   }
 
@@ -81,9 +83,9 @@ public abstract class AbstractSignatureMoveInfo implements AbstractSignatureMove
     card.setCostForTurn(0);
 
     if (toDeck) {
-      AbstractDungeon.actionManager.addToBottom(new MakeTempCardInDrawPileAction(this.signatureMoveCard, 1, !onTop, onTop));
+      AbstractDungeon.actionManager.addToTop(new MakeTempCardInDrawPileAction(this.signatureMoveCard, 1, !onTop, onTop));
     } else {
-      AbstractDungeon.actionManager.addToBottom(new MakeTempCardInHandAction(this.signatureMoveCard));
+      AbstractDungeon.actionManager.addToTop(new MakeTempCardInHandAction(this.signatureMoveCard));
     }
 
     this.flagCardAsGained();
@@ -122,9 +124,9 @@ public abstract class AbstractSignatureMoveInfo implements AbstractSignatureMove
     @Override
     public Integer onSave() {
       isStartOfRun = false;
-      AbstractSignatureMoveCard card = WrestlerCharacter.getSignatureMoveInfo().getSignatureMoveCard();
+      AbstractSignatureMoveCard card = WrestlerCharacter.getSignatureMoveInfo().getSignatureMoveCardReference();
       WrestlerMod.logger.info("MoveCardCustomSavable saving value: " + SignatureMoveCardEnum.getOrdinal(card) + " card: " + card.name);
-      return SignatureMoveCardEnum.getOrdinal(WrestlerCharacter.getSignatureMoveInfo().getSignatureMoveCard());
+      return SignatureMoveCardEnum.getOrdinal(WrestlerCharacter.getSignatureMoveInfo().getSignatureMoveCardReference());
     }
 
     @Override

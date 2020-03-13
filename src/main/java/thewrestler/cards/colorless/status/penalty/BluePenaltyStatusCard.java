@@ -28,12 +28,16 @@ public class BluePenaltyStatusCard extends AbstractPenaltyStatusCard {
   public BluePenaltyStatusCard() {
     super(ID, NAME, IMG_PATH, getDescription());
     this.magicNumber = this.baseMagicNumber = CARD_DRAW_AMOUNT;
+    this.exhaust = true;
   }
 
   @Override
   public void use(AbstractPlayer p, AbstractMonster m) {
     if (this.dontTriggerOnUseCard) {
+      this.exhaust = false;
       AbstractDungeon.actionManager.addToBottom(new GainPlatedArmorRandomMonsterAction(p, ENEMY_PLATED_ARMOR_GAIN));
+    } else {
+      this.exhaust = true;
     }
   }
 

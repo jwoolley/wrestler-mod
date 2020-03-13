@@ -12,6 +12,7 @@ import com.megacrit.cardcrawl.powers.VulnerablePower;
 import com.megacrit.cardcrawl.powers.WeakPower;
 import thewrestler.cards.WrestlerCardTags;
 import thewrestler.enums.AbstractCardEnum;
+import thewrestler.powers.SprainPower;
 
 import static thewrestler.WrestlerMod.getCardResourcePath;
 
@@ -31,13 +32,12 @@ public class EyePoke extends CustomCard {
   private static final CardRarity RARITY = CardRarity.BASIC;
   private static final CardTarget TARGET = CardTarget.ENEMY;
 
-  private static final int COST = 1;
+  private static final int COST = 0;
 
   public EyePoke() {
-    super(ID, NAME, getCardResourcePath(IMG_PATH), COST, getDescription(), TYPE, AbstractCardEnum.THE_WRESTLER_ORANGE,
+    super(ID, NAME, getCardResourcePath(IMG_PATH), COST, getDescription(true), TYPE, AbstractCardEnum.THE_WRESTLER_ORANGE,
         RARITY, TARGET);
     this.baseMagicNumber = this.magicNumber = DEBUFF_AMOUNT;
-    this.exhaust = true;
     tags.add(WrestlerCardTags.DIRTY);
   }
 
@@ -46,7 +46,7 @@ public class EyePoke extends CustomCard {
     AbstractDungeon.actionManager.addToBottom(
         new ApplyPowerAction(m, p, new WeakPower(m, this.magicNumber, true), this.magicNumber));
     AbstractDungeon.actionManager.addToBottom(
-        new ApplyPowerAction(m, p, new VulnerablePower(m, this.magicNumber, true), this.magicNumber));
+        new ApplyPowerAction(m, p, new SprainPower(m, this.magicNumber), this.magicNumber));
   }
 
   @Override
@@ -59,12 +59,13 @@ public class EyePoke extends CustomCard {
     if (!this.upgraded) {
       this.upgradeName();
       this.upgradeMagicNumber(DEBUFF_AMOUNT_UPGRADE);
-      this.rawDescription = getDescription();
+      this.exhaust = false;
+      this.rawDescription = getDescription(false);
       initializeDescription();
     }
   }
-  public static String getDescription() {
-    return DESCRIPTION;
+  public static String getDescription(boolean exhaust) {
+    return DESCRIPTION + (exhaust ? EXTENDED_DESCRIPTION[0] : EXTENDED_DESCRIPTION[1]);
   }
 
   static {

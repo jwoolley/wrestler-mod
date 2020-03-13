@@ -7,6 +7,14 @@
     "DESCRIPTION": "For every #b2 #yDirty cards you play in the same turn, gain a #yPenalty #yCard."
   },
 
+  "WrestlerMod:Bravado": {
+    "PROPER_NAME": "Bravado",
+    "NAMES": [
+      "bravado"
+    ],
+    "DESCRIPTION": "When you have #b5 #yBravado, gain a #yTrademark #yMove."
+  },
+
   "WrestlerMod:Dirty": {
     "PROPER_NAME": "Dirty",
     "NAMES": [
@@ -36,7 +44,7 @@
     "NAMES": [
       "Trademark Move", "trademark_move"
     ],
-    "DESCRIPTION": "A special attack card that can be obtained during combat when the conditions are met."
+    "DESCRIPTION": "One of a number of special attack cards that can be obtained during combat ."
   },
 
   "WrestlerMod:SignatureMoveCardIndicator": {
@@ -67,7 +75,7 @@
     "NAMES": [
       "Penalty Card", "penalty_card"
     ],
-    "DESCRIPTION": "Status card with one of several negative effects. Provides a beneficial effect when drawn."
+    "DESCRIPTION": "Playable status card with one of several negative effects. Provides a beneficial effect when drawn."
   },
 
   "WrestlerMod:PenaltyCardBlue": {

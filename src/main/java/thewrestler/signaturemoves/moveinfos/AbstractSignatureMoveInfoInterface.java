@@ -8,7 +8,8 @@ import thewrestler.signaturemoves.upgrades.SignatureMoveUpgradeList;
 import thewrestler.signaturemoves.upgrades.UpgradeType;
 
 public interface AbstractSignatureMoveInfoInterface extends StartOfCombatListener, EndOfCombatListener {
-  AbstractSignatureMoveCard getSignatureMoveCard();
+  void triggerGainTrademarkMove();
+  AbstractSignatureMoveCard getSignatureMoveCardReference();
   SignatureMoveUpgradeList getUpgradeList();
   void onCardPlayed(AbstractCard card);
   void onCardExhausted(AbstractCard card);

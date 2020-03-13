@@ -8,6 +8,14 @@
     ]
   },
 
+  "WrestlerMod:BravadoPower": {
+    "NAME": "Bravado",
+    "DESCRIPTIONS": [
+      "When you have #b",
+      " #yBravado, gain a #yTrademark #Move."
+    ]
+  },
+
   "WrestlerMod:CloverleafPower": {
     "NAME": "Cloverleaf",
     "DESCRIPTIONS": [

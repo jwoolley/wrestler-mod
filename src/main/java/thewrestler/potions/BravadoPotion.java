@@ -2,24 +2,15 @@ package thewrestler.potions;
 
 import com.badlogic.gdx.graphics.Color;
 import com.evacipated.cardcrawl.mod.stslib.Keyword;
-import com.megacrit.cardcrawl.actions.common.MakeTempCardInHandAction;
-import com.megacrit.cardcrawl.cards.purple.SignatureMove;
 import com.megacrit.cardcrawl.core.AbstractCreature;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
-import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.helpers.GameDictionary;
 import com.megacrit.cardcrawl.helpers.PowerTip;
-import com.megacrit.cardcrawl.localization.KeywordStrings;
 import com.megacrit.cardcrawl.localization.PotionStrings;
 import com.megacrit.cardcrawl.potions.AbstractPotion;
-import com.megacrit.cardcrawl.rooms.AbstractRoom;
 import thewrestler.WrestlerMod;
-import thewrestler.cards.attack.CobraClutch;
 import thewrestler.characters.WrestlerCharacter;
-import thewrestler.signaturemoves.moveinfos.AbstractSignatureMoveInfo;
 import thewrestler.util.BasicUtils;
-
-import java.util.regex.Pattern;
 
 public class BravadoPotion extends AbstractPotion {
   public static final String POTION_ID = WrestlerMod.makeID("BravadoPotion");
@@ -58,8 +49,8 @@ public class BravadoPotion extends AbstractPotion {
 
       final String cardname =
           WrestlerCharacter.hasSignatureMoveInfo()
-              && WrestlerCharacter.getSignatureMoveInfo().getSignatureMoveCard() != null
-              ? "#y" + WrestlerCharacter.getSignatureMoveInfo().getSignatureMoveCard().name.replaceAll("\\s", " #y")
+              && WrestlerCharacter.getSignatureMoveInfo().getSignatureMoveCardReference() != null
+              ? "#y" + WrestlerCharacter.getSignatureMoveInfo().getSignatureMoveCardReference().name.replaceAll("\\s", " #y")
               : "";
 
       final Keyword moveKeywordText = WrestlerMod.getKeyword(SIGNATURE_MOVE_KEYWORD_ID);

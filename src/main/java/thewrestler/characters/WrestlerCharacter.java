@@ -27,6 +27,7 @@ import thewrestler.cards.attack.WrestlerStrike;
 import thewrestler.cards.skill.EyePoke;
 import thewrestler.cards.skill.WrestlerDefend;
 import thewrestler.enums.AbstractCardEnum;
+import thewrestler.relics.DentedTrophy;
 import thewrestler.relics.ImprovedHeadgear;
 import thewrestler.signaturemoves.cards.AbstractSignatureMoveCard;
 import thewrestler.signaturemoves.cards.SignatureMoveCardEnum;
@@ -139,8 +140,10 @@ public class WrestlerCharacter extends CustomPlayer {
     // Starting Relics	
     public ArrayList<String> getStartingRelics() {
         ArrayList<String> retVal = new ArrayList<>();
-        retVal.add(ImprovedHeadgear.ID);
-        UnlockTracker.markRelicAsSeen(ImprovedHeadgear.ID);
+//        retVal.add(ImprovedHeadgear.ID);
+//        UnlockTracker.markRelicAsSeen(ImprovedHeadgear.ID);
+        retVal.add(DentedTrophy.ID);
+        UnlockTracker.markRelicAsSeen(DentedTrophy.ID);
         return retVal;
     }
 
@@ -163,7 +166,12 @@ public class WrestlerCharacter extends CustomPlayer {
         } else {
             return new AbstractSignatureMoveInfoInterface() {
                 @Override
-                public AbstractSignatureMoveCard getSignatureMoveCard() {
+                public void triggerGainTrademarkMove() {
+
+                }
+
+                @Override
+                public AbstractSignatureMoveCard getSignatureMoveCardReference() {
                     return null;
                 }
 

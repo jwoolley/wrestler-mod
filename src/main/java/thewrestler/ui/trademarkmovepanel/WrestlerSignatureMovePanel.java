@@ -242,7 +242,7 @@ public class WrestlerSignatureMovePanel implements WrestlerSignatureMovePanelInt
 
   @Override
   public AbstractSignatureMoveCard getPreviewCard() {
-    return getMoveInfo().getSignatureMoveCard();
+    return getMoveInfo().getSignatureMoveCardReference();
   }
 
   @Override
@@ -318,12 +318,12 @@ public class WrestlerSignatureMovePanel implements WrestlerSignatureMovePanelInt
 
   private static String getStaticConditionText() {
     return getMoveInfo().getStaticConditionText() + TEXT[1]
-        + getMoveInfo().getSignatureMoveCard().getIndefiniteCardName() + TEXT[2];
+        + getMoveInfo().getSignatureMoveCardReference().getIndefiniteCardName() + TEXT[2];
   }
 
   private static String getDynamicConditionText() {
     return getMoveInfo().getDynamicConditionText() + TEXT[1]
-        + getMoveInfo().getSignatureMoveCard().getIndefiniteCardName()+ TEXT[2];
+        + getMoveInfo().getSignatureMoveCardReference().getIndefiniteCardName()+ TEXT[2];
   }
 
   private static AbstractSignatureMoveInfoInterface getMoveInfo() {

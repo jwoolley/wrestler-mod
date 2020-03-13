@@ -52,8 +52,8 @@ public class Powerbomb extends CustomCard {
 
     private static final int COST = 3;
 
-    private static final int DAMAGE = 24;
-    private static final int DAMAGE_UPGRADE = 6;
+    private static final int DAMAGE = 20;
+    private static final int DAMAGE_UPGRADE = 4;
     private static final int DEBUFF_AMOUNT = 2;
     private static final int DEBUFF_AMOUNT_UPGRADE = 1;
 

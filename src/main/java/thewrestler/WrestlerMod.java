@@ -273,6 +273,7 @@ public class WrestlerMod implements
         reflectedMap.put("BONE_CRUNCH_1", new Sfx(getAudioResourcePath("TheWrestler_BoneCrunch1.ogg")));
         reflectedMap.put("BONE_CRUNCH_2", new Sfx(getAudioResourcePath("TheWrestler_BoneCrunch2.ogg")));
         reflectedMap.put("BOO_CROWD_1", new Sfx(getAudioResourcePath("TheWrestler_BooCrowd1.ogg")));
+        reflectedMap.put("BOXING_BELL_1", new Sfx(getAudioResourcePath("TheWrestler_BoxingBell1.ogg")));
         reflectedMap.put("BOOM_LOWFREQ_1", new Sfx(getAudioResourcePath("TheWrestler_ExplosionBombLowFrequency1.ogg")));
         reflectedMap.put("BOUNCE_METALLIC_1", new Sfx(getAudioResourcePath("TheWrestler_BounceMetallic1.ogg")));
         reflectedMap.put("BUBBLE_SHORT_1", new Sfx(getAudioResourcePath("TheWrestler_BubbleShort1.ogg")));
@@ -414,6 +415,7 @@ public class WrestlerMod implements
     public void receiveEditRelics() {
         logger.info("Adding relics");
         // This adds a character specific relic. Only when you play with the mentioned color, will you get this relic.
+        BaseMod.addRelicToCustomPool(new DentedTrophy(), AbstractCardEnum.THE_WRESTLER_ORANGE);
         BaseMod.addRelicToCustomPool(new Headgear(), AbstractCardEnum.THE_WRESTLER_ORANGE);
         BaseMod.addRelicToCustomPool(new ImprovedHeadgear(), AbstractCardEnum.THE_WRESTLER_ORANGE);
         BaseMod.addRelicToCustomPool(new RefereesWhistle(), AbstractCardEnum.THE_WRESTLER_ORANGE);
@@ -466,6 +468,7 @@ public class WrestlerMod implements
         BaseMod.addCard(new AlleyOop());
         BaseMod.addCard(new AtomicDrop());
         BaseMod.addCard(new Backfist());
+        BaseMod.addCard(new Backslide());
         BaseMod.addCard(new BearHug());
         BaseMod.addCard(new BlowOff());
         BaseMod.addCard(new Butterfly());
@@ -558,6 +561,7 @@ public class WrestlerMod implements
         UnlockTracker.unlockCard(AlleyOop.ID);
         UnlockTracker.unlockCard(AtomicDrop.ID);
         UnlockTracker.unlockCard(Backfist.ID);
+        UnlockTracker.unlockCard(Backslide.ID);
         UnlockTracker.unlockCard(BearHug.ID);
         UnlockTracker.unlockCard(BlowOff.ID);
         UnlockTracker.unlockCard(Brainbuster.ID);

@@ -42,7 +42,7 @@ public class DragonGateMoveInfo extends AbstractSignatureMoveInfo {
       this.numCardsExhausted++;
 
       if (this.numCardsExhausted == NUM_CARDS_REQUIRED) {
-        triggerGainCard();
+        // riggerGainCard();
       }
     }
   }

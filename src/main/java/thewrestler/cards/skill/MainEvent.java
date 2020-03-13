@@ -45,7 +45,7 @@ public class MainEvent extends CustomCard {
         WrestlerCharacter.getSignatureMoveInfo().manuallyTriggerCardGain(true, this.upgraded);
       } else {
         HashMap<CardGroup, AbstractCard> cardMap = CardUtil.getAllInBattleInstances(
-            WrestlerCharacter.getSignatureMoveInfo().getSignatureMoveCard().cardID);
+            WrestlerCharacter.getSignatureMoveInfo().getSignatureMoveCardReference().cardID);
 
         CardGroup signatureMoveCardGroup;
         AbstractCard signatureMoveCard;

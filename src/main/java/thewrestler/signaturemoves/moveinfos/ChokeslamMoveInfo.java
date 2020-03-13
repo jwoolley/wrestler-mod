@@ -73,7 +73,7 @@ public class ChokeslamMoveInfo extends AbstractSignatureMoveInfo {
   public void onEnemyGrappled() {
     grappledCount++;
     if (grappledCount == GRAPPLES_REQUIRED) {
-      triggerGainCard();
+//      triggerGainCard();
     }
   }
 

@@ -17,7 +17,7 @@ public abstract class AbstractPenaltyStatusCard extends CustomCard {
   private static final String IMG_PATH_PREFIX = "penaltycards/";
 
   public AbstractPenaltyStatusCard(String id, String name, String imgPath, String description) {
-    super(id, name, imgPath,-2, description, TYPE, CardColor.COLORLESS, RARITY, TARGET);
+    super(id, name, imgPath,1, description, TYPE, CardColor.COLORLESS, RARITY, TARGET);
     this.tags.add(WrestlerCardTags.PENALTY);
   }
 

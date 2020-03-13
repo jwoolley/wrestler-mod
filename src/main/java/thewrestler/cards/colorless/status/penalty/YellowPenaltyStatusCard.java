@@ -22,12 +22,12 @@ public class YellowPenaltyStatusCard extends AbstractPenaltyStatusCard {
   private static final CardStrings cardStrings;
 
   private static final int ENERGY_GAIN = 1;
-  private static final int DZ = 2;
 
   public YellowPenaltyStatusCard() {
     super(ID, NAME, IMG_PATH, getDescription());
     this.magicNumber = this.baseMagicNumber = ENERGY_GAIN;
     this.cardsToPreview = getPreviewCard();
+    this.exhaust = true;
   }
 
   private static AbstractCard previewCard;
@@ -41,8 +41,11 @@ public class YellowPenaltyStatusCard extends AbstractPenaltyStatusCard {
   @Override
   public void use(AbstractPlayer p, AbstractMonster m) {
     if (this.dontTriggerOnUseCard) {
+      this.exhaust = false;
       AbstractDungeon.actionManager.addToBottom(
           new MakeTempCardInDrawPileAction(getPreviewCard().makeCopy(), 1, true, true));
+    } else {
+      this.exhaust = true;
     }
   }
 

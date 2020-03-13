@@ -3,7 +3,6 @@ package thewrestler.cards.colorless.status.penalty;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
 import com.megacrit.cardcrawl.actions.common.DamageAction;
-import com.megacrit.cardcrawl.actions.common.LoseHPAction;
 import com.megacrit.cardcrawl.cards.CardQueueItem;
 import com.megacrit.cardcrawl.cards.DamageInfo;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
@@ -29,14 +28,18 @@ public class RedPenaltyStatusCard extends AbstractPenaltyStatusCard {
   public RedPenaltyStatusCard() {
     super(ID, NAME, IMG_PATH, getDescription());
     this.magicNumber = this.baseMagicNumber = STRENGTH_GAIN;
+    this.exhaust = true;
   }
 
   @Override
   public void use(AbstractPlayer p, AbstractMonster m) {
     if (this.dontTriggerOnUseCard) {
+      this.exhaust = false;
       AbstractDungeon.actionManager.addToBottom(
           new DamageAction(p, new DamageInfo(p, DAMAGE, DamageInfo.DamageType.THORNS),
               AbstractGameAction.AttackEffect.FIRE));
+    } else {
+      this.exhaust = true;
     }
   }
 

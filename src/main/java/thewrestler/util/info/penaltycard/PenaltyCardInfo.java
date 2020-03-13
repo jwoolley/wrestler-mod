@@ -46,18 +46,29 @@ public class PenaltyCardInfo implements StartOfCombatListener, EndOfCombatListen
     penaltyCards.forEach(PenaltyCardInfo::gainPenaltyCard);
   }
 
+  public static void gainPenaltyCards(int numCards) {
+    for (int i = 0; i < numCards; i++) {
+      gainPenaltyCard();
+    }
+  }
+
   public static void gainPenaltyCard(AbstractPenaltyStatusCard penaltyCard) {
     if (!AbstractDungeon.player.hasPower(NoPenaltyPower.POWER_ID)) {
-      WrestlerCharacter.getPenaltyCardInfo().reset();
-      AbstractDungeon.actionManager.addToBottom(new GainPenaltyCardsAction(1, penaltyCard));
-      List<AbstractPenaltyCardListener> listeners = new ArrayList<>();
-      listeners.addAll(getPenaltyCardListenerCards());
-      listeners.addAll(getPenaltyCardListenerPowers());
-      listeners.forEach(AbstractPenaltyCardListener::onGainedPenaltyCard);
-      CombatInfo.incrementPenaltyCardsGainedThisCombatCount();
+      AbstractDungeon.actionManager.addToTop(new GainPenaltyCardsAction(1, penaltyCard));
+      onPenaltyCardGained(penaltyCard);
     } else {
       AbstractDungeon.player.getPower(NoPenaltyPower.POWER_ID).flashWithoutSound();
     }
+  }
+
+
+  private static void onPenaltyCardGained(AbstractPenaltyStatusCard penaltyCard) {
+    WrestlerCharacter.getPenaltyCardInfo().reset();
+    List<AbstractPenaltyCardListener> listeners = new ArrayList<>();
+    listeners.addAll(getPenaltyCardListenerCards());
+    listeners.addAll(getPenaltyCardListenerPowers());
+    listeners.forEach(AbstractPenaltyCardListener::onGainedPenaltyCard);
+    CombatInfo.incrementPenaltyCardsGainedThisCombatCount();
   }
 
   private final static AbstractPenaltyCardStrategy DEFAULT_STRATEGY = new DefaultPenaltyCardStrategy();
@@ -81,20 +92,30 @@ public class PenaltyCardInfo implements StartOfCombatListener, EndOfCombatListen
     }
   }
 
-  static class GainPenaltyCardsAction extends AbstractGameAction {
+  public static class GainPenaltyCardsAction extends AbstractGameAction {
     private final static float ACTION_DURATION =  Settings.ACTION_DUR_XFAST;
     final private AbstractPenaltyStatusCard penaltyCard;
+    final private boolean addActionToTop;
     private boolean gainedCard;
 
     public GainPenaltyCardsAction(int amount) {
-      this(amount, null);
+      this(amount, null, false);
+    }
+
+    public GainPenaltyCardsAction(int amount, boolean addActionToTop) {
+      this(amount, null, addActionToTop);
     }
 
     public GainPenaltyCardsAction(int amount, AbstractPenaltyStatusCard penaltyCard) {
+      this(amount, penaltyCard, false);
+    }
+
+    public GainPenaltyCardsAction(int amount, AbstractPenaltyStatusCard penaltyCard, boolean addActionToTop) {
       this.duration = ACTION_DURATION;
       this.amount = amount;
       this.penaltyCard = penaltyCard;
       this.actionType = AbstractGameAction.ActionType.SPECIAL;
+      this.addActionToTop = addActionToTop;
       this.gainedCard = false;
     }
 
@@ -106,13 +127,21 @@ public class PenaltyCardInfo implements StartOfCombatListener, EndOfCombatListen
 
           final AbstractPenaltyStatusCard cardToGain = this.penaltyCard == null ? getNextPenaltyCard() : this.penaltyCard;
 
-          AbstractDungeon.actionManager.addToBottom(new MakeTempCardInHandAction(cardToGain));
+          if (addActionToTop) {
+            AbstractDungeon.actionManager.addToTop(new MakeTempCardInHandAction(cardToGain));
+          } else {
+            AbstractDungeon.actionManager.addToBottom(new MakeTempCardInHandAction(cardToGain));
+          }
           this.gainedCard = true;
         }
         if (this.amount <= 1) {
           this.isDone = true;
         } else if (this.duration < 0.1f) {
-          AbstractDungeon.actionManager.addToBottom(new GainPenaltyCardsAction(--this.amount));
+          if (addActionToTop) {
+            AbstractDungeon.actionManager.addToTop(new GainPenaltyCardsAction(--this.amount));
+          } else {
+            AbstractDungeon.actionManager.addToBottom(new GainPenaltyCardsAction(--this.amount));
+          }
           this.isDone = true;
         }
         return;

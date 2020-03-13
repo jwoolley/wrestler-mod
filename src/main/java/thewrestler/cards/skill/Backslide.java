@@ -2,19 +2,14 @@ package thewrestler.cards.skill;
 
 import basemod.abstracts.CustomCard;
 import basemod.helpers.TooltipInfo;
-import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
-import com.megacrit.cardcrawl.actions.utility.SFXAction;
+import com.megacrit.cardcrawl.actions.common.DrawCardAction;
+import com.megacrit.cardcrawl.actions.common.PutOnDeckAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
-import com.megacrit.cardcrawl.powers.IntangiblePlayerPower;
-import com.megacrit.cardcrawl.powers.StrengthPower;
-import org.apache.commons.lang3.StringUtils;
-import thewrestler.cards.WrestlerCardTags;
-import thewrestler.characters.WrestlerCharacter;
 import thewrestler.enums.AbstractCardEnum;
 import thewrestler.keywords.AbstractTooltipKeyword;
 import thewrestler.keywords.CustomTooltipKeywords;
@@ -26,64 +21,62 @@ import java.util.List;
 
 import static thewrestler.WrestlerMod.getCardResourcePath;
 
-public class HeelTurn extends CustomCard {
-  public static final String ID = "WrestlerMod:HeelTurn";
+public class Backslide extends CustomCard {
+  public static final String ID = "WrestlerMod:Backslide";
   public static final String NAME;
   public static final String DESCRIPTION;
   public static final String[] EXTENDED_DESCRIPTION;
-  public static final String IMG_PATH = "heelturn.png";
+  public static final String IMG_PATH = "backslide.png";
 
   private static final CardStrings cardStrings;
 
   private static final CardType TYPE = CardType.SKILL;
-  private static final CardRarity RARITY = CardRarity.RARE;
-  private static final CardTarget TARGET = CardTarget.SELF;
+  private static final CardRarity RARITY = CardRarity.COMMON;
+  private static final CardTarget TARGET = CardTarget.NONE;
 
-  private static final int COST = 3;
+  private static final int COST = 0;
 
-  private static final int INTANGIBLE_AMOUNT = 1;
-  private static final int STRENGTH_AMOUNT = 2;
-  private static final int STRENGTH_AMOUNT_UPGRADE = 1;
-  private static final int PENALTY_CARD_GAIN = 2;
+  private static final int DRAW_AMOUNT = 2;
+  private static final int DRAW_AMOUNT_UPGRADE = 1;
+  private static final int RETURN_AMOUNT = 1;
+  private static final int RETURN_AMOUNT_UPGRADE = 1;
+  private static final int PENALTY_CARD_GAIN = 1;
 
-  public HeelTurn() {
-    super(ID, NAME, getCardResourcePath(IMG_PATH), COST, getDescription(PENALTY_CARD_GAIN), TYPE,
+  public Backslide() {
+    super(ID, NAME, getCardResourcePath(IMG_PATH), COST, getDescription(RETURN_AMOUNT), TYPE,
         AbstractCardEnum.THE_WRESTLER_ORANGE, RARITY, TARGET);
-    this.baseMagicNumber = this.magicNumber = STRENGTH_AMOUNT;
+    this.baseMagicNumber = this.magicNumber = DRAW_AMOUNT;
+    this.misc = RETURN_AMOUNT;
     this.exhaust = true;
   }
 
   @Override
   public void use(AbstractPlayer p, AbstractMonster m) {
-    AbstractDungeon.actionManager.addToBottom(new SFXAction("BOO_CROWD_1"));
 
-    AbstractDungeon.actionManager.addToBottom(
-        new ApplyPowerAction(p, p, new IntangiblePlayerPower(p, INTANGIBLE_AMOUNT), INTANGIBLE_AMOUNT));
-
-    AbstractDungeon.actionManager.addToBottom(
-        new ApplyPowerAction(p, p, new StrengthPower(p, this.magicNumber), this.magicNumber));
-
-    PenaltyCardInfo.gainPenaltyCards(2);
+    AbstractDungeon.actionManager.addToBottom(new DrawCardAction(this.magicNumber,
+        new PenaltyCardInfo.GainPenaltyCardsAction(PENALTY_CARD_GAIN, true)));
+    AbstractDungeon.actionManager.addToBottom(new PutOnDeckAction(p, p, this.misc, false));
   }
 
   @Override
   public AbstractCard makeCopy() {
-    return new HeelTurn();
+    return new Backslide();
   }
 
   @Override
   public void upgrade() {
     if (!this.upgraded) {
       this.upgradeName();
-      this.upgradeMagicNumber(STRENGTH_AMOUNT_UPGRADE);
-      this.rawDescription = getDescription(PENALTY_CARD_GAIN);
+      this.upgradeMagicNumber(DRAW_AMOUNT_UPGRADE);
+      this.misc += RETURN_AMOUNT_UPGRADE;
+      this.rawDescription = getDescription(this.misc);
       initializeDescription();
     }
   }
 
-  public static String getDescription(int penaltyCardAmount) {
-    return DESCRIPTION + INTANGIBLE_AMOUNT + EXTENDED_DESCRIPTION[0]
-        +  StringUtils.repeat(EXTENDED_DESCRIPTION[1], penaltyCardAmount)
+  public static String getDescription(int returnAmount) {
+    return DESCRIPTION
+        + (returnAmount == 1 ? EXTENDED_DESCRIPTION[0] : returnAmount + EXTENDED_DESCRIPTION[1])
         + EXTENDED_DESCRIPTION[2];
   }
 
