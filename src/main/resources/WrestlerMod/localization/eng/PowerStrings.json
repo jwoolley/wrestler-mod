@@ -11,8 +11,8 @@
   "WrestlerMod:BravadoPower": {
     "NAME": "Bravado",
     "DESCRIPTIONS": [
-      "When you have #b",
-      " #yBravado, gain a #yTrademark #Move."
+      "When you obtain #b",
+      " #yBravado, gain one of your #yTrademark #yMoves."
     ]
   },
 

@@ -12,7 +12,7 @@
     "NAMES": [
       "bravado"
     ],
-    "DESCRIPTION": "When you have #b5 #yBravado, gain a #yTrademark #yMove."
+    "DESCRIPTION": "When you obtain #b5 #yBravado, gain one of your #yTrademark #yMoves."
   },
 
   "WrestlerMod:Dirty": {
@@ -44,7 +44,7 @@
     "NAMES": [
       "Trademark Move", "trademark_move"
     ],
-    "DESCRIPTION": "One of a number of special attack cards that can be obtained during combat ."
+    "DESCRIPTION": "One of several special attacks that can only be obtained during combat."
   },
 
   "WrestlerMod:SignatureMoveCardIndicator": {

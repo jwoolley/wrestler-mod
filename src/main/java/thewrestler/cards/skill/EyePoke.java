@@ -35,7 +35,7 @@ public class EyePoke extends CustomCard {
   private static final int COST = 0;
 
   public EyePoke() {
-    super(ID, NAME, getCardResourcePath(IMG_PATH), COST, getDescription(true), TYPE, AbstractCardEnum.THE_WRESTLER_ORANGE,
+    super(ID, NAME, getCardResourcePath(IMG_PATH), COST, getDescription(), TYPE, AbstractCardEnum.THE_WRESTLER_ORANGE,
         RARITY, TARGET);
     this.baseMagicNumber = this.magicNumber = DEBUFF_AMOUNT;
     tags.add(WrestlerCardTags.DIRTY);
@@ -60,12 +60,12 @@ public class EyePoke extends CustomCard {
       this.upgradeName();
       this.upgradeMagicNumber(DEBUFF_AMOUNT_UPGRADE);
       this.exhaust = false;
-      this.rawDescription = getDescription(false);
+      this.rawDescription = getDescription();
       initializeDescription();
     }
   }
-  public static String getDescription(boolean exhaust) {
-    return DESCRIPTION + (exhaust ? EXTENDED_DESCRIPTION[0] : EXTENDED_DESCRIPTION[1]);
+  public static String getDescription() {
+    return DESCRIPTION;
   }
 
   static {

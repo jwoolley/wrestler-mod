@@ -155,15 +155,15 @@
     ]
   },
 
-    "WrestlerMod:Facewash": {
-      "NAME": "Facewash",
-      "DESCRIPTION": "Draw ",
-      "EXTENDED_DESCRIPTION": [
-        "a card",
-        "!M! cards",
-        ". NL Gain !B! Block for each Attack drawn."
-      ]
-    },
+  "WrestlerMod:Facewash": {
+    "NAME": "Facewash",
+    "DESCRIPTION": "Draw ",
+    "EXTENDED_DESCRIPTION": [
+      "a card",
+      "!M! cards",
+      ". NL Gain !B! Block for each Attack drawn."
+    ]
+  },
 
   "WrestlerMod:ElbowDrop": {
     "NAME": "Elbow Drop",
@@ -577,7 +577,7 @@
 
   "WrestlerMod:TakeToTheMat": {
     "NAME": "Take to the Mat",
-    "DESCRIPTION": "Deal !D! Damage. NL If the enemy has !M! % health or less, they become wrestlermod:Grappled."
+    "DESCRIPTION": "Deal !D! Damage. NL If you have !M! or more wrestlermod:Bravado, apply wrestlermod:Grappled."
   },
 
   "WrestlerMod:Technician": {
