@@ -631,20 +631,17 @@ public class WrestlerMod implements
         UnlockTracker.unlockCard(TripleThreat.ID);
         UnlockTracker.unlockCard(WindUpKick.ID);
 
+        // CURSES
         BaseMod.addCard(new Predictable());
         UnlockTracker.unlockCard(Predictable.ID);
 
         // FOR PLAYTESTING
         BaseMod.addCard(new Chokeslam());
         UnlockTracker.unlockCard(Chokeslam.ID);
-
         BaseMod.addCard(new DragonGate());
         UnlockTracker.unlockCard(DragonGate.ID);
-
         BaseMod.addCard(new Piledriver());
         UnlockTracker.unlockCard(Piledriver.ID);
-
-//        UnlockTracker.unlockCard(SafetyTag.ID);
 
         logger.info("Done adding cards!");
 

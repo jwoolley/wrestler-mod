@@ -615,12 +615,12 @@
 
   "WrestlerMod:WindUpKick": {
     "NAME": "Wind-Up Kick",
-    "DESCRIPTION": "Can only be played if you've played !M! Skills this turn. NL Deal !D! damage to ALL enemies.",
+    "DESCRIPTION": "Can only be played if !M! non-Attack cards were played this turn. NL Deal !D! damage to ALL enemies.",
     "EXTENDED_DESCRIPTION": [
       "I have to play #b",
-      " more ",
-      "Skill first.",
-      "Skills first."
+      " more non-Attack",
+      " card first.",
+      " cards first."
     ]
   },
 

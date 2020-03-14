@@ -28,8 +28,8 @@ public class FairPlay extends CustomCard {
   private static final CardTarget TARGET = CardTarget.NONE;
 
   private static final int COST = -2;
-  public static final int BLOCK_AMOUNT = 6;
-  public static final int BLOCK_AMOUNT_UPGRADE = 4;
+  public static final int BLOCK_AMOUNT = 5;
+  public static final int BLOCK_AMOUNT_UPGRADE = 3;
 
   public FairPlay() {
     super(ID, NAME, getCardResourcePath(IMG_PATH), COST, getDescription(), TYPE,
