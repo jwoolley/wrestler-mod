@@ -5,28 +5,34 @@ import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 
 public class CombatInfo {
   public static final CardsPlayedCounts RESET_CARDS_PLAYED_COUNTS = new CardsPlayedCounts();
-  public static final CardsPlayedCounts UNINITIALIZED_CARDS_PLAYED_COUNTS = new CardsPlayedCounts(-1, -1, -1, -1, -1, -1, -1);
+  public static final CardsPlayedCounts UNINITIALIZED_CARDS_PLAYED_COUNTS = new CardsPlayedCounts(-1, -1, -1, -1, -1, -1, -1, -1, -1, -1);
 
   public static class CardsPlayedCounts {
     public CardsPlayedCounts() {
-      this(0, 0, 0, 0, 0, 0, 0);
+      this(0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
     }
 
-    private CardsPlayedCounts(int attacks, int skills, int powers, int debuffs, int dirtyCards, int dirtyCardThisCombat,
+    private CardsPlayedCounts(int attacks, int skills, int powers, int statuses, int curses, int debuffs, int dirtyCards, int nonAttacks, int dirtyCardThisCombat,
                               int penaltyCardsGainedThisCombat) {
       this.attacks = attacks;
       this.skills = skills;
       this.powers = powers;
+      this.statuses = statuses;
+      this.curses = curses;
       this.debuffs = debuffs;
       this.dirtyCards = dirtyCards;
+      this.nonAttacks = nonAttacks;
       this.dirtyCardsThisCombat = dirtyCardThisCombat;
       this.penaltyCardsGainedThisCombat = penaltyCardsGainedThisCombat;
     }
     public final int attacks;
     public final int skills;
     public final int powers;
+    public final int statuses;
+    public final int curses;
     public final int debuffs;
     public final int dirtyCards;
+    public final int nonAttacks;
     public int dirtyCardsThisCombat;
     public int penaltyCardsGainedThisCombat;
   }
@@ -83,6 +89,21 @@ public class CombatInfo {
         .filter(c -> c.type == AbstractCard.CardType.POWER).count();
   }
 
+  public static int getNumStatusesPlayed() {
+    return (int) AbstractDungeon.actionManager.cardsPlayedThisTurn.stream()
+        .filter(c -> c.type == AbstractCard.CardType.STATUS).count();
+  }
+
+  public static int getNumCursesPlayed() {
+    return (int) AbstractDungeon.actionManager.cardsPlayedThisTurn.stream()
+        .filter(c -> c.type == AbstractCard.CardType.CURSE).count();
+  }
+
+  public static int getNumNonAttacksPlayed() {
+    return (int) AbstractDungeon.actionManager.cardsPlayedThisTurn.size()
+        - getNumAttacksPlayed();
+  }
+
   public static int getNumDebuffsAppliedThisTurn() {
     return debuffsAppliedThisTurn;
   }
@@ -101,8 +122,11 @@ public class CombatInfo {
 
 
   public static CardsPlayedCounts getCardsPlayedCounts() {
-    return new CardsPlayedCounts(getNumAttacksPlayed(), getNumSkillsPlayed(), getNumPowersPlayed(),
-        getNumDebuffsAppliedThisTurn(), getNumDirtyCardsPlayed(), getNumDirtyCardsPlayedThisCombat(),
-        getNumPenaltyCardsGainedThisCombat());
+    return new CardsPlayedCounts(
+        getNumAttacksPlayed(), getNumSkillsPlayed(), getNumPowersPlayed(),
+        getNumStatusesPlayed(), getNumCursesPlayed(),
+        getNumDebuffsAppliedThisTurn(), getNumDirtyCardsPlayed(),
+        getNumNonAttacksPlayed(),
+        getNumDirtyCardsPlayedThisCombat(), getNumPenaltyCardsGainedThisCombat());
   }
 }

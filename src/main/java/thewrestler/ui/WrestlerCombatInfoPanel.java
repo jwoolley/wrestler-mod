@@ -142,36 +142,10 @@ public class WrestlerCombatInfoPanel implements CustomInfoPanel, StartOfCombatLi
     FontHelper.renderFontLeft(
         sb,
         font,
-        TEXT[2] + (this.cardCounts.skills >= 0 ? this.cardCounts.skills : ""),
+        TEXT[7] + (this.cardCounts.nonAttacks >= 0 ? this.cardCounts.nonAttacks : ""),
         this.xOffset + this.xTextOffset,
         this.yOffset + this.yTextOffset - (yLineOffset * 2.075f),
         color);
-
-    FontHelper.renderFontLeft(
-        sb,
-        font,
-        TEXT[3] + (this.cardCounts.powers >= 0 ? this.cardCounts.powers : ""),
-        this.xOffset + this.xTextOffset,
-        this.yOffset + this.yTextOffset - (yLineOffset * 3.075f),
-        color);
-
-    FontHelper.renderFontLeft(
-        sb,
-        font,
-        TEXT[4] + (this.cardCounts.dirtyCards >= 0 ? this.cardCounts.dirtyCards : ""),
-        this.xOffset + this.xTextOffset,
-        this.yOffset + this.yTextOffset - (yLineOffset * 4.075f),
-        color);
-
-//    FontHelper.renderFontLeft(
-//        sb,
-//        font,
-//        TEXT[4] + (this.cardCounts.dirtyCards >= 0 ? this.cardCounts.dirtyCards : "")
-//            + TEXT[5] + (this.cardCounts.dirtyCardsThisCombat >= 0 ? this.cardCounts.dirtyCardsThisCombat : "")
-//            + TEXT[6],
-//        this.xOffset + this.xTextOffset,
-//        this.yOffset + this.yTextOffset - (yLineOffset * 4.075f),
-//        color);
   }
 
   public boolean shouldRenderPanel() {
