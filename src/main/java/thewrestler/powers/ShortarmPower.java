@@ -43,7 +43,7 @@ public class ShortarmPower extends AbstractWrestlerPower implements CloneablePow
       if (this.attackWasDirty) {
         this.flash();
         AbstractDungeon.actionManager.addToBottom(
-            new ApplyPowerAction(target, this.owner, new SprainPower(target, this.amount), this.amount));
+            new ApplyPowerAction(target, this.owner, new InjuredPower(target, this.amount), this.amount));
       }
 
       //      testing version that lasts until EOT

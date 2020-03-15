@@ -13,8 +13,8 @@ import com.megacrit.cardcrawl.powers.AbstractPower;
 import thewrestler.WrestlerMod;
 import thewrestler.util.info.CombatInfo;
 
-public class SprainPower extends AbstractWrestlerPower implements CloneablePowerInterface {
-  public static final String POWER_ID = WrestlerMod.makeID("SprainPower");
+public class InjuredPower extends AbstractWrestlerPower implements CloneablePowerInterface {
+  public static final String POWER_ID = WrestlerMod.makeID("InjuredPower");
   public static final String IMG = "sprain.png";
   private static final PowerStrings powerStrings;
   public static final String NAME;
@@ -22,11 +22,11 @@ public class SprainPower extends AbstractWrestlerPower implements CloneablePower
 
   public static final PowerType POWER_TYPE = PowerType.DEBUFF;
 
-  private boolean keepSprained;
+  private boolean keepInjured;
 
-  public SprainPower(AbstractCreature owner, int amount) {
+  public InjuredPower(AbstractCreature owner, int amount) {
     super(POWER_ID, NAME, IMG, owner, owner, amount, POWER_TYPE);
-    keepSprained = false;
+    keepInjured = false;
   }
 
   @Override
@@ -38,17 +38,17 @@ public class SprainPower extends AbstractWrestlerPower implements CloneablePower
         new DamageAction(this.owner, new DamageInfo(this.source, this.amount, DamageInfo.DamageType.THORNS),
             AbstractGameAction.AttackEffect.SMASH, false));
 
-    WrestlerMod.logger.info("SprainPower::_atStartOfTurn called. setting keepSprained to false: " + this.keepSprained);
+    WrestlerMod.logger.info("SprainPower::_atStartOfTurn called. setting keepInjured to false: " + this.keepInjured);
 
-    this.keepSprained = false;
+    this.keepInjured = false;
   }
 
   @Override
   public void atEndOfTurn(boolean isPlayer) {
 
     WrestlerMod.logger.info("SprainPower::_atEndOfTurn called. isPlayer: " + isPlayer
-        + "; keepSprained: " + this.keepSprained + "; numAttacksPlayed: " + CombatInfo.getNumAttacksPlayed());
-    if (!isPlayer && !this.keepSprained || isPlayer && CombatInfo.getNumAttacksPlayed() == 0) {
+        + "; keepInjured: " + this.keepInjured + "; numAttacksPlayed: " + CombatInfo.getNumAttacksPlayed());
+    if (!isPlayer && !this.keepInjured || isPlayer && CombatInfo.getNumAttacksPlayed() == 0) {
       WrestlerMod.logger.info("SprainPower::_atEndOfTurn removing power");
       AbstractDungeon.actionManager.addToBottom(new RemoveSpecificPowerAction(this.owner, this.source, POWER_ID));
     } else {
@@ -59,8 +59,8 @@ public class SprainPower extends AbstractWrestlerPower implements CloneablePower
   @Override
   public void onAttack(DamageInfo info, int amount, AbstractCreature target) {
     if (info.owner == this.owner && this.owner != target && info.type == DamageInfo.DamageType.NORMAL) {
-      WrestlerMod.logger.info("SprainPower::onAttack called. setting keepSprained to true");
-      this.keepSprained = true;
+      WrestlerMod.logger.info("SprainPower::onAttack called. setting keepInjured to true");
+      this.keepInjured = true;
     }
   }
 
@@ -73,7 +73,7 @@ public class SprainPower extends AbstractWrestlerPower implements CloneablePower
 
   @Override
   public AbstractPower makeCopy() {
-    return new SprainPower(owner, amount);
+    return new InjuredPower(owner, amount);
   }
 
   static {

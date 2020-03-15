@@ -8,11 +8,10 @@ import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
-import com.megacrit.cardcrawl.powers.VulnerablePower;
 import com.megacrit.cardcrawl.powers.WeakPower;
 import thewrestler.cards.WrestlerCardTags;
 import thewrestler.enums.AbstractCardEnum;
-import thewrestler.powers.SprainPower;
+import thewrestler.powers.InjuredPower;
 
 import static thewrestler.WrestlerMod.getCardResourcePath;
 
@@ -23,8 +22,10 @@ public class EyePoke extends CustomCard {
   public static final String[] EXTENDED_DESCRIPTION;
   public static final String IMG_PATH = "eyepoke.png";
 
-  private static final int DEBUFF_AMOUNT = 1;
-  private static final int DEBUFF_AMOUNT_UPGRADE  = 1;
+  private static final int WEAK_AMOUNT = 1;
+  private static final int WEAK_AMOUNT_UPGRADE  = 1;
+  private static final int INJURED_AMOUNT = 3;
+  private static final int INJURED_AMOUNT_UPGRADE = 1;
 
   private static final CardStrings cardStrings;
 
@@ -37,16 +38,20 @@ public class EyePoke extends CustomCard {
   public EyePoke() {
     super(ID, NAME, getCardResourcePath(IMG_PATH), COST, getDescription(), TYPE, AbstractCardEnum.THE_WRESTLER_ORANGE,
         RARITY, TARGET);
-    this.baseMagicNumber = this.magicNumber = DEBUFF_AMOUNT;
+
+    // Using baseBlock (and overriding applyPowersToBlock) as a hack so value is highlighted in upgrade UI (a la Wish)
+    this.misc = this.baseBlock = INJURED_AMOUNT;
+    this.baseMagicNumber = this.magicNumber = WEAK_AMOUNT;
+
     tags.add(WrestlerCardTags.DIRTY);
   }
 
   @Override
   public void use(AbstractPlayer p, AbstractMonster m) {
     AbstractDungeon.actionManager.addToBottom(
-        new ApplyPowerAction(m, p, new WeakPower(m, this.magicNumber, true), this.magicNumber));
+        new ApplyPowerAction(m, p, new WeakPower(m, this.magicNumber, false), this.magicNumber));
     AbstractDungeon.actionManager.addToBottom(
-        new ApplyPowerAction(m, p, new SprainPower(m, this.magicNumber), this.magicNumber));
+        new ApplyPowerAction(m, p, new InjuredPower(m, this.misc), this.misc));
   }
 
   @Override
@@ -55,11 +60,16 @@ public class EyePoke extends CustomCard {
   }
 
   @Override
+  public void applyPowersToBlock() {
+    this.baseBlock = this.block = this.misc;
+  }
+
+  @Override
   public void upgrade() {
     if (!this.upgraded) {
       this.upgradeName();
-      this.upgradeMagicNumber(DEBUFF_AMOUNT_UPGRADE);
-      this.exhaust = false;
+      this.upgradeMagicNumber(WEAK_AMOUNT_UPGRADE);
+      this.misc = this.misc + INJURED_AMOUNT_UPGRADE;
       this.rawDescription = getDescription();
       initializeDescription();
     }

@@ -132,7 +132,7 @@
 
   "WrestlerMod:DivingStomp": {
     "NAME": "Diving Stomp",
-    "DESCRIPTION": "Deal !D! Damage. NL Apply !M! wrestlermod:Sprained."
+    "DESCRIPTION": "Deal !D! Damage. NL Apply !M! wrestlermod:Injured."
   },
 
   "WrestlerMod:Elbow": {
@@ -150,10 +150,7 @@
 
   "WrestlerMod:EyePoke": {
     "NAME": "Eye Poke",
-    "DESCRIPTION": "wrestlermod:Dirty. NL Apply !M! Weak and !M! wrestlermod:Sprained.",
-    "EXTENDED_DESCRIPTION": [
-      " NL Exhaust."
-    ]
+    "DESCRIPTION": "wrestlermod:Dirty. NL Apply !M! Weak and !B! wrestlermod:Injured. NL Exhaust."
   },
 
   "WrestlerMod:Facewash": {
@@ -218,7 +215,7 @@
 
   "WrestlerMod:Guillotine": {
     "NAME": "Guillotine",
-    "DESCRIPTION": "wrestlermod:Dirty. NL Deal !D! damage to ALL enemies. NL If your hand is empty, deal !D! damage again."
+    "DESCRIPTION": "wrestlermod:Dirty. NL Deal !D! damage to ALL enemies. NL Then deal !D! damage to all enemies 50% HP or less."
   },
 
   "WrestlerMod:HairPull": {
@@ -339,13 +336,13 @@
     "NAME": "Neckbreaker",
     "DESCRIPTION": "Deal !D! damage. NL If the enemy is wrestlermod:Grappled, apply !M! Vulnerable, !M! Weak, and ",
     "EXTENDED_DESCRIPTION": [
-      " wrestlermod:Sprained."
+      " wrestlermod:Injured."
     ]
   },
 
   "WrestlerMod:Octopus": {
     "NAME": "Octopus",
-    "DESCRIPTION": "Apply !M! wrestlermod:Sprained to a random enemy ",
+    "DESCRIPTION": "Apply !M! wrestlermod:Injured to a random enemy ",
     "EXTENDED_DESCRIPTION": [
       " times.",
       " times. NL Exahust."
@@ -487,7 +484,7 @@
 
   "WrestlerMod:Shortarm": {
     "NAME": "Shortarm",
-    "DESCRIPTION": "Deal !D! damage. NL Your wrestlermod:Dirty attacks this turn also apply !M! wrestlermod:Sprained."
+    "DESCRIPTION": "Deal !D! damage. NL Your wrestlermod:Dirty attacks this turn also apply !M! wrestlermod:Injured."
   },
 
   "WrestlerMod:Showboat": {
@@ -542,7 +539,7 @@
 
   "WrestlerMod:StomachClaw": {
     "NAME": "Stomach Claw",
-    "DESCRIPTION": "wrestlermod:Dirty. NL Apply !M! wrestlermod:Sprained."
+    "DESCRIPTION": "wrestlermod:Dirty. NL Apply !M! wrestlermod:Injured."
   },
 
   "WrestlerMod:Swerve": {

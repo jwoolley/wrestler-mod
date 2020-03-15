@@ -12,7 +12,7 @@ import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import thewrestler.enums.AbstractCardEnum;
-import thewrestler.powers.SprainPower;
+import thewrestler.powers.InjuredPower;
 
 import static thewrestler.WrestlerMod.getCardResourcePath;
 
@@ -49,7 +49,7 @@ public class DivingStomp extends CustomCard {
             AbstractGameAction.AttackEffect.BLUNT_HEAVY));
 
     AbstractDungeon.actionManager.addToBottom(
-        new ApplyPowerAction(m, p, new SprainPower(m, this.magicNumber), this.magicNumber));
+        new ApplyPowerAction(m, p, new InjuredPower(m, this.magicNumber), this.magicNumber));
   }
 
   @Override

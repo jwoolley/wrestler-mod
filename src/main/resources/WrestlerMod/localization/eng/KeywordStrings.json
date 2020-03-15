@@ -62,14 +62,6 @@
     "DESCRIPTION": "[#FFFFFF]."
   },
 
-  "WrestlerMod:Sprained": {
-    "PROPER_NAME": "Sprained",
-    "NAMES": [
-      "sprain", "sprained"
-    ],
-    "DESCRIPTION": "Sprained creatures lose HP at the start of their turn, and remain Sprained if they attack."
-  },
-
   "WrestlerMod:PenaltyCard": {
     "PROPER_NAME": "Penalty Card",
     "NAMES": [
@@ -133,6 +125,15 @@
     ],
     "DESCRIPTION": "#yGrappled enemies receive [#ED3030]+30%[] more and deal [#B6F8C0]-30%[] less damage. Grapple breaks once you're dealt #b10 damage in a single turn, or if you Grapple another enemy."
   },
+
+  "WrestlerMod:Injured": {
+    "PROPER_NAME": "Injured",
+    "NAMES": [
+      "injured", "injured"
+    ],
+    "DESCRIPTION": "Injured creatures lose HP at the start of their turn, and remain Injured if they attack."
+  },
+
 
   "WrestlerMod:Knee": {
     "PROPER_NAME": "Knee",

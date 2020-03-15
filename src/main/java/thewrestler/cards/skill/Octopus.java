@@ -7,17 +7,13 @@ import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.AbstractCreature;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
-import com.megacrit.cardcrawl.core.Settings;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.powers.ArtifactPower;
 import com.megacrit.cardcrawl.vfx.combat.FlashAtkImgEffect;
-import thewrestler.cards.attack.Screwjob;
 import thewrestler.enums.AbstractCardEnum;
-import thewrestler.powers.SprainPower;
-
-import java.util.UUID;
+import thewrestler.powers.InjuredPower;
 
 import static thewrestler.WrestlerMod.getCardResourcePath;
 
@@ -87,7 +83,7 @@ public class Octopus extends CustomCard {
           AbstractGameAction.AttackEffect.BLUNT_LIGHT,this.target.hasPower(ArtifactPower.POWER_ID)));
 
       AbstractDungeon.actionManager.addToBottom(
-          new ApplyPowerAction(this.target, AbstractDungeon.player, new SprainPower(this.target, this.amount),
+          new ApplyPowerAction(this.target, AbstractDungeon.player, new InjuredPower(this.target, this.amount),
               this.amount));
     }
   }

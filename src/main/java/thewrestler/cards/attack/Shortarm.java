@@ -13,7 +13,6 @@ import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import thewrestler.enums.AbstractCardEnum;
 import thewrestler.powers.ShortarmPower;
-import thewrestler.powers.SprainPower;
 
 import static thewrestler.WrestlerMod.getCardResourcePath;
 

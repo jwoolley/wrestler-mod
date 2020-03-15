@@ -18,7 +18,7 @@ import thewrestler.actions.power.ApplyGrappledAction;
 import thewrestler.enums.AbstractCardEnum;
 import thewrestler.powers.CloverleafPower;
 import thewrestler.powers.GrappledPower;
-import thewrestler.powers.SprainPower;
+import thewrestler.powers.InjuredPower;
 import thewrestler.powers.WrestlerShackled;
 import thewrestler.util.CreatureUtils;
 
@@ -107,7 +107,7 @@ public class Matrix extends CustomCard {
         case 2:
           targets.forEach(target ->
             AbstractDungeon.actionManager.addToBottom(
-            new ApplyPowerAction(target, source,new SprainPower(target, 1), 1,
+            new ApplyPowerAction(target, source,new InjuredPower(target, 1), 1,
                 true, AbstractGameAction.AttackEffect.NONE)));
           break;
         case 3:
