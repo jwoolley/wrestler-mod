@@ -705,6 +705,6 @@
 
   "WrestlerMod:YellowPenaltyStatusCard": {
     "NAME": "Yellow Penalty Card",
-    "DESCRIPTION": "Exhaust. NL When drawn, gain [E] . NL At the end of your turn, shuffle a *Dazed into your draw pile."
+    "DESCRIPTION": "Exhaust. NL When drawn, gain [E] . NL At the end of your turn, lose !M! wrestlermod:Bravado."
   }
 }

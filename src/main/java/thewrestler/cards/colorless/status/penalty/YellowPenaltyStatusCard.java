@@ -2,6 +2,7 @@ package thewrestler.cards.colorless.status.penalty;
 
 import com.megacrit.cardcrawl.actions.common.GainEnergyAction;
 import com.megacrit.cardcrawl.actions.common.MakeTempCardInDrawPileAction;
+import com.megacrit.cardcrawl.actions.common.ReducePowerAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.cards.CardQueueItem;
 import com.megacrit.cardcrawl.cards.status.Dazed;
@@ -10,6 +11,7 @@ import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
+import thewrestler.powers.BravadoPower;
 import thewrestler.powers.enqueuedpenaltycard.EnqueuedPenaltyCardPower;
 
 public class YellowPenaltyStatusCard extends AbstractPenaltyStatusCard {
@@ -22,28 +24,20 @@ public class YellowPenaltyStatusCard extends AbstractPenaltyStatusCard {
   private static final CardStrings cardStrings;
 
   private static final int ENERGY_GAIN = 1;
+  private static final int BRAVADO_LOSS = 2;
 
   public YellowPenaltyStatusCard() {
     super(ID, NAME, IMG_PATH, getDescription());
-    this.magicNumber = this.baseMagicNumber = ENERGY_GAIN;
-    this.cardsToPreview = getPreviewCard();
+    this.magicNumber = this.baseMagicNumber = BRAVADO_LOSS;
+    this.misc = ENERGY_GAIN;
     this.exhaust = true;
-  }
-
-  private static AbstractCard previewCard;
-  private static AbstractCard getPreviewCard() {
-    if (previewCard == null) {
-      previewCard = new Dazed();
-    }
-    return previewCard;
   }
 
   @Override
   public void use(AbstractPlayer p, AbstractMonster m) {
     if (this.dontTriggerOnUseCard) {
       this.exhaust = false;
-      AbstractDungeon.actionManager.addToBottom(
-          new MakeTempCardInDrawPileAction(getPreviewCard().makeCopy(), 1, true, true));
+      AbstractDungeon.actionManager.addToBottom(new ReducePowerAction(p, p, BravadoPower.POWER_ID, this.magicNumber));
     } else {
       this.exhaust = true;
     }
@@ -52,7 +46,7 @@ public class YellowPenaltyStatusCard extends AbstractPenaltyStatusCard {
   @Override
   public void triggerWhenDrawn(){
     AbstractPlayer p = AbstractDungeon.player;
-    AbstractDungeon.actionManager.addToBottom(new GainEnergyAction(this.magicNumber));
+    AbstractDungeon.actionManager.addToBottom(new GainEnergyAction(this.misc));
   }
 
   @Override
