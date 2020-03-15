@@ -57,6 +57,7 @@ public class FairPlay extends CustomCard {
     if (!this.upgraded) {
       this.upgradeName();
       this.upgradeBlock(BLOCK_AMOUNT_UPGRADE);
+      this.applyPowers();
       initializeDescription();
     }
   }

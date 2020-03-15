@@ -389,8 +389,8 @@
 
   "WrestlerMod:PlayToTheCrowd": {
     "NAME": "Play to the Crowd",
-    "DESCRIPTION": "Choose one: NL Gain !B! Block, or add a *Knee to your hand. NL Exhaust.",
-    "UPGRADE_DESCRIPTION":  "Choose one: NL Gain !B! Block, or add a *Knee+ to your hand. NL Exhaust."
+    "DESCRIPTION": "Gain !M!  wrestlermod:Bravado. NL Choose one: NL Gain !B! Block, or add a *Knee to your hand. NL Exhaust.",
+    "UPGRADE_DESCRIPTION":  "Gain !M! wrestlermod:Bravado. NL Choose one: NL Gain !B! Block, or add a *Knee+ to your hand. NL Exhaust."
   },
 
   "WrestlerMod:PowderBuffer": {

@@ -1,6 +1,7 @@
 package thewrestler.cards.skill;
 
 import basemod.abstracts.CustomCard;
+import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
 import com.megacrit.cardcrawl.actions.watcher.ChooseOneAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
@@ -12,6 +13,7 @@ import thewrestler.cards.colorless.attack.Knee;
 import thewrestler.cards.colorless.skill.FairPlay;
 import thewrestler.cards.colorless.skill.FoulPlay;
 import thewrestler.enums.AbstractCardEnum;
+import thewrestler.powers.BravadoPower;
 
 import java.util.ArrayList;
 
@@ -31,10 +33,13 @@ public class PlayToTheCrowd extends CustomCard {
   private static final CardTarget TARGET = CardTarget.SELF;
 
   private static final int COST = 0;
+  private static final int BRAVADO_AMOUNT = 1;
+  private static final int BRAVADO_AMOUNT_UPGRADE = 1;
 
   public PlayToTheCrowd() {
     super(ID, NAME, getCardResourcePath(IMG_PATH), COST, getDescription(false), TYPE,
         AbstractCardEnum.THE_WRESTLER_ORANGE, RARITY, TARGET);
+    this.baseMagicNumber = this.magicNumber = BRAVADO_AMOUNT;
     this.baseBlock = this.block = FairPlay.BLOCK_AMOUNT;
     this.cardsToPreview = new Knee();
     this.exhaust = true;
@@ -42,6 +47,9 @@ public class PlayToTheCrowd extends CustomCard {
 
   @Override
   public void use(AbstractPlayer p, AbstractMonster m) {
+    AbstractDungeon.actionManager.addToBottom(
+        new ApplyPowerAction(p, p, new BravadoPower(p, this.magicNumber), this.magicNumber));
+
     ArrayList<AbstractCard> options = new ArrayList<>();
     options.add(new FairPlay());
     options.add(new FoulPlay());
@@ -60,6 +68,8 @@ public class PlayToTheCrowd extends CustomCard {
   public void upgrade() {
     if (!this.upgraded) {
       this.upgradeName();
+      this.upgradeName();
+      this.upgradeMagicNumber(BRAVADO_AMOUNT_UPGRADE);
       this.upgradeBlock(FairPlay.BLOCK_AMOUNT_UPGRADE);
       this.cardsToPreview.upgrade();
       this.rawDescription = getDescription(true);

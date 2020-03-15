@@ -32,6 +32,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import thewrestler.cards.StartOfCombatListener;
 import thewrestler.cards.attack.*;
+import thewrestler.cards.colorless.skill.FairPlay;
 import thewrestler.cards.curse.Predictable;
 import thewrestler.cards.power.*;
 import thewrestler.cards.skill.*;
@@ -642,6 +643,8 @@ public class WrestlerMod implements
         UnlockTracker.unlockCard(DragonGate.ID);
         BaseMod.addCard(new Piledriver());
         UnlockTracker.unlockCard(Piledriver.ID);
+        BaseMod.addCard(new FairPlay());
+        UnlockTracker.unlockCard(FairPlay.ID);
 
         logger.info("Done adding cards!");
 
