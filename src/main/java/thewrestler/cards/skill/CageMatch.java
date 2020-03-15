@@ -34,7 +34,7 @@ public class CageMatch extends CustomCard {
   private static final CardTarget TARGET = CardTarget.ENEMY;
 
   private static final int COST = 1;
-  private static final int ENEMIES_STUNNED = 1;
+  private static final int ENEMIES_STUNNED = 2;
   private static final int ENEMIES_STUNNED_UPGRADE = 1;
 
   public CageMatch() {

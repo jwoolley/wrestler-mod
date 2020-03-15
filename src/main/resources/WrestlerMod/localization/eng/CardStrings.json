@@ -76,15 +76,16 @@
 
   "WrestlerMod:CannedHeat": {
     "NAME": "Canned Heat",
-    "DESCRIPTION": "wrestlermod:Dirty. NL Discard !M!",
+    "DESCRIPTION": "Gain [P]. NL Next turn, gain ",
     "EXTENDED_DESCRIPTION": [
+      "[E] ",
+      "and draw !M!",
       " card.",
-      " cards.",
-      " NL Gain [E] for each [P] you have."
+      " cards."
     ]
   },
 
-  "WrestlerMod:CheapHeat": {
+  "WrestlerMod:Glower": {
     "NAME": "Glower",
     "DESCRIPTION": "wrestlermod:Dirty. NL Exhaust a card from your discard pile. NL Gain [E] equal to its cost.",
 

@@ -13,13 +13,13 @@ import com.megacrit.cardcrawl.vfx.cardManip.ExhaustCardEffect;
 import com.megacrit.cardcrawl.vfx.cardManip.ShowCardBrieflyEffect;
 import thewrestler.WrestlerMod;
 
-public class CheapHeatAction extends AbstractGameAction {
+public class GlowerAction extends AbstractGameAction {
   public static final String[] TEXT = CardCrawlGame.languagePack.getUIString(
       WrestlerMod.makeID("CheapHeatAction")).TEXT;
   final private AbstractPlayer player;
 
   AbstractCard cardToExhaust;
-  public CheapHeatAction() {
+  public GlowerAction() {
     this.actionType = ActionType.ENERGY;
     this.duration = (this.startDuration = Settings.ACTION_DUR_FAST);
     this.player = AbstractDungeon.player;

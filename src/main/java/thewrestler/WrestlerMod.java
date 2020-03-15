@@ -475,7 +475,7 @@ public class WrestlerMod implements
         BaseMod.addCard(new Butterfly());
         BaseMod.addCard(new Brainbuster());
         BaseMod.addCard(new CageMatch());
-        BaseMod.addCard(new CheapHeat());
+        BaseMod.addCard(new CannedHeat());
         BaseMod.addCard(new CheapShot());
         BaseMod.addCard(new CleanFinish());
         BaseMod.addCard(new CloverleafAttack());
@@ -489,6 +489,7 @@ public class WrestlerMod implements
         BaseMod.addCard(new Feud());
         BaseMod.addCard(new FloatOver());
         BaseMod.addCard(new FrogSplash());
+        BaseMod.addCard(new Glower());
         BaseMod.addCard(new Guillotine());
         BaseMod.addCard(new HairPull());
         BaseMod.addCard(new Hammerlock());
@@ -568,7 +569,6 @@ public class WrestlerMod implements
         UnlockTracker.unlockCard(Brainbuster.ID);
         UnlockTracker.unlockCard(CageMatch.ID);;
         UnlockTracker.unlockCard(CannedHeat.ID);
-        UnlockTracker.unlockCard(CheapHeat.ID);
         UnlockTracker.unlockCard(CheapShot.ID);
         UnlockTracker.unlockCard(CleanFinish.ID);
         UnlockTracker.unlockCard(Cloverleaf.ID);
@@ -584,6 +584,7 @@ public class WrestlerMod implements
         UnlockTracker.unlockCard(FloatOver.ID);
         UnlockTracker.unlockCard(FrogSplash.ID);
         UnlockTracker.unlockCard(HalfNelson.ID);
+        UnlockTracker.unlockCard(Glower.ID);
         UnlockTracker.unlockCard(Guillotine.ID);
         UnlockTracker.unlockCard(HairPull.ID);
         UnlockTracker.unlockCard(Hammerlock.ID);

@@ -2,18 +2,24 @@ package thewrestler.cards.skill;
 
 import basemod.abstracts.CustomCard;
 import basemod.helpers.TooltipInfo;
+import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
 import com.megacrit.cardcrawl.actions.common.DiscardAction;
+import com.megacrit.cardcrawl.actions.common.DrawCardAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
+import com.megacrit.cardcrawl.powers.DrawCardNextTurnPower;
+import com.megacrit.cardcrawl.powers.EnergizedPower;
+import org.apache.commons.lang3.StringUtils;
 import thewrestler.cards.WrestlerCardTags;
 import thewrestler.enums.AbstractCardEnum;
 import thewrestler.keywords.AbstractTooltipKeyword;
 import thewrestler.keywords.CustomTooltipKeywords;
 import thewrestler.keywords.TooltipKeywords;
+import thewrestler.util.info.penaltycard.PenaltyCardInfo;
 
 import java.util.Arrays;
 import java.util.List;
@@ -34,26 +40,23 @@ public class CannedHeat extends CustomCard {
   private static final CardTarget TARGET = CardTarget.SELF;
 
   private static final int COST = 0;
-  private static final int ENERGY_PER_PENALTY_CARD = 1;
-  private static final int NUM_CARDS_DISCARDED = 2;
-  private static final int NUM_CARDS_DISCARDED_UPGRADE = -1;
+  private static final int ENERGY_AMOUNT = 1;
+  private static final int CARD_DRAW_AMOUNT = 1;
+  private static final int CARD_DRAW_AMOUNT_UPGRADE = 1;
 
   public CannedHeat() {
-    super(ID, NAME, getCardResourcePath(IMG_PATH), COST, getDescription(NUM_CARDS_DISCARDED), TYPE,
+    super(ID, NAME, getCardResourcePath(IMG_PATH), COST, getDescription(ENERGY_AMOUNT, CARD_DRAW_AMOUNT), TYPE,
         AbstractCardEnum.THE_WRESTLER_ORANGE, RARITY, TARGET);
-    this.baseMagicNumber = this.magicNumber = NUM_CARDS_DISCARDED;
-    this.tags.add(WrestlerCardTags.DIRTY);
+    this.baseMagicNumber = this.magicNumber =  CARD_DRAW_AMOUNT;
   }
 
   @Override
   public void use(AbstractPlayer p, AbstractMonster m) {
+    AbstractDungeon.actionManager.addToBottom(new PenaltyCardInfo.GainPenaltyCardsAction(1));
     AbstractDungeon.actionManager.addToBottom(
-        new DiscardAction(p, p, this.magicNumber, false));
-
-//    if (SportsmanshipInfo.isUnsporting()) {
-//      AbstractDungeon.actionManager.addToBottom(
-//          new GainEnergyAction(ENERGY_PER_PENALTY_CARD * SportsmanshipInfo.getAmount()));
-//    }
+        new ApplyPowerAction(p, p, new EnergizedPower(p, ENERGY_AMOUNT), ENERGY_AMOUNT));
+    AbstractDungeon.actionManager.addToBottom(
+        new ApplyPowerAction(p, p, new DrawCardNextTurnPower(p, this.magicNumber), this.magicNumber));
   }
 
   @Override
@@ -65,16 +68,17 @@ public class CannedHeat extends CustomCard {
   public void upgrade() {
     if (!this.upgraded) {
       this.upgradeName();
-      this.upgradeMagicNumber(NUM_CARDS_DISCARDED_UPGRADE);
-      this.rawDescription = getDescription(this.magicNumber);
+      this.upgradeMagicNumber(CARD_DRAW_AMOUNT_UPGRADE);
+      this.rawDescription = getDescription(ENERGY_AMOUNT, this.magicNumber);
       initializeDescription();
     }
   }
 
-  public static String getDescription(int numCardsDiscarded) {
+  public static String getDescription(int energyAmount, int drawAmount) {
     return DESCRIPTION
-        + (numCardsDiscarded == 1 ? EXTENDED_DESCRIPTION[0] : EXTENDED_DESCRIPTION[1])
-        + EXTENDED_DESCRIPTION[2];
+        + StringUtils.repeat(EXTENDED_DESCRIPTION[0], energyAmount)
+        + EXTENDED_DESCRIPTION[1]
+        + (drawAmount == 1 ? EXTENDED_DESCRIPTION[2] : EXTENDED_DESCRIPTION[3]);
   }
 
   private static List<AbstractTooltipKeyword> EXTRA_KEYWORDS = Arrays.asList(
