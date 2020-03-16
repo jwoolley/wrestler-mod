@@ -15,7 +15,7 @@ import thewrestler.util.info.CombatInfo;
 
 public class InjuredPower extends AbstractWrestlerPower implements CloneablePowerInterface {
   public static final String POWER_ID = WrestlerMod.makeID("InjuredPower");
-  public static final String IMG = "sprain.png";
+  public static final String IMG = "injured.png";
   private static final PowerStrings powerStrings;
   public static final String NAME;
   public static final String[] DESCRIPTIONS;
@@ -33,7 +33,7 @@ public class InjuredPower extends AbstractWrestlerPower implements CloneablePowe
   public void atStartOfTurn() {
     this.flash();
     CardCrawlGame.sound.play("SPRINGBOARD_1");
-    CardCrawlGame.sound.play("BONE_CRUNCH_2");
+    CardCrawlGame.sound.play("BONE_CRUNCH_1");
     AbstractDungeon.actionManager.addToBottom(
         new DamageAction(this.owner, new DamageInfo(this.source, this.amount, DamageInfo.DamageType.THORNS),
             AbstractGameAction.AttackEffect.SMASH, false));

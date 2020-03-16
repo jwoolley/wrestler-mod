@@ -387,7 +387,7 @@
 
   "WrestlerMod:PlayToTheCrowd": {
     "NAME": "Play to the Crowd",
-    "DESCRIPTION": "Gain !M!  wrestlermod:Bravado. NL Choose one: NL Gain !B! Block, or add a *Knee to your hand. NL Exhaust.",
+    "DESCRIPTION": "Gain !M! wrestlermod:Bravado. NL Choose one: NL Gain !B! Block, or add a *Knee to your hand. NL Exhaust.",
     "UPGRADE_DESCRIPTION":  "Gain !M! wrestlermod:Bravado. NL Choose one: NL Gain !B! Block, or add a *Knee+ to your hand. NL Exhaust."
   },
 
@@ -430,7 +430,7 @@
 
   "WrestlerMod:Redemption": {
     "NAME": "Redemption",
-    "DESCRIPTION": "Costs [E] less for each [P] gained this combat. NL Gain !B! Block. NL Exhaust all [P] gained this combat. NL Exhaust."
+    "DESCRIPTION": "Gain !B! Block. NL Exhaust ALL Statuses. NL Deal !D! damage to ALL enemies for each Exhausted card. NL Exhaust."
   },
 
   "WrestlerMod:Ropewalk": {

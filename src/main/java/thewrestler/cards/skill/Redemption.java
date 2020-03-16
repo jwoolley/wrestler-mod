@@ -2,31 +2,34 @@ package thewrestler.cards.skill;
 
 import basemod.abstracts.CustomCard;
 import basemod.helpers.TooltipInfo;
+import com.badlogic.gdx.graphics.Color;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
+import com.megacrit.cardcrawl.actions.animations.VFXAction;
+import com.megacrit.cardcrawl.actions.common.DamageAllEnemiesAction;
 import com.megacrit.cardcrawl.actions.common.GainBlockAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.cards.CardGroup;
+import com.megacrit.cardcrawl.cards.DamageInfo;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.core.Settings;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
-import thewrestler.cards.StartOfCombatListener;
 import thewrestler.cards.WrestlerCardTags;
+import thewrestler.effects.utils.combat.CleanFinishEffect;
 import thewrestler.enums.AbstractCardEnum;
 import thewrestler.keywords.AbstractTooltipKeyword;
 import thewrestler.keywords.CustomTooltipKeywords;
 import thewrestler.keywords.TooltipKeywords;
-import thewrestler.util.BasicUtils;
-import thewrestler.util.info.CombatInfo;
 
 import java.util.*;
+import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
 import static thewrestler.WrestlerMod.getCardResourcePath;
 
-public class Redemption extends CustomCard implements AbstractPenaltyCardListener, StartOfCombatListener {
+public class Redemption extends CustomCard {
   public static final String ID = "WrestlerMod:Redemption";
   public static final String NAME;
   public static final String DESCRIPTION;
@@ -35,48 +38,30 @@ public class Redemption extends CustomCard implements AbstractPenaltyCardListene
 
   private static final CardStrings cardStrings;
 
-  private static final CardType TYPE = CardType.SKILL;
-  private static final CardRarity RARITY = CardRarity.UNCOMMON;
-  private static final CardTarget TARGET = CardTarget.SELF;
+  private static final CardType TYPE = CardType.ATTACK;
+  private static final CardRarity RARITY = CardRarity.RARE;
+  private static final CardTarget TARGET = CardTarget.ALL_ENEMY;
 
-  private static final int BLOCK_AMOUNT = 30;
-  private static final int BLOCK_AMOUNT_UPGRADE = 10;
-  private static final int CARDS_TO_EXAHUST = 3;
-  private static final int COST = 3;
+  private static final int BLOCK_AMOUNT = 16;
+  private static final int BLOCK_AMOUNT_UPGRADE = 8;
+  private static final int DAMAGE_PER_CARD = 5;
+  private static final int DAMAGE_PER_CARD_UPGRADE = 1;
+  private static final int COST = 2;
 
   public Redemption() {
     super(ID, NAME, getCardResourcePath(IMG_PATH), COST, getDescription(), TYPE, AbstractCardEnum.THE_WRESTLER_ORANGE,
         RARITY, TARGET);
     this.baseBlock = this.block = BLOCK_AMOUNT;
-    this.baseMagicNumber = this.magicNumber = CARDS_TO_EXAHUST;
-    calculateCost();
+    this.baseDamage = this.damage = DAMAGE_PER_CARD;
     this.exhaust = true;
   }
 
   @Override
   public void use(AbstractPlayer p, AbstractMonster m) {
     AbstractDungeon.actionManager.addToBottom(new GainBlockAction(p, p, block));
-    AbstractDungeon.actionManager.addToBottom(new ExhaustPenaltyCardsAction(Settings.FAST_MODE));
-  }
-
-  private void calculateCost() {
-    if (BasicUtils.isPlayerInCombat()) {
-      modifyCostForCombat(-CombatInfo.getNumPenaltyCardsGainedThisCombat());
-      this.update();
-    }
-  }
-
-  @Override
-  public void onGainedWarningCard() { }
-
-  @Override
-  public void onGainedPenaltyCard() {
-    modifyCostForCombat(-1);
-  }
-
-  @Override
-  public void atStartOfCombat() {
-    calculateCost();
+    AbstractDungeon.actionManager.addToTop(
+        new VFXAction(new CleanFinishEffect(Color.valueOf("FFFDCB"), "CHOIR_ANGELIC_1", Settings.ACTION_DUR_FAST)));
+    AbstractDungeon.actionManager.addToBottom(new RedemptionAction(this.multiDamage, Settings.FAST_MODE));
   }
 
   @Override
@@ -93,6 +78,7 @@ public class Redemption extends CustomCard implements AbstractPenaltyCardListene
     if (!this.upgraded) {
       this.upgradeName();
       this.upgradeBlock(BLOCK_AMOUNT_UPGRADE);
+      this.upgradeDamage(DAMAGE_PER_CARD_UPGRADE);
       initializeDescription();
     }
   }
@@ -101,44 +87,59 @@ public class Redemption extends CustomCard implements AbstractPenaltyCardListene
       CustomTooltipKeywords.getTooltipKeyword(CustomTooltipKeywords.PENALTY_CARD)
   );
 
-  static class ExhaustPenaltyCardsAction extends AbstractGameAction {
-    private static final float ACTION_DURATION = Settings.ACTION_DUR_FASTER;
+  static class RedemptionAction extends AbstractGameAction {
+    private static final float ACTION_DURATION = Settings.ACTION_DUR_MED;
+    private static final float ACTION_DURATION_FASTER = Settings.ACTION_DUR_MED;
+    private static final DamageInfo.DamageType DAMAGE_TYPE = DamageInfo.DamageType.NORMAL;
+    private static final AttackEffect ATTACK_EFFECT = AbstractGameAction.AttackEffect.FIRE;
+    private final int[] multiDamage;
     private final boolean exhaustAll;
     private final boolean isFast;
+    private int numCardsExhausted;
+    boolean tickedOnce = false;
 
-    private ExhaustPenaltyCardsAction(int amount, boolean exhaustAll, boolean isFast) {
+    private RedemptionAction(int[] multiDamage, int amount, boolean exhaustAll, boolean isFast) {
       this.source = AbstractDungeon.player;
       this.actionType = ActionType.EXHAUST;
+      this.multiDamage = multiDamage;
       this.amount = amount;
-      this.exhaustAll = exhaustAll;
       this.isFast = isFast;
-      this.duration = ACTION_DURATION;
+      this.duration = isFast ? ACTION_DURATION_FASTER : ACTION_DURATION;
+      this.exhaustAll = exhaustAll;
     }
 
-    ExhaustPenaltyCardsAction(boolean isFast) {
-      this(-1, true, isFast);
+    RedemptionAction(int[] multiDamage, boolean isFast) {
+      this(multiDamage, -1, true, isFast);
     }
 
-    ExhaustPenaltyCardsAction(int amount, boolean isFast) {
-      this(amount, false, isFast);
+    RedemptionAction(int[] multiDamage, int amount, boolean isFast) {
+      this(multiDamage, amount, false, isFast);
     }
 
     @Override
     public void update() {
-      if (this.duration <= ACTION_DURATION) {
+      if (this.duration <= ACTION_DURATION && !tickedOnce) {
+
+        // final Predicate<AbstractCard> predicate = c -> c.hasTag(WrestlerCardTags.PENALTY);
+        final Predicate<AbstractCard> predicate = c -> c.type == CardType.STATUS;
+
         final Map<CardGroup, List<AbstractCard>> cardsToExhaust = new HashMap<>();
         cardsToExhaust.put(AbstractDungeon.player.hand, AbstractDungeon.player.hand.group.stream()
-            .filter(c -> c.hasTag(WrestlerCardTags.PENALTY)).collect(Collectors.toList()));
+            .filter(predicate::test).collect(Collectors.toList()));
         cardsToExhaust.put(AbstractDungeon.player.drawPile, AbstractDungeon.player.drawPile.group.stream()
-            .filter(c -> c.hasTag(WrestlerCardTags.PENALTY)).collect(Collectors.toList()));
+            .filter(predicate::test).collect(Collectors.toList()));
         cardsToExhaust.put(AbstractDungeon.player.discardPile, AbstractDungeon.player.discardPile.group.stream()
-            .filter(c -> c.hasTag(WrestlerCardTags.PENALTY)).collect(Collectors.toList()));
+            .filter(predicate::test).collect(Collectors.toList()));
 
         final List<Map.Entry<CardGroup, List<AbstractCard>>> entries = new ArrayList<>(cardsToExhaust.entrySet());
 
         if (this.exhaustAll || entries.stream().mapToLong(e -> e.getValue().size()).sum() <= this.amount) {
+            numCardsExhausted = 0;
             entries.forEach(e -> {
-              e.getValue().forEach(c -> e.getKey().moveToExhaustPile(c));
+              e.getValue().forEach(c ->  {
+                e.getKey().moveToExhaustPile(c);
+                numCardsExhausted++;
+              });
             });
         } else {
           final List<Map.Entry<CardGroup, AbstractCard>> flattenedEntries = new ArrayList<>();
@@ -149,8 +150,21 @@ public class Redemption extends CustomCard implements AbstractPenaltyCardListene
           });
           Collections.shuffle(flattenedEntries);
           flattenedEntries.stream().limit(this.amount).forEach(e -> e.getKey().moveToExhaustPile(e.getValue()));
+          numCardsExhausted = this.amount;
         }
 
+        if (numCardsExhausted == 0) {
+          this.isDone = true;
+        }
+
+        this.tickedOnce = true;
+      } else if (tickedOnce && this.duration <= 0.1f) {
+        if (numCardsExhausted > 0) {
+          for (int i = 0; i < numCardsExhausted; i++) {
+            AbstractDungeon.actionManager.addToTop(
+                new DamageAllEnemiesAction(this.source, this.multiDamage, DAMAGE_TYPE, ATTACK_EFFECT, this.isFast));
+          }
+        }
         this.isDone = true;
       }
       this.tickDuration();

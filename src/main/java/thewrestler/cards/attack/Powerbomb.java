@@ -2,7 +2,6 @@ package thewrestler.cards.attack;
 
 import basemod.abstracts.CustomCard;
 import basemod.helpers.TooltipInfo;
-import com.gikk.twirk.SETTINGS;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.animations.VFXAction;
 import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
@@ -18,22 +17,18 @@ import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.powers.VulnerablePower;
 import com.megacrit.cardcrawl.vfx.combat.WeightyImpactEffect;
-import thewrestler.cards.colorless.status.penalty.AbstractPenaltyStatusCard;
 import thewrestler.cards.colorless.status.penalty.OrangePenaltyStatusCard;
 import thewrestler.cards.colorless.status.penalty.RedPenaltyStatusCard;
 import thewrestler.cards.colorless.status.penalty.YellowPenaltyStatusCard;
-import thewrestler.characters.WrestlerCharacter;
 import thewrestler.enums.AbstractCardEnum;
 import thewrestler.keywords.AbstractTooltipKeyword;
 import thewrestler.keywords.CustomTooltipKeywords;
 import thewrestler.keywords.TooltipKeywords;
-import thewrestler.ui.WrestlerPenaltyCardInfoPanel;
 import thewrestler.util.CreatureUtils;
 import thewrestler.util.info.penaltycard.PenaltyCardInfo;
 
 import java.util.Arrays;
 import java.util.List;
-import java.util.Set;
 
 import static thewrestler.WrestlerMod.getCardResourcePath;
 
