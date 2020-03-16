@@ -12,10 +12,13 @@ public class WrestlerDirtyStrike extends WrestlerStrike {
   public static final String DESCRIPTION;
   public static final String IMG_PATH = "dirtystrike.png";
 
+  private static final int ADDITIONAL_BASE_DAMAGE = 1;
+
   private static final CardStrings cardStrings;
 
   public WrestlerDirtyStrike() {
     super(ID, NAME, DESCRIPTION, IMG_PATH);
+    this.baseDamage = this.damage  = this.baseDamage + ADDITIONAL_BASE_DAMAGE;
     tags.add(WrestlerCardTags.DIRTY);
   }
 
