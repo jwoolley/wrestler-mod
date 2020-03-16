@@ -15,13 +15,13 @@ import com.megacrit.cardcrawl.core.Settings;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
-import com.megacrit.cardcrawl.vfx.combat.WeightyImpactEffect;
 import thewrestler.actions.cards.DamageEnemiesAction;
 import thewrestler.cards.WrestlerCardTags;
 import thewrestler.effects.utils.combat.CleanFinishEffect;
 import thewrestler.enums.AbstractCardEnum;
 import thewrestler.util.CreatureUtils;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -54,33 +54,21 @@ public class Guillotine extends CustomCard {
 
   @Override
   public void use(AbstractPlayer p, AbstractMonster m) {
-    final AbstractGameAction guillotineAction =
-        new GuillotineAction(p, this.damage, this.damageType,  AttackEffect.SLASH_HEAVY,
-            0.25f, 0.4f, Settings.FAST_MODE);
+    List<AbstractMonster> guillotinedMonsters = CreatureUtils.getLivingMonsters().stream()
+        .filter(mo -> {
+          AbstractCard tmp = this.makeStatEquivalentCopy();
+           tmp.calculateCardDamage(mo);
+          return (mo.currentHealth - tmp.damage) * 2 <= mo.maxHealth;
+        })
+        .collect(Collectors.toList());
 
     AbstractDungeon.actionManager.addToBottom(
-        new DamageEnemiesAction(p, this.damage, this.damageType,
-            AttackEffect.SLASH_VERTICAL, CreatureUtils.getLivingMonsters(), guillotineAction));
-  }
+        new DamageAllEnemiesAction(p, this.multiDamage, this.damageType, AttackEffect.SLASH_VERTICAL, Settings.FAST_MODE));
 
-  class GuillotineDamageAction extends AbstractGameAction {
-    public GuillotineDamageAction(int damage) {
-      this.amount = damage;
-    }
-
-    @Override
-    public void update() {
-      final List<AbstractMonster> guillotinedMonsters = null;
-
-      if (!guillotinedMonsters.isEmpty()) {
-        guillotinedMonsters.forEach(monster -> AbstractDungeon.actionManager.addToTop(new VFXAction(
-            new WeightyImpactEffect(monster.hb.cX, monster.hb.cY, Color.SCARLET.cpy()), Settings.ACTION_DUR_XFAST)));
-        AbstractDungeon.actionManager.addToBottom(new SFXAction("GUILLOTINE_1"));
-        AbstractDungeon.actionManager.addToBottom(
-            new GuillotineAction(AbstractDungeon.player, 0, Guillotine.this.damageType,
-            AttackEffect.SLASH_HEAVY, 0.25f, 0.4f, Settings.FAST_MODE));
-      }
-      this.isDone = true;
+    if (!guillotinedMonsters.isEmpty()) {
+      AbstractDungeon.actionManager.addToBottom(new SFXAction("GUILLOTINE_1"));
+      AbstractDungeon.actionManager.addToBottom(new GuillotineAction(p, this.damage, this.damageType, guillotinedMonsters, AttackEffect.SLASH_HEAVY,
+          0.25f, 0.4f, Settings.FAST_MODE));
     }
   }
 
@@ -101,10 +89,10 @@ public class Guillotine extends CustomCard {
     private static final float DURATION_2 = 0.2f;
     private final float flashDuration;
     private final boolean isFast;
-    private int currentTick;
-    private final List<AbstractMonster> guillotinedMonsters;
+    private boolean tickedOnce;
+    private List<AbstractMonster> guillotinedMonsters;
 
-    GuillotineAction(AbstractPlayer source, int damage, DamageInfo.DamageType damageType,
+    GuillotineAction(AbstractPlayer source, int damage, DamageInfo.DamageType damageType, List<AbstractMonster> guillotinedMonsters,
                      AttackEffect attackEffect, float flashDuration, float damageDuration, boolean isFast) {
       this.duration = DURATION_2 + damageDuration;
       this.amount = damage;
@@ -114,34 +102,26 @@ public class Guillotine extends CustomCard {
       this.attackEffect = attackEffect;
       this.flashDuration = flashDuration;
       this.isFast = isFast;
-      this.currentTick = 0;
-
-      guillotinedMonsters = CreatureUtils.getLivingMonsters().stream()
-          .filter(mo -> mo.currentHealth * 2 <= mo.maxHealth)
-          .collect(Collectors.toList());
+      this.tickedOnce = false;
+      this.guillotinedMonsters = new ArrayList<>(guillotinedMonsters);
     }
 
     @Override
     public void update() {
-      if (guillotinedMonsters.isEmpty()) {
+      if (guillotinedMonsters == null || guillotinedMonsters.isEmpty()) {
         this.isDone = true;
         return;
       }
 
-      if (this.currentTick == 0) {
-        this.currentTick++;
-      } else if (this.duration <= DURATION_2 || this.isFast) {
-        if (this.currentTick == 1) {
-          AbstractDungeon.actionManager.addToTop(
-              new VFXAction(new CleanFinishEffect(Color.SCARLET, null, this.flashDuration, this.flashDuration,
-                  true)));
-          this.currentTick++;
-        } else if (currentTick == 2 && this.duration <= 0.1f || this.isFast && this.duration <= DURATION_2 / 2.0f) {
-          AbstractDungeon.actionManager.addToBottom(
-              new DamageEnemiesAction(this.source, this.amount, this.damageType, AttackEffect.SLASH_VERTICAL,
-                  this.guillotinedMonsters));
-          this.isDone = true;
-        }
+      if ((this.duration <= DURATION_2 || this.isFast) && !tickedOnce) {
+        AbstractDungeon.actionManager.addToTop(
+            new VFXAction(new CleanFinishEffect(Color.SCARLET, null, this.flashDuration, this.flashDuration, true)));
+        this.tickedOnce = true;
+      } else if (this.duration <= 0.1f || this.isFast && this.duration <= DURATION_2 / 2.0f) {
+        AbstractDungeon.actionManager.addToBottom(
+            new DamageEnemiesAction(this.source, this.amount, this.damageType,
+                this.attackEffect, guillotinedMonsters));
+        this.isDone = true;
       }
 
       this.tickDuration();
