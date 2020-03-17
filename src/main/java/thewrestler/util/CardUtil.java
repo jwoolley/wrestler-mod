@@ -4,10 +4,14 @@ import com.badlogic.gdx.graphics.Color;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.cards.CardGroup;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
+import org.omg.PortableInterceptor.ACTIVE;
 import thewrestler.WrestlerMod;
 import thewrestler.cards.WrestlerCardTags;
 
 import java.util.*;
+import java.util.function.Consumer;
+import java.util.function.Function;
+import java.util.function.Predicate;
 
 public class CardUtil {
   public static void discountRandomCardCost(List<AbstractCard> decreasableCards, int discountAmount,
@@ -59,6 +63,33 @@ public class CardUtil {
       }
     }
     return cards;
+  }
+
+  public static void forAllCardsInCombat(Consumer<AbstractCard> fn) {
+    forAllCardsInCombat(fn, c -> true);
+  }
+
+  public static void forAllCardsInCombat(Consumer<AbstractCard> fn, Predicate<AbstractCard> predicate) {
+    for (AbstractCard c : AbstractDungeon.player.drawPile.group) {
+      if (predicate.test(c)) {
+        fn.accept(c);
+      }
+    }
+    for (AbstractCard c : AbstractDungeon.player.discardPile.group) {
+      if (predicate.test(c)) {
+        fn.accept(c);
+      }
+    }
+    for (AbstractCard c : AbstractDungeon.player.exhaustPile.group) {
+      if (predicate.test(c)) {
+        fn.accept(c);
+      }
+    }
+    for (AbstractCard c : AbstractDungeon.player.limbo.group) {
+      if (predicate.test(c)) {
+        fn.accept(c);
+      }
+    }
   }
 
   public static AbstractCard applyDirtyModifier(AbstractCard card) {

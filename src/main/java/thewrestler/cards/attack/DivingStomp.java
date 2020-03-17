@@ -11,6 +11,7 @@ import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
+import thewrestler.cards.WrestlerCardTags;
 import thewrestler.enums.AbstractCardEnum;
 import thewrestler.powers.InjuredPower;
 
@@ -30,16 +31,17 @@ public class DivingStomp extends CustomCard {
   private static final CardTarget TARGET = CardTarget.ENEMY;
 
   private static final int COST = 2;
-  private static final int DAMAGE = 13;
-  private static final int DAMAGE_UPGRADE = 1;
+  private static final int DAMAGE = 15;
+  private static final int DAMAGE_UPGRADE = 5;
   private static final int SPRAIN_AMOUNT = 3;
-  private static final int SPRAIN_AMOUNT_UPGRADE = 1;
+  private static final int SPRAIN_AMOUNT_UPGRADE = 2;
 
   public DivingStomp() {
     super(ID, NAME, getCardResourcePath(IMG_PATH), COST, DESCRIPTION, TYPE,
         AbstractCardEnum.THE_WRESTLER_ORANGE, RARITY, TARGET);
     this.baseDamage = this.damage = DAMAGE;
     this.baseMagicNumber = this.magicNumber = SPRAIN_AMOUNT;
+    tags.add(WrestlerCardTags.DIRTY);
   }
 
   @Override

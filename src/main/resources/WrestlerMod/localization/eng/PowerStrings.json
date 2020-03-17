@@ -156,8 +156,8 @@
   "WrestlerMod:OpportunistPower": {
     "NAME": "Opportunist",
     "DESCRIPTIONS": [
-      "Whenever you lose a #yPenalty #yCard or gain a #yPenalty #yCard, gain #b",
-      " #yBlock."
+      "At the start of your turn, if no enemies intend to attack, draw #b",
+      " cards."
     ]
   },
 
@@ -183,16 +183,24 @@
   "WrestlerMod:ScrapperPower": {
     "NAME": "Scrapper",
     "DESCRIPTIONS": [
-      "At the end of your turn, you played no Skills, gain #b",
-      " #yStrength."
+      "At the end of your turn, you have no #yBlock, gain #b",
+      " #yBlock."
     ]
   },
 
   "WrestlerMod:ShortarmPower": {
     "NAME": "Shortarm",
     "DESCRIPTIONS": [
-      "Your #yDirty #yAttacks also apply #b",
-      " #yInjured this turn."
+      "Your Colorless #yAttacks deal #b",
+      " additional damage this turn."
+    ]
+  },
+
+  "WrestlerMod:SpotMonkeyPower": {
+    "NAME": "Spot Monkey",
+    "DESCRIPTIONS": [
+      "Whenever you gain a #yPenalty #yCard, gain #b",
+      " #yStrength."
     ]
   },
 

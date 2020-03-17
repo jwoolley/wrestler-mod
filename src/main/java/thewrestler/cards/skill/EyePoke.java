@@ -1,6 +1,7 @@
 package thewrestler.cards.skill;
 
 import basemod.abstracts.CustomCard;
+import basemod.helpers.TooltipInfo;
 import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
@@ -8,10 +9,17 @@ import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
+import com.megacrit.cardcrawl.powers.VulnerablePower;
 import com.megacrit.cardcrawl.powers.WeakPower;
 import thewrestler.cards.WrestlerCardTags;
 import thewrestler.enums.AbstractCardEnum;
+import thewrestler.keywords.AbstractTooltipKeyword;
+import thewrestler.keywords.CustomTooltipKeywords;
+import thewrestler.keywords.TooltipKeywords;
 import thewrestler.powers.InjuredPower;
+
+import java.util.Arrays;
+import java.util.List;
 
 import static thewrestler.WrestlerMod.getCardResourcePath;
 
@@ -24,8 +32,7 @@ public class EyePoke extends CustomCard {
 
   private static final int WEAK_AMOUNT = 1;
   private static final int WEAK_AMOUNT_UPGRADE  = 1;
-  private static final int INJURED_AMOUNT = 3;
-  private static final int INJURED_AMOUNT_UPGRADE = 1;
+  private static final int VULNERABLE_AMOUNT = 1;
 
   private static final CardStrings cardStrings;
 
@@ -40,9 +47,9 @@ public class EyePoke extends CustomCard {
         RARITY, TARGET);
 
     // Using baseBlock (and overriding applyPowersToBlock) as a hack so value is highlighted in upgrade UI (a la Wish)
-    this.misc = this.baseBlock = INJURED_AMOUNT;
+    this.misc = this.baseBlock = VULNERABLE_AMOUNT;
     this.baseMagicNumber = this.magicNumber = WEAK_AMOUNT;
-
+    this.exhaust = true;
     tags.add(WrestlerCardTags.DIRTY);
   }
 
@@ -51,7 +58,7 @@ public class EyePoke extends CustomCard {
     AbstractDungeon.actionManager.addToBottom(
         new ApplyPowerAction(m, p, new WeakPower(m, this.magicNumber, false), this.magicNumber));
     AbstractDungeon.actionManager.addToBottom(
-        new ApplyPowerAction(m, p, new InjuredPower(m, this.misc), this.misc));
+        new ApplyPowerAction(m, p, new VulnerablePower(m, this.misc, false), this.misc));
   }
 
   @Override
@@ -61,7 +68,7 @@ public class EyePoke extends CustomCard {
 
   @Override
   public void applyPowersToBlock() {
-    this.baseBlock = this.block = this.misc;
+    this.baseBlock = this.block = this.misc = VULNERABLE_AMOUNT;
   }
 
   @Override
@@ -69,7 +76,7 @@ public class EyePoke extends CustomCard {
     if (!this.upgraded) {
       this.upgradeName();
       this.upgradeMagicNumber(WEAK_AMOUNT_UPGRADE);
-      this.misc = this.misc + INJURED_AMOUNT_UPGRADE;
+      this.misc = this.baseBlock = VULNERABLE_AMOUNT;
       this.rawDescription = getDescription();
       initializeDescription();
     }
@@ -83,5 +90,14 @@ public class EyePoke extends CustomCard {
     NAME = cardStrings.NAME;
     DESCRIPTION = cardStrings.DESCRIPTION;
     EXTENDED_DESCRIPTION = cardStrings.EXTENDED_DESCRIPTION;
+  }
+
+  private static List<AbstractTooltipKeyword> EXTRA_KEYWORDS = Arrays.asList(
+      CustomTooltipKeywords.getTooltipKeyword(CustomTooltipKeywords.PENALTY_CARD_BLUE)
+  );
+
+  @Override
+  public List<TooltipInfo> getCustomTooltips() {
+    return TooltipKeywords.getTooltipInfos(EXTRA_KEYWORDS);
   }
 }

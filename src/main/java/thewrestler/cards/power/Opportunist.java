@@ -38,13 +38,13 @@ public class Opportunist extends CustomCard {
   private static final CardTarget TARGET = CardTarget.NONE;
 
   private static final int COST = 1;
-  private static final int BLOCK_AMOUNT = 8;
-  private static final int BLOCK_AMOUNT_UPGRADE = 4;
+  private static final int DRAW_AMOUNT = 2;
+  private static final int DRAW_AMOUNT_UPGRADE = 1;
 
   public Opportunist() {
     super(ID, NAME, getCardResourcePath(IMG_PATH), COST, DESCRIPTION, TYPE, AbstractCardEnum.THE_WRESTLER_ORANGE,
         RARITY, TARGET);
-    this.baseMagicNumber = this.magicNumber = BLOCK_AMOUNT;
+    this.baseMagicNumber = this.magicNumber = DRAW_AMOUNT;
   }
 
   @Override
@@ -57,22 +57,13 @@ public class Opportunist extends CustomCard {
   public AbstractCard makeCopy() {
     return new Opportunist();
   }
-
-  private static List<AbstractTooltipKeyword> EXTRA_KEYWORDS = Arrays.asList(
-      CustomTooltipKeywords.getTooltipKeyword(CustomTooltipKeywords.PENALTY_CARD)
-  );
-
-  @Override
-  public List<TooltipInfo> getCustomTooltips() {
-    return TooltipKeywords.getTooltipInfos(EXTRA_KEYWORDS);
-  }
-
+  
   @Override
   public void upgrade() {
     if (!this.upgraded) {
       this.upgradeName();
       initializeDescription();
-      this.upgradeMagicNumber(BLOCK_AMOUNT_UPGRADE);
+      this.upgradeMagicNumber(DRAW_AMOUNT_UPGRADE);
     }
   }
 

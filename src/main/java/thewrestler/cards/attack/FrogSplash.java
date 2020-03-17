@@ -12,8 +12,15 @@ import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.powers.WeakPower;
+import thewrestler.cards.colorless.status.penalty.BluePenaltyStatusCard;
+import thewrestler.cards.colorless.status.penalty.OrangePenaltyStatusCard;
+import thewrestler.cards.colorless.status.penalty.RedPenaltyStatusCard;
+import thewrestler.cards.colorless.status.penalty.YellowPenaltyStatusCard;
 import thewrestler.enums.AbstractCardEnum;
 import thewrestler.util.CreatureUtils;
+import thewrestler.util.info.penaltycard.PenaltyCardInfo;
+
+import java.util.Arrays;
 
 import static thewrestler.WrestlerMod.getCardResourcePath;
 
@@ -30,7 +37,7 @@ public class FrogSplash extends CustomCard {
   private static final CardRarity RARITY = CardRarity.UNCOMMON;
   private static final CardTarget TARGET = CardTarget.ALL_ENEMY;
 
-  private static final int COST = 2;
+  private static final int COST = 1;
   private static final int DAMAGE = 11;
   private static final int DAMAGE_UPGRADE = 3;
   private static final int WEAK_AMOUNT = 1;
@@ -43,6 +50,7 @@ public class FrogSplash extends CustomCard {
     this.baseMagicNumber = this.magicNumber = WEAK_AMOUNT;
     this.isMultiDamage = true;
     this.exhaust = true;
+    this.cardsToPreview = new BluePenaltyStatusCard();
   }
 
   @Override
@@ -57,6 +65,8 @@ public class FrogSplash extends CustomCard {
       AbstractDungeon.actionManager.addToBottom(
           new ApplyPowerAction(mo, p, new WeakPower(mo, this.magicNumber, false), this.magicNumber));
     });
+
+    PenaltyCardInfo.gainPenaltyCard( new BluePenaltyStatusCard());
   }
 
   @Override

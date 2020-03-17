@@ -2,17 +2,24 @@ package thewrestler.powers;
 
 import basemod.interfaces.CloneablePowerInterface;
 import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
+import com.megacrit.cardcrawl.actions.common.RelicAboveCreatureAction;
 import com.megacrit.cardcrawl.actions.common.RemoveSpecificPowerAction;
 import com.megacrit.cardcrawl.actions.utility.UseCardAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.cards.DamageInfo;
+import com.megacrit.cardcrawl.cards.tempCards.Shiv;
 import com.megacrit.cardcrawl.core.AbstractCreature;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.PowerStrings;
+import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.powers.AbstractPower;
 import thewrestler.WrestlerMod;
 import thewrestler.cards.WrestlerCardTags;
+import thewrestler.util.CardUtil;
+
+import javax.smartcardio.Card;
+import java.util.stream.Collectors;
 
 public class ShortarmPower extends AbstractWrestlerPower implements CloneablePowerInterface {
   public static final String POWER_ID = WrestlerMod.makeID("ShortarmPower");
@@ -23,13 +30,15 @@ public class ShortarmPower extends AbstractWrestlerPower implements CloneablePow
 
   public static final PowerType POWER_TYPE = PowerType.BUFF;
 
-  private boolean attackWasDirty;
-  private boolean usedAttack;
+  public ShortarmPower(AbstractCreature owner, int amount) {
+    super(POWER_ID, NAME, IMG, owner, owner, amount, POWER_TYPE);
+    updateExistingColorlessAttacks(amount);
+  }
 
-  public ShortarmPower(AbstractCreature owner, int sprainAmount) {
-    super(POWER_ID, NAME, IMG, owner, owner, sprainAmount, POWER_TYPE);
-    this.attackWasDirty = false;
-    this.usedAttack = false;
+  public void stackPower(int stackAmount) {
+    this.fontScale = 8.0F;
+    this.amount += stackAmount;
+    updateExistingColorlessAttacks(stackAmount);
   }
 
   @Override
@@ -38,33 +47,28 @@ public class ShortarmPower extends AbstractWrestlerPower implements CloneablePow
   }
 
   @Override
-  public void onAttack(DamageInfo info, int damageAmount, AbstractCreature target) {
-    if ((damageAmount > 0) && (target != this.owner) && (info.type == DamageInfo.DamageType.NORMAL)) {
-      if (this.attackWasDirty) {
-        this.flash();
-        AbstractDungeon.actionManager.addToBottom(
-            new ApplyPowerAction(target, this.owner, new InjuredPower(target, this.amount), this.amount));
-      }
+  public void onPlayCard(AbstractCard card, AbstractMonster m) {
 
-      //      testing version that lasts until EOT
-      //      this.usedAttack = true;
-    }
-  }
-
-  @Override
-  public void onUseCard(AbstractCard card, UseCardAction action) {
-    if (card.type == AbstractCard.CardType.ATTACK && card.hasTag(WrestlerCardTags.DIRTY)) {
-      this.attackWasDirty = true;
-    } else {
-      this.attackWasDirty = false;
-    }
   }
 
   @Override
   public void onAfterUseCard(AbstractCard card, UseCardAction action) {
-    if (this.usedAttack) {
-      AbstractDungeon.actionManager.addToBottom(new RemoveSpecificPowerAction(this.owner, this.owner, POWER_ID));
+
+  }
+
+  public void applyDamageIncrease(AbstractCard card) {
+    if (shouldApplyPower(card)) {
+      card.damage = (card.baseDamage = card.baseDamage + this.amount);
+      card.isDamageModified = true;
     }
+  }
+
+  public boolean shouldApplyPower(AbstractCard card) {
+    return card.color == AbstractCard.CardColor.COLORLESS && card.type == AbstractCard.CardType.ATTACK;
+  }
+
+  private void updateExistingColorlessAttacks(int increase) {
+    CardUtil.forAllCardsInCombat(c -> c.baseDamage += increase, this::shouldApplyPower);
   }
 
   @Override

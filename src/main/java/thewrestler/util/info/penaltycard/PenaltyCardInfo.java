@@ -69,6 +69,8 @@ public class PenaltyCardInfo implements StartOfCombatListener, EndOfCombatListen
     listeners.addAll(getPenaltyCardListenerPowers());
     listeners.forEach(AbstractPenaltyCardListener::onGainedPenaltyCard);
     CombatInfo.incrementPenaltyCardsGainedThisCombatCount();
+
+
   }
 
   private final static AbstractPenaltyCardStrategy DEFAULT_STRATEGY = new DefaultPenaltyCardStrategy();

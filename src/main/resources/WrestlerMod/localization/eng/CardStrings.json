@@ -132,7 +132,7 @@
 
   "WrestlerMod:DivingStomp": {
     "NAME": "Diving Stomp",
-    "DESCRIPTION": "Deal !D! Damage. NL Apply !M! wrestlermod:Injured."
+    "DESCRIPTION": "wrestlermod:Dirty. NL Deal !D! Damage. NL Apply !M! wrestlermod:Injured."
   },
 
   "WrestlerMod:Elbow": {
@@ -150,7 +150,7 @@
 
   "WrestlerMod:EyePoke": {
     "NAME": "Eye Poke",
-    "DESCRIPTION": "wrestlermod:Dirty. NL Apply !M! Weak and !B! wrestlermod:Injured. NL Exhaust."
+    "DESCRIPTION": "wrestlermod:Dirty. NL Apply !M! Weak and NL !B! Vulnerable. NL Exhaust."
   },
 
   "WrestlerMod:Facewash": {
@@ -205,7 +205,7 @@
 
   "WrestlerMod:FrogSplash": {
     "NAME": "Frog Splash",
-    "DESCRIPTION": "Deal !D! Damage and apply !M! Weak to ALL enemies. NL Exhaust."
+    "DESCRIPTION": "Deal !D! Damage and apply !M! Weak to ALL enemies. NL Gain [L] . NL Exhaust."
   },
 
   "WrestlerMod:HalfNelson": {
@@ -215,7 +215,7 @@
 
   "WrestlerMod:Guillotine": {
     "NAME": "Guillotine",
-    "DESCRIPTION": "wrestlermod:Dirty. NL Deal !D! damage to ALL enemies. NL Then deal !D! damage to all enemies 50% HP or less."
+    "DESCRIPTION": "wrestlermod:Dirty. NL Deal !D! damage to ALL enemies. NL Then deal !D! damage to all enemies with 50% HP or less."
   },
 
   "WrestlerMod:HairPull": {
@@ -364,7 +364,7 @@
 
   "WrestlerMod:Opportunist": {
     "NAME": "Opportunist",
-    "DESCRIPTION": "Whenever you lose a [P] or gain a [P] , gain !M! Block."
+    "DESCRIPTION": "At the start of your turn, if no enemies intend to attack, draw !M! cards."
   },
 
   "WrestlerMod:Pendulum": {
@@ -466,7 +466,7 @@
 
   "WrestlerMod:Scrapper": {
     "NAME": "Scrapper",
-    "DESCRIPTION": "At the end of your turn, if you played no Skills, gain !M! Strength."
+    "DESCRIPTION": "At the end of your turn, if you have no Block, gain !M! Block."
   },
 
   "WrestlerMod:Screwjob": {
@@ -484,7 +484,7 @@
 
   "WrestlerMod:Shortarm": {
     "NAME": "Shortarm",
-    "DESCRIPTION": "Deal !D! damage. NL Your wrestlermod:Dirty attacks this turn also apply !M! wrestlermod:Injured."
+    "DESCRIPTION": "Deal !D! damage. NL Gain !M! Temporary Strength. NL Gain [D] ."
   },
 
   "WrestlerMod:Showboat": {
@@ -516,6 +516,12 @@
       " this turn."
     ]
   },
+
+  "WrestlerMod:SpotMonkey": {
+    "NAME": "Spot Monkey",
+    "DESCRIPTION": "Whenever you gain a [P] , gain !M! Strength."
+  },
+
 
   "WrestlerMod:Springboard": {
     "NAME": "Springboard",
