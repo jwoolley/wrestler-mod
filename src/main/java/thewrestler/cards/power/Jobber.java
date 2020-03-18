@@ -14,53 +14,51 @@ import thewrestler.enums.AbstractCardEnum;
 import thewrestler.keywords.AbstractTooltipKeyword;
 import thewrestler.keywords.CustomTooltipKeywords;
 import thewrestler.keywords.TooltipKeywords;
-import thewrestler.powers.OpportunistPower;
-import thewrestler.powers.ProvenTacticsPower;
+import thewrestler.powers.JobberPower;
 import thewrestler.powers.SpotMonkeyPower;
-import thewrestler.signaturemoves.upgrades.UpgradeType;
 
 import java.util.Arrays;
 import java.util.List;
 
 import static thewrestler.WrestlerMod.getCardResourcePath;
 
-public class SpotMonkey extends CustomCard {
-  public static final String ID = WrestlerMod.makeID("SpotMonkey");
+public class Jobber extends CustomCard {
+  public static final String ID = WrestlerMod.makeID("Jobber");
 
   public static final String NAME;
   public static final String DESCRIPTION;
   public static final String[] EXTENDED_DESCRIPTION;
-  public static final String IMG_PATH = "spotmonkey.png";
+  public static final String IMG_PATH = "jobber.png";
 
   private static final CardStrings cardStrings;
 
   private static final CardType TYPE = CardType.POWER;
-  private static final CardRarity RARITY = CardRarity.RARE;
+  private static final CardRarity RARITY = CardRarity.UNCOMMON;
   private static final CardTarget TARGET = CardTarget.NONE;
 
   private static final int COST = 1;
-  private static final int UPGRADED_COST = 1;
-  private static final int STRENGTH_AMOUNT = 1;
+  private static final int BLOCK_AMOUNT = 5;
+  private static final int BLOCK_AMOUNT_UPGRADE = 2;
 
-  public SpotMonkey() {
+  public Jobber() {
     super(ID, NAME, getCardResourcePath(IMG_PATH), COST, DESCRIPTION, TYPE, AbstractCardEnum.THE_WRESTLER_ORANGE,
         RARITY, TARGET);
-    this.baseMagicNumber = this.magicNumber = STRENGTH_AMOUNT;
+    this.baseMagicNumber = this.magicNumber = BLOCK_AMOUNT;
   }
 
   @Override
   public void use(AbstractPlayer p, AbstractMonster m) {
     AbstractDungeon.actionManager.addToBottom(
-        new ApplyPowerAction(p, p, new SpotMonkeyPower(p, this.magicNumber), this.magicNumber));
+        new ApplyPowerAction(p, p, new JobberPower(p, this.magicNumber), this.magicNumber));
   }
 
   @Override
   public AbstractCard makeCopy() {
-    return new SpotMonkey();
+    return new Jobber();
   }
 
   private static List<AbstractTooltipKeyword> EXTRA_KEYWORDS = Arrays.asList(
-      CustomTooltipKeywords.getTooltipKeyword(CustomTooltipKeywords.PENALTY_CARD)
+      CustomTooltipKeywords.getTooltipKeyword(CustomTooltipKeywords.DIRTY)
   );
 
   @Override
@@ -73,7 +71,7 @@ public class SpotMonkey extends CustomCard {
     if (!this.upgraded) {
       this.upgradeName();
       initializeDescription();
-      this.upgradeBaseCost(UPGRADED_COST);
+      this.upgradeBaseCost(BLOCK_AMOUNT_UPGRADE);
     }
   }
 

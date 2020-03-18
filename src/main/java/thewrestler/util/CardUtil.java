@@ -70,6 +70,11 @@ public class CardUtil {
   }
 
   public static void forAllCardsInCombat(Consumer<AbstractCard> fn, Predicate<AbstractCard> predicate) {
+    for (AbstractCard c : AbstractDungeon.player.hand.group) {
+      if (predicate.test(c)) {
+        fn.accept(c);
+      }
+    }
     for (AbstractCard c : AbstractDungeon.player.drawPile.group) {
       if (predicate.test(c)) {
         fn.accept(c);

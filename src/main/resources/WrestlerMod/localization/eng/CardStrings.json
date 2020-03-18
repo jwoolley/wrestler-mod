@@ -275,6 +275,11 @@
     ]
   },
 
+  "WrestlerMod:Jobber": {
+    "NAME": "Jobber",
+    "DESCRIPTION": "Whenever you play wrestlermod:Dirty card, gain !M! Block."
+  },
+
   "WrestlerMod:Kayfabe": {
     "NAME": "Kayfabe",
     "DESCRIPTION": "Gain ",
@@ -484,7 +489,7 @@
 
   "WrestlerMod:Shortarm": {
     "NAME": "Shortarm",
-    "DESCRIPTION": "Deal !D! damage. NL Gain !M! Temporary Strength. NL Gain [D] ."
+    "DESCRIPTION": "wrestlermod:Dirty. NL Deal !D! damage twice. NL Increase the damage of ALL Shortarm cards by !M! this combat."
   },
 
   "WrestlerMod:Showboat": {
@@ -519,7 +524,7 @@
 
   "WrestlerMod:SpotMonkey": {
     "NAME": "Spot Monkey",
-    "DESCRIPTION": "Whenever you gain a [P] , gain !M! Strength."
+    "DESCRIPTION": "Whenever you gain a [P] , gain !M! Strength and !M! Dexterity."
   },
 
 

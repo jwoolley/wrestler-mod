@@ -130,6 +130,14 @@
     ]
   },
 
+  "WrestlerMod:JobberPower": {
+    "NAME": "Jobber",
+    "DESCRIPTIONS": [
+      "Whenever you play a #yDirty card, gain #b",
+      " #yBlock."
+    ]
+  },
+
   "WrestlerMod:MaintainGrapplePower": {
     "NAME": "Maintaining Grapple",
     "DESCRIPTIONS": [
@@ -200,7 +208,8 @@
     "NAME": "Spot Monkey",
     "DESCRIPTIONS": [
       "Whenever you gain a #yPenalty #yCard, gain #b",
-      " #yStrength."
+      " #yStrength and",
+      " #yDexterity."
     ]
   },
 

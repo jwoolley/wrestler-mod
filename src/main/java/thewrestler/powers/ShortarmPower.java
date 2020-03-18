@@ -32,17 +32,12 @@ public class ShortarmPower extends AbstractWrestlerPower implements CloneablePow
 
   public ShortarmPower(AbstractCreature owner, int amount) {
     super(POWER_ID, NAME, IMG, owner, owner, amount, POWER_TYPE);
-    updateExistingColorlessAttacks(amount);
-  }
-
-  public void stackPower(int stackAmount) {
-    this.fontScale = 8.0F;
-    this.amount += stackAmount;
-    updateExistingColorlessAttacks(stackAmount);
   }
 
   @Override
   public void atEndOfTurn(boolean isPlayer) {
+    AbstractDungeon.actionManager.addToTop(
+        new ApplyPowerAction(this.source, this.source, new InjuredPower(this.owner, this.amount), this.amount));
     AbstractDungeon.actionManager.addToBottom(new RemoveSpecificPowerAction(this.owner, this.owner, POWER_ID));
   }
 
@@ -52,23 +47,9 @@ public class ShortarmPower extends AbstractWrestlerPower implements CloneablePow
   }
 
   @Override
-  public void onAfterUseCard(AbstractCard card, UseCardAction action) {
-
-  }
-
-  public void applyDamageIncrease(AbstractCard card) {
-    if (shouldApplyPower(card)) {
-      card.damage = (card.baseDamage = card.baseDamage + this.amount);
-      card.isDamageModified = true;
-    }
-  }
-
-  public boolean shouldApplyPower(AbstractCard card) {
-    return card.color == AbstractCard.CardColor.COLORLESS && card.type == AbstractCard.CardType.ATTACK;
-  }
-
-  private void updateExistingColorlessAttacks(int increase) {
-    CardUtil.forAllCardsInCombat(c -> c.baseDamage += increase, this::shouldApplyPower);
+  public int onAttacked(DamageInfo info, int amount) {
+    AbstractDungeon.actionManager.addToBottom(new RemoveSpecificPowerAction(this.owner, this.owner, POWER_ID));
+    return amount;
   }
 
   @Override
