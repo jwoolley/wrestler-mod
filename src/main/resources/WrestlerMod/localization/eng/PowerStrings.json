@@ -223,6 +223,14 @@
     ]
   },
 
+  "WrestlerMod:SmackdownPower": {
+    "NAME": "Smackdown",
+    "DESCRIPTIONS": [
+      "Whenever you play a card, apply #b",
+      " #yInjured to ALL enemies."
+    ]
+  },
+
   "WrestlerMod:SquaringOffPower": {
     "NAME": "Squaring Off",
     "DESCRIPTIONS": [
@@ -237,7 +245,7 @@
   "WrestlerMod:SqueezePower": {
     "NAME": "Squeeze",
     "DESCRIPTIONS": [
-      "Whenever you apply a debuff to an enemy this turn that it doesn't already have, gain #b",
+      "Whenever you apply a debuff to an enemy this turn, gain #b",
       " #yBlock."
     ]
   },
@@ -254,7 +262,7 @@
   "WrestlerMod:TechnicianPower": {
     "NAME": "Technician",
     "DESCRIPTIONS": [
-      "Whenever you apply a debuff to an enemy that it doesn't already have, draw #b",
+      "Whenever play a #yPenalty #yCard, draw #b",
       " card.",
       " cards."
     ]

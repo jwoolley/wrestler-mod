@@ -13,6 +13,7 @@ import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import thewrestler.cards.StartOfCombatListener;
+import thewrestler.cards.WrestlerCardTags;
 import thewrestler.cards.skill.AbstractPenaltyCardListener;
 import thewrestler.enums.AbstractCardEnum;
 import thewrestler.keywords.AbstractTooltipKeyword;
@@ -24,7 +25,7 @@ import java.util.List;
 
 import static thewrestler.WrestlerMod.getCardResourcePath;
 
-public class LowBlow extends CustomCard implements AbstractPenaltyCardListener, StartOfCombatListener {
+public class LowBlow extends CustomCard {
   public static final String ID = "WrestlerMod:LowBlow";
   public static final String NAME;
   public static final String DESCRIPTION;
@@ -103,24 +104,9 @@ public class LowBlow extends CustomCard implements AbstractPenaltyCardListener, 
   }
 
   @Override
-  public void atStartOfCombat() {
-
-  }
-
-  @Override
-  public void atTurnStartPreDraw(){
-    this.selfRetain = false;
-  }
-
-
-  @Override
-  public void onGainedWarningCard() {
-
-  }
-
-  @Override
-  public void onGainedPenaltyCard() {
-    AbstractDungeon.actionManager.addToBottom(new DiscardToHandAction(this));
-    this.selfRetain = true;
+  public void onPlayCard(AbstractCard card, AbstractMonster m) {
+    if (card.hasTag(WrestlerCardTags.PENALTY)) {
+      AbstractDungeon.actionManager.addToBottom(new DiscardToHandAction(this));
+    }
   }
 }

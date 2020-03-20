@@ -11,6 +11,7 @@ import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import thewrestler.cards.StartOfCombatListener;
+import thewrestler.cards.WrestlerCardTags;
 import thewrestler.enums.AbstractCardEnum;
 import thewrestler.keywords.AbstractTooltipKeyword;
 import thewrestler.keywords.CustomTooltipKeywords;
@@ -21,7 +22,7 @@ import java.util.List;
 
 import static thewrestler.WrestlerMod.getCardResourcePath;
 
-public class Pinfall extends CustomCard implements AbstractPenaltyCardListener, StartOfCombatListener {
+public class Pinfall extends CustomCard {
   public static final String ID = "WrestlerMod:Pinfall";
   public static final String NAME;
   public static final String DESCRIPTION;
@@ -95,22 +96,9 @@ public class Pinfall extends CustomCard implements AbstractPenaltyCardListener, 
   }
 
   @Override
-  public void atStartOfCombat() {
-    this.selfRetain = false;
-  }
-
-  @Override
-  public void atTurnStartPreDraw() {
-    this.selfRetain = false;
-  }
-  @Override
-  public void onGainedWarningCard() {
-
-  }
-
-  @Override
-  public void onGainedPenaltyCard() {
-    AbstractDungeon.actionManager.addToBottom(new DiscardToHandAction(this));
-    this.selfRetain = true;
+  public void onPlayCard(AbstractCard card, AbstractMonster m) {
+    if (card.hasTag(WrestlerCardTags.PENALTY)) {
+      AbstractDungeon.actionManager.addToBottom(new DiscardToHandAction(this));
+    }
   }
 }

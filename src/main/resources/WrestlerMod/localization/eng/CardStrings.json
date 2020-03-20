@@ -3,8 +3,8 @@
     "NAME": "Alley Oop",
     "DESCRIPTION": "Discard !M! ",
     "EXTENDED_DESCRIPTION": [
-      "Attack",
-      "Attack",
+      "card",
+      "cards",
       ". NL Put !M! random ",
       " with cost ",
       " or less from your draw pile into your hand."
@@ -307,7 +307,7 @@
 
   "WrestlerMod:LowBlow": {
     "NAME": "Low Blow",
-    "DESCRIPTION": "Deal !D! Damage. NL When you gain a [P] , return this from your discard pile to your hand."
+    "DESCRIPTION": "Deal !D! Damage. NL When you play a [P] , return this from your discard pile to your hand."
   },
 
   "WrestlerMod:MainEvent": {
@@ -387,7 +387,7 @@
 
   "WrestlerMod:Pinfall": {
     "NAME": "Pinfall",
-    "DESCRIPTION": "Gain !B! Block. NL When you gain a [P] , return this from your discard pile to your hand."
+    "DESCRIPTION": "Gain !B! Block. NL When you play a [P] , return this from your discard pile to your hand."
   },
 
   "WrestlerMod:PlayToTheCrowd": {
@@ -476,7 +476,7 @@
 
   "WrestlerMod:Screwjob": {
     "NAME": "Screwjob",
-    "DESCRIPTION": "When you gain a [P] , increase this card's damage by !M! this combat. NL Deal !D! damage three times. Exhaust."
+    "DESCRIPTION": "When you play a [P] , increase this card's damage by !M! this combat. NL Deal !D! damage three times. Exhaust."
   },
 
   "WrestlerMod:Sharpshooter": {
@@ -522,11 +522,15 @@
     ]
   },
 
-  "WrestlerMod:SpotMonkey": {
-    "NAME": "Spot Monkey",
-    "DESCRIPTION": "Whenever you gain a [P] , gain !M! Strength and !M! Dexterity."
+  "WrestlerMod:Smackdown": {
+    "NAME": "Smackdown",
+    "DESCRIPTION": "Whenever you play a card, apply !M! wrestlermod:Injured to ALL enemies."
   },
 
+  "WrestlerMod:SpotMonkey": {
+    "NAME": "Spot Monkey",
+    "DESCRIPTION": "Whenever you play a [P] , gain !M! Strength and !M! Dexterity."
+  },
 
   "WrestlerMod:Springboard": {
     "NAME": "Springboard",
@@ -545,7 +549,7 @@
 
   "WrestlerMod:Squeeze": {
     "NAME": "Squeeze",
-    "DESCRIPTION": "Whenever you apply a debuff to an enemy this turn that it doesn't already have, gain !B! Block."
+    "DESCRIPTION": "Whenever you apply a debuff to an enemy this turn, gain !B! Block."
   },
 
   "WrestlerMod:StomachClaw": {
@@ -591,7 +595,7 @@
 
   "WrestlerMod:Technician": {
     "NAME": "Technician",
-    "DESCRIPTION": "Whenever you apply a debuff to an enemy that it doesn't already have, draw !M!",
+    "DESCRIPTION": "Whenever you play a [P] , draw !M!",
     "EXTENDED_DESCRIPTION": [
       " card.",
       " cards."
@@ -713,6 +717,10 @@
 
   "WrestlerMod:YellowPenaltyStatusCard": {
     "NAME": "Yellow Penalty Card",
-    "DESCRIPTION": "Exhaust. NL When drawn, gain [E] . NL At the end of your turn, lose !M! wrestlermod:Bravado."
+    "DESCRIPTION": "Gain",
+    "EXTENDED_DESCRIPTION": [
+      " [E]",
+      " next turn. NL Exhaust."
+    ]
   }
 }

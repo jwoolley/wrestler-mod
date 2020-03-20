@@ -10,7 +10,12 @@ import java.util.List;
 
 public class DefaultPenaltyCardStrategy extends AbstractPenaltyCardStrategy {
 
+  final boolean ONLY_YELLOW = true;
+
   public AbstractPenaltyStatusCard getNextCard() {
+    if (ONLY_YELLOW) {
+      return new YellowPenaltyStatusCard();
+    }
     return AbstractDungeon.miscRng.randomBoolean()
         ? AbstractDungeon.miscRng.randomBoolean() ?  new RedPenaltyStatusCard() : new BluePenaltyStatusCard()
         : AbstractDungeon.miscRng.randomBoolean() ? new YellowPenaltyStatusCard() : getNextCard();

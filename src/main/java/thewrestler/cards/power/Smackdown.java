@@ -14,64 +14,55 @@ import thewrestler.enums.AbstractCardEnum;
 import thewrestler.keywords.AbstractTooltipKeyword;
 import thewrestler.keywords.CustomTooltipKeywords;
 import thewrestler.keywords.TooltipKeywords;
-import thewrestler.powers.JobberPower;
-import thewrestler.powers.SpotMonkeyPower;
+import thewrestler.powers.SmackdownPower;
 
 import java.util.Arrays;
 import java.util.List;
 
 import static thewrestler.WrestlerMod.getCardResourcePath;
 
-public class Jobber extends CustomCard {
-  public static final String ID = WrestlerMod.makeID("Jobber");
+public class Smackdown extends CustomCard {
+  public static final String ID = WrestlerMod.makeID("Smackdown");
 
   public static final String NAME;
   public static final String DESCRIPTION;
   public static final String[] EXTENDED_DESCRIPTION;
-  public static final String IMG_PATH = "jobber.png";
+  public static final String IMG_PATH = "smackdown.png";
 
   private static final CardStrings cardStrings;
 
   private static final CardType TYPE = CardType.POWER;
-  private static final CardRarity RARITY = CardRarity.UNCOMMON;
+  private static final CardRarity RARITY = CardRarity.RARE;
   private static final CardTarget TARGET = CardTarget.NONE;
 
-  private static final int COST = 1;
-  private static final int BLOCK_AMOUNT = 4;
-  private static final int BLOCK_AMOUNT_UPGRADE = 2;
+  private static final int COST = 2;
+  private static final int INJURED_AMOUNT = 1;
+  private static final int INJURED_AMOUNT_UPGRADE = 1;
 
-  public Jobber() {
+  public Smackdown() {
     super(ID, NAME, getCardResourcePath(IMG_PATH), COST, DESCRIPTION, TYPE, AbstractCardEnum.THE_WRESTLER_ORANGE,
         RARITY, TARGET);
-    this.baseMagicNumber = this.magicNumber = BLOCK_AMOUNT;
+    this.baseMagicNumber = this.magicNumber = INJURED_AMOUNT;
   }
 
   @Override
   public void use(AbstractPlayer p, AbstractMonster m) {
     AbstractDungeon.actionManager.addToBottom(
-        new ApplyPowerAction(p, p, new JobberPower(p, this.magicNumber), this.magicNumber));
+        new ApplyPowerAction(p, p, new SmackdownPower(p, this.magicNumber), this.magicNumber));
   }
 
   @Override
   public AbstractCard makeCopy() {
-    return new Jobber();
+    return new Smackdown();
   }
 
-  private static List<AbstractTooltipKeyword> EXTRA_KEYWORDS = Arrays.asList(
-      CustomTooltipKeywords.getTooltipKeyword(CustomTooltipKeywords.DIRTY)
-  );
-
-  @Override
-  public List<TooltipInfo> getCustomTooltips() {
-    return TooltipKeywords.getTooltipInfos(EXTRA_KEYWORDS);
-  }
 
   @Override
   public void upgrade() {
     if (!this.upgraded) {
       this.upgradeName();
       initializeDescription();
-      this.upgradeMagicNumber(BLOCK_AMOUNT_UPGRADE);
+      this.upgradeBaseCost(INJURED_AMOUNT_UPGRADE);
     }
   }
 

@@ -107,7 +107,7 @@
     "NAMES": [
       "Yellow Penalty Card", "yellow_penalty_card"
     ],
-    "DESCRIPTION": "Shuffle a #yDazed into your draw pile at end of turn. Gain energy when drawn."
+    "DESCRIPTION": "Lose #b #yBravado when gained. Gain energy next turn when played."
   },
 
   "WrestlerMod:PenaltyCardsNoGlyph": {

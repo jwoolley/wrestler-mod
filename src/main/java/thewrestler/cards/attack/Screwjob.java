@@ -5,6 +5,7 @@ import basemod.helpers.TooltipInfo;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.common.DamageAction;
 import com.megacrit.cardcrawl.actions.common.ModifyDamageAction;
+import com.megacrit.cardcrawl.actions.utility.DiscardToHandAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.cards.DamageInfo;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
@@ -13,6 +14,7 @@ import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
+import thewrestler.cards.WrestlerCardTags;
 import thewrestler.cards.skill.AbstractPenaltyCardListener;
 import thewrestler.enums.AbstractCardEnum;
 import thewrestler.keywords.AbstractTooltipKeyword;
@@ -25,7 +27,7 @@ import java.util.UUID;
 
 import static thewrestler.WrestlerMod.getCardResourcePath;
 
-public class Screwjob extends CustomCard implements AbstractPenaltyCardListener {
+public class Screwjob extends CustomCard {
   public static final String ID = "WrestlerMod:Screwjob";
   public static final String NAME;
   public static final String DESCRIPTION;
@@ -41,7 +43,7 @@ public class Screwjob extends CustomCard implements AbstractPenaltyCardListener 
   private static final int COST = 1;
   private static final int DAMAGE = 3;
   private static final int NUM_REPS = 3;
-  private static final int DAMAGE_INCREASE_PER_PENALTY_CARD = 2;
+  private static final int DAMAGE_INCREASE_PER_PENALTY_CARD = 3;
   private static final int DAMAGE_INCREASE_PER_PENALTY_CARD_UPGRADE = 1;
 
   public Screwjob() {
@@ -59,13 +61,11 @@ public class Screwjob extends CustomCard implements AbstractPenaltyCardListener 
   }
 
   @Override
-  public void onGainedWarningCard() {
+  public void onPlayCard(AbstractCard card, AbstractMonster m) {
+    if (card.hasTag(WrestlerCardTags.PENALTY)) {
+      AbstractDungeon.actionManager.addToBottom(new ModifyDamageAction(this.uuid, this.magicNumber));
 
-  }
-
-  @Override
-  public void onGainedPenaltyCard() {
-    AbstractDungeon.actionManager.addToBottom(new ModifyDamageAction(this.uuid, this.magicNumber));
+    }
   }
 
   private static class ScrewjobAction extends AbstractGameAction {

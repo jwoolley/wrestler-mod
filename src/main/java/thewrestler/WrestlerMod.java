@@ -524,6 +524,7 @@ public class WrestlerMod implements
         BaseMod.addCard(new Shortarm());
         BaseMod.addCard(new Showboat());
         BaseMod.addCard(new SideRoll());
+        BaseMod.addCard(new Smackdown());
         BaseMod.addCard(new SpotMonkey());
         BaseMod.addCard(new Springboard());
         BaseMod.addCard(new SquareOff());
@@ -624,6 +625,7 @@ public class WrestlerMod implements
         UnlockTracker.unlockCard(Showboat.ID);
         UnlockTracker.unlockCard(SideRoll.ID);
         UnlockTracker.unlockCard(SleeperHold.ID);
+        UnlockTracker.unlockCard(Smackdown.ID);
         UnlockTracker.unlockCard(SpotMonkey.ID);
         UnlockTracker.unlockCard(Springboard.ID);
         UnlockTracker.unlockCard(SquareOff.ID);

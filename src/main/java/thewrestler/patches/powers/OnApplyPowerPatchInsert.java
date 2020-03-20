@@ -57,18 +57,12 @@ public class OnApplyPowerPatchInsert {
         if (player.hasPower(CloverleafPower.POWER_ID)) {
           ((CloverleafPower) AbstractDungeon.player.getPower(CloverleafPower.POWER_ID)).onApplyPower(powerToApply);
         }
+      }
 
+      if (source == player && target != player && !target.hasPower(ArtifactPower.POWER_ID)) {
         if (player.hasPower(SqueezePower.POWER_ID)) {
           ((SqueezePower) AbstractDungeon.player.getPower(SqueezePower.POWER_ID)).onApplyPower(powerToApply);
         }
-
-        if (player.hasPower(TechnicianPower.POWER_ID)) {
-          ((TechnicianPower) AbstractDungeon.player.getPower(TechnicianPower.POWER_ID)).onApplyPower(powerToApply);
-        }
-      }
-
-      if (source == player && target != player && target.hasPower(CloverleafPower.POWER_ID) && !target.hasPower(ArtifactPower.POWER_ID)) {
-        ((CloverleafPower) target.getPower(CloverleafPower.POWER_ID)).onApplyPower(powerToApply);
       }
 
       incrementDebuffsApplied(target, source, powerToApply);

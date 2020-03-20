@@ -1,5 +1,6 @@
 package thewrestler.cards.colorless.status.penalty;
 
+import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
 import com.megacrit.cardcrawl.actions.common.GainEnergyAction;
 import com.megacrit.cardcrawl.actions.common.MakeTempCardInDrawPileAction;
 import com.megacrit.cardcrawl.actions.common.ReducePowerAction;
@@ -11,6 +12,8 @@ import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
+import com.megacrit.cardcrawl.powers.EnergizedPower;
+import org.apache.commons.lang3.StringUtils;
 import thewrestler.powers.BravadoPower;
 import thewrestler.powers.enqueuedpenaltycard.EnqueuedPenaltyCardPower;
 
@@ -27,7 +30,7 @@ public class YellowPenaltyStatusCard extends AbstractPenaltyStatusCard {
   private static final int BRAVADO_LOSS = 2;
 
   public YellowPenaltyStatusCard() {
-    super(ID, NAME, IMG_PATH, getDescription());
+    super(ID, NAME, IMG_PATH, getDescription(ENERGY_GAIN));
     this.magicNumber = this.baseMagicNumber = BRAVADO_LOSS;
     this.misc = ENERGY_GAIN;
     this.exhaust = true;
@@ -35,18 +38,7 @@ public class YellowPenaltyStatusCard extends AbstractPenaltyStatusCard {
 
   @Override
   public void use(AbstractPlayer p, AbstractMonster m) {
-    if (this.dontTriggerOnUseCard) {
-      this.exhaust = false;
-      AbstractDungeon.actionManager.addToBottom(new ReducePowerAction(p, p, BravadoPower.POWER_ID, this.magicNumber));
-    } else {
-      this.exhaust = true;
-    }
-  }
-
-  @Override
-  public void triggerWhenDrawn(){
-    AbstractPlayer p = AbstractDungeon.player;
-    AbstractDungeon.actionManager.addToBottom(new GainEnergyAction(this.misc));
+    AbstractDungeon.actionManager.addToBottom(new ApplyPowerAction(p, p, new EnergizedPower(p, this.misc), this.misc));
   }
 
   @Override
@@ -55,12 +47,13 @@ public class YellowPenaltyStatusCard extends AbstractPenaltyStatusCard {
   }
 
   public void triggerOnEndOfTurnForPlayingCard() {
-    this.dontTriggerOnUseCard = true;
     AbstractDungeon.actionManager.cardQueue.add(new CardQueueItem(this, true));
   }
 
-  private static String getDescription() {
-    return DESCRIPTION;
+  private static String getDescription(int energyAmount) {
+    return DESCRIPTION
+        + StringUtils.repeat(EXTENDED_DESCRIPTION[0], energyAmount)
+        + EXTENDED_DESCRIPTION[1];
   }
 
   @Override
@@ -78,5 +71,11 @@ public class YellowPenaltyStatusCard extends AbstractPenaltyStatusCard {
   @Override
   protected EnqueuedPenaltyCardPower getEneueuedCardPower(int amount) {
     return new EnqueueCardPower(amount, ENQUEUE_POWER_ID, NAME, ENQUEUE_POWER_IMG_NAME);
+  }
+
+  @Override
+  public void triggerOnCardGained() {
+    AbstractPlayer p = AbstractDungeon.player;
+    AbstractDungeon.actionManager.addToBottom(new ReducePowerAction(p, p, BravadoPower.POWER_ID, this.magicNumber));
   }
 }

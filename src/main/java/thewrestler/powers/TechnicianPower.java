@@ -2,18 +2,20 @@ package thewrestler.powers;
 
 import basemod.interfaces.CloneablePowerInterface;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
-import com.megacrit.cardcrawl.actions.common.DamageAction;
-import com.megacrit.cardcrawl.actions.common.DrawCardAction;
-import com.megacrit.cardcrawl.actions.common.GainBlockAction;
-import com.megacrit.cardcrawl.actions.common.RemoveSpecificPowerAction;
+import com.megacrit.cardcrawl.actions.common.*;
+import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.cards.DamageInfo;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.AbstractCreature;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.PowerStrings;
+import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.powers.AbstractPower;
+import com.megacrit.cardcrawl.powers.DexterityPower;
+import com.megacrit.cardcrawl.powers.StrengthPower;
 import thewrestler.WrestlerMod;
+import thewrestler.cards.skill.AbstractPenaltyCardListener;
 import thewrestler.util.info.CombatInfo;
 
 public class TechnicianPower extends AbstractWrestlerPower implements CloneablePowerInterface {
@@ -25,15 +27,14 @@ public class TechnicianPower extends AbstractWrestlerPower implements CloneableP
 
   public static final PowerType POWER_TYPE = PowerType.BUFF;
 
-  public TechnicianPower(AbstractCreature owner, int amount) {
-    super(POWER_ID, NAME, IMG, owner, owner, amount, POWER_TYPE);
+  public TechnicianPower(int amount) {
+    super(POWER_ID, NAME, IMG, AbstractDungeon.player, AbstractDungeon.player, amount, POWER_TYPE);
   }
 
-  public void onApplyPower(AbstractPower power) {
-    AbstractPlayer player = AbstractDungeon.player;
-    AbstractDungeon.actionManager.addToBottom(new DrawCardAction(player, this.amount));
-//    AbstractDungeon.actionManager.addToBottom(new GainBlockAction(player, player, this.amount));
+  @Override
+  public void onPlayCard(AbstractCard card, AbstractMonster monster) {
     this.flash();
+    AbstractDungeon.actionManager.addToBottom(new DrawCardAction(AbstractDungeon.player, this.amount));
   }
 
   @Override
@@ -43,7 +44,7 @@ public class TechnicianPower extends AbstractWrestlerPower implements CloneableP
 
   @Override
   public AbstractPower makeCopy() {
-    return new TechnicianPower(owner, amount);
+    return new TechnicianPower(amount);
   }
 
   static {

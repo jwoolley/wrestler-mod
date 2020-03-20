@@ -76,4 +76,9 @@ public class BluePenaltyStatusCard extends AbstractPenaltyStatusCard {
   protected EnqueuedPenaltyCardPower getEneueuedCardPower(int amount) {
     return new EnqueueCardPower(amount, ENQUEUE_POWER_ID, NAME, ENQUEUE_POWER_IMG_NAME);
   }
+
+  @Override
+  public void triggerOnCardGained() {
+
+  }
 }

@@ -69,8 +69,6 @@ public class PenaltyCardInfo implements StartOfCombatListener, EndOfCombatListen
     listeners.addAll(getPenaltyCardListenerPowers());
     listeners.forEach(AbstractPenaltyCardListener::onGainedPenaltyCard);
     CombatInfo.incrementPenaltyCardsGainedThisCombatCount();
-
-
   }
 
   private final static AbstractPenaltyCardStrategy DEFAULT_STRATEGY = new DefaultPenaltyCardStrategy();
@@ -134,6 +132,7 @@ public class PenaltyCardInfo implements StartOfCombatListener, EndOfCombatListen
           } else {
             AbstractDungeon.actionManager.addToBottom(new MakeTempCardInHandAction(cardToGain));
           }
+          cardToGain.triggerOnCardGained();
           this.gainedCard = true;
         }
         if (this.amount <= 1) {

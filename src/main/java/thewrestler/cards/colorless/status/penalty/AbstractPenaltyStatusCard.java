@@ -23,6 +23,8 @@ public abstract class AbstractPenaltyStatusCard extends CustomCard {
 
   protected abstract EnqueuedPenaltyCardPower getEneueuedCardPower(int amount);
 
+  public abstract void triggerOnCardGained();
+
   public void applyEnqueuedCardPower(int amount) {
     EnqueuedPenaltyCardPower power = getEneueuedCardPower(amount);
     AbstractDungeon.actionManager.addToBottom(new EnqueuedPenaltyCardPower.GainEnqueuedPenaltyCardPowerAction(power));
