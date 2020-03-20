@@ -2,6 +2,7 @@ package thewrestler.powers;
 
 import basemod.interfaces.CloneablePowerInterface;
 import com.megacrit.cardcrawl.actions.common.MakeTempCardInDrawPileAction;
+import com.megacrit.cardcrawl.actions.common.RemoveSpecificPowerAction;
 import com.megacrit.cardcrawl.actions.utility.UseCardAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.core.AbstractCreature;
@@ -22,23 +23,28 @@ public class FeudRivalPower extends AbstractWrestlerPower implements CloneablePo
 
   public static final PowerType POWER_TYPE = PowerType.BUFF;
 
-  public FeudRivalPower(AbstractCreature owner, int amount) {
-    super(POWER_ID, NAME, IMG, owner, owner, amount, POWER_TYPE);
+  public FeudRivalPower(AbstractCreature owner) {
+    super(POWER_ID, NAME, IMG, owner, AbstractDungeon.player, -1, POWER_TYPE);
   }
 
   @Override
   public void updateDescription() {
+    final int feudAmount = getFeudAmount();
     this.description = DESCRIPTIONS[0]
-        + NUM_ATTACKS_REQUIRED
-        + DESCRIPTIONS[1]
-        + this.amount
-        + (this.amount == 1 ? DESCRIPTIONS[2] : DESCRIPTIONS[3])
-        + DESCRIPTIONS[4];
+        + feudAmount
+        + (feudAmount == 1 ? DESCRIPTIONS[1] : DESCRIPTIONS[2])
+        + DESCRIPTIONS[3];
+  }
+
+  private static int getFeudAmount() {
+    return AbstractDungeon.player.hasPower(FeudPower.POWER_ID)
+        ? AbstractDungeon.player.getPower(FeudPower.POWER_ID).amount
+        : 0;
   }
 
   @Override
   public AbstractPower makeCopy() {
-    return new FeudRivalPower(owner, amount);
+    return new FeudRivalPower(owner);
   }
 
   static {

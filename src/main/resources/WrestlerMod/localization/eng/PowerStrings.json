@@ -64,8 +64,17 @@
   "WrestlerMod:FeudPower": {
     "NAME": "Feud",
     "DESCRIPTIONS": [
-      "At the end of your turn, if you played exactly #b",
-      " #yAttacks, shuffle #b",
+      "Whenever you attack the same enemy twice in a row in one turn, shuffle #b",
+      " an #yElbow",
+      " #yElbows",
+      " into your draw pile."
+    ]
+  },
+
+  "WrestlerMod:FeudRivalPower": {
+    "NAME": "Feud Rival",
+    "DESCRIPTIONS": [
+      "The next time you attack this enemy this turn, shuffle #b",
       " #yElbow",
       " #yElbows",
       " on into your draw pile."

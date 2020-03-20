@@ -184,7 +184,7 @@
 
   "WrestlerMod:Feud": {
     "NAME": "Feud",
-    "DESCRIPTION": "At the end of your turn, if you played exactly !M! attacks, shuffle an *Elbow into your draw pile.",
+    "DESCRIPTION": "Whenever you attack the same enemy twice in a row in one turn, shuffle an *Elbow into your draw pile.",
     "EXTENDED_DESCRIPTION": [
       "Innate. NL "
     ]

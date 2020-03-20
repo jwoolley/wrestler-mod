@@ -56,14 +56,6 @@ public class LowBlow extends CustomCard {
   }
 
   @Override
-  public void triggerOnEndOfPlayerTurn() {
-    super.triggerOnEndOfPlayerTurn();
-    if (this.selfRetain) {
-      this.flash();
-    }
-  }
-
-  @Override
   public AbstractCard makeCopy() {
     return new LowBlow();
   }

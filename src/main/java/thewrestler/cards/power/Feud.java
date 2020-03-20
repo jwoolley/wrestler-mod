@@ -37,13 +37,12 @@ public class Feud extends AbstractCardWithPreviewCard {
   public Feud() {
     super(ID, NAME, getCardResourcePath(IMG_PATH), COST, getDescription(false), TYPE,
         AbstractCardEnum.THE_WRESTLER_ORANGE, RARITY, TARGET);
-    this.baseMagicNumber = this.magicNumber = FeudPower.NUM_ATTACKS_REQUIRED;
   }
 
   @Override
   public void use(AbstractPlayer p, AbstractMonster m) {
     AbstractDungeon.actionManager.addToBottom(
-        new ApplyPowerAction(p, p, new FeudPower(p, CARDS_PER_TURN), CARDS_PER_TURN));
+        new ApplyPowerAction(p, p, new FeudPower(CARDS_PER_TURN), CARDS_PER_TURN));
   }
 
   @Override
