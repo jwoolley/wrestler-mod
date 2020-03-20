@@ -38,9 +38,11 @@
 
   "WrestlerMod:BearHug": {
     "NAME": "Bear Hug",
-    "DESCRIPTION": "Deal !D! Damage. NL Whenever you play a non-Attack card this turn, apply !M! Constricted and you gain !M! Block.",
+    "DESCRIPTION": "Deal !D! Damage. NL Apply ",
     "EXTENDED_DESCRIPTION": [
-      " NL Exhaust."
+      " wrestlermod:Injured ",
+      " twice.",
+      " !M! times."
     ]
   },
 
@@ -717,7 +719,7 @@
 
   "WrestlerMod:YellowPenaltyStatusCard": {
     "NAME": "Yellow Penalty Card",
-    "DESCRIPTION": "Gain",
+    "DESCRIPTION": "When you gain this card, lose !M! wrestlermod:Bravado. NL NL Gain",
     "EXTENDED_DESCRIPTION": [
       " [E]",
       " next turn. NL Exhaust."

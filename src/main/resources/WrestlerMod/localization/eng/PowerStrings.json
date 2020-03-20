@@ -216,8 +216,8 @@
   "WrestlerMod:SpotMonkeyPower": {
     "NAME": "Spot Monkey",
     "DESCRIPTIONS": [
-      "Whenever you gain a #yPenalty #yCard, gain #b",
-      " #yStrength and",
+      "Whenever you play a #yPenalty #yCard, gain #b",
+      " #yStrength and #b",
       " #yDexterity."
     ]
   },

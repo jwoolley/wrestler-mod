@@ -293,6 +293,7 @@ public class WrestlerMod implements
         reflectedMap.put("GRUNT_SHORT_2", new Sfx(getAudioResourcePath("TheWrestler_GruntShort2.ogg")));
         reflectedMap.put("GUILLOTINE_1", new Sfx(getAudioResourcePath("TheWrestler_Guillotine1.ogg")));
         reflectedMap.put("LASER_SHORT_1", new Sfx(getAudioResourcePath("TheWrestler_LaserShort1.ogg")));
+        reflectedMap.put("ROAR_BEAST_1", new Sfx(getAudioResourcePath("TheWrestler_RoarBeast1.ogg")));
         reflectedMap.put("SNAP_LIGAMENT_1", new Sfx(getAudioResourcePath("TheWrestler_SnapLigament1.ogg")));
         reflectedMap.put("SPLAT_WET_1", new Sfx(getAudioResourcePath("TheWrestler_SplatWet1.ogg")));
         reflectedMap.put("SPRINGBOARD_1", new Sfx(getAudioResourcePath("TheWrestler_Springboard1.ogg")));
@@ -472,7 +473,6 @@ public class WrestlerMod implements
         BaseMod.addCard(new Backfist());
         BaseMod.addCard(new Backslide());
         BaseMod.addCard(new BearHug());
-        BaseMod.addCard(new BlowOff());
         BaseMod.addCard(new Butterfly());
         BaseMod.addCard(new Brainbuster());
         BaseMod.addCard(new CageMatch());
@@ -538,14 +538,19 @@ public class WrestlerMod implements
         BaseMod.addCard(new TripleThreat());
         BaseMod.addCard(new WindUpKick());
 
-        //        BaseMod.addCard(new HalfNelson());
-        //        BaseMod.addCard(new SleeperHold());
-        //        BaseMod.addCard(new NearFall());
-        //        BaseMod.addCard(new MainEvent());
+
+        /* TO BE REWORKED {
+            BaseMod.addCard(new BlowOff());
+            BaseMod.addCard(new HalfNelson());
+            BaseMod.addCard(new SleeperHold());
+            BaseMod.addCard(new NearFall());
+            BaseMod.addCard(new MainEvent());
+
+            BaseMod.addCard(new SafetyTag());
+            BaseMod.addCard(new TakeAPowder());
+        } */
 
 
-        //        BaseMod.addCard(new SafetyTag());
-        //        BaseMod.addCard(new TakeAPowder());
 
 
         // NEED REWORK BECAUSE OF PENALTY CARD REWORK

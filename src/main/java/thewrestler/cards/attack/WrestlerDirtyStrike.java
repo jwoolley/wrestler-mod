@@ -12,7 +12,7 @@ public class WrestlerDirtyStrike extends WrestlerStrike {
   public static final String DESCRIPTION;
   public static final String IMG_PATH = "dirtystrike.png";
 
-  private static final int ADDITIONAL_BASE_DAMAGE = 1;
+  private static final int ADDITIONAL_BASE_DAMAGE = 0;
 
   private static final CardStrings cardStrings;
 
