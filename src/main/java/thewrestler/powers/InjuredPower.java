@@ -22,11 +22,11 @@ public class InjuredPower extends AbstractWrestlerPower implements CloneablePowe
 
   public static final PowerType POWER_TYPE = PowerType.DEBUFF;
 
-  private boolean keepInjured;
+  private boolean reapplyInjured;
 
   public InjuredPower(AbstractCreature owner, int amount) {
     super(POWER_ID, NAME, IMG, owner, owner, amount, POWER_TYPE);
-    keepInjured = false;
+    reapplyInjured = false;
   }
 
   @Override
@@ -38,37 +38,42 @@ public class InjuredPower extends AbstractWrestlerPower implements CloneablePowe
         new DamageAction(this.owner, new DamageInfo(this.source, this.amount, DamageInfo.DamageType.THORNS),
             AbstractGameAction.AttackEffect.SMASH, false));
 
-    WrestlerMod.logger.info("SprainPower::_atStartOfTurn called. setting keepInjured to false: " + this.keepInjured);
+    WrestlerMod.logger.info("SprainPower::_atStartOfTurn called. setting reapplyInjured to false: " + this.reapplyInjured);
 
-    this.keepInjured = false;
+    this.reapplyInjured = false;
   }
 
   @Override
   public void atEndOfTurn(boolean isPlayer) {
-
     WrestlerMod.logger.info("SprainPower::_atEndOfTurn called. isPlayer: " + isPlayer
-        + "; keepInjured: " + this.keepInjured + "; numAttacksPlayed: " + CombatInfo.getNumAttacksPlayed());
-    if (!isPlayer && !this.keepInjured || isPlayer && CombatInfo.getNumAttacksPlayed() == 0) {
+        + "; reapplyInjured: " + this.reapplyInjured + "; numAttacksPlayed: " + CombatInfo.getNumAttacksPlayed());
+    if (!isPlayer && !this.reapplyInjured || isPlayer && CombatInfo.getNumAttacksPlayed() == 0) {
       WrestlerMod.logger.info("SprainPower::_atEndOfTurn removing power");
-      AbstractDungeon.actionManager.addToBottom(new RemoveSpecificPowerAction(this.owner, this.source, POWER_ID));
     } else {
-      // this.flashWithoutSound();
+      this.flashWithoutSound();
+      CardCrawlGame.sound.play("SPRINGBOARD_1");
+      CardCrawlGame.sound.play("SNAP_LIGAMENT_1");
+      AbstractDungeon.actionManager.addToBottom(
+          new DamageAction(this.owner, new DamageInfo(this.source, this.amount, DamageInfo.DamageType.THORNS),
+              AbstractGameAction.AttackEffect.SMASH, false));
     }
+    AbstractDungeon.actionManager.addToBottom(new RemoveSpecificPowerAction(this.owner, this.source, POWER_ID));
+
   }
 
   @Override
   public void onAttack(DamageInfo info, int amount, AbstractCreature target) {
     if (info.owner == this.owner && this.owner != target && info.type == DamageInfo.DamageType.NORMAL) {
-      WrestlerMod.logger.info("SprainPower::onAttack called. setting keepInjured to true");
-      this.keepInjured = true;
+      WrestlerMod.logger.info("SprainPower::onAttack called. setting reapplyInjured to true");
+      this.reapplyInjured = true;
     }
   }
 
   @Override
   public void updateDescription() {
     this.description = this.owner.isPlayer ?
-        (DESCRIPTIONS[0] + this.amount + DESCRIPTIONS[1])
-        : (DESCRIPTIONS[2] + this.amount + DESCRIPTIONS[3]);
+        (DESCRIPTIONS[0] + this.amount + DESCRIPTIONS[1] + this.amount + DESCRIPTIONS[2])
+        : (DESCRIPTIONS[3] + this.amount + DESCRIPTIONS[4] + this.amount + DESCRIPTIONS[5]);
   }
 
   @Override

@@ -440,6 +440,11 @@
     "DESCRIPTION": "Gain !B! Block. NL Exhaust ALL Statuses. NL Deal !D! damage to ALL enemies for each Exhausted card. NL Exhaust."
   },
 
+  "WrestlerMod:RefBump": {
+    "NAME": "Ref Bump",
+    "DESCRIPTION": "wrestlermod:Dirty. NL Gain !B! Block. NL [P] s cost 0 this turn."
+  },
+
   "WrestlerMod:Ropewalk": {
     "NAME": "Ropewalk",
     "DESCRIPTION": "Gain !B! Block. NL Reduce the cost of a random Attack card in your hand by 1 this",

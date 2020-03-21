@@ -515,6 +515,7 @@ public class WrestlerMod implements
         BaseMod.addCard(new Powerbomb());
         BaseMod.addCard(new ProvenTactics());
         BaseMod.addCard(new Redemption());
+        BaseMod.addCard(new RefBump());
         BaseMod.addCard(new Ropewalk());
         BaseMod.addCard(new RunTheRing());
         BaseMod.addCard(new Sandbag());
@@ -620,6 +621,7 @@ public class WrestlerMod implements
         UnlockTracker.unlockCard(Powerbomb.ID);
         UnlockTracker.unlockCard(ProvenTactics.ID);
         UnlockTracker.unlockCard(Redemption.ID);
+        UnlockTracker.unlockCard(RefBump.ID);
         UnlockTracker.unlockCard(Ropewalk.ID);
         UnlockTracker.unlockCard(RunTheRing.ID);
         UnlockTracker.unlockCard(Sandbag.ID);

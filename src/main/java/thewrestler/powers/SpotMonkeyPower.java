@@ -11,9 +11,9 @@ import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.powers.AbstractPower;
 import com.megacrit.cardcrawl.powers.DexterityPower;
 import com.megacrit.cardcrawl.powers.StrengthPower;
-import com.sun.webkit.graphics.WCTextRun;
 import thewrestler.WrestlerMod;
 import thewrestler.cards.WrestlerCardTags;
+import thewrestler.cards.colorless.status.penalty.AbstractPenaltyStatusCard;
 import thewrestler.cards.skill.AbstractPenaltyCardListener;
 
 public class SpotMonkeyPower extends AbstractWrestlerPower implements CloneablePowerInterface, AbstractPenaltyCardListener {
@@ -72,7 +72,7 @@ public class SpotMonkeyPower extends AbstractWrestlerPower implements CloneableP
   }
 
   @Override
-  public void onGainedPenaltyCard() {
+  public void onGainedPenaltyCard(AbstractPenaltyStatusCard card) {
 
   }
 }

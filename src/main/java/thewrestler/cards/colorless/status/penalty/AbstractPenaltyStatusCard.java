@@ -2,9 +2,12 @@ package thewrestler.cards.colorless.status.penalty;
 
 import basemod.abstracts.CustomCard;
 import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
+import com.megacrit.cardcrawl.core.AbstractCreature;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.powers.AbstractPower;
+import sun.security.krb5.internal.APOptions;
 import thewrestler.cards.WrestlerCardTags;
+import thewrestler.powers.RefBumpPower;
 import thewrestler.powers.enqueuedpenaltycard.EnqueuedPenaltyCardPower;
 
 import static thewrestler.WrestlerMod.getCardResourcePath;

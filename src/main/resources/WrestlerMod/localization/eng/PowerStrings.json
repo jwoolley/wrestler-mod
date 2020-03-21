@@ -226,9 +226,18 @@
     "NAME": "Injured",
     "DESCRIPTIONS": [
       "At the start of your turn, lose #b",
-      " HP. Lose #yInjured at the end of your turn if you didn't attack.",
+      " HP. Lose #b",
+      " HP again at the end of your turn if you attacked an enemy.",
       "At the start of its turn, loses #b",
-      " HP. Loses #yInjured at the end of its turn if it didn't attack."
+      " HP. Loses #b",
+      " HP again at the end of its turn if it attacks you."
+    ]
+  },
+
+  "WrestlerMod:RefBumpPower": {
+    "NAME": "Ref Bump",
+    "DESCRIPTIONS": [
+      "#yPenalty #yCards cost #b0 this turn."
     ]
   },
 

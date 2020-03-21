@@ -131,7 +131,7 @@
     "NAMES": [
       "injured", "injured"
     ],
-    "DESCRIPTION": "Injured creatures lose HP at the start of their turn, and remain Injured if they attack."
+    "DESCRIPTION": "Injured creatures lose HP at the start of their turn, and lose the same HP at end of turn if they attack."
   },
 
 

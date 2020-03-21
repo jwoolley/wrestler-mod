@@ -55,7 +55,6 @@ public class PenaltyCardInfo implements StartOfCombatListener, EndOfCombatListen
   public static void gainPenaltyCard(AbstractPenaltyStatusCard penaltyCard) {
     if (!AbstractDungeon.player.hasPower(NoPenaltyPower.POWER_ID)) {
       AbstractDungeon.actionManager.addToTop(new GainPenaltyCardsAction(1, penaltyCard));
-      onPenaltyCardGained(penaltyCard);
     } else {
       AbstractDungeon.player.getPower(NoPenaltyPower.POWER_ID).flashWithoutSound();
     }
@@ -65,9 +64,10 @@ public class PenaltyCardInfo implements StartOfCombatListener, EndOfCombatListen
   private static void onPenaltyCardGained(AbstractPenaltyStatusCard penaltyCard) {
     WrestlerCharacter.getPenaltyCardInfo().reset();
     List<AbstractPenaltyCardListener> listeners = new ArrayList<>();
+    penaltyCard.triggerOnCardGained();
     listeners.addAll(getPenaltyCardListenerCards());
     listeners.addAll(getPenaltyCardListenerPowers());
-    listeners.forEach(AbstractPenaltyCardListener::onGainedPenaltyCard);
+    listeners.forEach(liatener -> liatener.onGainedPenaltyCard(penaltyCard));
     CombatInfo.incrementPenaltyCardsGainedThisCombatCount();
   }
 
@@ -132,7 +132,7 @@ public class PenaltyCardInfo implements StartOfCombatListener, EndOfCombatListen
           } else {
             AbstractDungeon.actionManager.addToBottom(new MakeTempCardInHandAction(cardToGain));
           }
-          cardToGain.triggerOnCardGained();
+          onPenaltyCardGained(cardToGain);
           this.gainedCard = true;
         }
         if (this.amount <= 1) {
