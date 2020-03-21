@@ -46,10 +46,6 @@ public class YellowPenaltyStatusCard extends AbstractPenaltyStatusCard {
     return new YellowPenaltyStatusCard();
   }
 
-  public void triggerOnEndOfTurnForPlayingCard() {
-    AbstractDungeon.actionManager.cardQueue.add(new CardQueueItem(this, true));
-  }
-
   private static String getDescription(int energyAmount) {
     return DESCRIPTION
         + StringUtils.repeat(EXTENDED_DESCRIPTION[0], energyAmount)

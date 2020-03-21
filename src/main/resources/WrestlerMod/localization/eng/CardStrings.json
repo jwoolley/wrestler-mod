@@ -695,9 +695,9 @@
 
   "WrestlerMod:BluePenaltyStatusCard": {
     "NAME": "Blue Penalty Card",
-    "DESCRIPTION": "Exhaust. NL When drawn, draw !M! cards. NL At the end of your turn, a random enemy gains ",
+    "DESCRIPTION": "When you gain this card, a random enemy gains !M! *Plated *Armor. NL NL Draw",
     "EXTENDED_DESCRIPTION": [
-      " Plated Armor."
+      " cards next turn. NL Exhaust."
     ]
   },
 

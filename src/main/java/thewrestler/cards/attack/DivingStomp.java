@@ -30,11 +30,11 @@ public class DivingStomp extends CustomCard {
   private static final CardRarity RARITY = CardRarity.UNCOMMON;
   private static final CardTarget TARGET = CardTarget.ENEMY;
 
-  private static final int COST = 2;
-  private static final int DAMAGE = 15;
-  private static final int DAMAGE_UPGRADE = 5;
+  private static final int COST = 1;
+  private static final int DAMAGE = 10;
+  private static final int DAMAGE_UPGRADE = 2;
   private static final int SPRAIN_AMOUNT = 3;
-  private static final int SPRAIN_AMOUNT_UPGRADE = 2;
+  private static final int SPRAIN_AMOUNT_UPGRADE = 1;
 
   public DivingStomp() {
     super(ID, NAME, getCardResourcePath(IMG_PATH), COST, DESCRIPTION, TYPE,

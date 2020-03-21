@@ -67,7 +67,7 @@
     "NAMES": [
       "Penalty Card", "penalty_card"
     ],
-    "DESCRIPTION": "Playable status card with one of several negative effects. Provides a beneficial effect when drawn."
+    "DESCRIPTION": "Playable status cards which generate a negative effect when gained, and a beneficial effect when played."
   },
 
   "WrestlerMod:PenaltyCardBlue": {
@@ -75,7 +75,7 @@
     "NAMES": [
       "Blue Penalty Card", "blue_penalty_card"
     ],
-    "DESCRIPTION": "Applies #yPlated #yArmor to a random enemy at end of turn. Draw #b2 additional cards when drawn."
+    "DESCRIPTION": "Applies #yPlated #yArmor to a random enemy when gained. Exhaust and draw additional cards next turn when played."
   },
 
   "WrestlerMod:PenaltyCardGreen": {
@@ -107,7 +107,7 @@
     "NAMES": [
       "Yellow Penalty Card", "yellow_penalty_card"
     ],
-    "DESCRIPTION": "Lose #b #yBravado when gained. Gain energy next turn when played."
+    "DESCRIPTION": "Lose #b #yBravado when gained. Exhaust and gain energy next turn when played."
   },
 
   "WrestlerMod:PenaltyCardsNoGlyph": {
