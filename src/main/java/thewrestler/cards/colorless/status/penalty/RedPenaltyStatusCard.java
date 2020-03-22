@@ -1,16 +1,22 @@
 package thewrestler.cards.colorless.status.penalty;
 
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
-import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
-import com.megacrit.cardcrawl.actions.common.DamageAction;
+import com.megacrit.cardcrawl.actions.common.*;
+import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.cards.CardQueueItem;
 import com.megacrit.cardcrawl.cards.DamageInfo;
+import com.megacrit.cardcrawl.cards.status.Dazed;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
+import com.megacrit.cardcrawl.powers.DrawCardNextTurnPower;
+import com.megacrit.cardcrawl.powers.EnergizedPower;
 import com.megacrit.cardcrawl.powers.StrengthPower;
+import org.apache.commons.lang3.StringUtils;
+import thewrestler.actions.power.GainPlatedArmorRandomMonsterAction;
+import thewrestler.powers.BravadoPower;
 import thewrestler.powers.enqueuedpenaltycard.EnqueuedPenaltyCardPower;
 
 public class RedPenaltyStatusCard extends AbstractPenaltyStatusCard {
@@ -28,24 +34,12 @@ public class RedPenaltyStatusCard extends AbstractPenaltyStatusCard {
   public RedPenaltyStatusCard() {
     super(ID, NAME, IMG_PATH, getDescription());
     this.magicNumber = this.baseMagicNumber = STRENGTH_GAIN;
+    this.misc = DAMAGE;
     this.exhaust = true;
   }
 
   @Override
   public void use(AbstractPlayer p, AbstractMonster m) {
-    if (this.dontTriggerOnUseCard) {
-      this.exhaust = false;
-      AbstractDungeon.actionManager.addToBottom(
-          new DamageAction(p, new DamageInfo(p, DAMAGE, DamageInfo.DamageType.THORNS),
-              AbstractGameAction.AttackEffect.FIRE));
-    } else {
-      this.exhaust = true;
-    }
-  }
-
-  @Override
-  public void triggerWhenDrawn(){
-    AbstractPlayer p = AbstractDungeon.player;
     AbstractDungeon.actionManager.addToBottom(
         new ApplyPowerAction(p, p, new StrengthPower(p, STRENGTH_GAIN), STRENGTH_GAIN));
   }
@@ -53,11 +47,6 @@ public class RedPenaltyStatusCard extends AbstractPenaltyStatusCard {
   @Override
   public AbstractPenaltyStatusCard makeCopy() {
     return new RedPenaltyStatusCard();
-  }
-
-  public void triggerOnEndOfTurnForPlayingCard() {
-    this.dontTriggerOnUseCard = true;
-    AbstractDungeon.actionManager.cardQueue.add(new CardQueueItem(this, true));
   }
 
   private static String getDescription() {
@@ -83,6 +72,10 @@ public class RedPenaltyStatusCard extends AbstractPenaltyStatusCard {
 
   @Override
   public void triggerOnCardGained() {
+    AbstractPlayer p = AbstractDungeon.player;
 
+    AbstractDungeon.actionManager.addToBottom(
+        new DamageAction(p, new DamageInfo(p, DAMAGE, DamageInfo.DamageType.THORNS),
+            AbstractGameAction.AttackEffect.FIRE));
   }
 }

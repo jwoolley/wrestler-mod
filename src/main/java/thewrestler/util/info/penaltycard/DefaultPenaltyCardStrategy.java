@@ -11,9 +11,13 @@ import java.util.List;
 public class DefaultPenaltyCardStrategy extends AbstractPenaltyCardStrategy {
 
   final boolean ONLY_YELLOW = false;
-  final boolean ONLY_YELLOW_AND_BLUE = true;
+  final boolean ONLY_YELLOW_AND_BLUE = false;
+  final boolean ONLY_RED = true;
 
   public AbstractPenaltyStatusCard getNextCard() {
+    if (ONLY_RED) {
+      return new RedPenaltyStatusCard();
+    }
     if (ONLY_YELLOW) {
       return new YellowPenaltyStatusCard();
     } else if (ONLY_YELLOW_AND_BLUE) {

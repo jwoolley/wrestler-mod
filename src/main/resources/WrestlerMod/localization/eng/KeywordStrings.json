@@ -83,7 +83,7 @@
     "NAMES": [
       "Green Penalty Card", "green_penalty_card"
     ],
-    "DESCRIPTION": "Lose #yGold at end of turn. Gain #yDexterity when drawn."
+    "DESCRIPTION": "Lose #yGold when gained. Exhaust and gain #yDexterity when played."
   },
 
   "WrestlerMod:PenaltyCardOrange": {
@@ -99,7 +99,7 @@
     "NAMES": [
       "Red Penalty Card", "red_penalty_card"
     ],
-    "DESCRIPTION": "Take damage at end turn. Gain #yStrength when drawn."
+    "DESCRIPTION": "Take damage when gained. Exhaust and gain #yStrength when played."
   },
 
   "WrestlerMod:PenaltyCardYellow": {

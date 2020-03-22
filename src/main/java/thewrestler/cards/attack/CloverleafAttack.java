@@ -21,12 +21,14 @@ import thewrestler.cards.colorless.attack.Knee;
 import thewrestler.cards.colorless.status.penalty.AbstractPenaltyStatusCard;
 import thewrestler.cards.colorless.status.penalty.GreenPenaltyStatusCard;
 import thewrestler.cards.skill.Cloverleaf;
+import thewrestler.characters.WrestlerCharacter;
 import thewrestler.enums.AbstractCardEnum;
 import thewrestler.keywords.AbstractTooltipKeyword;
 import thewrestler.keywords.CustomTooltipKeyword;
 import thewrestler.keywords.CustomTooltipKeywords;
 import thewrestler.keywords.TooltipKeywords;
 import thewrestler.powers.CloverleafPower;
+import thewrestler.util.info.penaltycard.PenaltyCardInfo;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -66,10 +68,12 @@ public class CloverleafAttack extends CustomCard {
         new DamageAction(m, new DamageInfo(p, this.damage, DamageInfo.DamageType.NORMAL),
             AbstractGameAction.AttackEffect.SLASH_HEAVY));
 
+    WrestlerCharacter.getPenaltyCardInfo().enqueuePenaltyCard(new GreenPenaltyStatusCard(), true);
 //    AbstractDungeon.actionManager.addToBottom(
 //        new ApplyPowerAction(m, p, new CloverleafPower(p, this.misc), this.misc));
-    AbstractPenaltyStatusCard penaltyCard = new GreenPenaltyStatusCard();
-    penaltyCard.applyEnqueuedCardPower(1);
+//    AbstractPenaltyStatusCard penaltyCard = new GreenPenaltyStatusCard();
+//    penaltyCard.applyEnqueuedCardPower(1);
+
   }
 
   @Override

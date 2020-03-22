@@ -30,7 +30,7 @@ public class PenaltyCardInfo implements StartOfCombatListener, EndOfCombatListen
 
   public PenaltyCardInfo() {
     hasWarningCard = false;
-    penaltyCardStrategy = new DefaultPenaltyCardStrategy();
+    penaltyCardStrategy = getPenaltyCardStrategy();
   }
 
   public void reset() {
@@ -60,6 +60,9 @@ public class PenaltyCardInfo implements StartOfCombatListener, EndOfCombatListen
     }
   }
 
+  public void enqueuePenaltyCard(AbstractPenaltyStatusCard card, boolean toFront) {
+    this.penaltyCardStrategy.addPenaltyCardToQueue(card, toFront);
+  }
 
   private static void onPenaltyCardGained(AbstractPenaltyStatusCard penaltyCard) {
     WrestlerCharacter.getPenaltyCardInfo().reset();
@@ -71,7 +74,7 @@ public class PenaltyCardInfo implements StartOfCombatListener, EndOfCombatListen
     CombatInfo.incrementPenaltyCardsGainedThisCombatCount();
   }
 
-  private final static AbstractPenaltyCardStrategy DEFAULT_STRATEGY = new DefaultPenaltyCardStrategy();
+  private final static AbstractPenaltyCardStrategy DEFAULT_STRATEGY = new RarityPenatlyCardStrategy();
 
   private AbstractPenaltyCardStrategy getStrategy() {
     return this.penaltyCardStrategy;

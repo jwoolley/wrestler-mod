@@ -9,4 +9,5 @@ public abstract class AbstractPenaltyCardStrategy {
   public abstract AbstractPenaltyStatusCard previewNextCard();
   public abstract List<AbstractPenaltyStatusCard> previewNextCards();
   public abstract void resetForCombat();
+  public void addPenaltyCardToQueue(AbstractPenaltyStatusCard card, boolean toFront) {}
 }
