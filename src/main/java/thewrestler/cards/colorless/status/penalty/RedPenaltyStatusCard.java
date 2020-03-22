@@ -1,23 +1,15 @@
 package thewrestler.cards.colorless.status.penalty;
 
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
-import com.megacrit.cardcrawl.actions.common.*;
-import com.megacrit.cardcrawl.cards.AbstractCard;
-import com.megacrit.cardcrawl.cards.CardQueueItem;
+import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
+import com.megacrit.cardcrawl.actions.common.DamageAction;
 import com.megacrit.cardcrawl.cards.DamageInfo;
-import com.megacrit.cardcrawl.cards.status.Dazed;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
-import com.megacrit.cardcrawl.powers.DrawCardNextTurnPower;
-import com.megacrit.cardcrawl.powers.EnergizedPower;
 import com.megacrit.cardcrawl.powers.StrengthPower;
-import org.apache.commons.lang3.StringUtils;
-import thewrestler.actions.power.GainPlatedArmorRandomMonsterAction;
-import thewrestler.powers.BravadoPower;
-import thewrestler.powers.enqueuedpenaltycard.EnqueuedPenaltyCardPower;
 
 public class RedPenaltyStatusCard extends AbstractPenaltyStatusCard {
   public static final String ID = "WrestlerMod:RedPenaltyStatusCard";
@@ -61,13 +53,6 @@ public class RedPenaltyStatusCard extends AbstractPenaltyStatusCard {
     NAME = cardStrings.NAME;
     DESCRIPTION = cardStrings.DESCRIPTION;
     EXTENDED_DESCRIPTION = cardStrings.EXTENDED_DESCRIPTION;
-  }
-
-  private static final String ENQUEUE_POWER_ID = "WrestlerMod:EnqueueRedCardPower";
-  private static final String ENQUEUE_POWER_IMG_NAME = getPenaltyCardImgPath("enqueuered.png");
-  @Override
-  protected EnqueuedPenaltyCardPower getEneueuedCardPower(int amount) {
-    return new EnqueueCardPower(amount, ENQUEUE_POWER_ID, NAME, ENQUEUE_POWER_IMG_NAME);
   }
 
   @Override

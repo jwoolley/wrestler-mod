@@ -15,7 +15,6 @@ import thewrestler.cards.colorless.status.penalty.AbstractPenaltyStatusCard;
 import thewrestler.cards.skill.AbstractPenaltyCardListener;
 import thewrestler.characters.WrestlerCharacter;
 import thewrestler.powers.NoPenaltyPower;
-import thewrestler.powers.enqueuedpenaltycard.EnqueuedPenaltyCardPower;
 import thewrestler.util.BasicUtils;
 import thewrestler.util.info.CombatInfo;
 
@@ -88,11 +87,7 @@ public class PenaltyCardInfo implements StartOfCombatListener, EndOfCombatListen
   }
 
   private static AbstractPenaltyStatusCard getNextPenaltyCard() {
-    if  (EnqueuedPenaltyCardPower.playerHasAnyCardsEnqueued()) {
-      return EnqueuedPenaltyCardPower.getNextCard();
-    } else {
       return getPenaltyCardStrategy().getNextCard();
-    }
   }
 
   public static class GainPenaltyCardsAction extends AbstractGameAction {
@@ -165,7 +160,6 @@ public class PenaltyCardInfo implements StartOfCombatListener, EndOfCombatListen
   public static void resetForNewCombat() {
     if (WrestlerCharacter.hasPenaltyCardInfo()) {
       getInfo().reset();
-      EnqueuedPenaltyCardPower.resetForCombat();
     }
   }
 

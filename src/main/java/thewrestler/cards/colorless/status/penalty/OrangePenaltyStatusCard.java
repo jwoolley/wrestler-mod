@@ -10,7 +10,6 @@ import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.powers.FrailPower;
-import thewrestler.powers.enqueuedpenaltycard.EnqueuedPenaltyCardPower;
 
 public class OrangePenaltyStatusCard extends AbstractPenaltyStatusCard {
   public static final String ID = "WrestlerMod:OrangePenaltyStatusCard";
@@ -75,15 +74,8 @@ public class OrangePenaltyStatusCard extends AbstractPenaltyStatusCard {
     EXTENDED_DESCRIPTION = cardStrings.EXTENDED_DESCRIPTION;
   }
 
-  private static final String ENQUEUE_POWER_ID = "WrestlerMod:EnqueueOrangeCardPower";
-  private static final String ENQUEUE_POWER_IMG_NAME = getPenaltyCardImgPath("enqueueorange.png");
-  @Override
-  protected EnqueuedPenaltyCardPower getEneueuedCardPower(int amount) {
-    return new EnqueueCardPower(amount, ENQUEUE_POWER_ID, NAME, ENQUEUE_POWER_IMG_NAME);
-  }
-
   @Override
   public void triggerOnCardGained() {
-    
+
   }
 }

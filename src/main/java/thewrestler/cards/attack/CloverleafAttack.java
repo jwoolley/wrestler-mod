@@ -69,11 +69,6 @@ public class CloverleafAttack extends CustomCard {
             AbstractGameAction.AttackEffect.SLASH_HEAVY));
 
     WrestlerCharacter.getPenaltyCardInfo().enqueuePenaltyCard(new GreenPenaltyStatusCard(), true);
-//    AbstractDungeon.actionManager.addToBottom(
-//        new ApplyPowerAction(m, p, new CloverleafPower(p, this.misc), this.misc));
-//    AbstractPenaltyStatusCard penaltyCard = new GreenPenaltyStatusCard();
-//    penaltyCard.applyEnqueuedCardPower(1);
-
   }
 
   @Override

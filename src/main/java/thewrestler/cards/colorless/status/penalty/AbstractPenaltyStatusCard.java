@@ -1,14 +1,7 @@
 package thewrestler.cards.colorless.status.penalty;
 
 import basemod.abstracts.CustomCard;
-import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
-import com.megacrit.cardcrawl.core.AbstractCreature;
-import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
-import com.megacrit.cardcrawl.powers.AbstractPower;
-import sun.security.krb5.internal.APOptions;
 import thewrestler.cards.WrestlerCardTags;
-import thewrestler.powers.RefBumpPower;
-import thewrestler.powers.enqueuedpenaltycard.EnqueuedPenaltyCardPower;
 
 import static thewrestler.WrestlerMod.getCardResourcePath;
 
@@ -24,30 +17,7 @@ public abstract class AbstractPenaltyStatusCard extends CustomCard {
     this.tags.add(WrestlerCardTags.PENALTY);
   }
 
-  protected abstract EnqueuedPenaltyCardPower getEneueuedCardPower(int amount);
-
   public abstract void triggerOnCardGained();
-
-  public void applyEnqueuedCardPower(int amount) {
-    EnqueuedPenaltyCardPower power = getEneueuedCardPower(amount);
-    AbstractDungeon.actionManager.addToBottom(new EnqueuedPenaltyCardPower.GainEnqueuedPenaltyCardPowerAction(power));
-  }
-
-  protected class EnqueueCardPower extends EnqueuedPenaltyCardPower {
-    public EnqueueCardPower(int amount, String baseID, String cardName, String imgFilePath) {
-      super(AbstractDungeon.player, amount, baseID, cardName, imgFilePath);
-    }
-
-    @Override
-    protected AbstractPenaltyStatusCard getCard() {
-      return (AbstractPenaltyStatusCard) AbstractPenaltyStatusCard.this.makeCopy();
-    }
-
-    @Override
-    public AbstractPower makeCopy() {
-      return new EnqueueCardPower(this.amount, this.baseID, this.cardName, this.imgFilename);
-    }
-  }
 
   static String getPenaltyCardImgPath(String imgFilename) {
     return getCardResourcePath(IMG_PATH_PREFIX + imgFilename);

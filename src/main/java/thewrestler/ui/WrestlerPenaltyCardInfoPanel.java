@@ -54,10 +54,6 @@ public class WrestlerPenaltyCardInfoPanel implements CustomInfoPanel, StartOfCom
 
   private static final String BACKGROUND_IMG_DIR_PATH = "penaltycardinfopanel/";
 
-//  private static final List<String> BACKGROUND_IMG_FILENAMES = Arrays.asList(
-//    "background-zero-cards.png", "background-one-card.png", "background-two-cards.png", "background-three-cards.png");
-
-
   private static final List<String> BACKGROUND_IMG_FILENAMES = Arrays.asList(
       "background-no-warning.png", "background-with-warning.png", "background-two-cards.png", "background-three-cards.png");
 
