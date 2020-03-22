@@ -20,24 +20,24 @@ public abstract class AbstractPenaltyStatusCard extends CustomCard {
 
   private final CustomTooltipKeyword keyword;
 
-  private final String panelPreviewImgKey;
-  private final String panelWarningImgKey;
+  private final String panelPreviewImgPath;
+  private final String panelWarningImgPath;
 
   public AbstractPenaltyStatusCard(String id, String name, String imgPath, String panelImgKey, String description,
                                    String tooltipKeywordKey) {
     super(id, name, imgPath,1, description, TYPE, CardColor.COLORLESS, RARITY, TARGET);
-    this.panelPreviewImgKey = getInfoPanelPreviewImgPath(panelImgKey);
-    this.panelWarningImgKey = getInfoPanelPreviewWarningImgPath(panelImgKey);
+    this.panelPreviewImgPath = getInfoPanelPreviewImgPath(panelImgKey);
+    this.panelWarningImgPath = getInfoPanelPreviewWarningImgPath(panelImgKey);
     this.keyword = CustomTooltipKeywords.getTooltipKeyword(tooltipKeywordKey);
     this.tags.add(WrestlerCardTags.PENALTY);
   }
 
   public String getInfoPanelNoWarningImagePath() {
-    return panelPreviewImgKey;
+    return panelPreviewImgPath;
   }
 
   public String getInfoPanelWarningImagePath() {
-    return panelWarningImgKey;
+    return panelWarningImgPath;
   }
 
   public CustomTooltipKeyword getTooltipKeyword() {

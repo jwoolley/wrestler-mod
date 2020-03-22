@@ -14,11 +14,15 @@ import com.megacrit.cardcrawl.helpers.PowerTip;
 import com.megacrit.cardcrawl.helpers.TipHelper;
 import com.megacrit.cardcrawl.localization.Keyword;
 import com.megacrit.cardcrawl.localization.UIStrings;
+import org.omg.CORBA.WCharSeqHelper;
+import org.omg.PortableServer.POA;
 import thewrestler.WrestlerMod;
 import thewrestler.cards.EndOfCombatListener;
 import thewrestler.cards.StartOfCombatListener;
+import thewrestler.cards.colorless.status.penalty.AbstractPenaltyStatusCard;
 import thewrestler.characters.WrestlerCharacter;
 import thewrestler.keywords.AbstractTooltipKeyword;
+import thewrestler.keywords.CustomTooltipKeyword;
 import thewrestler.keywords.CustomTooltipKeywords;
 import thewrestler.keywords.TooltipKeywords;
 import thewrestler.util.BasicUtils;
@@ -26,9 +30,7 @@ import thewrestler.util.TextureLoader;
 import thewrestler.util.info.penaltycard.AbstractPenaltyCardSprite;
 import thewrestler.util.info.penaltycard.PenaltyCardInfo;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
 
 // TODO: VFX/SFX when sportsmanship changes (e.g. red or green border flash)
@@ -45,20 +47,12 @@ public class WrestlerPenaltyCardInfoPanel implements CustomInfoPanel, StartOfCom
   private static final float Y_TEXT_OFFSET = Y_TEXT_OFFSET_WIDESCREEN + 0;
   private static final float TOOLTIP_X_OFFSET = WIDTH + 16.0F;
   private static final float TOOLTIP_Y_OFFSET = -(HEIGHT + 180.0f);
-  private static final int PENALTY_CARD_X_OFFSET = 83;
-  private static final int PENALTY_CARD_X_DELTA_OFFSET = 15;
   private static final int PENALTY_CARD_Y_OFFSET = -16;
   private static final int PENALTY_CARD_Y_OFFSET_WIDSCREEN = -12;
 
   private static final String UI_NAME = WrestlerMod.makeID("PenaltyCardInfoPanel");
 
   private static final String BACKGROUND_IMG_DIR_PATH = "penaltycardinfopanel/";
-
-  private static final List<String> BACKGROUND_IMG_FILENAMES = Arrays.asList(
-      "background-no-warning.png", "background-with-warning.png", "background-two-cards.png", "background-three-cards.png");
-
-  private static List<String> BACKGROUND_IMG_FILEPATHS = BACKGROUND_IMG_FILENAMES.stream()
-      .map(f -> UiHelper.getUiImageResourcePath(BACKGROUND_IMG_DIR_PATH + f)).collect(Collectors.toList());
 
   private static final BitmapFont INFO_HEADER_FONT = FontHelper.charDescFont;
   private static final BitmapFont INFO_FONT = FontHelper.losePowerFont;
@@ -71,15 +65,13 @@ public class WrestlerPenaltyCardInfoPanel implements CustomInfoPanel, StartOfCom
   // TODO: only show Penalty Cards tooltip if no specific Penalty Card tooltip is shown (i.e. none are hovered)
   private static final List<String> keywordList = Arrays.asList(
       CustomTooltipKeywords.SPORTSMANSHIP,
-      CustomTooltipKeywords.PENALTY_CARDS_NO_GLYPH,
-      CustomTooltipKeywords.DIRTY);
+      CustomTooltipKeywords.PENALTY_CARDS_NO_GLYPH);
 
   private static final List<Keyword> baseGameKeywordList = new ArrayList<>();
   private ArrayList<PowerTip> keywordPowerTips;
-  private ArrayList<PowerTip> currentPowerTips = new ArrayList<>(getPowerTips());
 
   private final String uiName;
-  private Texture[] panelBackgroundImage = new Texture[BACKGROUND_IMG_FILEPATHS.size()];
+  private Texture[] panelBackgroundImage = new Texture[0];
   private final int xOffset;
   private final int yOffset;
   private final int yTextOffset;
@@ -88,6 +80,9 @@ public class WrestlerPenaltyCardInfoPanel implements CustomInfoPanel, StartOfCom
 
   private boolean updateWarningCardFlag = false;
   private boolean hasWarningCard;
+
+  private final Map<String, Texture> previewImages = new HashMap<>();
+  private final Map<String, Texture> warningImages = new HashMap<>();
 
   public WrestlerPenaltyCardInfoPanel() {
     this.uiName = UI_NAME;
@@ -113,18 +108,15 @@ public class WrestlerPenaltyCardInfoPanel implements CustomInfoPanel, StartOfCom
     if (updateWarningCardFlag) {
       this.hasWarningCard = WrestlerCharacter.getPenaltyCardInfo().hasWarningCard();
     }
-
-    // TODO: change to update warning card if present
-    // WrestlerCharacter.getSportsmanshipInfo().getPenaltyCards().forEach(AbstractPenaltyCard::update);
   }
 
   @Override
   public void render(SpriteBatch sb) {
     if (shouldRender()) {
-      // use the empty panel as background image. remove other bg images once dynamic penatly cards are in place
-      Texture backgroundImage = getPanelBackgroundImage(0);
-      // Texture backgroundImage = getPanelBackgroundImage(this.hasWarningCard);
-      List<PowerTip> powerTips = new ArrayList<>(getPowerTips());
+      Texture backgroundImage = getPanelBackgroundImage();
+      ArrayList<PowerTip> powerTips = new ArrayList<>(getPowerTips());
+
+      // TODO: cache preview card so we're not instantiating a new one on every tick
 
       sb.draw(backgroundImage,
           this.xOffset, this.yOffset,
@@ -133,34 +125,10 @@ public class WrestlerPenaltyCardInfoPanel implements CustomInfoPanel, StartOfCom
           backgroundImage.getWidth(),  backgroundImage.getHeight(),
           false, false);
 
-      // TODO: this should render warning card, if present
-      List<AbstractPenaltyCardSprite> cards = new ArrayList<>(); //WrestlerCharacter.getSportsmanshipInfo().getPenaltyCards();
-
-      if (!cards.isEmpty()) {
-        cards.get(0).setPosition(this.xOffset + PENALTY_CARD_X_OFFSET, this.yOffset - yPenaltyCardOffset);
-
-        for (int i = 1; i < cards.size(); i++) {
-          AbstractPenaltyCardSprite card = cards.get(i);
-          card.setPosition(this.xOffset
-                  + PENALTY_CARD_X_OFFSET + (PENALTY_CARD_X_DELTA_OFFSET + AbstractPenaltyCardSprite.WIDTH) * i,
-                  this.yOffset - yPenaltyCardOffset);
-        }
-
-        currentPowerTips.clear();
-        currentPowerTips.addAll(getPowerTips());
-
-        cards.forEach(c -> {
-          c.render(sb);
-          if (c.isHovered()) {
-            currentPowerTips.add(c.getPowerTip());
-          }
-        });
-      }
-
       if (this.hb.hovered) {
         TipHelper.queuePowerTips(
             hb.x + TOOLTIP_X_OFFSET * SettingsHelper.getScaleX(),
-            hb.y - TOOLTIP_Y_OFFSET * SettingsHelper.getScaleY(), currentPowerTips);
+            hb.y - TOOLTIP_Y_OFFSET * SettingsHelper.getScaleY(), powerTips);
       }
 
       renderInfoText(sb);
@@ -173,16 +141,6 @@ public class WrestlerPenaltyCardInfoPanel implements CustomInfoPanel, StartOfCom
     final BitmapFont headerFont = INFO_HEADER_FONT;
     final BitmapFont font = INFO_FONT;
     final Color headerColor = INFO_HEADER_COLOR;
-    final Color color = NEUTRAL_UNSPORTING_COLOR;
-
-    final int yLineOffset = (int)(INFO_FONT.getLineHeight() * (Settings.isSixteenByTen ? 1.05f : 0.95f));
-
-    final String separatorString = "/";
-
-    final double amountTextWidth = INFO_FONT.getSpaceWidth() * 0.75f;
-
-    final int xUnsportingTextOffset =
-        (int)((this.hb.width - (amountTextWidth))/2.0f);
 
     FontHelper.renderFontLeft(
         sb,
@@ -191,13 +149,6 @@ public class WrestlerPenaltyCardInfoPanel implements CustomInfoPanel, StartOfCom
         this.xOffset + WIDTH * 0.04f,
         this.yOffset + this.yTextOffset,
         headerColor);
-
-        //    FontHelper.renderFontLeft(
-        //        sb,
-        //        font, this.hasWarningCard + separatorString + SportsmanshipInfo.MAX_PENALTY_CARDS,
-        //        this.xOffset + xUnsportingTextOffset,
-        //        this.yOffset + this.yTextOffset - (yLineOffset * 1.035f),
-        //        color);
   }
 
   public boolean shouldRenderPanel() {
@@ -246,11 +197,14 @@ public class WrestlerPenaltyCardInfoPanel implements CustomInfoPanel, StartOfCom
   @Override
   public void atEndOfCombat() { refreshUnsportingAmount(); }
 
+  private AbstractPenaltyStatusCard getPreviewCard() {
+    return WrestlerCharacter.getPenaltyCardInfo().getPreviewCard();
+  }
+
   private ArrayList<PowerTip> getPowerTips() {
     if (keywordPowerTips == null) {
       keywordPowerTips = new ArrayList<>();
 
-      // crop keyword tooltips
       for (AbstractTooltipKeyword kw : TooltipKeywords.getTooltipKeywords(keywordList, baseGameKeywordList)) {
         final String name = TipHelper.capitalize(kw.getProperName());
         final String description = kw.getDescription();
@@ -262,16 +216,31 @@ public class WrestlerPenaltyCardInfoPanel implements CustomInfoPanel, StartOfCom
         }
       }
     }
-    return keywordPowerTips;
+
+    ArrayList<PowerTip> tooltips = new ArrayList<>(keywordPowerTips);
+    final AbstractPenaltyStatusCard previewCard = getPreviewCard();
+    final CustomTooltipKeyword pcKeyword = previewCard.getTooltipKeyword();
+    tooltips.add(new PowerTip(pcKeyword.getProperName(), pcKeyword.getDescription(),
+        pcKeyword.getGlyph().getGlyphAtlasRegion()));
+
+    return tooltips;
   }
 
-  private Texture getPanelBackgroundImage(int numPenaltyCards) {
-    final int index = PenaltyCardInfo.hasWarningCard() ? 1 : 0;
+  private Texture getPanelBackgroundImage() {
+    final AbstractPenaltyStatusCard penaltyCard = getPreviewCard();
+    final boolean hasWarningCard = PenaltyCardInfo.hasWarningCard();
 
-    if (panelBackgroundImage[index] == null) {
-      panelBackgroundImage[index] = TextureLoader.getTexture(BACKGROUND_IMG_FILEPATHS.get(index));
+    if (!hasWarningCard) {
+      if (!previewImages.containsKey(penaltyCard.cardID)) {
+        previewImages.put(penaltyCard.cardID, TextureLoader.getTexture(penaltyCard.getInfoPanelNoWarningImagePath()));
+      }
+      return previewImages.get(penaltyCard.cardID);
     }
-    return panelBackgroundImage[index];
+
+    if (!warningImages.containsKey(penaltyCard.cardID)) {
+      warningImages.put(penaltyCard.cardID, TextureLoader.getTexture(penaltyCard.getInfoPanelWarningImagePath()));
+    }
+    return warningImages.get(penaltyCard.cardID);
   }
 
   static {

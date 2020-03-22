@@ -107,7 +107,7 @@
     "NAMES": [
       "Yellow Penalty Card", "yellow_penalty_card"
     ],
-    "DESCRIPTION": "Lose #b #yBravado when gained. Exhaust and gain energy next turn when played."
+    "DESCRIPTION": "Lose #yBravado when gained. Exhaust and gain energy next turn when played."
   },
 
   "WrestlerMod:PenaltyCardsNoGlyph": {
@@ -115,7 +115,7 @@
     "NAMES": [
       "Penalty Cards", "penalty_cards"
     ],
-    "DESCRIPTION": "Status card with one of several negative effects. Provides a beneficial effect when drawn."
+    "DESCRIPTION": "Status card which applies a negative effect when gained. Provides a beneficial effect and exhausts when played."
   },
 
   "WrestlerMod:Grappled": {

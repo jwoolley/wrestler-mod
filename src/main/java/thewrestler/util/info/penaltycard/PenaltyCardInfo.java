@@ -37,6 +37,12 @@ public class PenaltyCardInfo implements StartOfCombatListener, EndOfCombatListen
     penaltyCardStrategy.resetForCombat();
   }
 
+
+  public AbstractPenaltyStatusCard getPreviewCard() {
+    return this.penaltyCardStrategy.previewNextCard();
+  }
+
+
   public static void gainPenaltyCard() {
     gainPenaltyCard(null);
   }
