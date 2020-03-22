@@ -10,13 +10,17 @@ import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.powers.StrengthPower;
+import thewrestler.keywords.CustomTooltipKeywords;
 
 public class RedPenaltyStatusCard extends AbstractPenaltyStatusCard {
   public static final String ID = "WrestlerMod:RedPenaltyStatusCard";
   public static final String NAME;
   public static final String DESCRIPTION;
   public static final String[] EXTENDED_DESCRIPTION;
-  public static final String IMG_PATH = getPenaltyCardImgPath("red.png");
+
+  public static final String TOOLTIP_KEYWORD_KEY = CustomTooltipKeywords.PENALTY_CARD_RED;
+  public static final String IMG_KEY = "red";
+  public static final String IMG_PATH = getPenaltyCardImgPath(IMG_KEY + ".png");
 
   private static final CardStrings cardStrings;
 
@@ -24,7 +28,7 @@ public class RedPenaltyStatusCard extends AbstractPenaltyStatusCard {
   private static final int DAMAGE = 2;
 
   public RedPenaltyStatusCard() {
-    super(ID, NAME, IMG_PATH, getDescription());
+    super(ID, NAME, IMG_PATH, IMG_KEY, getDescription(), TOOLTIP_KEYWORD_KEY);
     this.magicNumber = this.baseMagicNumber = STRENGTH_GAIN;
     this.misc = DAMAGE;
     this.exhaust = true;

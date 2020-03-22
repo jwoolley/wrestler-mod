@@ -10,13 +10,17 @@ import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.powers.FrailPower;
+import thewrestler.keywords.CustomTooltipKeywords;
 
 public class OrangePenaltyStatusCard extends AbstractPenaltyStatusCard {
   public static final String ID = "WrestlerMod:OrangePenaltyStatusCard";
   public static final String NAME;
   public static final String DESCRIPTION;
   public static final String[] EXTENDED_DESCRIPTION;
-  public static final String IMG_PATH = getPenaltyCardImgPath("orange.png");
+
+  public static final String TOOLTIP_KEYWORD_KEY = CustomTooltipKeywords.PENALTY_CARD_ORANGE;
+  public static final String IMG_KEY = "orange";
+  public static final String IMG_PATH = getPenaltyCardImgPath(IMG_KEY + ".png");
 
   private static final CardStrings cardStrings;
 
@@ -24,7 +28,7 @@ public class OrangePenaltyStatusCard extends AbstractPenaltyStatusCard {
   private static final int FRAIL_AMOUNT = 1;
 
   public OrangePenaltyStatusCard() {
-    super(ID, NAME, IMG_PATH, getDescription());
+    super(ID, NAME, IMG_PATH, IMG_KEY, getDescription(), TOOLTIP_KEYWORD_KEY);
     this.damage = this.baseDamage = DAMAGE;
     this.magicNumber = this.baseMagicNumber = FRAIL_AMOUNT;
     this.isMultiDamage = true;

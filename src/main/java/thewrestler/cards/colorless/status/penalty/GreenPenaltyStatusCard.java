@@ -10,13 +10,17 @@ import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.powers.DexterityPower;
 import com.megacrit.cardcrawl.vfx.GainPennyEffect;
+import thewrestler.keywords.CustomTooltipKeywords;
 
 public class GreenPenaltyStatusCard extends AbstractPenaltyStatusCard {
   public static final String ID = "WrestlerMod:GreenPenaltyStatusCard";
   public static final String NAME;
   public static final String DESCRIPTION;
   public static final String[] EXTENDED_DESCRIPTION;
-  public static final String IMG_PATH = getPenaltyCardImgPath("green.png");
+
+  public static final String TOOLTIP_KEYWORD_KEY = CustomTooltipKeywords.PENALTY_CARD_GREEN;
+  public static final String IMG_KEY = "green";
+  public static final String IMG_PATH = getPenaltyCardImgPath(IMG_KEY + ".png");
 
   private static final CardStrings cardStrings;
 
@@ -24,7 +28,7 @@ public class GreenPenaltyStatusCard extends AbstractPenaltyStatusCard {
   private static final int GOLD_LOSS = 2;
 
   public GreenPenaltyStatusCard() {
-    super(ID, NAME, IMG_PATH, getDescription());
+    super(ID, NAME, IMG_PATH, IMG_KEY, getDescription(), TOOLTIP_KEYWORD_KEY);
     this.magicNumber = this.baseMagicNumber = DEXTERITY_GAIN;
     this.misc = GOLD_LOSS;
     this.exhaust = true;

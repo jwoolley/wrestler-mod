@@ -8,13 +8,17 @@ import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.powers.DrawCardNextTurnPower;
 import thewrestler.actions.power.GainPlatedArmorRandomMonsterAction;
+import thewrestler.keywords.CustomTooltipKeywords;
 
 public class BluePenaltyStatusCard extends AbstractPenaltyStatusCard {
   public static final String ID = "WrestlerMod:BluePenaltyStatusCard";
   public static final String NAME;
   public static final String DESCRIPTION;
   public static final String[] EXTENDED_DESCRIPTION;
-  public static final String IMG_PATH = getPenaltyCardImgPath("blue.png");
+
+  public static final String TOOLTIP_KEYWORD_KEY = CustomTooltipKeywords.PENALTY_CARD_BLUE;
+  public static final String IMG_KEY = "blue";
+  public static final String IMG_PATH = getPenaltyCardImgPath(IMG_KEY + ".png");
 
   private static final CardStrings cardStrings;
 
@@ -22,7 +26,7 @@ public class BluePenaltyStatusCard extends AbstractPenaltyStatusCard {
   private static final int ENEMY_PLATED_ARMOR_GAIN = 2;
 
   public BluePenaltyStatusCard() {
-    super(ID, NAME, IMG_PATH, getDescription(CARD_DRAW_AMOUNT));
+    super(ID, NAME, IMG_PATH, IMG_KEY, getDescription(CARD_DRAW_AMOUNT), TOOLTIP_KEYWORD_KEY);
     this.magicNumber = this.baseMagicNumber = ENEMY_PLATED_ARMOR_GAIN;
     this.misc = CARD_DRAW_AMOUNT;
     this.exhaust = true;

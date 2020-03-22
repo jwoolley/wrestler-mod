@@ -9,6 +9,8 @@ import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.powers.EnergizedPower;
 import org.apache.commons.lang3.StringUtils;
+import thewrestler.keywords.CustomTooltipKeyword;
+import thewrestler.keywords.CustomTooltipKeywords;
 import thewrestler.powers.BravadoPower;
 
 public class YellowPenaltyStatusCard extends AbstractPenaltyStatusCard {
@@ -16,7 +18,10 @@ public class YellowPenaltyStatusCard extends AbstractPenaltyStatusCard {
   public static final String NAME;
   public static final String DESCRIPTION;
   public static final String[] EXTENDED_DESCRIPTION;
-  public static final String IMG_PATH = getPenaltyCardImgPath("yellow.png");
+
+  public static final String TOOLTIP_KEYWORD_KEY = CustomTooltipKeywords.PENALTY_CARD_YELLOW;
+  public static final String IMG_KEY = "yellow";
+  public static final String IMG_PATH = getPenaltyCardImgPath(IMG_KEY + ".png");
 
   private static final CardStrings cardStrings;
 
@@ -24,7 +29,7 @@ public class YellowPenaltyStatusCard extends AbstractPenaltyStatusCard {
   private static final int BRAVADO_LOSS = 2;
 
   public YellowPenaltyStatusCard() {
-    super(ID, NAME, IMG_PATH, getDescription(ENERGY_GAIN));
+    super(ID, NAME, IMG_PATH, IMG_KEY, getDescription(ENERGY_GAIN), TOOLTIP_KEYWORD_KEY);
     this.magicNumber = this.baseMagicNumber = BRAVADO_LOSS;
     this.misc = ENERGY_GAIN;
     this.exhaust = true;
