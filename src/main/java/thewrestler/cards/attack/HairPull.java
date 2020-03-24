@@ -16,6 +16,7 @@ import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.powers.AbstractPower;
 import thewrestler.cards.WrestlerCardTags;
 import thewrestler.enums.AbstractCardEnum;
+import thewrestler.util.CardUtil;
 
 import static thewrestler.WrestlerMod.getCardResourcePath;
 
@@ -43,7 +44,7 @@ public class HairPull extends CustomCard {
     super(ID, NAME, getCardResourcePath(IMG_PATH), COST, getDescription(MIN_DEBUFFS), TYPE,
         AbstractCardEnum.THE_WRESTLER_ORANGE, RARITY, TARGET);
     this.baseDamage = this.damage = DAMAGE;
-    tags.add(WrestlerCardTags.DIRTY);
+    CardUtil.makeCardDirty(this, this.type);
   }
 
   @Override

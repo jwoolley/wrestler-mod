@@ -24,7 +24,6 @@ public class TakeToTheMat extends CustomCard {
   public static final String IMG_PATH = "taketothemat.png";
 
   private static final int MIN_BRAVADO = 3;
-  private static final int MIN_BRAVADO_UPGRADE = -1;
 
   private static final CardStrings cardStrings;
 
@@ -33,8 +32,8 @@ public class TakeToTheMat extends CustomCard {
   private static final CardTarget TARGET = CardTarget.ENEMY;
 
   private static final int COST = 2;
+  private static final int UPGRADED_COST = 1;
   private static final int DAMAGE = 10;
-  private static final int DAMAGE_UPGRADE = 2;
 
   public TakeToTheMat() {
     super(ID, NAME, getCardResourcePath(IMG_PATH), COST, getDescription(), TYPE, AbstractCardEnum.THE_WRESTLER_ORANGE,
@@ -63,8 +62,7 @@ public class TakeToTheMat extends CustomCard {
   public void upgrade() {
     if (!this.upgraded) {
       this.upgradeName();
-      this.upgradeDamage(DAMAGE_UPGRADE);
-      this.upgradeMagicNumber(MIN_BRAVADO_UPGRADE);
+      this.upgradeBaseCost(UPGRADED_COST);
       this.rawDescription = getDescription();
       initializeDescription();
     }

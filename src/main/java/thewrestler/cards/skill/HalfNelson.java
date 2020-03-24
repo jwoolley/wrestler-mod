@@ -13,6 +13,7 @@ import thewrestler.WrestlerMod;
 import thewrestler.actions.power.ApplyGrappledAction;
 import thewrestler.cards.WrestlerCardTags;
 import thewrestler.enums.AbstractCardEnum;
+import thewrestler.util.CardUtil;
 
 import static thewrestler.WrestlerMod.getCardResourcePath;
 
@@ -39,7 +40,7 @@ public class HalfNelson extends CustomCard {
         AbstractCardEnum.THE_WRESTLER_ORANGE, RARITY, TARGET);
     this.magicNumber = this.baseMagicNumber = CARD_REDUCTION;
     this.exhaust = true;
-    tags.add(WrestlerCardTags.DIRTY);
+    CardUtil.makeCardDirty(this, this.type);
   }
 
   @Override

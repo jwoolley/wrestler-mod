@@ -14,6 +14,7 @@ import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import thewrestler.cards.WrestlerCardTags;
 import thewrestler.enums.AbstractCardEnum;
 import thewrestler.powers.InjuredPower;
+import thewrestler.util.CardUtil;
 
 import static thewrestler.WrestlerMod.getCardResourcePath;
 
@@ -41,7 +42,7 @@ public class DivingStomp extends CustomCard {
         AbstractCardEnum.THE_WRESTLER_ORANGE, RARITY, TARGET);
     this.baseDamage = this.damage = DAMAGE;
     this.baseMagicNumber = this.magicNumber = SPRAIN_AMOUNT;
-    tags.add(WrestlerCardTags.DIRTY);
+    CardUtil.makeCardDirty(this, this.type);
   }
 
   @Override

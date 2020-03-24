@@ -125,12 +125,19 @@ public class WrestlerMod implements
     private static final String SKILL_WRESTLER_ORANGE = getImageResourcePath("512/skill_wrestler.png");
     private static final String POWER_WRESTLER_ORANGE = getImageResourcePath("512/power_wrestler.png");
 
+    public static final String ATTACK_WRESTLER_DIRTY_ORANGE = getImageResourcePath("512/attack_wrestler_dirty.png");
+    public static final String SKILL_WRESTLER_DIRTY_ORANGE = getImageResourcePath("512/skill_wrestler_dirty.png");
+    public static final String POWER_WRESTLER_DIRTY_ORANGE = getImageResourcePath("512/power_wrestler_dirty.png");
+
     private static final String ENERGY_ORB_DEFAULT_ORANGE = getImageResourcePath("512/card_default_gray_orb.png");
     private static final String CARD_ENERGY_ORB = getImageResourcePath("512/card_small_orb.png");
 
     private static final String ATTACK_DEFAULT_ORANGE_PORTRAIT = getImageResourcePath("1024/attack_wrestler.png");
     private static final String SKILL_DEFAULT_ORANGE_PORTRAIT = getImageResourcePath("1024/skill_wrestler.png");
     private static final String POWER_DEFAULT_ORANGE_PORTRAIT = getImageResourcePath("1024/power_wrestler.png");
+    public static final String ATTACK_DEFAULT_DIRTY_ORANGE_PORTRAIT = getImageResourcePath("1024/attack_wrestler_dirty.png");
+    public static final String SKILL_DEFAULT_DIRTY_ORANGE_PORTRAIT = getImageResourcePath("1024/skill_wrestler_dirty.png");
+    public static final String POWER_DEFAULT_DIRTY_ORANGE_PORTRAIT = getImageResourcePath("1024/power_wrestler_dirty.png");
     private static final String ENERGY_ORB_DEFAULT_ORANGE_PORTRAIT = getImageResourcePath("1024/card_default_gray_orb.png");
 
     // Character assets
@@ -193,15 +200,20 @@ public class WrestlerMod implements
         logger.info("Done subscribing");
 
         logger.info("Creating the color " + AbstractCardEnum.THE_WRESTLER_ORANGE);
-
         BaseMod.addColor(AbstractCardEnum.THE_WRESTLER_ORANGE, WRESTLER_ORANGE, WRESTLER_ORANGE, WRESTLER_ORANGE,
             WRESTLER_ORANGE, WRESTLER_ORANGE, WRESTLER_ORANGE, WRESTLER_ORANGE,
             ATTACK_WRESTLER_ORANGE, SKILL_WRESTLER_ORANGE, POWER_WRESTLER_ORANGE, ENERGY_ORB_DEFAULT_ORANGE,
             ATTACK_DEFAULT_ORANGE_PORTRAIT, SKILL_DEFAULT_ORANGE_PORTRAIT, POWER_DEFAULT_ORANGE_PORTRAIT,
             ENERGY_ORB_DEFAULT_ORANGE_PORTRAIT, CARD_ENERGY_ORB);
-
         logger.info("Done creating the color");
 
+        logger.info("Creating the color " + AbstractCardEnum.THE_WRESTLER_ORANGE);
+        BaseMod.addColor(AbstractCardEnum.THE_WRESTLER_ORANGE, WRESTLER_ORANGE, WRESTLER_ORANGE, WRESTLER_ORANGE,
+            WRESTLER_ORANGE, WRESTLER_ORANGE, WRESTLER_ORANGE, WRESTLER_ORANGE,
+            ATTACK_WRESTLER_ORANGE, SKILL_WRESTLER_ORANGE, POWER_WRESTLER_ORANGE, ENERGY_ORB_DEFAULT_ORANGE,
+            ATTACK_DEFAULT_ORANGE_PORTRAIT, SKILL_DEFAULT_ORANGE_PORTRAIT, POWER_DEFAULT_ORANGE_PORTRAIT,
+            ENERGY_ORB_DEFAULT_ORANGE_PORTRAIT, CARD_ENERGY_ORB);
+        logger.info("Done creating the color");
 
         logger.info("Adding mod settings");
         // This loads the mod settings.
@@ -581,7 +593,6 @@ public class WrestlerMod implements
         UnlockTracker.unlockCard(CannedHeat.ID);
         UnlockTracker.unlockCard(CheapShot.ID);
         UnlockTracker.unlockCard(CleanFinish.ID);
-        UnlockTracker.unlockCard(Cloverleaf.ID);
         UnlockTracker.unlockCard(CloverleafAttack.ID);
         UnlockTracker.unlockCard(CobraClutch.ID);
         UnlockTracker.unlockCard(CurtainJerker.ID);

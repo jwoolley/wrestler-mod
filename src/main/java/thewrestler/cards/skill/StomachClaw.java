@@ -15,6 +15,7 @@ import com.megacrit.cardcrawl.vfx.combat.BiteEffect;
 import thewrestler.cards.WrestlerCardTags;
 import thewrestler.enums.AbstractCardEnum;
 import thewrestler.powers.InjuredPower;
+import thewrestler.util.CardUtil;
 
 import static thewrestler.WrestlerMod.getCardResourcePath;
 
@@ -41,7 +42,7 @@ public class StomachClaw extends CustomCard {
         RARITY, TARGET);
     this.baseMagicNumber = this.magicNumber = DEBUFF_AMOUNT;
     this.exhaust = true;
-    tags.add(WrestlerCardTags.DIRTY);
+    CardUtil.makeCardDirty(this, this.type);
   }
 
   @Override

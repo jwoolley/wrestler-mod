@@ -19,6 +19,7 @@ import thewrestler.actions.cards.DamageEnemiesAction;
 import thewrestler.cards.WrestlerCardTags;
 import thewrestler.effects.utils.combat.CleanFinishEffect;
 import thewrestler.enums.AbstractCardEnum;
+import thewrestler.util.CardUtil;
 import thewrestler.util.CreatureUtils;
 
 import java.util.ArrayList;
@@ -49,7 +50,7 @@ public class Guillotine extends CustomCard {
         AbstractCardEnum.THE_WRESTLER_ORANGE, RARITY, TARGET);
     this.baseDamage = this.damage = DAMAGE;
     this.isMultiDamage = true;
-    tags.add(WrestlerCardTags.DIRTY);
+    CardUtil.makeCardDirty(this, this.type);
   }
 
   @Override

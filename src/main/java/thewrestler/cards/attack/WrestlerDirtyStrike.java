@@ -1,10 +1,12 @@
 package thewrestler.cards.attack;
 
+import basemod.abstracts.CustomCard;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.localization.CardStrings;
 import thewrestler.WrestlerMod;
 import thewrestler.cards.WrestlerCardTags;
+import thewrestler.util.CardUtil;
 
 public class WrestlerDirtyStrike extends WrestlerStrike {
   public static final String ID = WrestlerMod.makeID("WrestlerDirtyStrike");
@@ -19,7 +21,12 @@ public class WrestlerDirtyStrike extends WrestlerStrike {
   public WrestlerDirtyStrike() {
     super(ID, NAME, DESCRIPTION, IMG_PATH);
     this.baseDamage = this.damage  = this.baseDamage + ADDITIONAL_BASE_DAMAGE;
-    tags.add(WrestlerCardTags.DIRTY);
+    setDirtyCardAttackFrame(this);
+    CardUtil.makeCardDirty(this, this.type);
+  }
+
+  static void setDirtyCardAttackFrame(CustomCard card) {
+    card.setBackgroundTexture(WrestlerMod.ATTACK_WRESTLER_DIRTY_ORANGE, WrestlerMod.ATTACK_DEFAULT_DIRTY_ORANGE_PORTRAIT);
   }
 
   public AbstractCard makeCopy() {

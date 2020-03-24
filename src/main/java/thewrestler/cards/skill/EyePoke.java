@@ -17,6 +17,7 @@ import thewrestler.keywords.AbstractTooltipKeyword;
 import thewrestler.keywords.CustomTooltipKeywords;
 import thewrestler.keywords.TooltipKeywords;
 import thewrestler.powers.InjuredPower;
+import thewrestler.util.CardUtil;
 
 import java.util.Arrays;
 import java.util.List;
@@ -50,7 +51,7 @@ public class EyePoke extends CustomCard {
     this.misc = this.baseBlock = VULNERABLE_AMOUNT;
     this.baseMagicNumber = this.magicNumber = WEAK_AMOUNT;
     this.exhaust = true;
-    tags.add(WrestlerCardTags.DIRTY);
+    CardUtil.makeCardDirty(this, this.type);
   }
 
   @Override

@@ -1,5 +1,6 @@
 package thewrestler.util;
 
+import basemod.abstracts.CustomCard;
 import com.badlogic.gdx.graphics.Color;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.cards.CardGroup;
@@ -25,6 +26,18 @@ public class CardUtil {
     }
 
     card.superFlash(Color.GOLD.cpy());
+  }
+
+  public static void makeCardDirty(CustomCard card, AbstractCard.CardType type) {
+    if (type == AbstractCard.CardType.ATTACK) {
+      card.setBackgroundTexture(WrestlerMod.ATTACK_WRESTLER_DIRTY_ORANGE, WrestlerMod.ATTACK_DEFAULT_DIRTY_ORANGE_PORTRAIT);
+    } else if (type == AbstractCard.CardType.POWER) {
+      card.setBackgroundTexture(WrestlerMod.POWER_WRESTLER_DIRTY_ORANGE, WrestlerMod.POWER_DEFAULT_DIRTY_ORANGE_PORTRAIT);
+    } else {
+      card.setBackgroundTexture(WrestlerMod.SKILL_WRESTLER_DIRTY_ORANGE, WrestlerMod.SKILL_DEFAULT_DIRTY_ORANGE_PORTRAIT);
+    }
+
+    card.tags.add(WrestlerCardTags.DIRTY);
   }
 
   public static boolean isCardInHand(AbstractCard card) {

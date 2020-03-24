@@ -17,6 +17,7 @@ import thewrestler.keywords.CustomTooltipKeywords;
 import thewrestler.keywords.TooltipKeywords;
 import thewrestler.powers.NearFallPower;
 import thewrestler.powers.RefBumpPower;
+import thewrestler.util.CardUtil;
 
 import java.util.Arrays;
 import java.util.List;
@@ -49,7 +50,7 @@ public class RefBump extends CustomCard {
     this.baseBlock = this.block = BLOCK_AMOUNT;
     this.baseMagicNumber = this.magicNumber = BLOCK_AMOUNT;
     this.bonusBlock = 0;
-    tags.add(WrestlerCardTags.DIRTY);
+    CardUtil.makeCardDirty(this, this.type);
   }
 
   @Override
