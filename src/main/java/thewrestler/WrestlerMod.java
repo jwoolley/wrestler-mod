@@ -485,7 +485,7 @@ public class WrestlerMod implements
         BaseMod.addCard(new Backfist());
         BaseMod.addCard(new Backslide());
         BaseMod.addCard(new BearHug());
-        BaseMod.addCard(new Butterfly());
+//        BaseMod.addCard(new Butterfly());
         BaseMod.addCard(new Brainbuster());
         BaseMod.addCard(new CageMatch());
         BaseMod.addCard(new CannedHeat());
@@ -500,7 +500,7 @@ public class WrestlerMod implements
         BaseMod.addCard(new Facewash());
         BaseMod.addCard(new FanFavorite());
         BaseMod.addCard(new Feud());
-        BaseMod.addCard(new FloatOver());
+//        BaseMod.addCard(new FloatOver());
         BaseMod.addCard(new FrogSplash());
         BaseMod.addCard(new Glower());
         BaseMod.addCard(new Guillotine());
@@ -532,7 +532,7 @@ public class WrestlerMod implements
         BaseMod.addCard(new RunTheRing());
         BaseMod.addCard(new Sandbag());
         BaseMod.addCard(new Scrapper());
-        BaseMod.addCard(new Screwjob());
+//        BaseMod.addCard(new Screwjob());
         BaseMod.addCard(new Sharpshooter());
         BaseMod.addCard(new Shortarm());
         BaseMod.addCard(new Showboat());

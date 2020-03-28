@@ -9,8 +9,11 @@ import com.megacrit.cardcrawl.actions.common.DamageAction;
 import com.megacrit.cardcrawl.actions.utility.SFXAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.cards.DamageInfo;
+import com.megacrit.cardcrawl.cards.green.Acrobatics;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
+import com.megacrit.cardcrawl.core.AbstractCreature;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
+import com.megacrit.cardcrawl.core.Settings;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
@@ -18,6 +21,8 @@ import com.megacrit.cardcrawl.vfx.combat.ClawEffect;
 import thewrestler.enums.AbstractCardEnum;
 import thewrestler.powers.BearHugPower;
 import thewrestler.powers.InjuredPower;
+
+import java.util.Set;
 
 import static thewrestler.WrestlerMod.getCardResourcePath;
 
@@ -57,14 +62,35 @@ public class BearHug extends CustomCard {
     AbstractDungeon.actionManager.addToBottom(
         new DamageAction(m, new DamageInfo(p, damage, damageTypeForTurn), AbstractGameAction.AttackEffect.SMASH));
 
-    for (int i = 0; i < this.magicNumber; i++) {
-      if (m != null) {
-        AbstractDungeon.actionManager.addToBottom(
-            new VFXAction(new ClawEffect(m.hb.cX, m.hb.cY, Color.BROWN, Color.RED ), 0.1F));
-      }
+    AbstractDungeon.actionManager.addToBottom(new ChainApplyInjuredAction(m, p, this.misc, this.magicNumber));
+  }
 
-      AbstractDungeon.actionManager.addToBottom(
-          new ApplyPowerAction(m, p, new InjuredPower(m, this.misc), this.misc, true));
+  class ChainApplyInjuredAction extends AbstractGameAction {
+    private final int repetitions;
+    public ChainApplyInjuredAction(AbstractCreature target, AbstractCreature source, int amount, int repetitions) {
+      this.duration = Settings.FAST_MODE ? Settings.ACTION_DUR_XFAST : Settings.ACTION_DUR_FAST;
+      this.target = target;
+      this.source = source;
+      this.amount = amount;
+      this.repetitions = repetitions;
+    }
+
+    @Override
+    public void update() {
+      if (repetitions > 0 && this.target != null && !this.target.isDeadOrEscaped()) {
+        AbstractDungeon.actionManager.addToBottom(
+            new VFXAction(new ClawEffect(this.target.hb.cX, this.target.hb.cY, Color.BROWN, Color.RED), 0.1F));
+
+        AbstractDungeon.actionManager.addToBottom(
+            new ApplyPowerAction(
+                this.target, this.source, new InjuredPower(this.target, this.amount), this.amount, true));
+
+        if (this.repetitions > 1) {
+          AbstractDungeon.actionManager.addToBottom(
+              new ChainApplyInjuredAction(this.target, this.source, this.amount, this.repetitions - 1));
+        }
+      }
+      this.isDone = true;
     }
   }
 

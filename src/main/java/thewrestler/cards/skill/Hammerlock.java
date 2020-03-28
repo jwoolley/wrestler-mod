@@ -2,6 +2,7 @@ package thewrestler.cards.skill;
 
 import com.megacrit.cardcrawl.actions.common.GainBlockAction;
 import com.megacrit.cardcrawl.actions.common.MakeTempCardInDiscardAction;
+import com.megacrit.cardcrawl.actions.common.MakeTempCardInHandAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
@@ -28,10 +29,9 @@ public class Hammerlock extends AbstractCardWithPreviewCard {
   private static final CardTarget TARGET = CardTarget.SELF;
   private static AbstractCard PREVIEW_CARD;
 
-  private static final int BLOCK_AMOUNT = 12;
-  private static final int BLOCK_AMOUNT_UPGRADE = 2;
+  private static final int BLOCK_AMOUNT = 10;
+  private static final int BLOCK_AMOUNT_UPGRADE = 3;
   private static final int CARD_AMOUNT = 2;
-  private static final int CARD_AMOUNT_UPGRADE = 1;
   private static final int COST = 2;
 
   public Hammerlock() {
@@ -44,9 +44,7 @@ public class Hammerlock extends AbstractCardWithPreviewCard {
   @Override
   public void use(AbstractPlayer p, AbstractMonster m) {
     AbstractDungeon.actionManager.addToBottom(new GainBlockAction(p, p, block));
-
-    AbstractDungeon.actionManager.addToBottom(
-        new MakeTempCardInDiscardAction(new Elbow(), this.magicNumber));
+    AbstractDungeon.actionManager.addToBottom(new MakeTempCardInHandAction(new Elbow(), this.magicNumber));
   }
 
   @Override
@@ -59,7 +57,6 @@ public class Hammerlock extends AbstractCardWithPreviewCard {
     if (!this.upgraded) {
       this.upgradeName();
       this.upgradeBlock(BLOCK_AMOUNT_UPGRADE);
-      this.upgradeMagicNumber(CARD_AMOUNT_UPGRADE);
       this.rawDescription = getDescription(this.magicNumber);
       initializeDescription();
     }

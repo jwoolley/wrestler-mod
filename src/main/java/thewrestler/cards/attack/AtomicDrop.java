@@ -27,19 +27,20 @@ public class AtomicDrop extends CustomCard {
   private static final CardStrings cardStrings;
 
   private static final CardType TYPE = CardType.ATTACK;
-  private static final CardRarity RARITY = CardRarity.UNCOMMON;
+  private static final CardRarity RARITY = CardRarity.RARE;
   private static final CardTarget TARGET = CardTarget.ENEMY;
 
   private static final int COST = 2;
   private static final int DAMAGE = 10;
+  private static final int UPGRADED_DAMAGE = 4;
   private static final int POWER_STACKS = 1;
-  private static final int POWER_STACKS_UPGRADE = 1;
 
   public AtomicDrop() {
     super(ID, NAME, getCardResourcePath(IMG_PATH), COST, getDescription(POWER_STACKS), TYPE,
         AbstractCardEnum.THE_WRESTLER_ORANGE, RARITY, TARGET);
     this.baseDamage = this.damage = DAMAGE;
     this.baseMagicNumber = this.magicNumber = POWER_STACKS;
+    this.exhaust = true;
   }
 
   @Override
@@ -63,7 +64,7 @@ public class AtomicDrop extends CustomCard {
   public void upgrade() {
     if (!this.upgraded) {
       this.upgradeName();
-      this.upgradeMagicNumber(POWER_STACKS_UPGRADE);
+      this.upgradeDamage(UPGRADED_DAMAGE);
       this.rawDescription = getDescription(this.magicNumber);
       this.initializeDescription();
     }

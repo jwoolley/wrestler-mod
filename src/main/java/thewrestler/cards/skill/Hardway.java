@@ -1,12 +1,20 @@
 package thewrestler.cards.skill;
 
 import basemod.abstracts.CustomCard;
+import com.badlogic.gdx.graphics.Color;
+import com.megacrit.cardcrawl.actions.AbstractGameAction;
+import com.megacrit.cardcrawl.actions.animations.VFXAction;
+import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
+import com.megacrit.cardcrawl.actions.common.LoseHPAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
+import com.megacrit.cardcrawl.powers.StrengthPower;
+import com.megacrit.cardcrawl.powers.ThornsPower;
+import com.megacrit.cardcrawl.vfx.combat.ClawEffect;
 import thewrestler.actions.cards.skill.HardwayAction;
 import thewrestler.cards.WrestlerCardTags;
 import thewrestler.enums.AbstractCardEnum;
@@ -28,12 +36,14 @@ public class Hardway extends CustomCard {
   private static final CardTarget TARGET = CardTarget.ENEMY;
 
   private static final int COST = 1;
-  private static final int UPGRADED_COST = 0;
+  private static final int STRENGTH_LOSS = 2;
+  private static final int STRENGTH_LOSS_UPGRADE = 1;
 
   public Hardway() {
     super(ID, NAME, getCardResourcePath(IMG_PATH), COST, getDescription(), TYPE, AbstractCardEnum.THE_WRESTLER_ORANGE,
         RARITY, TARGET);
     this.exhaust = true;
+    this.magicNumber = this.baseMagicNumber = STRENGTH_LOSS;
     CardUtil.makeCardDirty(this, this.type);
   }
 
@@ -42,7 +52,17 @@ public class Hardway extends CustomCard {
     // TODO: add VFX/SFX
     //   AbstractDungeon.actionManager.addToBottom(new SFXAction("BOO_CROWD_1"));
 
-    AbstractDungeon.actionManager.addToBottom(new HardwayAction(m, p));
+    AbstractDungeon.actionManager.addToBottom(
+        new VFXAction(new ClawEffect(m.hb.cX, m.hb.cY, Color.SCARLET, Color.RED), 0.2F));
+
+    AbstractDungeon.actionManager.addToBottom(
+        new ApplyPowerAction(m, p, new StrengthPower(m, -this.magicNumber), -this.magicNumber, true));
+
+    AbstractDungeon.actionManager.addToBottom(
+        new ApplyPowerAction(p, p, new ThornsPower(p, this.magicNumber), this.magicNumber, true));
+
+    AbstractDungeon.actionManager.addToBottom(
+        new LoseHPAction(p, p, this.magicNumber, AbstractGameAction.AttackEffect.SLASH_VERTICAL));
   }
 
   @Override
@@ -54,8 +74,7 @@ public class Hardway extends CustomCard {
   public void upgrade() {
     if (!this.upgraded) {
       this.upgradeName();
-      this.upgradeBaseCost(UPGRADED_COST);
-      this.rawDescription = getDescription();
+      this.upgradeMagicNumber(STRENGTH_LOSS_UPGRADE);
       initializeDescription();
     }
   }

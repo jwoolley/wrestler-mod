@@ -13,11 +13,11 @@
 
   "WrestlerMod:AtomicDrop": {
     "NAME": "Atomic Drop",
-    "DESCRIPTION": "Deal !D! Damage. NL The next",
+    "DESCRIPTION": "Deal !D! Damage. NL The first",
     "EXTENDED_DESCRIPTION": [
       " time",
       " !M! times",
-      " you attack the enemy this turn, gain [E]."
+      " you attack this enemy each turn, gain [E]. NL Exhaust."
     ]
   },
 
@@ -152,7 +152,7 @@
 
   "WrestlerMod:EyePoke": {
     "NAME": "Eye Poke",
-    "DESCRIPTION": "wrestlermod:Dirty. NL Apply !M! Weak and NL !B! Vulnerable. NL Exhaust."
+    "DESCRIPTION": "wrestlermod:Dirty. NL Apply !M! Weak and NL !B! wrestlermod:Injured. NL Exhaust."
   },
 
   "WrestlerMod:Facewash": {
@@ -234,13 +234,13 @@
     "EXTENDED_DESCRIPTION": [
       "an *Elbow",
       " *Elbows",
-      " to your discard pile."
+      " to your hand."
     ]
   },
 
   "WrestlerMod:Hardway": {
     "NAME": "Hardway",
-    "DESCRIPTION": "wrestlermod:Dirty. NL Remove all of the enemy's debuffs. NL They lose 1 Strength for each debuff removed. NL Exhaust."
+    "DESCRIPTION": "wrestlermod:Dirty. NL Enemy loses !M! Strength. NL Gain !M! Thorns. Lose !M! HP. NL Exhaust."
   },
 
   "WrestlerMod:Headlock": {
@@ -556,7 +556,7 @@
 
   "WrestlerMod:Squeeze": {
     "NAME": "Squeeze",
-    "DESCRIPTION": "Whenever you apply a debuff to an enemy this turn, gain !B! Block."
+    "DESCRIPTION": "Whenever you apply a debuff to an enemy this turn, gain !M! Block."
   },
 
   "WrestlerMod:StomachClaw": {
@@ -695,7 +695,7 @@
 
   "WrestlerMod:BluePenaltyStatusCard": {
     "NAME": "Blue Penalty Card",
-    "DESCRIPTION": "When you gain this card, a random enemy gains !M! *Plated *Armor. NL NL Draw ",
+    "DESCRIPTION": "When you gain this card, a random enemy gains !M! *Plated *Armor. NL Retain. NL Draw ",
     "EXTENDED_DESCRIPTION": [
       " cards next turn. NL Exhaust."
     ]
@@ -705,7 +705,7 @@
     "NAME": "Green Penalty Card",
     "DESCRIPTION": "When you gain this card, lose ",
     "EXTENDED_DESCRIPTION": [
-      " Gold. NL NL Gain !M! Dexterity. NL Exhaust."
+      " Gold. NL Retain. NL Gain !M! Dexterity. NL Exhaust."
     ]
   },
 
@@ -718,13 +718,13 @@
     "NAME": "Red Penalty Card",
     "DESCRIPTION": "When you gain this card, take ",
     "EXTENDED_DESCRIPTION": [
-      " damage. NL NL Gain !M! Strength. NL Exhaust."
+      " damage. NL Retain. NL Gain !M! Strength. NL Exhaust."
     ]
   },
 
   "WrestlerMod:YellowPenaltyStatusCard": {
     "NAME": "Yellow Penalty Card",
-    "DESCRIPTION": "When you gain this card, lose !M! wrestlermod:Bravado. NL NL Gain",
+    "DESCRIPTION": "When you gain this card, lose !M! wrestlermod:Bravado. NL Retain. NL Gain",
     "EXTENDED_DESCRIPTION": [
       " [E]",
       " next turn. NL Exhaust."

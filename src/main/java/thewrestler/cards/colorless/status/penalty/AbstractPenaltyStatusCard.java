@@ -30,6 +30,7 @@ public abstract class AbstractPenaltyStatusCard extends CustomCard {
     this.panelWarningImgPath = getInfoPanelPreviewWarningImgPath(panelImgKey);
     this.keyword = CustomTooltipKeywords.getTooltipKeyword(tooltipKeywordKey);
     this.tags.add(WrestlerCardTags.PENALTY);
+    this.selfRetain = true;
   }
 
   public String getInfoPanelNoWarningImagePath() {

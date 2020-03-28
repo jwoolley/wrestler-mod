@@ -58,8 +58,9 @@ public class Guillotine extends CustomCard {
     List<AbstractMonster> guillotinedMonsters = CreatureUtils.getLivingMonsters().stream()
         .filter(mo -> {
           AbstractCard tmp = this.makeStatEquivalentCopy();
-           tmp.calculateCardDamage(mo);
-          return (mo.currentHealth - tmp.damage) * 2 <= mo.maxHealth;
+          tmp.calculateCardDamage(mo);
+          final int expectedHealth = mo.currentHealth - tmp.damage;
+          return expectedHealth > 0 && expectedHealth * 2 <= mo.maxHealth;
         })
         .collect(Collectors.toList());
 

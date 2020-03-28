@@ -26,7 +26,7 @@ public class StomachClaw extends CustomCard {
   public static final String[] EXTENDED_DESCRIPTION;
   public static final String IMG_PATH = "stomachclaw.png";
 
-  private static final int DEBUFF_AMOUNT = 6;
+  private static final int DEBUFF_AMOUNT = 4;
   private static final int DEBUFF_AMOUNT_UPGRADE  = 1;
 
   private static final CardStrings cardStrings;
@@ -47,10 +47,10 @@ public class StomachClaw extends CustomCard {
 
   @Override
   public void use(AbstractPlayer p, AbstractMonster m) {
-    if (m != null) {
-      AbstractDungeon.actionManager.addToBottom(new VFXAction(
-          new BiteEffect(m.hb.cX, m.hb.cY - 40.0F * Settings.scale, Color.ORANGE.cpy()), 0.1F));
-    }
+//    if (m != null) {
+//      AbstractDungeon.actionManager.addToBottom(new VFXAction(
+//          new BiteEffect(m.hb.cX, m.hb.cY - 40.0F * Settings.scale, Color.ORANGE.cpy()), 0.1F));
+//    }
 
     AbstractDungeon.actionManager.addToBottom(
         new ApplyPowerAction(m, p, new InjuredPower(m, this.magicNumber), this.magicNumber));

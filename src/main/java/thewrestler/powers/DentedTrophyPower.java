@@ -1,38 +1,37 @@
 package thewrestler.powers;
 
 import basemod.interfaces.CloneablePowerInterface;
-import com.megacrit.cardcrawl.actions.common.GainBlockAction;
 import com.megacrit.cardcrawl.actions.common.RemoveSpecificPowerAction;
-import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.AbstractCreature;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.PowerStrings;
 import com.megacrit.cardcrawl.powers.AbstractPower;
 import thewrestler.WrestlerMod;
+import thewrestler.characters.WrestlerCharacter;
 
-public class SqueezePower extends AbstractWrestlerPower implements CloneablePowerInterface {
-  public static final String POWER_ID = WrestlerMod.makeID("SqueezePower");
-  public static final String IMG = "squeeze.png";
+public class DentedTrophyPower extends AbstractWrestlerPower implements CloneablePowerInterface {
+  public static final String POWER_ID = WrestlerMod.makeID("DentedTrophyPower");
+  public static final String IMG = "bravado.png";
   private static final PowerStrings powerStrings;
   public static final String NAME;
   public static final String[] DESCRIPTIONS;
 
   public static final PowerType POWER_TYPE = PowerType.BUFF;
 
-  public SqueezePower(AbstractCreature owner, int amount) {
+  public DentedTrophyPower(AbstractCreature owner, int amount) {
     super(POWER_ID, NAME, IMG, owner, owner, amount, POWER_TYPE);
   }
 
-  public void onApplyPower(AbstractPower power) {
-    AbstractPlayer player = AbstractDungeon.player;
-    AbstractDungeon.actionManager.addToBottom(new GainBlockAction(player, player, this.amount));
+  @Override
+  public void stackPower(int stackAmount) {
+    super.stackPower(stackAmount);
     this.flash();
   }
 
   @Override
-  public void atEndOfTurn(boolean isPlayer) {
-    AbstractDungeon.actionManager.addToBottom(new RemoveSpecificPowerAction(this.owner, this.owner, POWER_ID));
+  public void atStartOfTurn() {
+    this.amount = 0;
   }
 
   @Override
@@ -42,7 +41,7 @@ public class SqueezePower extends AbstractWrestlerPower implements CloneablePowe
 
   @Override
   public AbstractPower makeCopy() {
-    return new SqueezePower(owner, amount);
+    return new DentedTrophyPower(owner, amount);
   }
 
   static {
