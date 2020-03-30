@@ -33,6 +33,7 @@ public class BravadoPower extends AbstractWrestlerPower implements CloneablePowe
       WrestlerCharacter.getSignatureMoveInfo().triggerGainTrademarkMove();
       // AbstractDungeon.actionManager.addToTop(new GainTradeMarkMoveAction());
       CardCrawlGame.sound.play("BOXING_BELL_1");
+      CardCrawlGame.sound.play("BOXING_BELL_1");
       this.flash();
       this.amount -= AMOUNT_REQUIRED;
       if (this.amount <= 0) {

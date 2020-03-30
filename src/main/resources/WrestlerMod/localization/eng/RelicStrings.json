@@ -21,18 +21,8 @@
     "NAME": "Dented Trophy",
     "FLAVOR": "A reminder of past glory.",
     "DESCRIPTIONS": [
-      "At the end of your turn, if you've played #b",
-      " or more #yAttacks, gain #b1 #yBravado. At the start of your turn, if you have #b",
-      " or more Bravado, choose a #yTrademark #yMove to add to your hand."
-    ]
-  },
-
-  "WrestlerMod:DentedTrophyOld": {
-    "NAME": "Dented Trophy",
-    "FLAVOR": "A reminder of past glory.",
-    "DESCRIPTIONS": [
-      "At the start of your turn, gain #b",
-      " #yBravado."
+      "At the start of your turn, and whenever you play #b",
+      " #yAttacks in a single turn, gain #b1 #yBravado."
     ]
   },
 

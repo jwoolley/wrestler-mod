@@ -131,7 +131,7 @@
     "NAMES": [
       "injured", "injured"
     ],
-    "DESCRIPTION": "Injured creatures lose HP when Injured is applied, and whenever they're attacked this turn or Injured is applied again this turn."
+    "DESCRIPTION": "Injured creatures lose HP when Injured is applied and whenever they're attacked this turn."
   },
 
 

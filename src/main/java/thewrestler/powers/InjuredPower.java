@@ -52,7 +52,7 @@ public class InjuredPower extends AbstractWrestlerPower implements CloneablePowe
 
   public void stackPower(int amount) {
     super.stackPower(amount);
-    triggerPower(this.amount);
+    triggerPower(amount);
   }
 
   @Override

@@ -38,15 +38,6 @@
     ]
   },
 
-  "WrestlerMod:DentedTrophyPower": {
-    "NAME": "Attacks This Turn",
-    "DESCRIPTIONS": [
-      "You have played #b",
-      " #yAttacks this turn."
-    ]
-  },
-
-
   "WrestlerMod:FanFavoritePower": {
     "NAME": "Fan Favorite",
     "DESCRIPTIONS": [
@@ -223,9 +214,9 @@
   "WrestlerMod:InjuredPower": {
     "NAME": "Injured",
     "DESCRIPTIONS": [
-      "This turn, when you're attacked or when #yInjured is applied to you, lose #b",
+      "Whenever you're attacked this turn, lose #b",
       " HP.",
-      "This turn, when attacked or when #yInjured is applied, loses #b",
+      "When attacked this turn, loses #b",
       " HP."
     ]
   },

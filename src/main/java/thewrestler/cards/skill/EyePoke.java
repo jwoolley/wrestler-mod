@@ -49,7 +49,6 @@ public class EyePoke extends CustomCard {
     // Using baseBlock (and overriding applyPowersToBlock) as a hack so value is highlighted in upgrade UI (a la Wish)
     this.misc = this.baseBlock = INJURED_AMOUNT;
     this.baseMagicNumber = this.magicNumber = WEAK_AMOUNT;
-    this.exhaust = true;
     CardUtil.makeCardDirty(this, this.type);
   }
 

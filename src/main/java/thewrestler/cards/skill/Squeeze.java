@@ -10,7 +10,6 @@ import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import thewrestler.enums.AbstractCardEnum;
-import thewrestler.powers.DentedTrophyPower;
 import thewrestler.powers.SqueezePower;
 
 import static thewrestler.WrestlerMod.getCardResourcePath;
