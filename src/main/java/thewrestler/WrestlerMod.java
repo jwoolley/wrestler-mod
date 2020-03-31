@@ -26,6 +26,7 @@ import com.megacrit.cardcrawl.helpers.CardHelper;
 import com.megacrit.cardcrawl.helpers.FontHelper;
 import com.megacrit.cardcrawl.localization.*;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
+import com.megacrit.cardcrawl.rewards.RewardSave;
 import com.megacrit.cardcrawl.rooms.AbstractRoom;
 import com.megacrit.cardcrawl.unlock.UnlockTracker;
 import org.apache.logging.log4j.LogManager;
@@ -40,10 +41,12 @@ import thewrestler.characters.WrestlerCharacter;
 import thewrestler.enums.AbstractCardEnum;
 import thewrestler.enums.WrestlerCharEnum;
 import thewrestler.patches.powers.OnApplyPowerPatchInsert;
+import thewrestler.patches.rewards.TrademarkMoveRewardPatch;
 import thewrestler.potions.BravadoPotion;
 import thewrestler.potions.CobraPotion;
 import thewrestler.potions.GrapplePotion;
 import thewrestler.relics.*;
+import thewrestler.rewards.TrademarkMoveReward;
 import thewrestler.signaturemoves.cards.Chokeslam;
 import thewrestler.signaturemoves.cards.DragonGate;
 import thewrestler.signaturemoves.cards.Piledriver;
@@ -399,6 +402,18 @@ public class WrestlerMod implements
 
         // =============== /EVENTS/ =================
         logger.info("Done loading badge Image and mod options");
+
+        logger.info("Loading custom rewards");
+
+        BaseMod.registerCustomReward(TrademarkMoveRewardPatch.WRESTLER_TRADEMARK_MOVE_REWARD,
+            (rewardSave) ->  new TrademarkMoveReward(),
+            (customReward -> {
+                // TODO: save logic for trademark move reward
+                return new RewardSave(customReward.type.toString(), null, 0, 0);
+            })
+        );
+
+        logger.info("Done loading custom rewards");
     }
 
     // =============== / POST-INITIALIZE/ =================

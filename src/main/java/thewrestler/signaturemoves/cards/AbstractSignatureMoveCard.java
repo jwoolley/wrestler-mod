@@ -1,6 +1,11 @@
 package thewrestler.signaturemoves.cards;
 
 import basemod.abstracts.CustomCard;
+import com.megacrit.cardcrawl.actions.common.GainBlockAction;
+import com.megacrit.cardcrawl.cards.AbstractCard;
+import com.megacrit.cardcrawl.characters.AbstractPlayer;
+import com.megacrit.cardcrawl.core.CardCrawlGame;
+import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import thewrestler.signaturemoves.upgrades.AbstractSignatureMoveUpgrade;
 import thewrestler.enums.AbstractCardEnum;
 import thewrestler.signaturemoves.upgrades.SignatureMoveUpgradeList;
@@ -9,6 +14,7 @@ import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.function.Function;
 
 // TODO: implement getTooltips() method for explanatory tooltips
 //  (and append any additional tooltips specified in the subclass)
@@ -62,7 +68,23 @@ abstract public class AbstractSignatureMoveCard extends CustomCard {
     }
   }
 
+  private Function<Void,Void> upgradeSelectedCallback = aVoid -> null;
 
+  public void setUpgradeSelectedCallback(Function<Void, Void> callback) {
+    this.upgradeSelectedCallback = callback;
+  }
+
+  public void onChoseThisOption() {
+    upgradeSelectedCallback.apply(null);
+  }
+
+  public void reinitialize() {
+    this.initializeTitle();
+    this.initializeDescription();
+  }
+  public void upgradeCost(int newCost) {
+    this.upgradeBaseCost(newCost);
+  }
 
   abstract public String getIndefiniteCardName();
 }

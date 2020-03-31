@@ -34,7 +34,6 @@ public class PlayToTheCrowd extends CustomCard {
 
   private static final int COST = 0;
   private static final int BRAVADO_AMOUNT = 1;
-  private static final int BRAVADO_AMOUNT_UPGRADE = 1;
 
   public PlayToTheCrowd() {
     super(ID, NAME, getCardResourcePath(IMG_PATH), COST, getDescription(false), TYPE,
@@ -69,7 +68,6 @@ public class PlayToTheCrowd extends CustomCard {
     if (!this.upgraded) {
       this.upgradeName();
       this.upgradeName();
-      this.upgradeMagicNumber(BRAVADO_AMOUNT_UPGRADE);
       this.upgradeBlock(FairPlay.BLOCK_AMOUNT_UPGRADE);
       this.cardsToPreview.upgrade();
       this.rawDescription = getDescription(true);
