@@ -12,6 +12,7 @@ import thewrestler.WrestlerMod;
 import thewrestler.effects.utils.combat.CleanFinishEffect;
 import thewrestler.enums.AbstractCardEnum;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -31,35 +32,51 @@ public class CleanFinish extends CustomCard {
   private static final CardTarget TARGET = CardTarget.SELF;
 
   private static final int COST = 3;
-  private static final int UPGRADED_COST = 2;
 
+  private static final int NUM_DISCOUNTED_CARDS = 3;
+  private static final int NUM_DISCOUNTED_CARDS_UPGRADE = 1;
 
   public CleanFinish() {
     super(ID, NAME, getCardResourcePath(IMG_PATH), COST, getDescription(), TYPE, AbstractCardEnum.THE_WRESTLER_ORANGE,
         RARITY, TARGET);
+    this.baseMagicNumber = this.magicNumber = NUM_DISCOUNTED_CARDS;
     this.exhaust = true;
   }
 
   @Override
   public void use(AbstractPlayer p, AbstractMonster m) {
     List<AbstractCard> cards = p.hand.group.stream()
-        .filter(c -> c.type != CardType.STATUS && c.type != CardType.CURSE).collect(Collectors.toList());
+        .filter(c -> c.type != CardType.CURSE)
+        .filter(c -> c.cost > 0)
+        .filter(c -> c.uuid != this.uuid)
+        .collect(Collectors.toList());
 
-    WrestlerMod.logger.info("CleanFinish::use updating " + cards.size() + " cards");
+    WrestlerMod.logger.info("CleanFinish:use filtered cards:" + cards.stream()
+        .map(c -> c.name).collect(Collectors.joining(", ")));
 
     AbstractDungeon.actionManager.addToBottom(new VFXAction(new CleanFinishEffect()));
 
-    cards.forEach(c -> {
-      if (c.cost > 0) {
-        c.freeToPlayOnce = true;
-      }
-      if (!c.exhaust && !c.exhaustOnUseOnce) {
-        c.exhaustOnUseOnce = true;
-        c.rawDescription += EXTENDED_DESCRIPTION[0];
-      }
-      c.initializeDescription();
-      // AbstractDungeon.player.hand.refreshHandLayout();
-    });
+    Collections.shuffle(cards);
+
+    if (cards.size() > this.magicNumber) {
+      cards = cards.subList(0, this.magicNumber);
+    }
+
+    WrestlerMod.logger.info("CleanFinish:use suffled and truncated cards:" + cards.stream()
+        .map(c -> c.name).collect(Collectors.joining(", ")));
+
+    if (!cards.isEmpty()) {
+      cards.stream().forEach(c -> {
+        if (c.cost > 0) {
+          c.freeToPlayOnce = true;
+        }
+        if (!c.exhaust && !c.exhaustOnUseOnce) {
+          c.exhaustOnUseOnce = true;
+          c.rawDescription += EXTENDED_DESCRIPTION[0];
+        }
+        c.initializeDescription();
+      });
+    }
   }
 
   @Override
@@ -71,7 +88,7 @@ public class CleanFinish extends CustomCard {
   public void upgrade() {
     if (!this.upgraded) {
       this.upgradeName();
-      this.upgradeBaseCost(UPGRADED_COST);
+      this.upgradeMagicNumber(NUM_DISCOUNTED_CARDS_UPGRADE);
       initializeDescription();
     }
   }

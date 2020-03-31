@@ -1,10 +1,121 @@
 {
-  "WrestlerMod:Sprained": {
-    "PROPER_NAME": "Sprained",
+  "WrestlerMod:Sportsmanship": {
+    "PROPER_NAME": "Regulation Fighting",
     "NAMES": [
-      "sprain", "sprained"
+      "sportsmanship"
     ],
-    "DESCRIPTION": "When attacking, receive damage."
+    "DESCRIPTION": "For every #b2 #yDirty cards you play in the same turn, gain a #yPenalty #yCard."
+  },
+
+  "WrestlerMod:Bravado": {
+    "PROPER_NAME": "Bravado",
+    "NAMES": [
+      "bravado"
+    ],
+    "DESCRIPTION": "When you obtain #b5 #yBravado, gain one of your #yTrademark #yMoves."
+  },
+
+  "WrestlerMod:Dirty": {
+    "PROPER_NAME": "Dirty",
+    "NAMES": [
+      "dirty"
+    ],
+    "DESCRIPTION": "Playing multiple #yDirty cards in the same turn will earn #yPenalty #yCards."
+  },
+
+  "WrestlerMod:Elbow": {
+    "PROPER_NAME": "Elbow",
+    "NAMES": [
+      "elbow", "elbows"
+    ],
+    "DESCRIPTION": "A 0-cost #yAttack card with #yExhaust that deals modest damage and draws a card."
+  },
+
+  "WrestlerMod:Clean": {
+    "PROPER_NAME": "Clean",
+    "NAMES": [
+      "clean"
+    ],
+    "DESCRIPTION": "You have no #yPenalty #yCards."
+  },
+
+  "WrestlerMod:SignatureMove": {
+    "PROPER_NAME": "Trademark Move",
+    "NAMES": [
+      "Trademark Move", "trademark_move"
+    ],
+    "DESCRIPTION": "One of several special attacks that can only be obtained during combat."
+  },
+
+  "WrestlerMod:SignatureMoveCardIndicator": {
+    "PROPER_NAME": "Trademark Move Card",
+    "NAMES": [
+      "Trademark Move Card",
+      "trademark_move_Card"
+    ],
+    "DESCRIPTION": " Your trademark move this run is "
+  },
+
+  "WrestlerMod:SentenceEndPunctuation": {
+    "PROPER_NAME": "SentenceEndPunctuation",
+    "NAMES": [ "SentenceEndPunctuation" ],
+    "DESCRIPTION": "[#FFFFFF]."
+  },
+
+  "WrestlerMod:PenaltyCard": {
+    "PROPER_NAME": "Penalty Card",
+    "NAMES": [
+      "Penalty Card", "penalty_card"
+    ],
+    "DESCRIPTION": "Playable status cards which generate a negative effect when gained, and a beneficial effect when played."
+  },
+
+  "WrestlerMod:PenaltyCardBlue": {
+    "PROPER_NAME": "Blue Penalty Card",
+    "NAMES": [
+      "Blue Penalty Card", "blue_penalty_card"
+    ],
+    "DESCRIPTION": "Applies #yPlated #yArmor to a random enemy when gained. Exhaust and draw additional cards next turn when played."
+  },
+
+  "WrestlerMod:PenaltyCardGreen": {
+    "PROPER_NAME": "Green Penalty Card",
+    "NAMES": [
+      "Green Penalty Card", "green_penalty_card"
+    ],
+    "DESCRIPTION": "Lose #yGold when gained. Exhaust and gain #yDexterity when played."
+  },
+
+  "WrestlerMod:PenaltyCardOrange": {
+    "PROPER_NAME": "Orange Penalty Card",
+    "NAMES": [
+      "Orange Penalty Card", "orange_penalty_card"
+    ],
+    "DESCRIPTION": "Gain #yFrail at end of turn. Deals damage to ALL enemies when drawn."
+  },
+
+  "WrestlerMod:PenaltyCardRed": {
+    "PROPER_NAME": "Red Penalty Card",
+    "NAMES": [
+      "Red Penalty Card", "red_penalty_card"
+    ],
+    "DESCRIPTION": "Take damage when gained. Exhaust and gain #yStrength when played."
+  },
+
+  "WrestlerMod:PenaltyCardYellow": {
+    "PROPER_NAME": "Yellow Penalty Card",
+    "NAMES": [
+      "Yellow Penalty Card", "yellow_penalty_card"
+    ],
+    "DESCRIPTION": "Lose #yBravado when gained. Exhaust and gain energy next turn when played."
+  },
+
+  "WrestlerMod:PenaltyCardsNoGlyph": {
+    "PROPER_NAME": "Penalty Card",
+    "NAMES": [
+      "Penalty Cards", "penalty_cards"
+    ],
+    "DESCRIPTION": "Status card which applies a negative effect when gained. Provides a beneficial effect and exhausts when played."
   },
 
   "WrestlerMod:Grappled": {
@@ -15,12 +126,38 @@
     "DESCRIPTION": "#yGrappled enemies receive [#ED3030]+30%[] more and deal [#B6F8C0]-30%[] less damage. Grapple breaks once you're dealt #b10 damage in a single turn, or if you Grapple another enemy."
   },
 
+  "WrestlerMod:Injured": {
+    "PROPER_NAME": "Injured",
+    "NAMES": [
+      "injured", "injured"
+    ],
+    "DESCRIPTION": "Injured creatures lose HP when Injured is applied and whenever they're attacked this turn."
+  },
+
+
   "WrestlerMod:Knee": {
     "PROPER_NAME": "Knee",
     "NAMES": [
       "knee", "knees"
     ],
     "DESCRIPTION": "A 1-cost #yAttack card with #yEthereal and #yExhaust that deals moderate damage."
+  },
+
+  "WrestlerMod:BrutesTrophy": {
+    "PROPER_NAME": "Brute's Trophy",
+    "NAMES": [
+      "Brute's Trophy",
+      "brutes_trophy"
+    ],
+    "DESCRIPTION": "A relic which grants 2 #yStrength at the start of each combat."
+  },
+
+  "WrestlerMod:PeoplesCrown": {
+    "PROPER_NAME": "People's Crown",
+    "NAMES": [
+      "People's Crown", "peoples_crown"
+    ],
+    "DESCRIPTION": "A relic which grants 2 #yDexterity at the start of each combat."
   },
 
   "WrestlerMod:CobraClutch": {
@@ -31,6 +168,14 @@
     "DESCRIPTION": "Cobra Clutches are 0-cost #yAttack cards which deal modest damage and apply #yPoison."
   },
 
+  "WrestlerMod:TemporaryBuffer": {
+    "PROPER_NAME": "Temporary Buffer",
+    "NAMES": [
+      "TemporaryBuffer", "temporary_buffer"
+    ],
+    "DESCRIPTION": "Prevents the next time your would lose HP this turn."
+  },
+
   "Choked": {
     "PROPER_NAME": "Choked",
     "NAMES": [
@@ -38,6 +183,16 @@
     ],
     "DESCRIPTION": "Whenever you play a card this turn, loses HP."
   },
+
+  "Constricted": {
+    "PROPER_NAME": "Constricted",
+    "NAMES": [
+      "constricted"
+    ],
+    "DESCRIPTION": "Constricted creatures take damage at the end of their turn."
+
+  },
+
 
   "Beam_Cell": {
     "PROPER_NAME": "Beam Cell",

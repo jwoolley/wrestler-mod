@@ -12,6 +12,7 @@ public class AbstractWrestlerPower extends AbstractPower {
   protected static final Logger logger = WrestlerMod.logger;
 
   protected AbstractCreature source;
+  protected final String imgFilename;
 
   public AbstractWrestlerPower(String id, String name, String imgFilename,
                                AbstractCreature owner, AbstractCreature source, int amount, PowerType powerType) {
@@ -21,6 +22,7 @@ public class AbstractWrestlerPower extends AbstractPower {
     this.source = source;
     this.amount = amount;
     this.type = powerType;
+    this.imgFilename = imgFilename;
     updateDescription();
 
     this.region128 =

@@ -2,9 +2,9 @@ package thewrestler.powers.unused;
 
 import basemod.interfaces.CloneablePowerInterface;
 import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
-import com.megacrit.cardcrawl.actions.common.ReducePowerAction;
 import com.megacrit.cardcrawl.actions.common.RemoveSpecificPowerAction;
-import com.megacrit.cardcrawl.cards.DamageInfo;
+import com.megacrit.cardcrawl.actions.utility.UseCardAction;
+import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.core.AbstractCreature;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
@@ -13,7 +13,6 @@ import com.megacrit.cardcrawl.powers.AbstractPower;
 import com.megacrit.cardcrawl.powers.DexterityPower;
 import com.megacrit.cardcrawl.powers.StrengthPower;
 import thewrestler.WrestlerMod;
-import thewrestler.actions.power.ApplyGrappledAction;
 import thewrestler.powers.AbstractWrestlerPower;
 
 public class CurtainJerkerPower extends AbstractWrestlerPower implements CloneablePowerInterface {
@@ -29,18 +28,13 @@ public class CurtainJerkerPower extends AbstractWrestlerPower implements Cloneab
     super(POWER_ID, NAME, IMG, owner, owner, amount, POWER_TYPE);
   }
 
-  @Override
-  public int onAttackedToChangeDamage(DamageInfo info, int damageAmount) {
-    if (damageAmount > 0 && info.owner != this.owner) {
-      flash();
-      AbstractDungeon.actionManager.addToTop(new RemoveSpecificPowerAction(this.owner, this.owner, this.ID));
-      AbstractDungeon.actionManager.addToBottom(
-          new ApplyPowerAction(this.owner, this.owner, new StrengthPower(this.owner, -this.amount), -this.amount));
-      AbstractDungeon.actionManager.addToBottom(
-          new ApplyPowerAction(this.owner, this.owner, new DexterityPower(this.owner, -this.amount), -this.amount));
-    }
-    return damageAmount;
-  }
+//  @Override
+//  public int onAttackedToChangeDamage(DamageInfo info, int damageAmount) {
+//    if (damageAmount > 0 && info.owner != this.owner) {
+//     triggerRemovePower();
+//    }
+//    return damageAmount;
+//  }
 
   @Override
   public void updateDescription() {
@@ -56,5 +50,22 @@ public class CurtainJerkerPower extends AbstractWrestlerPower implements Cloneab
     powerStrings = CardCrawlGame.languagePack.getPowerStrings(POWER_ID);
     NAME = powerStrings.NAME;
     DESCRIPTIONS = powerStrings.DESCRIPTIONS;
+  }
+
+  private void triggerRemovePower() {
+    flash();
+    AbstractDungeon.actionManager.addToTop(new RemoveSpecificPowerAction(this.owner, this.owner, this.ID));
+    AbstractDungeon.actionManager.addToBottom(
+        new ApplyPowerAction(this.owner, this.owner, new StrengthPower(this.owner, -this.amount), -this.amount));
+    AbstractDungeon.actionManager.addToBottom(
+        new ApplyPowerAction(this.owner, this.owner, new DexterityPower(this.owner, -this.amount), -this.amount));
+
+  }
+
+  @Override
+  public void onUseCard(AbstractCard card, UseCardAction action) {
+    if (card.type == AbstractCard.CardType.POWER) {
+      AbstractDungeon.actionManager.addToTop(new RemoveSpecificPowerAction(this.owner, this.owner, this.ID));
+    }
   }
 }

@@ -14,7 +14,9 @@ import com.megacrit.cardcrawl.localization.UIStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.powers.VulnerablePower;
 import com.megacrit.cardcrawl.vfx.ThoughtBubble;
+import thewrestler.cards.WrestlerCardTags;
 import thewrestler.enums.AbstractCardEnum;
+import thewrestler.util.CardUtil;
 
 import static thewrestler.WrestlerMod.getCardResourcePath;
 
@@ -47,6 +49,7 @@ public class CheapShot extends CustomCard {
     this.baseMagicNumber = this.magicNumber = VULNERABLE_AMOUNT;
     this.isInnate = true;
     this.exhaust = true;
+    CardUtil.makeCardDirty(this, this.type);
   }
 
   @Override

@@ -11,8 +11,10 @@ import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
+import thewrestler.cards.WrestlerCardTags;
 import thewrestler.enums.AbstractCardEnum;
-import thewrestler.powers.SprainPower;
+import thewrestler.powers.InjuredPower;
+import thewrestler.util.CardUtil;
 
 import static thewrestler.WrestlerMod.getCardResourcePath;
 
@@ -29,10 +31,10 @@ public class DivingStomp extends CustomCard {
   private static final CardRarity RARITY = CardRarity.UNCOMMON;
   private static final CardTarget TARGET = CardTarget.ENEMY;
 
-  private static final int COST = 2;
-  private static final int DAMAGE = 14;
+  private static final int COST = 1;
+  private static final int DAMAGE = 10;
   private static final int DAMAGE_UPGRADE = 2;
-  private static final int SPRAIN_AMOUNT = 1;
+  private static final int SPRAIN_AMOUNT = 2;
   private static final int SPRAIN_AMOUNT_UPGRADE = 1;
 
   public DivingStomp() {
@@ -40,6 +42,7 @@ public class DivingStomp extends CustomCard {
         AbstractCardEnum.THE_WRESTLER_ORANGE, RARITY, TARGET);
     this.baseDamage = this.damage = DAMAGE;
     this.baseMagicNumber = this.magicNumber = SPRAIN_AMOUNT;
+    CardUtil.makeCardDirty(this, this.type);
   }
 
   @Override
@@ -49,7 +52,7 @@ public class DivingStomp extends CustomCard {
             AbstractGameAction.AttackEffect.BLUNT_HEAVY));
 
     AbstractDungeon.actionManager.addToBottom(
-        new ApplyPowerAction(m, p, new SprainPower(m, this.magicNumber), this.magicNumber));
+        new ApplyPowerAction(m, p, new InjuredPower(m, this.magicNumber), this.magicNumber));
   }
 
   @Override

@@ -4,7 +4,6 @@ import basemod.abstracts.CustomCard;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
 import com.megacrit.cardcrawl.actions.common.DamageAction;
-import com.megacrit.cardcrawl.actions.utility.WaitAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.cards.DamageInfo;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
@@ -13,10 +12,8 @@ import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.powers.*;
-import thewrestler.actions.ReduceBlockAction;
 import thewrestler.powers.GrappledPower;
-import thewrestler.powers.SquaringOffPower;
-import thewrestler.powers.WrestlerShackled;
+import thewrestler.powers.InjuredPower;
 import thewrestler.enums.AbstractCardEnum;
 
 import static thewrestler.WrestlerMod.getCardResourcePath;
@@ -38,9 +35,10 @@ public class Neckbreaker extends CustomCard {
   private static final int DAMAGE = 9;
   private static final int DAMAGE_UPGRADE = 3;
   private static final int DEBUFF_AMOUNT = 1;
+  private static final int INJURED_AMOUNT = 6;
 
   public Neckbreaker() {
-    super(ID, NAME, getCardResourcePath(IMG_PATH), COST, DESCRIPTION, TYPE,
+    super(ID, NAME, getCardResourcePath(IMG_PATH), COST, getDescription(INJURED_AMOUNT), TYPE,
         AbstractCardEnum.THE_WRESTLER_ORANGE, RARITY, TARGET);
     this.baseDamage = this.damage = DAMAGE;
     this.baseMagicNumber = this.magicNumber = DEBUFF_AMOUNT;
@@ -60,7 +58,7 @@ public class Neckbreaker extends CustomCard {
           new ApplyPowerAction(m, p, new WeakPower(m, this.magicNumber, false), this.magicNumber));
 
       AbstractDungeon.actionManager.addToBottom(
-          new ApplyPowerAction(m, p, new FrailPower(m, this.magicNumber, false), this.magicNumber));
+          new ApplyPowerAction(m, p, new InjuredPower(m, INJURED_AMOUNT), INJURED_AMOUNT));
     }
   }
 
@@ -75,6 +73,10 @@ public class Neckbreaker extends CustomCard {
       this.upgradeName();
       this.upgradeDamage(DAMAGE_UPGRADE);
     }
+  }
+
+  private static String getDescription(int injuredAmount) {
+    return DESCRIPTION + injuredAmount + EXTENDED_DESCRIPTION[0];
   }
 
   static {

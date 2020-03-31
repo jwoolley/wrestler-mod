@@ -22,7 +22,7 @@ public class GrayMatterPower extends AbstractWrestlerPower implements CloneableP
 
   public static final int CARDS_PER_TRIGGER = 1;
 
-  public static final PowerType POWER_TYPE = PowerType.BUFF;
+  public static final PowerType POWER_TYPE = PowerType.DEBUFF;
 
   public GrayMatterPower(AbstractCreature owner, int amount) {
     super(POWER_ID, NAME, IMG, owner, AbstractDungeon.player, amount, POWER_TYPE);
@@ -31,8 +31,8 @@ public class GrayMatterPower extends AbstractWrestlerPower implements CloneableP
   @Override
   public void updateDescription() {
     this.description = DESCRIPTIONS[0]
-        + (this.amount == 1 ? DESCRIPTIONS[1] : DESCRIPTIONS[2] + this.amount + DESCRIPTIONS[3])
-        + DESCRIPTIONS[4];
+      + (this.amount == 1 ? DESCRIPTIONS[1] : DESCRIPTIONS[2] + this.amount + DESCRIPTIONS[3])
+      + DESCRIPTIONS[4];
   }
 
   @Override

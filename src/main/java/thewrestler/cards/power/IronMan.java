@@ -10,10 +10,8 @@ import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import thewrestler.WrestlerMod;
 import thewrestler.enums.AbstractCardEnum;
-import thewrestler.powers.FanFavoritePower;
 import thewrestler.powers.IronManHealPower;
 import thewrestler.powers.IronManPower;
-import thewrestler.powers.ScrapperPower;
 
 import static thewrestler.WrestlerMod.getCardResourcePath;
 
@@ -65,7 +63,7 @@ public class IronMan extends CustomCard {
   }
 
   public static String getDescription() {
-    return DESCRIPTION + IronManPower.HEAL_AMOUNT + EXTENDED_DESCRIPTION[0];
+    return DESCRIPTION + IronManPower.HP_THRESHOLD + EXTENDED_DESCRIPTION[0];
   }
 
   static {

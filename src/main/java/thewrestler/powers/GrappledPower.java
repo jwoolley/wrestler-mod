@@ -10,7 +10,9 @@ import com.megacrit.cardcrawl.localization.PowerStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.powers.AbstractPower;
 import thewrestler.WrestlerMod;
+import thewrestler.characters.WrestlerCharacter;
 import thewrestler.util.BasicUtils;
+import thewrestler.util.CreatureUtils;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -58,7 +60,7 @@ public class GrappledPower extends AbstractWrestlerPower implements CloneablePow
   }
 
   static public List<AbstractMonster> getGrappledEnemies() {
-    return AbstractDungeon.getCurrRoom().monsters.monsters.stream()
+    return CreatureUtils.getLivingMonsters().stream()
         .filter(m -> m.hasPower(POWER_ID)).collect(Collectors.toList());
   }
 
@@ -77,7 +79,7 @@ public class GrappledPower extends AbstractWrestlerPower implements CloneablePow
 
   @Override
   public void atEndOfTurn(boolean isPlayer) {
-    System.out.println("GrappledPower::atEndOfTurn triggered. isPlayer: " + isPlayer);
+    System.out.println("GrappledPower::_atEndOfTurn triggered. isPlayer: " + isPlayer);
     if (isPlayer) {
       System.out.println("GrappledPower::atStartOfTurnPostDraw reapplying MaintainGrapplePower to source: " + this.source);
       MaintainGrapplePower.apply(this.source, this.owner, this.amount, true);
@@ -97,6 +99,10 @@ public class GrappledPower extends AbstractWrestlerPower implements CloneablePow
     MaintainGrapplePower.apply(this.source, this.owner, stackAmount - currentGrappleStacks, false);
 
     MaintainGrapplePower.apply(this.source, this.owner, stackAmount, false);
+
+    if (WrestlerCharacter.hasSignatureMoveInfo()) {
+      WrestlerCharacter.getSignatureMoveInfo().onEnemyGrappled();
+    }
   }
 
   @Override
@@ -108,8 +114,17 @@ public class GrappledPower extends AbstractWrestlerPower implements CloneablePow
                 new RemoveSpecificPowerAction(m, this.owner, GrappledPower.POWER_ID)));
 
     // isRefreshOrTargetSwitch is either true (because another enemy is grappled) or doesn't matter
-    // (the flag isn't checked the player isn't already maintaining grapple
+    // (the flag isn't checked the player isn't already maintaining grapple)
     MaintainGrapplePower.apply(this.source, this.owner, this.amount, true);
+
+    if (WrestlerCharacter.hasSignatureMoveInfo()) {
+      WrestlerCharacter.getSignatureMoveInfo().onEnemyGrappled();
+    }
+  }
+
+  @Override
+  public void onApplyPower(AbstractPower power, AbstractCreature target, AbstractCreature source) {
+    super.onApplyPower(power, target, source);
   }
 
   @Override

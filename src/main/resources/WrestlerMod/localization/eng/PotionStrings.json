@@ -1,4 +1,11 @@
 {
+  "WrestlerMod:BravadoPotion": {
+    "NAME": "Bravado Potion",
+    "DESCRIPTIONS": [
+      "If you haven't gained your #yTrademark #yMove this combat, add your #yTrademark #yMove to your hand."
+    ]
+  },
+
   "WrestlerMod:CobraPotion": {
     "NAME": "Cobra Venom",
     "DESCRIPTIONS": [
@@ -6,16 +13,24 @@
       " [#568526]Cobra [#568526]Clutches to your hand."
     ]
   },
+
   "WrestlerMod:CobraPotionCobraClutchName": {
-  "NAME": "CobraPotionCobraClutchName",
-  "DESCRIPTIONS": ["Cobra Clutch"]
-},
+    "NAME": "CobraPotionCobraClutchName",
+    "DESCRIPTIONS": ["Cobra Clutch"]
+  },
+
   "WrestlerMod:GrapplePotion": {
     "NAME": "Grapple Potion",
     "DESCRIPTIONS": ["Apply #yGrappled."]
   },
+
   "WrestlerMod:GrapplePotionGrappledName": {
     "NAME": "GrapplePotionGrappledName",
     "DESCRIPTIONS": ["Grappled"]
+  },
+
+  "WrestlerMod:BravadoPotionTrademarkMove": {
+    "NAME": "BravadoPotionTrademarkMove",
+    "DESCRIPTIONS": ["Trademark Move"]
   }
 }

@@ -1,19 +1,22 @@
 package thewrestler.relics;
 
-import basemod.abstracts.CustomRelic;
 import com.badlogic.gdx.graphics.Texture;
-import com.megacrit.cardcrawl.actions.common.GainBlockAction;
+import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
 import com.megacrit.cardcrawl.actions.utility.SFXAction;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
+import com.megacrit.cardcrawl.localization.Keyword;
 import com.megacrit.cardcrawl.powers.AbstractPower;
+import com.megacrit.cardcrawl.powers.NextTurnBlockPower;
 import thewrestler.WrestlerMod;
 import thewrestler.util.TextureLoader;
+
+import java.util.List;
 
 import static thewrestler.WrestlerMod.makeRelicOutlinePath;
 import static thewrestler.WrestlerMod.makeRelicPath;
 
-public class Headgear extends CustomRelic {
+public class Headgear extends CustomWrestlerRelic {
   // ID, images, text.
   public static final String ID = WrestlerMod.makeID("Headgear");
 
@@ -28,7 +31,8 @@ public class Headgear extends CustomRelic {
 
   public void onApplyPower(AbstractPower power) {
     AbstractPlayer player = AbstractDungeon.player;
-    AbstractDungeon.actionManager.addToBottom(new GainBlockAction(player, player, BLOCK_AMOUNT));
+    AbstractDungeon.actionManager.addToBottom(
+        new ApplyPowerAction(player, player, new NextTurnBlockPower(player, BLOCK_AMOUNT),BLOCK_AMOUNT));
     triggerEffects();
   }
 
@@ -43,4 +47,13 @@ public class Headgear extends CustomRelic {
     return DESCRIPTIONS[0] + BLOCK_AMOUNT + DESCRIPTIONS[1];
   }
 
+  @Override
+  protected List<String> getKeywordList() {
+    return null;
+  }
+
+  @Override
+  protected List<Keyword> getBaseGameKeywordList() {
+    return null;
+  }
 }

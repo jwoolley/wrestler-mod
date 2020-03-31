@@ -30,8 +30,8 @@ public class TagOut extends AbstractCardWithPreviewCard {
   private static AbstractCard UPGRADED_PREVIEW_CARD;
 
   private static final int COST = 1;
-  private static final int DEX_GAIN = 2;
-  private static final int DEX_GAIN_UPGRADE = 1;
+  private static final int DEX_GAIN = 1;
+  private static final int UPGRADED_DEX_GAIN = 1;
 
   public TagOut() {
     super(ID, NAME, getCardResourcePath(IMG_PATH), COST, getDescription(TagIn.NAME), TYPE, AbstractCardEnum.THE_WRESTLER_ORANGE,
@@ -61,7 +61,7 @@ public class TagOut extends AbstractCardWithPreviewCard {
   public void upgrade() {
     if (!this.upgraded) {
       this.upgradeName();
-      this.upgradeMagicNumber(DEX_GAIN_UPGRADE);
+      this.upgradeMagicNumber(UPGRADED_DEX_GAIN);
       this.rawDescription = getDescription(this.getPreviewCard().name);
       initializeDescription();
     }

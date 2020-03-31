@@ -10,6 +10,7 @@ import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
+import thewrestler.cards.WrestlerCardTags;
 
 import static thewrestler.WrestlerMod.getCardResourcePath;
 
@@ -34,6 +35,7 @@ public class Knee extends CustomCard {
     super(ID, NAME, getCardResourcePath(IMG_PATH), COST, DESCRIPTION, TYPE,
         CardColor.COLORLESS, RARITY, TARGET);
     this.baseDamage = this.damage = DAMAGE;
+    tags.add(WrestlerCardTags.DIRTY);
     this.exhaust = true;
     this.isEthereal = true;
   }
@@ -55,6 +57,7 @@ public class Knee extends CustomCard {
     if (!this.upgraded) {
       this.upgradeName();
       this.upgradeDamage(DAMAGE_UPGRADE);
+      initializeDescription();
     }
   }
 

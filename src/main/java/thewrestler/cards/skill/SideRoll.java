@@ -26,21 +26,22 @@ public class SideRoll extends CustomCard {
   private static final CardRarity RARITY = CardRarity.COMMON;
   private static final CardTarget TARGET = CardTarget.SELF;
 
-  private static final int BLOCK_AMOUNT = 7;
-  private static final int BLOCK_AMOUNT_UPGRADE = 2;
+  private static final int BLOCK_AMOUNT = 6;
+  private static final int BLOCK_AMOUNT_UPGRADE = 3;
   private static final int COST = 1;
+  private static final int NUM_CARDS_DRAWN = 2;
 
   public SideRoll() {
     super(ID, NAME, getCardResourcePath(IMG_PATH), COST, getDescription(), TYPE, AbstractCardEnum.THE_WRESTLER_ORANGE,
         RARITY, TARGET);
     this.baseBlock = this.block = BLOCK_AMOUNT;
+    this.baseMagicNumber = this.magicNumber = NUM_CARDS_DRAWN;
   }
 
   @Override
   public void use(AbstractPlayer p, AbstractMonster m) {
     AbstractDungeon.actionManager.addToBottom(new GainBlockAction(p, p, block));
-
-    AbstractDungeon.actionManager.addToBottom(new SideRollAction());
+    AbstractDungeon.actionManager.addToBottom(new SideRollAction(this.magicNumber));
   }
 
   @Override

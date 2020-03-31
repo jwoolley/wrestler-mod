@@ -30,6 +30,7 @@ public class FanFavorite extends CustomCard {
   private static final CardTarget TARGET = CardTarget.NONE;
 
   private static final int COST = 1;
+  private static final int UPGRADED_COST = 0;
 
   public FanFavorite() {
     super(ID, NAME, getCardResourcePath(IMG_PATH), COST, getDescription(FanFavoritePower.BASE_BLOCK_AMOUNT), TYPE,
@@ -53,7 +54,7 @@ public class FanFavorite extends CustomCard {
   public void upgrade() {
     if (!this.upgraded) {
       this.upgradeName();
-      this.upgradeMagicNumber(FanFavoritePower.BLOCK_AMOUNT_UPGRADE);
+      this.upgradeBaseCost(UPGRADED_COST);
       this.rawDescription = getDescription(this.magicNumber);
       initializeDescription();
     }

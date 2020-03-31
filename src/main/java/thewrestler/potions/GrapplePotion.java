@@ -4,17 +4,13 @@ import com.badlogic.gdx.graphics.Color;
 import com.megacrit.cardcrawl.core.AbstractCreature;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
-import com.megacrit.cardcrawl.helpers.CardHelper;
 import com.megacrit.cardcrawl.helpers.GameDictionary;
 import com.megacrit.cardcrawl.helpers.PowerTip;
-import com.megacrit.cardcrawl.localization.KeywordStrings;
 import com.megacrit.cardcrawl.localization.PotionStrings;
 import com.megacrit.cardcrawl.potions.AbstractPotion;
 import com.megacrit.cardcrawl.rooms.AbstractRoom;
 import thewrestler.WrestlerMod;
 import thewrestler.actions.power.ApplyGrappledAction;
-
-import java.util.TreeMap;
 
 public class GrapplePotion extends AbstractPotion {
     public static final String POTION_ID = WrestlerMod.makeID("GrapplePotion");

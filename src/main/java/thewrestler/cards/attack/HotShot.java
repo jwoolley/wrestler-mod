@@ -11,7 +11,9 @@ import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
+import thewrestler.cards.WrestlerCardTags;
 import thewrestler.enums.AbstractCardEnum;
+import thewrestler.util.CardUtil;
 
 import static thewrestler.WrestlerMod.getCardResourcePath;
 
@@ -32,13 +34,14 @@ public class HotShot extends CustomCard {
   private static final int DAMAGE = 6;
   private static final int LIFE_LOSS = 1;
 
-  private static final int DAMAGE_UPGRADE = 1;
+  private static final int DAMAGE_UPGRADE = 2;
 
   public HotShot() {
     super(ID, NAME, getCardResourcePath(IMG_PATH), COST, DESCRIPTION, TYPE,
         AbstractCardEnum.THE_WRESTLER_ORANGE, RARITY, TARGET);
     this.baseDamage = this.damage = DAMAGE;
     this.baseMagicNumber = this.magicNumber = LIFE_LOSS;
+    CardUtil.makeCardDirty(this, this.type);
   }
 
   @Override

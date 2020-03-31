@@ -21,48 +21,38 @@ import com.megacrit.cardcrawl.unlock.UnlockTracker;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import thewrestler.WrestlerMod;
-import thewrestler.cards.attack.WrestlerStrike;
-import thewrestler.cards.skill.WrestlerDefend;
-import thewrestler.cards.skill.EyePoke;
 import thewrestler.cards.attack.TakeToTheMat;
+import thewrestler.cards.attack.WrestlerDirtyStrike;
+import thewrestler.cards.attack.WrestlerStrike;
+import thewrestler.cards.skill.EyePoke;
+import thewrestler.cards.skill.WrestlerDefend;
 import thewrestler.enums.AbstractCardEnum;
-import thewrestler.relics.Headgear;
+import thewrestler.relics.DentedTrophy;
+import thewrestler.relics.ImprovedHeadgear;
+import thewrestler.signaturemoves.cards.AbstractSignatureMoveCard;
+import thewrestler.signaturemoves.cards.SignatureMoveCardEnum;
+import thewrestler.signaturemoves.moveinfos.AbstractSignatureMoveInfo;
+import thewrestler.signaturemoves.moveinfos.AbstractSignatureMoveInfoInterface;
+import thewrestler.signaturemoves.upgrades.SignatureMoveUpgradeList;
+import thewrestler.signaturemoves.upgrades.UpgradeType;
+import thewrestler.util.info.penaltycard.PenaltyCardInfo;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 import static thewrestler.WrestlerMod.*;
-
-//Wiki-page https://github.com/daviscook477/BaseMod/wiki/Custom-Characters
-//and https://github.com/daviscook477/BaseMod/wiki/Migrating-to-5.0
-//All text (starting description and loadout, anything labeled TEXT[]) can be found in WrestlerMod-character-Strings.json in the resources
 
 public class WrestlerCharacter extends CustomPlayer {
     public static final Color CARD_RENDER_COLOR = new Color(0.9F, 0.5F, 0.0F, 1.0F);
     public static final Color SLASH_ATTACK_COLOR = Color.ORANGE.cpy();
-
     public static final Logger logger = LogManager.getLogger(WrestlerMod.class.getName());
 
-    // =============== CHARACTER ENUMERATORS =================
-    // These are enums for your Characters color (both general color and for the card library) as well as
-    // an enum for the name of the player class - IRONCLAD, THE_SILENT, DEFECT, YOUR_CLASS ...
-    // These are all necessary for creating a character. If you want to find out where and how exactly they are used
-    // in the basegame (for fun and education) Ctrl+click on the PlayerClass, CardColor and/or LibraryType below and go down the
-    // Ctrl+click rabbit hole
-
     public static class Enums {
-//        @SpireEnum
-//        public static AbstractPlayer.PlayerClass THE_WRESTLER;
-//        @SpireEnum(name = "THE_WRESTLER_ORANGE") // These two HAVE to have the same absolutely identical name.
-//        public static AbstractCard.CardColor THE_WRESTLER_ORANGE;
         @SpireEnum(name = "THE_WRESTLER_ORANGE") @SuppressWarnings("unused")
-        public static CardLibrary.LibraryType THE_WRESTLER_GRAY;
+        public static CardLibrary.LibraryType THE_WRESTLER_ORANGE;
     }
 
-    // =============== CHARACTER ENUMERATORS  =================
-
-
     // =============== BASE STATS =================
-
     public static final int ENERGY_PER_TURN = 3;
     public static final int STARTING_HP = 75;
     public static final int MAX_HP = 75;
@@ -70,24 +60,16 @@ public class WrestlerCharacter extends CustomPlayer {
     public static final int CARD_DRAW = 5;
     public static final int ORB_SLOTS = 0;
 
-    // =============== /BASE STATS/ =================
-
-
-    // =============== STRINGS =================
-
     private static final String ID = makeID("TheWrestler"); // needs to be the key from CharacterStrings.json
     private static final CharacterStrings characterStrings = CardCrawlGame.languagePack.getCharacterString(ID);
     private static final String[] NAMES = characterStrings.NAMES;
     private static final String[] TEXT = characterStrings.TEXT;
 
-    // =============== /STRINGS/ =================
-
-
     private static String getCharacterOrbImagePath(String filename) {
         return getImageResourcePath("char/wrestler/orb/" + filename);
     }
-    // =============== TEXTURES OF BIG ENERGY ORB ===============
 
+    // =============== BIG ENERGY ORB ===============
     public static final String[] orbTextures = {
         getCharacterOrbImagePath("layer1.png"),
         getCharacterOrbImagePath("layer2.png"),
@@ -102,39 +84,27 @@ public class WrestlerCharacter extends CustomPlayer {
         getCharacterOrbImagePath("layer5d.png")
     };
 
-    // =============== /TEXTURES OF BIG ENERGY ORB/ ===============
-
-    // =============== CHARACTER CLASS START =================
     private static final String ANIMATION_PATH = "character/wrestler.scml";
 
-    public WrestlerCharacter(String name, PlayerClass setClass) {
-//        super(name, setClass, orbTextures, getEnergyOrbFilePath(),null, (String) null);
+    // custom metadata
+    private static AbstractSignatureMoveInfoInterface signatureMoveInfo;
+    private static PenaltyCardInfo penaltyCardInfo;
 
+    public WrestlerCharacter(String name, PlayerClass setClass) {
         super(name, setClass, orbTextures,
             getCharacterOrbImagePath("vfx.png"), null,
                 new SpriterAnimation(getAnimationResourcePath(ANIMATION_PATH)));
 
-        // ENABLE IF USING CHARACTER ANIMATION
         initializeClass(null, // required call to load textures and setup energy/loadout.
-                // I left these in WrestlerMod.java (Ctrl+click them to see where they are, Ctrl+hover to see what they read.)
                 THE_WRESTLER_SHOULDER_2, // campfire pose
                 THE_WRESTLER_SHOULDER_1, // another campfire pose
                 THE_WRESTLER_CORPSE, // dead corpse
-                getLoadout(), 20.0F, -8.0F, 220.0F, 290.0F, new EnergyManager(ENERGY_PER_TURN)); // energy manager
-                        // ENABLE IF USING CHARACTER ANIMATION
+                getLoadout(), 20.0F, -8.0F, 220.0F, 290.0F, new EnergyManager(ENERGY_PER_TURN));
 
-        // =============== /TEXTURES, ENERGY, LOADOUT/ =================
-        
         // =============== TEXT BUBBLE LOCATION =================
-
         dialogX = (drawX + 0.0F * Settings.scale); // set location for text bubbles
         dialogY = (drawY + 220.0F * Settings.scale); // you can just copy these values
-
-        // =============== /TEXT BUBBLE LOCATION/ =================
-
     }
-
-    // =============== /CHARACTER CLASS END/ =================
 
     // Starting description and loadout
     @Override
@@ -153,8 +123,8 @@ public class WrestlerCharacter extends CustomPlayer {
 
         retVal.add(WrestlerStrike.ID);
         retVal.add(WrestlerStrike.ID);
-        retVal.add(WrestlerStrike.ID);
-        retVal.add(WrestlerStrike.ID);
+        retVal.add(WrestlerDirtyStrike.ID);
+        retVal.add(WrestlerDirtyStrike.ID);
 
         retVal.add(WrestlerDefend.ID);
         retVal.add(WrestlerDefend.ID);
@@ -170,9 +140,134 @@ public class WrestlerCharacter extends CustomPlayer {
     // Starting Relics	
     public ArrayList<String> getStartingRelics() {
         ArrayList<String> retVal = new ArrayList<>();
-        retVal.add(Headgear.ID);
-        UnlockTracker.markRelicAsSeen(Headgear.ID);
+//        retVal.add(ImprovedHeadgear.ID);
+//        UnlockTracker.markRelicAsSeen(ImprovedHeadgear.ID);
+        retVal.add(DentedTrophy.ID);
+        UnlockTracker.markRelicAsSeen(DentedTrophy.ID);
         return retVal;
+    }
+
+    public static boolean hasSignatureMoveInfo() {
+        return signatureMoveInfo != null;
+    }
+
+    public static AbstractSignatureMoveInfoInterface getSignatureMoveInfo() {
+        return signatureMoveInfo;
+    }
+
+    public static void setSignatureMoveInfo(AbstractSignatureMoveInfoInterface _signatureMoveInfo) {
+        signatureMoveInfo = _signatureMoveInfo;
+    }
+
+    public static AbstractSignatureMoveInfoInterface initializeSignatureMoveInfo() {
+        if (AbstractSignatureMoveInfo.SIGNATURE_MOVES_ENABLED) {
+            final int index = (new Random()).nextInt(SignatureMoveCardEnum.values().length);
+            return SignatureMoveCardEnum.values()[index].getInfoCopy(SignatureMoveUpgradeList.NO_UPGRADES);
+        } else {
+            return new AbstractSignatureMoveInfoInterface() {
+                @Override
+                public void triggerGainTrademarkMove() {
+
+                }
+
+                @Override
+                public AbstractSignatureMoveCard getSignatureMoveCardReference() {
+                    return null;
+                }
+
+                @Override
+                public SignatureMoveUpgradeList getUpgradeList() {
+                    return null;
+                }
+
+                @Override
+                public void onCardPlayed(AbstractCard card) {
+
+                }
+
+                @Override
+                public void onCardExhausted(AbstractCard card) {
+
+                }
+
+                @Override
+                public void upgradeMove(UpgradeType type) {
+
+                }
+
+                @Override
+                public void onEnemyGrappled() {
+
+                }
+
+                @Override
+                public String getDynamicConditionText() {
+                    return null;
+                }
+
+                @Override
+                public String getStaticConditionText() {
+                    return null;
+                }
+
+                @Override
+                public boolean canStillTriggerCardGain() {
+                    return false;
+                }
+
+                @Override
+                public void manuallyTriggerCardGain(boolean toDeck, boolean onTop) {
+
+                }
+
+                @Override
+                public void atStartOfTurn() {
+
+                }
+
+                @Override
+                public void atEndOfTurn() {
+
+                }
+
+                @Override
+                public void atStartOfCombat() {
+
+                }
+
+                @Override
+                public void atEndOfCombat() {
+
+                }
+            };
+        }
+    }
+
+    public static boolean hasPenaltyCardInfo() {
+        return penaltyCardInfo != null;
+    }
+
+    public static PenaltyCardInfo getPenaltyCardInfo() {
+        return penaltyCardInfo != null ? penaltyCardInfo : new PenaltyCardInfo();
+    }
+
+    public static void resetPenaltyCardInfo() {
+        if (hasPenaltyCardInfo()) {
+            penaltyCardInfo.reset();
+        } else {
+            initializePenaltyCardInfo();
+        }
+    }
+
+    public static PenaltyCardInfo initializePenaltyCardInfo() {
+        penaltyCardInfo = new PenaltyCardInfo();
+        return penaltyCardInfo;
+    }
+
+    @Override
+    public void applyEndOfTurnTriggers() {
+        super.applyEndOfTurnTriggers();
+        WrestlerMod.atEndOfPlayerTurn();
     }
 
     // character Select screen effect
@@ -193,7 +288,7 @@ public class WrestlerCharacter extends CustomPlayer {
     // Ascension 14 or higher. (ironclad loses 5, defect and silent lose 4 hp respectively)
     @Override
     public int getAscensionMaxHPLoss() {
-        return 0;
+        return 4;
     }
 
     // Should return the card color enum to be associated with your character.
@@ -281,10 +376,6 @@ public class WrestlerCharacter extends CustomPlayer {
 
     @Override
     public Texture getEnergyImage() {
-        final Texture energyImage = super.getEnergyImage();
-        System.out.println("Energy image: " + energyImage.toString());
-        return energyImage;
+        return super.getEnergyImage();
     }
-
-    // Should return class name as it appears in run history screen.
 }

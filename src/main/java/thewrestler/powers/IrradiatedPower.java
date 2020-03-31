@@ -1,9 +1,9 @@
 package thewrestler.powers;
 
 import basemod.interfaces.CloneablePowerInterface;
+import com.badlogic.gdx.graphics.Color;
 import com.megacrit.cardcrawl.actions.common.GainEnergyAction;
 import com.megacrit.cardcrawl.actions.common.ReducePowerAction;
-import com.megacrit.cardcrawl.actions.common.RemoveSpecificPowerAction;
 import com.megacrit.cardcrawl.actions.utility.SFXAction;
 import com.megacrit.cardcrawl.cards.DamageInfo;
 import com.megacrit.cardcrawl.core.AbstractCreature;
@@ -22,10 +22,18 @@ public class IrradiatedPower extends AbstractWrestlerPower implements CloneableP
 
   public static final int ENERGY_PER_TRIGGER = 1;
 
-  public static final PowerType POWER_TYPE = PowerType.BUFF;
+  public static final PowerType POWER_TYPE = PowerType.DEBUFF;
+
+  private int remainingTriggersThisTurn;
 
   public IrradiatedPower(AbstractCreature owner, int amount) {
     super(POWER_ID, NAME, IMG, owner, AbstractDungeon.player, amount, POWER_TYPE);
+    remainingTriggersThisTurn = amount;
+  }
+
+  @Override
+  public void atStartOfTurn() {
+    remainingTriggersThisTurn = amount;
   }
 
   @Override
@@ -37,17 +45,29 @@ public class IrradiatedPower extends AbstractWrestlerPower implements CloneableP
 
   @Override
   public int onAttackedToChangeDamage(DamageInfo info, int amount) {
-    if (info.owner == this.source && info.type == DamageInfo.DamageType.NORMAL) {
+    if (this.remainingTriggersThisTurn > 0 && info.owner == this.source && info.type == DamageInfo.DamageType.NORMAL) {
       this.flash();
       this.applyTrigger();
-      this.updateDescription();
+      remainingTriggersThisTurn--;
     }
     return amount;
   }
 
   @Override
-  public void atStartOfTurn() {
-    AbstractDungeon.actionManager.addToBottom(new RemoveSpecificPowerAction(this.owner, this.source, POWER_ID));
+  public void stackPower(int amount) {
+    super.stackPower(amount);
+    updateDescription();
+    this.remainingTriggersThisTurn += amount;
+  }
+
+  @Override
+  public void update(int slot) {
+    super.update(slot);
+
+    if (this.remainingTriggersThisTurn > 0) {
+      this.owner.tint.color.set(Color.CHARTREUSE);
+      this.owner.tint.changeColor(Color.WHITE.cpy());
+    }
   }
 
   @Override
@@ -58,7 +78,7 @@ public class IrradiatedPower extends AbstractWrestlerPower implements CloneableP
 
   private void applyTrigger() {
     AbstractDungeon.actionManager.addToTop(new SFXAction("ELECTRO_INTERFERENCE_1"));
-    AbstractDungeon.actionManager.addToTop(new ReducePowerAction(this.owner, this.owner, this, 1));
+//    AbstractDungeon.actionManager.addToTop(new ReducePowerAction(this.owner, this.owner, this, 1));
     AbstractDungeon.actionManager.addToBottom(new GainEnergyAction(ENERGY_PER_TRIGGER));
   }
 

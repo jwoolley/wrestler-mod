@@ -23,8 +23,7 @@ public class FanFavoritePower extends AbstractWrestlerPower implements Cloneable
   public static final PowerType POWER_TYPE = PowerType.BUFF;
 
   public static final int ATTACKS_PER_TRIGGER = 3;
-  public static final int BASE_BLOCK_AMOUNT = 4;
-  public static final int BLOCK_AMOUNT_UPGRADE = 1;
+  public static final int BASE_BLOCK_AMOUNT = 5;
 
   private int blockAmount;
 

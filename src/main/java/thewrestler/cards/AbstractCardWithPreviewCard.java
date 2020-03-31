@@ -5,11 +5,12 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.core.Settings;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
+import thewrestler.ui.CardPreviewElement;
 import thewrestler.util.BasicUtils;
 import thewrestler.util.CardUtil;
 import thewrestler.util.ConfigurationOptions;
 
-abstract public class AbstractCardWithPreviewCard extends CustomCard {
+abstract public class AbstractCardWithPreviewCard extends CustomCard implements CardPreviewElement {
   private MultiLock renderPreviewCard;
   public AbstractCardWithPreviewCard(String id, String name, String img, int cost, String rawDescription, CardType type,
                                      CardColor color, CardRarity rarity, CardTarget target) {
@@ -17,11 +18,14 @@ abstract public class AbstractCardWithPreviewCard extends CustomCard {
     renderPreviewCard = MultiLock.ZERO;
   }
 
-  abstract public AbstractCard getPreviewCard();
-
+  @Override
   public void renderCardTip(SpriteBatch sb) {
     super.renderCardTip(sb);
+    renderPreviewCardTip(sb);
+  }
 
+  @Override
+  public void renderPreviewCardTip(SpriteBatch sb) {
     // TODO: reposition if card is offscreen (most likely off right side?)
     if (shouldRenderPreviewCard()) {
       final AbstractCard _previewCard = getPreviewCard();
@@ -33,7 +37,7 @@ abstract public class AbstractCardWithPreviewCard extends CustomCard {
     }
   }
 
-  private float getPreviewXOffset() {
+  public float getPreviewXOffset() {
     final float cardScale = this.drawScale * Settings.scale;
     final boolean isCardNearRightEdge = this.current_x > Settings.WIDTH * 0.725F;
     final boolean isCardNearLeftEdge = this.current_x < (1 - 0.725F);
@@ -45,7 +49,7 @@ abstract public class AbstractCardWithPreviewCard extends CustomCard {
     }
   }
 
-  protected float getPreviewYOffset() {
+  public float getPreviewYOffset() {
     final float cardScale = this.drawScale * Settings.scale;
     return (this.hb.y + this.hb.height * 0.64f) * cardScale;
   }
@@ -76,11 +80,7 @@ abstract public class AbstractCardWithPreviewCard extends CustomCard {
     }
   }
 
-  enum MultiLock {
-    ZERO, ONE, TWO;
-  }
-
-  private boolean shouldRenderPreviewCard() {
+  public boolean shouldRenderPreviewCard() {
     return !(CardUtil.isCardInHand(this) && ConfigurationOptions.HIDE_PREVIEW_CARDS_IN_COMBAT)
         && this.renderPreviewCard == MultiLock.TWO
         && (AbstractDungeon.player == null

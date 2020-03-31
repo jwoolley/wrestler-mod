@@ -29,13 +29,13 @@ public class Scrapper extends CustomCard {
   private static final CardTarget TARGET = CardTarget.NONE;
 
   private static final int COST = 1;
-  private static final int STRENGTH_PER_TURN = 2;
-  private static final int STRENGTH_PER_TURN_UPGRADE = 3;
+  private static final int BLOCK = 6;
+  private static final int BLOCK_UPGRADE = 3;
 
   public Scrapper() {
     super(ID, NAME, getCardResourcePath(IMG_PATH), COST, DESCRIPTION, TYPE, AbstractCardEnum.THE_WRESTLER_ORANGE,
         RARITY, TARGET);
-    this.baseMagicNumber = this.magicNumber = STRENGTH_PER_TURN;
+    this.baseMagicNumber = this.magicNumber = BLOCK;
   }
 
   @Override
@@ -53,7 +53,7 @@ public class Scrapper extends CustomCard {
   public void upgrade() {
     if (!this.upgraded) {
       this.upgradeName();
-      this.upgradeMagicNumber(STRENGTH_PER_TURN_UPGRADE);
+      this.upgradeMagicNumber(BLOCK_UPGRADE);
       initializeDescription();
     }
   }

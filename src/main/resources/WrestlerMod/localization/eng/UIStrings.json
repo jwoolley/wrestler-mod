@@ -1,4 +1,71 @@
 {
+  "WrestlerMod:PenaltyCardInfoPanel": {
+    "TEXT": [
+      "Next Penalty Card"
+    ]
+  },
+
+  "WrestlerMod:BluePenaltyCard": {
+    "TEXT": [
+      "Blue Penalty Card",
+      "At the start of your turn, a random enemy gains #b",
+      " #yBlock."
+    ]
+  },
+
+  "WrestlerMod:OrangePenaltyCard": {
+    "TEXT": [
+      "Orange Penalty Card",
+      "At the start of your turn, increase the cost of a random card in your hand by #b",
+      " until end of turn."
+    ]
+  },
+
+  "WrestlerMod:RedPenaltyCard": {
+    "TEXT": [
+      "Red Penalty Card",
+      "At the start of your turn, lose #b",
+      " HP."
+    ]
+  },
+
+  "WrestlerMod:YellowPenaltyCard": {
+    "TEXT": [
+      "Yellow Penalty Card",
+      "At the start of your turn, add a #yDazed to your draw pile"
+    ]
+  },
+
+  "WrestlerMod:CombatInfoPanel": {
+    "TEXT": [
+      "Played This Turn",
+      "Attacks: ",
+      "Skills: ",
+      "Powers: ",
+      "Dirty: ",
+      " (Combat total: ",
+      ")",
+      "Non-Attacks: "
+    ]
+  },
+
+  "WrestlerMod:SignatureMovePanel": {
+    "TEXT": [
+      "Trademark Move",
+      " add ",
+      " to your hand.",
+      "You have acquired your Trademark Move already this combat."
+    ]
+  },
+
+  "WrestlerMod:CheapHeatAction": {
+    "TEXT": [
+      "Choose a Card to Exhaust.",
+      "Choose ",
+      " Cards to Exhaust."
+    ]
+  },
+
   "WrestlerMod:ChooseAndAddFilteredDiscardCardsToHandAction": {
     "TEXT": [
       "Choose a Card to Add to Your Hand.",
@@ -6,6 +73,20 @@
       " Cards to Add to Your Hand."
     ]
   },
+
+  "WrestlerMod:NearFallAction": {
+    "TEXT": [
+      "Choose a Card to Exhaust."
+    ]
+  },
+
+  "WrestlerMod:ShowboatAction": {
+    "TEXT": [
+      "Choose a Card to Put on top of Your Draw Pile.",
+      "Dirty. NL "
+    ]
+  },
+
   "WrestlerMod:SideRollAction": {
     "TEXT": [
       "Choose a Card to Discard."

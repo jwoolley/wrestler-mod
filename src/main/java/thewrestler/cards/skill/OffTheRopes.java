@@ -9,7 +9,6 @@ import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import thewrestler.actions.ChooseAndAddFilteredDiscardCardsToHandAction;
-import thewrestler.actions.MoveRandomCardsFromDiscardToHandAction;
 import thewrestler.enums.AbstractCardEnum;
 
 import java.util.Arrays;
@@ -27,14 +26,15 @@ public class OffTheRopes extends CustomCard {
   private static final CardStrings cardStrings;
 
   private static final CardType TYPE = CardType.SKILL;
-  private static final CardRarity RARITY = CardRarity.COMMON;
+  private static final CardRarity RARITY = CardRarity.UNCOMMON;
   private static final CardTarget TARGET = CardTarget.SELF;
 
   private static final int BLOCK_AMOUNT = 5;
+  private static final int BLOCK_AMOUNT_UPGRADE = 3;
   private static final int COST = 1;
 
   public OffTheRopes() {
-    super(ID, NAME, getCardResourcePath(IMG_PATH), COST, getDescription(false), TYPE,
+    super(ID, NAME, getCardResourcePath(IMG_PATH), COST, getDescription(true), TYPE,
         AbstractCardEnum.THE_WRESTLER_ORANGE, RARITY, TARGET);
     this.baseBlock = this.block = BLOCK_AMOUNT;
   }
@@ -45,14 +45,20 @@ public class OffTheRopes extends CustomCard {
 
     Predicate<AbstractCard> predicate =  c -> c.type == CardType.ATTACK;
 
+    AbstractDungeon.actionManager.addToBottom(
+        new ChooseAndAddFilteredDiscardCardsToHandAction(1,
+            predicate, Arrays.copyOfRange(EXTENDED_DESCRIPTION, 3, 6), false));
+
+    /*
     if (this.upgraded) {
       AbstractDungeon.actionManager.addToBottom(
           new ChooseAndAddFilteredDiscardCardsToHandAction(1,
-              predicate, Arrays.copyOfRange(EXTENDED_DESCRIPTION, 3, 6), true));
+              predicate, Arrays.copyOfRange(EXTENDED_DESCRIPTION, 3, 6), false));
     } else {
       AbstractDungeon.actionManager.addToBottom(
           new MoveRandomCardsFromDiscardToHandAction(1, predicate));
     }
+    */
   }
 
   @Override
@@ -64,6 +70,7 @@ public class OffTheRopes extends CustomCard {
   public void upgrade() {
     if (!this.upgraded) {
       this.upgradeName();
+      this.upgradeBlock(BLOCK_AMOUNT_UPGRADE);
       this.rawDescription = getDescription(true);
       initializeDescription();
     }

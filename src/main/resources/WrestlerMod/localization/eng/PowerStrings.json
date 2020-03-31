@@ -2,26 +2,37 @@
   "WrestlerMod:BearHugPower": {
     "NAME": "Bear Hug",
     "DESCRIPTIONS": [
-      "Whenever you play a #ySkill this turn, takes #b",
-      " damage."]
+      "Whenever you play a #yNon-Attack card this turn, gains #b",
+      " #yConstricted and you gain #b",
+      " #yBlock."
+    ]
   },
 
-  "WrestlerMod:CageMatchPower": {
-    "NAME": "Cage Fighting",
+  "WrestlerMod:BravadoPower": {
+    "NAME": "Bravado",
     "DESCRIPTIONS": [
-      "Until next turn, attack damage to and from #ySidelined enemies is reduced to #b",
-      "."]
+      "When you obtain #b",
+      " #yBravado, gain one of your #yTrademark #yMoves."
+    ]
+  },
+
+  "WrestlerMod:CloverleafPower": {
+    "NAME": "Cloverleaf",
+    "DESCRIPTIONS": [
+      "Whenever you apply a debuff to this enemy, you gain #b",
+      " #yBlock."
+    ]
   },
 
   "WrestlerMod:CommonPower": {
-          "NAME": "Wrestler Power",
-          "DESCRIPTIONS": ["You applied #b", " keyword.", " keywords."]
+      "NAME": "Wrestler Power",
+      "DESCRIPTIONS": ["You applied #b", " keyword.", " keywords."]
   },
 
   "WrestlerMod:CurtainJerkerPower": {
     "NAME": "Curtain Jerker",
     "DESCRIPTIONS": [
-      "The next time you take attack damage, lose #b",
+      "The next time you play a power, lose #b",
       " #yStrength and #b",
       " #yDexterity."
     ]
@@ -38,6 +49,35 @@
       " to trigger.)"
     ]
   },
+
+  "WrestlerMod:FeudPower": {
+    "NAME": "Feud",
+    "DESCRIPTIONS": [
+      "Whenever you attack the same enemy twice in a row in one turn, shuffle #b",
+      " an #yElbow",
+      " #yElbows",
+      " into your draw pile."
+    ]
+  },
+
+  "WrestlerMod:FeudRivalPower": {
+    "NAME": "Feud Rival",
+    "DESCRIPTIONS": [
+      "The next time you attack this enemy this turn, shuffle #b",
+      " #yElbow",
+      " #yElbows",
+      " on into your draw pile."
+    ]
+  },
+
+  "WrestlerMod:FloatOverPower": {
+    "NAME": "Float Over",
+    "DESCRIPTIONS": [
+      "At the end of your turn, if your hand is empty, gain #b",
+      " #yTemporary #yBuffer."
+    ]
+  },
+
 
   "WrestlerMod:GrappledPower": {
     "NAME": "Grappled",
@@ -63,11 +103,9 @@
   "WrestlerMod:IronManPower": {
     "NAME": "Iron Man",
     "DESCRIPTIONS": [
-      "The next time",
-      "For the next #b",
-      " times",
-      " you would die this turn, heal for #b",
-      " HP instead."
+      "At the start of your turn, if your HP is ",
+      " or less, gain #b",
+      " #yTemporary #yBuffer."
     ]
   },
 
@@ -90,6 +128,14 @@
     ]
   },
 
+  "WrestlerMod:JobberPower": {
+    "NAME": "Jobber",
+    "DESCRIPTIONS": [
+      "Whenever you play a #yDirty card, gain #b",
+      " #yBlock."
+    ]
+  },
+
   "WrestlerMod:MaintainGrapplePower": {
     "NAME": "Maintaining Grapple",
     "DESCRIPTIONS": [
@@ -99,12 +145,28 @@
     ]
   },
 
-  "WrestlerMod:NotCageFightingPower": {
-    "NAME": "Sidelined",
+  "WrestlerMod:NearFallPower": {
+    "NAME": "Near-Fall",
     "DESCRIPTIONS": [
-      "Until next turn, attack damage to and from #yCage #yFighting enemies is reduced to #b",
-      "."]
+      "Until end of turn, whenever you have no cards in hand, draw a card."
+    ]
   },
+
+  "WrestlerMod:NoPenaltyPower": {
+    "NAME": "Above Reproach",
+    "DESCRIPTIONS": [
+      "You can't gain #yPenalty #yCards this turn."
+    ]
+  },
+
+  "WrestlerMod:OpportunistPower": {
+    "NAME": "Opportunist",
+    "DESCRIPTIONS": [
+      "At the start of your turn, if no enemies intend to attack, draw #b",
+      " cards."
+    ]
+  },
+
 
   "WrestlerMod:ProvenTacticsPower": {
     "NAME": "Proven Tactics",
@@ -127,16 +189,50 @@
   "WrestlerMod:ScrapperPower": {
     "NAME": "Scrapper",
     "DESCRIPTIONS": [
-      "At the start of your turn, if an enemy is #yGrappled, gain #b",
-      " #yStrength."
+      "At the end of your turn, you have no #yBlock, gain #b",
+      " #yBlock."
     ]
   },
 
-  "WrestlerMod:SprainPower": {
-    "NAME": "Sprained",
+  "WrestlerMod:ShortarmPower": {
+    "NAME": "Shortarm",
     "DESCRIPTIONS": [
-      "Whenever this character attacks, it takes #b",
-      " damage."
+      "Your Colorless #yAttacks deal #b",
+      " additional damage this turn."
+    ]
+  },
+
+  "WrestlerMod:SpotMonkeyPower": {
+    "NAME": "Spot Monkey",
+    "DESCRIPTIONS": [
+      "Whenever you play a #yPenalty #yCard, gain #b",
+      " #yStrength and #b",
+      " #yDexterity."
+    ]
+  },
+
+  "WrestlerMod:InjuredPower": {
+    "NAME": "Injured",
+    "DESCRIPTIONS": [
+      "Whenever you're attacked this turn, lose #b",
+      " HP.",
+      "When attacked this turn, loses #b",
+      " HP."
+    ]
+  },
+
+  "WrestlerMod:RefBumpPower": {
+    "NAME": "Ref Bump",
+    "DESCRIPTIONS": [
+      "#yPenalty #yCards cost #b0 this turn."
+    ]
+  },
+
+  "WrestlerMod:SmackdownPower": {
+    "NAME": "Smackdown",
+    "DESCRIPTIONS": [
+      "Whenever you play a card, apply #b",
+      " #yInjured to ALL enemies."
     ]
   },
 
@@ -148,6 +244,42 @@
       "time ",
       "times ",
       "this turn, apply #yGrappled."
+    ]
+  },
+
+  "WrestlerMod:SqueezePower": {
+    "NAME": "Squeeze",
+    "DESCRIPTIONS": [
+      "Whenever you apply a debuff to an enemy this turn, gain #b",
+      " #yBlock."
+    ]
+  },
+
+  "WrestlerMod:RetroactivePenaltyPower": {
+    "NAME": "Retroactive Penalty",
+    "DESCRIPTIONS": [
+      "At the start of your next turn, gain #b",
+      " #yPenalty #yCard.",
+      " #yPenalty #yCards."
+    ]
+  },
+
+  "WrestlerMod:TechnicianPower": {
+    "NAME": "Technician",
+    "DESCRIPTIONS": [
+      "Whenever play a #yPenalty #yCard, draw #b",
+      " card.",
+      " cards."
+    ]
+  },
+
+  "WrestlerMod:TemporaryBufferPower": {
+    "NAME": "Temporary Buffer",
+    "DESCRIPTIONS": [
+      "Prevent the next time",
+      "Prevent the next #b" ,
+      " times",
+      " you would lose HP this turn."
     ]
   },
 

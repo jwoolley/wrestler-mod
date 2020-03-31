@@ -29,7 +29,7 @@ public class WindUpKick extends CustomCard {
   private static final int COST = 0;
   private static final int DAMAGE = 9;
   private static final int DAMAGE_UPGRADE = 3;
-  private static final int NUM_SKILLS_REQUIRED = 3;
+  private static final int NUM_SKILLS_REQUIRED = 2;
 
   public WindUpKick() {
     super(ID, NAME, getCardResourcePath(IMG_PATH), COST, DESCRIPTION, TYPE,
@@ -54,7 +54,7 @@ public class WindUpKick extends CustomCard {
       return false;
     }
 
-    if (canUse && getNumSkillsPlayed() <  this.magicNumber) {
+    if (canUse && getNumNonAttacksPlayed() <  this.magicNumber) {
       canUse = false;
       this.cantUseMessage = getCantPlayMessage();
     }
@@ -76,7 +76,7 @@ public class WindUpKick extends CustomCard {
 
   @Override
   public String getCantPlayMessage() {
-    final int numSkillsRemaining = this.magicNumber - getNumSkillsPlayed();
+    final int numSkillsRemaining = this.magicNumber - getNumNonAttacksPlayed();
     return EXTENDED_DESCRIPTION[0] + numSkillsRemaining + EXTENDED_DESCRIPTION[1]
         + (numSkillsRemaining == 1 ? EXTENDED_DESCRIPTION[2] : EXTENDED_DESCRIPTION[3]);
   }
@@ -85,6 +85,13 @@ public class WindUpKick extends CustomCard {
   private static int getNumSkillsPlayed() {
     return (int) AbstractDungeon.actionManager.cardsPlayedThisTurn.stream()
         .filter(c -> c.type == CardType.SKILL).count();
+  }
+
+
+  // TODO: move to helper/util class
+  private static int getNumNonAttacksPlayed() {
+    return (int) AbstractDungeon.actionManager.cardsPlayedThisTurn.stream()
+        .filter(c -> c.type != CardType.ATTACK).count();
   }
 
   static {

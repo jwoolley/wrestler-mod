@@ -19,7 +19,7 @@ public class TripleThreatPower extends AbstractWrestlerPower implements Cloneabl
   public static final String NAME = powerStrings.NAME;
   public static final String[] DESCRIPTIONS = powerStrings.DESCRIPTIONS;
 
-  public static final PowerType POWER_TYPE = PowerType.BUFF;
+  public static final PowerType POWER_TYPE = PowerType.DEBUFF;
 
   private final AbstractCard bonusCard;
 

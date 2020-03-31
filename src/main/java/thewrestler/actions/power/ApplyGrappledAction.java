@@ -45,7 +45,6 @@ public class ApplyGrappledAction extends AbstractGameAction {
               this.target, this.source, new GrappledPower(this.target, this.source, this.amount), this.amount,
               this.useFastMode));
 
-      AbstractPlayer player = AbstractDungeon.player;
       this.tickDuration();
       this.isDone = true;
     }

@@ -4,6 +4,7 @@ import basemod.BaseMod;
 import basemod.ModLabeledToggleButton;
 import basemod.ModPanel;
 import basemod.ReflectionHacks;
+import basemod.helpers.RelicType;
 import basemod.interfaces.*;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.files.FileHandle;
@@ -16,27 +17,46 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.megacrit.cardcrawl.audio.Sfx;
 import com.megacrit.cardcrawl.audio.SoundMaster;
+import com.megacrit.cardcrawl.cards.AbstractCard;
+import com.megacrit.cardcrawl.cards.CardGroup;
+import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.core.Settings;
 import com.megacrit.cardcrawl.helpers.CardHelper;
 import com.megacrit.cardcrawl.helpers.FontHelper;
 import com.megacrit.cardcrawl.localization.*;
+import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.rooms.AbstractRoom;
 import com.megacrit.cardcrawl.unlock.UnlockTracker;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import thewrestler.cards.StartOfCombatListener;
 import thewrestler.cards.attack.*;
+import thewrestler.cards.colorless.skill.FairPlay;
+import thewrestler.cards.curse.Predictable;
 import thewrestler.cards.power.*;
 import thewrestler.cards.skill.*;
 import thewrestler.characters.WrestlerCharacter;
 import thewrestler.enums.AbstractCardEnum;
 import thewrestler.enums.WrestlerCharEnum;
 import thewrestler.patches.powers.OnApplyPowerPatchInsert;
+import thewrestler.potions.BravadoPotion;
 import thewrestler.potions.CobraPotion;
 import thewrestler.potions.GrapplePotion;
-import thewrestler.relics.Headgear;
+import thewrestler.relics.*;
+import thewrestler.signaturemoves.cards.Chokeslam;
+import thewrestler.signaturemoves.cards.DragonGate;
+import thewrestler.signaturemoves.cards.Piledriver;
+import thewrestler.signaturemoves.moveinfos.AbstractSignatureMoveInfo;
+import thewrestler.ui.WrestlerPenaltyCardInfoPanel;
+import thewrestler.ui.WrestlerCombatInfoPanel;
+import thewrestler.ui.trademarkmovepanel.WrestlerSignatureMovePanel;
+import thewrestler.ui.trademarkmovepanel.WrestlerSignatureMovePanelInterface;
+import thewrestler.util.BasicUtils;
 import thewrestler.util.IDCheckDontTouchPls;
 import thewrestler.util.TextureLoader;
+import thewrestler.util.info.CombatInfo;
+import thewrestler.util.info.penaltycard.PenaltyCardInfo;
 import thewrestler.variables.DefaultCustomVariable;
 import thewrestler.variables.DefaultSecondMagicNumber;
 
@@ -49,34 +69,6 @@ import java.util.Map;
 import java.util.Properties;
 import java.util.stream.Collectors;
 
-//TODO: DON'T MASS RENAME/REFACTOR
-//TODO: DON'T MASS RENAME/REFACTOR
-//TODO: DON'T MASS RENAME/REFACTOR
-//TODO: DON'T MASS RENAME/REFACTOR
-// Please don't just mass replace "WrestlerCharacter" with "yourMod" everywhere.
-// It'll be a bigger pain for you. You only need to replace it in 3 places.
-// I comment those places below, under the place where you set your ID.
-
-//TODO: FIRST THINGS FIRST: RENAME YOUR PACKAGE AND ID NAMES FIRST-THING!!!
-// Right click the package (Open the project pane on the left. Folder with black dot on it. The name's at the very top) -> Refactor -> Rename, and name it whatever you wanna call your mod.
-// Scroll down in this file. Change the ID from "WrestlerCharacter:" to "yourModName:" or whatever your heart desires (don't use spaces). Dw, you'll see it.
-// In the JSON strings (resources>localization>eng>[all them files] make sure they all go "yourModName:" rather than "WrestlerCharacter". You can ctrl+R to replace in 1 file, or ctrl+shift+r to mass replace in specific files/directories (Be careful.).
-// Start with the DefaultCommon cards - they are the most commented cards since I don't feel it's necessary to put identical comments on every card.
-// After you sorta get the hang of how to make cards, check out the card template which will make your life easier
-
-/*
- * With that out of the way:
- * Welcome to this super over-commented Slay the Spire modding base.
- * Use it to make your own mod of any type. - If you want to add any standard in-game content (character,
- * cards, relics), this is a good starting point.
- * It features 1 character with a minimal set of things: 1 card of each type, 1 debuff, couple of relics, etc.
- * If you're new to modding, you basically *need* the BaseMod wiki for whatever you wish to add
- * https://github.com/daviscook477/BaseMod/wiki - work your way through with this base.
- * Feel free to use this in any way you like, of course. MIT licence applies. Happy modding!
- *
- * And pls. Read the comments.
- */
-
 @SpireInitializer
 public class WrestlerMod implements
         EditCardsSubscriber,
@@ -84,10 +76,16 @@ public class WrestlerMod implements
         EditStringsSubscriber,
         EditKeywordsSubscriber,
         EditCharactersSubscriber,
+        PostCreateStartingDeckSubscriber,
+        PostDungeonInitializeSubscriber,
         PostInitializeSubscriber,
-        OnStartBattleSubscriber {
-    // Make sure to implement the subscribers *you* are using (read basemod wiki). Editing cards? EditCardsSubscriber.
-    // Making relics? EditRelicsSubscriber. etc., etc., for a full list and how to make your own, visit the basemod wiki.
+        StartGameSubscriber,
+        OnStartBattleSubscriber,
+        PostEnergyRechargeSubscriber,
+        PreMonsterTurnSubscriber,
+        PostBattleSubscriber,
+        OnCardUseSubscriber {
+
     public static final Logger logger = LogManager.getLogger(WrestlerMod.class.getName());
     public static final String MOD_ID = "WrestlerMod";
     public static final String RESOURCE_FOLDER_NAME = "WrestlerMod";
@@ -101,14 +99,14 @@ public class WrestlerMod implements
 
     //This is for the in-game mod settings panel.
     private static final String MODNAME = "The Wrestler";
-    private static final String AUTHOR = "Author";
+    private static final String AUTHOR = "jwoolley";
     private static final String DESCRIPTION = "A base for Slay the Spire to my own mod from, featuring The Wrestler.";
 
     // =============== INPUT TEXTURE LOCATION =================
 
     // Colors (RGB)
     // Character Color
-    public static final Color WRESTLER_ORANGE = CardHelper.getColor(220.0f, 140.0f, 0.0f);
+    public static final Color WRESTLER_ORANGE = CardHelper.getColor(220, 140, 0);
 
     public static final String getAnimationResourcePath(String resourcePath) {
         return RESOURCE_FOLDER_NAME + "/animations/" + resourcePath;
@@ -123,17 +121,24 @@ public class WrestlerMod implements
     }
 
     // Card backgrounds - The actual rectangular card.
-    private static final String ATTACK_WRESTLER_GRAY = getImageResourcePath("512/attack_wrestler.png");
-    private static final String SKILL_WRESTLER_GRAY = getImageResourcePath("512/skill_wrestler.png");
-    private static final String POWER_WRESTLER_GRAY = getImageResourcePath("512/power_wrestler.png");
+    private static final String ATTACK_WRESTLER_ORANGE = getImageResourcePath("512/attack_wrestler.png");
+    private static final String SKILL_WRESTLER_ORANGE = getImageResourcePath("512/skill_wrestler.png");
+    private static final String POWER_WRESTLER_ORANGE = getImageResourcePath("512/power_wrestler.png");
 
-    private static final String ENERGY_ORB_DEFAULT_GRAY = getImageResourcePath("512/card_default_gray_orb.png");
+    public static final String ATTACK_WRESTLER_DIRTY_ORANGE = getImageResourcePath("512/attack_wrestler_dirty.png");
+    public static final String SKILL_WRESTLER_DIRTY_ORANGE = getImageResourcePath("512/skill_wrestler_dirty.png");
+    public static final String POWER_WRESTLER_DIRTY_ORANGE = getImageResourcePath("512/power_wrestler_dirty.png");
+
+    private static final String ENERGY_ORB_DEFAULT_ORANGE = getImageResourcePath("512/card_default_gray_orb.png");
     private static final String CARD_ENERGY_ORB = getImageResourcePath("512/card_small_orb.png");
 
-    private static final String ATTACK_DEFAULT_GRAY_PORTRAIT = getImageResourcePath("1024/attack_wrestler.png");
-    private static final String SKILL_DEFAULT_GRAY_PORTRAIT = getImageResourcePath("1024/skill_wrestler.png");
-    private static final String POWER_DEFAULT_GRAY_PORTRAIT = getImageResourcePath("1024/power_wrestler.png");
-    private static final String ENERGY_ORB_DEFAULT_GRAY_PORTRAIT = getImageResourcePath("1024/card_default_gray_orb.png");
+    private static final String ATTACK_DEFAULT_ORANGE_PORTRAIT = getImageResourcePath("1024/attack_wrestler.png");
+    private static final String SKILL_DEFAULT_ORANGE_PORTRAIT = getImageResourcePath("1024/skill_wrestler.png");
+    private static final String POWER_DEFAULT_ORANGE_PORTRAIT = getImageResourcePath("1024/power_wrestler.png");
+    public static final String ATTACK_DEFAULT_DIRTY_ORANGE_PORTRAIT = getImageResourcePath("1024/attack_wrestler_dirty.png");
+    public static final String SKILL_DEFAULT_DIRTY_ORANGE_PORTRAIT = getImageResourcePath("1024/skill_wrestler_dirty.png");
+    public static final String POWER_DEFAULT_DIRTY_ORANGE_PORTRAIT = getImageResourcePath("1024/power_wrestler_dirty.png");
+    private static final String ENERGY_ORB_DEFAULT_ORANGE_PORTRAIT = getImageResourcePath("1024/card_default_gray_orb.png");
 
     // Character assets
     private static final String THE_WRESTLER_BUTTON = getImageResourcePath("charSelect/WrestlerCharacterButton.png");
@@ -145,12 +150,12 @@ public class WrestlerMod implements
     //Mod Badge - A small icon that appears in the mod settings menu next to your mod.
     public static final String BADGE_IMAGE = getImageResourcePath("Badge.png");
 
-    // Atlas and JSON files for the Animations
-//    public static final String THE_WRESTLER_SKELETON_ATLAS = getImageResourcePath("char/wrestler/skeleton.atlas");
-//    public static final String THE_WRESTLER_SKELETON_JSON = getImageResourcePath("/char/wrestler/skeleton.json");
-//    public static final String THE_WRESTLER_STATIC_CHARACTER_SPRITE = getImageResourcePath("char/wrestler/main3.png");
-
     private static Map<String, Keyword> keywords;
+
+
+    public static WrestlerPenaltyCardInfoPanel penaltyCardInfoPanel;
+    public static WrestlerCombatInfoPanel combatInfoPanel;
+    public static WrestlerSignatureMovePanelInterface signatureMovePanel;
 
     // =============== MAKE IMAGE PATHS =================
 
@@ -195,15 +200,20 @@ public class WrestlerMod implements
         logger.info("Done subscribing");
 
         logger.info("Creating the color " + AbstractCardEnum.THE_WRESTLER_ORANGE);
-
         BaseMod.addColor(AbstractCardEnum.THE_WRESTLER_ORANGE, WRESTLER_ORANGE, WRESTLER_ORANGE, WRESTLER_ORANGE,
             WRESTLER_ORANGE, WRESTLER_ORANGE, WRESTLER_ORANGE, WRESTLER_ORANGE,
-            ATTACK_WRESTLER_GRAY, SKILL_WRESTLER_GRAY, POWER_WRESTLER_GRAY, ENERGY_ORB_DEFAULT_GRAY,
-                ATTACK_DEFAULT_GRAY_PORTRAIT, SKILL_DEFAULT_GRAY_PORTRAIT, POWER_DEFAULT_GRAY_PORTRAIT,
-                ENERGY_ORB_DEFAULT_GRAY_PORTRAIT, CARD_ENERGY_ORB);
-
+            ATTACK_WRESTLER_ORANGE, SKILL_WRESTLER_ORANGE, POWER_WRESTLER_ORANGE, ENERGY_ORB_DEFAULT_ORANGE,
+            ATTACK_DEFAULT_ORANGE_PORTRAIT, SKILL_DEFAULT_ORANGE_PORTRAIT, POWER_DEFAULT_ORANGE_PORTRAIT,
+            ENERGY_ORB_DEFAULT_ORANGE_PORTRAIT, CARD_ENERGY_ORB);
         logger.info("Done creating the color");
 
+        logger.info("Creating the color " + AbstractCardEnum.THE_WRESTLER_ORANGE);
+        BaseMod.addColor(AbstractCardEnum.THE_WRESTLER_ORANGE, WRESTLER_ORANGE, WRESTLER_ORANGE, WRESTLER_ORANGE,
+            WRESTLER_ORANGE, WRESTLER_ORANGE, WRESTLER_ORANGE, WRESTLER_ORANGE,
+            ATTACK_WRESTLER_ORANGE, SKILL_WRESTLER_ORANGE, POWER_WRESTLER_ORANGE, ENERGY_ORB_DEFAULT_ORANGE,
+            ATTACK_DEFAULT_ORANGE_PORTRAIT, SKILL_DEFAULT_ORANGE_PORTRAIT, POWER_DEFAULT_ORANGE_PORTRAIT,
+            ENERGY_ORB_DEFAULT_ORANGE_PORTRAIT, CARD_ENERGY_ORB);
+        logger.info("Done creating the color");
 
         logger.info("Adding mod settings");
         // This loads the mod settings.
@@ -272,25 +282,45 @@ public class WrestlerMod implements
 
     private void registerSfx() {
         HashMap<String, Sfx> reflectedMap = getSoundsMap();
+        reflectedMap.put("BOMB_DROP_EXPLODE_1", new Sfx(getAudioResourcePath("TheWrestler_BombDropExplode1.ogg")));
+        reflectedMap.put("BONE_CRUNCH_1", new Sfx(getAudioResourcePath("TheWrestler_BoneCrunch1.ogg")));
+        reflectedMap.put("BONE_CRUNCH_2", new Sfx(getAudioResourcePath("TheWrestler_BoneCrunch2.ogg")));
         reflectedMap.put("BOO_CROWD_1", new Sfx(getAudioResourcePath("TheWrestler_BooCrowd1.ogg")));
+        reflectedMap.put("BOXING_BELL_1", new Sfx(getAudioResourcePath("TheWrestler_BoxingBell1.ogg")));
+        reflectedMap.put("BOXING_BELL_DOUBLE_1", new Sfx(getAudioResourcePath("TheWrestler_BoxingBellDouble1.ogg")));
         reflectedMap.put("BOOM_LOWFREQ_1", new Sfx(getAudioResourcePath("TheWrestler_ExplosionBombLowFrequency1.ogg")));
         reflectedMap.put("BOUNCE_METALLIC_1", new Sfx(getAudioResourcePath("TheWrestler_BounceMetallic1.ogg")));
         reflectedMap.put("BUBBLE_SHORT_1", new Sfx(getAudioResourcePath("TheWrestler_BubbleShort1.ogg")));
         reflectedMap.put("CAMERA_SHUTTER_1", new Sfx(getAudioResourcePath("TheWrestler_CameraShutter1.ogg")));
         reflectedMap.put("CHALK_WRITING_1", new Sfx(getAudioResourcePath("TheWrestler_ChalkWriting1.ogg")));
         reflectedMap.put("CHEER_CROWD_1", new Sfx(getAudioResourcePath("TheWrestler_CheerCrowd1.ogg")));
+        reflectedMap.put("CHOIR_ANGELIC_1", new Sfx(getAudioResourcePath("TheWrestler_ChoirAngelic1.ogg")));
+        reflectedMap.put("COWBELL_1", new Sfx(getAudioResourcePath("TheWrestler_Cowbell1.ogg")));
         reflectedMap.put("DOOR_HATCH_OPEN_1", new Sfx(getAudioResourcePath("TheWrestler_DoorHatchOpen1.ogg")));
+        reflectedMap.put("DRILL_SPIN_1", new Sfx(getAudioResourcePath("TheWrestler_DrillSpin1.ogg")));
         reflectedMap.put("ELECTRO_INTERFERENCE_1", new Sfx(getAudioResourcePath("TheWrestler_ElectroInterference1.ogg")));
+        reflectedMap.put("GATE_OPEN_RUSTY_1", new Sfx(getAudioResourcePath("TheWrestler_GateRustyOpen1.ogg")));
         reflectedMap.put("GONG_STRIKE_1", new Sfx(getAudioResourcePath("TheWrestler_GongStrike1.ogg")));
+        reflectedMap.put("GONG_STRIKE_2", new Sfx(getAudioResourcePath("TheWrestler_GongStrike2.ogg")));
         reflectedMap.put("GRUNT_SHORT_1", new Sfx(getAudioResourcePath("TheWrestler_GruntShort1.ogg")));
         reflectedMap.put("GRUNT_SHORT_2", new Sfx(getAudioResourcePath("TheWrestler_GruntShort2.ogg")));
+        reflectedMap.put("GUILLOTINE_1", new Sfx(getAudioResourcePath("TheWrestler_Guillotine1.ogg")));
+        reflectedMap.put("LASER_SHORT_1", new Sfx(getAudioResourcePath("TheWrestler_LaserShort1.ogg")));
+        reflectedMap.put("ROAR_BEAST_1", new Sfx(getAudioResourcePath("TheWrestler_RoarBeast1.ogg")));
+        reflectedMap.put("SNAP_LIGAMENT_1", new Sfx(getAudioResourcePath("TheWrestler_SnapLigament1.ogg")));
         reflectedMap.put("SPLAT_WET_1", new Sfx(getAudioResourcePath("TheWrestler_SplatWet1.ogg")));
         reflectedMap.put("SPRINGBOARD_1", new Sfx(getAudioResourcePath("TheWrestler_Springboard1.ogg")));
         reflectedMap.put("THUD_MEDIUM_1", new Sfx(getAudioResourcePath("TheWrestler_ThudMedium1.ogg")));
         reflectedMap.put("TONE_ELECTRONIC_1", new Sfx(getAudioResourcePath("TheWrestler_ToneElectronic1.ogg")));
+        reflectedMap.put("WHISTLE_BLOW_1", new Sfx(getAudioResourcePath("TheWrestler_WhistleBlow1.ogg")));
+        reflectedMap.put("WHISTLE_BLOW_SHORT_1", new Sfx(getAudioResourcePath("TheWrestler_WhistleBlowShort1.ogg")));
+        reflectedMap.put("WHISTLE_STEAM_1", new Sfx(getAudioResourcePath("TheWrestler_WhistleSteam1.ogg")));
+        reflectedMap.put("WHOOSH_ROCKET_1", new Sfx(getAudioResourcePath("TheWrestler_WhooshRocket1.ogg")));
+        reflectedMap.put("WHOOSH_ROPE_1", new Sfx(getAudioResourcePath("TheWrestler_WhooshRope1.ogg")));
+        reflectedMap.put("WING_FLUTTER_1", new Sfx(getAudioResourcePath("TheWrestler_WingFlutter1.ogg")));
         reflectedMap.put("YELL_PAIN_1", new Sfx(getAudioResourcePath("TheWrestler_YellPain1.ogg")));
-
         reflectedMap.put("METAL_MAN_RIFF_1", new Sfx(getAudioResourcePath("music/TheWrestler_MetalManRiff1.ogg")));
+        reflectedMap.put("METAL_MAN_RIFF_2", new Sfx(getAudioResourcePath("music/TheWrestler_MetalManRiff2.ogg")));
     }
 
     // ======= /REGISTER ASSETS/ ========
@@ -380,6 +410,9 @@ public class WrestlerMod implements
         logger.info("Beginning to edit potions");
 
         // If you want your potion to be class-specific, add the player class argument
+        BaseMod.addPotion(BravadoPotion.class, BravadoPotion.LIQUID_COLOR, BravadoPotion.HYBRID_COLOR,
+            BravadoPotion.SPOTS_COLOR, BravadoPotion.POTION_ID);
+
         BaseMod.addPotion(CobraPotion.class, CobraPotion.LIQUID_COLOR, CobraPotion.HYBRID_COLOR,
             CobraPotion.SPOTS_COLOR, CobraPotion.POTION_ID);
 
@@ -398,13 +431,27 @@ public class WrestlerMod implements
     public void receiveEditRelics() {
         logger.info("Adding relics");
         // This adds a character specific relic. Only when you play with the mentioned color, will you get this relic.
+        BaseMod.addRelicToCustomPool(new DentedTrophy(), AbstractCardEnum.THE_WRESTLER_ORANGE);
         BaseMod.addRelicToCustomPool(new Headgear(), AbstractCardEnum.THE_WRESTLER_ORANGE);
+        BaseMod.addRelicToCustomPool(new ImprovedHeadgear(), AbstractCardEnum.THE_WRESTLER_ORANGE);
+        BaseMod.addRelicToCustomPool(new RefereesWhistle(), AbstractCardEnum.THE_WRESTLER_ORANGE);
+
+        BaseMod.addRelicToCustomPool(new BrutesTrophy(), AbstractCardEnum.THE_WRESTLER_ORANGE);
+
+        // TODO: fix this or remove it
+        //  BaseMod.addRelicToCustomPool(new FightCard(), AbstractCardEnum.THE_WRESTLER_ORANGE);
+        BaseMod.addRelicToCustomPool(new PeoplesCrown(), AbstractCardEnum.THE_WRESTLER_ORANGE);
+
+        BaseMod.addRelicToCustomPool(new LuckyTrunks(), AbstractCardEnum.THE_WRESTLER_ORANGE);
+
+        // TODO: reflavor and reenable this (since its flavor was appropriated for the starter relic)
 
         // This adds a relic to the Shared pool. Every character can find this relic.
-        //  BaseMod.addRelic(new WrestlerRelic2(), RelicType.SHARED);
+        // TODO: put this behind a Config flag, a la Hayseed
+        BaseMod.addRelic(new FancyFootgear(), RelicType.SHARED);
 
         // Mark relics as seen (the others are all starters so they're marked as seen in the character file
-        // UnlockTracker.markRelicAsSeen(BottledWrestlerRelic.ID);
+        // UnlockTracker.markRelicAsSeen(Headgear.ID);
         logger.info("Done adding relics!");
     }
 
@@ -431,46 +478,99 @@ public class WrestlerMod implements
 
         // TODO: rename these
         BaseMod.addCard(new WrestlerStrike());
+        BaseMod.addCard(new WrestlerDirtyStrike());
         BaseMod.addCard(new WrestlerDefend());
 
+        BaseMod.addCard(new AlleyOop());
         BaseMod.addCard(new AtomicDrop());
+        BaseMod.addCard(new Backfist());
+        BaseMod.addCard(new Backslide());
         BaseMod.addCard(new BearHug());
-        BaseMod.addCard(new BlowOff());
+//        BaseMod.addCard(new Butterfly());
         BaseMod.addCard(new Brainbuster());
         BaseMod.addCard(new CageMatch());
+        BaseMod.addCard(new CannedHeat());
         BaseMod.addCard(new CheapShot());
         BaseMod.addCard(new CleanFinish());
+        BaseMod.addCard(new CloverleafAttack());
         BaseMod.addCard(new CobraClutch());
         BaseMod.addCard(new CurtainJerker());
         BaseMod.addCard(new DivingStomp());
+        BaseMod.addCard(new ElbowDrop());
         BaseMod.addCard(new EyePoke());
         BaseMod.addCard(new Facewash());
         BaseMod.addCard(new FanFavorite());
+        BaseMod.addCard(new Feud());
+//        BaseMod.addCard(new FloatOver());
         BaseMod.addCard(new FrogSplash());
+        BaseMod.addCard(new Glower());
+        BaseMod.addCard(new Guillotine());
         BaseMod.addCard(new HairPull());
+        BaseMod.addCard(new Hammerlock());
         BaseMod.addCard(new Hardway());
         BaseMod.addCard(new Headlock());
+        BaseMod.addCard(new HeartPunch());
         BaseMod.addCard(new HeelTurn());
         BaseMod.addCard(new HotShot());
         BaseMod.addCard(new IronMan());
+        BaseMod.addCard(new Jobber());
+        BaseMod.addCard(new Kayfabe());
+        BaseMod.addCard(new LowBlow());
+        BaseMod.addCard(new Matrix());
         BaseMod.addCard(new Neckbreaker());
+        BaseMod.addCard(new Octopus());
         BaseMod.addCard(new OffTheRopes());
+        BaseMod.addCard(new Opportunist());
+        BaseMod.addCard(new Pendulum());
+        BaseMod.addCard(new PhantomBump());
+        BaseMod.addCard(new Pinfall());
+        BaseMod.addCard(new PlayToTheCrowd());
+        BaseMod.addCard(new Powerbomb());
         BaseMod.addCard(new ProvenTactics());
+        BaseMod.addCard(new Redemption());
+        BaseMod.addCard(new RefBump());
         BaseMod.addCard(new Ropewalk());
         BaseMod.addCard(new RunTheRing());
         BaseMod.addCard(new Sandbag());
         BaseMod.addCard(new Scrapper());
+//        BaseMod.addCard(new Screwjob());
         BaseMod.addCard(new Sharpshooter());
+        BaseMod.addCard(new Shortarm());
+        BaseMod.addCard(new Showboat());
         BaseMod.addCard(new SideRoll());
+        BaseMod.addCard(new Smackdown());
+        BaseMod.addCard(new SpotMonkey());
         BaseMod.addCard(new Springboard());
         BaseMod.addCard(new SquareOff());
+        BaseMod.addCard(new Squeeze());
+        BaseMod.addCard(new StomachClaw());
+        BaseMod.addCard(new Swerve());
         BaseMod.addCard(new TagIn());
         BaseMod.addCard(new TakeToTheMat());
+        BaseMod.addCard(new Technician());
         BaseMod.addCard(new TriangleChoke());
         BaseMod.addCard(new TripleThreat());
         BaseMod.addCard(new WindUpKick());
 
-//        BaseMod.addCard(new SafetyTag());
+
+        /* TO BE REWORKED {
+            BaseMod.addCard(new BlowOff());
+            BaseMod.addCard(new HalfNelson());
+            BaseMod.addCard(new SleeperHold());
+            BaseMod.addCard(new NearFall());
+            BaseMod.addCard(new MainEvent());
+
+            BaseMod.addCard(new SafetyTag());
+            BaseMod.addCard(new TakeAPowder());
+        } */
+
+
+
+
+        // NEED REWORK BECAUSE OF PENALTY CARD REWORK
+        // BaseMod.addCard(new CannedHeat());
+
+
 
         logger.info("Making sure the cards are unlocked.");
         // Unlock the cards
@@ -480,53 +580,107 @@ public class WrestlerMod implements
         // TODO: create "addCardToBasePool" method for cards that begin unlocked
 
         UnlockTracker.unlockCard(WrestlerStrike.ID);
+        UnlockTracker.unlockCard(WrestlerDirtyStrike.ID);
         UnlockTracker.unlockCard(WrestlerDefend.ID);
 
+        UnlockTracker.unlockCard(AlleyOop.ID);
         UnlockTracker.unlockCard(AtomicDrop.ID);
+        UnlockTracker.unlockCard(Backfist.ID);
+        UnlockTracker.unlockCard(Backslide.ID);
         UnlockTracker.unlockCard(BearHug.ID);
         UnlockTracker.unlockCard(BlowOff.ID);
         UnlockTracker.unlockCard(Brainbuster.ID);
-        UnlockTracker.unlockCard(CageMatch.ID);
+        UnlockTracker.unlockCard(CageMatch.ID);;
+        UnlockTracker.unlockCard(CannedHeat.ID);
         UnlockTracker.unlockCard(CheapShot.ID);
         UnlockTracker.unlockCard(CleanFinish.ID);
+        UnlockTracker.unlockCard(CloverleafAttack.ID);
         UnlockTracker.unlockCard(CobraClutch.ID);
         UnlockTracker.unlockCard(CurtainJerker.ID);
         UnlockTracker.unlockCard(DivingStomp.ID);
+        UnlockTracker.unlockCard(ElbowDrop.ID);
         UnlockTracker.unlockCard(EyePoke.ID);
         UnlockTracker.unlockCard(Facewash.ID);
         UnlockTracker.unlockCard(FanFavorite.ID);
+        UnlockTracker.unlockCard(Feud.ID);
+        UnlockTracker.unlockCard(FloatOver.ID);
         UnlockTracker.unlockCard(FrogSplash.ID);
+        UnlockTracker.unlockCard(HalfNelson.ID);
+        UnlockTracker.unlockCard(Glower.ID);
+        UnlockTracker.unlockCard(Guillotine.ID);
         UnlockTracker.unlockCard(HairPull.ID);
+        UnlockTracker.unlockCard(Hammerlock.ID);
         UnlockTracker.unlockCard(Hardway.ID);
         UnlockTracker.unlockCard(Headlock.ID);
+        UnlockTracker.unlockCard(HeartPunch.ID);
         UnlockTracker.unlockCard(HeelTurn.ID);
         UnlockTracker.unlockCard(HotShot.ID);
         UnlockTracker.unlockCard(IronMan.ID);
+        UnlockTracker.unlockCard(Jobber.ID);
+        UnlockTracker.unlockCard(Kayfabe.ID);
+        UnlockTracker.unlockCard(LowBlow.ID);
+        UnlockTracker.unlockCard(MainEvent.ID);
+        UnlockTracker.unlockCard(Matrix.ID);
+        UnlockTracker.unlockCard(NearFall.ID);
         UnlockTracker.unlockCard(Neckbreaker.ID);
+        UnlockTracker.unlockCard(Octopus.ID);
         UnlockTracker.unlockCard(OffTheRopes.ID);
+        UnlockTracker.unlockCard(Opportunist.ID);
+        UnlockTracker.unlockCard(Pendulum.ID);
+        UnlockTracker.unlockCard(PhantomBump.ID);
+        UnlockTracker.unlockCard(Pinfall.ID);
+        UnlockTracker.unlockCard(PlayToTheCrowd.ID);
+        UnlockTracker.unlockCard(Powerbomb.ID);
         UnlockTracker.unlockCard(ProvenTactics.ID);
+        UnlockTracker.unlockCard(Redemption.ID);
+        UnlockTracker.unlockCard(RefBump.ID);
         UnlockTracker.unlockCard(Ropewalk.ID);
         UnlockTracker.unlockCard(RunTheRing.ID);
         UnlockTracker.unlockCard(Sandbag.ID);
         UnlockTracker.unlockCard(Scrapper.ID);
+        UnlockTracker.unlockCard(Screwjob.ID);
         UnlockTracker.unlockCard(Sharpshooter.ID);
+        UnlockTracker.unlockCard(Shortarm.ID);
+        UnlockTracker.unlockCard(Showboat.ID);
         UnlockTracker.unlockCard(SideRoll.ID);
+        UnlockTracker.unlockCard(SleeperHold.ID);
+        UnlockTracker.unlockCard(Smackdown.ID);
+        UnlockTracker.unlockCard(SpotMonkey.ID);
         UnlockTracker.unlockCard(Springboard.ID);
         UnlockTracker.unlockCard(SquareOff.ID);
+        UnlockTracker.unlockCard(Squeeze.ID);
+        UnlockTracker.unlockCard(StomachClaw.ID);
+        UnlockTracker.unlockCard(Swerve.ID);
         UnlockTracker.unlockCard(TagIn.ID);
+        UnlockTracker.unlockCard(TakeAPowder.ID);
         UnlockTracker.unlockCard(TakeToTheMat.ID);
+        UnlockTracker.unlockCard(Technician.ID);
         UnlockTracker.unlockCard(TriangleChoke.ID);
         UnlockTracker.unlockCard(TripleThreat.ID);
         UnlockTracker.unlockCard(WindUpKick.ID);
 
+        // CURSES
+        BaseMod.addCard(new Predictable());
+        UnlockTracker.unlockCard(Predictable.ID);
 
-//        UnlockTracker.unlockCard(SafetyTag.ID);
-
-        // TODO: Remove this once card pool is sufficiently large
-        BaseMod.addCard(new DefaultRareAttack());
-        UnlockTracker.unlockCard(DefaultRareAttack.ID);
+        // FOR PLAYTESTING
+        BaseMod.addCard(new Chokeslam());
+        UnlockTracker.unlockCard(Chokeslam.ID);
+        BaseMod.addCard(new DragonGate());
+        UnlockTracker.unlockCard(DragonGate.ID);
+        BaseMod.addCard(new Piledriver());
+        UnlockTracker.unlockCard(Piledriver.ID);
+        BaseMod.addCard(new FairPlay());
+        UnlockTracker.unlockCard(FairPlay.ID);
 
         logger.info("Done adding cards!");
+
+        if (AbstractSignatureMoveInfo.SIGNATURE_MOVES_ENABLED) {
+            BaseMod.addSaveField(AbstractSignatureMoveInfo.SIGNATURE_CARD_SAVABLE_KEY,
+                AbstractSignatureMoveInfo.getCardSavable());
+            BaseMod.addSaveField(AbstractSignatureMoveInfo.SIGNATURE_UPGRADE_SAVABLE_KEY,
+                AbstractSignatureMoveInfo.getUpgradeSavable());
+        }
     }
 
     // There are better ways to do this than listing every single individual card, but I do not want to complicate things
@@ -601,12 +755,11 @@ public class WrestlerMod implements
     public void receiveEditKeywords() {
         // Keywords on cards are supposed to be Capitalized, while in Keyword-String.json they're lowercase
         //
-        // Multiword keywords on cards are done With_Underscores
+        // Multiword thewrestler.keywords on cards are done With_Underscores
         //
-        // If you're using multiword keywords, the first element in your NAMES array in your keywords-strings.json has to be the same as the PROPER_NAME.
+        // If you're using multiword thewrestler.keywords, the first element in your NAMES array in your thewrestler.keywords-strings.json has to be the same as the PROPER_NAME.
         // That is, in Card-Strings.json you would have #yA_Long_Keyword (#y highlights the keyword in yellow).
         // In Keyword-Strings.json you would have PROPER_NAME as A Long Keyword and the first element in NAMES be a long keyword, and the second element be a_long_keyword
-
 
         final Gson gson = new Gson();
         String language = getLanguageString();
@@ -654,7 +807,103 @@ public class WrestlerMod implements
     }
 
     @Override
+    public void receiveStartGame() {
+        penaltyCardInfoPanel = new WrestlerPenaltyCardInfoPanel();
+        combatInfoPanel = new WrestlerCombatInfoPanel();
+        logger.info("WresterMod:receiveStartGame called");
+
+        WrestlerCharacter.setSignatureMoveInfo(WrestlerCharacter.initializeSignatureMoveInfo());
+        signatureMovePanel = WrestlerSignatureMovePanel.getPanel();
+
+        if (AbstractSignatureMoveInfo.SIGNATURE_MOVES_ENABLED) {
+            if (AbstractSignatureMoveInfo.isSaveDataValid()) {
+                AbstractSignatureMoveInfo.loadSaveData();
+                WrestlerMod.logger.info("WrestlerCharacter:setSignatureMoveInfo set info from save: " + WrestlerCharacter.getSignatureMoveInfo());
+            } else {
+                WrestlerMod.logger.info("WrestlerMod::receiveOnBattleStart initializing signatureMoveInfo");
+            }
+        }
+
+        if (BasicUtils.isPlayingAsWrestler()) {
+            WrestlerCharacter.initializePenaltyCardInfo();
+        }
+    }
+
+    @Override
     public void receiveOnBattleStart(AbstractRoom abstractRoom) {
-        OnApplyPowerPatchInsert.powerActionList.clear();
+        if (BasicUtils.isPlayingAsWrestler()) {
+            OnApplyPowerPatchInsert.powerActionList.clear();
+            combatInfoPanel.atStartOfCombat();
+            penaltyCardInfoPanel.atEndOfCombat();
+            signatureMovePanel.atStartOfCombat();
+            WrestlerCharacter.getSignatureMoveInfo().atStartOfCombat();
+            WrestlerCharacter.getPenaltyCardInfo().atStartOfCombat();
+            CombatInfo.atStartOfCombat();
+        }
+
+        StartOfCombatListener.triggerStartOfCombatPowers();
+        StartOfCombatListener.triggerStartOfCombatCards();
+    }
+
+    @Override
+    public void receiveCardUsed(AbstractCard abstractCard) {
+        combatInfoPanel.updateCardCounts();
+        signatureMovePanel.onCardUsed(abstractCard);
+        WrestlerCharacter.getPenaltyCardInfo().onCardUsed(abstractCard);
+        penaltyCardInfoPanel.onCardUsed(abstractCard);
+    }
+
+    @Override
+    public void receivePostEnergyRecharge() {
+        penaltyCardInfoPanel.atStartOfTurn();
+        combatInfoPanel.atStartOfTurn();
+        signatureMovePanel.atStartOfTurn();
+        WrestlerCharacter.getSignatureMoveInfo().atStartOfTurn();
+        WrestlerCharacter.getPenaltyCardInfo().atStartOfTurn();
+        CombatInfo.atStartOfTurn();
+    }
+
+    @Override
+    public void receivePostBattle(AbstractRoom abstractRoom) {
+        penaltyCardInfoPanel.atEndOfCombat();
+        combatInfoPanel.atEndOfCombat();
+        signatureMovePanel.atEndOfCombat();
+        WrestlerCharacter.getSignatureMoveInfo().atEndOfCombat();
+        WrestlerCharacter.getPenaltyCardInfo().atEndOfCombat();
+        CombatInfo.atEndOfCombat();
+    }
+
+    public static void atEndOfPlayerTurn() {
+        WrestlerCharacter.getSignatureMoveInfo().atEndOfTurn();
+        WrestlerCharacter.getPenaltyCardInfo().atEndOfTurn();
+    }
+
+    @Override
+    public boolean receivePreMonsterTurn(AbstractMonster abstractMonster) {
+        penaltyCardInfoPanel.atEndOfTurn();
+        combatInfoPanel.atEndOfTurn();
+        signatureMovePanel.atEndOfTurn();
+        return true;
+    }
+
+    static public void onExhaustCardHook(AbstractCard card) {
+        WrestlerCharacter.getSignatureMoveInfo().onCardExhausted(card);
+        WrestlerCharacter.getPenaltyCardInfo().onCardExhausted(card);
+    }
+
+    public static Keyword getKeyword(String key) {
+        return keywords.get(key);
+    }
+
+    @Override
+    public void receivePostCreateStartingDeck(AbstractPlayer.PlayerClass playerClass, CardGroup cardGroup) {
+        AbstractSignatureMoveInfo.resetForNewRun();
+        PenaltyCardInfo.resetForNewCombat();
+        WrestlerCharacter.resetPenaltyCardInfo();
+    }
+
+    @Override
+    public void receivePostDungeonInitialize() {
+
     }
 }

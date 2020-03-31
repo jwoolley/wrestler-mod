@@ -19,7 +19,7 @@ public class DefaultUncommonPower extends AbstractDynamicCard {
     /*
      * Wiki-page: https://github.com/daviscook477/BaseMod/wiki/Custom-Cards
      *
-     * Weirdness Apply X (+1) keywords to yourself.
+     * Weirdness Apply X (+1) thewrestler.keywords to yourself.
      */
 
     // TEXT DECLARATION 

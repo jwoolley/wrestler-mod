@@ -12,7 +12,7 @@ import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import thewrestler.WrestlerMod;
 import thewrestler.cards.AbstractCardWithPreviewCard;
-import thewrestler.cards.colorless.attack.Knee;
+import thewrestler.cards.colorless.attack.Elbow;
 import thewrestler.enums.AbstractCardEnum;
 import thewrestler.powers.TripleThreatPower;
 
@@ -37,7 +37,7 @@ public class TripleThreat extends AbstractCardWithPreviewCard {
   private static final int COST = 1;
 
   public TripleThreat() {
-    super(ID, NAME, getCardResourcePath(IMG_PATH), COST, getDescription(Knee.NAME), TYPE, AbstractCardEnum.THE_WRESTLER_ORANGE,
+    super(ID, NAME, getCardResourcePath(IMG_PATH), COST, getDescription(Elbow.NAME), TYPE, AbstractCardEnum.THE_WRESTLER_ORANGE,
         RARITY, TARGET);
     this.baseDamage = this.damage = DAMAGE;
   }
@@ -74,7 +74,7 @@ public class TripleThreat extends AbstractCardWithPreviewCard {
 
   private static AbstractCard getBonusCard() {
     if (PREVIEW_CARD == null) {
-      PREVIEW_CARD = new Knee();
+      PREVIEW_CARD = new Elbow();
     }
     return PREVIEW_CARD;
   }
@@ -88,6 +88,6 @@ public class TripleThreat extends AbstractCardWithPreviewCard {
     NAME = cardStrings.NAME;
     DESCRIPTION = cardStrings.DESCRIPTION;
     EXTENDED_DESCRIPTION = cardStrings.EXTENDED_DESCRIPTION;
-    PREVIEW_CARD = new Knee();
+    PREVIEW_CARD = new Elbow();
   }
 }

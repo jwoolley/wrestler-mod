@@ -10,6 +10,7 @@ import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import thewrestler.WrestlerMod;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.function.Predicate;
 
 public class ChooseAndAddFilteredDiscardCardsToHandAction extends AbstractGameAction {
@@ -29,7 +30,7 @@ public class ChooseAndAddFilteredDiscardCardsToHandAction extends AbstractGameAc
     this.numberOfCards = numberOfCards;
     this.optional = optional;
     this.predicate = predicate;
-    this.chooserUiStrings = chooserUiStrings;
+    this.chooserUiStrings = chooserUiStrings.clone();
   }
 
   private static ArrayList<AbstractCard> getDiscardCards() {

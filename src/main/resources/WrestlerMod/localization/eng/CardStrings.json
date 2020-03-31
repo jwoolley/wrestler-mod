@@ -1,79 +1,55 @@
 {
-  "WrestlerMod:_ColorExample": {
-    "NAME": "COLOR EXAMPLE",
-    "DESCRIPTION": "Deal !D! Damage. NL [#0000ff]This[] [#ff0000]Is[] [#ffff00]How[] [#88888]color[] [#ff00ff]works.[]"
+  "WrestlerMod:AlleyOop": {
+    "NAME": "Alley Oop",
+    "DESCRIPTION": "Discard !M! ",
+    "EXTENDED_DESCRIPTION": [
+      "card",
+      "cards",
+      ". NL Put !M! random ",
+      " with cost ",
+      " or less from your draw pile into your hand."
+    ]
   },
-  "WrestlerMod:_MultiwordKeywordExample": {
-    "NAME": "MULTIWORD KEYWORD EXAMPLE",
-    "DESCRIPTION": "Gain !B! Block. NL WrestlerMod:Multiword_Keyword."
-  },
-  "WrestlerMod:DefaultCommonPower": {
-    "NAME": "Hold Place",
-    "DESCRIPTION": "Gain !M! WrestlerMod:Keyword.",
-    "UPGRADE_DESCRIPTION": "Gain !M! WrestlerMod:Keywords."
-  },
-  "WrestlerMod:DefaultUncommonAttack": {
-    "NAME": "Big slap",
-    "DESCRIPTION": "Deal !D! Damage."
-  },
-
-  "WrestlerMod:DefaultUncommonPower": {
-    "NAME": "Weirdness",
-    "DESCRIPTION": "Gain X WrestlerMod:Keywords.",
-    "UPGRADE_DESCRIPTION": "Gain X +1 WrestlerMod:Keywords."
-  },
-  "WrestlerMod:DefaultRareAttack": {
-    "NAME": "Power Bomb",
-    "DESCRIPTION": "Deal !D! Damage."
-  },
-  "WrestlerMod:DefaultRareSkill": {
-    "NAME": "For Each Loop x2",
-    "DESCRIPTION": "Apply !M! vulnerable to all enemies, 2 times.",
-    "UPGRADE_DESCRIPTION": "Apply !M! vulnerable to all enemies, 3 times."
-  },
-
-  "WrestlerMod:DefaultAttackWithVariable": {
-    "NAME": "Special Strike",
-    "DESCRIPTION": "Deal !D! Damage [E] times. NL (Deal !WrestlerMod:ENERGY_DAMAGE! damage total.)"
-  },
-  "WrestlerMod:DefaultSecondMagicNumberSkill": {
-    "NAME": "Cool 2 Number Card",
-    "DESCRIPTION": "Apply !M! vulnerable and !WrestlerMod:SecondMagic! poison to an enemy."
-  },
-  "WrestlerMod:OrbSkill": {
-    "NAME": "Get Orb",
-    "DESCRIPTION": "Channel 1 Default Orb."
-  },
-
 
   "WrestlerMod:AtomicDrop": {
     "NAME": "Atomic Drop",
-    "DESCRIPTION": "Deal !D! Damage. NL The next ",
+    "DESCRIPTION": "Deal !D! Damage. NL The first",
     "EXTENDED_DESCRIPTION": [
-      "time",
-      "!M! times",
-      " you attack the enemy this turn, gain [E]."
+      " time",
+      " !M! times",
+      " you attack this enemy each turn, gain [E]. NL Exhaust."
+    ]
+  },
+
+  "WrestlerMod:Backfist": {
+    "NAME": "Backfist",
+    "DESCRIPTION": "Deal !D! damage. NL Shuffle an *Elbow into your draw pile."
+  },
+
+  "WrestlerMod:Backslide": {
+    "NAME": "Backslide",
+    "DESCRIPTION": "Draw !M! cards. NL Gain [P] . NL Put ",
+    "EXTENDED_DESCRIPTION": [
+      "a card",
+      " cards",
+      " from your hand onto the top of your draw pile. NL Exhaust."
     ]
   },
 
   "WrestlerMod:BearHug": {
     "NAME": "Bear Hug",
-    "DESCRIPTION": "Deal !D! Damage. NL Whenever you play a Skill this turn, apply !M! Vulnerable and !M! Weak.",
+    "DESCRIPTION": "Deal !D! Damage. NL Apply ",
     "EXTENDED_DESCRIPTION": [
-      " NL Exhaust."
+      " wrestlermod:Injured ",
+      " twice.",
+      " !M! times."
     ]
   },
 
   "WrestlerMod:BlowOff": {
     "NAME": "Blow Off",
-    "DESCRIPTION": "Discard ",
-    "EXTENDED_DESCRIPTION": [
-      "!M! card",
-      "!M! cards",
-      ". NL Gain !B! Block."
-    ]
+    "DESCRIPTION": "Retain. NL Deal !D! damage to ALL enemies. NL When Retained or discarded, increase its damage by !M! this combat. Exhaust."
   },
-
 
   "WrestlerMod:Brainbuster": {
     "NAME": "Brainbuster",
@@ -85,22 +61,65 @@
     ]
   },
 
+  "WrestlerMod:Butterfly": {
+    "NAME": "Butterfly",
+    "DESCRIPTION": "Remove !M! of the enemy's debuffs at random. NL Gain [E] and draw a card for each debuff removed."
+  },
+
   "WrestlerMod:CageMatch": {
     "NAME": "Cage Match",
-    "DESCRIPTION": "Apply wrestlermod:Grappled. NL Stun all other enemies for 1 turn. NL Exhaust."
+    "DESCRIPTION": "Apply wrestlermod:Grappled. NL Stun !M! other random",
+    "EXTENDED_DESCRIPTION": [
+      " enemy.",
+      " enemies.",
+      " NL Exhaust."
+    ]
+  },
+
+  "WrestlerMod:CannedHeat": {
+    "NAME": "Canned Heat",
+    "DESCRIPTION": "Gain [P]. NL Next turn, gain ",
+    "EXTENDED_DESCRIPTION": [
+      "[E] ",
+      "and draw !M!",
+      " card.",
+      " cards."
+    ]
+  },
+
+  "WrestlerMod:Glower": {
+    "NAME": "Glower",
+    "DESCRIPTION": "wrestlermod:Dirty. NL Exhaust a card from your discard pile. NL Gain [E] equal to its cost.",
+
+    "EXTENDED_DESCRIPTION": [
+      "Choose a card to exhaust."
+    ]
   },
 
   "WrestlerMod:CheapShot": {
     "NAME": "Cheap Shot",
-    "DESCRIPTION": "Innate. NL Deal !D! damage. NL If the enemy intends to attack, apply !M! Vulnerable. NL Exhaust."
+    "DESCRIPTION": "Innate. wrestlermod:Dirty. NL Deal !D! damage. NL If the enemy intends to attack, apply !M! Vulnerable. NL Exhaust."
   },
 
   "WrestlerMod:CleanFinish": {
     "NAME": "Clean Finish",
-    "DESCRIPTION": "Cards in your hand cost 0 this combat and Exhaust when played. NL Exhaust.",
+    "DESCRIPTION": "!M! random cards in your hand cost 0 this combat and Exhaust when played. NL Exhaust.",
     "EXTENDED_DESCRIPTION": [
       " NL Exhaust."
     ]
+  },
+
+  "WrestlerMod:Cloverleaf": {
+    "NAME": "Cloverleaf",
+    "DESCRIPTION": "Apply !M! Vulnerable. NL Whenever you apply a debuff to this enemy that it doesn't already have, gain ",
+    "EXTENDED_DESCRIPTION": [
+      " Block. NL Exhaust."
+    ]
+  },
+
+  "WrestlerMod:CloverleafAttack": {
+    "NAME": "Cloverleaf",
+    "DESCRIPTION": "Deal !D! damage. NL The next time you would gain a random [P] this combat, gain a [N] instead."
   },
 
   "WrestlerMod:CobraClutch": {
@@ -110,18 +129,30 @@
 
   "WrestlerMod:CurtainJerker": {
     "NAME": "Curtain Jerker",
-    "DESCRIPTION": "Gain !M! Strength and !M! Dexterity which last until you take attack damage from an enemy.",
-    "EXTENDED_DESCRIPTION": [ "Innate. NL " ]
+    "DESCRIPTION": "Gain !M! Strength and !M! Dexterity. NL The next time you play a power, lose !M! Strength and !M! Dexterity."
   },
 
   "WrestlerMod:DivingStomp": {
     "NAME": "Diving Stomp",
-    "DESCRIPTION": "Deal !D! Damage. NL Apply !M! wrestlermod:Sprained."
+    "DESCRIPTION": "wrestlermod:Dirty. NL Deal !D! Damage. NL Apply !M! wrestlermod:Injured."
+  },
+
+  "WrestlerMod:Elbow": {
+    "NAME": "Elbow",
+    "DESCRIPTION": "Deal !D! Damage. NL Draw a card. NL Exhaust."
+  },
+
+  "WrestlerMod:ElbowGrease": {
+    "NAME": "Elbow Grease",
+    "DESCRIPTION": "Add an ",
+    "EXTENDED_DESCRIPTION": [
+      " to your hand."
+    ]
   },
 
   "WrestlerMod:EyePoke": {
     "NAME": "Eye Poke",
-    "DESCRIPTION": "Apply !M! Weak and !M! Vulnerable. NL Exhaust."
+    "DESCRIPTION": "wrestlermod:Dirty. NL Apply !M! Weak and NL !B! wrestlermod:Injured."
   },
 
   "WrestlerMod:Facewash": {
@@ -130,8 +161,19 @@
     "EXTENDED_DESCRIPTION": [
       "a card",
       "!M! cards",
-      ", then discard a card at random. NL If it's an Attack, play it."
+      ". NL Gain !B! Block for each Attack drawn."
     ]
+  },
+
+  "WrestlerMod:ElbowDrop": {
+    "NAME": "Elbow Drop",
+    "DESCRIPTION": "Deal !D! damage. NL Draw !M! card. NL When this card is discarded, reduce its cost by 1 until played."
+  },
+
+
+  "WrestlerMod:FairPlay": {
+    "NAME": "Fair Play",
+    "DESCRIPTION": "Gain !B! Block."
   },
 
   "WrestlerMod:FanFavorite": {
@@ -142,22 +184,63 @@
     ]
   },
 
+  "WrestlerMod:Feud": {
+    "NAME": "Feud",
+    "DESCRIPTION": "Whenever you attack the same enemy twice in a row in one turn, shuffle an *Elbow into your draw pile.",
+    "EXTENDED_DESCRIPTION": [
+      "Innate. NL "
+    ]
+  },
+
+  "WrestlerMod:FloatOver": {
+    "NAME": "Float Over",
+    "DESCRIPTION": "At the end of your turn, if your hand is empty, gain !M! wrestlermod:Temporary_Buffer."
+  },
+
+  "WrestlerMod:FoulPlay": {
+    "NAME": "Foul Play",
+    "DESCRIPTION": "Add a ",
+    "EXTENDED_DESCRIPTION": [
+      " to your hand."
+    ]
+  },
+
   "WrestlerMod:FrogSplash": {
     "NAME": "Frog Splash",
-    "DESCRIPTION": "Deal !D! Damage and apply !M! Weak to ALL enemies. NL Exhaust."
+    "DESCRIPTION": "Deal !D! Damage and apply !M! Weak to ALL enemies. NL Gain [L] . NL Exhaust."
+  },
+
+  "WrestlerMod:HalfNelson": {
+    "NAME": "Half Nelson",
+    "DESCRIPTION": "Deal 6 damage. Whenever you apply a debuff to this enemy, gain !B! Block."
+  },
+
+  "WrestlerMod:Guillotine": {
+    "NAME": "Guillotine",
+    "DESCRIPTION": "wrestlermod:Dirty. NL Deal !D! damage to ALL enemies. NL Then deal !D! damage to all enemies with 50% HP or less."
   },
 
   "WrestlerMod:HairPull": {
     "NAME": "Hair Pull",
-    "DESCRIPTION": "Deal !D! damage. NL If the enemy is wrestlermod:Grappled, gain [E]."
+    "DESCRIPTION": "wrestlermod:Dirty. NL Deal !D! damage. NL If the enemy has ",
+    "EXTENDED_DESCRIPTION": [
+      " or more debuffs,  gain [E] and draw 1 card."
+    ]
+  },
+
+  "WrestlerMod:Hammerlock": {
+    "NAME": "Hammerlock",
+    "DESCRIPTION": "Gain !B! Block. NL Add ",
+    "EXTENDED_DESCRIPTION": [
+      "an *Elbow",
+      " *Elbows",
+      " to your hand."
+    ]
   },
 
   "WrestlerMod:Hardway": {
     "NAME": "Hardway",
-    "DESCRIPTION": "Remove all of the enemy's debuffs. NL They lose 1 Strength for each debuff removed. NL Exhaust.",
-    "EXTENDED_DESCRIPTION": [
-      "Ethereal. NL "
-    ]
+    "DESCRIPTION": "wrestlermod:Dirty. NL Enemy loses !M! Strength. NL Gain !M! Thorns. Lose !M! HP. NL Exhaust."
   },
 
   "WrestlerMod:Headlock": {
@@ -165,36 +248,112 @@
     "DESCRIPTION": "Deal !D! Damage. NL Enemy loses !M! Strength until end of turn."
   },
 
+
+  "WrestlerMod:HeartPunch": {
+    "NAME": "Heart Punch",
+    "DESCRIPTION": "Deal !D! Damage. NL Remove all of the enemy's debuffs. NL Heal !M! HP for each debuff removed. NL Exhaust."
+  },
+
   "WrestlerMod:HeelTurn": {
     "NAME": "Heel Turn",
     "DESCRIPTION": "Gain ",
     "EXTENDED_DESCRIPTION": [
-      " Intangible. NL Gain ",
-      " Strength. NL Gain !M! Gold. NL Exhaust."
+      " Intangible. NL Gain !M! Strength. NL Gain",
+      " [P] ",
+      ". NL Exhaust."
     ]
   },
 
   "WrestlerMod:HotShot": {
     "NAME": "Hot Shot",
-    "DESCRIPTION": "Deal !D! Damage. NL Lose !M! HP."
+    "DESCRIPTION": "wrestlermod:Dirty. NL Deal !D! Damage. NL Lose !M! HP."
   },
 
   "WrestlerMod:IronMan": {
     "NAME": "Iron Man",
-    "DESCRIPTION": "The next time you would die this turn, heal for ",
+    "DESCRIPTION": "At the start of your turn, if your HP is ",
     "EXTENDED_DESCRIPTION": [
-      " HP instead. NL At the end of combat, heal !M! HP."
+      " or less, gain 1 wrestlermod:Temporary_Buffer. NL At the end of combat, heal !M! HP."
+    ]
+  },
+
+  "WrestlerMod:Jobber": {
+    "NAME": "Jobber",
+    "DESCRIPTION": "Whenever you play wrestlermod:Dirty card, gain !M! Block."
+  },
+
+  "WrestlerMod:Kayfabe": {
+    "NAME": "Kayfabe",
+    "DESCRIPTION": "Gain ",
+    "EXTENDED_DESCRIPTION": [
+      "[E] ",
+      ". NL Next turn, gain",
+      ". NL You can't gain",
+      " [P] ",
+      "this turn. NL Exhaust."
     ]
   },
 
   "WrestlerMod:Knee": {
     "NAME": "Knee",
-    "DESCRIPTION": "Ethereal. NL Deal !D! Damage. NL Exhaust."
+    "DESCRIPTION": "Ethereal. NL wrestlermod:Dirty. NL Deal !D! Damage. NL Exhaust."
+  },
+
+  "WrestlerMod:KneedAFriend": {
+    "NAME": "Kneed a Friend",
+    "DESCRIPTION": "Add a ",
+    "EXTENDED_DESCRIPTION": [
+      " to your hand."
+    ]
+  },
+
+  "WrestlerMod:LowBlow": {
+    "NAME": "Low Blow",
+    "DESCRIPTION": "Deal !D! Damage. NL When you play a [P] , return this from your discard pile to your hand."
+  },
+
+  "WrestlerMod:MainEvent": {
+    "NAME": "Main Event",
+    "DESCRIPTION": "If you've already gained your wrestlermod:Trademark_Move, put it into your hand. NL Otherwise,",
+    "EXTENDED_DESCRIPTION": [
+      " shuffle it into",
+      " put it on top of",
+      " your draw pile. NL Exhaust."
+    ]
+  },
+
+  "WrestlerMod:Matrix": {
+    "NAME": "Matrix",
+    "DESCRIPTION": "Apply X random debuffs to ALL enemies, then double all enemies' debuffs. NL Exhaust.",
+    "UPGRADE_DESCRIPTION":  "Apply X+1 random debuffs to ALL enemies, then double all enemies' debuffs. NL Exhaust."
+  },
+
+  "WrestlerMod:NearFall": {
+    "NAME": "Near-Fall",
+    "DESCRIPTION": "Exhaust !M!",
+    "EXTENDED_DESCRIPTION": [
+      " card",
+      " cards",
+      " in hand. NL Until end of turn, whenever you have no cards in hand, draw a card.",
+      "Ethereal. NL "
+    ]
   },
 
   "WrestlerMod:Neckbreaker": {
     "NAME": "Neckbreaker",
-    "DESCRIPTION": "Deal !D! damage. NL If the enemy is wrestlermod:Grappled, apply !M! Vulnerable, !M! Weak, and !M! Frail."
+    "DESCRIPTION": "Deal !D! damage. NL If the enemy is wrestlermod:Grappled, apply !M! Vulnerable, !M! Weak, and ",
+    "EXTENDED_DESCRIPTION": [
+      " wrestlermod:Injured."
+    ]
+  },
+
+  "WrestlerMod:Octopus": {
+    "NAME": "Octopus",
+    "DESCRIPTION": "Apply !M! wrestlermod:Injured to a random enemy ",
+    "EXTENDED_DESCRIPTION": [
+      " times.",
+      " times. NL Exahust."
+    ]
   },
 
   "WrestlerMod:OffTheRopes": {
@@ -210,9 +369,80 @@
     ]
   },
 
+  "WrestlerMod:Opportunist": {
+    "NAME": "Opportunist",
+    "DESCRIPTION": "At the start of your turn, if no enemies intend to attack, draw !M! cards."
+  },
+
+  "WrestlerMod:Pendulum": {
+    "NAME": "Pendulum",
+    "DESCRIPTION": "Discard your hand. NL Draw X cards and NL Gain X [E]. NL You can't draw additional cards this turn.",
+    "EXTENDED_DESCRIPTION": [
+      " NL Exhaust."
+    ]
+  },
+
+  "WrestlerMod:PhantomBump": {
+    "NAME": "Phantom Bump",
+    "DESCRIPTION": "Gain !M! wrestlermod:Temporary_Buffer."
+  },
+
+  "WrestlerMod:Pinfall": {
+    "NAME": "Pinfall",
+    "DESCRIPTION": "Gain !B! Block. NL When you play a [P] , return this from your discard pile to your hand."
+  },
+
+  "WrestlerMod:PlayToTheCrowd": {
+    "NAME": "Play to the Crowd",
+    "DESCRIPTION": "Gain !M! wrestlermod:Bravado. NL Choose one: NL Gain !B! Block, or add a *Knee to your hand. NL Exhaust.",
+    "UPGRADE_DESCRIPTION":  "Gain !M! wrestlermod:Bravado. NL Choose one: NL Gain !B! Block, or add a *Knee+ to your hand. NL Exhaust."
+  },
+
+  "WrestlerMod:PowderBuffer": {
+    "NAME": "Clutch",
+    "DESCRIPTION": "Gain !M! Buffer.",
+    "EXTENDED_DESCRIPTION": [
+      "Double Clutch"
+    ]
+  },
+
+  "WrestlerMod:PowderHybrid": {
+    "NAME": "Buffer Solution",
+    "DESCRIPTION": "Gain !M! Buffer. NL Gain !M! random potion."
+  },
+
+  "WrestlerMod:PowderPotion": {
+    "NAME": "Bubble",
+    "DESCRIPTION": "Gain !M! random potion.",
+    "EXTENDED_DESCRIPTION": [
+      "Double Bubble",
+      "Gain !M! random potions."
+    ]
+  },
+
+  "WrestlerMod:Powerbomb": {
+    "NAME": "Power Bomb",
+    "DESCRIPTION": "Deal !D! Damage and Apply !M! Vulnerable to ALL enemies. NL Gain [D] [Y] [O] ."
+  },
+
+  "WrestlerMod:Predictable": {
+    "NAME": "Predictable",
+    "DESCRIPTION": "Unplayable. NL At the end of your turn, apply !M! Artifact to a random enemy."
+  },
+
   "WrestlerMod:ProvenTactics": {
     "NAME": "Proven Tactics",
     "DESCRIPTION": "At the start of your turn, randomly add a Flex, Neutralize, or Beam_Cell to your hand. It gains Exhaust."
+  },
+
+  "WrestlerMod:Redemption": {
+    "NAME": "Redemption",
+    "DESCRIPTION": "Gain !B! Block. NL Exhaust ALL Statuses. NL Deal !D! damage to ALL enemies for each Exhausted card. NL Exhaust."
+  },
+
+  "WrestlerMod:RefBump": {
+    "NAME": "Ref Bump",
+    "DESCRIPTION": "wrestlermod:Dirty. NL Gain !B! Block. NL [P] s cost 0 this turn."
   },
 
   "WrestlerMod:Ropewalk": {
@@ -226,7 +456,7 @@
 
   "WrestlerMod:RunTheRing": {
     "NAME": "Run the Ring",
-    "DESCRIPTION": "Discard !M! cards at random. NL Deal !D! damage to ALL enemies",
+    "DESCRIPTION": "Discard !M! cards at random. NL Deal !D! damage to a random enemy",
     "EXTENDED_DESCRIPTION": [
       " twice.",
       " !M! times."
@@ -248,17 +478,65 @@
 
   "WrestlerMod:Scrapper": {
     "NAME": "Scrapper",
-    "DESCRIPTION": "At the start of your turn, if an enemy is wrestlermod:Grappled, gain !M! Strength."
+    "DESCRIPTION": "At the end of your turn, if you have no Block, gain !M! Block."
+  },
+
+  "WrestlerMod:Screwjob": {
+    "NAME": "Screwjob",
+    "DESCRIPTION": "When you play a [P] , increase this card's damage by !M! this combat. NL Deal !D! damage three times. Exhaust."
   },
 
   "WrestlerMod:Sharpshooter": {
     "NAME": "Sharpshooter",
-    "DESCRIPTION": "Apply !M! Choked. NL Deal !D! Damage for each debuff applied to the enemy."
+    "DESCRIPTION": "Apply !M! Constricted. NL Deal !D! Damage for each debuff applied to the enemy.",
+    "EXTENDED_DESCRIPTION": [
+      "Ethereal. NL "
+    ]
+  },
+
+  "WrestlerMod:Shortarm": {
+    "NAME": "Shortarm",
+    "DESCRIPTION": "wrestlermod:Dirty. NL Deal !D! damage twice. NL Increase the damage of ALL Shortarm cards by !M! this combat."
+  },
+
+  "WrestlerMod:Showboat": {
+    "NAME": "Showboat",
+    "DESCRIPTION": "Put a card from your discard pile on top of your draw pile",
+    "EXTENDED_DESCRIPTION": [
+      " and upgrade it",
+      ". NL It costs 0 until played."
+    ]
   },
 
   "WrestlerMod:SideRoll": {
     "NAME": "Side Roll",
-    "DESCRIPTION": "Gain !B! Block. NL Discard 1 card. NL If you discarded an Attack this way, Draw 1 card."
+    "DESCRIPTION": "Gain !B! Block. NL Discard 1 card. NL Draw !M! cards if you discard an Attack this way."
+  },
+
+  "WrestlerMod:Sidestep": {
+    "NAME": "Sidestep",
+    "DESCRIPTION": "Gain !B! Block."
+  },
+
+  "WrestlerMod:SleeperHold": {
+    "NAME": "Sleeper Hold",
+    "DESCRIPTION": "Apply wrestlermod:Grappled. NL Reduce the cost of ",
+    "EXTENDED_DESCRIPTION": [
+      " a random ",
+      " !M! random ",
+      " non-Attack cards in your hand by ",
+      " this turn."
+    ]
+  },
+
+  "WrestlerMod:Smackdown": {
+    "NAME": "Smackdown",
+    "DESCRIPTION": "Whenever you play a card, apply !M! wrestlermod:Injured to ALL enemies."
+  },
+
+  "WrestlerMod:SpotMonkey": {
+    "NAME": "Spot Monkey",
+    "DESCRIPTION": "Whenever you play a [P] , gain !M! Strength and !M! Dexterity."
   },
 
   "WrestlerMod:Springboard": {
@@ -271,10 +549,24 @@
     ]
   },
 
-
   "WrestlerMod:SquareOff": {
     "NAME": "Square Off",
-    "DESCRIPTION": "Gain !B! Block. NL Apply !M! Weak. NL If you attack that enemy twice this turn, apply wrestlermod:Grappled."
+    "DESCRIPTION": "Apply !M! Weak. NL If you attack that enemy twice this turn, apply wrestlermod:Grappled."
+  },
+
+  "WrestlerMod:Squeeze": {
+    "NAME": "Squeeze",
+    "DESCRIPTION": "Whenever you apply a debuff to an enemy this turn, gain !M! Block."
+  },
+
+  "WrestlerMod:StomachClaw": {
+    "NAME": "Stomach Claw",
+    "DESCRIPTION": "wrestlermod:Dirty. NL Apply !M! wrestlermod:Injured."
+  },
+
+  "WrestlerMod:Swerve": {
+    "NAME": "Swerve",
+    "DESCRIPTION": "Gain !B! Block. NL If this card is discarded from your hand, gain !M! Block."
   },
 
   "WrestlerMod:TagIn": {
@@ -293,9 +585,28 @@
     ]
   },
 
+  "WrestlerMod:TakeAPowder": {
+    "NAME": "Take a Powder",
+    "DESCRIPTION": "If wrestlermod:Clean, gain !M! wrestlermod:Temporary_Buffer. NL Otherwise, gain ",
+    "EXTENDED_DESCRIPTION": [
+      " gold.",
+      " gold and a random potion.",
+      " NL Exhaust."
+    ]
+  },
+
   "WrestlerMod:TakeToTheMat": {
     "NAME": "Take to the Mat",
-    "DESCRIPTION": "Deal !D! Damage. NL If the enemy has !M! % health or less, they become wrestlermod:Grappled."
+    "DESCRIPTION": "Deal !D! Damage. NL If you have !M! or more wrestlermod:Bravado, apply wrestlermod:Grappled."
+  },
+
+  "WrestlerMod:Technician": {
+    "NAME": "Technician",
+    "DESCRIPTION": "Whenever you play a [P] , draw !M!",
+    "EXTENDED_DESCRIPTION": [
+      " card.",
+      " cards."
+    ]
   },
 
   "WrestlerMod:TornadoTag": {
@@ -316,18 +627,26 @@
 
   "WrestlerMod:TriangleChoke": {
     "NAME": "Triangle Choke",
-    "DESCRIPTION": "Deal !D! Damage. NL If you have played a Power and a Skill this turn, apply wrestlermod:Grappled."
+    "DESCRIPTION": "Deal !D! Damage. NL If you've played a Power and a Skill this turn, gain !B! Block and ",
+    "EXTENDED_DESCRIPTION": [
+      " Artifact."
+    ]
   },
 
   "WrestlerMod:WindUpKick": {
     "NAME": "Wind-Up Kick",
-    "DESCRIPTION": "Can only be played if you've played !M! Skills this turn. NL Deal !D! damage to ALL enemies.",
+    "DESCRIPTION": "Can only be played if !M! non-Attack cards were played this turn. NL Deal !D! damage to ALL enemies.",
     "EXTENDED_DESCRIPTION": [
       "I have to play #b",
-      " more ",
-      "Skill first.",
-      "Skills first."
+      " more non-Attack",
+      " card first.",
+      " cards first."
     ]
+  },
+
+  "WrestlerMod:WrestlerDirtyStrike": {
+    "NAME": "Dirty Strike",
+    "DESCRIPTION": "wrestlermod:Dirty. NL Deal !D! Damage."
   },
 
   "WrestlerMod:WrestlerStrike": {
@@ -338,5 +657,77 @@
   "WrestlerMod:WrestlerDefend": {
     "NAME": "Defend",
     "DESCRIPTION": "Gain !B! Block."
+  },
+
+  "WrestlerMod:Chokeslam": {
+    "NAME": "Chokeslam",
+    "DESCRIPTION": "Retain. NL Deal !D! Damage. NL Apply Choked. NL Add",
+    "EXTENDED_DESCRIPTION": [
+      " a Knee",
+      "  !M! Knees",
+      " to your hand.",
+      " It costs",
+      " They cost",
+      " 0 this turn.",
+      "a "
+    ]
+  },
+
+  "WrestlerMod:DragonGate": {
+    "NAME": "Dragon Gate",
+    "DESCRIPTION": "Retain. NL Add !M! random non-Status cards from your Exhaust pile to your hand.",
+    "EXTENDED_DESCRIPTION": [
+      "a "
+    ]
+  },
+
+  "WrestlerMod:Piledriver": {
+    "NAME": "Piledriver",
+    "DESCRIPTION": "Retain. NL Deal !D! Damage to ALL enemies. NL For each enemy killed or whose Block is broken, gain ",
+    "EXTENDED_DESCRIPTION": [
+      "[E]",
+      " and draw !M!",
+      " card.",
+      " cards.",
+      "a "
+    ]
+  },
+
+  "WrestlerMod:BluePenaltyStatusCard": {
+    "NAME": "Blue Penalty Card",
+    "DESCRIPTION": "When you gain this card, a random enemy gains !M! *Plated *Armor. NL Retain. NL Draw ",
+    "EXTENDED_DESCRIPTION": [
+      " cards next turn. NL Exhaust."
+    ]
+  },
+
+  "WrestlerMod:GreenPenaltyStatusCard": {
+    "NAME": "Green Penalty Card",
+    "DESCRIPTION": "When you gain this card, lose ",
+    "EXTENDED_DESCRIPTION": [
+      " Gold. NL Retain. NL Gain !M! Dexterity. NL Exhaust."
+    ]
+  },
+
+  "WrestlerMod:OrangePenaltyStatusCard": {
+    "NAME": "Orange Penalty Card",
+    "DESCRIPTION": "Exhaust. NL When drawn, deal !D! damage to ALL enemies. NL At the end of your turn, gain !M! Frail."
+  },
+
+  "WrestlerMod:RedPenaltyStatusCard": {
+    "NAME": "Red Penalty Card",
+    "DESCRIPTION": "When you gain this card, take ",
+    "EXTENDED_DESCRIPTION": [
+      " damage. NL Retain. NL Gain !M! Strength. NL Exhaust."
+    ]
+  },
+
+  "WrestlerMod:YellowPenaltyStatusCard": {
+    "NAME": "Yellow Penalty Card",
+    "DESCRIPTION": "When you gain this card, lose !M! wrestlermod:Bravado. NL Retain. NL Gain",
+    "EXTENDED_DESCRIPTION": [
+      " [E]",
+      " next turn. NL Exhaust."
+    ]
   }
 }
