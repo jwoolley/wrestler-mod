@@ -90,10 +90,13 @@ public class Chokeslam extends AbstractSignatureMoveCard {
       } else if (upgrade.type == UpgradeType.LOSE_EXHAUST) {
         this.exhaust = false;
       }
+      this.timesUpgraded++;
+      this.upgraded = true;
       this.upgradeList.add(upgrade);
     });
 
     updateDescription();
+    upgradeName(this.upgradeList);
   }
 
   @Override

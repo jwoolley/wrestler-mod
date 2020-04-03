@@ -91,5 +91,114 @@
     "TEXT": [
       "Choose a Card to Discard."
     ]
+  },
+
+  "WrestlerMod:TrademarkMoveNames_1": {
+    "TEXT": [
+      "Front",
+      "Rear",
+      "Standing",
+      "Diving",
+      "Flying",
+      "Reverse",
+      "Power",
+      "Spinning",
+      "Kneeling",
+      "Inverted"
+    ]
+  },
+
+  "WrestlerMod:TrademarkMoveNames_2": {
+    "TEXT": [
+      "Reverse",
+      "Sleeper",
+      "Rolling",
+      "Leaping",
+      "Backhand",
+      "Giant"
+    ]
+  },
+
+  "WrestlerMod:TrademarkMoveNames_3": {
+    "TEXT": [
+      "Exploding",
+      "Imploding",
+      "Wind-Up",
+      "Ringpost",
+      "Crooked",
+      "Mounted",
+      "Heavy",
+      "Deadly",
+      "Lethal",
+      "Empowered"
+    ]
+  },
+
+  "WrestlerMod:TrademarkMoveNames_4": {
+    "TEXT": [
+      "Double",
+      "Triple",
+      "Quadruple",
+      "Quintuple",
+      "Bionic",
+      "Serpentine"
+    ]
+  },
+
+  "WrestlerMod:TrademarkMoveNames_5": {
+    "TEXT": [
+      "Slingshot",
+      "Backbreaker",
+      "Superman",
+      "Hangman’s",
+      "Pumphandle",
+      "Snapmare",
+      "Olypmic",
+      "Figure-Four"
+    ]
+  },
+
+  "WrestlerMod:TrademarkMoveNames_6": {
+    "TEXT": [
+      "Body",
+      "Crossbody",
+      "Forehand",
+      "Arm",
+      "Leg",
+      "Face",
+      "Neck",
+      "One-Arm",
+      "One-Legged",
+      "Two-Arm",
+      "Two-Legged"
+    ]
+  },
+
+  "WrestlerMod:TrademarkMoveNames_Suffix_7": {
+    "TEXT": [
+      "Camel",
+      "Lion",
+      "Tiger",
+      "Python",
+      "Shark",
+      "Vulture",
+      "Eagle",
+      "Scorpion",
+      "Spider",
+      "Wolf",
+      "Mongoose"
+    ]
+  },
+
+  "WrestlerMod:TrademarkMoveNames_Suffix_1": {
+    "TEXT": [
+      "Hold",
+      "Drop",
+      "Press",
+      "Kick",
+      "Takedown",
+      "Lift",
+      "Splash"
+    ]
   }
 }

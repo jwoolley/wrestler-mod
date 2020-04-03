@@ -2,27 +2,23 @@ package thewrestler.signaturemoves.cards;
 
 import basemod.abstracts.CustomCard;
 import com.megacrit.cardcrawl.cards.AbstractCard;
-import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
+import com.megacrit.cardcrawl.core.CardCrawlGame;
 import thewrestler.enums.AbstractCardEnum;
-import thewrestler.signaturemoves.upgrades.AbstractSignatureMoveUpgrade;
-import thewrestler.signaturemoves.upgrades.UpgradeGroup;
-import thewrestler.signaturemoves.upgrades.SignatureMoveUpgradeList;
-
+import thewrestler.signaturemoves.upgrades.*;
+import thewrestler.WrestlerMod;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
+import static thewrestler.WrestlerMod.getCardResourcePath;
+
 // TODO: implement getTooltips() method for explanatory tooltips
 //  (and append any additional tooltips specified in the subclass)
-
 // TODO: color text highlighting on cardnames, thewrestler.keywords
-
-import static thewrestler.WrestlerMod.getCardResourcePath;
 
 abstract public class AbstractSignatureMoveCard extends CustomCard {
   // TODO: add effects on the info panel, etc. for full trigger (with card gain) and partial trigger (for multi-step
@@ -148,6 +144,47 @@ abstract public class AbstractSignatureMoveCard extends CustomCard {
     return getPossibleUpgrades(allPossibleUpgrades, currentUpgrades).size();
   }
 
+  final
+  protected void upgradeName(List<AbstractSignatureMoveUpgrade> upgrades) {
+    final UpgradeGroup group = getUpgradeGroup(upgrades);
+
+    String newName = originalName;
+
+    for (AbstractSignatureMoveUpgrade upgrade : upgrades) {
+      final int count = group.get(upgrade);
+      if (upgrade.type == UpgradeType.COST_REDUCTION) {
+        if (count == 1) {
+          newName = UPGRADE_NAMES_1[2] + " " + newName;
+        } else if (count == 2)  {
+          newName = UPGRADE_NAMES_1[3] + " " + newName;
+        } else if (count == 3)  {
+          newName = UPGRADE_NAMES_1[4] + " " + newName;
+        }
+      } else if (upgrade.type == UpgradeType.RETAIN) {
+        newName = UPGRADE_NAMES_1[9] + " " + newName;
+      } else if (upgrade.type == UpgradeType.LOSE_EXHAUST) {
+        newName = UPGRADE_NAMES_1[5] + " " + newName;
+      }
+      else if (upgrade.type == UpgradeType.DAMAGE) {
+        if (upgrade.rarity == UpgradeRarity.COMMON) {
+          for (int i = 0; i < count; i++) {
+            newName += "+";
+          }
+        }
+      }
+    }
+
+    this.name = newName;
+    initializeTitle();
+  }
+
+
+  public static final String[] UPGRADE_NAMES_1 = CardCrawlGame.languagePack.getUIString(WrestlerMod.makeID("TrademarkMoveNames_1")).TEXT;
+  public static final String[] UPGRADE_NAMES_2 = CardCrawlGame.languagePack.getUIString(WrestlerMod.makeID("TrademarkMoveNames_2")).TEXT;
+  public static final String[] UPGRADE_NAMES_3 = CardCrawlGame.languagePack.getUIString(WrestlerMod.makeID("TrademarkMoveNames_3")).TEXT;
+  public static final String[] UPGRADE_NAMES_4 = CardCrawlGame.languagePack.getUIString(WrestlerMod.makeID("TrademarkMoveNames_4")).TEXT;
+  public static final String[] UPGRADE_NAMES_5 = CardCrawlGame.languagePack.getUIString(WrestlerMod.makeID("TrademarkMoveNames_5")).TEXT;
+  public static final String[] UPGRADE_NAMES_6 = CardCrawlGame.languagePack.getUIString(WrestlerMod.makeID("TrademarkMoveNames_6")).TEXT;
 
   abstract public String getIndefiniteCardName();
 }
