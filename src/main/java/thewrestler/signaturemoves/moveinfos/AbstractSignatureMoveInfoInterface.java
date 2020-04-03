@@ -5,7 +5,10 @@ import thewrestler.cards.EndOfCombatListener;
 import thewrestler.cards.StartOfCombatListener;
 import thewrestler.signaturemoves.cards.AbstractSignatureMoveCard;
 import thewrestler.signaturemoves.upgrades.SignatureMoveUpgradeList;
+import thewrestler.signaturemoves.upgrades.UpgradeRarity;
 import thewrestler.signaturemoves.upgrades.UpgradeType;
+
+import java.net.URI;
 
 public interface AbstractSignatureMoveInfoInterface extends StartOfCombatListener, EndOfCombatListener {
   void triggerGainTrademarkMove();
@@ -13,7 +16,7 @@ public interface AbstractSignatureMoveInfoInterface extends StartOfCombatListene
   SignatureMoveUpgradeList getUpgradeList();
   void onCardPlayed(AbstractCard card);
   void onCardExhausted(AbstractCard card);
-  void upgradeMove(UpgradeType type);
+  void upgradeMove(UpgradeType type, UpgradeRarity rarity);
   void onEnemyGrappled();
   String getDynamicConditionText();
   String getStaticConditionText();

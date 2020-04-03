@@ -17,7 +17,9 @@ import com.megacrit.cardcrawl.vfx.combat.DamageImpactBlurEffect;
 import com.megacrit.cardcrawl.vfx.combat.FlashAtkImgEffect;
 import com.megacrit.cardcrawl.vfx.combat.WeightyImpactEffect;
 import org.apache.commons.lang3.StringUtils;
+import thewrestler.signaturemoves.upgrades.AbstractSignatureMoveUpgrade;
 import thewrestler.signaturemoves.upgrades.SignatureMoveUpgradeList;
+import thewrestler.signaturemoves.upgrades.UpgradeGroup;
 import thewrestler.util.CreatureUtils;
 
 import java.util.ArrayList;
@@ -39,12 +41,13 @@ public class Piledriver extends AbstractSignatureMoveCard {
   private static final int DAMAGE = 13;
   private static final int NUM_CARDS = 1;
   private static final int NUM_ENERGY = 1;
+  private static final boolean HAS_EXHAUST = true;
   private static final boolean HAS_RETAIN = true;
 
   private int energyGain;
 
   public Piledriver() {
-    super(ID, NAME, IMG_PATH, COST, getDescription(NUM_ENERGY, NUM_CARDS), TYPE, TARGET, HAS_RETAIN);
+    super(ID, NAME, IMG_PATH, COST, getDescription(NUM_ENERGY, NUM_CARDS), TYPE, TARGET, HAS_EXHAUST, HAS_RETAIN);
     this.baseDamage = this.damage = DAMAGE;
     this.baseMagicNumber = this.magicNumber = NUM_CARDS;
     this.energyGain = NUM_ENERGY;
@@ -60,12 +63,24 @@ public class Piledriver extends AbstractSignatureMoveCard {
   }
 
   @Override
-  public void applyUpgrades(SignatureMoveUpgradeList upgradeList) {
+  public void applyUpgrades(List<AbstractSignatureMoveUpgrade> upgradesToApply) {
   }
 
   @Override
   public AbstractSignatureMoveCard makeCopy() {
     return new Piledriver();
+  }
+
+  @Override
+  public UpgradeGroup getAllEligibleUpgrades() {
+    // TODO: implement
+    return null;
+  }
+
+  @Override
+  public UpgradeGroup getCurrentEligibleUpgrades() {
+    // TODO: implement
+    return null;
   }
 
   @Override

@@ -4,6 +4,7 @@ import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import thewrestler.signaturemoves.cards.Piledriver;
 import thewrestler.signaturemoves.upgrades.SignatureMoveUpgradeList;
+import thewrestler.signaturemoves.upgrades.UpgradeRarity;
 import thewrestler.signaturemoves.upgrades.UpgradeType;
 
 public class PiledriverMoveInfo extends AbstractSignatureMoveInfo {
@@ -44,6 +45,11 @@ public class PiledriverMoveInfo extends AbstractSignatureMoveInfo {
   }
 
   @Override
+  public void upgradeMove(UpgradeType type, UpgradeRarity rarity) {
+
+  }
+
+  @Override
   public void _atStartOfTurn() {
   }
 
@@ -65,11 +71,6 @@ public class PiledriverMoveInfo extends AbstractSignatureMoveInfo {
   @Override
   public void _atEndOfCombat() {
     this.numTurns = 0;
-  }
-
-  @Override
-  public void upgradeMove(UpgradeType type) {
-
   }
 
   @Override

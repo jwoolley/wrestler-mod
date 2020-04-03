@@ -12,7 +12,9 @@ import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import thewrestler.effects.utils.combat.CleanFinishEffect;
+import thewrestler.signaturemoves.upgrades.AbstractSignatureMoveUpgrade;
 import thewrestler.signaturemoves.upgrades.SignatureMoveUpgradeList;
+import thewrestler.signaturemoves.upgrades.UpgradeGroup;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -33,11 +35,12 @@ public class DragonGate extends AbstractSignatureMoveCard {
 
   private static final int COST = 1;
   private static final int NUM_CARDS = 3;
+  private static final boolean HAS_EXHAUST = true;
   private static final boolean HAS_RETAIN = true;
 
 
   public DragonGate() {
-    super(ID, NAME, IMG_PATH, COST, DESCRIPTION, TYPE, TARGET, HAS_RETAIN);
+    super(ID, NAME, IMG_PATH, COST, DESCRIPTION, TYPE, TARGET, HAS_EXHAUST, HAS_RETAIN);
     this.baseMagicNumber = this.magicNumber = NUM_CARDS;;
   }
 
@@ -105,12 +108,24 @@ public class DragonGate extends AbstractSignatureMoveCard {
   }
 
   @Override
-  public void applyUpgrades(SignatureMoveUpgradeList upgradeList) {
+  public void applyUpgrades(List<AbstractSignatureMoveUpgrade> upgradesToApply) {
   }
 
   @Override
   public AbstractSignatureMoveCard makeCopy() {
     return new DragonGate();
+  }
+
+  @Override
+  public UpgradeGroup getAllEligibleUpgrades() {
+    // TODO: implement
+    return null;
+  }
+
+  @Override
+  public UpgradeGroup getCurrentEligibleUpgrades() {
+    // TODO: implement
+    return null;
   }
 
   @Override

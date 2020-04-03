@@ -18,7 +18,7 @@ public class SignatureMoveUpgradeList extends ArrayList<AbstractSignatureMoveUpg
 
     if (this != NO_UPGRADES && !this.isEmpty()) {
       for (AbstractSignatureMoveUpgrade upgrade : this) {
-        serializedList += upgrade.numUpgrades * Math.pow(2, upgrade.upgradeType.ordinal());
+        serializedList += upgrade.numUpgrades * Math.pow(2, upgrade.type.ordinal());
       }
     }
     return serializedList;

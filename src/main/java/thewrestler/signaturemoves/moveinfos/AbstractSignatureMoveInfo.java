@@ -8,7 +8,7 @@ import thewrestler.WrestlerMod;
 import thewrestler.characters.WrestlerCharacter;
 import thewrestler.signaturemoves.cards.AbstractSignatureMoveCard;
 import thewrestler.signaturemoves.cards.SignatureMoveCardEnum;
-import thewrestler.signaturemoves.upgrades.SignatureMoveUpgradeList;
+import thewrestler.signaturemoves.upgrades.*;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
@@ -20,15 +20,35 @@ public abstract class AbstractSignatureMoveInfo implements AbstractSignatureMove
 
   final AbstractSignatureMoveCard signatureMoveCard;
   final SignatureMoveUpgradeList upgradeList;
+  final UpgradeGroup eligibleUpgradeGroup;
+  UpgradeGroup currentUpgradeGroup;
 
   public AbstractSignatureMoveInfo(AbstractSignatureMoveCard signatureMoveCard,
                                    SignatureMoveUpgradeList upgradeList, boolean isFirstInstance){
     this.signatureMoveCard = signatureMoveCard.makeCopy();
     this.upgradeList = new SignatureMoveUpgradeList(upgradeList);
+    this.eligibleUpgradeGroup = signatureMoveCard.getAllEligibleUpgrades();
+    currentUpgradeGroup = new UpgradeGroup();
     this.isFirstInstance = isFirstInstance;
     this.resetForNewCombat();
     if (upgradeList != SignatureMoveUpgradeList.NO_UPGRADES) {
       this.signatureMoveCard.applyUpgrades(upgradeList);
+    }
+  }
+
+  @Override
+  public void upgradeMove(UpgradeType type, UpgradeRarity rarity) {
+    // TODO: increment upgrade of specified type (not 1)
+    this.upgradeList.add(new AbstractSignatureMoveUpgrade(type,1, rarity));
+
+    if (type == UpgradeType.COST_REDUCTION) {
+      AbstractSignatureMoveCard card = WrestlerCharacter.getSignatureMoveInfo().getSignatureMoveCardReference();
+      if (card.cost > 0) {
+        card.upgradeCost(card.cost - 1);
+        card.name = "Standing " + card.name;
+        card.upgraded = true;
+        card.reinitialize();
+      }
     }
   }
 

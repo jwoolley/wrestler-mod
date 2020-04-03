@@ -34,6 +34,7 @@ import thewrestler.signaturemoves.cards.SignatureMoveCardEnum;
 import thewrestler.signaturemoves.moveinfos.AbstractSignatureMoveInfo;
 import thewrestler.signaturemoves.moveinfos.AbstractSignatureMoveInfoInterface;
 import thewrestler.signaturemoves.upgrades.SignatureMoveUpgradeList;
+import thewrestler.signaturemoves.upgrades.UpgradeRarity;
 import thewrestler.signaturemoves.upgrades.UpgradeType;
 import thewrestler.util.info.penaltycard.PenaltyCardInfo;
 
@@ -191,7 +192,7 @@ public class WrestlerCharacter extends CustomPlayer {
                 }
 
                 @Override
-                public void upgradeMove(UpgradeType type) {
+                public void upgradeMove(UpgradeType type, UpgradeRarity rarity) {
 
                 }
 

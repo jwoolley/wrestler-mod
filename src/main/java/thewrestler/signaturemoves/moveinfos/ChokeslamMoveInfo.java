@@ -6,6 +6,7 @@ import thewrestler.signaturemoves.cards.AbstractSignatureMoveCard;
 import thewrestler.signaturemoves.cards.Chokeslam;
 import thewrestler.signaturemoves.upgrades.AbstractSignatureMoveUpgrade;
 import thewrestler.signaturemoves.upgrades.SignatureMoveUpgradeList;
+import thewrestler.signaturemoves.upgrades.UpgradeRarity;
 import thewrestler.signaturemoves.upgrades.UpgradeType;
 
 public class ChokeslamMoveInfo extends AbstractSignatureMoveInfo {
@@ -65,22 +66,6 @@ public class ChokeslamMoveInfo extends AbstractSignatureMoveInfo {
   @Override
   public void _atEndOfCombat() {
     this.grappledCount = 0;
-  }
-
-  @Override
-  public void upgradeMove(UpgradeType type) {
-    // TODO: increment upgrade of specified type (not 1)
-    this.upgradeList.add(new AbstractSignatureMoveUpgrade(type, 1));
-
-    if (type == UpgradeType.COST_REDUCTION) {
-      AbstractSignatureMoveCard card = WrestlerCharacter.getSignatureMoveInfo().getSignatureMoveCardReference();
-      if (card.cost > 0) {
-        card.upgradeCost(card.cost - 1);
-        card.name = "Standing " + card.name;
-        card.upgraded = true;
-        card.reinitialize();
-      }
-    }
   }
 
   @Override

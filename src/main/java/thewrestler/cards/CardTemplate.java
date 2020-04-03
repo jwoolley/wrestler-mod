@@ -22,7 +22,7 @@ public class CardTemplate extends AbstractDynamicCard {
      * Ctrl+Shift+A and search up "file and code template"
      * Press the + button at the top and name your template whatever it is for - "AttackCard" or "PowerCard" or something up to you.
      * Read up on the instructions at the bottom. Basically replace anywhere you'd put your cards name with ${NAME}
-     * And then you can do custom ones like ${DAMAGE} and ${TARGET} if you want.
+     * And then you can do custom ones like ${DAMAGE_MEDIUM} and ${TARGET} if you want.
      * I'll leave some comments on things you might consider replacing with what.
      *
      * Of course, delete all the comments and add anything you want (For example, if you're making a skill card template you'll
@@ -53,7 +53,7 @@ public class CardTemplate extends AbstractDynamicCard {
     private static final int COST = 1;  // COST = ${COST}
     private static final int UPGRADED_COST = 0; // UPGRADED_COST = ${UPGRADED_COST}
 
-    private static final int DAMAGE = 7;    // DAMAGE = ${DAMAGE}
+    private static final int DAMAGE = 7;    // DAMAGE_MEDIUM = ${DAMAGE_MEDIUM}
     private static final int UPGRADE_PLUS_DMG = 2;  // UPGRADE_PLUS_DMG = ${UPGRADED_DAMAGE_INCREASE}
 
     // /STAT DECLARATION/

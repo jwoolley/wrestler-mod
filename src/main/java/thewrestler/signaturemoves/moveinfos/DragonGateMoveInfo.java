@@ -67,11 +67,6 @@ public class DragonGateMoveInfo extends AbstractSignatureMoveInfo {
   }
 
   @Override
-  public void upgradeMove(UpgradeType type) {
-
-  }
-
-  @Override
   public void onEnemyGrappled() {  }
 
   // TODO: move this text to UiStrings.json
