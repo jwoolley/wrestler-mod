@@ -40,12 +40,13 @@ public abstract class AbstractSignatureMoveInfo implements AbstractSignatureMove
     }
   }
 
-  public void applyUpgrades(SignatureMoveUpgradeList upgrades) {
-    this.signatureMoveCard.applyUpgrades(upgrades);
+  public void applyUpgrade(AbstractSignatureMoveUpgrade upgrade) {
+    this.signatureMoveCard.applyUpgrade(upgrade);
+    this.upgradeList.add(upgrade);
   }
 
-  @Override
-  public void addUpgradesToList(SignatureMoveUpgradeList upgrades) {
+  public void applyUpgrades(SignatureMoveUpgradeList upgrades) {
+    this.signatureMoveCard.applyUpgrades(upgrades);
     this.upgradeList.addAll(upgrades);
   }
 

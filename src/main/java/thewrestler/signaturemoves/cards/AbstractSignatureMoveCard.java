@@ -10,9 +10,8 @@ import thewrestler.signaturemoves.upgrades.*;
 import thewrestler.WrestlerMod;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
+import java.net.URI;
+import java.util.*;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
@@ -58,10 +57,9 @@ abstract public class AbstractSignatureMoveCard extends CustomCard {
     this.applyUpgrades(Collections.singletonList(upgrade));
   }
 
-  public void applyUpgrades(SignatureMoveUpgradeList upgradeList) {
+  void applyUpgrades(SignatureMoveUpgradeList upgradeList) {
     if (WrestlerCharacter.hasSignatureMoveInfo()) {
       // TODO: this should live in the info-but that means all calls to apply upgrades need to go through the info, not here
-      WrestlerCharacter.getSignatureMoveInfo().addUpgradesToList(upgradeList);
     }
     this.applyUpgrades(new ArrayList<>(upgradeList));
   }
@@ -122,8 +120,40 @@ abstract public class AbstractSignatureMoveCard extends CustomCard {
   }
 
   static private List<AbstractSignatureMoveUpgrade> getPossibleUpgrades(UpgradeGroup allPossibleUpgrades, UpgradeGroup currentUpgrades) {
-    return allPossibleUpgrades.keySet().stream()
-        .filter(u -> !currentUpgrades.containsKey(u) || currentUpgrades.get(u) < allPossibleUpgrades.get(u)).collect(Collectors.toList());
+    final Map<UpgradeType, Integer> allCommon = new HashMap<>();
+    allPossibleUpgrades.keySet().stream()
+        .filter(upgrade -> upgrade.rarity == UpgradeRarity.COMMON)
+        .forEach(upgrade ->  allCommon.put(upgrade.type, allPossibleUpgrades.get(upgrade)));
+
+    final Map<UpgradeType, Integer> currentCommon = new HashMap<>();
+    currentUpgrades.keySet().stream()
+        .filter(upgrade -> upgrade.rarity == UpgradeRarity.COMMON )
+        .forEach(upgrade ->  currentCommon.put(upgrade.type, currentUpgrades.get(upgrade)));
+
+    final Map<UpgradeType, Integer> allRare = new HashMap<>();
+    allPossibleUpgrades.keySet().stream()
+        .filter(upgrade -> upgrade.rarity == UpgradeRarity.RARE)
+        .forEach(upgrade ->  allRare.put(upgrade.type, allPossibleUpgrades.get(upgrade)));
+
+    final Map<UpgradeType, Integer> currentRare = new HashMap<>();
+    currentUpgrades.keySet().stream()
+        .filter(upgrade -> upgrade.rarity == UpgradeRarity.RARE)
+        .forEach(upgrade ->  currentRare.put(upgrade.type, currentUpgrades.get(upgrade)));
+
+    List<AbstractSignatureMoveUpgrade> availableUpgrades = new ArrayList<>();
+
+    availableUpgrades.addAll(allCommon.keySet().stream()
+      .filter(type -> !currentCommon.containsKey(type) || currentCommon.get(type) < allCommon.get(type))
+      .map(type -> new AbstractSignatureMoveUpgrade(type, 1, UpgradeRarity.COMMON))
+      .collect(Collectors.toList()));
+
+    availableUpgrades.addAll(allRare.keySet().stream()
+        .filter(type -> !allRare.containsKey(type) || currentRare.get(type) < allRare.get(type))
+        .map(type -> new AbstractSignatureMoveUpgrade(type, 1, UpgradeRarity.RARE))
+        .collect(Collectors.toList()));
+
+    return availableUpgrades;
+
   }
 
   private static UpgradeGroup getUpgradeGroup(List<AbstractSignatureMoveUpgrade> upgrades) {

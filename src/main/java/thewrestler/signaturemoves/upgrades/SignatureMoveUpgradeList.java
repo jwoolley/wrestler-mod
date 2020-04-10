@@ -28,7 +28,7 @@ public class SignatureMoveUpgradeList extends ArrayList<AbstractSignatureMoveUpg
         if (serializedList.length() > 0) {
           serializedList += DELIMITER;
         }
-        serializedList += upgrade.type.ordinal() + SEPARATOR + Math.abs(upgrade.numUpgrades);
+        serializedList += upgrade.type.ordinal() + SEPARATOR + Math.abs(upgrade.numUpgrades) + SEPARATOR + upgrade.rarity.ordinal();
       }
     }
     return serializedList;
@@ -39,12 +39,13 @@ public class SignatureMoveUpgradeList extends ArrayList<AbstractSignatureMoveUpg
       try {
         SignatureMoveUpgradeList upgradeList = new SignatureMoveUpgradeList();
 
-        // TODO: decode rarity (third value) from seralized entry once implemented
+        // TODO: decode rarity (third value) from serialized entry once implemented
         for (String serializedUpgrade : serializedList.split(DELIMITER)) {
          String[] upgradePair = serializedUpgrade.split(SEPARATOR);
           final UpgradeType type = UpgradeType.values()[Integer.parseInt(upgradePair[0])];
           final int numUpgrades = Math.abs(Integer.parseInt(upgradePair[1]));
-          upgradeList.add(new AbstractSignatureMoveUpgrade(type, numUpgrades, UpgradeRarity.UNKNOWN));
+          final UpgradeRarity rarity = UpgradeRarity.values()[Integer.parseInt(upgradePair[2])];
+          upgradeList.add(new AbstractSignatureMoveUpgrade(type, numUpgrades, rarity));
         }
         return upgradeList;
       } catch (Exception e) {

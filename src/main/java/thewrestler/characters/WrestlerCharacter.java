@@ -33,6 +33,7 @@ import thewrestler.signaturemoves.cards.AbstractSignatureMoveCard;
 import thewrestler.signaturemoves.cards.SignatureMoveCardEnum;
 import thewrestler.signaturemoves.moveinfos.AbstractSignatureMoveInfo;
 import thewrestler.signaturemoves.moveinfos.AbstractSignatureMoveInfoInterface;
+import thewrestler.signaturemoves.upgrades.AbstractSignatureMoveUpgrade;
 import thewrestler.signaturemoves.upgrades.SignatureMoveUpgradeList;
 import thewrestler.signaturemoves.upgrades.UpgradeRarity;
 import thewrestler.signaturemoves.upgrades.UpgradeType;
@@ -187,17 +188,17 @@ public class WrestlerCharacter extends CustomPlayer {
                 }
 
                 @Override
+                public void applyUpgrade(AbstractSignatureMoveUpgrade upgrade) {
+
+                }
+
+                @Override
                 public void onCardPlayed(AbstractCard card) {
 
                 }
 
                 @Override
                 public void onCardExhausted(AbstractCard card) {
-
-                }
-
-                @Override
-                public void addUpgradesToList(SignatureMoveUpgradeList upgrades) {
 
                 }
 

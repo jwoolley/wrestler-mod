@@ -4,6 +4,7 @@ import com.megacrit.cardcrawl.cards.AbstractCard;
 import thewrestler.cards.EndOfCombatListener;
 import thewrestler.cards.StartOfCombatListener;
 import thewrestler.signaturemoves.cards.AbstractSignatureMoveCard;
+import thewrestler.signaturemoves.upgrades.AbstractSignatureMoveUpgrade;
 import thewrestler.signaturemoves.upgrades.SignatureMoveUpgradeList;
 import thewrestler.signaturemoves.upgrades.UpgradeRarity;
 import thewrestler.signaturemoves.upgrades.UpgradeType;
@@ -14,9 +15,9 @@ public interface AbstractSignatureMoveInfoInterface extends StartOfCombatListene
   void triggerGainTrademarkMove();
   AbstractSignatureMoveCard getSignatureMoveCardReference();
   SignatureMoveUpgradeList getUpgradeList();
+  void applyUpgrade(AbstractSignatureMoveUpgrade upgrade);
   void onCardPlayed(AbstractCard card);
   void onCardExhausted(AbstractCard card);
-  void addUpgradesToList(SignatureMoveUpgradeList upgrades);
   void onEnemyGrappled();
   String getDynamicConditionText();
   String getStaticConditionText();

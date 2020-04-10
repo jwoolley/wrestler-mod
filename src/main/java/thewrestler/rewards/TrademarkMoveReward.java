@@ -30,7 +30,7 @@ public class TrademarkMoveReward extends CustomReward {
 
   public boolean isFinished = false;
 
-  private static final int NUM_REWARDS = 4;
+  private static final int NUM_REWARDS = 3;
   @Override
   public boolean claimReward() {
    if (AbstractDungeon.screen == AbstractDungeon.CurrentScreen.COMBAT_REWARD) {
@@ -54,8 +54,7 @@ public class TrademarkMoveReward extends CustomReward {
           AbstractDungeon.topLevelEffects.add(effect);
           AbstractDungeon.topLevelEffects.add(new UpgradeShineEffect(Settings.WIDTH / 2.0F, Settings.HEIGHT / 2.0F));
 
-          originalCard.applyUpgrade(upgrade);
-
+          WrestlerCharacter.getSignatureMoveInfo().applyUpgrade(upgrade);
           isFinished = true;
           return null;
         });
