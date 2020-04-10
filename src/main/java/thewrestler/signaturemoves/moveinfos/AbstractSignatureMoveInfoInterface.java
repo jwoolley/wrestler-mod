@@ -16,7 +16,7 @@ public interface AbstractSignatureMoveInfoInterface extends StartOfCombatListene
   SignatureMoveUpgradeList getUpgradeList();
   void onCardPlayed(AbstractCard card);
   void onCardExhausted(AbstractCard card);
-  void upgradeMove(UpgradeType type, UpgradeRarity rarity);
+  void addUpgradesToList(SignatureMoveUpgradeList upgrades);
   void onEnemyGrappled();
   String getDynamicConditionText();
   String getStaticConditionText();

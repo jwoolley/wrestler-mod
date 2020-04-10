@@ -3,6 +3,8 @@ package thewrestler.signaturemoves.cards;
 import basemod.abstracts.CustomCard;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
+import org.omg.CORBA.WCharSeqHelper;
+import thewrestler.characters.WrestlerCharacter;
 import thewrestler.enums.AbstractCardEnum;
 import thewrestler.signaturemoves.upgrades.*;
 import thewrestler.WrestlerMod;
@@ -57,6 +59,10 @@ abstract public class AbstractSignatureMoveCard extends CustomCard {
   }
 
   public void applyUpgrades(SignatureMoveUpgradeList upgradeList) {
+    if (WrestlerCharacter.hasSignatureMoveInfo()) {
+      // TODO: this should live in the info-but that means all calls to apply upgrades need to go through the info, not here
+      WrestlerCharacter.getSignatureMoveInfo().addUpgradesToList(upgradeList);
+    }
     this.applyUpgrades(new ArrayList<>(upgradeList));
   }
 

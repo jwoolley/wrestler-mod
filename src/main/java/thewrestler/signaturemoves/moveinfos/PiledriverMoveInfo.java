@@ -45,11 +45,6 @@ public class PiledriverMoveInfo extends AbstractSignatureMoveInfo {
   }
 
   @Override
-  public void upgradeMove(UpgradeType type, UpgradeRarity rarity) {
-
-  }
-
-  @Override
   public void _atStartOfTurn() {
   }
 

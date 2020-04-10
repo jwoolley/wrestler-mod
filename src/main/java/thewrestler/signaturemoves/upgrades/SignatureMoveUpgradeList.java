@@ -1,5 +1,7 @@
 package thewrestler.signaturemoves.upgrades;
 
+import thewrestler.WrestlerMod;
+
 import java.util.ArrayList;
 
 public class SignatureMoveUpgradeList extends ArrayList<AbstractSignatureMoveUpgrade> {
@@ -13,26 +15,43 @@ public class SignatureMoveUpgradeList extends ArrayList<AbstractSignatureMoveUpg
     super(upgradeList);
   }
 
-  public int getSerializedUpgradeList() {
-    int serializedList = 0;
+  private static final String DELIMITER = ";";
+  private static final String SEPARATOR = ",";
+
+
+  public String getSerializedUpgradeList() {
+    String serializedList = "";
 
     if (this != NO_UPGRADES && !this.isEmpty()) {
+      // TODO: encode rarity (as a third value) to seralized entry
       for (AbstractSignatureMoveUpgrade upgrade : this) {
-        serializedList += upgrade.numUpgrades * Math.pow(2, upgrade.type.ordinal());
+        if (serializedList.length() > 0) {
+          serializedList += DELIMITER;
+        }
+        serializedList += upgrade.type.ordinal() + SEPARATOR + Math.abs(upgrade.numUpgrades);
       }
     }
     return serializedList;
   }
 
-  public static SignatureMoveUpgradeList listFromSerializedData(int serializedList) {
-    if (serializedList <= 0) {
-      return NO_UPGRADES;
+  public static SignatureMoveUpgradeList listFromSerializedData(String serializedList) {
+    if (serializedList.length() > 0) {
+      try {
+        SignatureMoveUpgradeList upgradeList = new SignatureMoveUpgradeList();
+
+        // TODO: decode rarity (third value) from seralized entry once implemented
+        for (String serializedUpgrade : serializedList.split(DELIMITER)) {
+         String[] upgradePair = serializedUpgrade.split(SEPARATOR);
+          final UpgradeType type = UpgradeType.values()[Integer.parseInt(upgradePair[0])];
+          final int numUpgrades = Math.abs(Integer.parseInt(upgradePair[1]));
+          upgradeList.add(new AbstractSignatureMoveUpgrade(type, numUpgrades, UpgradeRarity.UNKNOWN));
+        }
+        return upgradeList;
+      } catch (Exception e) {
+        WrestlerMod.logger.warn("SignatureMoveUpgradeList::listFromSerializedData error parsing serialized list: "
+            + serializedList  + ": " + e.getLocalizedMessage());
+      }
     }
-
-    SignatureMoveUpgradeList upgradeList = new SignatureMoveUpgradeList();
-
-    // TODO: implement bit-based conversion to upgrade list
-
-    return upgradeList;
+    return NO_UPGRADES;
   }
 }

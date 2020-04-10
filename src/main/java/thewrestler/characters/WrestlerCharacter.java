@@ -162,7 +162,12 @@ public class WrestlerCharacter extends CustomPlayer {
 
     public static AbstractSignatureMoveInfoInterface initializeSignatureMoveInfo() {
         if (AbstractSignatureMoveInfo.SIGNATURE_MOVES_ENABLED) {
-            final int index = (new Random()).nextInt(SignatureMoveCardEnum.values().length);
+            int index = -1;
+            if (AbstractSignatureMoveInfo.TEST_MOVE != null) {
+                index = AbstractSignatureMoveInfo.TEST_MOVE.ordinal();
+            } else {
+                index = (new Random()).nextInt(SignatureMoveCardEnum.values().length);
+            }
             return SignatureMoveCardEnum.values()[index].getInfoCopy(SignatureMoveUpgradeList.NO_UPGRADES);
         } else {
             return new AbstractSignatureMoveInfoInterface() {
@@ -192,7 +197,7 @@ public class WrestlerCharacter extends CustomPlayer {
                 }
 
                 @Override
-                public void upgradeMove(UpgradeType type, UpgradeRarity rarity) {
+                public void addUpgradesToList(SignatureMoveUpgradeList upgrades) {
 
                 }
 

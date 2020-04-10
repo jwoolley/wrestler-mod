@@ -1,13 +1,8 @@
 package thewrestler.signaturemoves.moveinfos;
 
 import com.megacrit.cardcrawl.cards.AbstractCard;
-import thewrestler.characters.WrestlerCharacter;
-import thewrestler.signaturemoves.cards.AbstractSignatureMoveCard;
 import thewrestler.signaturemoves.cards.Chokeslam;
-import thewrestler.signaturemoves.upgrades.AbstractSignatureMoveUpgrade;
 import thewrestler.signaturemoves.upgrades.SignatureMoveUpgradeList;
-import thewrestler.signaturemoves.upgrades.UpgradeRarity;
-import thewrestler.signaturemoves.upgrades.UpgradeType;
 
 public class ChokeslamMoveInfo extends AbstractSignatureMoveInfo {
   private static final int GRAPPLES_REQUIRED = 2;

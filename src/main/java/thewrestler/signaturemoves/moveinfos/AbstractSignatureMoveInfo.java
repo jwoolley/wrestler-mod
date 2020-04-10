@@ -12,11 +12,15 @@ import thewrestler.signaturemoves.upgrades.*;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
+import java.util.List;
 
 public abstract class AbstractSignatureMoveInfo implements AbstractSignatureMoveInfoInterface {
   public final boolean isFirstInstance;
 
   public static final boolean SIGNATURE_MOVES_ENABLED = true;
+
+//  public static final SignatureMoveCardEnum TEST_MOVE = null;
+  public static final SignatureMoveCardEnum TEST_MOVE = SignatureMoveCardEnum.CHOKESLAM;
 
   final AbstractSignatureMoveCard signatureMoveCard;
   final SignatureMoveUpgradeList upgradeList;
@@ -36,20 +40,13 @@ public abstract class AbstractSignatureMoveInfo implements AbstractSignatureMove
     }
   }
 
-  @Override
-  public void upgradeMove(UpgradeType type, UpgradeRarity rarity) {
-    // TODO: increment upgrade of specified type (not 1)
-    this.upgradeList.add(new AbstractSignatureMoveUpgrade(type,1, rarity));
+  public void applyUpgrades(SignatureMoveUpgradeList upgrades) {
+    this.signatureMoveCard.applyUpgrades(upgrades);
+  }
 
-    if (type == UpgradeType.COST_REDUCTION) {
-      AbstractSignatureMoveCard card = WrestlerCharacter.getSignatureMoveInfo().getSignatureMoveCardReference();
-      if (card.cost > 0) {
-        card.upgradeCost(card.cost - 1);
-        card.name = "Standing " + card.name;
-        card.upgraded = true;
-        card.reinitialize();
-      }
-    }
+  @Override
+  public void addUpgradesToList(SignatureMoveUpgradeList upgrades) {
+    this.upgradeList.addAll(upgrades);
   }
 
   public void triggerGainTrademarkMove() {
@@ -151,27 +148,32 @@ public abstract class AbstractSignatureMoveInfo implements AbstractSignatureMove
 
     @Override
     public void onLoad(Integer serializedValue) {
-      if (serializedValue != null) {
-        infoFromSave.cardFromSave = SignatureMoveCardEnum.getCardCopy(serializedValue);
-        WrestlerMod.logger.info("MoveCardCustomSavable::onLoad Loaded MoveCardCustomSavable from serialized value: "
-            + serializedValue + "; card: "
-            + (infoFromSave.cardFromSave != null ? infoFromSave.cardFromSave.cardID : " UNKNOWN"));
-      } else {
-        WrestlerMod.logger.info("MoveCardCustomSavable::onLoad serialized value not found in save data.");
+      try {
+        if (serializedValue != null) {
+          infoFromSave.cardFromSave = SignatureMoveCardEnum.getCardCopy(serializedValue);
+          WrestlerMod.logger.info("MoveCardCustomSavable::onLoad Loaded MoveCardCustomSavable from serialized value: "
+              + serializedValue + "; card: "
+              + (infoFromSave.cardFromSave != null ? infoFromSave.cardFromSave.cardID : " UNKNOWN"));
+        } else {
+          WrestlerMod.logger.info("MoveCardCustomSavable::onLoad serialized value not found in save data.");
+        }
+      } catch (Exception e) {
+        WrestlerMod.logger.warn("MoveCardCustomSavable::onLoad failed to load save data.");
+
       }
     }
   }
 
-  static class MoveUpgradeCustomSavable implements CustomSavable<Integer> {
+  static class MoveUpgradeCustomSavable implements CustomSavable<String> {
     @Override
-    public Integer onSave() {
+    public String onSave() {
       SignatureMoveUpgradeList list = WrestlerCharacter.getSignatureMoveInfo().getUpgradeList();
       WrestlerMod.logger.info("MoveUpgradeCustomSavable::onSave saving value: " + list.getSerializedUpgradeList() + " size: " + list.size());
       return list.getSerializedUpgradeList();
     }
 
     @Override
-    public void onLoad(Integer serializedValue) {
+    public void onLoad(String serializedValue) {
       if (serializedValue != null) {
         infoFromSave.upgradeListFromSave = SignatureMoveUpgradeList.listFromSerializedData(serializedValue);
 
@@ -212,6 +214,7 @@ public abstract class AbstractSignatureMoveInfo implements AbstractSignatureMove
       // TODO: load save data into WrestlerCharacter.signatureMoveInfo
       WrestlerMod.logger.info("AbstractSignatureMoveInfo::loadSaveData save data found. loading from save");
       SignatureMoveCardEnum cardEnum = SignatureMoveCardEnum.getEnum(infoFromSave.cardFromSave);
+
       WrestlerCharacter.setSignatureMoveInfo(cardEnum.getInfoCopy(infoFromSave.upgradeListFromSave));
     }
   }

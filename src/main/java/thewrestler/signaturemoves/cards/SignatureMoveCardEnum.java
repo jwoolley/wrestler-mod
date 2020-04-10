@@ -25,7 +25,9 @@ public enum SignatureMoveCardEnum {
   }
 
   public AbstractSignatureMoveInfo getInfoCopy(SignatureMoveUpgradeList upgradeList) {
-    return this.moveInfo.makeCopy();
+    AbstractSignatureMoveInfo info = this.moveInfo.makeCopy();
+    info.applyUpgrades(upgradeList);
+    return info;
   }
 
   public static AbstractSignatureMoveCard getCardCopy(int index) {
