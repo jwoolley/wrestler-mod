@@ -180,6 +180,30 @@ abstract public class AbstractSignatureMoveCard extends CustomCard {
     return getPossibleUpgrades(allPossibleUpgrades, currentUpgrades).size();
   }
 
+  static final float BASELINE_TITLE_FONT_SIZE = 23.0f;
+  static final Map<Integer, Float> sizeFactorMap = new HashMap<>();
+  static {
+    sizeFactorMap.put(24, 0.9f);
+    sizeFactorMap.put(36, 0.8f);
+    sizeFactorMap.put(48, 0.7f);
+  }
+
+  @Override
+  public float getTitleFontSize() {
+    float sizeFactor = 1.0f;
+
+    for(Integer minLength : sizeFactorMap.keySet()) {
+      if (this.name.length() >= minLength && sizeFactor > sizeFactorMap.get(minLength)) {
+        sizeFactor = sizeFactorMap.get(minLength);
+      }
+    }
+
+    if (sizeFactor == 1.0f) {
+      return super.getTitleFontSize();
+    }
+    return sizeFactor * BASELINE_TITLE_FONT_SIZE;
+  }
+
   final
   protected void upgradeName(List<AbstractSignatureMoveUpgrade> upgrades) {
     final UpgradeGroup group = getUpgradeGroup(upgrades);
