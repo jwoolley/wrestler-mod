@@ -24,8 +24,6 @@ public class DentedTrophy extends CustomWrestlerRelic {
   private static final Texture IMG = TextureLoader.getTexture(makeRelicPath("dentedtrophy.png"));
   private static final Texture OUTLINE = TextureLoader.getTexture(makeRelicOutlinePath("dentedtrophy.png"));
 
-  public final int MIN_ATTACKS = 3;
-
   private static final List<String> POWERTIP_KEYWORDS = Arrays.asList(
       WrestlerMod.makeID("Bravado"),
       WrestlerMod.makeID("SignatureMove")
@@ -33,30 +31,16 @@ public class DentedTrophy extends CustomWrestlerRelic {
 
   public DentedTrophy() {
     super(ID, IMG, OUTLINE, RelicTier.SPECIAL, LandingSound.CLINK);
-    this.counter = 0;
   }
 
   @Override
   public String getUpdatedDescription() {
-    return DESCRIPTIONS[0] + MIN_ATTACKS + DESCRIPTIONS[1];
+    return DESCRIPTIONS[0];
   }
 
   @Override
   public void atTurnStart() {
-    this.counter = 0;
     triggerGainPower();
-  }
-
-  @Override
-  public void onPlayCard(AbstractCard card, AbstractMonster monster) {
-    if (card.type == AbstractCard.CardType.ATTACK) {
-      this.counter++;
-      if (this.counter >= MIN_ATTACKS) {
-        CardCrawlGame.sound.play("BOXING_BELL_DOUBLE_1");
-        triggerGainPower();
-        this.counter -= MIN_ATTACKS;
-      }
-    }
   }
 
   private void triggerGainPower() {

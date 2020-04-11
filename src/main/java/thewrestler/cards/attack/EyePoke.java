@@ -1,24 +1,21 @@
-package thewrestler.cards.skill;
+package thewrestler.cards.attack;
 
 import basemod.abstracts.CustomCard;
-import basemod.helpers.TooltipInfo;
+import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
+import com.megacrit.cardcrawl.actions.common.DamageAction;
+import com.megacrit.cardcrawl.actions.common.DrawCardAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
+import com.megacrit.cardcrawl.cards.DamageInfo;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
+import com.megacrit.cardcrawl.powers.VulnerablePower;
 import com.megacrit.cardcrawl.powers.WeakPower;
 import thewrestler.enums.AbstractCardEnum;
-import thewrestler.keywords.AbstractTooltipKeyword;
-import thewrestler.keywords.CustomTooltipKeywords;
-import thewrestler.keywords.TooltipKeywords;
-import thewrestler.powers.InjuredPower;
 import thewrestler.util.CardUtil;
-
-import java.util.Arrays;
-import java.util.List;
 
 import static thewrestler.WrestlerMod.getCardResourcePath;
 
@@ -29,35 +26,41 @@ public class EyePoke extends CustomCard {
   public static final String[] EXTENDED_DESCRIPTION;
   public static final String IMG_PATH = "eyepoke.png";
 
-  private static final int WEAK_AMOUNT = 1;
-  private static final int WEAK_AMOUNT_UPGRADE  = 1;
-  private static final int INJURED_AMOUNT = 2;
-  private static final int INJURED_AMOUNT_UPGRADE = 1;
 
+  private static final int DAMAGE = 3;
+  private static final int DAMAGE_UPGRADE = 2;
+  private static final int DEBUFF_AMOUNT = 1;
   private static final CardStrings cardStrings;
 
-  private static final CardType TYPE = CardType.SKILL;
+  private static final CardType TYPE = CardType.ATTACK;
   private static final CardRarity RARITY = CardRarity.BASIC;
   private static final CardTarget TARGET = CardTarget.ENEMY;
 
   private static final int COST = 0;
 
   public EyePoke() {
-    super(ID, NAME, getCardResourcePath(IMG_PATH), COST, getDescription(), TYPE, AbstractCardEnum.THE_WRESTLER_ORANGE,
+    super(ID, NAME, getCardResourcePath(IMG_PATH), COST, getDescription(false), TYPE, AbstractCardEnum.THE_WRESTLER_ORANGE,
         RARITY, TARGET);
-
-    // Using baseBlock (and overriding applyPowersToBlock) as a hack so value is highlighted in upgrade UI (a la Wish)
-    this.misc = this.baseBlock = INJURED_AMOUNT;
-    this.baseMagicNumber = this.magicNumber = WEAK_AMOUNT;
+    this.baseDamage = this.damage = DAMAGE;
+    this.baseMagicNumber = this.magicNumber = DEBUFF_AMOUNT;
     CardUtil.makeCardDirty(this, this.type);
+    this.exhaust = true;
   }
 
   @Override
   public void use(AbstractPlayer p, AbstractMonster m) {
     AbstractDungeon.actionManager.addToBottom(
+        new DamageAction(m, new DamageInfo(p, damage, damageTypeForTurn),
+            AbstractGameAction.AttackEffect.SLASH_HORIZONTAL));
+
+    AbstractDungeon.actionManager.addToBottom(
         new ApplyPowerAction(m, p, new WeakPower(m, this.magicNumber, false), this.magicNumber));
     AbstractDungeon.actionManager.addToBottom(
-        new ApplyPowerAction(m, p, new InjuredPower(m, p, this.misc), this.misc));
+        new ApplyPowerAction(m, p, new VulnerablePower(m, this.magicNumber, false), this.magicNumber));
+
+    if (this.upgraded) {
+      AbstractDungeon.actionManager.addToBottom(new DrawCardAction(1));
+    }
   }
 
   @Override
@@ -66,22 +69,16 @@ public class EyePoke extends CustomCard {
   }
 
   @Override
-  public void applyPowersToBlock() {
-    this.baseBlock = this.block = this.misc = INJURED_AMOUNT + (this.upgraded ? INJURED_AMOUNT_UPGRADE : 0);
-  }
-
-  @Override
   public void upgrade() {
     if (!this.upgraded) {
       this.upgradeName();
-      this.upgradeMagicNumber(WEAK_AMOUNT_UPGRADE);
-      this.misc = this.baseBlock = INJURED_AMOUNT + INJURED_AMOUNT_UPGRADE;
-      this.rawDescription = getDescription();
+      this.upgradeDamage(DAMAGE_UPGRADE);
+      this.rawDescription = getDescription(true);
       initializeDescription();
     }
   }
-  public static String getDescription() {
-    return DESCRIPTION;
+  public static String getDescription(boolean drawCard) {
+    return DESCRIPTION + (drawCard ? EXTENDED_DESCRIPTION[1] : "") + EXTENDED_DESCRIPTION[0];
   }
 
   static {

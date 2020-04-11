@@ -2,6 +2,7 @@ package thewrestler.cards.attack;
 
 import basemod.abstracts.CustomCard;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
+import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
 import com.megacrit.cardcrawl.actions.common.DamageAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.cards.DamageInfo;
@@ -34,12 +35,14 @@ public class TakeToTheMat extends CustomCard {
   private static final int COST = 2;
   private static final int UPGRADED_COST = 1;
   private static final int DAMAGE = 10;
+  private static final int BRAVADO_GAIN = 1;
 
   public TakeToTheMat() {
     super(ID, NAME, getCardResourcePath(IMG_PATH), COST, getDescription(), TYPE, AbstractCardEnum.THE_WRESTLER_ORANGE,
         RARITY, TARGET);
     this.baseDamage = this.damage = DAMAGE;
-    this.baseMagicNumber = this.magicNumber = MIN_BRAVADO;
+    this.baseMagicNumber = this.magicNumber = BRAVADO_GAIN;
+    this.misc = MIN_BRAVADO;
   }
 
   @Override
@@ -48,8 +51,11 @@ public class TakeToTheMat extends CustomCard {
         new DamageAction(m, new DamageInfo(p, this.damage, this.damageTypeForTurn),
             AbstractGameAction.AttackEffect.BLUNT_HEAVY));
 
-    if (p.hasPower(BravadoPower.POWER_ID) && p.getPower(BravadoPower.POWER_ID).amount >= this.magicNumber) {
+    if (p.hasPower(BravadoPower.POWER_ID) && p.getPower(BravadoPower.POWER_ID).amount >= this.misc) {
       AbstractDungeon.actionManager.addToBottom(new ApplyGrappledAction(m, p));
+    } else {
+      AbstractDungeon.actionManager.addToBottom(
+          new ApplyPowerAction(p, p, new BravadoPower(p, this.magicNumber), this.magicNumber));
     }
   }
 
@@ -68,7 +74,7 @@ public class TakeToTheMat extends CustomCard {
     }
   }
   public static String getDescription() {
-    return DESCRIPTION;
+    return DESCRIPTION + MIN_BRAVADO + EXTENDED_DESCRIPTION[0];
   }
 
   static {

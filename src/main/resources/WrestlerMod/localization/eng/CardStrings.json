@@ -152,7 +152,11 @@
 
   "WrestlerMod:EyePoke": {
     "NAME": "Eye Poke",
-    "DESCRIPTION": "wrestlermod:Dirty. NL Apply !M! Weak and NL !B! wrestlermod:Injury."
+    "DESCRIPTION": "wrestlermod:Dirty. NL Deal !D! Damage. NL Apply !M! Weak and !M! Vulnerable.",
+    "EXTENDED_DESCRIPTION": [
+      " NL Exhaust.",
+      " NL Draw a card."
+    ]
   },
 
   "WrestlerMod:Facewash": {
@@ -597,7 +601,10 @@
 
   "WrestlerMod:TakeToTheMat": {
     "NAME": "Take to the Mat",
-    "DESCRIPTION": "Deal !D! Damage. NL If you have !M! or more wrestlermod:Bravado, apply wrestlermod:Grappled."
+    "DESCRIPTION": "Deal !D! Damage. NL Apply wrestlermod:Grappled if you have ",
+    "EXTENDED_DESCRIPTION": [
+      " or more wrestlermod:Bravado. NL Else gain !M! wrestlermod:Bravado."
+    ]
   },
 
   "WrestlerMod:Technician": {
