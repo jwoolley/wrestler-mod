@@ -159,7 +159,7 @@ public class WrestlerSignatureMovePanel implements WrestlerSignatureMovePanelInt
 
 
     final int Y_LINE_OFFSET_16_BY_10 =  (int)(INFO_FONT.getLineHeight() * 1.00f);
-    final int Y_LINE_OFFSET_16_BY_9 =  (int)(INFO_FONT.getLineHeight() * 0.95f);
+    final int Y_LINE_OFFSET_16_BY_9 =  (int)(INFO_FONT.getLineHeight() * 0.94f);
 
     final int yLineOffset = Settings.isSixteenByTen ? Y_LINE_OFFSET_16_BY_10 : Y_LINE_OFFSET_16_BY_9;
 
