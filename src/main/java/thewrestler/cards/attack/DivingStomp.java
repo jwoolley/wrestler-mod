@@ -52,7 +52,7 @@ public class DivingStomp extends CustomCard {
             AbstractGameAction.AttackEffect.BLUNT_HEAVY));
 
     AbstractDungeon.actionManager.addToBottom(
-        new ApplyPowerAction(m, p, new InjuredPower(m, this.magicNumber), this.magicNumber));
+        new ApplyPowerAction(m, p, new InjuredPower(m, p, this.magicNumber), this.magicNumber));
   }
 
   @Override

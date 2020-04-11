@@ -57,7 +57,7 @@ public class EyePoke extends CustomCard {
     AbstractDungeon.actionManager.addToBottom(
         new ApplyPowerAction(m, p, new WeakPower(m, this.magicNumber, false), this.magicNumber));
     AbstractDungeon.actionManager.addToBottom(
-        new ApplyPowerAction(m, p, new InjuredPower(m, this.misc), this.misc));
+        new ApplyPowerAction(m, p, new InjuredPower(m, p, this.misc), this.misc));
   }
 
   @Override

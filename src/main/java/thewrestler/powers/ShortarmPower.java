@@ -37,7 +37,7 @@ public class ShortarmPower extends AbstractWrestlerPower implements CloneablePow
   @Override
   public void atEndOfTurn(boolean isPlayer) {
     AbstractDungeon.actionManager.addToTop(
-        new ApplyPowerAction(this.source, this.source, new InjuredPower(this.owner, this.amount), this.amount));
+        new ApplyPowerAction(this.source, this.source, new InjuredPower(this.owner, this.source, this.amount), this.amount));
     AbstractDungeon.actionManager.addToBottom(new RemoveSpecificPowerAction(this.owner, this.owner, POWER_ID));
   }
 

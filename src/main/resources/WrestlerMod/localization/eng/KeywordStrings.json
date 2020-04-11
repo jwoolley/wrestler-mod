@@ -126,12 +126,12 @@
     "DESCRIPTION": "#yGrappled enemies receive [#ED3030]+30%[] more and deal [#B6F8C0]-30%[] less damage. Grapple breaks once you're dealt #b10 damage in a single turn, or if you Grapple another enemy."
   },
 
-  "WrestlerMod:Injured": {
-    "PROPER_NAME": "Injured",
+  "WrestlerMod:Injury": {
+    "PROPER_NAME": "Injury",
     "NAMES": [
-      "injured", "injured"
+      "injury"
     ],
-    "DESCRIPTION": "Injured creatures lose HP when Injured is applied and whenever they're attacked this turn."
+    "DESCRIPTION": "When receiving unblocked attack damage this turn, injured creatures receive additional damage. If the attack damage exceeds the #yInjury amount, #yInjury is lost but is reapplied next turn."
   },
 
 

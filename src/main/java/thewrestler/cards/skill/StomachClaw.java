@@ -53,7 +53,7 @@ public class StomachClaw extends CustomCard {
 //    }
 
     AbstractDungeon.actionManager.addToBottom(
-        new ApplyPowerAction(m, p, new InjuredPower(m, this.magicNumber), this.magicNumber));
+        new ApplyPowerAction(m, p, new InjuredPower(m, p, this.magicNumber), this.magicNumber));
   }
 
   @Override

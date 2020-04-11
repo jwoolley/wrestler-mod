@@ -83,7 +83,7 @@ public class Octopus extends CustomCard {
           AbstractGameAction.AttackEffect.BLUNT_LIGHT,this.target.hasPower(ArtifactPower.POWER_ID)));
 
       AbstractDungeon.actionManager.addToBottom(
-          new ApplyPowerAction(this.target, AbstractDungeon.player, new InjuredPower(this.target, this.amount),
+          new ApplyPowerAction(this.target, AbstractDungeon.player, new InjuredPower(this.target, this.source, this.amount),
               this.amount));
     }
   }

@@ -212,12 +212,20 @@
   },
 
   "WrestlerMod:InjuredPower": {
-    "NAME": "Injured",
+    "NAME": "Injury",
     "DESCRIPTIONS": [
-      "Whenever you're attacked this turn, lose #b",
-      " HP.",
-      "When attacked this turn, loses #b",
-      " HP."
+      "When you receive unblocked attack damage this turn, take #b",
+      "When it receives unblocked attack damage this turn, it takes #b",
+      " additional damage. If the unblocked damage is #b",
+      " or more, #yInjury is lost but is reapplied next turn."
+    ]
+  },
+
+  "WrestlerMod:PersistentInjuryPower": {
+    "NAME": "Persistent Injury",
+    "DESCRIPTIONS": [
+      "At the end of its turn, receives #b",
+      " #yInjury."
     ]
   },
 
@@ -232,7 +240,7 @@
     "NAME": "Smackdown",
     "DESCRIPTIONS": [
       "Whenever you play a card, apply #b",
-      " #yInjured to ALL enemies."
+      " #yInjury to ALL enemies."
     ]
   },
 

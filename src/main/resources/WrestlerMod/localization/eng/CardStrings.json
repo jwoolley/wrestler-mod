@@ -40,7 +40,7 @@
     "NAME": "Bear Hug",
     "DESCRIPTION": "Deal !D! Damage. NL Apply ",
     "EXTENDED_DESCRIPTION": [
-      " wrestlermod:Injured ",
+      " wrestlermod:Injury ",
       " twice.",
       " !M! times."
     ]
@@ -134,7 +134,7 @@
 
   "WrestlerMod:DivingStomp": {
     "NAME": "Diving Stomp",
-    "DESCRIPTION": "wrestlermod:Dirty. NL Deal !D! Damage. NL Apply !M! wrestlermod:Injured."
+    "DESCRIPTION": "wrestlermod:Dirty. NL Deal !D! Damage. NL Apply !M! wrestlermod:Injury."
   },
 
   "WrestlerMod:Elbow": {
@@ -152,7 +152,7 @@
 
   "WrestlerMod:EyePoke": {
     "NAME": "Eye Poke",
-    "DESCRIPTION": "wrestlermod:Dirty. NL Apply !M! Weak and NL !B! wrestlermod:Injured."
+    "DESCRIPTION": "wrestlermod:Dirty. NL Apply !M! Weak and NL !B! wrestlermod:Injury."
   },
 
   "WrestlerMod:Facewash": {
@@ -343,13 +343,13 @@
     "NAME": "Neckbreaker",
     "DESCRIPTION": "Deal !D! damage. NL If the enemy is wrestlermod:Grappled, apply !M! Vulnerable, !M! Weak, and ",
     "EXTENDED_DESCRIPTION": [
-      " wrestlermod:Injured."
+      " wrestlermod:Injury."
     ]
   },
 
   "WrestlerMod:Octopus": {
     "NAME": "Octopus",
-    "DESCRIPTION": "Apply !M! wrestlermod:Injured to a random enemy ",
+    "DESCRIPTION": "Apply !M! wrestlermod:Injury to a random enemy ",
     "EXTENDED_DESCRIPTION": [
       " times.",
       " times. NL Exahust."
@@ -531,7 +531,7 @@
 
   "WrestlerMod:Smackdown": {
     "NAME": "Smackdown",
-    "DESCRIPTION": "Whenever you play a card, apply !M! wrestlermod:Injured to ALL enemies."
+    "DESCRIPTION": "Whenever you play a card, apply !M! wrestlermod:Injury to ALL enemies."
   },
 
   "WrestlerMod:SpotMonkey": {
@@ -561,7 +561,7 @@
 
   "WrestlerMod:StomachClaw": {
     "NAME": "Stomach Claw",
-    "DESCRIPTION": "wrestlermod:Dirty. NL Apply !M! wrestlermod:Injured."
+    "DESCRIPTION": "wrestlermod:Dirty. NL Apply !M! wrestlermod:Injury."
   },
 
   "WrestlerMod:Swerve": {

@@ -58,7 +58,7 @@ public class Neckbreaker extends CustomCard {
           new ApplyPowerAction(m, p, new WeakPower(m, this.magicNumber, false), this.magicNumber));
 
       AbstractDungeon.actionManager.addToBottom(
-          new ApplyPowerAction(m, p, new InjuredPower(m, INJURED_AMOUNT), INJURED_AMOUNT));
+          new ApplyPowerAction(m, p, new InjuredPower(m, p, INJURED_AMOUNT), INJURED_AMOUNT));
     }
   }
 

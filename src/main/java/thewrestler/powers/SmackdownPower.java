@@ -36,7 +36,7 @@ public class SmackdownPower extends AbstractWrestlerPower implements CloneablePo
   @Override
   public void onPlayCard(AbstractCard card, AbstractMonster monster) {
     CreatureUtils.getLivingMonsters().forEach(m -> AbstractDungeon.actionManager.addToTop(new
-        ApplyPowerAction(m, this.source,new InjuredPower(m, this.amount),  this.amount)));
+        ApplyPowerAction(m, this.source,new InjuredPower(m, AbstractDungeon.player, this.amount),  this.amount)));
   }
 
   @Override

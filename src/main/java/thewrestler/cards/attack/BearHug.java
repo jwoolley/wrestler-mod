@@ -83,7 +83,7 @@ public class BearHug extends CustomCard {
 
         AbstractDungeon.actionManager.addToBottom(
             new ApplyPowerAction(
-                this.target, this.source, new InjuredPower(this.target, this.amount), this.amount, true));
+                this.target, this.source, new InjuredPower(this.target, this.source, this.amount), this.amount, true));
 
         if (this.repetitions > 1) {
           AbstractDungeon.actionManager.addToBottom(

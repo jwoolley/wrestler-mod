@@ -107,7 +107,7 @@ public class Matrix extends CustomCard {
         case 2:
           targets.forEach(target ->
             AbstractDungeon.actionManager.addToBottom(
-            new ApplyPowerAction(target, source,new InjuredPower(target, 1), 1,
+            new ApplyPowerAction(target, source,new InjuredPower(target, source, 1), 1,
                 true, AbstractGameAction.AttackEffect.NONE)));
           break;
         case 3:
