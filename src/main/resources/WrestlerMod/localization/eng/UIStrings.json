@@ -51,10 +51,12 @@
 
   "WrestlerMod:SignatureMovePanel": {
     "TEXT": [
-      "Trademark Move",
-      " add ",
-      " to your hand.",
-      "You have acquired your Trademark Move already this combat."
+      "Trademark Moves",
+      "Gain ",
+      " Bravado",
+      "At ",
+      " Bravado, gain a Trademark Move.",
+      "Available moves: "
     ]
   },
 

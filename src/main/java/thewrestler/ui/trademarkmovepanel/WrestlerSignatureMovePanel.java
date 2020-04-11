@@ -17,6 +17,7 @@ import com.megacrit.cardcrawl.helpers.input.InputHelper;
 import com.megacrit.cardcrawl.localization.UIStrings;
 import thewrestler.WrestlerMod;
 import thewrestler.characters.WrestlerCharacter;
+import thewrestler.powers.BravadoPower;
 import thewrestler.signaturemoves.cards.AbstractSignatureMoveCard;
 import thewrestler.signaturemoves.moveinfos.AbstractSignatureMoveInfo;
 import thewrestler.signaturemoves.moveinfos.AbstractSignatureMoveInfoInterface;
@@ -32,14 +33,14 @@ import java.util.ArrayList;
 public class WrestlerSignatureMovePanel implements WrestlerSignatureMovePanelInterface {
   private static final String[] TEXT;
 
-  private static final float WIDTH = 290;
+  private static final float WIDTH = 290 + 4; // extra width to fit the text. TODO: resize the panel image (and others)
   private static final float HEIGHT = 185;
   private static final float X_OFFSET = 24;
   private static final float Y_OFFSET = 441 + HEIGHT;
   private static final float Y_OFFSET_WIDESCREEN = 441 + HEIGHT;
   private static final float X_TEXT_OFFSET = 10;
   private static final float Y_TEXT_OFFSET_WIDESCREEN = HEIGHT - 20;
-  private static final float Y_TEXT_OFFSET =  Y_TEXT_OFFSET_WIDESCREEN + 0;
+  private static final float Y_TEXT_OFFSET =  HEIGHT - 20;
   private static final float TOOLTIP_X_OFFSET = 108.0F;
   private static final float TOOLTIP_Y_OFFSET = -8.0F;
 
@@ -48,9 +49,11 @@ public class WrestlerSignatureMovePanel implements WrestlerSignatureMovePanelInt
 
   private static final BitmapFont INFO_HEADER_FONT = FontHelper.charDescFont;
   private static final BitmapFont CARD_NAME_FONT = FontHelper.healthInfoFont;
-  private static final Color CARD_NAME_COLOR = Color.GOLDENROD.cpy();
+  private static final Color HEADER_COLOR = Color.GOLDENROD.cpy();
+
+  private static final Color CARD_NAME_COLOR = Color.GREEN.cpy();
   private static final BitmapFont INFO_FONT = FontHelper.tipBodyFont;
-  private static final Color INFO_HEADER_COLOR = Color.valueOf("992200ff");
+  private static final Color SUBHEADER_COLOR = Color.valueOf("992200ff");
   private static final Color INFO_COLOR = Color.valueOf("e9e9e0cc");
 
   private final String uiName;
@@ -148,11 +151,17 @@ public class WrestlerSignatureMovePanel implements WrestlerSignatureMovePanelInt
     final BitmapFont headerFont = INFO_HEADER_FONT;
     final BitmapFont cardNameFont = CARD_NAME_FONT;
     final BitmapFont font = INFO_FONT;
-    final Color headerColor = INFO_HEADER_COLOR;
+    final Color infoColor = INFO_COLOR;
     final Color cardNameColor = CARD_NAME_COLOR;
-    final Color color = INFO_COLOR;
 
-    final int yLineOffset = (int)(INFO_FONT.getLineHeight() * (Settings.isSixteenByTen ? 1.05f : 0.95f));
+    final int infoXOffset = this.xOffset + this.xTextOffset;
+    final int infoYOffset = this.yOffset + this.yTextOffset + 8;
+
+
+    final int Y_LINE_OFFSET_16_BY_10 =  (int)(INFO_FONT.getLineHeight() * 1.00f);
+    final int Y_LINE_OFFSET_16_BY_9 =  (int)(INFO_FONT.getLineHeight() * 0.95f);
+
+    final int yLineOffset = Settings.isSixteenByTen ? Y_LINE_OFFSET_16_BY_10 : Y_LINE_OFFSET_16_BY_9;
 
     FontHelper.renderFontLeft(
         sb,
@@ -160,25 +169,46 @@ public class WrestlerSignatureMovePanel implements WrestlerSignatureMovePanelInt
         TEXT[0],
         this.xOffset + this.width * 0.04f,
         this.yOffset + this.yTextOffset,
-        headerColor);
+        HEADER_COLOR);
 
     FontHelper.renderFontLeft(
         sb,
         cardNameFont,
-        getPreviewCard().name,
+        TEXT[1] + (BravadoPower.getAmountRequired() - BravadoPower.getPlayerAmount()) + TEXT[2],
         this.xOffset + this.width * 0.04f,
         this.yOffset + this.yTextOffset - (yLineOffset * 1.0f),
-        cardNameColor);
+        SUBHEADER_COLOR);
 
-    final String conditionText = getMoveGainConditionText();
-
-    GlyphLayout layout = new GlyphLayout(font, conditionText, color,this.width -  this.xTextOffset,
+    final String infoText = TEXT[3] + BravadoPower.getAmountRequired() + TEXT[4];
+    GlyphLayout layout = new GlyphLayout(font, infoText, infoColor,this.width -  this.xTextOffset,
         Align.left, true);
 
-    font.setColor(color);
-    font.draw(sb, conditionText,
-        this.xOffset + this.xTextOffset,
-        (this.yOffset + this.yTextOffset) - (yLineOffset * 2.0f),
+    font.setColor(infoColor);
+    font.draw(sb, infoText,
+        infoXOffset,
+        infoYOffset - (yLineOffset * 2.0f),
+        layout.width, Align.left, true);
+
+    final String cardListLabel = TEXT[5];
+
+    layout = new GlyphLayout(font, cardListLabel, SUBHEADER_COLOR,this.width -  this.xTextOffset,
+        Align.left, true);
+
+    font.setColor(HEADER_COLOR);
+    font.draw(sb, cardListLabel,
+        infoXOffset,
+        infoYOffset - (yLineOffset * 4.0f),
+        layout.width, Align.left, true);
+
+    final String cardList = getMoveInfo().getSignatureMoveCardReference().name;
+
+    layout = new GlyphLayout(font, cardList, CARD_NAME_COLOR,this.width -  this.xTextOffset,
+        Align.left, true);
+
+    font.setColor(CARD_NAME_COLOR);
+    font.draw(sb, cardList,
+        infoXOffset,
+        infoYOffset - (yLineOffset * 5.0f),
         layout.width, Align.left, true);
   }
 

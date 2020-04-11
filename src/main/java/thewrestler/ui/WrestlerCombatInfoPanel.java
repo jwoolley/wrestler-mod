@@ -146,6 +146,14 @@ public class WrestlerCombatInfoPanel implements CustomInfoPanel, StartOfCombatLi
         this.xOffset + this.xTextOffset,
         this.yOffset + this.yTextOffset - (yLineOffset * 2.075f),
         color);
+
+    FontHelper.renderFontLeft(
+        sb,
+        font,
+        TEXT[4] + (this.cardCounts.nonAttacks >= 0 ? this.cardCounts.dirtyCards : ""),
+        this.xOffset + this.xTextOffset,
+        this.yOffset + this.yTextOffset - (yLineOffset * 3.075f),
+        color);
   }
 
   public boolean shouldRenderPanel() {

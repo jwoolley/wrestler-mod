@@ -2,12 +2,14 @@ package thewrestler.powers;
 
 import basemod.interfaces.CloneablePowerInterface;
 import com.megacrit.cardcrawl.actions.common.RemoveSpecificPowerAction;
+import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.AbstractCreature;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.PowerStrings;
 import com.megacrit.cardcrawl.powers.AbstractPower;
 import thewrestler.WrestlerMod;
+import thewrestler.actions.power.ApplyGrappledAction;
 import thewrestler.characters.WrestlerCharacter;
 
 public class BravadoPower extends AbstractWrestlerPower implements CloneablePowerInterface {
@@ -40,6 +42,18 @@ public class BravadoPower extends AbstractWrestlerPower implements CloneablePowe
         AbstractDungeon.actionManager.addToTop(new RemoveSpecificPowerAction(this.owner, this.owner, POWER_ID));
       }
     }
+  }
+
+  public static int getAmountRequired() {
+    return AMOUNT_REQUIRED;
+  }
+
+  public static int getPlayerAmount() {
+    AbstractPlayer player = AbstractDungeon.player;
+    if (AbstractDungeon.isPlayerInDungeon() && player.hasPower(POWER_ID)) {
+      return player.getPower(POWER_ID).amount;
+    }
+    return 0;
   }
 
   @Override
