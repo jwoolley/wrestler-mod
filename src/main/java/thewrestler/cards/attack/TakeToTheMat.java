@@ -51,11 +51,24 @@ public class TakeToTheMat extends CustomCard {
         new DamageAction(m, new DamageInfo(p, this.damage, this.damageTypeForTurn),
             AbstractGameAction.AttackEffect.BLUNT_HEAVY));
 
-    if (p.hasPower(BravadoPower.POWER_ID) && p.getPower(BravadoPower.POWER_ID).amount >= this.misc) {
+    if (willTrigger()) {
       AbstractDungeon.actionManager.addToBottom(new ApplyGrappledAction(m, p));
     } else {
       AbstractDungeon.actionManager.addToBottom(
           new ApplyPowerAction(p, p, new BravadoPower(p, this.magicNumber), this.magicNumber));
+    }
+  }
+
+  private boolean willTrigger() {
+    AbstractPlayer p = AbstractDungeon.player;
+    return p.hasPower(BravadoPower.POWER_ID) && p.getPower(BravadoPower.POWER_ID).amount >= this.misc;
+  }
+
+  public void triggerOnGlowCheck() {
+    if (willTrigger()) {
+      this.glowColor = AbstractCard.GOLD_BORDER_GLOW_COLOR.cpy();
+    } else {
+      this.glowColor = AbstractCard.BLUE_BORDER_GLOW_COLOR.cpy();
     }
   }
 

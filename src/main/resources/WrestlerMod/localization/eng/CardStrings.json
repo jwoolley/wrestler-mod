@@ -98,7 +98,7 @@
 
   "WrestlerMod:CheapShot": {
     "NAME": "Cheap Shot",
-    "DESCRIPTION": "Innate. wrestlermod:Dirty. NL Deal !D! damage. NL If the enemy intends to attack, apply !M! Vulnerable. NL Exhaust."
+    "DESCRIPTION": "Innate. wrestlermod:Dirty. NL Deal !D! damage. NL Apply !M! Vulnerable. NL Exhaust."
   },
 
   "WrestlerMod:CleanFinish": {
@@ -313,7 +313,7 @@
 
   "WrestlerMod:LowBlow": {
     "NAME": "Low Blow",
-    "DESCRIPTION": "Deal !D! Damage. NL When you play a [P] , return this from your discard pile to your hand."
+    "DESCRIPTION": "Deal !D! Damage. NL Costs 1 less for each [P] played this combat."
   },
 
   "WrestlerMod:MainEvent": {
@@ -634,9 +634,9 @@
 
   "WrestlerMod:TriangleChoke": {
     "NAME": "Triangle Choke",
-    "DESCRIPTION": "Deal !D! Damage. NL If you've played a Power and a Skill this turn, gain !B! Block and ",
+    "DESCRIPTION": "Deal !D! Damage. NL If you have played at ",
     "EXTENDED_DESCRIPTION": [
-      " Artifact."
+      " or more non-Attack cards this turn, gain !M! wrestlermod:Bravado."
     ]
   },
 

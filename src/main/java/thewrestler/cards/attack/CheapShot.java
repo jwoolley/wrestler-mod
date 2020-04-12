@@ -58,14 +58,8 @@ public class CheapShot extends CustomCard {
         new DamageAction(m, new DamageInfo(p, damage, damageTypeForTurn),
             AbstractGameAction.AttackEffect.SLASH_HORIZONTAL));
 
-    if (m.getIntentBaseDmg() >= 0) {
-      AbstractDungeon.actionManager.addToBottom(
-          new ApplyPowerAction(m, p, new VulnerablePower(p, this.magicNumber, false), this.magicNumber));
-    } else {
-      AbstractDungeon.effectList.add(
-          new ThoughtBubble(AbstractDungeon.player.dialogX, AbstractDungeon.player.dialogY,
-              3.0F, INFO_TEXT[0], true));
-    }
+    AbstractDungeon.actionManager.addToBottom(
+        new ApplyPowerAction(m, p, new VulnerablePower(p, this.magicNumber, false), this.magicNumber));
   }
 
   @Override

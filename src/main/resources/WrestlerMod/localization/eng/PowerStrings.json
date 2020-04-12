@@ -120,11 +120,11 @@
   "WrestlerMod:IrradiatedPower": {
     "NAME": "Irradiated",
     "DESCRIPTIONS": [
-      "The next ",
+      "The first ",
       "time",
       "#b",
       " times",
-      " you attack this enemy this turn, gain [E] ."
+      " you attack this enemy each turn, gain [E] ."
     ]
   },
 

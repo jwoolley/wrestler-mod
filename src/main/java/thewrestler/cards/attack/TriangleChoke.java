@@ -15,6 +15,8 @@ import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.powers.ArtifactPower;
 import thewrestler.actions.power.ApplyGrappledAction;
 import thewrestler.enums.AbstractCardEnum;
+import thewrestler.powers.BravadoPower;
+import thewrestler.util.info.CombatInfo;
 
 import static thewrestler.WrestlerMod.getCardResourcePath;
 
@@ -35,13 +37,15 @@ public class TriangleChoke extends CustomCard {
   private static final int DAMAGE = 7;
   private static final int BLOCK = 7;
   private static final int DAMAGE__AND_BLOCK_UPGRADE = 3;
-  private static final int ARTIFACT_AMOUNT = 1;
+  private static final int NUM_BRAVADO = 1;
+  private static final int MIN_NONATTACK_CARDS = 2;
 
   public TriangleChoke() {
-    super(ID, NAME, getCardResourcePath(IMG_PATH), COST, getDescription(ARTIFACT_AMOUNT), TYPE,
+    super(ID, NAME, getCardResourcePath(IMG_PATH), COST, getDescription(MIN_NONATTACK_CARDS), TYPE,
         AbstractCardEnum.THE_WRESTLER_ORANGE, RARITY, TARGET);
     this.baseDamage = this.damage = DAMAGE;
     this.baseBlock = this.block = BLOCK;
+    this.baseMagicNumber = this.magicNumber = NUM_BRAVADO;
   }
 
   @Override
@@ -50,10 +54,10 @@ public class TriangleChoke extends CustomCard {
         new DamageAction(m, new DamageInfo(p, damage, damageTypeForTurn),
             AbstractGameAction.AttackEffect.SLASH_HORIZONTAL));
 
-    if (getNumPowersPlayed() > 0 && getNumSkillsPlayed() > 0) {
+    if (willTrigger()) {
       AbstractDungeon.actionManager.addToBottom(new GainBlockAction(p, p, this.block));
       AbstractDungeon.actionManager.addToBottom(
-          new ApplyPowerAction(p, p, new ArtifactPower(p, ARTIFACT_AMOUNT), ARTIFACT_AMOUNT));
+          new ApplyPowerAction(p, p, new BravadoPower(p, this.magicNumber), this.magicNumber));
     }
   }
 
@@ -68,25 +72,25 @@ public class TriangleChoke extends CustomCard {
       this.upgradeName();
       this.upgradeDamage(DAMAGE__AND_BLOCK_UPGRADE);
       this.upgradeBlock(DAMAGE__AND_BLOCK_UPGRADE);
-      this.rawDescription = getDescription(ARTIFACT_AMOUNT);
+      this.rawDescription = getDescription(MIN_NONATTACK_CARDS);
       this.initializeDescription();
     }
   }
 
-  // TODO: move to helper/util class
-  private static int getNumPowersPlayed() {
-    return (int) AbstractDungeon.actionManager.cardsPlayedThisTurn.stream()
-        .filter(c -> c.type == CardType.POWER).count();
+  private boolean willTrigger() {
+    return CombatInfo.getNumNonAttacksPlayed() >= MIN_NONATTACK_CARDS;
   }
 
-  // TODO: move to helper/util class
-  private static int getNumSkillsPlayed() {
-    return (int) AbstractDungeon.actionManager.cardsPlayedThisTurn.stream()
-        .filter(c -> c.type == CardType.SKILL).count();
+  public void triggerOnGlowCheck() {
+    if (willTrigger()) {
+      this.glowColor = AbstractCard.GOLD_BORDER_GLOW_COLOR.cpy();
+    } else {
+      this.glowColor = AbstractCard.BLUE_BORDER_GLOW_COLOR.cpy();
+    }
   }
 
-  private static String getDescription(int numArtifact) {
-    return DESCRIPTION + numArtifact + EXTENDED_DESCRIPTION[0];
+  private static String getDescription(int minNonAttacks) {
+    return DESCRIPTION + minNonAttacks + EXTENDED_DESCRIPTION[0];
   }
 
   static {

@@ -10,6 +10,8 @@ import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import thewrestler.enums.AbstractCardEnum;
+import thewrestler.powers.BravadoPower;
+import thewrestler.util.info.CombatInfo;
 
 import static thewrestler.WrestlerMod.getCardResourcePath;
 
@@ -54,11 +56,19 @@ public class WindUpKick extends CustomCard {
       return false;
     }
 
-    if (canUse && getNumNonAttacksPlayed() <  this.magicNumber) {
+    if (canUse && CombatInfo.getNumNonAttacksPlayed() < this.magicNumber) {
       canUse = false;
       this.cantUseMessage = getCantPlayMessage();
     }
     return canUse;
+  }
+
+  public void triggerOnGlowCheck() {
+    if (this.canUse(AbstractDungeon.player, null)) {
+      this.glowColor = AbstractCard.GOLD_BORDER_GLOW_COLOR.cpy();
+    } else {
+      this.glowColor = AbstractCard.BLUE_BORDER_GLOW_COLOR.cpy();
+    }
   }
 
   @Override
@@ -76,22 +86,9 @@ public class WindUpKick extends CustomCard {
 
   @Override
   public String getCantPlayMessage() {
-    final int numSkillsRemaining = this.magicNumber - getNumNonAttacksPlayed();
+    final int numSkillsRemaining = this.magicNumber - CombatInfo.getNumNonAttacksPlayed();
     return EXTENDED_DESCRIPTION[0] + numSkillsRemaining + EXTENDED_DESCRIPTION[1]
         + (numSkillsRemaining == 1 ? EXTENDED_DESCRIPTION[2] : EXTENDED_DESCRIPTION[3]);
-  }
-
-  // TODO: move to helper/util class
-  private static int getNumSkillsPlayed() {
-    return (int) AbstractDungeon.actionManager.cardsPlayedThisTurn.stream()
-        .filter(c -> c.type == CardType.SKILL).count();
-  }
-
-
-  // TODO: move to helper/util class
-  private static int getNumNonAttacksPlayed() {
-    return (int) AbstractDungeon.actionManager.cardsPlayedThisTurn.stream()
-        .filter(c -> c.type != CardType.ATTACK).count();
   }
 
   static {

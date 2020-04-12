@@ -52,7 +52,6 @@ public class LowBlow extends CustomCard {
   public void use(AbstractPlayer p, AbstractMonster m) {
     AbstractDungeon.actionManager.addToBottom(
         new DamageAction(m, new DamageInfo(p, damage, damageTypeForTurn), AbstractGameAction.AttackEffect.BLUNT_LIGHT));
-    this.selfRetain = false;
   }
 
   @Override
@@ -98,7 +97,8 @@ public class LowBlow extends CustomCard {
   @Override
   public void onPlayCard(AbstractCard card, AbstractMonster m) {
     if (card.hasTag(WrestlerCardTags.PENALTY)) {
-      AbstractDungeon.actionManager.addToBottom(new DiscardToHandAction(this));
+      this.flash();
+      updateCost(-1);
     }
   }
 }

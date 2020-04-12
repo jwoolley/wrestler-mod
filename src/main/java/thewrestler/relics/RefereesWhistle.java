@@ -1,5 +1,6 @@
 package thewrestler.relics;
 
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.megacrit.cardcrawl.actions.common.DrawCardAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
@@ -12,6 +13,7 @@ import thewrestler.util.info.penaltycard.PenaltyCardInfo;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import static thewrestler.WrestlerMod.makeRelicOutlinePath;
 import static thewrestler.WrestlerMod.makeRelicPath;
@@ -32,10 +34,18 @@ public class RefereesWhistle extends CustomWrestlerRelic {
   }
 
   public void onPlayerEndTurn() {
-    this.flash();
-    AbstractDungeon.player.hand.group.stream()
-        .filter(c -> c.hasTag(WrestlerCardTags.PENALTY) && c.cost > 0)
-        .forEach(c -> c.modifyCostForCombat(-1));
+    final List<AbstractCard> penaltyCards =
+        AbstractDungeon.player.hand.group.stream()
+            .filter(c -> c.hasTag(WrestlerCardTags.PENALTY) && c.cost > 0)
+            .collect(Collectors.toList());
+
+    if (!penaltyCards.isEmpty()) {
+      this.flash();
+      penaltyCards.forEach(c -> {
+        c.flash(Color.GOLD);
+        c.modifyCostForCombat(-1);
+      });
+    }
   }
 
   private static final List<String> POWERTIP_KEYWORDS = Arrays.asList(WrestlerMod.makeID("PenaltyCard"));

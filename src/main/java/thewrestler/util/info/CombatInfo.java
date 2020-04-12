@@ -100,8 +100,8 @@ public class CombatInfo {
   }
 
   public static int getNumNonAttacksPlayed() {
-    return (int) AbstractDungeon.actionManager.cardsPlayedThisTurn.size()
-        - getNumAttacksPlayed();
+    return (int) AbstractDungeon.actionManager.cardsPlayedThisTurn.stream()
+        .filter(c -> c.type != AbstractCard.CardType.ATTACK).count();
   }
 
   public static int getNumDebuffsAppliedThisTurn() {
