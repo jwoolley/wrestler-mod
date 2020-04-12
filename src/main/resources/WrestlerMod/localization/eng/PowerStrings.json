@@ -124,7 +124,7 @@
       "time",
       "#b",
       " times",
-      " you attack this enemy this turn, gain [E]."
+      " you attack this enemy this turn, gain [E] ."
     ]
   },
 
@@ -197,8 +197,11 @@
   "WrestlerMod:ShortarmPower": {
     "NAME": "Shortarm",
     "DESCRIPTIONS": [
-      "Your Colorless #yAttacks deal #b",
-      " additional damage this turn."
+      "Double the effect of the next",
+      " #yPenalty #yCard",
+      " #b",
+      " #yPenalty #yCards",
+      " you play this turn."
     ]
   },
 

@@ -12,8 +12,11 @@ import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.powers.ChokePower;
-import thewrestler.cards.colorless.attack.Knee;
-import thewrestler.signaturemoves.upgrades.*;
+import thewrestler.cards.colorless.attack.Elbow;
+import thewrestler.signaturemoves.upgrades.AbstractSignatureMoveUpgrade;
+import thewrestler.signaturemoves.upgrades.UpgradeGroup;
+import thewrestler.signaturemoves.upgrades.UpgradeRarity;
+import thewrestler.signaturemoves.upgrades.UpgradeType;
 
 import java.util.List;
 
@@ -32,31 +35,41 @@ public class Chokeslam extends AbstractSignatureMoveCard {
   private static final CardTarget TARGET = CardTarget.ENEMY;
 
   private static final int COST = 1;
-  private static final int DAMAGE = 10;
+  private static final int DAMAGE = 8;
   private static final int NUM_CARD_COPIES = 1;
   private static final int NUM_CHOKE_STACKS = 1;
   private static final boolean HAS_EXHAUST = true;
   private static final boolean HAS_RETAIN = false;
+
+  private boolean bonusCardIsFreeToPlay;
 
   private static AbstractCard BONUS_CARD;
 
   private int numChokeStacks;
 
   private static final UpgradeGroup ELIGIBLE_UPGRADES;
+  private static final int DAMAGE_UPGRADE_COMMON = 5;
+  private static final int DAMAGE_UPGRADE_RARE = 8;
+  private static final int COST_REDUCTION = 1;
 
   public Chokeslam() {
-    super(ID, NAME, IMG_PATH, COST, getDescription(HAS_RETAIN, HAS_EXHAUST, NUM_CARD_COPIES), TYPE, TARGET, HAS_EXHAUST, HAS_RETAIN);
+    super(ID, NAME, IMG_PATH, COST, getDescription(HAS_RETAIN, HAS_EXHAUST, NUM_CARD_COPIES, false),
+        TYPE, TARGET, HAS_EXHAUST, HAS_RETAIN);
     this.baseDamage = this.damage = DAMAGE;
     this.baseMagicNumber = this.magicNumber = NUM_CARD_COPIES;
     this.numChokeStacks = NUM_CHOKE_STACKS;
+    bonusCardIsFreeToPlay = false;
   }
 
   private AbstractCard makeBonusCard() {
     if (BONUS_CARD == null) {
-      BONUS_CARD = new Knee();
+      BONUS_CARD = new Elbow();
     }
     AbstractCard bonusCard = BONUS_CARD.makeCopy();
-    bonusCard.setCostForTurn(0);
+
+    if (this.bonusCardIsFreeToPlay) {
+      bonusCard.setCostForTurn(0);
+    }
     return bonusCard;
   }
 
@@ -73,10 +86,6 @@ public class Chokeslam extends AbstractSignatureMoveCard {
       AbstractDungeon.actionManager.addToBottom(new MakeTempCardInHandAction(this.makeBonusCard()));
     }
   }
-
-  private static final int DAMAGE_UPGRADE_COMMON = 4;
-  private static final int DAMAGE_UPGRADE_RARE = 8;
-  private static final int COST_REDUCTION = 1;
 
   @Override
   public void applyUpgrades(List<AbstractSignatureMoveUpgrade> upgradesToApply) {
@@ -128,17 +137,18 @@ public class Chokeslam extends AbstractSignatureMoveCard {
   }
 
   private void updateDescription() {
-    this.rawDescription = getDescription(this.selfRetain, this.exhaust, this.magicNumber);
+    this.rawDescription = getDescription(this.selfRetain, this.exhaust, this.magicNumber, this.bonusCardIsFreeToPlay);
     initializeDescription();
   }
 
-  public static String getDescription(boolean hasRetain, boolean hasExhaust, int numBonusCards) {
+  public static String getDescription(boolean hasRetain, boolean hasExhaust, int numBonusCards, boolean bonusIsFree) {
     return
         (hasRetain ? EXTENDED_DESCRIPTION[6] : "")
         + DESCRIPTION + (numBonusCards == 1 ? EXTENDED_DESCRIPTION[0] : EXTENDED_DESCRIPTION[1])
         + EXTENDED_DESCRIPTION[2]
-        + (numBonusCards == 1 ? EXTENDED_DESCRIPTION[3] : EXTENDED_DESCRIPTION[4])
-        + EXTENDED_DESCRIPTION[5]
+        + (bonusIsFree
+            ? (numBonusCards == 1 ? EXTENDED_DESCRIPTION[3] : EXTENDED_DESCRIPTION[4]) + EXTENDED_DESCRIPTION[5]
+            : "")
         +  (hasExhaust ? EXTENDED_DESCRIPTION[7] : "");
   }
 

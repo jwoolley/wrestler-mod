@@ -1,6 +1,7 @@
 package thewrestler.cards.attack;
 
 import basemod.abstracts.CustomCard;
+import basemod.helpers.TooltipInfo;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
 import com.megacrit.cardcrawl.actions.common.DamageAction;
@@ -18,9 +19,15 @@ import thewrestler.cards.WrestlerCardTags;
 import thewrestler.cards.colorless.status.penalty.BluePenaltyStatusCard;
 import thewrestler.cards.colorless.status.penalty.RedPenaltyStatusCard;
 import thewrestler.enums.AbstractCardEnum;
+import thewrestler.keywords.AbstractTooltipKeyword;
+import thewrestler.keywords.CustomTooltipKeywords;
+import thewrestler.keywords.TooltipKeywords;
 import thewrestler.powers.ShortarmPower;
 import thewrestler.util.CardUtil;
 import thewrestler.util.info.penaltycard.PenaltyCardInfo;
+
+import java.util.Arrays;
+import java.util.List;
 
 import static thewrestler.WrestlerMod.getCardResourcePath;
 
@@ -38,15 +45,13 @@ public class Shortarm extends CustomCard {
   private static final CardTarget TARGET = CardTarget.ENEMY;
 
   private static final int COST = 1;
-  private static final int DAMAGE = 2;
-  private static final int DAMAGE_UPGRADE = 1;
-  private static final int DAMAGE_INCREASE_AMOUNT = 1;
+  private static final int DAMAGE = 3;
+  private static final int DAMAGE_UPGRADE = 2;
 
   public Shortarm() {
     super(ID, NAME, getCardResourcePath(IMG_PATH), COST, getDescription(), TYPE,
         AbstractCardEnum.THE_WRESTLER_ORANGE, RARITY, TARGET);
     this.baseDamage = this.damage = DAMAGE;
-    this.baseMagicNumber = this.magicNumber = DAMAGE_INCREASE_AMOUNT;
     CardUtil.makeCardDirty(this, this.type);
   }
 
@@ -60,30 +65,23 @@ public class Shortarm extends CustomCard {
         new DamageAction(m, new DamageInfo(p, damage, damageTypeForTurn),
             AbstractGameAction.AttackEffect.BLUNT_HEAVY, true));
 
-    AbstractDungeon.actionManager.addToBottom(new ShortarmAction());
+    AbstractDungeon.actionManager.addToBottom(new ApplyPowerAction(p, p, new ShortarmPower(1), 1));
   }
-
-  class ShortarmAction extends AbstractGameAction {
-
-    @Override
-    public void update() {
-      Shortarm.this.baseDamage += DAMAGE_INCREASE_AMOUNT;
-      Shortarm.this.applyPowers();
-
-      CardUtil.forAllCardsInCombat(c -> {
-        c.baseDamage += DAMAGE_INCREASE_AMOUNT;
-        c.applyPowers();
-      }, c -> c instanceof Shortarm);
-
-      this.isDone = true;
-    }
-  }
-
 
   @Override
   public AbstractCard makeCopy() {
     return new Shortarm();
   }
+
+  private static List<AbstractTooltipKeyword> EXTRA_KEYWORDS = Arrays.asList(
+      CustomTooltipKeywords.getTooltipKeyword(CustomTooltipKeywords.PENALTY_CARD)
+  );
+
+  @Override
+  public List<TooltipInfo> getCustomTooltips() {
+    return TooltipKeywords.getTooltipInfos(EXTRA_KEYWORDS);
+  }
+
 
   @Override
   public void upgrade() {

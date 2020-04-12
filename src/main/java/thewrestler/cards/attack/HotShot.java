@@ -1,6 +1,7 @@
 package thewrestler.cards.attack;
 
 import basemod.abstracts.CustomCard;
+import basemod.helpers.TooltipInfo;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.common.DamageAction;
 import com.megacrit.cardcrawl.actions.common.LoseHPAction;
@@ -12,8 +13,17 @@ import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import thewrestler.cards.WrestlerCardTags;
+import thewrestler.cards.colorless.status.penalty.GreenPenaltyStatusCard;
+import thewrestler.cards.colorless.status.penalty.OrangePenaltyStatusCard;
+import thewrestler.characters.WrestlerCharacter;
 import thewrestler.enums.AbstractCardEnum;
+import thewrestler.keywords.AbstractTooltipKeyword;
+import thewrestler.keywords.CustomTooltipKeywords;
+import thewrestler.keywords.TooltipKeywords;
 import thewrestler.util.CardUtil;
+
+import java.util.Arrays;
+import java.util.List;
 
 import static thewrestler.WrestlerMod.getCardResourcePath;
 
@@ -32,15 +42,13 @@ public class HotShot extends CustomCard {
 
   private static final int COST = 0;
   private static final int DAMAGE = 6;
-  private static final int LIFE_LOSS = 1;
 
-  private static final int DAMAGE_UPGRADE = 2;
+  private static final int DAMAGE_UPGRADE = 3;
 
   public HotShot() {
     super(ID, NAME, getCardResourcePath(IMG_PATH), COST, DESCRIPTION, TYPE,
         AbstractCardEnum.THE_WRESTLER_ORANGE, RARITY, TARGET);
     this.baseDamage = this.damage = DAMAGE;
-    this.baseMagicNumber = this.magicNumber = LIFE_LOSS;
     CardUtil.makeCardDirty(this, this.type);
   }
 
@@ -50,8 +58,17 @@ public class HotShot extends CustomCard {
         new DamageAction(m, new DamageInfo(p, damage, damageTypeForTurn),
             AbstractGameAction.AttackEffect.BLUNT_LIGHT));
 
-    AbstractDungeon.actionManager.addToBottom(
-        new LoseHPAction(p, p, this.magicNumber, AbstractGameAction.AttackEffect.FIRE));
+    WrestlerCharacter.getPenaltyCardInfo().enqueuePenaltyCard(new OrangePenaltyStatusCard(), true);
+  }
+
+  private static List<AbstractTooltipKeyword> EXTRA_KEYWORDS = Arrays.asList(
+      CustomTooltipKeywords.getTooltipKeyword(CustomTooltipKeywords.PENALTY_CARD),
+      CustomTooltipKeywords.getTooltipKeyword(CustomTooltipKeywords.PENALTY_CARD_ORANGE)
+  );
+
+  @Override
+  public List<TooltipInfo> getCustomTooltips() {
+    return TooltipKeywords.getTooltipInfos(EXTRA_KEYWORDS);
   }
 
   @Override

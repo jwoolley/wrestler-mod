@@ -244,7 +244,7 @@
 
   "WrestlerMod:Hardway": {
     "NAME": "Hardway",
-    "DESCRIPTION": "wrestlermod:Dirty. NL Enemy loses !M! Strength. NL Gain !M! Thorns. Lose !M! HP. NL Exhaust."
+    "DESCRIPTION": "wrestlermod:Dirty. NL Enemy loses !M! Strength. NL Gain !M! Thorns. NL Lose !M! HP. NL Exhaust."
   },
 
   "WrestlerMod:Headlock": {
@@ -270,7 +270,7 @@
 
   "WrestlerMod:HotShot": {
     "NAME": "Hot Shot",
-    "DESCRIPTION": "wrestlermod:Dirty. NL Deal !D! Damage. NL Lose !M! HP."
+    "DESCRIPTION": "wrestlermod:Dirty. NL Deal !D! damage. NL The next random [P] this you gain this combat is a [O]."
   },
 
   "WrestlerMod:IronMan": {
@@ -500,7 +500,7 @@
 
   "WrestlerMod:Shortarm": {
     "NAME": "Shortarm",
-    "DESCRIPTION": "wrestlermod:Dirty. NL Deal !D! damage twice. NL Increase the damage of ALL Shortarm cards by !M! this combat."
+    "DESCRIPTION": "wrestlermod:Dirty. NL Deal !D! damage twice. NL Double the effect of the next [P] you play this turn."
   },
 
   "WrestlerMod:Showboat": {
@@ -670,8 +670,8 @@
     "NAME": "Chokeslam",
     "DESCRIPTION": "Deal !D! Damage. NL Apply Choked. NL Add",
     "EXTENDED_DESCRIPTION": [
-      " a Knee",
-      "  !M! Knees",
+      " an *Elbow",
+      "  !M! *Elbows",
       " to your hand.",
       " It costs",
       " They cost",
@@ -705,7 +705,7 @@
     "NAME": "Blue Penalty Card",
     "DESCRIPTION": "When you gain this card, a random enemy gains !M! *Plated *Armor. NL Retain. NL Draw ",
     "EXTENDED_DESCRIPTION": [
-      " cards next turn. NL Exhaust."
+      " cards. NL Exhaust."
     ]
   },
 
@@ -719,7 +719,7 @@
 
   "WrestlerMod:OrangePenaltyStatusCard": {
     "NAME": "Orange Penalty Card",
-    "DESCRIPTION": "Exhaust. NL When drawn, deal !D! damage to ALL enemies. NL At the end of your turn, gain !M! Frail."
+    "DESCRIPTION": "NL When drawn, gain !M! Frail. NL Retain. NL Deal !D! damage to ALL enemies. NL Exhaust."
   },
 
   "WrestlerMod:RedPenaltyStatusCard": {

@@ -36,32 +36,22 @@ public class OrangePenaltyStatusCard extends AbstractPenaltyStatusCard {
   }
 
   @Override
-  public void use(AbstractPlayer p, AbstractMonster m) {
-    if (this.dontTriggerOnUseCard) {
-      this.exhaust = false;
-      // setting isSourceMonster to true prevents the frail from falling off immediately
-      AbstractDungeon.actionManager.addToBottom(
-          new ApplyPowerAction(p, p, new FrailPower(p, this.magicNumber, true)));
-    } else {
-      this.exhaust = true;
-    }
-  }
-
-  @Override
-  public void triggerWhenDrawn(){
-    AbstractPlayer p = AbstractDungeon.player;
+  public void triggerOnCardUsed(AbstractPlayer p, AbstractMonster m) {
     AbstractDungeon.actionManager.addToBottom(new DamageAllEnemiesAction(p, this.multiDamage, this.damageType,
         AbstractGameAction.AttackEffect.FIRE, true));
   }
 
   @Override
-  public AbstractPenaltyStatusCard makeCopy() {
-    return new OrangePenaltyStatusCard();
+  public void triggerOnCardGained(){
+    AbstractPlayer p = AbstractDungeon.player;
+    // setting isSourceMonster to true prevents the frail from falling off immediately
+    AbstractDungeon.actionManager.addToBottom(
+        new ApplyPowerAction(p, p, new FrailPower(p, this.magicNumber, true)));
   }
 
-  public void triggerOnEndOfTurnForPlayingCard() {
-    this.dontTriggerOnUseCard = true;
-    AbstractDungeon.actionManager.cardQueue.add(new CardQueueItem(this, true));
+  @Override
+  public AbstractPenaltyStatusCard makeCopy() {
+    return new OrangePenaltyStatusCard();
   }
 
   private static String getDescription() {
@@ -76,10 +66,5 @@ public class OrangePenaltyStatusCard extends AbstractPenaltyStatusCard {
     NAME = cardStrings.NAME;
     DESCRIPTION = cardStrings.DESCRIPTION;
     EXTENDED_DESCRIPTION = cardStrings.EXTENDED_DESCRIPTION;
-  }
-
-  @Override
-  public void triggerOnCardGained() {
-
   }
 }

@@ -28,6 +28,7 @@ import thewrestler.cards.attack.EyePoke;
 import thewrestler.cards.skill.WrestlerDefend;
 import thewrestler.enums.AbstractCardEnum;
 import thewrestler.relics.DentedTrophy;
+import thewrestler.relics.RefereesWhistle;
 import thewrestler.signaturemoves.cards.AbstractSignatureMoveCard;
 import thewrestler.signaturemoves.cards.SignatureMoveCardEnum;
 import thewrestler.signaturemoves.moveinfos.AbstractSignatureMoveInfo;
@@ -36,6 +37,7 @@ import thewrestler.signaturemoves.upgrades.AbstractSignatureMoveUpgrade;
 import thewrestler.signaturemoves.upgrades.SignatureMoveUpgradeList;
 import thewrestler.util.info.penaltycard.PenaltyCardInfo;
 
+import java.sql.Ref;
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -139,10 +141,10 @@ public class WrestlerCharacter extends CustomPlayer {
     // Starting Relics	
     public ArrayList<String> getStartingRelics() {
         ArrayList<String> retVal = new ArrayList<>();
-//        retVal.add(ImprovedHeadgear.ID);
-//        UnlockTracker.markRelicAsSeen(ImprovedHeadgear.ID);
         retVal.add(DentedTrophy.ID);
         UnlockTracker.markRelicAsSeen(DentedTrophy.ID);
+        retVal.add(RefereesWhistle.ID);
+        UnlockTracker.markRelicAsSeen(RefereesWhistle.ID);
         return retVal;
     }
 

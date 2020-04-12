@@ -20,11 +20,7 @@ public class RefereesWhistle extends CustomWrestlerRelic {
   public static final String ID = WrestlerMod.makeID("RefereesWhistle");
   private static final Texture IMG = TextureLoader.getTexture(makeRelicPath("refereeswhistle.png"));
   private static final Texture OUTLINE = TextureLoader.getTexture(makeRelicOutlinePath("refereeswhistle.png"));
-  private static final RelicTier RELIC_TIER = RelicTier.COMMON;
-
-  private static final List<String> POWERTIP_KEYWORDS = Arrays.asList(WrestlerMod.makeID("PenaltyCard"));
-
-  public static final int CARD_AMOUNT = 2;
+  private static final RelicTier RELIC_TIER = RelicTier.STARTER;
 
   public RefereesWhistle() {
     super(ID, IMG, OUTLINE, RELIC_TIER, LandingSound.CLINK);
@@ -32,13 +28,17 @@ public class RefereesWhistle extends CustomWrestlerRelic {
 
   @Override
   public String getUpdatedDescription() {
-    return DESCRIPTIONS[0] + CARD_AMOUNT
-        + (CARD_AMOUNT == 1 ? DESCRIPTIONS[1] : DESCRIPTIONS[2]);
+    return DESCRIPTIONS[0];
   }
 
-  public void atTurnStart() {
-
+  public void onPlayerEndTurn() {
+    this.flash();
+    AbstractDungeon.player.hand.group.stream()
+        .filter(c -> c.hasTag(WrestlerCardTags.PENALTY) && c.cost > 0)
+        .forEach(c -> c.modifyCostForCombat(-1));
   }
+
+  private static final List<String> POWERTIP_KEYWORDS = Arrays.asList(WrestlerMod.makeID("PenaltyCard"));
 
   @Override
   protected List<String> getKeywordList() {
@@ -50,11 +50,4 @@ public class RefereesWhistle extends CustomWrestlerRelic {
     return null;
   }
 
-  @Override
-  public void onCardDraw(AbstractCard drawnCard) {
-    if (drawnCard.hasTag(WrestlerCardTags.PENALTY)) {
-      flash();
-      AbstractDungeon.actionManager.addToBottom(new DrawCardAction(CARD_AMOUNT));
-    }
-  }
 }

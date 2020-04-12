@@ -1,9 +1,15 @@
 package thewrestler.cards.colorless.status.penalty;
 
 import basemod.abstracts.CustomCard;
+import com.megacrit.cardcrawl.actions.common.ReducePowerAction;
+import com.megacrit.cardcrawl.characters.AbstractPlayer;
+import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
+import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import thewrestler.cards.WrestlerCardTags;
+import thewrestler.cards.attack.Shortarm;
 import thewrestler.keywords.CustomTooltipKeyword;
 import thewrestler.keywords.CustomTooltipKeywords;
+import thewrestler.powers.ShortarmPower;
 import thewrestler.ui.UiHelper;
 
 import static thewrestler.WrestlerMod.getCardResourcePath;
@@ -25,7 +31,7 @@ public abstract class AbstractPenaltyStatusCard extends CustomCard {
 
   public AbstractPenaltyStatusCard(String id, String name, String imgPath, String panelImgKey, String description,
                                    String tooltipKeywordKey) {
-    super(id, name, imgPath,1, description, TYPE, CardColor.COLORLESS, RARITY, TARGET);
+    super(id, name, imgPath,2, description, TYPE, CardColor.COLORLESS, RARITY, TARGET);
     this.panelPreviewImgPath = getInfoPanelPreviewImgPath(panelImgKey);
     this.panelWarningImgPath = getInfoPanelPreviewWarningImgPath(panelImgKey);
     this.keyword = CustomTooltipKeywords.getTooltipKeyword(tooltipKeywordKey);
@@ -46,6 +52,17 @@ public abstract class AbstractPenaltyStatusCard extends CustomCard {
   }
 
   public abstract void triggerOnCardGained();
+  public abstract void triggerOnCardUsed(AbstractPlayer p, AbstractMonster m);
+
+  public void use(AbstractPlayer p, AbstractMonster m) {
+    final AbstractPlayer player = AbstractDungeon.player;
+    this.triggerOnCardUsed(p, m);
+    if (player.hasPower(ShortarmPower.POWER_ID)) {
+      player.getPower(ShortarmPower.POWER_ID).flash();
+      AbstractDungeon.actionManager.addToTop(new ReducePowerAction(player, player, ShortarmPower.POWER_ID, 1));
+      this.triggerOnCardUsed(p, m);
+    }
+  }
 
   static String getPenaltyCardImgPath(String imgFilename) {
     return getCardResourcePath(IMG_PATH_PREFIX + imgFilename);

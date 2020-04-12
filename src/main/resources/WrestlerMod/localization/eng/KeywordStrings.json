@@ -75,7 +75,7 @@
     "NAMES": [
       "Blue Penalty Card", "blue_penalty_card"
     ],
-    "DESCRIPTION": "Applies #yPlated #yArmor to a random enemy when gained. Exhaust and draw additional cards next turn when played."
+    "DESCRIPTION": "Applies #yPlated #yArmor to a random enemy when gained. Exhaust and draw cards when played."
   },
 
   "WrestlerMod:PenaltyCardGreen": {
@@ -91,7 +91,7 @@
     "NAMES": [
       "Orange Penalty Card", "orange_penalty_card"
     ],
-    "DESCRIPTION": "Gain #yFrail at end of turn. Deals damage to ALL enemies when drawn."
+    "DESCRIPTION": "Gain #yFrail when gained. Deals damage to ALL enemies when played."
   },
 
   "WrestlerMod:PenaltyCardRed": {

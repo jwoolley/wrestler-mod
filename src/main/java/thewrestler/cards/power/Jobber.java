@@ -36,7 +36,7 @@ public class Jobber extends CustomCard {
   private static final CardTarget TARGET = CardTarget.NONE;
 
   private static final int COST = 1;
-  private static final int BLOCK_AMOUNT = 4;
+  private static final int BLOCK_AMOUNT = 3;
   private static final int BLOCK_AMOUNT_UPGRADE = 2;
 
   public Jobber() {

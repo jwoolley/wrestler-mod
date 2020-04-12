@@ -43,7 +43,7 @@ public class AlleyOop extends CustomCard {
   public void use(AbstractPlayer p, AbstractMonster m) {
     AbstractDungeon.actionManager.addToBottom(
         new DiscardAction(p, p, this.magicNumber, false));
-    final Predicate<AbstractCard> predicate =  c -> c.cost <= MAX_CARD_COST && c.type == CardType.ATTACK;
+    final Predicate<AbstractCard> predicate =  c -> c.cost <= MAX_CARD_COST;
     AbstractDungeon.actionManager.addToBottom(
         new MoveRandomCardsFromDrawPileToHandAction(this.magicNumber, predicate));
   }

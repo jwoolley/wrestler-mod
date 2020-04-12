@@ -1,6 +1,7 @@
 package thewrestler.cards.colorless.status.penalty;
 
 import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
+import com.megacrit.cardcrawl.actions.common.DrawCardAction;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
@@ -33,9 +34,8 @@ public class BluePenaltyStatusCard extends AbstractPenaltyStatusCard {
   }
 
   @Override
-  public void use(AbstractPlayer p, AbstractMonster m) {
-    AbstractDungeon.actionManager.addToBottom(
-        new ApplyPowerAction(p, p, new DrawCardNextTurnPower(p, this.misc), this.misc));
+  public void triggerOnCardUsed(AbstractPlayer p, AbstractMonster m) {
+    AbstractDungeon.actionManager.addToBottom(new DrawCardAction(this.misc));
   }
 
   @Override
