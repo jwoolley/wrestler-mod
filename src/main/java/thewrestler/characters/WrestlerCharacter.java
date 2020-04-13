@@ -259,7 +259,7 @@ public class WrestlerCharacter extends CustomPlayer {
 
     public static void resetPenaltyCardInfo() {
         if (hasPenaltyCardInfo()) {
-            penaltyCardInfo.reset();
+            penaltyCardInfo.resetForCombat();
         } else {
             initializePenaltyCardInfo();
         }

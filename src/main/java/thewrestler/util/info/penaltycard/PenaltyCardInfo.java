@@ -32,11 +32,14 @@ public class PenaltyCardInfo implements StartOfCombatListener, EndOfCombatListen
     penaltyCardStrategy = getPenaltyCardStrategy();
   }
 
-  public void reset() {
+  public void resetForTurn() {
     hasWarningCard = false;
-    penaltyCardStrategy.resetForCombat();
   }
 
+  public void resetForCombat() {
+    penaltyCardStrategy.resetForCombat();
+    this.resetForTurn();
+  }
 
   public AbstractPenaltyStatusCard getPreviewCard() {
     return this.penaltyCardStrategy.previewNextCard();
@@ -70,7 +73,7 @@ public class PenaltyCardInfo implements StartOfCombatListener, EndOfCombatListen
   }
 
   private static void onPenaltyCardGained(AbstractPenaltyStatusCard penaltyCard) {
-    WrestlerCharacter.getPenaltyCardInfo().reset();
+    WrestlerCharacter.getPenaltyCardInfo().resetForTurn();
     List<AbstractPenaltyCardListener> listeners = new ArrayList<>();
     penaltyCard.triggerOnCardGained();
     listeners.addAll(getPenaltyCardListenerCards());
@@ -165,7 +168,7 @@ public class PenaltyCardInfo implements StartOfCombatListener, EndOfCombatListen
 
   public static void resetForNewCombat() {
     if (WrestlerCharacter.hasPenaltyCardInfo()) {
-      getInfo().reset();
+      getInfo().resetForCombat();
     }
   }
 
@@ -192,7 +195,7 @@ public class PenaltyCardInfo implements StartOfCombatListener, EndOfCombatListen
   // TODO: add hook to make this call (or use PostBattleSubscriber hook)
   public void onVictory(AbstractCard card) {
     WrestlerMod.logger.info("UnsportingInfo:: onVictory called");
-    reset();
+    resetForCombat();
   }
 
   public void atStartOfTurn() {
@@ -200,18 +203,18 @@ public class PenaltyCardInfo implements StartOfCombatListener, EndOfCombatListen
     //    if (CombatInfo.getNumDirtyCardsPlayed() == 0) {
     //      reset();
     //    }
-    reset();
+    resetForTurn();
   }
 
   public void atEndOfTurn() {
 
   }
   public void atStartOfCombat(){
-    reset();
+    resetForCombat();
   }
 
   public void atEndOfCombat() {
-    reset();
+    resetForCombat();
   }
 
   public static List<AbstractCard> getPlayersDirtyCards() {

@@ -99,7 +99,7 @@ public class RarityPenatlyCardStrategy extends AbstractPenaltyCardStrategy
 
   @Override
   public void resetForCombat() {
-
+    cardQueue.clear();
   }
 
   @Override
