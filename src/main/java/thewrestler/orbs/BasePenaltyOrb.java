@@ -5,8 +5,10 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.MathUtils;
+import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.core.Settings;
+import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.helpers.MathHelper;
 import com.megacrit.cardcrawl.helpers.PowerTip;
 import com.megacrit.cardcrawl.helpers.TipHelper;
@@ -154,7 +156,9 @@ abstract public class BasePenaltyOrb extends AbstractOrb {
         scale + MathUtils.sin(angle / PI_4) * ORB_WAVY_DIST * Settings.scale, scale, angle,
         0, 0, 96, 96, false, false);
 
-    // TODO: draw preview card on hover
+    if (this.hb.hovered) {
+      renderCardPreview(sb);
+    }
 
     hb.render(sb);
   }
@@ -193,6 +197,17 @@ abstract public class BasePenaltyOrb extends AbstractOrb {
 
     this.powerTips.clear();
     this.powerTips.addAll(tooltips);
+  }
+
+  public void renderCardPreview(SpriteBatch sb) {
+    final float drawScale = 1.0F;
+    float tmpScale = 0.7F;
+
+    this.penaltyCard.current_x = getXTooltipOffset() + (AbstractCard.IMG_WIDTH / 2.0F * 0.8F - 4.0F) * drawScale;
+    this.penaltyCard.current_y = (getYTooltipOffset() + 2.5f * (AbstractCard.IMG_HEIGHT / 2.0F - AbstractCard.IMG_HEIGHT / 2.0F * 0.65F) * drawScale);
+
+    this.penaltyCard.drawScale = tmpScale;
+    this.penaltyCard.render(sb);
   }
 
   @Override
