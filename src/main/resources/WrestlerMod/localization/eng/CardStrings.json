@@ -393,7 +393,7 @@
 
   "WrestlerMod:Pinfall": {
     "NAME": "Pinfall",
-    "DESCRIPTION": "Gain !B! Block. NL When you play a [P] , return this from your discard pile to your hand."
+    "DESCRIPTION": "Gain !B! Block. NL When you play a [P] , increase its Block by !M! this combat."
   },
 
   "WrestlerMod:PlayToTheCrowd": {
@@ -499,7 +499,7 @@
   },
 
   "WrestlerMod:Shortarm": {
-    "NAME": "Shortarm",
+    "NAME": "Double Down",
     "DESCRIPTION": "wrestlermod:Dirty. NL Deal !D! damage twice. NL Double the effect of the next [P] you play this turn."
   },
 

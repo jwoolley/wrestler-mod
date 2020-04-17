@@ -37,6 +37,7 @@ import thewrestler.cards.colorless.skill.FairPlay;
 import thewrestler.cards.curse.Predictable;
 import thewrestler.cards.power.*;
 import thewrestler.cards.skill.*;
+import thewrestler.cards.unused.OrbSkill;
 import thewrestler.characters.WrestlerCharacter;
 import thewrestler.enums.AbstractCardEnum;
 import thewrestler.enums.WrestlerCharEnum;
@@ -175,7 +176,7 @@ public class WrestlerMod implements
     }
 
     public static String makeOrbPath(String resourcePath) {
-        return getImageResourcePath("orb/" + resourcePath);
+        return getImageResourcePath("orbs/" + resourcePath);
     }
 
     public static String makePowerPath(String resourcePath) {
@@ -567,6 +568,9 @@ public class WrestlerMod implements
         BaseMod.addCard(new TripleThreat());
         BaseMod.addCard(new WindUpKick());
 
+
+        BaseMod.addCard(new OrbSkill());
+        UnlockTracker.unlockCard(OrbSkill.ID);
 
         /* TO BE REWORKED {
             BaseMod.addCard(new BlowOff());

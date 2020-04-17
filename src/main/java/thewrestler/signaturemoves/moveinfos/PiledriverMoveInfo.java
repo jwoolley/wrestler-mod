@@ -50,12 +50,7 @@ public class PiledriverMoveInfo extends AbstractSignatureMoveInfo {
 
   @Override
   public void _atEndOfTurn() {
-    if (AbstractDungeon.player.drawPile.size() <= MAX_CARDS) {
-      numTurns++;
-      if (numTurns == TURNS_REQUIRED) {
-        //        triggerGainCard();
-      }
-    }
+
   }
 
   @Override

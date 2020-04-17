@@ -31,6 +31,7 @@ public class MainEvent extends CustomCard {
   private static final CardTarget TARGET = CardTarget.NONE;
 
   private static final int COST = 1;
+  private static final int BRAVADO_GAIN = 2;
 
   public MainEvent() {
     super(ID, NAME, getCardResourcePath(IMG_PATH), COST, getDescription(false), TYPE,

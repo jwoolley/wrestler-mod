@@ -50,8 +50,8 @@ public abstract class AbstractSignatureMoveInfo implements AbstractSignatureMove
     this.upgradeList.addAll(upgrades);
   }
 
-  public void triggerGainTrademarkMove() {
-    this.triggerGainCard();
+  public void triggerGainTrademarkMove(boolean toDeck) {
+    this.triggerGainCard(toDeck);
   }
 
   public abstract boolean gainedCardThisCombat();
@@ -90,20 +90,19 @@ public abstract class AbstractSignatureMoveInfo implements AbstractSignatureMove
   }
 
 
-  public void triggerGainCard() {
+  public void triggerGainCard(boolean toDeck) {
     if (this.canStillTriggerCardGain()) {
-      triggerGainCard(false,false);
+      triggerGainCard(toDeck,false);
     }
   }
 
   protected void triggerGainCard(boolean toDeck, boolean onTop) {
-    AbstractSignatureMoveCard card = this.signatureMoveCard.makeCopy();
-    card.setCostForTurn(0);
+    final AbstractSignatureMoveCard card = this.signatureMoveCard.makeCopy();
 
     if (toDeck) {
-      AbstractDungeon.actionManager.addToTop(new MakeTempCardInDrawPileAction(this.signatureMoveCard, 1, !onTop, onTop));
+      AbstractDungeon.actionManager.addToTop(new MakeTempCardInDrawPileAction(card, 1, !onTop, onTop));
     } else {
-      AbstractDungeon.actionManager.addToTop(new MakeTempCardInHandAction(this.signatureMoveCard));
+      AbstractDungeon.actionManager.addToTop(new MakeTempCardInHandAction(card));
     }
 
     this.flagCardAsGained();

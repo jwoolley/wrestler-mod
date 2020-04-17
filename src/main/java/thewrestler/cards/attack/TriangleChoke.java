@@ -37,7 +37,7 @@ public class TriangleChoke extends CustomCard {
   private static final int DAMAGE = 7;
   private static final int BLOCK = 7;
   private static final int DAMAGE__AND_BLOCK_UPGRADE = 3;
-  private static final int NUM_BRAVADO = 1;
+  private static final int NUM_BRAVADO = 2;
   private static final int MIN_NONATTACK_CARDS = 2;
 
   public TriangleChoke() {

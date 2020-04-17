@@ -26,7 +26,7 @@ public class YellowPenaltyStatusCard extends AbstractPenaltyStatusCard {
   private static final CardStrings cardStrings;
 
   private static final int ENERGY_GAIN = 1;
-  private static final int BRAVADO_LOSS = 2;
+  private static final int BRAVADO_LOSS = 1;
 
   public YellowPenaltyStatusCard() {
     super(ID, NAME, IMG_PATH, IMG_KEY, getDescription(ENERGY_GAIN), TOOLTIP_KEYWORD_KEY);

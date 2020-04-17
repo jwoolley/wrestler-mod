@@ -19,8 +19,10 @@ import com.megacrit.cardcrawl.orbs.AbstractOrb;
 import com.megacrit.cardcrawl.vfx.combat.DarkOrbActivateEffect;
 import com.megacrit.cardcrawl.vfx.combat.DarkOrbPassiveEffect;
 import com.megacrit.cardcrawl.vfx.combat.OrbFlareEffect;
+import org.omg.CORBA.ORB;
 import thewrestler.WrestlerMod;
 import thewrestler.util.TextureLoader;
+import thewrestler.util.info.penaltycard.PenaltyCardInfo;
 
 import static thewrestler.WrestlerMod.makeOrbPath;
 
@@ -31,7 +33,7 @@ public class DefaultOrb extends AbstractOrb {
     private static final OrbStrings orbString = CardCrawlGame.languagePack.getOrbString(ORB_ID);
     public static final String[] DESC = orbString.DESCRIPTION;
 
-    private static final Texture IMG = TextureLoader.getTexture(makeOrbPath("default_orb.png"));
+    private static final Texture IMG = TextureLoader.getTexture(makeOrbPath("bluecardorb2.png"));
     // Animation Rendering Numbers - You can leave these at default, or play around with them and see what they change.
     private float vfxTimer = 1.0f;
     private float vfxIntervalMin = 0.1f;
@@ -50,7 +52,7 @@ public class DefaultOrb extends AbstractOrb {
 
         updateDescription();
 
-        angle = MathUtils.random(360.0f); // More Animation-related Numbers
+        angle = MathUtils.random(5.0f); // More Animation-related Numbers
         channelAnimTimer = 0.5f;
     }
 
@@ -92,24 +94,56 @@ public class DefaultOrb extends AbstractOrb {
     public void updateAnimation() {// You can totally leave this as is.
         // If you want to create a whole new orb effect - take a look at conspire's Water Orb. It includes a custom sound, too!
         super.updateAnimation();
-        angle += Gdx.graphics.getDeltaTime() * 45.0f;
+//        angle += Gdx.graphics.getDeltaTime() * 45.0f;
         vfxTimer -= Gdx.graphics.getDeltaTime();
         if (vfxTimer < 0.0f) {
-            AbstractDungeon.effectList.add(new DarkOrbPassiveEffect(cX, cY)); // This is the purple-sparkles in the orb. You can change this to whatever fits your orb.
+//            AbstractDungeon.effectList.add(new DarkOrbPassiveEffect(cX, cY)); // This is the purple-sparkles in the orb. You can change this to whatever fits your orb.
             vfxTimer = MathUtils.random(vfxIntervalMin, vfxIntervalMax);
         }
     }
 
     // Render the orb.
+    private boolean hadWarningCard = false;
+    private boolean alphaWaning = false;
+    private final float ORB_ALPHA_MAX = 1.5f;
+    private final float ORB_ALPHA_MIN = 1.0f;
+    private final float ORB_ALPHA_DELTA = 0.01f;
+    private final float ORB_ALPHA_NO_WARNING = 2.0f;
+    private float orbAlphaModifier = ORB_ALPHA_MAX;
+
     @Override
     public void render(SpriteBatch sb) {
-        sb.setColor(new Color(1.0f, 1.0f, 1.0f, c.a / 2.0f));
+
+        if (PenaltyCardInfo.hasWarningCard()) {
+            if (!hadWarningCard) {
+                orbAlphaModifier = ORB_ALPHA_MAX;
+                hadWarningCard = true;
+            }
+            sb.setColor(new Color(1.0f, 1.0f, 1.0f, c.a /orbAlphaModifier));
+
+            if (alphaWaning) {
+                orbAlphaModifier -= ORB_ALPHA_DELTA;
+                if (orbAlphaModifier <= ORB_ALPHA_MIN) {
+                    alphaWaning = false;
+                }
+            } else {
+                orbAlphaModifier += ORB_ALPHA_DELTA;
+                if (orbAlphaModifier >= ORB_ALPHA_MAX) {
+                    alphaWaning = true;
+                }
+            }
+        } else {
+            sb.setColor(new Color(0.75f, 0.75f, 0.75f, c.a / ORB_ALPHA_NO_WARNING));
+            hadWarningCard = false;
+        }
+
         sb.draw(img, cX - 48.0f, cY - 48.0f + bobEffect.y, 48.0f, 48.0f, 96.0f, 96.0f, scale + MathUtils.sin(angle / PI_4) * ORB_WAVY_DIST * Settings.scale, scale, angle, 0, 0, 96, 96, false, false);
-        sb.setColor(new Color(1.0f, 1.0f, 1.0f, this.c.a / 2.0f));
-        sb.setBlendFunction(770, 1);
-        sb.draw(img, cX - 48.0f, cY - 48.0f + bobEffect.y, 48.0f, 48.0f, 96.0f, 96.0f, scale, scale + MathUtils.sin(angle / PI_4) * ORB_WAVY_DIST * Settings.scale, -angle, 0, 0, 96, 96, false, false);
-        sb.setBlendFunction(770, 771);
-        renderText(sb);
+
+        //        sb.setColor(new Color(1.0f, 1.0f, 1.0f, this.c.a / 2.0f));
+//        sb.setBlendFunction(770, 1);
+//        sb.draw(img, cX - 48.0f, cY - 48.0f + bobEffect.y, 48.0f, 48.0f, 96.0f, 96.0f, scale, scale + MathUtils.sin(angle / PI_4) * ORB_WAVY_DIST * Settings.scale, -angle, 0, 0, 96, 96, false, false);
+//        sb.setBlendFunction(770, 771);
+//        renderText(sb);
         hb.render(sb);
     }
 

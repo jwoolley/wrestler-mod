@@ -12,7 +12,7 @@
     "NAME": "Bravado",
     "DESCRIPTIONS": [
       "When you obtain #b",
-      " #yBravado, gain one of your #yTrademark #yMoves."
+      " #yBravado, shuffle one of your #yTrademark #yMoves into your draw pile."
     ]
   },
 
@@ -145,6 +145,18 @@
     ]
   },
 
+
+  "WrestlerMod:MainEventPower": {
+    "NAME": "Main Event",
+    "DESCRIPTIONS": [
+      "The next",
+      " time",
+      " #b",
+      " times",
+      "you gain a #yTrademark #yMove this combat, it to your hand instead of shuffling it into your draw pile."
+    ]
+  },
+
   "WrestlerMod:NearFallPower": {
     "NAME": "Near-Fall",
     "DESCRIPTIONS": [
@@ -195,7 +207,7 @@
   },
 
   "WrestlerMod:ShortarmPower": {
-    "NAME": "Shortarm",
+    "NAME": "Double Down",
     "DESCRIPTIONS": [
       "Double the effect of the next",
       " #yPenalty #yCard",

@@ -32,18 +32,20 @@ public class Pinfall extends CustomCard {
   private static final CardStrings cardStrings;
 
   private static final CardType TYPE = CardType.SKILL;
-  private static final CardRarity RARITY = CardRarity.COMMON;
+  private static final CardRarity RARITY = CardRarity.UNCOMMON;
   private static final CardTarget TARGET = CardTarget.SELF;
 
   private static final int BLOCK_AMOUNT = 3;
-  private static final int BLOCK_AMOUNT_UPGRADE = 2;
+  private static final int BLOCK_AMOUNT_UPGRADE = 1;
+  private static final int BLOCK_INCREASE = 3;
+  private static final int BLOCK_INCREASE_UPGRADE = 1;
   private static final int COST = 0;
 
   public Pinfall() {
     super(ID, NAME, getCardResourcePath(IMG_PATH), COST, getDescription(), TYPE, AbstractCardEnum.THE_WRESTLER_ORANGE,
         RARITY, TARGET);
     this.baseBlock = this.block = BLOCK_AMOUNT;
-    this.selfRetain = false;
+    this.baseMagicNumber = this.magicNumber = BLOCK_INCREASE;
   }
 
   @Override
@@ -52,13 +54,6 @@ public class Pinfall extends CustomCard {
     this.selfRetain = false;
   }
 
-  @Override
-  public void triggerOnEndOfPlayerTurn() {
-    super.triggerOnEndOfPlayerTurn();
-    if (this.selfRetain) {
-      this.flash();
-    }
-  }
 
   @Override
   public AbstractCard makeCopy() {
@@ -70,6 +65,7 @@ public class Pinfall extends CustomCard {
     if (!this.upgraded) {
       this.upgradeName();
       this.upgradeBlock(BLOCK_AMOUNT_UPGRADE);
+      this.upgradeMagicNumber(BLOCK_INCREASE_UPGRADE);
       this.rawDescription = getDescription();
       initializeDescription();
     }
@@ -98,7 +94,7 @@ public class Pinfall extends CustomCard {
   @Override
   public void onPlayCard(AbstractCard card, AbstractMonster m) {
     if (card.hasTag(WrestlerCardTags.PENALTY)) {
-      AbstractDungeon.actionManager.addToBottom(new DiscardToHandAction(this));
-    }
+      this.upgradeBlock(this.magicNumber);
+;    }
   }
 }

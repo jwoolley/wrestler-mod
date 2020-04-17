@@ -59,7 +59,7 @@ public class WrestlerCharacter extends CustomPlayer {
     public static final int MAX_HP = 75;
     public static final int STARTING_GOLD = 99;
     public static final int CARD_DRAW = 5;
-    public static final int ORB_SLOTS = 0;
+    public static final int ORB_SLOTS = 1;
 
     private static final String ID = makeID("TheWrestler"); // needs to be the key from CharacterStrings.json
     private static final CharacterStrings characterStrings = CardCrawlGame.languagePack.getCharacterString(ID);
@@ -172,7 +172,7 @@ public class WrestlerCharacter extends CustomPlayer {
         } else {
             return new AbstractSignatureMoveInfoInterface() {
                 @Override
-                public void triggerGainTrademarkMove() {
+                public void triggerGainTrademarkMove(boolean toDeck) {
 
                 }
 

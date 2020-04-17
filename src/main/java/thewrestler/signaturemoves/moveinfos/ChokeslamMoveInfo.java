@@ -65,10 +65,7 @@ public class ChokeslamMoveInfo extends AbstractSignatureMoveInfo {
 
   @Override
   public void onEnemyGrappled() {
-    grappledCount++;
-    if (grappledCount == GRAPPLES_REQUIRED) {
-//      triggerGainCard();
-    }
+
   }
 
   // TODO: move this text to UiStrings.json

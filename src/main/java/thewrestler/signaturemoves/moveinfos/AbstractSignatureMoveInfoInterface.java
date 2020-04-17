@@ -12,7 +12,7 @@ import thewrestler.signaturemoves.upgrades.UpgradeType;
 import java.net.URI;
 
 public interface AbstractSignatureMoveInfoInterface extends StartOfCombatListener, EndOfCombatListener {
-  void triggerGainTrademarkMove();
+  void triggerGainTrademarkMove(boolean toDeck);
   AbstractSignatureMoveCard getSignatureMoveCardReference();
   SignatureMoveUpgradeList getUpgradeList();
   void applyUpgrade(AbstractSignatureMoveUpgrade upgrade);
