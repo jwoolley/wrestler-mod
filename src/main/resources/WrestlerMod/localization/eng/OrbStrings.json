@@ -7,5 +7,48 @@
       " cards.",
       "NL #yEvoke: Deal #b damage to all enemies."
     ]
+  },
+
+  "WrestlerMod:BasePenaltyOrb": {
+    "NAME": "Next Penalty Card: ",
+    "DESCRIPTION": [
+      "Play #b",
+      " more #yDirty cards this turn to gain this Penalty Card."
+    ]
+  },
+
+  "WrestlerMod:BluePenaltyOrb": {
+    "NAME": "Blue",
+    "DESCRIPTION": [
+      "Blue"
+    ]
+  },
+
+  "WrestlerMod:GreenPenaltyOrb": {
+    "NAME": "Green",
+    "DESCRIPTION": [
+      "Green"
+    ]
+  },
+
+  "WrestlerMod:OrangePenaltyOrb": {
+    "NAME": "Orange",
+    "DESCRIPTION": [
+      "Orange"
+    ]
+  },
+
+  "WrestlerMod:RedPenaltyOrb": {
+    "NAME": "Red",
+    "DESCRIPTION": [
+      "Red"
+    ]
+  },
+
+  "WrestlerMod:YellowPenaltyOrb": {
+    "NAME": "Yellow",
+    "DESCRIPTION": [
+      "Yellow"
+    ]
   }
 }

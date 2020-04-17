@@ -7,6 +7,7 @@ import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.core.Settings;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
+import com.megacrit.cardcrawl.orbs.AbstractOrb;
 import thewrestler.WrestlerMod;
 import thewrestler.cards.EndOfCombatListener;
 import thewrestler.cards.StartOfCombatListener;
@@ -14,6 +15,7 @@ import thewrestler.cards.WrestlerCardTags;
 import thewrestler.cards.colorless.status.penalty.AbstractPenaltyStatusCard;
 import thewrestler.cards.skill.AbstractPenaltyCardListener;
 import thewrestler.characters.WrestlerCharacter;
+import thewrestler.orbs.BasePenaltyOrb;
 import thewrestler.powers.NoPenaltyPower;
 import thewrestler.util.BasicUtils;
 import thewrestler.util.info.CombatInfo;
@@ -177,6 +179,10 @@ public class PenaltyCardInfo implements StartOfCombatListener, EndOfCombatListen
     if (card.hasTag(WrestlerCardTags.DIRTY)) {
       handleDirtyCardPlayed();
       CombatInfo.incrementDirtyCardsPlayedCount();
+
+      AbstractDungeon.player.orbs.stream()
+          .filter(o -> o instanceof BasePenaltyOrb)
+          .forEach(AbstractOrb::updateDescription);
     }
   }
 
@@ -191,6 +197,11 @@ public class PenaltyCardInfo implements StartOfCombatListener, EndOfCombatListen
       this.hasWarningCard = true;
     }
   }
+
+  public static int numDirtyCardsToTriggerNextGain() {
+    return hasPenaltyCardInfo() ? (getInfo().hasWarningCard ? 1 : 2) : 99;
+  }
+
 
   // TODO: add hook to make this call (or use PostBattleSubscriber hook)
   public void onVictory(AbstractCard card) {

@@ -1,5 +1,6 @@
 package thewrestler.ui;
 
+import basemod.ReflectionHacks;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
@@ -126,6 +127,10 @@ public class WrestlerPenaltyCardInfoPanel implements CustomInfoPanel, StartOfCom
           false, false);
 
       if (this.hb.hovered) {
+
+        boolean renderedTipThisFrame = (Boolean)ReflectionHacks.getPrivateStatic(TipHelper.class, "renderedTipThisFrame");
+        WrestlerMod.logger.info("WrestlerPenaltyCardInfoPanel.render :: renderedTipThisFrame: " + renderedTipThisFrame);
+
         TipHelper.queuePowerTips(
             hb.x + TOOLTIP_X_OFFSET * SettingsHelper.getScaleX(),
             hb.y - TOOLTIP_Y_OFFSET * SettingsHelper.getScaleY(), powerTips);

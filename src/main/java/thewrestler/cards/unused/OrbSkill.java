@@ -9,7 +9,9 @@ import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import thewrestler.WrestlerMod;
 import thewrestler.cards.AbstractDynamicCard;
 import thewrestler.enums.AbstractCardEnum;
+import thewrestler.orbs.BluePenaltyOrb;
 import thewrestler.orbs.DefaultOrb;
+import thewrestler.orbs.RedPenaltyOrb;
 
 import static thewrestler.WrestlerMod.getCardResourcePath;
 
@@ -54,7 +56,7 @@ public class OrbSkill extends AbstractDynamicCard {
     @Override
     public void use(AbstractPlayer p, AbstractMonster m) {
 
-        AbstractDungeon.actionManager.addToBottom(new ChannelAction(new DefaultOrb())); // Channel a Default Orb.
+        AbstractDungeon.actionManager.addToBottom(new ChannelAction(new RedPenaltyOrb())); // Channel a Default Orb.
 
     }
 
