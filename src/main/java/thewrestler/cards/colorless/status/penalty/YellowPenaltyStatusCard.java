@@ -11,6 +11,9 @@ import com.megacrit.cardcrawl.powers.EnergizedPower;
 import org.apache.commons.lang3.StringUtils;
 import thewrestler.keywords.CustomTooltipKeyword;
 import thewrestler.keywords.CustomTooltipKeywords;
+import thewrestler.orbs.BasePenaltyOrb;
+import thewrestler.orbs.GreenPenaltyOrb;
+import thewrestler.orbs.YellowPenaltyOrb;
 import thewrestler.powers.BravadoPower;
 
 public class YellowPenaltyStatusCard extends AbstractPenaltyStatusCard {
@@ -22,6 +25,7 @@ public class YellowPenaltyStatusCard extends AbstractPenaltyStatusCard {
   public static final String TOOLTIP_KEYWORD_KEY = CustomTooltipKeywords.PENALTY_CARD_YELLOW;
   public static final String IMG_KEY = "yellow";
   public static final String IMG_PATH = getPenaltyCardImgPath(IMG_KEY + ".png");
+
 
   private static final CardStrings cardStrings;
 
@@ -39,6 +43,12 @@ public class YellowPenaltyStatusCard extends AbstractPenaltyStatusCard {
   public void triggerOnCardUsed(AbstractPlayer p, AbstractMonster m) {
     AbstractDungeon.actionManager.addToBottom(new ApplyPowerAction(p, p, new EnergizedPower(p, this.misc), this.misc));
   }
+
+  @Override
+  public BasePenaltyOrb getOrb() {
+    return new YellowPenaltyOrb();
+  }
+
 
   @Override
   public AbstractPenaltyStatusCard makeCopy() {

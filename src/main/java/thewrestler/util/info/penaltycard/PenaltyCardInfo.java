@@ -36,6 +36,7 @@ public class PenaltyCardInfo implements StartOfCombatListener, EndOfCombatListen
 
   public void resetForTurn() {
     hasWarningCard = false;
+    resetPenaltyOrbs();
   }
 
   public void resetForCombat() {
@@ -80,8 +81,14 @@ public class PenaltyCardInfo implements StartOfCombatListener, EndOfCombatListen
     penaltyCard.triggerOnCardGained();
     listeners.addAll(getPenaltyCardListenerCards());
     listeners.addAll(getPenaltyCardListenerPowers());
-    listeners.forEach(liatener -> liatener.onGainedPenaltyCard(penaltyCard));
+    listeners.forEach(listener -> listener.onGainedPenaltyCard(penaltyCard));
     CombatInfo.incrementPenaltyCardsGainedThisCombatCount();
+    resetPenaltyOrbs();
+  }
+
+  private static void resetPenaltyOrbs() {
+    BasePenaltyOrb.clearPenaltyOrbs();
+    BasePenaltyOrb.channelPenaltyOrb(getPenaltyCardStrategy().previewNextCard().getOrb());
   }
 
   private final static AbstractPenaltyCardStrategy DEFAULT_STRATEGY = new RarityPenatlyCardStrategy();
@@ -180,9 +187,7 @@ public class PenaltyCardInfo implements StartOfCombatListener, EndOfCombatListen
       handleDirtyCardPlayed();
       CombatInfo.incrementDirtyCardsPlayedCount();
 
-      AbstractDungeon.player.orbs.stream()
-          .filter(o -> o instanceof BasePenaltyOrb)
-          .forEach(AbstractOrb::updateDescription);
+      BasePenaltyOrb.updateDescriptions();
     }
   }
 
@@ -240,6 +245,7 @@ public class PenaltyCardInfo implements StartOfCombatListener, EndOfCombatListen
 
     return dirtyCards;
   }
+
 
   public static List<AbstractPenaltyCardListener> getPenaltyCardListenerPowers() {
     return AbstractDungeon.player.powers.stream()

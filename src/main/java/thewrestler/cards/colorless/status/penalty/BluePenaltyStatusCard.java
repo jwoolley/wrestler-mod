@@ -10,6 +10,8 @@ import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.powers.DrawCardNextTurnPower;
 import thewrestler.actions.power.GainPlatedArmorRandomMonsterAction;
 import thewrestler.keywords.CustomTooltipKeywords;
+import thewrestler.orbs.BasePenaltyOrb;
+import thewrestler.orbs.BluePenaltyOrb;
 
 public class BluePenaltyStatusCard extends AbstractPenaltyStatusCard {
   public static final String ID = "WrestlerMod:BluePenaltyStatusCard";
@@ -20,7 +22,6 @@ public class BluePenaltyStatusCard extends AbstractPenaltyStatusCard {
   public static final String TOOLTIP_KEYWORD_KEY = CustomTooltipKeywords.PENALTY_CARD_BLUE;
   public static final String IMG_KEY = "blue";
   public static final String IMG_PATH = getPenaltyCardImgPath(IMG_KEY + ".png");
-
   private static final CardStrings cardStrings;
 
   private static final int CARD_DRAW_AMOUNT = 2;
@@ -36,6 +37,11 @@ public class BluePenaltyStatusCard extends AbstractPenaltyStatusCard {
   @Override
   public void triggerOnCardUsed(AbstractPlayer p, AbstractMonster m) {
     AbstractDungeon.actionManager.addToBottom(new DrawCardAction(this.misc));
+  }
+
+  @Override
+  public BasePenaltyOrb getOrb() {
+    return new BluePenaltyOrb();
   }
 
   @Override

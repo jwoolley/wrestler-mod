@@ -11,6 +11,9 @@ import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.powers.StrengthPower;
 import thewrestler.keywords.CustomTooltipKeywords;
+import thewrestler.orbs.BasePenaltyOrb;
+import thewrestler.orbs.GreenPenaltyOrb;
+import thewrestler.orbs.RedPenaltyOrb;
 
 public class RedPenaltyStatusCard extends AbstractPenaltyStatusCard {
   public static final String ID = "WrestlerMod:RedPenaltyStatusCard";
@@ -39,6 +42,12 @@ public class RedPenaltyStatusCard extends AbstractPenaltyStatusCard {
     AbstractDungeon.actionManager.addToBottom(
         new ApplyPowerAction(p, p, new StrengthPower(p, STRENGTH_GAIN), STRENGTH_GAIN));
   }
+
+  @Override
+  public BasePenaltyOrb getOrb() {
+    return new RedPenaltyOrb();
+  }
+
 
   @Override
   public AbstractPenaltyStatusCard makeCopy() {

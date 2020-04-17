@@ -6,6 +6,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.MathUtils;
 import com.megacrit.cardcrawl.cards.AbstractCard;
+import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.core.Settings;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
@@ -15,6 +16,7 @@ import com.megacrit.cardcrawl.helpers.TipHelper;
 import com.megacrit.cardcrawl.localization.Keyword;
 import com.megacrit.cardcrawl.localization.OrbStrings;
 import com.megacrit.cardcrawl.orbs.AbstractOrb;
+import com.megacrit.cardcrawl.orbs.EmptyOrbSlot;
 import thewrestler.WrestlerMod;
 import thewrestler.cards.colorless.status.penalty.AbstractPenaltyStatusCard;
 import thewrestler.keywords.AbstractTooltipKeyword;
@@ -26,7 +28,10 @@ import thewrestler.util.info.penaltycard.PenaltyCardInfo;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.zip.Adler32;
 
 import static thewrestler.WrestlerMod.makeOrbPath;
 
@@ -208,6 +213,42 @@ abstract public class BasePenaltyOrb extends AbstractOrb {
 
     this.penaltyCard.drawScale = tmpScale;
     this.penaltyCard.render(sb);
+  }
+
+  public static void channelPenaltyOrb(BasePenaltyOrb orb) {
+    if (AbstractDungeon.isPlayerInDungeon() && AbstractDungeon.player != null && AbstractDungeon.player.orbs != null) {
+      AbstractDungeon.player.channelOrb(orb);
+    }
+  }
+
+  public static void clearPenaltyOrbs() {
+    AbstractPlayer player = AbstractDungeon.player;
+    if (AbstractDungeon.isPlayerInDungeon() && AbstractDungeon.player != null
+        && AbstractDungeon.player.orbs != null && !player.orbs.isEmpty()) {
+
+      final List<Integer> freedSlots = new ArrayList<>();
+
+      for (int i = 0; i < player.orbs.size(); i++) {
+        if (player.orbs.get(i) != null) {
+          if (player.orbs.get(i) instanceof BasePenaltyOrb) {
+            player.orbs.get(i).setSlot(i, player.maxOrbs);
+            freedSlots.add(i);
+          } else if (!freedSlots.isEmpty() && !(player.orbs.get(i) instanceof EmptyOrbSlot)) {
+            Collections.swap(player.orbs, i, freedSlots.get(0));
+            freedSlots.remove(0);
+            freedSlots.add(i);
+          }
+        }
+      }
+    }
+  }
+
+  public static void updateDescriptions() {
+    if (AbstractDungeon.isPlayerInDungeon() && AbstractDungeon.player != null && AbstractDungeon.player.orbs != null) {
+      AbstractDungeon.player.orbs.stream()
+          .filter(o -> o instanceof BasePenaltyOrb)
+          .forEach(AbstractOrb::updateDescription);
+    }
   }
 
   @Override

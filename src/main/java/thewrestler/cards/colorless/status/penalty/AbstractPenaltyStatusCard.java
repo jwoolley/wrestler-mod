@@ -9,6 +9,7 @@ import thewrestler.cards.WrestlerCardTags;
 import thewrestler.cards.attack.Shortarm;
 import thewrestler.keywords.CustomTooltipKeyword;
 import thewrestler.keywords.CustomTooltipKeywords;
+import thewrestler.orbs.BasePenaltyOrb;
 import thewrestler.powers.ShortarmPower;
 import thewrestler.ui.UiHelper;
 
@@ -63,6 +64,8 @@ public abstract class AbstractPenaltyStatusCard extends CustomCard {
       this.triggerOnCardUsed(p, m);
     }
   }
+
+  public abstract BasePenaltyOrb getOrb();
 
   static String getPenaltyCardImgPath(String imgFilename) {
     return getCardResourcePath(IMG_PATH_PREFIX + imgFilename);

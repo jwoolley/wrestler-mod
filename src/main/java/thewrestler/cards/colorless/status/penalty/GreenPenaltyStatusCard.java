@@ -11,6 +11,9 @@ import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.powers.DexterityPower;
 import com.megacrit.cardcrawl.vfx.GainPennyEffect;
 import thewrestler.keywords.CustomTooltipKeywords;
+import thewrestler.orbs.BasePenaltyOrb;
+import thewrestler.orbs.BluePenaltyOrb;
+import thewrestler.orbs.GreenPenaltyOrb;
 
 public class GreenPenaltyStatusCard extends AbstractPenaltyStatusCard {
   public static final String ID = "WrestlerMod:GreenPenaltyStatusCard";
@@ -39,6 +42,12 @@ public class GreenPenaltyStatusCard extends AbstractPenaltyStatusCard {
     AbstractDungeon.actionManager.addToBottom(
         new ApplyPowerAction(p, p, new DexterityPower(p, DEXTERITY_GAIN), DEXTERITY_GAIN));
   }
+
+  @Override
+  public BasePenaltyOrb getOrb() {
+    return new GreenPenaltyOrb();
+  }
+
 
   @Override
   public AbstractPenaltyStatusCard makeCopy() {
