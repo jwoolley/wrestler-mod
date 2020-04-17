@@ -510,6 +510,7 @@ public class WrestlerMod implements
         BaseMod.addCard(new CleanFinish());
         BaseMod.addCard(new CloverleafAttack());
         BaseMod.addCard(new CobraClutch());
+        BaseMod.addCard(new ComeClean());
         BaseMod.addCard(new CurtainJerker());
         BaseMod.addCard(new DivingStomp());
         BaseMod.addCard(new ElbowDrop());
@@ -615,6 +616,7 @@ public class WrestlerMod implements
         UnlockTracker.unlockCard(CleanFinish.ID);
         UnlockTracker.unlockCard(CloverleafAttack.ID);
         UnlockTracker.unlockCard(CobraClutch.ID);
+        UnlockTracker.unlockCard(ComeClean.ID);
         UnlockTracker.unlockCard(CurtainJerker.ID);
         UnlockTracker.unlockCard(DivingStomp.ID);
         UnlockTracker.unlockCard(ElbowDrop.ID);

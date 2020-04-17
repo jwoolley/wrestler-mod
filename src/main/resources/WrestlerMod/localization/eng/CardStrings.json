@@ -87,6 +87,19 @@
     ]
   },
 
+  "WrestlerMod:ComeClean": {
+    "NAME": "ComeClean",
+    "DESCRIPTION": "Discard !M!",
+    "EXTENDED_DESCRIPTION": [
+      " card",
+      " cards",
+      ". NL Draw !M!",
+      ". NL If you discarded a [P] or a wrestlermod:Dirty card, draw ",
+      " cards instead."
+    ]
+  },
+
+
   "WrestlerMod:Glower": {
     "NAME": "Glower",
     "DESCRIPTION": "wrestlermod:Dirty. NL Exhaust a card from your discard pile. NL Gain [E] equal to its cost.",
