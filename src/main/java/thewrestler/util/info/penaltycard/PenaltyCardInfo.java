@@ -78,6 +78,7 @@ public class PenaltyCardInfo implements StartOfCombatListener, EndOfCombatListen
   private static void onPenaltyCardGained(AbstractPenaltyStatusCard penaltyCard) {
     WrestlerCharacter.getPenaltyCardInfo().resetForTurn();
     List<AbstractPenaltyCardListener> listeners = new ArrayList<>();
+    penaltyCard.triggerOnCardGained();
     listeners.addAll(getPenaltyCardListenerCards());
     listeners.addAll(getPenaltyCardListenerPowers());
     listeners.forEach(listener -> listener.onGainedPenaltyCard(penaltyCard));
@@ -222,8 +223,8 @@ public class PenaltyCardInfo implements StartOfCombatListener, EndOfCombatListen
   }
 
   public void atEndOfTurn() {
-    AbstractPenaltyStatusCard.triggerPenaltyCardsEndOfTurn();
   }
+
   public void atStartOfCombat(){
     resetForCombat();
   }

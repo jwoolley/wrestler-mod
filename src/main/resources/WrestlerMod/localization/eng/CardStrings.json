@@ -711,7 +711,7 @@
 
   "WrestlerMod:BluePenaltyStatusCard": {
     "NAME": "Blue Penalty Card",
-    "DESCRIPTION": "At the end of your turn, a random enemy gains !M! *Plated *Armor. NL Retain. NL Draw ",
+    "DESCRIPTION": "When you gain this card, a random enemy gains !M! *Plated *Armor. NL Retain. NL Draw ",
     "EXTENDED_DESCRIPTION": [
       " cards. NL Exhaust."
     ]
@@ -719,7 +719,7 @@
 
   "WrestlerMod:GreenPenaltyStatusCard": {
     "NAME": "Green Penalty Card",
-    "DESCRIPTION": "At the end of your turn, lose ",
+    "DESCRIPTION": "When you gain this card, lose ",
     "EXTENDED_DESCRIPTION": [
       " Gold. NL Retain. NL Gain !M! Dexterity. NL Exhaust."
     ]
@@ -727,12 +727,12 @@
 
   "WrestlerMod:OrangePenaltyStatusCard": {
     "NAME": "Orange Penalty Card",
-    "DESCRIPTION": "At the end of your turn, gain !M! Frail. NL Retain. NL Deal !D! damage to ALL enemies. NL Exhaust."
+    "DESCRIPTION": "When you gain this card, gain !M! Frail. NL Retain. NL Deal !D! damage to ALL enemies. NL Exhaust."
   },
 
   "WrestlerMod:RedPenaltyStatusCard": {
     "NAME": "Red Penalty Card",
-    "DESCRIPTION": "At the end of your turn, take ",
+    "DESCRIPTION": "When you gain this card, take ",
     "EXTENDED_DESCRIPTION": [
       " damage. NL Retain. NL Gain !M! Strength. NL Exhaust."
     ]

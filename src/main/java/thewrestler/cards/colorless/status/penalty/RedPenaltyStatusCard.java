@@ -29,7 +29,7 @@ public class RedPenaltyStatusCard extends AbstractPenaltyStatusCard {
   private static final CardStrings cardStrings;
 
   private static final int STRENGTH_GAIN = 2;
-  private static final int DAMAGE = 3;
+  private static final int DAMAGE = 5;
 
   public RedPenaltyStatusCard() {
     super(ID, NAME, IMG_PATH, IMG_KEY, getDescription(), TOOLTIP_KEYWORD_KEY);
@@ -74,7 +74,7 @@ public class RedPenaltyStatusCard extends AbstractPenaltyStatusCard {
   }
 
   @Override
-  public void triggerOnEndOfTurn() {
+  public void triggerOnCardGained() {
     AbstractPlayer p = AbstractDungeon.player;
 
     AbstractDungeon.actionManager.addToBottom(

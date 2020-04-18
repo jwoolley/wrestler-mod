@@ -74,7 +74,7 @@ public class GreenPenaltyStatusCard extends AbstractPenaltyStatusCard {
   }
 
   @Override
-  public void triggerOnEndOfTurn() {
+  public void triggerOnCardGained() {
     AbstractPlayer p = AbstractDungeon.player;
     AbstractDungeon.actionManager.addToBottom(new AbstractGameAction() {
       @Override

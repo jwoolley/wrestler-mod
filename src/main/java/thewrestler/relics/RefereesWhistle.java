@@ -33,6 +33,21 @@ public class RefereesWhistle extends CustomWrestlerRelic {
     return DESCRIPTIONS[0];
   }
 
+  public void onPlayerEndTurn() {
+    final List<AbstractCard> penaltyCards =
+        AbstractDungeon.player.hand.group.stream()
+            .filter(c -> c.hasTag(WrestlerCardTags.PENALTY) && c.cost > 0)
+            .collect(Collectors.toList());
+
+    if (!penaltyCards.isEmpty()) {
+      this.flash();
+      penaltyCards.forEach(c -> {
+        c.flash(Color.GOLD);
+        c.modifyCostForCombat(-1);
+      });
+    }
+  }
+
   private static final List<String> POWERTIP_KEYWORDS = Arrays.asList(WrestlerMod.makeID("PenaltyCard"));
 
   @Override

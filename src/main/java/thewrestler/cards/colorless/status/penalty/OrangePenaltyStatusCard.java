@@ -28,8 +28,8 @@ public class OrangePenaltyStatusCard extends AbstractPenaltyStatusCard {
 
   private static final CardStrings cardStrings;
 
-  private static final int DAMAGE = 5;
-  private static final int FRAIL_AMOUNT = 1;
+  private static final int DAMAGE = 8;
+  private static final int FRAIL_AMOUNT = 2;
 
   public OrangePenaltyStatusCard() {
     super(ID, NAME, IMG_PATH, IMG_KEY, getDescription(), TOOLTIP_KEYWORD_KEY);
@@ -56,11 +56,11 @@ public class OrangePenaltyStatusCard extends AbstractPenaltyStatusCard {
 
 
   @Override
-  public void triggerOnEndOfTurn(){
+  public void triggerOnCardGained(){
     AbstractPlayer p = AbstractDungeon.player;
     // setting isSourceMonster to true prevents the frail from falling off immediately
     AbstractDungeon.actionManager.addToBottom(
-        new ApplyPowerAction(p, p, new FrailPower(p, this.magicNumber, true)));
+        new ApplyPowerAction(p, p, new FrailPower(p, this.magicNumber, false)));
   }
 
   @Override

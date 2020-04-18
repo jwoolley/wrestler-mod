@@ -37,6 +37,8 @@ import java.util.stream.Collectors;
 // TODO: VFX/SFX when sportsmanship changes (e.g. red or green border flash)
 
 public class WrestlerPenaltyCardInfoPanel implements CustomInfoPanel, StartOfCombatListener, EndOfCombatListener {
+  private static boolean PANEL_ENABLED = false;
+
   private static final String[] TEXT;
 
   private static final float WIDTH = 290;
@@ -161,7 +163,7 @@ public class WrestlerPenaltyCardInfoPanel implements CustomInfoPanel, StartOfCom
   }
 
   public static boolean shouldRender() {
-    return BasicUtils.isPlayingAsWrestler() &&
+    return PANEL_ENABLED && BasicUtils.isPlayingAsWrestler() &&
         (AbstractDungeon.screen == AbstractDungeon.CurrentScreen.MAP || BasicUtils.isPlayerInCombat());
   }
 
