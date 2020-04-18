@@ -38,7 +38,6 @@ import thewrestler.cards.curse.Predictable;
 import thewrestler.cards.power.*;
 import thewrestler.cards.skill.*;
 import thewrestler.cards.unused.OrbSkill;
-import thewrestler.cards.unused.PhantomBumpPowerOld;
 import thewrestler.characters.WrestlerCharacter;
 import thewrestler.enums.AbstractCardEnum;
 import thewrestler.enums.WrestlerCharEnum;

@@ -1,5 +1,6 @@
 package thewrestler.cards.colorless.status.penalty;
 
+import com.badlogic.gdx.graphics.Color;
 import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
 import com.megacrit.cardcrawl.actions.common.DrawCardAction;
 import com.megacrit.cardcrawl.cards.CardQueueItem;
@@ -37,6 +38,11 @@ public class BluePenaltyStatusCard extends AbstractPenaltyStatusCard {
   @Override
   public void triggerOnCardUsed(AbstractPlayer p, AbstractMonster m) {
     AbstractDungeon.actionManager.addToBottom(new DrawCardAction(this.misc));
+  }
+
+  @Override
+  protected Color getFlashColor() {
+    return Color.TEAL;
   }
 
   @Override

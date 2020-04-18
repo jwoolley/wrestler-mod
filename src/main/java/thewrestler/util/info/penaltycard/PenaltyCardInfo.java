@@ -222,7 +222,7 @@ public class PenaltyCardInfo implements StartOfCombatListener, EndOfCombatListen
   }
 
   public void atEndOfTurn() {
-
+    AbstractPenaltyStatusCard.triggerPenaltyCardsEndOfTurn();
   }
   public void atStartOfCombat(){
     resetForCombat();

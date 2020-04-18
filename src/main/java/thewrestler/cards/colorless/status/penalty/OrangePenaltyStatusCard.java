@@ -1,5 +1,6 @@
 package thewrestler.cards.colorless.status.penalty;
 
+import com.badlogic.gdx.graphics.Color;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
 import com.megacrit.cardcrawl.actions.common.DamageAllEnemiesAction;
@@ -41,6 +42,11 @@ public class OrangePenaltyStatusCard extends AbstractPenaltyStatusCard {
   public void triggerOnCardUsed(AbstractPlayer p, AbstractMonster m) {
     AbstractDungeon.actionManager.addToBottom(new DamageAllEnemiesAction(p, this.multiDamage, this.damageType,
         AbstractGameAction.AttackEffect.FIRE, true));
+  }
+
+  @Override
+  protected Color getFlashColor() {
+    return Color.ORANGE;
   }
 
   @Override

@@ -48,34 +48,38 @@ public class CardUtil {
     return card != null && card.cardID != null && card.cardID.equals(targetCardId);
   }
 
-  public static HashMap<CardGroup, AbstractCard> getAllInBattleInstances(String cardId) {
+  public static HashMap<CardGroup, AbstractCard> getAllInBattleInstances(Predicate<AbstractCard> predicate) {
     HashMap<CardGroup, AbstractCard> cards = new HashMap();
     for (AbstractCard c : AbstractDungeon.player.drawPile.group) {
-      if (cardHasCardId(c, cardId)) {
+      if (predicate.test(c)) {
         cards.put(AbstractDungeon.player.drawPile, c);
       }
     }
     for (AbstractCard c : AbstractDungeon.player.discardPile.group) {
-      if (cardHasCardId(c, cardId)) {
+      if (predicate.test(c)) {
         cards.put(AbstractDungeon.player.discardPile, c);
       }
     }
     for (AbstractCard c : AbstractDungeon.player.exhaustPile.group) {
-      if (cardHasCardId(c, cardId)) {
+      if (predicate.test(c)) {
         cards.put(AbstractDungeon.player.exhaustPile, c);
       }
     }
     for (AbstractCard c : AbstractDungeon.player.limbo.group) {
-      if (cardHasCardId(c, cardId)) {
+      if (predicate.test(c)) {
         cards.put(AbstractDungeon.player.limbo, c);
       }
     }
     for (AbstractCard c : AbstractDungeon.player.hand.group) {
-      if (cardHasCardId(c, cardId)) {
+      if (predicate.test(c)) {
         cards.put(AbstractDungeon.player.hand, c);
       }
     }
     return cards;
+  }
+
+  public static HashMap<CardGroup, AbstractCard> getAllInBattleInstances(String cardId) {
+    return getAllInBattleInstances(c -> cardHasCardId(c, cardId));
   }
 
   public static void forAllCardsInCombat(Consumer<AbstractCard> fn) {
