@@ -1,6 +1,7 @@
 package thewrestler.cards.skill;
 
 import basemod.abstracts.CustomCard;
+import basemod.helpers.TooltipInfo;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
@@ -13,7 +14,13 @@ import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.powers.ArtifactPower;
 import com.megacrit.cardcrawl.vfx.combat.FlashAtkImgEffect;
 import thewrestler.enums.AbstractCardEnum;
+import thewrestler.keywords.AbstractTooltipKeyword;
+import thewrestler.keywords.CustomTooltipKeywords;
+import thewrestler.keywords.TooltipKeywords;
 import thewrestler.powers.InjuredPower;
+
+import java.util.Arrays;
+import java.util.List;
 
 import static thewrestler.WrestlerMod.getCardResourcePath;
 
@@ -104,6 +111,15 @@ public class Octopus extends CustomCard {
   }
   public static String getDescription(int numTimesApplied, boolean willExhaust) {
     return DESCRIPTION + numTimesApplied  + (!willExhaust ? EXTENDED_DESCRIPTION[0] : EXTENDED_DESCRIPTION[1]);
+  }
+
+  private static List<AbstractTooltipKeyword> EXTRA_KEYWORDS = Arrays.asList(
+      CustomTooltipKeywords.getTooltipKeyword(CustomTooltipKeywords.PERSISTENT_INJURY)
+  );
+
+  @Override
+  public List<TooltipInfo> getCustomTooltips() {
+    return TooltipKeywords.getTooltipInfos(EXTRA_KEYWORDS);
   }
 
   static {

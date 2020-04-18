@@ -19,6 +19,9 @@ public class CustomTooltipKeywords {
   public static final String SPORTSMANSHIP = WrestlerMod.makeID("Sportsmanship");
   public static final String DIRTY = WrestlerMod.makeID("Dirty");
 
+  public static final String INJURY = WrestlerMod.makeID("Injury");
+  public static final String PERSISTENT_INJURY = WrestlerMod.makeID("PersistentInjury");
+
   static {
     CustomTooltipKeywords.customKeywords.put(PENALTY_CARD,
         getCustomTooltipKeyword(PENALTY_CARD, CustomGlyph.CustomGlyphEnum.PENALTY_CARD));
@@ -44,6 +47,10 @@ public class CustomTooltipKeywords {
     CustomTooltipKeywords.customKeywords.put(SPORTSMANSHIP, getCustomTooltipKeyword(SPORTSMANSHIP));
 
     CustomTooltipKeywords.customKeywords.put(DIRTY, getCustomTooltipKeyword(DIRTY));
+
+    CustomTooltipKeywords.customKeywords.put(INJURY, getCustomTooltipKeyword(INJURY));
+
+    CustomTooltipKeywords.customKeywords.put(PERSISTENT_INJURY, getCustomTooltipKeyword(PERSISTENT_INJURY));
   }
 
   public static CustomTooltipKeyword getTooltipKeyword(String id) {

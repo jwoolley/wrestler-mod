@@ -1,7 +1,9 @@
 package thewrestler.powers;
 
 import basemod.interfaces.CloneablePowerInterface;
+import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
+import com.megacrit.cardcrawl.actions.common.DamageAction;
 import com.megacrit.cardcrawl.actions.common.RemoveSpecificPowerAction;
 import com.megacrit.cardcrawl.cards.DamageInfo;
 import com.megacrit.cardcrawl.core.AbstractCreature;
@@ -30,12 +32,19 @@ public class PersistentInjuryPower extends AbstractWrestlerPower implements Clon
 
   @Override
   public void updateDescription() {
-    this.description = DESCRIPTIONS[0] + this.amount + DESCRIPTIONS[1];
+    this.description = DESCRIPTIONS[0] + this.amount + DESCRIPTIONS[1] + this.amount;
   }
 
   @Override
   public void atEndOfTurn(boolean isPlayer) {
     if (isPlayer == this.owner.isPlayer) {
+      CardCrawlGame.sound.play("SPRINGBOARD_1");
+      CardCrawlGame.sound.play("BONE_CRUNCH_1");
+
+      AbstractDungeon.actionManager.addToBottom(
+          new DamageAction(this.owner, new DamageInfo(this.source, this.amount, DamageInfo.DamageType.THORNS),
+              AbstractGameAction.AttackEffect.SMASH, false));
+
       AbstractDungeon.actionManager.addToBottom(new ApplyPowerAction(this.owner, this.source,
           new InjuredPower(this.owner, this.source, this.amount), this.amount));
       AbstractDungeon.actionManager.addToBottom(new RemoveSpecificPowerAction(this.owner, this.source, this.ID));

@@ -229,17 +229,21 @@
   "WrestlerMod:InjuredPower": {
     "NAME": "Injury",
     "DESCRIPTIONS": [
-      "When you receive unblocked attack damage this turn, take #b",
-      "When it receives unblocked attack damage this turn, it takes #b",
-      " additional damage. If the unblocked damage is #b",
-      " or more, #yInjury is lost but is reapplied next turn."
+      "Attacks against you",
+      "Attacks against this enemy",
+      " ignore #b",
+      " #yBlock this turn. If",
+      " you receive #b",
+      " it receives #b",
+      " or more unblocked damage at once, remove #yInjury and apply #yPersistent #yInjury."
     ]
   },
 
   "WrestlerMod:PersistentInjuryPower": {
     "NAME": "Persistent Injury",
     "DESCRIPTIONS": [
-      "At the end of its turn, receives #b",
+      "At the end of its turn, takes #b",
+      " damage and gains #b",
       " #yInjury."
     ]
   },

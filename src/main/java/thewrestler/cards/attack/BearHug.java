@@ -1,6 +1,7 @@
 package thewrestler.cards.attack;
 
 import basemod.abstracts.CustomCard;
+import basemod.helpers.TooltipInfo;
 import com.badlogic.gdx.graphics.Color;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.animations.VFXAction;
@@ -19,9 +20,14 @@ import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.vfx.combat.ClawEffect;
 import thewrestler.enums.AbstractCardEnum;
+import thewrestler.keywords.AbstractTooltipKeyword;
+import thewrestler.keywords.CustomTooltipKeywords;
+import thewrestler.keywords.TooltipKeywords;
 import thewrestler.powers.BearHugPower;
 import thewrestler.powers.InjuredPower;
 
+import java.util.Arrays;
+import java.util.List;
 import java.util.Set;
 
 import static thewrestler.WrestlerMod.getCardResourcePath;
@@ -113,6 +119,15 @@ public class BearHug extends CustomCard {
   public static String getDescription(int injuredPerTick, int numTicks) {
     return DESCRIPTION + injuredPerTick + EXTENDED_DESCRIPTION[0]
         + (numTicks == 2 ? EXTENDED_DESCRIPTION[1] : EXTENDED_DESCRIPTION[2]);
+  }
+
+  private static List<AbstractTooltipKeyword> EXTRA_KEYWORDS = Arrays.asList(
+      CustomTooltipKeywords.getTooltipKeyword(CustomTooltipKeywords.PERSISTENT_INJURY)
+  );
+
+  @Override
+  public List<TooltipInfo> getCustomTooltips() {
+    return TooltipKeywords.getTooltipInfos(EXTRA_KEYWORDS);
   }
 
   static {

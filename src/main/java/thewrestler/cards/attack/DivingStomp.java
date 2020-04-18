@@ -1,6 +1,7 @@
 package thewrestler.cards.attack;
 
 import basemod.abstracts.CustomCard;
+import basemod.helpers.TooltipInfo;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
 import com.megacrit.cardcrawl.actions.common.DamageAction;
@@ -13,8 +14,14 @@ import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import thewrestler.cards.WrestlerCardTags;
 import thewrestler.enums.AbstractCardEnum;
+import thewrestler.keywords.AbstractTooltipKeyword;
+import thewrestler.keywords.CustomTooltipKeywords;
+import thewrestler.keywords.TooltipKeywords;
 import thewrestler.powers.InjuredPower;
 import thewrestler.util.CardUtil;
+
+import java.util.Arrays;
+import java.util.List;
 
 import static thewrestler.WrestlerMod.getCardResourcePath;
 
@@ -67,6 +74,15 @@ public class DivingStomp extends CustomCard {
       this.upgradeDamage(DAMAGE_UPGRADE);
       this.upgradeMagicNumber(SPRAIN_AMOUNT_UPGRADE);
     }
+  }
+
+  private static List<AbstractTooltipKeyword> EXTRA_KEYWORDS = Arrays.asList(
+      CustomTooltipKeywords.getTooltipKeyword(CustomTooltipKeywords.PERSISTENT_INJURY)
+  );
+
+  @Override
+  public List<TooltipInfo> getCustomTooltips() {
+    return TooltipKeywords.getTooltipInfos(EXTRA_KEYWORDS);
   }
 
   static {

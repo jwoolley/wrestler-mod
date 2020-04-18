@@ -131,8 +131,19 @@
     "NAMES": [
       "injury"
     ],
-    "DESCRIPTION": "When receiving unblocked attack damage this turn, injured creatures receive additional damage. If the attack damage exceeds the #yInjury amount, #yInjury is lost but is reapplied next turn."
+    "DESCRIPTION": "Attack damage to ignores #yBlock equal to a creature's Injury. If unblocked damage from an attack exceeds its Injury, it loses Injury and gains #yPersistent #yInjury."
   },
+
+
+
+  "WrestlerMod:PersistentInjury": {
+    "PROPER_NAME": "Persistent Injury",
+    "NAMES": [
+      "PersistentInjury", "persistent_injury"
+    ],
+    "DESCRIPTION": "Creatures with Persistent Injury take damage at the end of their turn and gain that much #yInjury. Then Persistent Injury is removed."
+  },
+
 
 
   "WrestlerMod:Knee": {

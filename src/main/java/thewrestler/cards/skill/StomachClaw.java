@@ -1,6 +1,7 @@
 package thewrestler.cards.skill;
 
 import basemod.abstracts.CustomCard;
+import basemod.helpers.TooltipInfo;
 import com.badlogic.gdx.graphics.Color;
 import com.megacrit.cardcrawl.actions.animations.VFXAction;
 import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
@@ -14,8 +15,14 @@ import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.vfx.combat.BiteEffect;
 import thewrestler.cards.WrestlerCardTags;
 import thewrestler.enums.AbstractCardEnum;
+import thewrestler.keywords.AbstractTooltipKeyword;
+import thewrestler.keywords.CustomTooltipKeywords;
+import thewrestler.keywords.TooltipKeywords;
 import thewrestler.powers.InjuredPower;
 import thewrestler.util.CardUtil;
+
+import java.util.Arrays;
+import java.util.List;
 
 import static thewrestler.WrestlerMod.getCardResourcePath;
 
@@ -72,6 +79,15 @@ public class StomachClaw extends CustomCard {
   }
   public static String getDescription() {
     return DESCRIPTION;
+  }
+
+  private static List<AbstractTooltipKeyword> EXTRA_KEYWORDS = Arrays.asList(
+      CustomTooltipKeywords.getTooltipKeyword(CustomTooltipKeywords.PERSISTENT_INJURY)
+  );
+
+  @Override
+  public List<TooltipInfo> getCustomTooltips() {
+    return TooltipKeywords.getTooltipInfos(EXTRA_KEYWORDS);
   }
 
   static {

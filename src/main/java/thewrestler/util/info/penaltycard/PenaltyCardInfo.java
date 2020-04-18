@@ -69,7 +69,7 @@ public class PenaltyCardInfo implements StartOfCombatListener, EndOfCombatListen
       AbstractDungeon.player.getPower(NoPenaltyPower.POWER_ID).flashWithoutSound();
     }
   }
-
+  
   public void enqueuePenaltyCard(AbstractPenaltyStatusCard card, boolean toFront) {
     this.penaltyCardStrategy.addPenaltyCardToQueue(card, toFront);
     resetPenaltyOrbs();

@@ -39,14 +39,15 @@ public class PhantomBump extends CustomCard {
   private static final CardTarget TARGET = CardTarget.ENEMY;
 
   private static final int COST = 1;
-  private static final int DAMAGE_AMOUNT = 6;
-  private static final int DAMAGE_AMOUNT_UPGRADE = 2;
+  private static final int DAMAGE_AMOUNT = 8;
+  private static final int DAMAGE_AMOUNT_UPGRADE = 3;
 
   public PhantomBump() {
     super(ID, NAME, getCardResourcePath(IMG_PATH), COST, getDescription(), TYPE,
         AbstractCardEnum.THE_WRESTLER_ORANGE, RARITY, TARGET);
     this.damage = this.baseDamage = DAMAGE_AMOUNT;
     this.cardsToPreview = new GreenPenaltyStatusCard();
+    this.exhaust = true;
   }
 
   @Override
