@@ -2,11 +2,11 @@ package thewrestler.cards.colorless.status.penalty;
 
 import basemod.abstracts.CustomCard;
 import com.megacrit.cardcrawl.actions.common.ReducePowerAction;
+import com.megacrit.cardcrawl.cards.CardQueueItem;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import thewrestler.cards.WrestlerCardTags;
-import thewrestler.cards.attack.Shortarm;
 import thewrestler.keywords.CustomTooltipKeyword;
 import thewrestler.keywords.CustomTooltipKeywords;
 import thewrestler.orbs.BasePenaltyOrb;
@@ -38,6 +38,7 @@ public abstract class AbstractPenaltyStatusCard extends CustomCard {
     this.keyword = CustomTooltipKeywords.getTooltipKeyword(tooltipKeywordKey);
     this.tags.add(WrestlerCardTags.PENALTY);
     this.selfRetain = true;
+    this.exhaust = true;
   }
 
   public String getInfoPanelNoWarningImagePath() {
@@ -52,17 +53,23 @@ public abstract class AbstractPenaltyStatusCard extends CustomCard {
     return keyword;
   }
 
-  public abstract void triggerOnCardGained();
+  public abstract void triggerOnEndOfTurn();
   public abstract void triggerOnCardUsed(AbstractPlayer p, AbstractMonster m);
 
   public void use(AbstractPlayer p, AbstractMonster m) {
-    final AbstractPlayer player = AbstractDungeon.player;
-    this.triggerOnCardUsed(p, m);
-    if (player.hasPower(ShortarmPower.POWER_ID)) {
-      player.getPower(ShortarmPower.POWER_ID).flash();
-      AbstractDungeon.actionManager.addToTop(new ReducePowerAction(player, player, ShortarmPower.POWER_ID, 1));
+      final AbstractPlayer player = AbstractDungeon.player;
       this.triggerOnCardUsed(p, m);
-    }
+      if (player.hasPower(ShortarmPower.POWER_ID)) {
+        player.getPower(ShortarmPower.POWER_ID).flash();
+        AbstractDungeon.actionManager.addToTop(new ReducePowerAction(player, player, ShortarmPower.POWER_ID, 1));
+        this.triggerOnCardUsed(p, m);
+      }
+  }
+
+
+  @Override
+  public void triggerOnEndOfTurnForPlayingCard() {
+    triggerOnEndOfTurn();
   }
 
   public abstract BasePenaltyOrb getOrb();

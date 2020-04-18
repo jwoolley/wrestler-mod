@@ -36,7 +36,6 @@ public class YellowPenaltyStatusCard extends AbstractPenaltyStatusCard {
     super(ID, NAME, IMG_PATH, IMG_KEY, getDescription(ENERGY_GAIN), TOOLTIP_KEYWORD_KEY);
     this.magicNumber = this.baseMagicNumber = BRAVADO_LOSS;
     this.misc = ENERGY_GAIN;
-    this.exhaust = true;
   }
 
   @Override
@@ -72,7 +71,7 @@ public class YellowPenaltyStatusCard extends AbstractPenaltyStatusCard {
   }
 
   @Override
-  public void triggerOnCardGained() {
+  public void triggerOnEndOfTurn() {
     AbstractPlayer p = AbstractDungeon.player;
     AbstractDungeon.actionManager.addToBottom(new ReducePowerAction(p, p, BravadoPower.POWER_ID, this.magicNumber));
   }

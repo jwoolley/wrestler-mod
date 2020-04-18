@@ -2,6 +2,7 @@ package thewrestler.cards.colorless.status.penalty;
 
 import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
 import com.megacrit.cardcrawl.actions.common.DrawCardAction;
+import com.megacrit.cardcrawl.cards.CardQueueItem;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
@@ -31,7 +32,6 @@ public class BluePenaltyStatusCard extends AbstractPenaltyStatusCard {
     super(ID, NAME, IMG_PATH, IMG_KEY, getDescription(CARD_DRAW_AMOUNT), TOOLTIP_KEYWORD_KEY);
     this.magicNumber = this.baseMagicNumber = ENEMY_PLATED_ARMOR_GAIN;
     this.misc = CARD_DRAW_AMOUNT;
-    this.exhaust = true;
   }
 
   @Override
@@ -64,7 +64,7 @@ public class BluePenaltyStatusCard extends AbstractPenaltyStatusCard {
   }
 
   @Override
-  public void triggerOnCardGained() {
+  public void triggerOnEndOfTurn() {
     AbstractPlayer p = AbstractDungeon.player;
     AbstractDungeon.actionManager.addToBottom(new GainPlatedArmorRandomMonsterAction(p, ENEMY_PLATED_ARMOR_GAIN));
   }

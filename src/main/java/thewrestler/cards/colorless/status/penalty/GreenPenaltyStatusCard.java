@@ -34,7 +34,6 @@ public class GreenPenaltyStatusCard extends AbstractPenaltyStatusCard {
     super(ID, NAME, IMG_PATH, IMG_KEY, getDescription(), TOOLTIP_KEYWORD_KEY);
     this.magicNumber = this.baseMagicNumber = DEXTERITY_GAIN;
     this.misc = GOLD_LOSS;
-    this.exhaust = true;
   }
 
   @Override
@@ -69,7 +68,7 @@ public class GreenPenaltyStatusCard extends AbstractPenaltyStatusCard {
   }
 
   @Override
-  public void triggerOnCardGained() {
+  public void triggerOnEndOfTurn() {
     AbstractPlayer p = AbstractDungeon.player;
     AbstractDungeon.actionManager.addToBottom(new AbstractGameAction() {
       @Override

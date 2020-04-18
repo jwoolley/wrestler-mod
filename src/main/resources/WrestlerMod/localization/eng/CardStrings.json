@@ -130,8 +130,8 @@
     ]
   },
 
-  "WrestlerMod:CloverleafAttack": {
-    "NAME": "Cloverleaf",
+  "WrestlerMod:PhantomBump": {
+    "NAME": "Phantom Bump",
     "DESCRIPTION": "Deal !D! damage. NL The next time you would gain a random [P] this combat, gain a [N] instead."
   },
 
@@ -397,11 +397,6 @@
     "EXTENDED_DESCRIPTION": [
       " NL Exhaust."
     ]
-  },
-
-  "WrestlerMod:PhantomBump": {
-    "NAME": "Phantom Bump",
-    "DESCRIPTION": "Gain !M! wrestlermod:Temporary_Buffer."
   },
 
   "WrestlerMod:Pinfall": {
@@ -716,7 +711,7 @@
 
   "WrestlerMod:BluePenaltyStatusCard": {
     "NAME": "Blue Penalty Card",
-    "DESCRIPTION": "When you gain this card, a random enemy gains !M! *Plated *Armor. NL Retain. NL Draw ",
+    "DESCRIPTION": "At the end of your turn, a random enemy gains !M! *Plated *Armor. NL Retain. NL Draw ",
     "EXTENDED_DESCRIPTION": [
       " cards. NL Exhaust."
     ]
@@ -724,7 +719,7 @@
 
   "WrestlerMod:GreenPenaltyStatusCard": {
     "NAME": "Green Penalty Card",
-    "DESCRIPTION": "When you gain this card, lose ",
+    "DESCRIPTION": "At the end of your turn, lose ",
     "EXTENDED_DESCRIPTION": [
       " Gold. NL Retain. NL Gain !M! Dexterity. NL Exhaust."
     ]
@@ -732,12 +727,12 @@
 
   "WrestlerMod:OrangePenaltyStatusCard": {
     "NAME": "Orange Penalty Card",
-    "DESCRIPTION": "NL When drawn, gain !M! Frail. NL Retain. NL Deal !D! damage to ALL enemies. NL Exhaust."
+    "DESCRIPTION": "NL At the end of your turn, gain !M! Frail. NL Retain. NL Deal !D! damage to ALL enemies. NL Exhaust."
   },
 
   "WrestlerMod:RedPenaltyStatusCard": {
     "NAME": "Red Penalty Card",
-    "DESCRIPTION": "When you gain this card, take ",
+    "DESCRIPTION": "At the end of your turn, take ",
     "EXTENDED_DESCRIPTION": [
       " damage. NL Retain. NL Gain !M! Strength. NL Exhaust."
     ]

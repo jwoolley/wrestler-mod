@@ -24,13 +24,13 @@ import java.util.List;
 
 import static thewrestler.WrestlerMod.getCardResourcePath;
 
-public class CloverleafAttack extends CustomCard {
-  public static final String ID = WrestlerMod.makeID("CloverleafAttack");
+public class PhantomBump extends CustomCard {
+  public static final String ID = WrestlerMod.makeID("PhantomBump");
 
   public static final String NAME;
   public static final String DESCRIPTION;
   public static final String[] EXTENDED_DESCRIPTION;
-  public static final String IMG_PATH = "cloverleafattack.png";
+  public static final String IMG_PATH = "phantombump.png";
 
   private static final CardStrings cardStrings;
 
@@ -42,7 +42,7 @@ public class CloverleafAttack extends CustomCard {
   private static final int DAMAGE_AMOUNT = 6;
   private static final int DAMAGE_AMOUNT_UPGRADE = 2;
 
-  public CloverleafAttack() {
+  public PhantomBump() {
     super(ID, NAME, getCardResourcePath(IMG_PATH), COST, getDescription(), TYPE,
         AbstractCardEnum.THE_WRESTLER_ORANGE, RARITY, TARGET);
     this.damage = this.baseDamage = DAMAGE_AMOUNT;
@@ -60,7 +60,7 @@ public class CloverleafAttack extends CustomCard {
 
   @Override
   public AbstractCard makeCopy() {
-    return new CloverleafAttack();
+    return new PhantomBump();
   }
 
   @Override
@@ -70,16 +70,6 @@ public class CloverleafAttack extends CustomCard {
       this.upgradeDamage(DAMAGE_AMOUNT_UPGRADE);
       initializeDescription();
     }
-  }
-
-  private static List<AbstractTooltipKeyword> EXTRA_KEYWORDS = Arrays.asList(
-      CustomTooltipKeywords.getTooltipKeyword(CustomTooltipKeywords.PENALTY_CARD),
-      CustomTooltipKeywords.getTooltipKeyword(CustomTooltipKeywords.PENALTY_CARD_GREEN)
-  );
-
-  @Override
-  public List<TooltipInfo> getCustomTooltips() {
-    return TooltipKeywords.getTooltipInfos(EXTRA_KEYWORDS);
   }
 
   public static String getDescription() {

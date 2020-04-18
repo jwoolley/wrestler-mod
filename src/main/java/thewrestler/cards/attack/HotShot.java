@@ -50,6 +50,7 @@ public class HotShot extends CustomCard {
         AbstractCardEnum.THE_WRESTLER_ORANGE, RARITY, TARGET);
     this.baseDamage = this.damage = DAMAGE;
     CardUtil.makeCardDirty(this, this.type);
+    this.cardsToPreview = new OrangePenaltyStatusCard();
   }
 
   @Override

@@ -38,6 +38,7 @@ import thewrestler.cards.curse.Predictable;
 import thewrestler.cards.power.*;
 import thewrestler.cards.skill.*;
 import thewrestler.cards.unused.OrbSkill;
+import thewrestler.cards.unused.PhantomBumpPowerOld;
 import thewrestler.characters.WrestlerCharacter;
 import thewrestler.enums.AbstractCardEnum;
 import thewrestler.enums.WrestlerCharEnum;
@@ -508,7 +509,6 @@ public class WrestlerMod implements
         BaseMod.addCard(new CannedHeat());
         BaseMod.addCard(new CheapShot());
         BaseMod.addCard(new CleanFinish());
-        BaseMod.addCard(new CloverleafAttack());
         BaseMod.addCard(new CobraClutch());
         BaseMod.addCard(new ComeClean());
         BaseMod.addCard(new CurtainJerker());
@@ -614,7 +614,6 @@ public class WrestlerMod implements
         UnlockTracker.unlockCard(CannedHeat.ID);
         UnlockTracker.unlockCard(CheapShot.ID);
         UnlockTracker.unlockCard(CleanFinish.ID);
-        UnlockTracker.unlockCard(CloverleafAttack.ID);
         UnlockTracker.unlockCard(CobraClutch.ID);
         UnlockTracker.unlockCard(ComeClean.ID);
         UnlockTracker.unlockCard(CurtainJerker.ID);

@@ -1,4 +1,4 @@
-package thewrestler.cards.power;
+package thewrestler.cards.unused;
 
 import basemod.abstracts.CustomCard;
 import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
@@ -10,13 +10,12 @@ import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import thewrestler.WrestlerMod;
 import thewrestler.enums.AbstractCardEnum;
-import thewrestler.powers.ScrapperPower;
 import thewrestler.powers.TemporaryBufferPower;
 
 import static thewrestler.WrestlerMod.getCardResourcePath;
 
-public class PhantomBump extends CustomCard {
-  public static final String ID = WrestlerMod.makeID("PhantomBump");
+public class PhantomBumpPowerOld extends CustomCard {
+  public static final String ID = WrestlerMod.makeID("PhantomBumpPower");
 
   public static final String NAME;
   public static final String DESCRIPTION;
@@ -33,7 +32,7 @@ public class PhantomBump extends CustomCard {
   private static final int BUFFER_STACKS = 1;
   private static final int UPGRADED_BUFFER_STACKS = 1;
 
-  public PhantomBump() {
+  public PhantomBumpPowerOld() {
     super(ID, NAME, getCardResourcePath(IMG_PATH), COST, getDescription(), TYPE, AbstractCardEnum.THE_WRESTLER_ORANGE,
         RARITY, TARGET);
     this.baseMagicNumber = this.magicNumber = BUFFER_STACKS;
@@ -47,7 +46,7 @@ public class PhantomBump extends CustomCard {
 
   @Override
   public AbstractCard makeCopy() {
-    return new PhantomBump();
+    return new PhantomBumpPowerOld();
   }
 
   @Override

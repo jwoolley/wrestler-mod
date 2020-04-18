@@ -7,7 +7,6 @@ import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.core.Settings;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
-import com.megacrit.cardcrawl.orbs.AbstractOrb;
 import thewrestler.WrestlerMod;
 import thewrestler.cards.EndOfCombatListener;
 import thewrestler.cards.StartOfCombatListener;
@@ -73,12 +72,12 @@ public class PenaltyCardInfo implements StartOfCombatListener, EndOfCombatListen
 
   public void enqueuePenaltyCard(AbstractPenaltyStatusCard card, boolean toFront) {
     this.penaltyCardStrategy.addPenaltyCardToQueue(card, toFront);
+    resetPenaltyOrbs();
   }
 
   private static void onPenaltyCardGained(AbstractPenaltyStatusCard penaltyCard) {
     WrestlerCharacter.getPenaltyCardInfo().resetForTurn();
     List<AbstractPenaltyCardListener> listeners = new ArrayList<>();
-    penaltyCard.triggerOnCardGained();
     listeners.addAll(getPenaltyCardListenerCards());
     listeners.addAll(getPenaltyCardListenerPowers());
     listeners.forEach(listener -> listener.onGainedPenaltyCard(penaltyCard));
