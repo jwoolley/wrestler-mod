@@ -21,6 +21,8 @@ import thewrestler.util.info.CombatInfo;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Consumer;
+import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
 public class PenaltyCardInfo implements StartOfCombatListener, EndOfCombatListener {
@@ -69,10 +71,15 @@ public class PenaltyCardInfo implements StartOfCombatListener, EndOfCombatListen
       AbstractDungeon.player.getPower(NoPenaltyPower.POWER_ID).flashWithoutSound();
     }
   }
-  
+
   public void enqueuePenaltyCard(AbstractPenaltyStatusCard card, boolean toFront) {
     this.penaltyCardStrategy.addPenaltyCardToQueue(card, toFront);
     resetPenaltyOrbs();
+  }
+
+
+  public void forEachQueuedCard(Consumer<AbstractPenaltyStatusCard> fn, Predicate<AbstractPenaltyStatusCard> predicate) {
+    getStrategy().forEachQueuedCard(fn, predicate);
   }
 
   private static void onPenaltyCardGained(AbstractPenaltyStatusCard penaltyCard) {
@@ -144,9 +151,9 @@ public class PenaltyCardInfo implements StartOfCombatListener, EndOfCombatListen
           final AbstractPenaltyStatusCard cardToGain = this.penaltyCard == null ? getNextPenaltyCard() : this.penaltyCard;
 
           if (addActionToTop) {
-            AbstractDungeon.actionManager.addToTop(new MakeTempCardInHandAction(cardToGain));
+            AbstractDungeon.actionManager.addToTop(new MakeTempCardInHandAction(cardToGain.makeCopy()));
           } else {
-            AbstractDungeon.actionManager.addToBottom(new MakeTempCardInHandAction(cardToGain));
+            AbstractDungeon.actionManager.addToBottom(new MakeTempCardInHandAction(cardToGain.makeCopy()));
           }
           onPenaltyCardGained(cardToGain);
           this.gainedCard = true;
@@ -176,7 +183,7 @@ public class PenaltyCardInfo implements StartOfCombatListener, EndOfCombatListen
   }
 
   public static void resetForNewCombat() {
-    if (WrestlerCharacter.hasPenaltyCardInfo()) {
+    if (WrestlerCharacter.hasPenaltyCardInfo() && getInfo() != null) {
       getInfo().resetForCombat();
     }
   }

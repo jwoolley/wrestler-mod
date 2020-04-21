@@ -53,11 +53,13 @@ public class GreenPenaltyStatusCard extends AbstractPenaltyStatusCard {
     return new GreenPenaltyOrb();
   }
 
-
   @Override
   public AbstractPenaltyStatusCard makeCopy() {
-    return new GreenPenaltyStatusCard();
+    AbstractPenaltyStatusCard card = new GreenPenaltyStatusCard();
+    card.applyDiscounts();
+    return card;
   }
+
 
   private static String getDescription() {
     return DESCRIPTION + GOLD_LOSS + EXTENDED_DESCRIPTION[0];

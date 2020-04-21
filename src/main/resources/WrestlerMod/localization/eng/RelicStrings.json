@@ -21,7 +21,7 @@
     "NAME": "Dented Trophy",
     "FLAVOR": "A reminder of past glory.",
     "DESCRIPTIONS": [
-      "At the start of your turn, gain #b1 #yBravado."
+      "At the start of combat, upgrade a random card in your draw pile."
     ]
   },
 

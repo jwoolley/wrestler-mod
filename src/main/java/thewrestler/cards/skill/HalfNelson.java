@@ -40,7 +40,7 @@ public class HalfNelson extends CustomCard {
         AbstractCardEnum.THE_WRESTLER_ORANGE, RARITY, TARGET);
     this.magicNumber = this.baseMagicNumber = CARD_REDUCTION;
     this.exhaust = true;
-    CardUtil.makeCardDirty(this, this.type);
+    CardUtil.makeCardDirty(this);
   }
 
   @Override

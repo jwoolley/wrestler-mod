@@ -609,18 +609,16 @@
 
   "WrestlerMod:TakeToTheMat": {
     "NAME": "Take to the Mat",
-    "DESCRIPTION": "Deal !D! Damage. NL Apply wrestlermod:Grappled if you have ",
-    "EXTENDED_DESCRIPTION": [
-      " or more wrestlermod:Bravado. NL Else gain !M! wrestlermod:Bravado."
-    ]
+    "DESCRIPTION": "Deal !D! Damage. NL If you have played a non-Attack card this turn, apply wrestlermod:Grappled."
   },
 
   "WrestlerMod:Technician": {
     "NAME": "Technician",
-    "DESCRIPTION": "Whenever you play a [P] , draw !M!",
+    "DESCRIPTION": "Dirty. NL [P] s cost ",
     "EXTENDED_DESCRIPTION": [
-      " card.",
-      " cards."
+      " [E]",
+      " less.",
+      "Innate. NL "
     ]
   },
 
@@ -642,7 +640,7 @@
 
   "WrestlerMod:TriangleChoke": {
     "NAME": "Triangle Choke",
-    "DESCRIPTION": "Deal !D! Damage. NL If you have played at ",
+    "DESCRIPTION": "Deal !D! Damage. NL If you have played ",
     "EXTENDED_DESCRIPTION": [
       " or more non-Attack cards this turn, gain !M! wrestlermod:Bravado."
     ]

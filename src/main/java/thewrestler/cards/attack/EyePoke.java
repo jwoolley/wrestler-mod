@@ -43,7 +43,7 @@ public class EyePoke extends CustomCard {
         RARITY, TARGET);
     this.baseDamage = this.damage = DAMAGE;
     this.baseMagicNumber = this.magicNumber = DEBUFF_AMOUNT;
-    CardUtil.makeCardDirty(this, this.type);
+    CardUtil.makeCardDirty(this);
     this.exhaust = true;
   }
 

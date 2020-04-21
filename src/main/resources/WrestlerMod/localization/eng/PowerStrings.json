@@ -294,9 +294,9 @@
   "WrestlerMod:TechnicianPower": {
     "NAME": "Technician",
     "DESCRIPTIONS": [
-      "Whenever play a #yPenalty #yCard, draw #b",
-      " card.",
-      " cards."
+      "#yPenalty #yCards cost ",
+      " [E]",
+      " less."
     ]
   },
 

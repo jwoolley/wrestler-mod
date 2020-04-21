@@ -34,7 +34,7 @@ public class Glower extends CustomCard {
   public Glower() {
     super(ID, NAME, getCardResourcePath(IMG_PATH), COST, getDescription(), TYPE,
         AbstractCardEnum.THE_WRESTLER_ORANGE, RARITY, TARGET);
-    CardUtil.makeCardDirty(this, this.type);
+    CardUtil.makeCardDirty(this);
   }
 
   @Override

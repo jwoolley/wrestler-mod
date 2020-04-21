@@ -45,7 +45,7 @@ public class Shortarm extends CustomCard {
     super(ID, NAME, getCardResourcePath(IMG_PATH), COST, getDescription(), TYPE,
         AbstractCardEnum.THE_WRESTLER_ORANGE, RARITY, TARGET);
     this.baseDamage = this.damage = DAMAGE;
-    CardUtil.makeCardDirty(this, this.type);
+    CardUtil.makeCardDirty(this);
   }
 
   @Override

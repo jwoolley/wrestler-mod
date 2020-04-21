@@ -49,7 +49,7 @@ public class StomachClaw extends CustomCard {
         RARITY, TARGET);
     this.baseMagicNumber = this.magicNumber = DEBUFF_AMOUNT;
     this.exhaust = true;
-    CardUtil.makeCardDirty(this, this.type);
+    CardUtil.makeCardDirty(this);
   }
 
   @Override

@@ -28,7 +28,8 @@ public class CardUtil {
     card.superFlash(Color.GOLD.cpy());
   }
 
-  public static void makeCardDirty(CustomCard card, AbstractCard.CardType type) {
+  public static void makeCardDirty(CustomCard card) {
+    final AbstractCard.CardType type = card.type;
     if (type == AbstractCard.CardType.ATTACK) {
       card.setBackgroundTexture(WrestlerMod.ATTACK_WRESTLER_DIRTY_ORANGE, WrestlerMod.ATTACK_DEFAULT_DIRTY_ORANGE_PORTRAIT);
     } else if (type == AbstractCard.CardType.POWER) {

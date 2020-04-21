@@ -22,7 +22,7 @@ public class WrestlerDirtyStrike extends WrestlerStrike {
     super(ID, NAME, DESCRIPTION, IMG_PATH);
     this.baseDamage = this.damage  = this.baseDamage + ADDITIONAL_BASE_DAMAGE;
     setDirtyCardAttackFrame(this);
-    CardUtil.makeCardDirty(this, this.type);
+    CardUtil.makeCardDirty(this);
   }
 
   static void setDirtyCardAttackFrame(CustomCard card) {

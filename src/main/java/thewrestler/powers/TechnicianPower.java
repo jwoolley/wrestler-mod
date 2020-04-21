@@ -1,22 +1,15 @@
 package thewrestler.powers;
 
 import basemod.interfaces.CloneablePowerInterface;
-import com.megacrit.cardcrawl.actions.AbstractGameAction;
-import com.megacrit.cardcrawl.actions.common.*;
-import com.megacrit.cardcrawl.cards.AbstractCard;
-import com.megacrit.cardcrawl.cards.DamageInfo;
-import com.megacrit.cardcrawl.characters.AbstractPlayer;
-import com.megacrit.cardcrawl.core.AbstractCreature;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.PowerStrings;
-import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.powers.AbstractPower;
-import com.megacrit.cardcrawl.powers.DexterityPower;
-import com.megacrit.cardcrawl.powers.StrengthPower;
+import org.apache.commons.lang3.StringUtils;
 import thewrestler.WrestlerMod;
-import thewrestler.cards.skill.AbstractPenaltyCardListener;
-import thewrestler.util.info.CombatInfo;
+import thewrestler.cards.colorless.status.penalty.AbstractPenaltyStatusCard;
+import thewrestler.characters.WrestlerCharacter;
+import thewrestler.util.CardUtil;
 
 public class TechnicianPower extends AbstractWrestlerPower implements CloneablePowerInterface {
   public static final String POWER_ID = WrestlerMod.makeID("TechnicianPower");
@@ -32,14 +25,29 @@ public class TechnicianPower extends AbstractWrestlerPower implements CloneableP
   }
 
   @Override
-  public void onPlayCard(AbstractCard card, AbstractMonster monster) {
-    this.flash();
-    AbstractDungeon.actionManager.addToBottom(new DrawCardAction(AbstractDungeon.player, this.amount));
+  public void stackPower(int amount) {
+    super.stackPower(amount);
+    WrestlerMod.logger.info("TechnicianPower::stackPower called: " + amount);
+    applyDiscount(amount);
+  }
+
+  @Override
+  public void onInitialApplication() {
+    WrestlerMod.logger.info("TechnicianPower::onInitialApplication called: " + this.amount);
+    applyDiscount(this.amount);
+  }
+
+  private void applyDiscount(int amount) {
+    WrestlerMod.logger.info("TechnicianPower::applyDiscount called: " + amount);
+    CardUtil.forAllCardsInCombat(c -> c.updateCost(-amount), c -> c instanceof AbstractPenaltyStatusCard);
+    WrestlerCharacter.getPenaltyCardInfo().forEachQueuedCard(c -> c.updateCost(-amount), c -> true);
   }
 
   @Override
   public void updateDescription() {
-    this.description = DESCRIPTIONS[0] + this.amount + (this.amount == 1 ? DESCRIPTIONS[1] : DESCRIPTIONS[2]);
+    this.description = DESCRIPTIONS[0]
+        + StringUtils.repeat(DESCRIPTIONS[1], this.amount)
+        + DESCRIPTIONS[2];
   }
 
   @Override

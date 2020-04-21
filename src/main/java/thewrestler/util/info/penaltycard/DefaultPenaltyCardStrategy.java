@@ -6,7 +6,10 @@ import thewrestler.cards.colorless.status.penalty.BluePenaltyStatusCard;
 import thewrestler.cards.colorless.status.penalty.RedPenaltyStatusCard;
 import thewrestler.cards.colorless.status.penalty.YellowPenaltyStatusCard;
 
+import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collector;
 
 public class DefaultPenaltyCardStrategy extends AbstractPenaltyCardStrategy {
 
@@ -41,5 +44,10 @@ public class DefaultPenaltyCardStrategy extends AbstractPenaltyCardStrategy {
   @Override
   public void resetForCombat() {
 
+  }
+
+  @Override
+  protected List<AbstractPenaltyStatusCard> getQueuedCards() {
+    return Collections.EMPTY_LIST;
   }
 }

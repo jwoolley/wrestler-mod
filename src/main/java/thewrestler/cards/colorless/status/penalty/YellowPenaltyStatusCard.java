@@ -54,10 +54,11 @@ public class YellowPenaltyStatusCard extends AbstractPenaltyStatusCard {
     return new YellowPenaltyOrb();
   }
 
-
   @Override
   public AbstractPenaltyStatusCard makeCopy() {
-    return new YellowPenaltyStatusCard();
+    AbstractPenaltyStatusCard card = new YellowPenaltyStatusCard();
+    card.applyDiscounts();
+    return card;
   }
 
   private static String getDescription(int energyAmount) {

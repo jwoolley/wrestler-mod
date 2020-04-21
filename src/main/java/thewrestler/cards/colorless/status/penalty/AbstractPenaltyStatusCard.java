@@ -2,13 +2,9 @@ package thewrestler.cards.colorless.status.penalty;
 
 import basemod.abstracts.CustomCard;
 import com.badlogic.gdx.graphics.Color;
-import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.common.ReducePowerAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
-import com.megacrit.cardcrawl.cards.purple.Collect;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
-import com.megacrit.cardcrawl.core.CardCrawlGame;
-import com.megacrit.cardcrawl.core.Settings;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import thewrestler.cards.WrestlerCardTags;
@@ -16,14 +12,8 @@ import thewrestler.keywords.CustomTooltipKeyword;
 import thewrestler.keywords.CustomTooltipKeywords;
 import thewrestler.orbs.BasePenaltyOrb;
 import thewrestler.powers.ShortarmPower;
-import thewrestler.relics.RefereesWhistle;
+import thewrestler.powers.TechnicianPower;
 import thewrestler.ui.UiHelper;
-import thewrestler.util.CardUtil;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.stream.Collector;
-import java.util.stream.Collectors;
 
 import static thewrestler.WrestlerMod.getCardResourcePath;
 
@@ -84,6 +74,42 @@ public abstract class AbstractPenaltyStatusCard extends CustomCard {
   }
 
   abstract protected Color getFlashColor();
+
+  protected void applyDiscounts() {
+    if (AbstractDungeon.player != null && AbstractDungeon.player.hasPower(TechnicianPower.POWER_ID)) {
+      updateCost(-AbstractDungeon.player.getPower(TechnicianPower.POWER_ID).amount);
+    }
+  }
+
+  @Override
+  public AbstractCard makeStatEquivalentCopy() {
+    AbstractPenaltyStatusCard tmp = (AbstractPenaltyStatusCard) super.makeStatEquivalentCopy();
+    tmp.applyDiscounts();
+    return tmp;
+  }
+
+  public void resetCost() {
+
+  }
+
+  @Override
+  public void updateCost(int amt) {
+    int tmpCost = this.cost;
+    int diff = this.cost - this.costForTurn;
+
+    tmpCost += amt;
+    if (tmpCost < 0) {
+      tmpCost = 0;
+    }
+    if (tmpCost != this.cost) {
+      this.isCostModified = true;
+      this.cost = tmpCost;
+      this.costForTurn = (this.cost - diff);
+      if (this.costForTurn < 0) {
+        this.costForTurn = 0;
+      }
+    }
+  }
 
   public abstract BasePenaltyOrb getOrb();
 

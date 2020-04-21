@@ -103,6 +103,11 @@ public class RarityPenatlyCardStrategy extends AbstractPenaltyCardStrategy
   }
 
   @Override
+  protected List<AbstractPenaltyStatusCard> getQueuedCards() {
+    return cardQueue;
+  }
+
+  @Override
   public void addPenaltyCardToQueue(AbstractPenaltyStatusCard card, boolean toFront) {
     cardQueue.add(toFront ? 0 : cardQueue.size(), (AbstractPenaltyStatusCard)card.makeCopy());
   }

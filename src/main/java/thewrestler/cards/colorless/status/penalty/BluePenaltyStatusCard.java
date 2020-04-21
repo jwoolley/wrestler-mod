@@ -52,7 +52,9 @@ public class BluePenaltyStatusCard extends AbstractPenaltyStatusCard {
 
   @Override
   public AbstractPenaltyStatusCard makeCopy() {
-    return new BluePenaltyStatusCard();
+    AbstractPenaltyStatusCard card = new BluePenaltyStatusCard();
+    card.applyDiscounts();
+    return card;
   }
 
   private static String getDescription(int drawAmount) {

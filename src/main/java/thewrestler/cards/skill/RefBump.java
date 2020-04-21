@@ -50,7 +50,7 @@ public class RefBump extends CustomCard {
     this.baseBlock = this.block = BLOCK_AMOUNT;
     this.baseMagicNumber = this.magicNumber = BLOCK_AMOUNT;
     this.bonusBlock = 0;
-    CardUtil.makeCardDirty(this, this.type);
+    CardUtil.makeCardDirty(this);
   }
 
   @Override

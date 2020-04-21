@@ -65,9 +65,10 @@ public class OrangePenaltyStatusCard extends AbstractPenaltyStatusCard {
 
   @Override
   public AbstractPenaltyStatusCard makeCopy() {
-    return new OrangePenaltyStatusCard();
+    AbstractPenaltyStatusCard card = new OrangePenaltyStatusCard();
+    card.applyDiscounts();
+    return card;
   }
-
   private static String getDescription() {
     return DESCRIPTION;
   }

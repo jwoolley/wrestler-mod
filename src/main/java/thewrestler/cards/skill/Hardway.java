@@ -44,7 +44,7 @@ public class Hardway extends CustomCard {
         RARITY, TARGET);
     this.exhaust = true;
     this.magicNumber = this.baseMagicNumber = STRENGTH_LOSS;
-    CardUtil.makeCardDirty(this, this.type);
+    CardUtil.makeCardDirty(this);
   }
 
   @Override

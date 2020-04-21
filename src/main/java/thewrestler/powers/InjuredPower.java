@@ -41,14 +41,14 @@ public class InjuredPower extends AbstractWrestlerPower implements CloneablePowe
   }
 
   public static int getTotalInjuryAmount(AbstractCreature creature) {
-    return creature.hasPower(InjuredPower.POWER_ID) ? creature.getPower(InjuredPower.POWER_ID).amount : 0;
+    return creature.hasPower(InjuredPower.POWER_ID) ? creature.getPower(POWER_ID).amount : 0;
   }
 
   private void triggerPower(int injuredAmount) {
     CardCrawlGame.sound.play("BONE_CRUNCH_1");
 
     if (injuredAmount >= this.amount) {
-      AbstractDungeon.actionManager.addToTop(new RemoveSpecificPowerAction(this.owner, this.source, this.ID));
+      AbstractDungeon.actionManager.addToTop(new RemoveSpecificPowerAction(this.owner, this.source, POWER_ID));
       AbstractDungeon.actionManager.addToTop(new ApplyPowerAction(this.owner, this.source,
           new PersistentInjuryPower(this.owner, this.source, this.amount), this.amount));
     }

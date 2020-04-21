@@ -49,7 +49,7 @@ public class CheapShot extends CustomCard {
     this.baseMagicNumber = this.magicNumber = VULNERABLE_AMOUNT;
     this.isInnate = true;
     this.exhaust = true;
-    CardUtil.makeCardDirty(this, this.type);
+    CardUtil.makeCardDirty(this);
   }
 
   @Override
