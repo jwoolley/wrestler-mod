@@ -22,6 +22,7 @@ import com.megacrit.cardcrawl.cards.CardGroup;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.core.Settings;
+import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.helpers.CardHelper;
 import com.megacrit.cardcrawl.helpers.FontHelper;
 import com.megacrit.cardcrawl.localization.*;
@@ -37,6 +38,7 @@ import thewrestler.cards.colorless.skill.FairPlay;
 import thewrestler.cards.curse.Predictable;
 import thewrestler.cards.power.*;
 import thewrestler.cards.skill.*;
+import thewrestler.cards.debug.*;
 import thewrestler.cards.unused.OrbSkill;
 import thewrestler.characters.WrestlerCharacter;
 import thewrestler.enums.AbstractCardEnum;
@@ -48,12 +50,13 @@ import thewrestler.potions.CobraPotion;
 import thewrestler.potions.GrapplePotion;
 import thewrestler.relics.*;
 import thewrestler.rewards.TrademarkMoveReward;
+import thewrestler.screens.TrademarkMoveSelectScreen;
 import thewrestler.signaturemoves.cards.Chokeslam;
 import thewrestler.signaturemoves.cards.DragonGate;
 import thewrestler.signaturemoves.cards.Piledriver;
 import thewrestler.signaturemoves.moveinfos.AbstractSignatureMoveInfo;
-import thewrestler.ui.WrestlerPenaltyCardInfoPanel;
 import thewrestler.ui.WrestlerCombatInfoPanel;
+import thewrestler.ui.WrestlerPenaltyCardInfoPanel;
 import thewrestler.ui.trademarkmovepanel.WrestlerSignatureMovePanel;
 import thewrestler.ui.trademarkmovepanel.WrestlerSignatureMovePanelInterface;
 import thewrestler.util.BasicUtils;
@@ -160,6 +163,19 @@ public class WrestlerMod implements
     public static WrestlerPenaltyCardInfoPanel penaltyCardInfoPanel;
     public static WrestlerCombatInfoPanel combatInfoPanel;
     public static WrestlerSignatureMovePanelInterface signatureMovePanel;
+
+    private static TrademarkMoveSelectScreen trademarkMoveScreen = new TrademarkMoveSelectScreen();
+
+    public static void openTrademarkMoveSelectScreen() {
+        // TODO: don't open if the state is wrong (i.e. player not in dungeon or hand doesn't have 2 or more PCs)
+        if (AbstractDungeon.getCurrRoom().phase == AbstractRoom.RoomPhase.COMBAT) {
+            trademarkMoveScreen.open();
+        }
+    }
+
+    public static TrademarkMoveSelectScreen getTrademarkMoveSelectScreen() {
+        return trademarkMoveScreen;
+    }
 
     // =============== MAKE IMAGE PATHS =================
 
@@ -691,6 +707,12 @@ public class WrestlerMod implements
         BaseMod.addCard(new Piledriver());
         UnlockTracker.unlockCard(Piledriver.ID);
         BaseMod.addCard(new FairPlay());
+        UnlockTracker.unlockCard(FairPlay.ID);
+
+
+        BaseMod.addCard(new DebugTrademarkMoveScreen());
+        UnlockTracker.unlockCard(DebugTrademarkMoveScreen.ID);
+
         UnlockTracker.unlockCard(FairPlay.ID);
 
         logger.info("Done adding cards!");

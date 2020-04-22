@@ -743,5 +743,10 @@
       " [E]",
       " next turn. NL Exhaust."
     ]
+  },
+
+  "WrestlerMod:DebugTrademarkMoveScreen": {
+    "NAME": "Trademark Move Screen",
+    "DESCRIPTION": "Open the Trademark Move screen."
   }
 }

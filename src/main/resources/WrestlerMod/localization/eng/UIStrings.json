@@ -97,9 +97,17 @@
 
   "WrestlerMod:ComeCleanAction": {
     "TEXT": [
+      "Gain."
+    ]
+  },
+
+
+  "WrestlerMod:ChooseTrademarkMoveAction": {
+    "TEXT": [
       "Discard."
     ]
   },
+
 
   "WrestlerMod:TrademarkMoveNames_1": {
     "TEXT": [
