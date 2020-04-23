@@ -5,13 +5,12 @@ import com.badlogic.gdx.graphics.Color;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.cards.CardGroup;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
-import org.omg.PortableInterceptor.ACTIVE;
 import thewrestler.WrestlerMod;
 import thewrestler.cards.WrestlerCardTags;
 
-import java.util.*;
+import java.util.HashMap;
+import java.util.List;
 import java.util.function.Consumer;
-import java.util.function.Function;
 import java.util.function.Predicate;
 
 public class CardUtil {

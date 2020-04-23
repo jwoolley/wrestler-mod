@@ -50,7 +50,7 @@ import thewrestler.potions.CobraPotion;
 import thewrestler.potions.GrapplePotion;
 import thewrestler.relics.*;
 import thewrestler.rewards.TrademarkMoveReward;
-import thewrestler.screens.TrademarkMoveSelectScreen;
+import thewrestler.screens.trademarkmove.TrademarkMoveSelectScreen;
 import thewrestler.signaturemoves.cards.Chokeslam;
 import thewrestler.signaturemoves.cards.DragonGate;
 import thewrestler.signaturemoves.cards.Piledriver;
