@@ -72,6 +72,7 @@ public class DebugTrademarkMoveScreen extends CustomCard {
         if (AbstractDungeon.getMonsters().areMonstersBasicallyDead() || allPenaltyCards.size() < 2) {
           this.isDone = true;
         } else {
+          WrestlerMod.getTrademarkMoveSelectScreen().setCards(this.selectedCard, this.allPenaltyCards);
           WrestlerMod.openTrademarkMoveSelectScreen();
         }
         tickDuration();

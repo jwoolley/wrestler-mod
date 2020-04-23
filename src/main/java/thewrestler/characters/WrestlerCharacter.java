@@ -141,8 +141,8 @@ public class WrestlerCharacter extends CustomPlayer {
     // Starting Relics	
     public ArrayList<String> getStartingRelics() {
         ArrayList<String> retVal = new ArrayList<>();
-        retVal.add(DentedTrophy.ID);
-        UnlockTracker.markRelicAsSeen(DentedTrophy.ID);
+//        retVal.add(DentedTrophy.ID);
+//        UnlockTracker.markRelicAsSeen(DentedTrophy.ID);
         retVal.add(RefereesWhistle.ID);
         UnlockTracker.markRelicAsSeen(RefereesWhistle.ID);
         return retVal;
