@@ -2,7 +2,9 @@ package thewrestler.cards.debug;
 
 import basemod.abstracts.CustomCard;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
+import com.megacrit.cardcrawl.actions.common.MakeTempCardInHandAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
+import com.megacrit.cardcrawl.cards.CardQueueItem;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.core.Settings;
@@ -16,6 +18,8 @@ import thewrestler.cards.colorless.status.penalty.BluePenaltyStatusCard;
 import thewrestler.cards.colorless.status.penalty.RedPenaltyStatusCard;
 import thewrestler.cards.colorless.status.penalty.YellowPenaltyStatusCard;
 import thewrestler.enums.AbstractCardEnum;
+import thewrestler.screens.trademarkmove.TrademarkMoveSelectScreen;
+import thewrestler.screens.trademarkmove.TrademarkMoveSelectScreen.TrademarkMoveScreenSelection;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -49,6 +53,7 @@ public class DebugTrademarkMoveScreen extends CustomCard {
     AbstractDungeon.actionManager.addToBottom(new ChooseTrademarkMoveAction(testSelectedCard, testAllPenaltyCards));
   }
 
+  // TODO: don't show Cancel button if triggered through CardQueueItem (e.g. via Havoc); make this configurable
   private static class ChooseTrademarkMoveAction extends AbstractGameAction {
     private static final UIStrings uiStrings =
         CardCrawlGame.languagePack.getUIString(WrestlerMod.makeID("ComeCleanAction"));
@@ -72,13 +77,26 @@ public class DebugTrademarkMoveScreen extends CustomCard {
         if (AbstractDungeon.getMonsters().areMonstersBasicallyDead() || allPenaltyCards.size() < 2) {
           this.isDone = true;
         } else {
-          WrestlerMod.getTrademarkMoveSelectScreen().setCards(this.selectedCard, this.allPenaltyCards);
-          WrestlerMod.openTrademarkMoveSelectScreen();
+          TrademarkMoveSelectScreen screen = WrestlerMod.getTrademarkMoveSelectScreen();
+          screen.reset();
+          screen.setCards(this.selectedCard, this.allPenaltyCards);
+          screen.open();
         }
         tickDuration();
         return;
       }
-      if (!WrestlerMod.getTrademarkMoveSelectScreen().isOpen()) {
+
+      TrademarkMoveScreenSelection selection = WrestlerMod.getTrademarkMoveSelectScreen().getSelection();
+      if (selection !=  TrademarkMoveScreenSelection.UNSELECTED) {
+        if (selection == TrademarkMoveScreenSelection.PLAY) {
+          AbstractDungeon.actionManager.cardQueue.add(new CardQueueItem(this.selectedCard, false));
+        } else if (selection == TrademarkMoveScreenSelection.COMBINE) {
+          TrademarkMoveSelectScreen screen = WrestlerMod.getTrademarkMoveSelectScreen();
+          AbstractDungeon.player.hand.moveToExhaustPile(this.selectedCard);
+          AbstractDungeon.player.hand.moveToExhaustPile(screen.getSecondSelectedCard());
+          AbstractDungeon.actionManager.addToBottom(new MakeTempCardInHandAction(screen.getTrademarkMove()));
+        } else if (selection == TrademarkMoveScreenSelection.CANCEL) {
+          this.selectedCard.triggeredFromSelectScreen = false;      }
         this.isDone = true;
       }
       tickDuration();

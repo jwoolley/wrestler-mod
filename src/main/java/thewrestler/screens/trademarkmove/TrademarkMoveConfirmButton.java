@@ -16,8 +16,6 @@ import com.megacrit.cardcrawl.helpers.input.InputHelper;
 import java.util.function.Consumer;
 
 public class TrademarkMoveConfirmButton {
-//  private static final UIStrings uiStrings = CardCrawlGame.languagePack.getUIString("CardRewardScreen");
-//  public static final String[] TEXT = uiStrings.TEXT;
   private static final float WIDTH = 512.0f;
   private static final float HEIGHT = 256.0f;
   public static final float TAKE_Y = Settings.HEIGHT / 2.0F - 340.0F * Settings.scale;
@@ -31,14 +29,32 @@ public class TrademarkMoveConfirmButton {
   private float controllerImgTextWidth = 0.0F;
 
   private final String label;
+  private final Consumer<AbstractCard> onHoveredCallback;
+  private final Consumer<AbstractCard> onUnhoveredCallback;
   private final Consumer<AbstractCard> onClickCallback;
-  public TrademarkMoveConfirmButton(String label, Consumer<AbstractCard> onClickCallback) {
+
+  public boolean wasHovered;
+
+  public TrademarkMoveConfirmButton(String label, Consumer<AbstractCard> onHoveredCallback,
+                                    Consumer<AbstractCard> onUnhoveredCallback, Consumer<AbstractCard> onClickCallback) {
     this.hb.move(Settings.WIDTH / 2.0F, TAKE_Y);
     this.label = label;
+    this.onHoveredCallback = onHoveredCallback;
+    this.onUnhoveredCallback = onUnhoveredCallback;
     this.onClickCallback = onClickCallback;
   }
 
-  protected void onClick() {
+  private void onHover() {
+    this.onHoveredCallback.accept(null);
+    wasHovered = true;
+  }
+
+  private void onUnhover() {
+    this.onUnhoveredCallback.accept(null);
+    wasHovered = false;
+  }
+
+  private void onClick() {
     this.onClickCallback.accept(null);
   }
 
@@ -49,6 +65,11 @@ public class TrademarkMoveConfirmButton {
     this.hb.update();
     if (this.hb.justHovered) {
       CardCrawlGame.sound.play("UI_HOVER");
+    }
+    if (this.hb.hovered && !this.wasHovered) {
+      this.onHover();
+    } else if (!this.hb.hovered && this.wasHovered) {
+      this.onUnhover();
     }
     if ((this.hb.hovered) && (InputHelper.justClickedLeft)) {
       this.hb.clickStarted = true;

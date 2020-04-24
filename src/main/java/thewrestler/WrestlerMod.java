@@ -51,6 +51,7 @@ import thewrestler.potions.GrapplePotion;
 import thewrestler.relics.*;
 import thewrestler.rewards.TrademarkMoveReward;
 import thewrestler.screens.trademarkmove.TrademarkMoveSelectScreen;
+import thewrestler.screens.trademarkmove.patches.TintCardPatch;
 import thewrestler.signaturemoves.cards.Chokeslam;
 import thewrestler.signaturemoves.cards.DragonGate;
 import thewrestler.signaturemoves.cards.Piledriver;
@@ -885,6 +886,7 @@ public class WrestlerMod implements
 
         StartOfCombatListener.triggerStartOfCombatPowers();
         StartOfCombatListener.triggerStartOfCombatCards();
+        TintCardPatch.clearTintedCards();
     }
 
     @Override

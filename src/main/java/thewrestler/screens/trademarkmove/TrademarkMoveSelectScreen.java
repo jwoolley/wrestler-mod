@@ -1,14 +1,18 @@
 package thewrestler.screens.trademarkmove;
 
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.megacrit.cardcrawl.actions.common.MakeTempCardInHandAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.core.Settings;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.helpers.Hitbox;
 import com.megacrit.cardcrawl.screens.select.GridCardSelectScreen;
+import com.megacrit.cardcrawl.vfx.cardManip.ExhaustCardEffect;
 import org.apache.logging.log4j.Logger;
 import thewrestler.WrestlerMod;
 import thewrestler.cards.colorless.status.penalty.AbstractPenaltyStatusCard;
+import thewrestler.screens.trademarkmove.patches.TintCardPatch;
 import thewrestler.signaturemoves.cards.AbstractSignatureMoveCard;
 import thewrestler.signaturemoves.cards.Chokeslam;
 
@@ -29,6 +33,9 @@ public class TrademarkMoveSelectScreen {
   private static AbstractSignatureMoveCard trademarkMoveCard;
   private static final List<AbstractPenaltyStatusCard> allCards = new ArrayList<>();
 
+  private static final Color PRIMARY_GLOW_COLOR = Color.YELLOW;
+  private static final Color SECONDARY_GLOW_COLOR = Color.CYAN;
+
   TrademarkMoveConfirmButton confirmButton1;
   TrademarkMoveConfirmButton confirmButton2;
 
@@ -38,10 +45,59 @@ public class TrademarkMoveSelectScreen {
 
   }
 
+  private static void resetCardAlpha() {
+    firstCard.transparency = 1.0f;
+    secondCard.transparency = 1.0f;
+    trademarkMoveCard.transparency = 1.0f;
+  }
+
+  private static void resetCardGlow() {
+    firstCard.glowColor = SECONDARY_GLOW_COLOR;
+    secondCard.glowColor = SECONDARY_GLOW_COLOR;
+    trademarkMoveCard.glowColor = PRIMARY_GLOW_COLOR;
+    firstCard.stopGlowing();
+    secondCard.stopGlowing();
+    trademarkMoveCard.stopGlowing();
+  }
+
   private void initializeButtons() {
     Logger logger  = WrestlerMod.logger;
-    confirmButton1 = new TrademarkMoveConfirmButton("Play", (thisIsNull) -> { logger.info("Play Button Clicked."); close(); });
-    confirmButton2 = new TrademarkMoveConfirmButton("Combine & Exhaust", (thisIsNull) -> { logger.info("Combine Button Clicked."); close(); });
+    confirmButton1 = new TrademarkMoveConfirmButton("Play",
+        (thisIsNull) -> {
+          TintCardPatch.tintCard(secondCard);
+          TintCardPatch.tintCard(trademarkMoveCard);
+          firstCard.superFlash(SECONDARY_GLOW_COLOR);
+          firstCard.beginGlowing();
+        },
+        (thisIsNull) -> {
+          TintCardPatch.untintCard(secondCard);
+          TintCardPatch.untintCard(trademarkMoveCard);
+          resetCardGlow();
+        },
+        (thisIsNull) -> {
+          this.selection = TrademarkMoveScreenSelection.PLAY;
+          logger.info("Play Button Clicked.");
+          close();
+        });
+
+    confirmButton2 = new TrademarkMoveConfirmButton("Combine & Exhaust",
+        (thisIsNull) -> {
+          resetCardAlpha();
+          firstCard.beginGlowing();
+          secondCard.beginGlowing();
+          trademarkMoveCard.beginGlowing();
+          firstCard.superFlash(SECONDARY_GLOW_COLOR);
+          secondCard.superFlash(SECONDARY_GLOW_COLOR);
+          trademarkMoveCard.superFlash(PRIMARY_GLOW_COLOR);
+        },
+        (thisIsNull) -> { /* resetCardAlpha();  */ resetCardGlow(); },
+        (thisIsNull) -> {
+          this.selection = TrademarkMoveScreenSelection.COMBINE;
+          AbstractDungeon.topLevelEffectsQueue.add(new ExhaustCardEffect(firstCard));
+          AbstractDungeon.topLevelEffectsQueue.add(new ExhaustCardEffect(secondCard));
+          AbstractDungeon.actionManager.addToTop(new MakeTempCardInHandAction(trademarkMoveCard));
+          close();
+        });
     positionButtons();
     this.confirmButton1.hide();
     this.confirmButton1.show();
@@ -50,11 +106,33 @@ public class TrademarkMoveSelectScreen {
   }
 
   public void reset() {
+    this.selection = TrademarkMoveScreenSelection.UNSELECTED;
     isOpen = false;
     firstCard = null;
     secondCard = null;
     trademarkMoveCard = null;
     allCards.clear();
+  }
+
+  public enum TrademarkMoveScreenSelection {
+    UNSELECTED,
+    PLAY,
+    COMBINE,
+    CANCEL
+  }
+
+  private TrademarkMoveScreenSelection selection = TrademarkMoveScreenSelection.UNSELECTED;
+
+  public TrademarkMoveScreenSelection getSelection() {
+    return selection;
+  }
+
+  public AbstractPenaltyStatusCard getSecondSelectedCard() {
+    return secondCard;
+  }
+
+  public AbstractSignatureMoveCard getTrademarkMove() {
+    return trademarkMoveCard;
   }
 
   // TODO: move logic to PenaltyCardInfo, wrap that here
@@ -68,10 +146,15 @@ public class TrademarkMoveSelectScreen {
   private void configureCardLayout() {
     firstCard.drawScale = secondCard.drawScale = trademarkMoveCard.drawScale = CARD_DRAW_SCALE;
     positionCards(firstCard, secondCard, trademarkMoveCard);
+    resetCardGlow();
     generateCardHitboxes(Arrays.asList(firstCard, secondCard, trademarkMoveCard));
   }
 
   public void setCards(AbstractPenaltyStatusCard playedCard, List<AbstractPenaltyStatusCard> allCardsInHand) {
+
+    // TODO: use makeStatEquivalentCopy copies of the cards; BUT map to references to the originals so the action
+    //  knows what cards to act on (reuse UUID?)
+
     allCards.clear();
     allCards.addAll(allCardsInHand);
     allCards.remove(playedCard);
@@ -182,6 +265,7 @@ public class TrademarkMoveSelectScreen {
     if (this.isOpen) {
       if (AbstractDungeon.overlayMenu.cancelButton.hb.clickStarted) {
         AbstractDungeon.closeCurrentScreen();
+        this.selection = TrademarkMoveScreenSelection.CANCEL;
         this.close();
         return;
       }
