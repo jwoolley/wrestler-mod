@@ -4,10 +4,8 @@ import thewrestler.WrestlerMod;
 import thewrestler.signaturemoves.cards.old.Chokeslam;
 import thewrestler.signaturemoves.cards.old.DragonGate;
 import thewrestler.signaturemoves.cards.old.Piledriver;
-import thewrestler.signaturemoves.moveinfos.AbstractSignatureMoveInfo;
-import thewrestler.signaturemoves.moveinfos.ChokeslamMoveInfo;
-import thewrestler.signaturemoves.moveinfos.DragonGateMoveInfo;
-import thewrestler.signaturemoves.moveinfos.PiledriverMoveInfo;
+import thewrestler.signaturemoves.cards.skill.ElbowSmash;
+import thewrestler.signaturemoves.moveinfos.*;
 import thewrestler.signaturemoves.upgrades.SignatureMoveUpgradeList;
 
 import java.util.Arrays;
@@ -16,6 +14,7 @@ import java.util.Optional;
 public enum SignatureMoveCardEnum {
   CHOKESLAM(new Chokeslam(), new ChokeslamMoveInfo()),
   DRAGON_GATE(new DragonGate(), new DragonGateMoveInfo()),
+  ELBOW_SMASH(new ElbowSmash(), new ElbowSmashMoveInfo()),
   PILEDRIVER(new Piledriver(), new PiledriverMoveInfo());
 
   SignatureMoveCardEnum(AbstractSignatureMoveCard card, AbstractSignatureMoveInfo moveInfo) {

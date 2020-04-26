@@ -13,7 +13,6 @@ import com.megacrit.cardcrawl.powers.DexterityPower;
 import com.megacrit.cardcrawl.vfx.GainPennyEffect;
 import thewrestler.keywords.CustomTooltipKeywords;
 import thewrestler.orbs.BasePenaltyOrb;
-import thewrestler.orbs.BluePenaltyOrb;
 import thewrestler.orbs.GreenPenaltyOrb;
 
 public class GreenPenaltyStatusCard extends AbstractPenaltyStatusCard {

@@ -163,6 +163,11 @@
     ]
   },
 
+  "WrestlerMod:ElbowSmash": {
+    "NAME": "Elbow Smash",
+    "DESCRIPTION": "Discard your Hand. NL Add 1 *Elbow to your hand for each card discarded."
+  },
+
   "WrestlerMod:EyePoke": {
     "NAME": "Eye Poke",
     "DESCRIPTION": "wrestlermod:Dirty. NL Deal !D! Damage. NL Apply !M! Weak and !M! Vulnerable.",

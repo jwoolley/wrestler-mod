@@ -11,9 +11,12 @@ import com.megacrit.cardcrawl.vfx.cardManip.ExhaustCardEffect;
 import org.apache.logging.log4j.Logger;
 import thewrestler.WrestlerMod;
 import thewrestler.cards.colorless.status.penalty.AbstractPenaltyStatusCard;
+import thewrestler.cards.colorless.status.penalty.BluePenaltyStatusCard;
+import thewrestler.cards.colorless.status.penalty.YellowPenaltyStatusCard;
 import thewrestler.screens.trademarkmove.patches.TintCardPatch;
 import thewrestler.signaturemoves.cards.AbstractSignatureMoveCard;
 import thewrestler.signaturemoves.cards.old.Chokeslam;
+import thewrestler.signaturemoves.cards.skill.ElbowSmash;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -140,12 +143,17 @@ public class TrademarkMoveSelectScreen {
   // TODO: move logic to PenaltyCardInfo, wrap that here
   private AbstractSignatureMoveCard getTrademarkMoveCard(AbstractPenaltyStatusCard penaltyCard1,
                                                          AbstractPenaltyStatusCard penaltyCard2) {
+    if (penaltyCard1 instanceof BluePenaltyStatusCard && penaltyCard2 instanceof YellowPenaltyStatusCard
+     || penaltyCard1 instanceof YellowPenaltyStatusCard && penaltyCard2 instanceof BluePenaltyStatusCard) {
+      return new ElbowSmash();
+    }
     return new Chokeslam();
   }
 
-
   private final float CARD_DRAW_SCALE = 0.8f;
   private void configureCardLayout() {
+    // TODO; show preview card (if present) on hover over card (particularly for the trademark moves)
+
     firstCard.drawScale = secondCard.drawScale = trademarkMoveCard.drawScale = CARD_DRAW_SCALE;
     positionCards(firstCard, secondCard, trademarkMoveCard);
     resetCardGlow();

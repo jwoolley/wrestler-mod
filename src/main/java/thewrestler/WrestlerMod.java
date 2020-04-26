@@ -303,6 +303,7 @@ public class WrestlerMod implements
 
     private void registerSfx() {
         HashMap<String, Sfx> reflectedMap = getSoundsMap();
+        reflectedMap.put("BOING_SIMPLE_1", new Sfx(getAudioResourcePath("TheWrestler_BoingSimple1.ogg")));
         reflectedMap.put("BOMB_DROP_EXPLODE_1", new Sfx(getAudioResourcePath("TheWrestler_BombDropExplode1.ogg")));
         reflectedMap.put("BONE_CRUNCH_1", new Sfx(getAudioResourcePath("TheWrestler_BoneCrunch1.ogg")));
         reflectedMap.put("BONE_CRUNCH_2", new Sfx(getAudioResourcePath("TheWrestler_BoneCrunch2.ogg")));
