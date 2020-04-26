@@ -2,7 +2,6 @@ package thewrestler.screens.trademarkmove;
 
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.megacrit.cardcrawl.actions.common.MakeTempCardInHandAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.core.Settings;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
@@ -19,6 +18,7 @@ import thewrestler.signaturemoves.cards.Chokeslam;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 // TODO: BUGFIX: cancel button disappears if you switch to another screen (e.g. settings) while this screen is up
 //               factors: 1) cancel button is hidden when another screen is opened; no hook is used to restore it
@@ -95,7 +95,6 @@ public class TrademarkMoveSelectScreen {
           this.selection = TrademarkMoveScreenSelection.COMBINE;
           AbstractDungeon.topLevelEffectsQueue.add(new ExhaustCardEffect(firstCard));
           AbstractDungeon.topLevelEffectsQueue.add(new ExhaustCardEffect(secondCard));
-          AbstractDungeon.actionManager.addToTop(new MakeTempCardInHandAction(trademarkMoveCard));
           close();
         });
     positionButtons();
@@ -128,7 +127,10 @@ public class TrademarkMoveSelectScreen {
   }
 
   public AbstractPenaltyStatusCard getSecondSelectedCard() {
-    return secondCard;
+    return allCards.stream()
+        .filter(c -> c.uuid == this.secondCard.uuid)
+        .collect(Collectors.toList())
+        .get(0);
   }
 
   public AbstractSignatureMoveCard getTrademarkMove() {
@@ -159,8 +161,8 @@ public class TrademarkMoveSelectScreen {
     allCards.addAll(allCardsInHand);
     allCards.remove(playedCard);
 
-    firstCard = playedCard;
-    secondCard = allCardsInHand.get(1);
+    firstCard = (AbstractPenaltyStatusCard) playedCard.makeSameInstanceOf();
+    secondCard = (AbstractPenaltyStatusCard) allCards.get(0).makeSameInstanceOf();
     trademarkMoveCard = getTrademarkMoveCard(firstCard, secondCard);
 
     configureCardLayout();
