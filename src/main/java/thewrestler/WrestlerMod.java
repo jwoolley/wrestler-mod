@@ -580,6 +580,7 @@ public class WrestlerMod implements
         BaseMod.addCard(new StomachClaw());
         BaseMod.addCard(new Swerve());
         BaseMod.addCard(new TagIn());
+        BaseMod.addCard(new TakeAPowder());
         BaseMod.addCard(new TakeToTheMat());
         BaseMod.addCard(new Technician());
         BaseMod.addCard(new TriangleChoke());
@@ -598,7 +599,6 @@ public class WrestlerMod implements
             BaseMod.addCard(new MainEvent());
 
             BaseMod.addCard(new SafetyTag());
-            BaseMod.addCard(new TakeAPowder());
         } */
 
 

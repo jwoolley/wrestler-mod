@@ -599,12 +599,7 @@
 
   "WrestlerMod:TakeAPowder": {
     "NAME": "Take a Powder",
-    "DESCRIPTION": "If wrestlermod:Clean, gain !M! wrestlermod:Temporary_Buffer. NL Otherwise, gain ",
-    "EXTENDED_DESCRIPTION": [
-      " gold.",
-      " gold and a random potion.",
-      " NL Exhaust."
-    ]
+    "DESCRIPTION": "Gain !B! Block. NL Gain !M! Weak."
   },
 
   "WrestlerMod:TakeToTheMat": {

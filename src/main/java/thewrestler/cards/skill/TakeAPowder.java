@@ -2,6 +2,7 @@ package thewrestler.cards.skill;
 
 import basemod.abstracts.CustomCard;
 import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
+import com.megacrit.cardcrawl.actions.common.GainBlockAction;
 import com.megacrit.cardcrawl.actions.common.ObtainPotionAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
@@ -9,6 +10,7 @@ import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
+import com.megacrit.cardcrawl.powers.WeakPower;
 import thewrestler.actions.GainGoldAction;
 import thewrestler.enums.AbstractCardEnum;
 import thewrestler.powers.TemporaryBufferPower;
@@ -27,36 +29,29 @@ public class TakeAPowder extends CustomCard {
   private static final CardStrings cardStrings;
 
   private static final CardType TYPE = CardType.SKILL;
-  private static final CardRarity RARITY = CardRarity.RARE;
+  private static final CardRarity RARITY = CardRarity.UNCOMMON;
   private static final CardTarget TARGET = CardTarget.SELF;
 
-  private static final int COST = 2;
-  private static final int TEMP_BUFFER_AMOUNT = 2;
-  private static final int TEMP_BUFFER_AMOUNT_UPGRADE = 1;
-  private static final int GOLD_AMOUNT = 10;
-
-  private int goldAmount;
+  private static final int COST = 1;
+  private static final int BLOCK_AMOUNT = 12;
+  private static final int BLOCK_AMOUNT_UPGRADE = 3;
+  private static final int WEAK_AMOUNT = 2;
 
   public TakeAPowder() {
-    super(ID, NAME, getCardResourcePath(IMG_PATH), COST, getDescription(GOLD_AMOUNT, false), TYPE,
+    super(ID, NAME, getCardResourcePath(IMG_PATH), COST, getDescription(), TYPE,
         AbstractCardEnum.THE_WRESTLER_ORANGE, RARITY, TARGET);
-    this. baseMagicNumber = this.magicNumber = TEMP_BUFFER_AMOUNT;
-    this.goldAmount = GOLD_AMOUNT;
+    this.baseBlock = this.block = BLOCK_AMOUNT;
+
+    this.baseMagicNumber = this.magicNumber = WEAK_AMOUNT;
     this.tags.add(AbstractCard.CardTags.HEALING);
     this.exhaust = true;
   }
 
   @Override
   public void use(AbstractPlayer p, AbstractMonster m) {
-    if (PenaltyCardInfo.hasPenaltyCardInfo()) {
-      AbstractDungeon.actionManager.addToBottom(
-          new ApplyPowerAction(p, p, new TemporaryBufferPower(p, this.magicNumber), this.magicNumber));
-    } else {
-      AbstractDungeon.actionManager.addToBottom(new GainGoldAction(this.goldAmount));
-      if (this.upgraded) {
-        AbstractDungeon.actionManager.addToBottom(new ObtainPotionAction(AbstractDungeon.returnRandomPotion(true)));
-      }
-    }
+    AbstractDungeon.actionManager.addToBottom(new GainBlockAction(p, this.block));
+    AbstractDungeon.actionManager.addToBottom(
+          new ApplyPowerAction(p, p, new WeakPower(p, this.magicNumber, false), this.magicNumber));
   }
 
   @Override
@@ -68,18 +63,15 @@ public class TakeAPowder extends CustomCard {
   public void upgrade() {
     if (!this.upgraded) {
       this.upgradeName();
-      this.upgradeMagicNumber(TEMP_BUFFER_AMOUNT_UPGRADE);
-      this.rawDescription = cardStrings.UPGRADE_DESCRIPTION;
-      this.rawDescription = getDescription(this.goldAmount, true);
+      this.upgradeBlock(BLOCK_AMOUNT_UPGRADE);
+      this.rawDescription = getDescription();
       this.initializeDescription();
     }
   }
 
 
-  private static String getDescription(int goldAmount, boolean isUpgraded) {
-    return DESCRIPTION + goldAmount
-        + (!isUpgraded ? EXTENDED_DESCRIPTION[0] :  EXTENDED_DESCRIPTION[1])
-        + EXTENDED_DESCRIPTION[2];
+  private static String getDescription() {
+    return DESCRIPTION;
   }
 
   static {
