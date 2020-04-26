@@ -1,4 +1,4 @@
-package thewrestler.signaturemoves.cards;
+package thewrestler.signaturemoves.cards.old;
 
 import com.badlogic.gdx.graphics.Color;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
@@ -12,8 +12,8 @@ import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import thewrestler.effects.utils.combat.CleanFinishEffect;
+import thewrestler.signaturemoves.cards.AbstractSignatureMoveCard;
 import thewrestler.signaturemoves.upgrades.AbstractSignatureMoveUpgrade;
-import thewrestler.signaturemoves.upgrades.SignatureMoveUpgradeList;
 import thewrestler.signaturemoves.upgrades.UpgradeGroup;
 
 import java.util.ArrayList;

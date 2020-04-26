@@ -1,11 +1,8 @@
 package thewrestler.signaturemoves.moveinfos;
 
 import com.megacrit.cardcrawl.cards.AbstractCard;
-import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
-import thewrestler.signaturemoves.cards.Piledriver;
+import thewrestler.signaturemoves.cards.old.Piledriver;
 import thewrestler.signaturemoves.upgrades.SignatureMoveUpgradeList;
-import thewrestler.signaturemoves.upgrades.UpgradeRarity;
-import thewrestler.signaturemoves.upgrades.UpgradeType;
 
 public class PiledriverMoveInfo extends AbstractSignatureMoveInfo {
   private static final int TURNS_REQUIRED = 2;

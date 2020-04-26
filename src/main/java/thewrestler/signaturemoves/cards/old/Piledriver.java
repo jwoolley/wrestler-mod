@@ -1,11 +1,10 @@
-package thewrestler.signaturemoves.cards;
+package thewrestler.signaturemoves.cards.old;
 
 import com.badlogic.gdx.graphics.Color;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.animations.VFXAction;
 import com.megacrit.cardcrawl.actions.common.DrawCardAction;
 import com.megacrit.cardcrawl.actions.common.GainEnergyAction;
-import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.cards.DamageInfo;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
@@ -17,8 +16,8 @@ import com.megacrit.cardcrawl.vfx.combat.DamageImpactBlurEffect;
 import com.megacrit.cardcrawl.vfx.combat.FlashAtkImgEffect;
 import com.megacrit.cardcrawl.vfx.combat.WeightyImpactEffect;
 import org.apache.commons.lang3.StringUtils;
+import thewrestler.signaturemoves.cards.AbstractSignatureMoveCard;
 import thewrestler.signaturemoves.upgrades.AbstractSignatureMoveUpgrade;
-import thewrestler.signaturemoves.upgrades.SignatureMoveUpgradeList;
 import thewrestler.signaturemoves.upgrades.UpgradeGroup;
 import thewrestler.util.CreatureUtils;
 

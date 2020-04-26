@@ -1,6 +1,9 @@
 package thewrestler.signaturemoves.cards;
 
 import thewrestler.WrestlerMod;
+import thewrestler.signaturemoves.cards.old.Chokeslam;
+import thewrestler.signaturemoves.cards.old.DragonGate;
+import thewrestler.signaturemoves.cards.old.Piledriver;
 import thewrestler.signaturemoves.moveinfos.AbstractSignatureMoveInfo;
 import thewrestler.signaturemoves.moveinfos.ChokeslamMoveInfo;
 import thewrestler.signaturemoves.moveinfos.DragonGateMoveInfo;

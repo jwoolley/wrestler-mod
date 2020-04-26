@@ -1,4 +1,4 @@
-package thewrestler.signaturemoves.cards;
+package thewrestler.signaturemoves.cards.old;
 
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
@@ -13,6 +13,7 @@ import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.powers.ChokePower;
 import thewrestler.cards.colorless.attack.Elbow;
+import thewrestler.signaturemoves.cards.AbstractSignatureMoveCard;
 import thewrestler.signaturemoves.upgrades.AbstractSignatureMoveUpgrade;
 import thewrestler.signaturemoves.upgrades.UpgradeGroup;
 import thewrestler.signaturemoves.upgrades.UpgradeRarity;

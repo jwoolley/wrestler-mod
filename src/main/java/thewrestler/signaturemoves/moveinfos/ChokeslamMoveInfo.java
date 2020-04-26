@@ -1,7 +1,7 @@
 package thewrestler.signaturemoves.moveinfos;
 
 import com.megacrit.cardcrawl.cards.AbstractCard;
-import thewrestler.signaturemoves.cards.Chokeslam;
+import thewrestler.signaturemoves.cards.old.Chokeslam;
 import thewrestler.signaturemoves.upgrades.SignatureMoveUpgradeList;
 
 public class ChokeslamMoveInfo extends AbstractSignatureMoveInfo {

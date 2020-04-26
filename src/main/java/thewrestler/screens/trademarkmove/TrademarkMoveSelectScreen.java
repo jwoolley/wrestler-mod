@@ -13,7 +13,7 @@ import thewrestler.WrestlerMod;
 import thewrestler.cards.colorless.status.penalty.AbstractPenaltyStatusCard;
 import thewrestler.screens.trademarkmove.patches.TintCardPatch;
 import thewrestler.signaturemoves.cards.AbstractSignatureMoveCard;
-import thewrestler.signaturemoves.cards.Chokeslam;
+import thewrestler.signaturemoves.cards.old.Chokeslam;
 
 import java.util.ArrayList;
 import java.util.Arrays;

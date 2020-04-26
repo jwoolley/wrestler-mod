@@ -1,9 +1,8 @@
 package thewrestler.signaturemoves.moveinfos;
 
 import com.megacrit.cardcrawl.cards.AbstractCard;
-import thewrestler.signaturemoves.cards.DragonGate;
+import thewrestler.signaturemoves.cards.old.DragonGate;
 import thewrestler.signaturemoves.upgrades.SignatureMoveUpgradeList;
-import thewrestler.signaturemoves.upgrades.UpgradeType;
 
 public class DragonGateMoveInfo extends AbstractSignatureMoveInfo {
   private static final int NUM_CARDS_REQUIRED = 5;

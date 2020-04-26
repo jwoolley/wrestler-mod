@@ -31,7 +31,7 @@ abstract public class AbstractSignatureMoveCard extends CustomCard {
   private static final String IMG_PATH_PREFIX = "signaturemoves/";
   private final String imgName;
 
-  final SignatureMoveUpgradeList upgradeList;
+  final protected SignatureMoveUpgradeList upgradeList;
 
   public AbstractSignatureMoveCard(String id, String name, String img, int cost, String rawDescription,
                                    CardType type, CardTarget target, boolean hasExhaust, boolean hasRetain) {
