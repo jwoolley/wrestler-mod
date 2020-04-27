@@ -16,6 +16,7 @@ import thewrestler.cards.colorless.status.penalty.YellowPenaltyStatusCard;
 import thewrestler.screens.trademarkmove.patches.TintCardPatch;
 import thewrestler.signaturemoves.cards.AbstractSignatureMoveCard;
 import thewrestler.signaturemoves.cards.old.Chokeslam;
+import thewrestler.signaturemoves.cards.skill.ChopBlock;
 import thewrestler.signaturemoves.cards.skill.ElbowSmash;
 
 import java.util.ArrayList;
@@ -146,6 +147,8 @@ public class TrademarkMoveSelectScreen {
     if (penaltyCard1 instanceof BluePenaltyStatusCard && penaltyCard2 instanceof YellowPenaltyStatusCard
      || penaltyCard1 instanceof YellowPenaltyStatusCard && penaltyCard2 instanceof BluePenaltyStatusCard) {
       return new ElbowSmash();
+    } else if (penaltyCard1 instanceof BluePenaltyStatusCard && penaltyCard2 instanceof BluePenaltyStatusCard) {
+      return new ChopBlock();
     }
     return new Chokeslam();
   }
