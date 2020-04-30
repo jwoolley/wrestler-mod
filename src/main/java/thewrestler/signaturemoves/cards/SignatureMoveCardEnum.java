@@ -19,7 +19,8 @@ public enum SignatureMoveCardEnum {
   DOOMSDAY_DEVICE(new DoomsdayDevice(), new DoomsdayDeviceMoveInfo()),
   ELBOW_SMASH(new ElbowSmash(), new ElbowSmashMoveInfo()),
   PILEDRIVER(new Piledriver(), new PiledriverMoveInfo()),
-  SUPLEX(new Suplex(), new SuplexMoveInfo());
+  SUPLEX(new Suplex(), new SuplexMoveInfo()),
+  WIND_UP(new Suplex(), new WindUpMoveInfo());
 
   SignatureMoveCardEnum(AbstractSignatureMoveCard card, AbstractSignatureMoveInfo moveInfo) {
     this.card = card;

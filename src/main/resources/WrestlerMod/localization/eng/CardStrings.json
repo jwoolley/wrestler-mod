@@ -642,7 +642,7 @@
   },
 
   "WrestlerMod:WindUpKick": {
-    "NAME": "Wind-Up Kick",
+    "NAME": "Spinning Heel Kick",
     "DESCRIPTION": "Can only be played if !M! non-Attack cards were played this turn. NL Deal !D! damage to ALL enemies.",
     "EXTENDED_DESCRIPTION": [
       "I have to play #b",
@@ -744,16 +744,21 @@
   },
 
   "WrestlerMod:Piledriver": {
-  "NAME": "Piledriver",
-  "DESCRIPTION": "Remove all Block from the enemy. NL Deal !D! damage twice. NL Gain Block equal to unblocked damage dealt.",
-  "EXTENDED_DESCRIPTION": [
-    "[E]",
-    " and draw !M!",
-    " card.",
-    " cards.",
-    "a "
-  ]
-},
+    "NAME": "Piledriver",
+    "DESCRIPTION": "Remove all Block from the enemy. NL Deal !D! damage twice. NL Gain Block equal to unblocked damage dealt.",
+    "EXTENDED_DESCRIPTION": [
+      "[E]",
+      " and draw !M!",
+      " card.",
+      " cards.",
+      "a "
+    ]
+  },
+
+  "WrestlerMod:WindUp": {
+    "NAME": "Wind Up",
+    "DESCRIPTION": "Retain. NL Gain [E] [E] . NL Your next !M! attacks this turn are played twice."
+  },
 
   "WrestlerMod:Suplex": {
     "NAME": "Suplex Slam",

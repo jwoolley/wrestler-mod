@@ -58,6 +58,7 @@ import thewrestler.signaturemoves.cards.old.DragonGate;
 import thewrestler.signaturemoves.cards.attack.Piledriver;
 import thewrestler.signaturemoves.cards.skill.ChopBlock;
 import thewrestler.signaturemoves.cards.skill.DoomsdayDevice;
+import thewrestler.signaturemoves.cards.skill.WindUp;
 import thewrestler.signaturemoves.moveinfos.AbstractSignatureMoveInfo;
 import thewrestler.ui.WrestlerCombatInfoPanel;
 import thewrestler.ui.WrestlerPenaltyCardInfoPanel;
@@ -337,6 +338,7 @@ public class WrestlerMod implements
         reflectedMap.put("SNAP_LIGAMENT_1", new Sfx(getAudioResourcePath("TheWrestler_SnapLigament1.ogg")));
         reflectedMap.put("SPLAT_WET_1", new Sfx(getAudioResourcePath("TheWrestler_SplatWet1.ogg")));
         reflectedMap.put("SPRINGBOARD_1", new Sfx(getAudioResourcePath("TheWrestler_Springboard1.ogg")));
+        reflectedMap.put("SPRING_WIND_UP_BOING_2", new Sfx(getAudioResourcePath("TheWrestler_SpringWindUpBoing2.ogg")));
         reflectedMap.put("THUD_MEDIUM_1", new Sfx(getAudioResourcePath("TheWrestler_ThudMedium1.ogg")));
         reflectedMap.put("TIME_BOMB_1", new Sfx(getAudioResourcePath("TheWrestler_TimeBomb1.ogg")));
         reflectedMap.put("TONE_ELECTRONIC_1", new Sfx(getAudioResourcePath("TheWrestler_ToneElectronic1.ogg")));
@@ -728,6 +730,8 @@ public class WrestlerMod implements
         UnlockTracker.unlockCard(Piledriver.ID);
         BaseMod.addCard(new Suplex());
         UnlockTracker.unlockCard(Suplex.ID);
+        BaseMod.addCard(new WindUp());
+        UnlockTracker.unlockCard(WindUp.ID);
 
         UnlockTracker.unlockCard(FairPlay.ID);
 

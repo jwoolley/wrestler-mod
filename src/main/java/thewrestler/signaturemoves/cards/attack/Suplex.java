@@ -15,6 +15,7 @@ import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.vfx.BorderFlashEffect;
 import com.megacrit.cardcrawl.vfx.combat.RoomTintEffect;
 import thewrestler.cards.colorless.status.penalty.BluePenaltyStatusCard;
+import thewrestler.cards.colorless.status.penalty.RedPenaltyStatusCard;
 import thewrestler.cards.colorless.status.penalty.YellowPenaltyStatusCard;
 import thewrestler.signaturemoves.cards.AbstractSignatureMoveCard;
 import thewrestler.signaturemoves.upgrades.AbstractSignatureMoveUpgrade;
@@ -49,7 +50,7 @@ public class Suplex extends AbstractSignatureMoveCard {
 
   public Suplex() {
     super(ID, NAME, IMG_PATH, COST, getDescription(DAMAGE_INCREASE), TYPE, TARGET, HAS_EXHAUST, HAS_RETAIN,
-        BluePenaltyStatusCard.class, YellowPenaltyStatusCard.class);
+        YellowPenaltyStatusCard.class, RedPenaltyStatusCard.class);
     this.baseMagicNumber = this.magicNumber = NUM_CARDS;
     this.baseDamage = this.damage = DAMAGE;
     this.misc = DAMAGE_INCREASE;
