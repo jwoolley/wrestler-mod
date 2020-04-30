@@ -55,7 +55,7 @@ import thewrestler.screens.trademarkmove.patches.TintCardPatch;
 import thewrestler.signaturemoves.cards.attack.Suplex;
 import thewrestler.signaturemoves.cards.old.Chokeslam;
 import thewrestler.signaturemoves.cards.old.DragonGate;
-import thewrestler.signaturemoves.cards.old.Piledriver;
+import thewrestler.signaturemoves.cards.attack.Piledriver;
 import thewrestler.signaturemoves.cards.skill.ChopBlock;
 import thewrestler.signaturemoves.cards.skill.DoomsdayDevice;
 import thewrestler.signaturemoves.moveinfos.AbstractSignatureMoveInfo;
@@ -724,6 +724,8 @@ public class WrestlerMod implements
         UnlockTracker.unlockCard(ChopBlock.ID);
         BaseMod.addCard(new DoomsdayDevice());
         UnlockTracker.unlockCard(DoomsdayDevice.ID);
+        BaseMod.addCard(new Piledriver());
+        UnlockTracker.unlockCard(Piledriver.ID);
         BaseMod.addCard(new Suplex());
         UnlockTracker.unlockCard(Suplex.ID);
 

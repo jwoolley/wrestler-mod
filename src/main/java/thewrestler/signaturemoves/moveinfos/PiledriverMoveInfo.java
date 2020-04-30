@@ -1,7 +1,7 @@
 package thewrestler.signaturemoves.moveinfos;
 
 import com.megacrit.cardcrawl.cards.AbstractCard;
-import thewrestler.signaturemoves.cards.old.Piledriver;
+import thewrestler.signaturemoves.cards.attack.Piledriver;
 import thewrestler.signaturemoves.upgrades.SignatureMoveUpgradeList;
 
 public class PiledriverMoveInfo extends AbstractSignatureMoveInfo {

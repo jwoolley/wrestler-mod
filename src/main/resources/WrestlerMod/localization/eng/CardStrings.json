@@ -690,18 +690,6 @@
     ]
   },
 
-  "WrestlerMod:Piledriver": {
-    "NAME": "Piledriver",
-    "DESCRIPTION": "Retain. NL Deal !D! Damage to ALL enemies. NL For each enemy killed or whose Block is broken, gain ",
-    "EXTENDED_DESCRIPTION": [
-      "[E]",
-      " and draw !M!",
-      " card.",
-      " cards.",
-      "a "
-    ]
-  },
-
   "WrestlerMod:BluePenaltyStatusCard": {
     "NAME": "Blue Penalty Card",
     "DESCRIPTION": "When you gain this card, a random enemy gains !M! *Plated *Armor. NL Retain. NL Draw ",
@@ -754,6 +742,18 @@
     "NAME": "Elbow Smash",
     "DESCRIPTION": "Discard your Hand. NL Add 1 *Elbow to your hand for each card discarded."
   },
+
+  "WrestlerMod:Piledriver": {
+  "NAME": "Piledriver",
+  "DESCRIPTION": "Remove all Block from the enemy. NL Deal !D! damage twice. NL Gain Block equal to unblocked damage dealt.",
+  "EXTENDED_DESCRIPTION": [
+    "[E]",
+    " and draw !M!",
+    " card.",
+    " cards.",
+    "a "
+  ]
+},
 
   "WrestlerMod:Suplex": {
     "NAME": "Suplex Slam",

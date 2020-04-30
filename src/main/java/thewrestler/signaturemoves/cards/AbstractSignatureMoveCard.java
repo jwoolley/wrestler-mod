@@ -52,12 +52,15 @@ abstract public class AbstractSignatureMoveCard extends CustomCard {
                                     CardType type, CardTarget target, SignatureMoveUpgradeList upgradeList,
                                     Class<? extends AbstractPenaltyStatusCard> comboClass1,
                                     Class<? extends AbstractPenaltyStatusCard> comboClass2) {
-    super(id, name, getCardResourcePath(IMG_PATH_PREFIX + img), cost, rawDescription, type, COLOR, RARITY, target);
+    super(id, name, getCardResourcePath(IMG_PATH_PREFIX + img), cost, rawDescription, type, COLOR, CardRarity.RARE, target);
     this.imgName = img;
     this.upgradeList = new SignatureMoveUpgradeList();
     applyUpgrades(upgradeList);
     this.comboClass1 = comboClass1;
     this.comboClass2 = comboClass2;
+
+    // TODO: setting rarity to Rare initially is a HACK to get the banner color. FIX THIS (custom card frame/banner?)
+    this.rarity = CardRarity.RARE;
     // apply upgrades — will need to utilize static helper methods for upgraded name, image, description, etc.
   }
 

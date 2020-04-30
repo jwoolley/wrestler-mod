@@ -2,6 +2,7 @@ package thewrestler.signaturemoves.cards;
 
 import thewrestler.WrestlerMod;
 import thewrestler.signaturemoves.cards.attack.Suplex;
+import thewrestler.signaturemoves.cards.attack.Piledriver;
 import thewrestler.signaturemoves.cards.skill.ChopBlock;
 import thewrestler.signaturemoves.cards.skill.DoomsdayDevice;
 import thewrestler.signaturemoves.cards.skill.ElbowSmash;
@@ -14,10 +15,10 @@ import java.util.Optional;
 public enum SignatureMoveCardEnum {
 //  CHOKESLAM(new Chokeslam(), new ChokeslamMoveInfo()),
 //  DRAGON_GATE(new DragonGate(), new DragonGateMoveInfo()),
-//  PILEDRIVER(new Piledriver(), new PiledriverMoveInfo()),
   CHOP_BLOCK(new ChopBlock(), new ChopBlockMoveInfo()),
   DOOMSDAY_DEVICE(new DoomsdayDevice(), new DoomsdayDeviceMoveInfo()),
   ELBOW_SMASH(new ElbowSmash(), new ElbowSmashMoveInfo()),
+  PILEDRIVER(new Piledriver(), new PiledriverMoveInfo()),
   SUPLEX(new Suplex(), new SuplexMoveInfo());
 
   SignatureMoveCardEnum(AbstractSignatureMoveCard card, AbstractSignatureMoveInfo moveInfo) {
