@@ -38,6 +38,14 @@
     ]
   },
 
+  "WrestlerMod:DoomsdayDevicePower": {
+    "NAME": "Doomsday Device",
+    "DESCRIPTIONS": [
+      "At the start of your turn, draw #b",
+      " cards, then deal damage to ALL enemies equal to twice the number of cards in your hand."
+    ]
+  },
+
   "WrestlerMod:FanFavoritePower": {
     "NAME": "Fan Favorite",
     "DESCRIPTIONS": [

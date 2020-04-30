@@ -1,22 +1,22 @@
 package thewrestler.signaturemoves.moveinfos;
 
 import com.megacrit.cardcrawl.cards.AbstractCard;
-import thewrestler.signaturemoves.cards.skill.DoomsdayDevice;
+import thewrestler.signaturemoves.cards.attack.Suplex;
 import thewrestler.signaturemoves.upgrades.SignatureMoveUpgradeList;
 
 // TODO: this is not correct
 
-public class DoomsdayDeviceMoveInfo extends AbstractSignatureMoveInfo {
+public class SuplexMoveInfo extends AbstractSignatureMoveInfo {
   private static final int NUM_CARDS_REQUIRED = 5;
   private int numCardsExhausted = 0;
   private boolean alreadyGainedThisCombat;
 
-  public DoomsdayDeviceMoveInfo() {
+  public SuplexMoveInfo() {
     this(SignatureMoveUpgradeList.NO_UPGRADES, true);
   }
 
-  public DoomsdayDeviceMoveInfo(SignatureMoveUpgradeList upgradeList, boolean isFirstInstance) {
-    super(new DoomsdayDevice(), upgradeList, isFirstInstance);
+  public SuplexMoveInfo(SignatureMoveUpgradeList upgradeList, boolean isFirstInstance) {
+    super(new Suplex(), upgradeList, isFirstInstance);
   }
 
   @Override

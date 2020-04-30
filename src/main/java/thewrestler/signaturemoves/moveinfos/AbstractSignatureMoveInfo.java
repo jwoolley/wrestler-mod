@@ -20,7 +20,7 @@ public abstract class AbstractSignatureMoveInfo implements AbstractSignatureMove
   public static final boolean SIGNATURE_MOVES_ENABLED = true;
 
 //  public static final SignatureMoveCardEnum TEST_MOVE = null;
-  public static final SignatureMoveCardEnum TEST_MOVE = SignatureMoveCardEnum.CHOKESLAM;
+  public static final SignatureMoveCardEnum TEST_MOVE = SignatureMoveCardEnum.CHOP_BLOCK;
 
   final AbstractSignatureMoveCard signatureMoveCard;
   final SignatureMoveUpgradeList upgradeList;

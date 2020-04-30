@@ -10,13 +10,14 @@ import com.megacrit.cardcrawl.screens.select.GridCardSelectScreen;
 import com.megacrit.cardcrawl.vfx.cardManip.ExhaustCardEffect;
 import org.apache.logging.log4j.Logger;
 import thewrestler.WrestlerMod;
-import thewrestler.cards.colorless.status.penalty.AbstractPenaltyStatusCard;
-import thewrestler.cards.colorless.status.penalty.BluePenaltyStatusCard;
-import thewrestler.cards.colorless.status.penalty.YellowPenaltyStatusCard;
+import thewrestler.cards.colorless.status.penalty.*;
 import thewrestler.screens.trademarkmove.patches.TintCardPatch;
 import thewrestler.signaturemoves.cards.AbstractSignatureMoveCard;
+import thewrestler.signaturemoves.cards.SignatureMoveCardEnum;
+import thewrestler.signaturemoves.cards.attack.Suplex;
 import thewrestler.signaturemoves.cards.old.Chokeslam;
 import thewrestler.signaturemoves.cards.skill.ChopBlock;
+import thewrestler.signaturemoves.cards.skill.DoomsdayDevice;
 import thewrestler.signaturemoves.cards.skill.ElbowSmash;
 
 import java.util.ArrayList;
@@ -141,16 +142,15 @@ public class TrademarkMoveSelectScreen {
     return trademarkMoveCard;
   }
 
-  // TODO: move logic to PenaltyCardInfo, wrap that here
   private AbstractSignatureMoveCard getTrademarkMoveCard(AbstractPenaltyStatusCard penaltyCard1,
                                                          AbstractPenaltyStatusCard penaltyCard2) {
-    if (penaltyCard1 instanceof BluePenaltyStatusCard && penaltyCard2 instanceof YellowPenaltyStatusCard
-     || penaltyCard1 instanceof YellowPenaltyStatusCard && penaltyCard2 instanceof BluePenaltyStatusCard) {
-      return new ElbowSmash();
-    } else if (penaltyCard1 instanceof BluePenaltyStatusCard && penaltyCard2 instanceof BluePenaltyStatusCard) {
-      return new ChopBlock();
-    }
-    return new Chokeslam();
+    final AbstractSignatureMoveCard DEFAULT_SIGNATURE_MOVE = new Chokeslam();
+
+     return Arrays.asList(SignatureMoveCardEnum.values()).stream()
+         .filter(move -> move.getCardCopy().matchCombo(penaltyCard1, penaltyCard2))
+         .map(SignatureMoveCardEnum::getCardCopy)
+         .findFirst()
+         .orElse(DEFAULT_SIGNATURE_MOVE);
   }
 
   private final float CARD_DRAW_SCALE = 0.8f;

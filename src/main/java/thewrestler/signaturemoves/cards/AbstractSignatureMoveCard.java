@@ -4,6 +4,8 @@ import basemod.abstracts.CustomCard;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import org.omg.CORBA.WCharSeqHelper;
+import thewrestler.cards.colorless.status.penalty.AbstractPenaltyStatusCard;
+import thewrestler.cards.colorless.status.penalty.BluePenaltyStatusCard;
 import thewrestler.characters.WrestlerCharacter;
 import thewrestler.enums.AbstractCardEnum;
 import thewrestler.signaturemoves.upgrades.*;
@@ -33,19 +35,29 @@ abstract public class AbstractSignatureMoveCard extends CustomCard {
 
   final protected SignatureMoveUpgradeList upgradeList;
 
+  final Class<? extends AbstractPenaltyStatusCard> comboClass1;
+  final Class<? extends AbstractPenaltyStatusCard> comboClass2;
+
   public AbstractSignatureMoveCard(String id, String name, String img, int cost, String rawDescription,
-                                   CardType type, CardTarget target, boolean hasExhaust, boolean hasRetain) {
-    this(id, name, img, cost, rawDescription, type, target, SignatureMoveUpgradeList.NO_UPGRADES);
+                                   CardType type, CardTarget target, boolean hasExhaust, boolean hasRetain,
+                                   Class<? extends AbstractPenaltyStatusCard> comboClass1,
+                                   Class<? extends AbstractPenaltyStatusCard> comboClass2) {
+    this(id, name, img, cost, rawDescription, type, target, SignatureMoveUpgradeList.NO_UPGRADES,
+        comboClass1, comboClass2);
     this.exhaust = hasExhaust;
     this.selfRetain = hasRetain;
   }
 
   private AbstractSignatureMoveCard(String id, String name, String img, int cost, String rawDescription,
-                                   CardType type, CardTarget target, SignatureMoveUpgradeList upgradeList) {
+                                    CardType type, CardTarget target, SignatureMoveUpgradeList upgradeList,
+                                    Class<? extends AbstractPenaltyStatusCard> comboClass1,
+                                    Class<? extends AbstractPenaltyStatusCard> comboClass2) {
     super(id, name, getCardResourcePath(IMG_PATH_PREFIX + img), cost, rawDescription, type, COLOR, RARITY, target);
     this.imgName = img;
     this.upgradeList = new SignatureMoveUpgradeList();
     applyUpgrades(upgradeList);
+    this.comboClass1 = comboClass1;
+    this.comboClass2 = comboClass2;
     // apply upgrades — will need to utilize static helper methods for upgraded name, image, description, etc.
   }
 
@@ -111,6 +123,10 @@ abstract public class AbstractSignatureMoveCard extends CustomCard {
     return selectRandomUpgrades(card.getAllEligibleUpgrades(), getUpgradeGroup(card.upgradeList), numUpgrades);
   }
 
+  public boolean matchCombo(AbstractPenaltyStatusCard card1, AbstractPenaltyStatusCard card2) {
+    return comboClass1.isInstance(card1) && comboClass2.isInstance(card2)
+        || comboClass1.isInstance(card2) && comboClass2.isInstance(card1);
+  }
 
   static private List<AbstractSignatureMoveUpgrade> selectRandomUpgrades(UpgradeGroup allPossibleUpgrades, UpgradeGroup currentUpgrades, int numUpgrades) {
     // TODO: introduce rarity calculation / application

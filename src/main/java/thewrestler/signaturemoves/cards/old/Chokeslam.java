@@ -55,7 +55,7 @@ public class Chokeslam extends AbstractSignatureMoveCard {
 
   public Chokeslam() {
     super(ID, NAME, IMG_PATH, COST, getDescription(HAS_RETAIN, HAS_EXHAUST, NUM_CARD_COPIES, false),
-        TYPE, TARGET, HAS_EXHAUST, HAS_RETAIN);
+        TYPE, TARGET, HAS_EXHAUST, HAS_RETAIN, null, null);
     this.baseDamage = this.damage = DAMAGE;
     this.baseMagicNumber = this.magicNumber = NUM_CARD_COPIES;
     this.numChokeStacks = NUM_CHOKE_STACKS;

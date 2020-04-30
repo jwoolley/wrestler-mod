@@ -52,9 +52,12 @@ import thewrestler.relics.*;
 import thewrestler.rewards.TrademarkMoveReward;
 import thewrestler.screens.trademarkmove.TrademarkMoveSelectScreen;
 import thewrestler.screens.trademarkmove.patches.TintCardPatch;
+import thewrestler.signaturemoves.cards.attack.Suplex;
 import thewrestler.signaturemoves.cards.old.Chokeslam;
 import thewrestler.signaturemoves.cards.old.DragonGate;
 import thewrestler.signaturemoves.cards.old.Piledriver;
+import thewrestler.signaturemoves.cards.skill.ChopBlock;
+import thewrestler.signaturemoves.cards.skill.DoomsdayDevice;
 import thewrestler.signaturemoves.moveinfos.AbstractSignatureMoveInfo;
 import thewrestler.ui.WrestlerCombatInfoPanel;
 import thewrestler.ui.WrestlerPenaltyCardInfoPanel;
@@ -335,6 +338,7 @@ public class WrestlerMod implements
         reflectedMap.put("SPLAT_WET_1", new Sfx(getAudioResourcePath("TheWrestler_SplatWet1.ogg")));
         reflectedMap.put("SPRINGBOARD_1", new Sfx(getAudioResourcePath("TheWrestler_Springboard1.ogg")));
         reflectedMap.put("THUD_MEDIUM_1", new Sfx(getAudioResourcePath("TheWrestler_ThudMedium1.ogg")));
+        reflectedMap.put("TIME_BOMB_1", new Sfx(getAudioResourcePath("TheWrestler_TimeBomb1.ogg")));
         reflectedMap.put("TONE_ELECTRONIC_1", new Sfx(getAudioResourcePath("TheWrestler_ToneElectronic1.ogg")));
         reflectedMap.put("WHISTLE_BLOW_1", new Sfx(getAudioResourcePath("TheWrestler_WhistleBlow1.ogg")));
         reflectedMap.put("WHISTLE_BLOW_SHORT_1", new Sfx(getAudioResourcePath("TheWrestler_WhistleBlowShort1.ogg")));
@@ -715,6 +719,13 @@ public class WrestlerMod implements
 
         BaseMod.addCard(new DebugTrademarkMoveScreen());
         UnlockTracker.unlockCard(DebugTrademarkMoveScreen.ID);
+
+        BaseMod.addCard(new ChopBlock());
+        UnlockTracker.unlockCard(ChopBlock.ID);
+        BaseMod.addCard(new DoomsdayDevice());
+        UnlockTracker.unlockCard(DoomsdayDevice.ID);
+        BaseMod.addCard(new Suplex());
+        UnlockTracker.unlockCard(Suplex.ID);
 
         UnlockTracker.unlockCard(FairPlay.ID);
 

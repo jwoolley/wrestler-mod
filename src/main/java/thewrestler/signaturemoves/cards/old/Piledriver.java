@@ -46,7 +46,8 @@ public class Piledriver extends AbstractSignatureMoveCard {
   private int energyGain;
 
   public Piledriver() {
-    super(ID, NAME, IMG_PATH, COST, getDescription(NUM_ENERGY, NUM_CARDS), TYPE, TARGET, HAS_EXHAUST, HAS_RETAIN);
+    super(ID, NAME, IMG_PATH, COST, getDescription(NUM_ENERGY, NUM_CARDS), TYPE, TARGET, HAS_EXHAUST, HAS_RETAIN,
+        null, null);
     this.baseDamage = this.damage = DAMAGE;
     this.baseMagicNumber = this.magicNumber = NUM_CARDS;
     this.energyGain = NUM_ENERGY;

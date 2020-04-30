@@ -40,7 +40,7 @@ public class DragonGate extends AbstractSignatureMoveCard {
 
 
   public DragonGate() {
-    super(ID, NAME, IMG_PATH, COST, DESCRIPTION, TYPE, TARGET, HAS_EXHAUST, HAS_RETAIN);
+    super(ID, NAME, IMG_PATH, COST, DESCRIPTION, TYPE, TARGET, HAS_EXHAUST, HAS_RETAIN, null, null);
     this.baseMagicNumber = this.magicNumber = NUM_CARDS;;
   }
 

@@ -15,6 +15,9 @@ import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import javafx.util.Pair;
 import thewrestler.cards.colorless.attack.Elbow;
+import thewrestler.cards.colorless.status.penalty.BluePenaltyStatusCard;
+import thewrestler.cards.colorless.status.penalty.OrangePenaltyStatusCard;
+import thewrestler.cards.colorless.status.penalty.YellowPenaltyStatusCard;
 import thewrestler.effects.utils.combat.CleanFinishEffect;
 import thewrestler.signaturemoves.cards.AbstractSignatureMoveCard;
 import thewrestler.signaturemoves.upgrades.AbstractSignatureMoveUpgrade;
@@ -43,7 +46,8 @@ public class ElbowSmash extends AbstractSignatureMoveCard {
 
 
   public ElbowSmash() {
-    super(ID, NAME, IMG_PATH, COST, DESCRIPTION, TYPE, TARGET, HAS_EXHAUST, HAS_RETAIN);
+    super(ID, NAME, IMG_PATH, COST, DESCRIPTION, TYPE, TARGET, HAS_EXHAUST, HAS_RETAIN,
+        BluePenaltyStatusCard.class, YellowPenaltyStatusCard.class);
     this.cardsToPreview = new Elbow();
   }
 

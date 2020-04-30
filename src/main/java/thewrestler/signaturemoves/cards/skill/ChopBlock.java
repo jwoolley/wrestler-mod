@@ -20,6 +20,8 @@ import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import javafx.util.Pair;
 import thewrestler.cards.colorless.attack.Elbow;
+import thewrestler.cards.colorless.status.penalty.AbstractPenaltyStatusCard;
+import thewrestler.cards.colorless.status.penalty.BluePenaltyStatusCard;
 import thewrestler.effects.utils.combat.CleanFinishEffect;
 import thewrestler.signaturemoves.cards.AbstractSignatureMoveCard;
 import thewrestler.signaturemoves.upgrades.AbstractSignatureMoveUpgrade;
@@ -45,11 +47,11 @@ public class ChopBlock extends AbstractSignatureMoveCard {
   private static final int COST = 1;
   private static final int NUM_CARDS = 3;
   private static final boolean HAS_EXHAUST = false;
-  private static final boolean HAS_RETAIN = false;
-
+  private static final boolean HAS_RETAIN = true;
 
   public ChopBlock() {
-    super(ID, NAME, IMG_PATH, COST, DESCRIPTION, TYPE, TARGET, HAS_EXHAUST, HAS_RETAIN);
+    super(ID, NAME, IMG_PATH, COST, DESCRIPTION, TYPE, TARGET, HAS_EXHAUST, HAS_RETAIN,
+       BluePenaltyStatusCard.class, BluePenaltyStatusCard.class);
     this.baseMagicNumber = this.magicNumber = NUM_CARDS;
   }
 
@@ -71,9 +73,18 @@ public class ChopBlock extends AbstractSignatureMoveCard {
       @Override
       public void update() {
         final int totalHandCost = AbstractDungeon.player.hand.group.stream()
-            .mapToInt(c -> c.costForTurn)
+            .mapToInt(c -> Math.max(c.costForTurn, 0))
             .sum();
         AbstractDungeon.actionManager.addToBottom(new GainBlockAction(AbstractDungeon.player, totalHandCost));
+        this.isDone = true;
+      }
+    }
+
+    class GainBlockForHandCountAction extends AbstractGameAction {
+      @Override
+      public void update() {
+        final int handCount = AbstractDungeon.player.hand.group.size();
+        AbstractDungeon.actionManager.addToBottom(new GainBlockAction(AbstractDungeon.player, 2 * handCount));
         this.isDone = true;
       }
     }
@@ -81,7 +92,7 @@ public class ChopBlock extends AbstractSignatureMoveCard {
     @Override
     public void update() {
       if (this.duration <= DURATION) {
-        AbstractDungeon.actionManager.addToTop(new DrawCardAction(this.amount, new GainBlockForHandCostAction()));
+        AbstractDungeon.actionManager.addToTop(new DrawCardAction(this.amount, new GainBlockForHandCountAction()));
 
         AbstractDungeon.actionManager.addToTop(new SFXAction("CHOP_WOOD_1"));
 
