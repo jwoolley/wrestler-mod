@@ -58,6 +58,14 @@
     ]
   },
 
+  "WrestlerMod:FlamesOfTheHammerPower": {
+    "NAME": "Forge Flames",
+    "DESCRIPTIONS": [
+      "At the start of its turn, takes #b",
+      " damage. When you attack this enemy, remove this and add a #yBurning #yHammer to your hand."
+    ]
+  },
+
   "WrestlerMod:FeudPower": {
     "NAME": "Feud",
     "DESCRIPTIONS": [

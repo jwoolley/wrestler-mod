@@ -3,6 +3,8 @@ package thewrestler.signaturemoves.cards.attack;
 import com.badlogic.gdx.graphics.Color;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.animations.VFXAction;
+import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
+import com.megacrit.cardcrawl.actions.common.DamageAction;
 import com.megacrit.cardcrawl.actions.common.GainBlockAction;
 import com.megacrit.cardcrawl.actions.common.RemoveAllBlockAction;
 import com.megacrit.cardcrawl.actions.utility.WaitAction;
@@ -14,12 +16,16 @@ import com.megacrit.cardcrawl.core.Settings;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
+import com.megacrit.cardcrawl.powers.EnergizedPower;
 import com.megacrit.cardcrawl.ui.panels.EnergyPanel;
 import com.megacrit.cardcrawl.vfx.WallopEffect;
 import com.megacrit.cardcrawl.vfx.combat.FlashAtkImgEffect;
 import com.megacrit.cardcrawl.vfx.combat.WeightyImpactEffect;
+import com.sun.org.apache.bcel.internal.generic.DADD;
 import thewrestler.cards.colorless.status.penalty.BluePenaltyStatusCard;
+import thewrestler.cards.colorless.status.penalty.OrangePenaltyStatusCard;
 import thewrestler.cards.colorless.status.penalty.RedPenaltyStatusCard;
+import thewrestler.powers.trademarkmoves.FlamesOfTheHammerPower;
 import thewrestler.signaturemoves.cards.AbstractSignatureMoveCard;
 import thewrestler.signaturemoves.upgrades.AbstractSignatureMoveUpgrade;
 import thewrestler.signaturemoves.upgrades.UpgradeGroup;
@@ -28,12 +34,12 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
-public class Piledriver extends AbstractSignatureMoveCard {
-  public static final String ID = "WrestlerMod:Piledriver";
+public class BurningHammer extends AbstractSignatureMoveCard {
+  public static final String ID = "WrestlerMod:BurningHammer";
   public static final String NAME;
   public static final String DESCRIPTION;
   public static final String[] EXTENDED_DESCRIPTION;
-  public static final String IMG_PATH = "piledriver.png";
+  public static final String IMG_PATH = "burninghammer.png";
 
   private static final CardStrings cardStrings;
 
@@ -41,65 +47,28 @@ public class Piledriver extends AbstractSignatureMoveCard {
   private static final CardTarget TARGET = CardTarget.ENEMY;
 
   private static final int COST = 1;
-  private static final boolean HAS_EXHAUST = false;
+  private static final int DAMAGE = 9;
+  private static final int FLAMES_AMOUNT = 4;
+  private static final boolean HAS_EXHAUST = true;
   private static final boolean HAS_RETAIN = false;
 
-  public Piledriver() {
+  public BurningHammer() {
     super(ID, NAME, IMG_PATH, COST, getDescription(), TYPE, TARGET, HAS_EXHAUST, HAS_RETAIN,
-        BluePenaltyStatusCard.class, RedPenaltyStatusCard.class);
+        OrangePenaltyStatusCard.class, RedPenaltyStatusCard.class);
+    this.baseDamage = this.damage = DAMAGE;
+    this.baseMagicNumber = this.magicNumber = FLAMES_AMOUNT;
   }
 
   @Override
   public void use(AbstractPlayer p, AbstractMonster m) {
-    AbstractDungeon.actionManager.addToTop(
-        new VFXAction(new WeightyImpactEffect(m.hb.cX, m.hb.cY,Color.BLUE.cpy()), Settings.ACTION_DUR_XFAST));
+    AbstractDungeon.actionManager.addToBottom(
+        new DamageAction(m, new DamageInfo(p, damage, damageTypeForTurn),
+            AbstractGameAction.AttackEffect.BLUNT_HEAVY));
 
-    AbstractDungeon.actionManager.addToTop(
-        new VFXAction(new WeightyImpactEffect(m.hb.cX, m.hb.cY,Color.RED.cpy()), Settings.ACTION_DUR_XFAST));
+    CardCrawlGame.sound.play("FORGE_HAMMER_1");
 
-    AbstractDungeon.actionManager.addToBottom(new PiledriverAction(m, true));
-    AbstractDungeon.actionManager.addToBottom(new PiledriverAction(m, false));
-  }
-
-  private static class PiledriverAction extends AbstractGameAction {
-    final private boolean isHeavy;
-
-    public PiledriverAction(AbstractCreature target, boolean isHeavy) {
-      setValues(target, AbstractDungeon.player);
-      this.actionType = AbstractGameAction.ActionType.DAMAGE;
-      this.startDuration = isHeavy ? Settings.ACTION_DUR_MED : 0.0f;
-      this.duration = this.startDuration;
-      this.isHeavy = isHeavy;
-    }
-
-    public void update() {
-      if (shouldCancelAction()) {
-        this.isDone = true;
-        return;
-      }
-
-      tickDuration();
-
-      if (this.isDone) {
-        final int handSize = AbstractDungeon.player.hand.size();
-        final DamageInfo info = new DamageInfo(AbstractDungeon.player, handSize, DamageInfo.DamageType.NORMAL);
-        AbstractDungeon.effectList.add(new FlashAtkImgEffect(this.target.hb.cX, this.target.hb.cY,
-            isHeavy ? AbstractGameAction.AttackEffect.BLUNT_HEAVY : AttackEffect.BLUNT_LIGHT, false));
-
-        this.target.damage(info);
-        if (this.target.lastDamageTaken > 0) {
-          AbstractDungeon.actionManager.addToTop(new GainBlockAction(this.source, this.target.lastDamageTaken));
-          if (this.target.hb != null) {
-            AbstractDungeon.actionManager.addToTop(new VFXAction(new WallopEffect(this.target.lastDamageTaken, this.target.hb.cX, this.target.hb.cY)));
-          }
-        }
-        if (AbstractDungeon.getCurrRoom().monsters.areMonstersBasicallyDead()) {
-          AbstractDungeon.actionManager.clearPostCombatActions();
-        } else {
-          addToTop(new WaitAction(0.1F));
-        }
-      }
-    }
+    AbstractDungeon.actionManager.addToBottom(
+        new ApplyPowerAction(m, p, new FlamesOfTheHammerPower(m, p, this.magicNumber), this.magicNumber));
   }
 
   @Override
@@ -108,7 +77,7 @@ public class Piledriver extends AbstractSignatureMoveCard {
 
   @Override
   public AbstractSignatureMoveCard makeCopy() {
-    return new Piledriver();
+    return new BurningHammer();
   }
 
   @Override

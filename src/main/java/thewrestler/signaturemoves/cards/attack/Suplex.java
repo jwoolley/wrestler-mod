@@ -14,7 +14,6 @@ import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.vfx.BorderFlashEffect;
 import com.megacrit.cardcrawl.vfx.combat.RoomTintEffect;
-import thewrestler.cards.colorless.status.penalty.BluePenaltyStatusCard;
 import thewrestler.cards.colorless.status.penalty.RedPenaltyStatusCard;
 import thewrestler.cards.colorless.status.penalty.YellowPenaltyStatusCard;
 import thewrestler.signaturemoves.cards.AbstractSignatureMoveCard;

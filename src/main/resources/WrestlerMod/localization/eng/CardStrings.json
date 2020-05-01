@@ -728,6 +728,12 @@
     ]
   },
 
+  "WrestlerMod:BurningHammer": {
+    "NAME": "Burning Hammer",
+    "DESCRIPTION": "Deal !D! Damage. NL Apply !M! wrestlermod:Forge_Flames. NL Exhaust."
+  },
+
+
   "WrestlerMod:ChopBlock": {
     "NAME": "Chop Block",
     "DESCRIPTION": "Retain. NL Draw !M! cards. NL Then gain Block equal to twice the number of cards in your hand."
@@ -739,24 +745,17 @@
   },
 
   "WrestlerMod:ElbowSmash": {
-    "NAME": "Elbow Smash",
+    "NAME": "Bionic Elbow",
     "DESCRIPTION": "Discard your Hand. NL Add 1 *Elbow to your hand for each card discarded."
   },
 
   "WrestlerMod:Piledriver": {
     "NAME": "Piledriver",
-    "DESCRIPTION": "Remove all Block from the enemy. NL Deal !D! damage twice. NL Gain Block equal to unblocked damage dealt.",
-    "EXTENDED_DESCRIPTION": [
-      "[E]",
-      " and draw !M!",
-      " card.",
-      " cards.",
-      "a "
-    ]
+    "DESCRIPTION": "Deal damage equal to the number of cards in your hand, twice. NL Gain Block equal to unblocked damage dealt."
   },
 
   "WrestlerMod:WindUp": {
-    "NAME": "Wind Up",
+    "NAME": "Wind-Up",
     "DESCRIPTION": "Retain. NL Gain [E] [E] . NL Your next !M! attacks this turn are played twice."
   },
 

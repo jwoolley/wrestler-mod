@@ -52,12 +52,14 @@ import thewrestler.relics.*;
 import thewrestler.rewards.TrademarkMoveReward;
 import thewrestler.screens.trademarkmove.TrademarkMoveSelectScreen;
 import thewrestler.screens.trademarkmove.patches.TintCardPatch;
+import thewrestler.signaturemoves.cards.attack.BurningHammer;
 import thewrestler.signaturemoves.cards.attack.Suplex;
 import thewrestler.signaturemoves.cards.old.Chokeslam;
 import thewrestler.signaturemoves.cards.old.DragonGate;
 import thewrestler.signaturemoves.cards.attack.Piledriver;
 import thewrestler.signaturemoves.cards.skill.ChopBlock;
 import thewrestler.signaturemoves.cards.skill.DoomsdayDevice;
+import thewrestler.signaturemoves.cards.skill.ElbowSmash;
 import thewrestler.signaturemoves.cards.skill.WindUp;
 import thewrestler.signaturemoves.moveinfos.AbstractSignatureMoveInfo;
 import thewrestler.ui.WrestlerCombatInfoPanel;
@@ -327,6 +329,7 @@ public class WrestlerMod implements
         reflectedMap.put("DOOR_HATCH_OPEN_1", new Sfx(getAudioResourcePath("TheWrestler_DoorHatchOpen1.ogg")));
         reflectedMap.put("DRILL_SPIN_1", new Sfx(getAudioResourcePath("TheWrestler_DrillSpin1.ogg")));
         reflectedMap.put("ELECTRO_INTERFERENCE_1", new Sfx(getAudioResourcePath("TheWrestler_ElectroInterference1.ogg")));
+        reflectedMap.put("FORGE_HAMMER_1", new Sfx(getAudioResourcePath("TheWrestler_ForgeHammer1.ogg")));
         reflectedMap.put("GATE_OPEN_RUSTY_1", new Sfx(getAudioResourcePath("TheWrestler_GateRustyOpen1.ogg")));
         reflectedMap.put("GONG_STRIKE_1", new Sfx(getAudioResourcePath("TheWrestler_GongStrike1.ogg")));
         reflectedMap.put("GONG_STRIKE_2", new Sfx(getAudioResourcePath("TheWrestler_GongStrike2.ogg")));
@@ -713,6 +716,8 @@ public class WrestlerMod implements
         UnlockTracker.unlockCard(Chokeslam.ID);
         BaseMod.addCard(new DragonGate());
         UnlockTracker.unlockCard(DragonGate.ID);
+        BaseMod.addCard(new ElbowSmash());
+        UnlockTracker.unlockCard(ElbowSmash.ID);
         BaseMod.addCard(new Piledriver());
         UnlockTracker.unlockCard(Piledriver.ID);
         BaseMod.addCard(new FairPlay());
@@ -722,6 +727,8 @@ public class WrestlerMod implements
         BaseMod.addCard(new DebugTrademarkMoveScreen());
         UnlockTracker.unlockCard(DebugTrademarkMoveScreen.ID);
 
+        BaseMod.addCard(new BurningHammer());
+        UnlockTracker.unlockCard(BurningHammer.ID);
         BaseMod.addCard(new ChopBlock());
         UnlockTracker.unlockCard(ChopBlock.ID);
         BaseMod.addCard(new DoomsdayDevice());

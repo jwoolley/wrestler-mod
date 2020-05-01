@@ -65,12 +65,11 @@ public class ElbowSmash extends AbstractSignatureMoveCard {
     @Override
     public void update() {
       if (this.duration <= DURATION) {
-        CardCrawlGame.sound.play("SPRINGBOARD_1");
+        CardCrawlGame.sound.play("ORB_SLOT_GAIN");
         if (!this.player.hand.isEmpty()) {
           final int numCards = AbstractDungeon.player.hand.size();
           AbstractDungeon.actionManager.addToTop(new MakeTempCardInHandAction(new Elbow(), numCards));
           AbstractDungeon.actionManager.addToTop(new DiscardAction(this.player, this.player, numCards, true));
-
         }
         this.isDone = true;
         return;

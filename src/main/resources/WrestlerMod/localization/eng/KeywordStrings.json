@@ -39,6 +39,15 @@
     "DESCRIPTION": "You have no #yPenalty #yCards."
   },
 
+  "WrestlerMod:FlamesOfTheHammer": {
+    "PROPER_NAME": "Forge Flames",
+    "NAMES": [
+      "Forge Flames", "forge_flames"
+    ],
+    "DESCRIPTION": "Flames-afflicted enemies take damage at the start of their turn. When you attack the enemy, remove #yForge #yFlames and add a #yBurning #yHammer to your hand."
+  },
+
+
   "WrestlerMod:SignatureMove": {
     "PROPER_NAME": "Trademark Move",
     "NAMES": [
