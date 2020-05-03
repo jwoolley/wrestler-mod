@@ -15,6 +15,7 @@ public class WrestlerDirtyStrike extends WrestlerStrike {
   public static final String IMG_PATH = "dirtystrike.png";
 
   private static final int ADDITIONAL_BASE_DAMAGE = 0;
+  private static final int UPGRADE_DAMAGE = 3;
 
   private static final CardStrings cardStrings;
 
@@ -27,6 +28,15 @@ public class WrestlerDirtyStrike extends WrestlerStrike {
 
   static void setDirtyCardAttackFrame(CustomCard card) {
     card.setBackgroundTexture(WrestlerMod.ATTACK_WRESTLER_DIRTY_ORANGE, WrestlerMod.ATTACK_DEFAULT_DIRTY_ORANGE_PORTRAIT);
+  }
+
+  @Override
+  public void upgrade() {
+    if (!upgraded) {
+      upgradeName();
+      upgradeDamage(UPGRADE_DAMAGE);
+      initializeDescription();
+    }
   }
 
   public AbstractCard makeCopy() {

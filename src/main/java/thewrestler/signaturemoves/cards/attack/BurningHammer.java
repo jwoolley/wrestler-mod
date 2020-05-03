@@ -49,7 +49,7 @@ public class BurningHammer extends AbstractSignatureMoveCard {
   private static final int COST = 1;
   private static final int DAMAGE = 9;
   private static final int FLAMES_AMOUNT = 4;
-  private static final boolean HAS_EXHAUST = true;
+  private static final boolean HAS_EXHAUST = false;
   private static final boolean HAS_RETAIN = false;
 
   public BurningHammer() {

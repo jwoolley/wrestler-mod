@@ -53,6 +53,7 @@ import thewrestler.rewards.TrademarkMoveReward;
 import thewrestler.screens.trademarkmove.TrademarkMoveSelectScreen;
 import thewrestler.screens.trademarkmove.patches.TintCardPatch;
 import thewrestler.signaturemoves.cards.attack.BurningHammer;
+import thewrestler.signaturemoves.cards.attack.PhoenixSplash;
 import thewrestler.signaturemoves.cards.attack.Suplex;
 import thewrestler.signaturemoves.cards.old.Chokeslam;
 import thewrestler.signaturemoves.cards.old.DragonGate;
@@ -311,6 +312,7 @@ public class WrestlerMod implements
         HashMap<String, Sfx> reflectedMap = getSoundsMap();
         reflectedMap.put("BOING_SIMPLE_1", new Sfx(getAudioResourcePath("TheWrestler_BoingSimple1.ogg")));
         reflectedMap.put("BOMB_DROP_EXPLODE_1", new Sfx(getAudioResourcePath("TheWrestler_BombDropExplode1.ogg")));
+        reflectedMap.put("BOMB_IMPACT_1", new Sfx(getAudioResourcePath("TheWrestler_BombImpact1.ogg")));
         reflectedMap.put("BONE_CRUNCH_1", new Sfx(getAudioResourcePath("TheWrestler_BoneCrunch1.ogg")));
         reflectedMap.put("BONE_CRUNCH_2", new Sfx(getAudioResourcePath("TheWrestler_BoneCrunch2.ogg")));
         reflectedMap.put("BOO_CROWD_1", new Sfx(getAudioResourcePath("TheWrestler_BooCrowd1.ogg")));
@@ -733,6 +735,8 @@ public class WrestlerMod implements
         UnlockTracker.unlockCard(ChopBlock.ID);
         BaseMod.addCard(new DoomsdayDevice());
         UnlockTracker.unlockCard(DoomsdayDevice.ID);
+        BaseMod.addCard(new PhoenixSplash());
+        UnlockTracker.unlockCard(PhoenixSplash.ID);
         BaseMod.addCard(new Piledriver());
         UnlockTracker.unlockCard(Piledriver.ID);
         BaseMod.addCard(new Suplex());

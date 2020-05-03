@@ -5,6 +5,7 @@ import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
 import com.megacrit.cardcrawl.actions.common.DamageAction;
 import com.megacrit.cardcrawl.actions.common.DrawCardAction;
+import com.megacrit.cardcrawl.actions.common.GainBlockAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.cards.DamageInfo;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
@@ -28,8 +29,9 @@ public class EyePoke extends CustomCard {
 
 
   private static final int DAMAGE = 3;
+  private static final int BLOCK = 3;
   private static final int DAMAGE_UPGRADE = 2;
-  private static final int DEBUFF_AMOUNT = 1;
+  private static final int BLOCK_UPGRADE = 2;
   private static final CardStrings cardStrings;
 
   private static final CardType TYPE = CardType.ATTACK;
@@ -39,10 +41,10 @@ public class EyePoke extends CustomCard {
   private static final int COST = 0;
 
   public EyePoke() {
-    super(ID, NAME, getCardResourcePath(IMG_PATH), COST, getDescription(false), TYPE, AbstractCardEnum.THE_WRESTLER_ORANGE,
+    super(ID, NAME, getCardResourcePath(IMG_PATH), COST, getDescription(), TYPE, AbstractCardEnum.THE_WRESTLER_ORANGE,
         RARITY, TARGET);
     this.baseDamage = this.damage = DAMAGE;
-    this.baseMagicNumber = this.magicNumber = DEBUFF_AMOUNT;
+    this.baseBlock = this.block = BLOCK_UPGRADE;
     CardUtil.makeCardDirty(this);
     this.exhaust = true;
   }
@@ -52,6 +54,8 @@ public class EyePoke extends CustomCard {
     AbstractDungeon.actionManager.addToBottom(
         new DamageAction(m, new DamageInfo(p, damage, damageTypeForTurn),
             AbstractGameAction.AttackEffect.SLASH_HORIZONTAL));
+
+    AbstractDungeon.actionManager.addToBottom(new GainBlockAction(p, this.block));
 
     AbstractDungeon.actionManager.addToBottom(
         new ApplyPowerAction(m, p, new WeakPower(m, this.magicNumber, false), this.magicNumber));
@@ -73,12 +77,13 @@ public class EyePoke extends CustomCard {
     if (!this.upgraded) {
       this.upgradeName();
       this.upgradeDamage(DAMAGE_UPGRADE);
-      this.rawDescription = getDescription(true);
+      this.upgradeBlock(BLOCK_UPGRADE);
+      this.rawDescription = getDescription();
       initializeDescription();
     }
   }
-  public static String getDescription(boolean drawCard) {
-    return DESCRIPTION + (drawCard ? EXTENDED_DESCRIPTION[1] : "") + EXTENDED_DESCRIPTION[0];
+  public static String getDescription() {
+    return DESCRIPTION;
   }
 
   static {

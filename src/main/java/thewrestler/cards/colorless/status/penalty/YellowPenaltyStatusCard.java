@@ -2,7 +2,9 @@ package thewrestler.cards.colorless.status.penalty;
 
 import com.badlogic.gdx.graphics.Color;
 import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
+import com.megacrit.cardcrawl.actions.common.MakeTempCardInDiscardAction;
 import com.megacrit.cardcrawl.actions.common.ReducePowerAction;
+import com.megacrit.cardcrawl.cards.status.Dazed;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
@@ -27,15 +29,14 @@ public class YellowPenaltyStatusCard extends AbstractPenaltyStatusCard {
   public static final String IMG_KEY = "yellow";
   public static final String IMG_PATH = getPenaltyCardImgPath(IMG_KEY + ".png");
 
-
   private static final CardStrings cardStrings;
 
   private static final int ENERGY_GAIN = 1;
-  private static final int BRAVADO_LOSS = 2;
+  private static final int NUM_DAZED = 2;
 
   public YellowPenaltyStatusCard() {
     super(ID, NAME, IMG_PATH, IMG_KEY, getDescription(ENERGY_GAIN), TOOLTIP_KEYWORD_KEY);
-    this.magicNumber = this.baseMagicNumber = BRAVADO_LOSS;
+    this.magicNumber = this.baseMagicNumber = NUM_DAZED;
     this.misc = ENERGY_GAIN;
   }
 
@@ -80,6 +81,7 @@ public class YellowPenaltyStatusCard extends AbstractPenaltyStatusCard {
   @Override
   public void triggerOnCardGained() {
     AbstractPlayer p = AbstractDungeon.player;
+    AbstractDungeon.actionManager.addToTop(new MakeTempCardInDiscardAction(new Dazed(), this.magicNumber));
     AbstractDungeon.actionManager.addToBottom(new ReducePowerAction(p, p, BravadoPower.POWER_ID, this.magicNumber));
   }
 }

@@ -20,7 +20,7 @@
     "NAMES": [
       "dirty"
     ],
-    "DESCRIPTION": "Playing multiple #yDirty cards in the same turn will earn #yPenalty #yCards."
+    "DESCRIPTION": "Play two #yDirty cards in the same turn to earn a #yPenalty #yCard. Combine two Penalty Cards to gain a #yTrademark #yMove."
   },
 
   "WrestlerMod:Elbow": {
@@ -44,7 +44,7 @@
     "NAMES": [
       "Forge Flames", "forge_flames"
     ],
-    "DESCRIPTION": "Flames-afflicted enemies take damage at the start of their turn. When you attack the enemy, remove #yForge #yFlames and add a #yBurning #yHammer to your hand."
+    "DESCRIPTION": "Flames-afflicted enemies take damage at the start of their turn. If this kills the enemy, add a #yBurning #yHammer to your hand."
   },
 
 
@@ -53,7 +53,7 @@
     "NAMES": [
       "Trademark Move", "trademark_move"
     ],
-    "DESCRIPTION": "One of several special attacks that can only be obtained during combat."
+    "DESCRIPTION": "One of a number of powerful cards obtained only during combat. Combining two #yPenalty #yCards exhausts them and awards a Trademark Move based on their color combination."
   },
 
   "WrestlerMod:SignatureMoveCardIndicator": {
@@ -76,7 +76,7 @@
     "NAMES": [
       "Penalty Card", "penalty_card"
     ],
-    "DESCRIPTION": "Playable status cards which generate a negative effect when gained, and a beneficial effect when played."
+    "DESCRIPTION": "Status cards which generate a negative effect when gained. Play for beneficial effect, or combine two Penalty Cards by paying their combined cost to gain a #yTrademark #yMove."
   },
 
   "WrestlerMod:PenaltyCardBlue": {

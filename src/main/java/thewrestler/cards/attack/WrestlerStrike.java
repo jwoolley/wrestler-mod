@@ -42,7 +42,7 @@ public class WrestlerStrike extends CustomCard {
 
     private static final int COST = 1;
     private static final int DAMAGE = 6;
-    private static final int UPGRADE_PLUS_DMG = 3;
+    private static final int DAMAGE_UPGRADE = 4;
 
     public WrestlerStrike() {
         this(ID, NAME, DESCRIPTION, IMG);
@@ -66,7 +66,7 @@ public class WrestlerStrike extends CustomCard {
     public void upgrade() {
         if (!upgraded) {
             upgradeName();
-            upgradeDamage(UPGRADE_PLUS_DMG);
+            upgradeDamage(DAMAGE_UPGRADE);
             initializeDescription();
         }
     }

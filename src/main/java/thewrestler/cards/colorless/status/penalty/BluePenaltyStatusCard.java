@@ -27,7 +27,7 @@ public class BluePenaltyStatusCard extends AbstractPenaltyStatusCard {
   private static final CardStrings cardStrings;
 
   private static final int CARD_DRAW_AMOUNT = 2;
-  private static final int ENEMY_PLATED_ARMOR_GAIN = 3;
+  private static final int ENEMY_PLATED_ARMOR_GAIN = 4;
 
   public BluePenaltyStatusCard() {
     super(ID, NAME, IMG_PATH, IMG_KEY, getDescription(CARD_DRAW_AMOUNT), TOOLTIP_KEYWORD_KEY);

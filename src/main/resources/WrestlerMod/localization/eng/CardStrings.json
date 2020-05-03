@@ -165,11 +165,7 @@
 
   "WrestlerMod:EyePoke": {
     "NAME": "Eye Poke",
-    "DESCRIPTION": "wrestlermod:Dirty. NL Deal !D! Damage. NL Apply !M! Weak and !M! Vulnerable.",
-    "EXTENDED_DESCRIPTION": [
-      " NL Exhaust.",
-      " NL Draw a card."
-    ]
+    "DESCRIPTION": "wrestlermod:Dirty. NL Deal !D! Damage. NL Gain !B! Block. NL Exhaust."
   },
 
   "WrestlerMod:Facewash": {
@@ -658,7 +654,7 @@
   },
 
   "WrestlerMod:WrestlerStrike": {
-    "NAME": "Strike",
+    "NAME": "Clean Strike",
     "DESCRIPTION": "Deal !D! Damage."
   },
 
@@ -721,7 +717,7 @@
 
   "WrestlerMod:YellowPenaltyStatusCard": {
     "NAME": "Yellow Penalty Card",
-    "DESCRIPTION": "When you gain this card, lose !M! wrestlermod:Bravado. NL Retain. NL Gain",
+    "DESCRIPTION": "When you gain this card, add !M! *Dazed to your discard pile. NL Retain. NL Gain",
     "EXTENDED_DESCRIPTION": [
       " [E]",
       " next turn. NL Exhaust."
@@ -730,9 +726,8 @@
 
   "WrestlerMod:BurningHammer": {
     "NAME": "Burning Hammer",
-    "DESCRIPTION": "Deal !D! Damage. NL Apply !M! wrestlermod:Forge_Flames. NL Exhaust."
+    "DESCRIPTION": "Deal !D! Damage. NL Apply !M! wrestlermod:Forge_Flames."
   },
-
 
   "WrestlerMod:ChopBlock": {
     "NAME": "Chop Block",
@@ -747,6 +742,11 @@
   "WrestlerMod:ElbowSmash": {
     "NAME": "Bionic Elbow",
     "DESCRIPTION": "Discard your Hand. NL Add 1 *Elbow to your hand for each card discarded."
+  },
+
+  "WrestlerMod:PhoenixSplash": {
+    "NAME": "Phoenix Splash",
+    "DESCRIPTION": "Deal !D! Damage and apply !M! wrestlermod:Forge_Flames to ALL enemies."
   },
 
   "WrestlerMod:Piledriver": {

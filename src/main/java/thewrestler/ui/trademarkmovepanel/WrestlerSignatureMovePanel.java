@@ -31,6 +31,7 @@ import java.util.ArrayList;
 // TODO: subheader w/ Signature Move name (in yellow)
 
 public class WrestlerSignatureMovePanel implements WrestlerSignatureMovePanelInterface {
+  private static final boolean PANEL_ENABLED = false;
   private static final String[] TEXT;
 
   private static final float WIDTH = 290 + 4; // extra width to fit the text. TODO: resize the panel image (and others)
@@ -227,7 +228,7 @@ public class WrestlerSignatureMovePanel implements WrestlerSignatureMovePanelInt
   }
 
   public static boolean shouldRender() {
-    return BasicUtils.isPlayingAsWrestler() && BasicUtils.isPlayerInCombat()
+    return PANEL_ENABLED && BasicUtils.isPlayingAsWrestler() && BasicUtils.isPlayerInCombat()
         && WrestlerCharacter.getSignatureMoveInfo() != null;
   }
 

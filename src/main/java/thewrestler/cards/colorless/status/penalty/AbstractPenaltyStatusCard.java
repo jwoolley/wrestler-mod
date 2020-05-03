@@ -64,9 +64,7 @@ public abstract class AbstractPenaltyStatusCard extends CustomCard {
   public abstract void triggerOnCardUsed(AbstractPlayer p, AbstractMonster m);
 
   public void use(AbstractPlayer p, AbstractMonster m) {
-
       // TODO: set dontTriggerOnUseCard?
-
       final AbstractPlayer player = AbstractDungeon.player;
       this.triggerOnCardUsed(p, m);
       if (player.hasPower(ShortarmPower.POWER_ID)) {
