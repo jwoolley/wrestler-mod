@@ -23,7 +23,7 @@
     "DESCRIPTIONS": [
       "At the end of combat, heal #b",
       " HP. This amount is reduced by #b",
-      " each time you play a #yPenalty #yCard."
+      " each time you gain a #yPenalty #yCard."
     ]
   },
 

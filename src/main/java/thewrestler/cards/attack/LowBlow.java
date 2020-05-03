@@ -4,7 +4,6 @@ import basemod.abstracts.CustomCard;
 import basemod.helpers.TooltipInfo;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.common.DamageAction;
-import com.megacrit.cardcrawl.actions.utility.DiscardToHandAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.cards.DamageInfo;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
@@ -12,8 +11,9 @@ import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
-import thewrestler.cards.StartOfCombatListener;
+import org.lwjgl.opencl.APPLEContextLoggingUtil;
 import thewrestler.cards.WrestlerCardTags;
+import thewrestler.cards.colorless.status.penalty.AbstractPenaltyStatusCard;
 import thewrestler.cards.skill.AbstractPenaltyCardListener;
 import thewrestler.enums.AbstractCardEnum;
 import thewrestler.keywords.AbstractTooltipKeyword;
@@ -25,7 +25,7 @@ import java.util.List;
 
 import static thewrestler.WrestlerMod.getCardResourcePath;
 
-public class LowBlow extends CustomCard {
+public class LowBlow extends CustomCard implements AbstractPenaltyCardListener {
   public static final String ID = "WrestlerMod:LowBlow";
   public static final String NAME;
   public static final String DESCRIPTION;
@@ -95,7 +95,12 @@ public class LowBlow extends CustomCard {
   }
 
   @Override
-  public void onPlayCard(AbstractCard card, AbstractMonster m) {
+  public void onGainedWarningCard() {
+
+  }
+
+  @Override
+  public void onGainedPenaltyCard(AbstractPenaltyStatusCard card) {
     if (card.hasTag(WrestlerCardTags.PENALTY)) {
       this.flash();
       updateCost(-1);

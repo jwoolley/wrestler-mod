@@ -44,7 +44,7 @@ public class EyePoke extends CustomCard {
     super(ID, NAME, getCardResourcePath(IMG_PATH), COST, getDescription(), TYPE, AbstractCardEnum.THE_WRESTLER_ORANGE,
         RARITY, TARGET);
     this.baseDamage = this.damage = DAMAGE;
-    this.baseBlock = this.block = BLOCK_UPGRADE;
+    this.baseBlock = this.block = BLOCK;
     CardUtil.makeCardDirty(this);
     this.exhaust = true;
   }
@@ -56,15 +56,6 @@ public class EyePoke extends CustomCard {
             AbstractGameAction.AttackEffect.SLASH_HORIZONTAL));
 
     AbstractDungeon.actionManager.addToBottom(new GainBlockAction(p, this.block));
-
-    AbstractDungeon.actionManager.addToBottom(
-        new ApplyPowerAction(m, p, new WeakPower(m, this.magicNumber, false), this.magicNumber));
-    AbstractDungeon.actionManager.addToBottom(
-        new ApplyPowerAction(m, p, new VulnerablePower(m, this.magicNumber, false), this.magicNumber));
-
-    if (this.upgraded) {
-      AbstractDungeon.actionManager.addToBottom(new DrawCardAction(1));
-    }
   }
 
   @Override

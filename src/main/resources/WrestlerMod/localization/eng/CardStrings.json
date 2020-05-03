@@ -142,7 +142,7 @@
 
   "WrestlerMod:CurtainJerker": {
     "NAME": "Curtain Jerker",
-    "DESCRIPTION": "Gain !M! Strength and !M! Dexterity. NL The next time you play a power, lose !M! Strength and !M! Dexterity."
+    "DESCRIPTION": "Gain !M! Strength and !M! Dexterity. NL The next time you play a Power or gain a [P] , lose !M! Strength and !M! Dexterity."
   },
 
   "WrestlerMod:DivingStomp": {
@@ -322,7 +322,7 @@
 
   "WrestlerMod:LowBlow": {
     "NAME": "Low Blow",
-    "DESCRIPTION": "Deal !D! Damage. NL Costs 1 less for each [P] played this combat."
+    "DESCRIPTION": "Deal !D! Damage. NL Costs 1 less for each [P] gained this combat."
   },
 
   "WrestlerMod:MainEvent": {

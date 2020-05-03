@@ -13,9 +13,11 @@ import com.megacrit.cardcrawl.powers.AbstractPower;
 import com.megacrit.cardcrawl.powers.DexterityPower;
 import com.megacrit.cardcrawl.powers.StrengthPower;
 import thewrestler.WrestlerMod;
+import thewrestler.cards.colorless.status.penalty.AbstractPenaltyStatusCard;
+import thewrestler.cards.skill.AbstractPenaltyCardListener;
 import thewrestler.powers.AbstractWrestlerPower;
 
-public class CurtainJerkerPower extends AbstractWrestlerPower implements CloneablePowerInterface {
+public class CurtainJerkerPower extends AbstractWrestlerPower implements AbstractPenaltyCardListener, CloneablePowerInterface {
   public static final String POWER_ID = WrestlerMod.makeID("CurtainJerkerPower");
   public static final String IMG = "curtainjerker.png";
   private static final PowerStrings powerStrings;
@@ -67,5 +69,15 @@ public class CurtainJerkerPower extends AbstractWrestlerPower implements Cloneab
     if (card.type == AbstractCard.CardType.POWER) {
       AbstractDungeon.actionManager.addToTop(new RemoveSpecificPowerAction(this.owner, this.owner, this.ID));
     }
+  }
+
+  @Override
+  public void onGainedWarningCard() {
+
+  }
+
+  @Override
+  public void onGainedPenaltyCard(AbstractPenaltyStatusCard card) {
+    AbstractDungeon.actionManager.addToTop(new RemoveSpecificPowerAction(this.owner, this.owner, this.ID));
   }
 }

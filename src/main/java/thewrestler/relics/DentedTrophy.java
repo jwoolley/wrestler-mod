@@ -11,6 +11,7 @@ import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import thewrestler.WrestlerMod;
 import thewrestler.actions.UpgradeRandomCardInDrawPileAction;
 import thewrestler.cards.WrestlerCardTags;
+import thewrestler.cards.colorless.status.penalty.AbstractPenaltyStatusCard;
 import thewrestler.cards.skill.AbstractPenaltyCardListener;
 import thewrestler.util.TextureLoader;
 
@@ -20,7 +21,7 @@ import java.util.List;
 import static thewrestler.WrestlerMod.makeRelicOutlinePath;
 import static thewrestler.WrestlerMod.makeRelicPath;
 
-public class DentedTrophy extends CustomWrestlerRelic {
+public class DentedTrophy extends CustomWrestlerRelic implements AbstractPenaltyCardListener {
   public static final String ID = WrestlerMod.makeID("DentedTrophy");
   private static final Texture IMG = TextureLoader.getTexture(makeRelicPath("dentedtrophy.png"));
   private static final Texture OUTLINE = TextureLoader.getTexture(makeRelicOutlinePath("dentedtrophy.png"));
@@ -56,15 +57,6 @@ public class DentedTrophy extends CustomWrestlerRelic {
   }
 
   @Override
-  public void onPlayCard(AbstractCard card, AbstractMonster monster) {
-    if (card.hasTag(WrestlerCardTags.PENALTY) && this.counter > 0) {
-      flash();
-      this.counter -= HEAL_REDUCTION;
-    }
-  }
-
-
-  @Override
   protected List<String> getKeywordList() {
     return POWERTIP_KEYWORDS;
   }
@@ -72,5 +64,18 @@ public class DentedTrophy extends CustomWrestlerRelic {
   @Override
   protected List<Keyword> getBaseGameKeywordList() {
     return null;
+  }
+
+  @Override
+  public void onGainedWarningCard() {
+
+  }
+
+  @Override
+  public void onGainedPenaltyCard(AbstractPenaltyStatusCard card) {
+    if (this.counter > 0) {
+      flash();
+      this.counter -= HEAL_REDUCTION;
+    }
   }
 }

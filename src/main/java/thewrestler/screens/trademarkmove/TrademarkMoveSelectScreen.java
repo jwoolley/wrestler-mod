@@ -65,9 +65,11 @@ public class TrademarkMoveSelectScreen {
     trademarkMoveCard.stopGlowing();
   }
 
+  // TODO: localize buttons
+
   private void initializeButtons() {
     Logger logger  = WrestlerMod.logger;
-    confirmButton1 = new TrademarkMoveConfirmButton("Play",
+    confirmButton1 = new TrademarkMoveConfirmButton("Play Card",
         (thisIsNull) -> {
           TintCardPatch.tintCard(secondCard);
           TintCardPatch.tintCard(trademarkMoveCard);

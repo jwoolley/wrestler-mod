@@ -32,7 +32,7 @@
   "WrestlerMod:CurtainJerkerPower": {
     "NAME": "Curtain Jerker",
     "DESCRIPTIONS": [
-      "The next time you play a power, lose #b",
+      "The next time you play a #yPower card or gain a #yPenalty #yCard, lose #b",
       " #yStrength and #b",
       " #yDexterity."
     ]
