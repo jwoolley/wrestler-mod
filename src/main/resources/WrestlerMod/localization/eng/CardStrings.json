@@ -711,7 +711,7 @@
     "NAME": "Red Penalty Card",
     "DESCRIPTION": "When you gain this card, take ",
     "EXTENDED_DESCRIPTION": [
-      " damage. NL Retain. NL Gain !M! Strength. NL Exhaust."
+      " damage. NL Retain. NL Gain !M! Temporary Strength. NL Exhaust."
     ]
   },
 

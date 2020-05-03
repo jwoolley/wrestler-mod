@@ -10,6 +10,7 @@ import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
+import com.megacrit.cardcrawl.powers.LoseStrengthPower;
 import com.megacrit.cardcrawl.powers.StrengthPower;
 import thewrestler.keywords.CustomTooltipKeywords;
 import thewrestler.orbs.BasePenaltyOrb;
@@ -28,7 +29,7 @@ public class RedPenaltyStatusCard extends AbstractPenaltyStatusCard {
 
   private static final CardStrings cardStrings;
 
-  private static final int STRENGTH_GAIN = 2;
+  private static final int STRENGTH_GAIN = 3;
   private static final int DAMAGE = 5;
 
   public RedPenaltyStatusCard() {
@@ -41,6 +42,8 @@ public class RedPenaltyStatusCard extends AbstractPenaltyStatusCard {
   public void triggerOnCardUsed(AbstractPlayer p, AbstractMonster m) {
     AbstractDungeon.actionManager.addToBottom(
         new ApplyPowerAction(p, p, new StrengthPower(p, STRENGTH_GAIN), STRENGTH_GAIN));
+    AbstractDungeon.actionManager.addToBottom(
+        new ApplyPowerAction(p, p, new LoseStrengthPower(p, STRENGTH_GAIN),STRENGTH_GAIN));
   }
 
   @Override

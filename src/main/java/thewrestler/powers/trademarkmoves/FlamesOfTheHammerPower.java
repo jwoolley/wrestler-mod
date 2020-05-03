@@ -9,6 +9,7 @@ import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.PowerStrings;
 import com.megacrit.cardcrawl.powers.AbstractPower;
+import com.megacrit.cardcrawl.rooms.AbstractRoom;
 import com.megacrit.cardcrawl.vfx.combat.FlashAtkImgEffect;
 import thewrestler.WrestlerMod;
 import thewrestler.powers.AbstractWrestlerPower;
@@ -33,16 +34,17 @@ public class FlamesOfTheHammerPower extends AbstractWrestlerPower implements Clo
   }
 
   @Override
-  public void atEndOfTurn(boolean isPlayer) {
-    this.flash();
+  public void atStartOfTurn() {
+    if ((AbstractDungeon.getCurrRoom().phase == AbstractRoom.RoomPhase.COMBAT) &&
+        (!AbstractDungeon.getMonsters().areMonstersBasicallyDead())) {
+      AbstractDungeon.effectList.add(new FlashAtkImgEffect(this.owner.hb.cX, this.owner.hb.cY, AbstractGameAction.AttackEffect.FIRE));
+      this.owner.damage(new DamageInfo(this.source, this.amount, DamageInfo.DamageType.THORNS));
 
-    AbstractDungeon.effectList.add(new FlashAtkImgEffect(this.owner.hb.cX, this.owner.hb.cY, AbstractGameAction.AttackEffect.FIRE));
-    this.owner.damage(new DamageInfo(this.source, this.amount, DamageInfo.DamageType.THORNS));
-
-    if ((this.owner.isDying || this.owner.currentHealth <= 0) && (!this.owner.halfDead)) {
-      AbstractDungeon.actionManager.addToTop(new MakeTempCardInHandAction(new BurningHammer()));
-      if (AbstractDungeon.getCurrRoom().monsters.areMonstersBasicallyDead()) {
-        AbstractDungeon.actionManager.clearPostCombatActions();
+      if ((this.owner.isDying || this.owner.currentHealth <= 0) && (!this.owner.halfDead)) {
+        AbstractDungeon.actionManager.addToTop(new MakeTempCardInHandAction(new BurningHammer()));
+        if (AbstractDungeon.getCurrRoom().monsters.areMonstersBasicallyDead()) {
+          AbstractDungeon.actionManager.clearPostCombatActions();
+        }
       }
     }
   }
