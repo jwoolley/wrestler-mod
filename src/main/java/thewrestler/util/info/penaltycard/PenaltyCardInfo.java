@@ -86,8 +86,10 @@ public class PenaltyCardInfo implements StartOfCombatListener, EndOfCombatListen
     WrestlerCharacter.getPenaltyCardInfo().resetForTurn();
     List<AbstractPenaltyCardListener> listeners = new ArrayList<>();
     penaltyCard.triggerOnCardGained();
-    listeners.addAll(getPenaltyCardListenerCards());
+    // ORDER COULD MATTER HERE
+    listeners.addAll(getPenaltyCardListenerRelics());
     listeners.addAll(getPenaltyCardListenerPowers());
+    listeners.addAll(getPenaltyCardListenerCards());
     listeners.forEach(listener -> listener.onGainedPenaltyCard(penaltyCard));
     CombatInfo.incrementPenaltyCardsGainedThisCombatCount();
     resetPenaltyOrbs();
@@ -253,6 +255,11 @@ public class PenaltyCardInfo implements StartOfCombatListener, EndOfCombatListen
     return dirtyCards;
   }
 
+  public static List<AbstractPenaltyCardListener> getPenaltyCardListenerRelics() {
+    return AbstractDungeon.player.relics.stream()
+        .filter(p -> p instanceof AbstractPenaltyCardListener)
+        .map(p -> (AbstractPenaltyCardListener)p).collect(Collectors.toList());
+  }
 
   public static List<AbstractPenaltyCardListener> getPenaltyCardListenerPowers() {
     return AbstractDungeon.player.powers.stream()
@@ -260,7 +267,7 @@ public class PenaltyCardInfo implements StartOfCombatListener, EndOfCombatListen
         .map(p -> (AbstractPenaltyCardListener)p).collect(Collectors.toList());
   }
 
-    public static List<AbstractPenaltyCardListener> getPenaltyCardListenerCards() {
+  public static List<AbstractPenaltyCardListener> getPenaltyCardListenerCards() {
     final List<AbstractPenaltyCardListener> cards = new ArrayList<>();
 
     AbstractPlayer player = AbstractDungeon.player;

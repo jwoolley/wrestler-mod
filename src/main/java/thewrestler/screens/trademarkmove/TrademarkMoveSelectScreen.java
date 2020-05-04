@@ -10,15 +10,11 @@ import com.megacrit.cardcrawl.screens.select.GridCardSelectScreen;
 import com.megacrit.cardcrawl.vfx.cardManip.ExhaustCardEffect;
 import org.apache.logging.log4j.Logger;
 import thewrestler.WrestlerMod;
-import thewrestler.cards.colorless.status.penalty.*;
+import thewrestler.cards.colorless.status.penalty.AbstractPenaltyStatusCard;
 import thewrestler.screens.trademarkmove.patches.TintCardPatch;
 import thewrestler.signaturemoves.cards.AbstractSignatureMoveCard;
 import thewrestler.signaturemoves.cards.SignatureMoveCardEnum;
-import thewrestler.signaturemoves.cards.attack.Suplex;
 import thewrestler.signaturemoves.cards.old.Chokeslam;
-import thewrestler.signaturemoves.cards.skill.ChopBlock;
-import thewrestler.signaturemoves.cards.skill.DoomsdayDevice;
-import thewrestler.signaturemoves.cards.skill.ElbowSmash;
 
 import java.util.ArrayList;
 import java.util.Arrays;

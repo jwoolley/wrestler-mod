@@ -2,15 +2,9 @@ package thewrestler.relics;
 
 import com.badlogic.gdx.graphics.Texture;
 import com.megacrit.cardcrawl.actions.common.RelicAboveCreatureAction;
-import com.megacrit.cardcrawl.actions.utility.SFXAction;
-import com.megacrit.cardcrawl.cards.AbstractCard;
-import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.Keyword;
-import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import thewrestler.WrestlerMod;
-import thewrestler.actions.UpgradeRandomCardInDrawPileAction;
-import thewrestler.cards.WrestlerCardTags;
 import thewrestler.cards.colorless.status.penalty.AbstractPenaltyStatusCard;
 import thewrestler.cards.skill.AbstractPenaltyCardListener;
 import thewrestler.util.TextureLoader;
@@ -38,7 +32,7 @@ public class DentedTrophy extends CustomWrestlerRelic implements AbstractPenalty
 
   @Override
   public String getUpdatedDescription() {
-    return DESCRIPTIONS[0] + STARTING_HEAL + DESCRIPTIONS[1] + HEAL_REDUCTION + DESCRIPTIONS[2];
+    return DESCRIPTIONS[0] + STARTING_HEAL + DESCRIPTIONS[1];
   }
 
   @Override
