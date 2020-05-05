@@ -8,10 +8,13 @@ import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.Keyword;
 import thewrestler.WrestlerMod;
 import thewrestler.cards.WrestlerCardTags;
+import thewrestler.cards.colorless.status.penalty.AbstractPenaltyStatusCard;
 import thewrestler.util.TextureLoader;
 import thewrestler.util.info.penaltycard.PenaltyCardInfo;
 
 import java.util.Arrays;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -40,11 +43,11 @@ public class RefereesWhistle extends CustomWrestlerRelic {
             .collect(Collectors.toList());
 
     if (!penaltyCards.isEmpty()) {
+      Collections.shuffle(penaltyCards);
       this.flash();
-      penaltyCards.forEach(c -> {
-        c.flash(Color.GOLD);
-        c.modifyCostForCombat(-1);
-      });
+      AbstractCard card =  penaltyCards.get(0);
+      card.flash(Color.GOLD);
+      card.modifyCostForCombat(-1);
     }
   }
 
