@@ -751,7 +751,7 @@
 
   "WrestlerMod:Piledriver": {
     "NAME": "Piledriver",
-    "DESCRIPTION": "Deal damage equal to the number of cards in your hand, twice. NL Gain Block equal to unblocked damage dealt."
+    "DESCRIPTION": "Deal damage equal to three times the number of cards in your hand. NL Gain Block equal to unblocked damage dealt."
   },
 
   "WrestlerMod:WindUp": {

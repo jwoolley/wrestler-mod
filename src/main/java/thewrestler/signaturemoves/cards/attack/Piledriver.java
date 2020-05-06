@@ -58,7 +58,7 @@ public class Piledriver extends AbstractSignatureMoveCard {
         new VFXAction(new WeightyImpactEffect(m.hb.cX, m.hb.cY,Color.RED.cpy()), Settings.ACTION_DUR_XFAST));
 
     AbstractDungeon.actionManager.addToBottom(new PiledriverAction(m, true));
-    AbstractDungeon.actionManager.addToBottom(new PiledriverAction(m, false));
+//    AbstractDungeon.actionManager.addToBottom(new PiledriverAction(m, false));
   }
 
   private static class PiledriverAction extends AbstractGameAction {
@@ -82,7 +82,7 @@ public class Piledriver extends AbstractSignatureMoveCard {
 
       if (this.isDone) {
         final int handSize = AbstractDungeon.player.hand.size();
-        final DamageInfo info = new DamageInfo(AbstractDungeon.player, handSize, DamageInfo.DamageType.NORMAL);
+        final DamageInfo info = new DamageInfo(AbstractDungeon.player, 3 * handSize, DamageInfo.DamageType.NORMAL);
         AbstractDungeon.effectList.add(new FlashAtkImgEffect(this.target.hb.cX, this.target.hb.cY,
             isHeavy ? AbstractGameAction.AttackEffect.BLUNT_HEAVY : AttackEffect.BLUNT_LIGHT, false));
 
