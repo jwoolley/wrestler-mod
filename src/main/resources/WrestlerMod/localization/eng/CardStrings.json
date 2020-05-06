@@ -230,7 +230,7 @@
 
   "WrestlerMod:Guillotine": {
     "NAME": "Guillotine",
-    "DESCRIPTION": "wrestlermod:Dirty. NL Deal !D! damage to ALL enemies. NL Then deal !D! damage to all enemies with 50% HP or less."
+    "DESCRIPTION": "wrestlermod:Dirty. NL Deal !D! damage to ALL enemies. NL If you have no Attacks in hand, deal !D! damage to all enemies again."
   },
 
   "WrestlerMod:HairPull": {
