@@ -2,6 +2,7 @@ package thewrestler.screens.trademarkmove.actions;
 
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.common.MakeTempCardInHandAction;
+import com.megacrit.cardcrawl.actions.unique.LoseEnergyAction;
 import com.megacrit.cardcrawl.cards.CardQueueItem;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.core.Settings;
@@ -35,10 +36,11 @@ public class ChooseTrademarkMoveAction extends AbstractGameAction {
 
   public void update() {
     if (this.duration == this.startDuration) {
+      // TODO: also perform cost check from UsePenaltyCardPatch (extract out of that class)
       if (AbstractDungeon.getMonsters().areMonstersBasicallyDead() || allPenaltyCards.size() < 2) {
         this.isDone = true;
       } else {
-        TrademarkMoveSelectScreen screen = WrestlerMod.getTrademarkMoveSelectScreen();
+        final TrademarkMoveSelectScreen screen = WrestlerMod.getTrademarkMoveSelectScreen();
         screen.reset();
         screen.setCards(this.selectedCard, this.allPenaltyCards);
         screen.open();
@@ -53,12 +55,18 @@ public class ChooseTrademarkMoveAction extends AbstractGameAction {
         this.selectedCard.triggeredFromSelectScreen = true;
         AbstractDungeon.actionManager.cardQueue.add(new CardQueueItem(this.selectedCard, false));
       } else if (selection == TrademarkMoveScreenSelection.COMBINE) {
-        TrademarkMoveSelectScreen screen = WrestlerMod.getTrademarkMoveSelectScreen();
+        final TrademarkMoveSelectScreen screen = WrestlerMod.getTrademarkMoveSelectScreen();
+        AbstractDungeon.actionManager.addToTop(
+            new LoseEnergyAction(selectedCard.costForTurn + screen.getSecondSelectedCard().costForTurn));
         AbstractDungeon.player.hand.moveToExhaustPile(this.selectedCard);
         AbstractDungeon.player.hand.moveToExhaustPile(screen.getSecondSelectedCard());
         AbstractDungeon.actionManager.addToBottom(new MakeTempCardInHandAction(screen.getTrademarkMove()));
       } else if (selection == TrademarkMoveScreenSelection.CANCEL) {
         this.selectedCard.triggeredFromSelectScreen = false;
+      }
+      final TrademarkMoveSelectScreen screen = WrestlerMod.getTrademarkMoveSelectScreen();
+      if (screen.isOpen) {
+        screen.close();
       }
       this.isDone = true;
     }

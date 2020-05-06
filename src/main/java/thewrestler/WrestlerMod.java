@@ -172,17 +172,17 @@ public class WrestlerMod implements
     public static WrestlerCombatInfoPanel combatInfoPanel;
     public static WrestlerSignatureMovePanelInterface signatureMovePanel;
 
-    private static TrademarkMoveSelectScreen trademarkMoveScreen = new TrademarkMoveSelectScreen();
+    public static TrademarkMoveSelectScreen trademarkMoveSelectScreen = new TrademarkMoveSelectScreen();
 
     public static void openTrademarkMoveSelectScreen() {
         // TODO: don't open if the state is wrong (i.e. player not in dungeon or hand doesn't have 2 or more PCs)
         if (AbstractDungeon.getCurrRoom().phase == AbstractRoom.RoomPhase.COMBAT) {
-            trademarkMoveScreen.open();
+            trademarkMoveSelectScreen.open();
         }
     }
 
     public static TrademarkMoveSelectScreen getTrademarkMoveSelectScreen() {
-        return trademarkMoveScreen;
+        return trademarkMoveSelectScreen;
     }
 
     // =============== MAKE IMAGE PATHS =================

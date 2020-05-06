@@ -1,8 +1,11 @@
 package thewrestler.screens.trademarkmove;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.evacipated.cardcrawl.modthespire.lib.SpireEnum;
 import com.megacrit.cardcrawl.cards.AbstractCard;
+import com.megacrit.cardcrawl.cards.CardGroup;
 import com.megacrit.cardcrawl.core.Settings;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.helpers.Hitbox;
@@ -40,10 +43,16 @@ public class TrademarkMoveSelectScreen {
   TrademarkMoveConfirmButton confirmButton1;
   TrademarkMoveConfirmButton confirmButton2;
 
-  private boolean isOpen = false;
+  public boolean isOpen = false;
+
+  // TODO: read from localization
+  private static final String header = "Play Card or Combine";
+  private float showTimer;
+
+  private CardGroup savedHand;
 
   public TrademarkMoveSelectScreen() {
-
+    this.showTimer = 0.25f;
   }
 
   private static void resetCardAlpha() {
@@ -80,7 +89,7 @@ public class TrademarkMoveSelectScreen {
         (thisIsNull) -> {
           this.selection = TrademarkMoveScreenSelection.PLAY;
           logger.info("Play Button Clicked.");
-          close();
+          fakeClose();
         });
 
     confirmButton2 = new TrademarkMoveConfirmButton("Combine & Exhaust",
@@ -96,19 +105,25 @@ public class TrademarkMoveSelectScreen {
         (thisIsNull) -> { /* resetCardAlpha();  */ resetCardGlow(); },
         (thisIsNull) -> {
           this.selection = TrademarkMoveScreenSelection.COMBINE;
-          AbstractDungeon.topLevelEffectsQueue.add(new ExhaustCardEffect(firstCard));
-          AbstractDungeon.topLevelEffectsQueue.add(new ExhaustCardEffect(secondCard));
-          close();
+
+          ExhaustCardEffect effect1 = new ExhaustCardEffect(firstCard);
+          effect1.duration = 0.6f;
+          ExhaustCardEffect effect2 = new ExhaustCardEffect(secondCard);
+          effect2.duration = 0.6f;
+
+          AbstractDungeon.topLevelEffectsQueue.add(effect1);
+          AbstractDungeon.topLevelEffectsQueue.add(effect2);
+          fakeClose();
         });
     positionButtons();
-    this.confirmButton1.hide();
     this.confirmButton1.show();
-    this.confirmButton2.hide();
     this.confirmButton2.show();
   }
 
   public void reset() {
     this.selection = TrademarkMoveScreenSelection.UNSELECTED;
+    this.confirmButton1 = null;
+    this.confirmButton2 = null;
     isOpen = false;
     firstCard = null;
     secondCard = null;
@@ -178,17 +193,38 @@ public class TrademarkMoveSelectScreen {
   }
 
   public void open() {
-    this.isOpen  = true;
-    // show buttons
+    AbstractDungeon.topPanel.unhoverHitboxes();
 
-    // from GridCardSelectScreen
-    // hide buttons? peek/confirm
+    initializeButtons();
+
+    disableCombatControls();
 
     AbstractDungeon.isScreenUp = true;
     AbstractDungeon.screen = AbstractDungeon.CurrentScreen.NONE;
     AbstractDungeon.overlayMenu.showBlackScreen(0.75f);
+    AbstractDungeon.dynamicBanner.appear(header);
 
-    initializeButtons();
+    showCancelButton();
+    this.showTimer = 0.25F;
+    this.isOpen = true;
+  }
+
+  private void disableCombatControls() {
+    AbstractDungeon.overlayMenu.proceedButton.hide();
+    AbstractDungeon.overlayMenu.endTurnButton.disable();
+  }
+
+  public void reopen() {
+    AbstractDungeon.screen = Enum.TRADEMARK_MOVE_SELECT;
+
+    AbstractDungeon.topPanel.unhoverHitboxes();
+    AbstractDungeon.isScreenUp = true;
+    AbstractDungeon.dynamicBanner.appear(this.header);
+    disableCombatControls();
+    showCancelButton();
+  }
+
+  private void showCancelButton() {
     AbstractDungeon.overlayMenu.cancelButton.show(GridCardSelectScreen.TEXT[1]);
   }
 
@@ -205,11 +241,19 @@ public class TrademarkMoveSelectScreen {
     }
   }
 
-  private void close() {
+  public void close() {
     AbstractDungeon.overlayMenu.hideBlackScreen();
-    AbstractDungeon.overlayMenu.cancelButton.hide();
-    AbstractDungeon.isScreenUp = false;
     this.isOpen = false;
+
+    this.isOpen = false;
+    AbstractDungeon.player.hand = this.savedHand;
+
+    AbstractDungeon.overlayMenu.endTurnButton.enable();
+    AbstractDungeon.overlayMenu.cancelButton.hide();
+
+    AbstractDungeon.dynamicBanner.hide();
+    AbstractDungeon.screen = AbstractDungeon.CurrentScreen.NONE;
+    AbstractDungeon.isScreenUp = false;
   }
 
   public boolean isOpen() {
@@ -218,7 +262,7 @@ public class TrademarkMoveSelectScreen {
 
   public void render(SpriteBatch sb) {
     // TODO: call render on all sub-elements
-    if (this.isOpen) {
+    if (this.isOpen && AbstractDungeon.isScreenUp) {
       firstCard.render(sb);
       firstCard.hb.render(sb);
       secondCard.render(sb);
@@ -274,22 +318,49 @@ public class TrademarkMoveSelectScreen {
   public void update() {
     // TODO: call update on all sub-elements
     if (this.isOpen) {
-      if (AbstractDungeon.overlayMenu.cancelButton.hb.clickStarted) {
-        AbstractDungeon.closeCurrentScreen();
-        this.selection = TrademarkMoveScreenSelection.CANCEL;
-        this.close();
+      if (this.showTimer > 0.0F) {
+        this.showTimer -= Gdx.graphics.getDeltaTime();
+        if (Settings.FAST_MODE) {
+          this.showTimer -= Gdx.graphics.getDeltaTime();
+        }
+        updateCards();
         return;
       }
 
-      firstCard.hb.update();
-      secondCard.hb.update();
-      trademarkMoveCard.hb.update();
+      this.savedHand = AbstractDungeon.player.hand;
 
+      if (AbstractDungeon.overlayMenu.cancelButton.hb.clickStarted) {
+        this.selection = TrademarkMoveScreenSelection.CANCEL;
+        AbstractDungeon.overlayMenu.cancelButton.hb.clickStarted = false;
+        fakeClose();
+        return;
+      }
+
+      updateCards();
       confirmButton1.update();
       confirmButton2.update();
 
       // TODO: this is experimental
       AbstractDungeon.overlayMenu.cancelButton.update();
     }
+  }
+
+  private void updateCards() {
+    firstCard.hb.update();
+    secondCard.hb.update();
+    trademarkMoveCard.hb.update();
+  }
+
+  private void fakeClose() {
+    AbstractDungeon.overlayMenu.endTurnButton.disable();
+    AbstractDungeon.screen = AbstractDungeon.CurrentScreen.NONE;
+    AbstractDungeon.isScreenUp = false;
+    this.confirmButton1.hide();
+    this.confirmButton2.hide();
+  }
+
+  public static class Enum {
+    @SpireEnum
+    public static AbstractDungeon.CurrentScreen TRADEMARK_MOVE_SELECT;
   }
 }
