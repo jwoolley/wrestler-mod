@@ -41,10 +41,13 @@ public class Shortarm extends CustomCard {
   private static final int DAMAGE = 3;
   private static final int DAMAGE_UPGRADE = 2;
 
+  private static final int BUFF_AMOUNT = 1;
+
   public Shortarm() {
     super(ID, NAME, getCardResourcePath(IMG_PATH), COST, getDescription(), TYPE,
         AbstractCardEnum.THE_WRESTLER_ORANGE, RARITY, TARGET);
     this.baseDamage = this.damage = DAMAGE;
+    this.baseMagicNumber = this.magicNumber = BUFF_AMOUNT;
     CardUtil.makeCardDirty(this);
   }
 

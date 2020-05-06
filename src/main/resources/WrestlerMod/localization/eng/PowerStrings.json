@@ -223,13 +223,10 @@
   },
 
   "WrestlerMod:ShortarmPower": {
-    "NAME": "Double Down",
+    "NAME": "Shortarm",
     "DESCRIPTIONS": [
-      "Double the effect of the next",
-      " #yPenalty #yCard",
-      " #b",
-      " #yPenalty #yCards",
-      " you play this turn."
+      "Your #yDirty #yAttacks deal #b",
+      " additional damage."
     ]
   },
 

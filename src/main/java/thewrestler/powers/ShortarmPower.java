@@ -30,20 +30,31 @@ public class ShortarmPower extends AbstractWrestlerPower implements CloneablePow
 
   public static final PowerType POWER_TYPE = PowerType.BUFF;
 
+
+
   public ShortarmPower(int amount) {
     super(POWER_ID, NAME, IMG, AbstractDungeon.player, AbstractDungeon.player, amount, POWER_TYPE);
   }
 
+
   @Override
-  public void atEndOfTurn(boolean isPlayer) {
-    AbstractDungeon.actionManager.addToBottom(new RemoveSpecificPowerAction(this.owner, this.owner, POWER_ID));
+  public void onUseCard(AbstractCard card, UseCardAction action) {
+    if (card.type == AbstractCard.CardType.ATTACK && card.hasTag(WrestlerCardTags.DIRTY)) {
+      flash();
+    }
+  }
+
+  @Override
+  public float atDamageGive(float damage, DamageInfo.DamageType damageType, AbstractCard card) {
+    if (card.type == AbstractCard.CardType.ATTACK && card.hasTag(WrestlerCardTags.DIRTY)) {
+      damage += this.amount;
+    }
+    return damage;
   }
 
   @Override
   public void updateDescription() {
-    this.description = DESCRIPTIONS[0]
-      + (this.amount == 1 ? DESCRIPTIONS[1] : DESCRIPTIONS[2] + this.amount + DESCRIPTIONS[3])
-      + DESCRIPTIONS[4];
+    this.description = DESCRIPTIONS[0] + this.amount + DESCRIPTIONS[1];
   }
 
   @Override

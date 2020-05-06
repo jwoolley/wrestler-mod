@@ -503,8 +503,8 @@
   },
 
   "WrestlerMod:Shortarm": {
-    "NAME": "Double Down",
-    "DESCRIPTION": "wrestlermod:Dirty. NL Deal !D! damage twice. NL Double the effect of the next [P] you play this turn."
+    "NAME": "Double Shortarm",
+    "DESCRIPTION": "wrestlermod:Dirty. NL Deal !D! damage twice. NL Your wrestlermod:Dirty Attacks deal !M! additional damage this combat."
   },
 
   "WrestlerMod:Showboat": {
@@ -741,7 +741,7 @@
 
   "WrestlerMod:ElbowSmash": {
     "NAME": "Bionic Elbow",
-    "DESCRIPTION": "Discard your Hand. NL Add 1 *Elbow to your hand for each card discarded."
+    "DESCRIPTION": "Discard your Hand. NL Add !M! *Elbows to your hand."
   },
 
   "WrestlerMod:PhoenixSplash": {

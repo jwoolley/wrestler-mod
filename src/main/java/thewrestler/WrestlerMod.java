@@ -343,6 +343,7 @@ public class WrestlerMod implements
         reflectedMap.put("SNAP_LIGAMENT_1", new Sfx(getAudioResourcePath("TheWrestler_SnapLigament1.ogg")));
         reflectedMap.put("SPLAT_WET_1", new Sfx(getAudioResourcePath("TheWrestler_SplatWet1.ogg")));
         reflectedMap.put("SPRINGBOARD_1", new Sfx(getAudioResourcePath("TheWrestler_Springboard1.ogg")));
+        reflectedMap.put("SPRING_WIND_UP_1", new Sfx(getAudioResourcePath("TheWrestler_SpringWindUp1.ogg")));
         reflectedMap.put("SPRING_WIND_UP_BOING_2", new Sfx(getAudioResourcePath("TheWrestler_SpringWindUpBoing2.ogg")));
         reflectedMap.put("THUD_MEDIUM_1", new Sfx(getAudioResourcePath("TheWrestler_ThudMedium1.ogg")));
         reflectedMap.put("TIME_BOMB_1", new Sfx(getAudioResourcePath("TheWrestler_TimeBomb1.ogg")));

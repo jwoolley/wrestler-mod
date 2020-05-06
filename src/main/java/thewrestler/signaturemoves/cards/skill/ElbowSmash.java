@@ -41,6 +41,7 @@ public class ElbowSmash extends AbstractSignatureMoveCard {
   private static final CardTarget TARGET = AbstractCard.CardTarget.NONE;
 
   private static final int COST = 1;
+  private static final int NUM_ELBOWS = 3;
   private static final boolean HAS_EXHAUST = false;
   private static final boolean HAS_RETAIN = false;
 
@@ -48,6 +49,7 @@ public class ElbowSmash extends AbstractSignatureMoveCard {
   public ElbowSmash() {
     super(ID, NAME, IMG_PATH, COST, DESCRIPTION, TYPE, TARGET, HAS_EXHAUST, HAS_RETAIN,
         BluePenaltyStatusCard.class, YellowPenaltyStatusCard.class);
+    this.baseMagicNumber = this.magicNumber = NUM_ELBOWS;
     this.cardsToPreview = new Elbow();
   }
 
@@ -56,7 +58,8 @@ public class ElbowSmash extends AbstractSignatureMoveCard {
 
     final AbstractPlayer player;
 
-    ElbowSmashAction() {
+    ElbowSmashAction(int amount) {
+      this.amount = amount;
       this.duration = DURATION;
       this.actionType = ActionType.CARD_MANIPULATION;
       this.player = AbstractDungeon.player;
@@ -67,9 +70,9 @@ public class ElbowSmash extends AbstractSignatureMoveCard {
       if (this.duration <= DURATION) {
         CardCrawlGame.sound.play("ORB_SLOT_GAIN");
         if (!this.player.hand.isEmpty()) {
-          final int numCards = AbstractDungeon.player.hand.size();
-          AbstractDungeon.actionManager.addToTop(new MakeTempCardInHandAction(new Elbow(), numCards));
-          AbstractDungeon.actionManager.addToTop(new DiscardAction(this.player, this.player, numCards, true));
+          final int numCardsInHand = AbstractDungeon.player.hand.size();
+          AbstractDungeon.actionManager.addToTop(new MakeTempCardInHandAction(new Elbow(), this.amount));
+          AbstractDungeon.actionManager.addToTop(new DiscardAction(this.player, this.player, numCardsInHand, true));
         }
         this.isDone = true;
         return;
@@ -81,7 +84,7 @@ public class ElbowSmash extends AbstractSignatureMoveCard {
   @Override
   public void use(AbstractPlayer p, AbstractMonster m) {
     // TODO: splashy dragon gate effect (two transparent dragons + sinister noise?)
-    AbstractDungeon.actionManager.addToBottom(new ElbowSmashAction());
+    AbstractDungeon.actionManager.addToBottom(new ElbowSmashAction(this.magicNumber));
   }
 
   @Override

@@ -43,7 +43,7 @@ public class WindUp extends AbstractSignatureMoveCard {
 
   @Override
   public void use(AbstractPlayer p, AbstractMonster m) {
-    AbstractDungeon.actionManager.addToBottom(new SFXAction("SPRING_WIND_UP_BOING_2"));
+    AbstractDungeon.actionManager.addToBottom(new SFXAction("SPRING_WIND_UP_1"));
     AbstractDungeon.actionManager.addToBottom(new GainEnergyAction(ENERGY_GAIN));
     AbstractDungeon.actionManager.addToBottom(new ApplyPowerAction(p, p, new DoubleTapPower(p, this.magicNumber), this.magicNumber));
   }

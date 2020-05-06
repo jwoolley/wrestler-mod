@@ -76,7 +76,7 @@
     "NAMES": [
       "Penalty Card", "penalty_card"
     ],
-    "DESCRIPTION": "Status cards which generate a negative effect when gained. Play for beneficial effect, or combine two Penalty Cards by paying their combined cost to gain a #yTrademark #yMove."
+    "DESCRIPTION": "Status cards which generate a negative effect when gained. Play for beneficial effect, or combine two Penalty Cards for their combined cost to gain a #yTrademark #yMove."
   },
 
   "WrestlerMod:PenaltyCardBlue": {

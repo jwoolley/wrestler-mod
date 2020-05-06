@@ -27,8 +27,8 @@ public class RarityPenatlyCardStrategy extends AbstractPenaltyCardStrategy
 
   private final List<AbstractPenaltyStatusCard> cardQueue = new ArrayList<>();
 
-  private static final float DEFAULT_COMMON_PROBABILITY = 0.9f;
-  private static final float DEFAULT_UNCOMMON_PROBABILITY = 0.6f;
+  private static final float DEFAULT_COMMON_PROBABILITY = 0.6f;
+  private static final float DEFAULT_UNCOMMON_PROBABILITY = 0.5f;
   private static final float DEFAULT_RARE_PROBABILITY = 0.4f;
 
   public RarityPenatlyCardStrategy() {

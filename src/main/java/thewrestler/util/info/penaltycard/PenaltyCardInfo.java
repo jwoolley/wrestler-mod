@@ -95,8 +95,26 @@ public class PenaltyCardInfo implements StartOfCombatListener, EndOfCombatListen
     resetPenaltyOrbs();
   }
 
+
+  private static boolean isNextPenaltyCardLockedForTurn() {
+    return false;
+  }
+
+
+  private static boolean playerHasLockCardPower() {
+    return false;
+  }
+
+  private static boolean isNextPenaltyCardLocked() {
+    return playerHasLockCardPower() || isNextPenaltyCardLockedForTurn();
+  }
+
   private static void resetPenaltyOrbs() {
     BasePenaltyOrb.clearPenaltyOrbs();
+    if (!isNextPenaltyCardLocked()) {
+      // clear next card off of the queue
+      getPenaltyCardStrategy().getNextCard();
+    }
     BasePenaltyOrb.channelPenaltyOrb(getPenaltyCardStrategy().previewNextCard().getOrb());
   }
 
