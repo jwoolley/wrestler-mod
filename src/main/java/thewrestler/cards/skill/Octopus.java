@@ -113,15 +113,6 @@ public class Octopus extends CustomCard {
     return DESCRIPTION + numTimesApplied  + (!willExhaust ? EXTENDED_DESCRIPTION[0] : EXTENDED_DESCRIPTION[1]);
   }
 
-  private static List<AbstractTooltipKeyword> EXTRA_KEYWORDS = Arrays.asList(
-      CustomTooltipKeywords.getTooltipKeyword(CustomTooltipKeywords.PERSISTENT_INJURY)
-  );
-
-  @Override
-  public List<TooltipInfo> getCustomTooltips() {
-    return TooltipKeywords.getTooltipInfos(EXTRA_KEYWORDS);
-  }
-
   static {
     cardStrings = CardCrawlGame.languagePack.getCardStrings(ID);
     NAME = cardStrings.NAME;

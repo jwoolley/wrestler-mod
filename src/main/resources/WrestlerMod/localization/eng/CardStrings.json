@@ -63,7 +63,7 @@
 
   "WrestlerMod:Butterfly": {
     "NAME": "Butterfly",
-    "DESCRIPTION": "Remove !M! of the enemy's debuffs at random. NL Gain [E] and draw a card for each debuff removed."
+    "DESCRIPTION": "Deal !D! damage to a random enemy twice. NL The color of your next [P] won't change at the start of next turn."
   },
 
   "WrestlerMod:CageMatch": {
@@ -142,7 +142,7 @@
 
   "WrestlerMod:CurtainJerker": {
     "NAME": "Curtain Jerker",
-    "DESCRIPTION": "Gain !M! Strength and !M! Dexterity. NL The next time you play a Power or gain a [P] , lose !M! Strength and !M! Dexterity."
+    "DESCRIPTION": "Gain !M! Strength and !M! Dexterity which last until you play a Power or gain a [P]."
   },
 
   "WrestlerMod:DivingStomp": {
@@ -279,7 +279,7 @@
 
   "WrestlerMod:HotShot": {
     "NAME": "Hot Shot",
-    "DESCRIPTION": "wrestlermod:Dirty. NL Deal !D! damage. NL The next random [P] this you gain this combat is a [O]."
+    "DESCRIPTION": "wrestlermod:Dirty. NL Deal !D! damage. NL The next [P] this turn is a [O]."
   },
 
   "WrestlerMod:IronMan": {
@@ -309,7 +309,7 @@
 
   "WrestlerMod:Knee": {
     "NAME": "Knee",
-    "DESCRIPTION": "Ethereal. NL wrestlermod:Dirty. NL Deal !D! Damage. NL Exhaust."
+    "DESCRIPTION": "Retain. NL wrestlermod:Dirty. NL Deal !D! Damage. NL Exhaust."
   },
 
   "WrestlerMod:KneedAFriend": {
@@ -397,13 +397,13 @@
 
   "WrestlerMod:Pinfall": {
     "NAME": "Pinfall",
-    "DESCRIPTION": "Gain !B! Block. NL When you play a [P] , increase its Block by !M! this combat."
+    "DESCRIPTION": "Gain !B! Block. NL When you play a [P] , increase this card's Block by !M! this combat."
   },
 
   "WrestlerMod:PlayToTheCrowd": {
     "NAME": "Play to the Crowd",
-    "DESCRIPTION": "Gain !M! wrestlermod:Bravado. NL Choose one: NL Gain !B! Block, or add a *Knee to your hand. NL Exhaust.",
-    "UPGRADE_DESCRIPTION":  "Gain !M! wrestlermod:Bravado. NL Choose one: NL Gain !B! Block, or add a *Knee+ to your hand. NL Exhaust."
+    "DESCRIPTION": "Choose one: NL Gain !B! Block, or add a *Knee to your hand. NL Exhaust.",
+    "UPGRADE_DESCRIPTION":  "Choose one: NL Gain !B! Block, or add a *Knee+ to your hand. NL Exhaust."
   },
 
   "WrestlerMod:PowderBuffer": {
@@ -730,8 +730,8 @@
   },
 
   "WrestlerMod:ChopBlock": {
-    "NAME": "Chop Block",
-    "DESCRIPTION": "Retain. NL Draw !M! cards. NL Then gain Block equal to twice the number of cards in your hand."
+    "NAME": "Bodyblock",
+    "DESCRIPTION": "Draw !M! cards. NL Gain Block equal to twice the number of cards in your hand. NL Block isn't removed at the start of your next turn."
   },
 
   "WrestlerMod:DoomsdayDevice": {

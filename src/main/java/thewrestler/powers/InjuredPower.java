@@ -17,6 +17,8 @@ import com.megacrit.cardcrawl.localization.PowerStrings;
 import com.megacrit.cardcrawl.powers.AbstractPower;
 import thewrestler.WrestlerMod;
 
+import static java.awt.SystemColor.info;
+
 public class InjuredPower extends AbstractWrestlerPower implements CloneablePowerInterface {
   public static final String POWER_ID = WrestlerMod.makeID("InjuredPower");
   public static final String IMG = "injured.png";
@@ -26,45 +28,66 @@ public class InjuredPower extends AbstractWrestlerPower implements CloneablePowe
 
   public static final PowerType POWER_TYPE = PowerType.DEBUFF;
 
+  private boolean persistInjury = false;
+
+  private static final int STACKS_PER_ATTACK = 1;
+
   public InjuredPower(AbstractCreature owner, AbstractCreature source, int amount) {
     super(POWER_ID, NAME, IMG, owner, source, amount, POWER_TYPE);
     updateDescription();
-  }
-
-  @Override
-  public int onAttackedToChangeDamage(DamageInfo info, int damageAmount){
-    if (info.type == DamageInfo.DamageType.NORMAL && damageAmount > 0 && amount > 0 && info.owner != this.owner) {
-      final int injuryDamage = Math.min(damageAmount, this.amount);
-      triggerPower(injuryDamage);
-    }
-    return damageAmount;
   }
 
   public static int getTotalInjuryAmount(AbstractCreature creature) {
     return creature.hasPower(InjuredPower.POWER_ID) ? creature.getPower(POWER_ID).amount : 0;
   }
 
-  private void triggerPower(int injuredAmount) {
-    CardCrawlGame.sound.play("BONE_CRUNCH_1");
+  @Override
+  public void atStartOfTurn() {
+    this.persistInjury = false;
+  }
 
-    if (injuredAmount >= this.amount) {
-      AbstractDungeon.actionManager.addToTop(new RemoveSpecificPowerAction(this.owner, this.source, POWER_ID));
-      AbstractDungeon.actionManager.addToTop(new ApplyPowerAction(this.owner, this.source,
-          new PersistentInjuryPower(this.owner, this.source, this.amount), this.amount));
+  @Override
+  public void onAttack(DamageInfo info, int damageAmount, AbstractCreature target) {
+    if (target != this.owner) {
+      this.stackPower(STACKS_PER_ATTACK);
+      this.persistInjury = true;
     }
   }
 
   @Override
   public void atEndOfTurn(boolean isPlayer) {
-    AbstractDungeon.actionManager.addToBottom(new RemoveSpecificPowerAction(this.owner, this.source, POWER_ID));
+    if (this.amount > 0) {
+      CardCrawlGame.sound.play("SPRINGBOARD_1");
+      CardCrawlGame.sound.play("BONE_CRUNCH_1");
+
+      AbstractDungeon.actionManager.addToBottom(
+          new DamageAction(this.owner, new DamageInfo(this.source, this.amount, DamageInfo.DamageType.THORNS),
+              AbstractGameAction.AttackEffect.SMASH, false));
+    }
+    if (this.amount == 1) {
+      AbstractDungeon.actionManager.addToBottom(new RemoveSpecificPowerAction(this.owner, this.source, POWER_ID));
+    } else {
+      AbstractDungeon.actionManager.addToBottom(new ReducePowerAction(this.owner, this.source, POWER_ID, getReductionAmount()));
+    }
+  }
+
+  private int getReductionAmount() {
+    return (int) Math.round(Math.ceil(this.amount / 2.0f));
   }
 
   @Override
   public void updateDescription() {
-    this.description = (this.owner.isPlayer ? DESCRIPTIONS[0] : DESCRIPTIONS[1])
-        + DESCRIPTIONS[2] + this.amount + DESCRIPTIONS[3]
-        + (this.owner.isPlayer ? DESCRIPTIONS[4] : DESCRIPTIONS[5])
-        + this.amount + DESCRIPTIONS[6];
+    final String yourOrIts = isPlayer() ? DESCRIPTIONS[3] : DESCRIPTIONS[4];
+    this.description = (isPlayer() ? DESCRIPTIONS[0] : DESCRIPTIONS[1]) + this.amount
+        + DESCRIPTIONS[2] + yourOrIts + DESCRIPTIONS[5]
+        + (isPlayer() ? DESCRIPTIONS[6] : DESCRIPTIONS[7]) + STACKS_PER_ATTACK + DESCRIPTIONS[8]
+        + (isPlayer() ? DESCRIPTIONS[9] : DESCRIPTIONS[10]) + DESCRIPTIONS[11]
+        + yourOrIts + DESCRIPTIONS[12] + getReductionAmount() + DESCRIPTIONS[13] + yourOrIts + DESCRIPTIONS[14]
+        + (isPlayer() ? DESCRIPTIONS[15] : DESCRIPTIONS[16]) + DESCRIPTIONS[17];
+  }
+
+  private boolean isPlayer() {
+    return this.owner.isPlayer;
   }
 
   @Override

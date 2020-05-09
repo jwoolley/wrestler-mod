@@ -16,6 +16,7 @@ import thewrestler.cards.skill.AbstractPenaltyCardListener;
 import thewrestler.characters.WrestlerCharacter;
 import thewrestler.orbs.BasePenaltyOrb;
 import thewrestler.powers.NoPenaltyPower;
+import thewrestler.powers.PenaltyLockedPower;
 import thewrestler.util.BasicUtils;
 import thewrestler.util.info.CombatInfo;
 
@@ -37,7 +38,7 @@ public class PenaltyCardInfo implements StartOfCombatListener, EndOfCombatListen
 
   public void resetForTurn() {
     hasWarningCard = false;
-    resetPenaltyOrbs();
+    refreshPenaltyOrb();
   }
 
   public void resetForCombat() {
@@ -74,9 +75,8 @@ public class PenaltyCardInfo implements StartOfCombatListener, EndOfCombatListen
 
   public void enqueuePenaltyCard(AbstractPenaltyStatusCard card, boolean toFront) {
     this.penaltyCardStrategy.addPenaltyCardToQueue(card, toFront);
-    resetPenaltyOrbs();
+    refreshPenaltyOrb();
   }
-
 
   public void forEachQueuedCard(Consumer<AbstractPenaltyStatusCard> fn, Predicate<AbstractPenaltyStatusCard> predicate) {
     getStrategy().forEachQueuedCard(fn, predicate);
@@ -92,24 +92,18 @@ public class PenaltyCardInfo implements StartOfCombatListener, EndOfCombatListen
     listeners.addAll(getPenaltyCardListenerCards());
     listeners.forEach(listener -> listener.onGainedPenaltyCard(penaltyCard));
     CombatInfo.incrementPenaltyCardsGainedThisCombatCount();
-    resetPenaltyOrbs();
+    refreshPenaltyOrb();
   }
-
-
-  private static boolean isNextPenaltyCardLockedForTurn() {
-    return false;
-  }
-
 
   private static boolean playerHasLockCardPower() {
-    return false;
+    return AbstractDungeon.isPlayerInDungeon() && AbstractDungeon.player.hasPower(PenaltyLockedPower.POWER_ID);
   }
 
-  private static boolean isNextPenaltyCardLocked() {
-    return playerHasLockCardPower() || isNextPenaltyCardLockedForTurn();
+  public static boolean isNextPenaltyCardLocked() {
+    return playerHasLockCardPower();
   }
 
-  private static void resetPenaltyOrbs() {
+  private static void refreshPenaltyOrb() {
     BasePenaltyOrb.clearPenaltyOrbs();
     if (!isNextPenaltyCardLocked()) {
       // clear next card off of the queue
@@ -242,10 +236,6 @@ public class PenaltyCardInfo implements StartOfCombatListener, EndOfCombatListen
   }
 
   public void atStartOfTurn() {
-    //  USE THIS CHECK IF warning card should "carry over" if 1 Dirty card was played
-    //    if (CombatInfo.getNumDirtyCardsPlayed() == 0) {
-    //      reset();
-    //    }
     resetForTurn();
   }
 

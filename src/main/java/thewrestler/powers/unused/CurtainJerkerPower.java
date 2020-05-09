@@ -67,7 +67,7 @@ public class CurtainJerkerPower extends AbstractWrestlerPower implements Abstrac
   @Override
   public void onUseCard(AbstractCard card, UseCardAction action) {
     if (card.type == AbstractCard.CardType.POWER) {
-      AbstractDungeon.actionManager.addToTop(new RemoveSpecificPowerAction(this.owner, this.owner, this.ID));
+      triggerRemovePower();
     }
   }
 
@@ -78,6 +78,6 @@ public class CurtainJerkerPower extends AbstractWrestlerPower implements Abstrac
 
   @Override
   public void onGainedPenaltyCard(AbstractPenaltyStatusCard card) {
-    AbstractDungeon.actionManager.addToTop(new RemoveSpecificPowerAction(this.owner, this.owner, this.ID));
+    triggerRemovePower();
   }
 }

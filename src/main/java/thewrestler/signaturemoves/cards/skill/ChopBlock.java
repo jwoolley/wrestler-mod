@@ -1,6 +1,7 @@
 package thewrestler.signaturemoves.cards.skill;
 
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
+import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
 import com.megacrit.cardcrawl.actions.common.DrawCardAction;
 import com.megacrit.cardcrawl.actions.common.GainBlockAction;
 import com.megacrit.cardcrawl.actions.utility.SFXAction;
@@ -13,6 +14,7 @@ import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.helpers.ScreenShake;
 import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
+import com.megacrit.cardcrawl.powers.BlurPower;
 import thewrestler.cards.colorless.status.penalty.BluePenaltyStatusCard;
 import thewrestler.signaturemoves.cards.AbstractSignatureMoveCard;
 import thewrestler.signaturemoves.upgrades.AbstractSignatureMoveUpgrade;
@@ -25,7 +27,7 @@ public class ChopBlock extends AbstractSignatureMoveCard {
   public static final String NAME;
   public static final String DESCRIPTION;
   public static final String[] EXTENDED_DESCRIPTION;
-  public static final String IMG_PATH = "chopblock.png";
+  public static final String IMG_PATH = "bodyblock.png";
 
   private static final CardStrings cardStrings;
 
@@ -33,9 +35,9 @@ public class ChopBlock extends AbstractSignatureMoveCard {
   private static final CardTarget TARGET = AbstractCard.CardTarget.NONE;
 
   private static final int COST = 1;
-  private static final int NUM_CARDS = 3;
+  private static final int NUM_CARDS = 2;
   private static final boolean HAS_EXHAUST = false;
-  private static final boolean HAS_RETAIN = true;
+  private static final boolean HAS_RETAIN = false;
 
   public ChopBlock() {
     super(ID, NAME, IMG_PATH, COST, DESCRIPTION, TYPE, TARGET, HAS_EXHAUST, HAS_RETAIN,
@@ -86,6 +88,10 @@ public class ChopBlock extends AbstractSignatureMoveCard {
 
         AbstractDungeon.actionManager.addToTop(new ShakeScreenAction(0.0F,
             ScreenShake.ShakeDur.MED, ScreenShake.ShakeIntensity.HIGH));
+
+        AbstractDungeon.actionManager.addToBottom(
+            new ApplyPowerAction(this.player, this.player, new BlurPower(this.player, 1), 1));
+
         this.isDone = true;
       }
       tickDuration();

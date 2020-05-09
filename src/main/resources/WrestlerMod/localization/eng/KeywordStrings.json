@@ -140,10 +140,8 @@
     "NAMES": [
       "injury"
     ],
-    "DESCRIPTION": "Attack damage to ignores #yBlock equal to a creature's Injury. If unblocked damage from an attack exceeds its Injury, it loses Injury and gains #yPersistent #yInjury."
+    "DESCRIPTION": "An Injured creature gains #b1 additional #yInjury when it attacks. At the end of its turn, it takes damage, then loses half of its #yInjury if it didn't attack."
   },
-
-
 
   "WrestlerMod:PersistentInjury": {
     "PROPER_NAME": "Persistent Injury",
@@ -160,7 +158,7 @@
     "NAMES": [
       "knee", "knees"
     ],
-    "DESCRIPTION": "A 1-cost #yAttack card with #yEthereal and #yExhaust that deals moderate damage."
+    "DESCRIPTION": "A #yDirty 1-cost #yAttack card with #yRetain and #yExhaust that deals moderate damage."
   },
 
   "WrestlerMod:BrutesTrophy": {

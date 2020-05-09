@@ -1,14 +1,17 @@
-package thewrestler.cards.skill;
+package thewrestler.cards.attack;
 
 import basemod.abstracts.CustomCard;
+import com.megacrit.cardcrawl.actions.AbstractGameAction;
+import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
+import com.megacrit.cardcrawl.actions.common.AttackDamageRandomEnemyAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
-import thewrestler.actions.cards.skill.ButterflyAction;
 import thewrestler.enums.AbstractCardEnum;
+import thewrestler.powers.PenaltyLockedPower;
 
 import static thewrestler.WrestlerMod.getCardResourcePath;
 
@@ -21,23 +24,29 @@ public class Butterfly extends CustomCard {
 
   private static final CardStrings cardStrings;
 
-  private static final CardType TYPE = CardType.SKILL;
+  private static final CardType TYPE = CardType.ATTACK;
   private static final CardRarity RARITY = CardRarity.UNCOMMON;
-  private static final CardTarget TARGET = CardTarget.ENEMY;
+  private static final CardTarget TARGET = CardTarget.ALL_ENEMY;
 
   private static final int COST = 1;
-  private static final int NUM_DEBUFFS_REMOVED = 2;
-  private static final int NUM_DEBUFFS_REMOVED_UPGRADE = 1;
+  private static final int DAMAGE = 3;
+  private static final int NUM_TRIGGERS = 2;
+  private static final int NUM_TRIGGERS_UPGRADE = 1;
 
   public Butterfly() {
     super(ID, NAME, getCardResourcePath(IMG_PATH), COST, getDescription(), TYPE, AbstractCardEnum.THE_WRESTLER_ORANGE,
         RARITY, TARGET);
-    this.baseMagicNumber = this.magicNumber = NUM_DEBUFFS_REMOVED;
+    this.baseDamage = this.damage = DAMAGE;
+    this.baseMagicNumber = this.magicNumber = NUM_TRIGGERS;
   }
 
   @Override
   public void use(AbstractPlayer p, AbstractMonster m) {
-    AbstractDungeon.actionManager.addToBottom(new ButterflyAction(m, p, this.magicNumber));
+    for (int i = 0; i < this.magicNumber; i++) {
+      AbstractDungeon.actionManager.addToBottom(
+          new AttackDamageRandomEnemyAction(this, AbstractGameAction.AttackEffect.POISON));
+    }
+    AbstractDungeon.actionManager.addToBottom(new ApplyPowerAction(p, p, new PenaltyLockedPower(1)));
   }
 
   @Override
@@ -49,7 +58,7 @@ public class Butterfly extends CustomCard {
   public void upgrade() {
     if (!this.upgraded) {
       this.upgradeName();
-      this.upgradeMagicNumber(NUM_DEBUFFS_REMOVED_UPGRADE);
+      this.upgradeMagicNumber(NUM_TRIGGERS_UPGRADE);
       initializeDescription();
     }
   }

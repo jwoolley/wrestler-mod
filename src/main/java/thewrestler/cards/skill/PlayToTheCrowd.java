@@ -33,12 +33,10 @@ public class PlayToTheCrowd extends CustomCard {
   private static final CardTarget TARGET = CardTarget.SELF;
 
   private static final int COST = 0;
-  private static final int BRAVADO_AMOUNT = 1;
 
   public PlayToTheCrowd() {
     super(ID, NAME, getCardResourcePath(IMG_PATH), COST, getDescription(false), TYPE,
         AbstractCardEnum.THE_WRESTLER_ORANGE, RARITY, TARGET);
-    this.baseMagicNumber = this.magicNumber = BRAVADO_AMOUNT;
     this.baseBlock = this.block = FairPlay.BLOCK_AMOUNT;
     this.cardsToPreview = new Knee();
     this.exhaust = true;
@@ -46,9 +44,6 @@ public class PlayToTheCrowd extends CustomCard {
 
   @Override
   public void use(AbstractPlayer p, AbstractMonster m) {
-    AbstractDungeon.actionManager.addToBottom(
-        new ApplyPowerAction(p, p, new BravadoPower(p, this.magicNumber), this.magicNumber));
-
     ArrayList<AbstractCard> options = new ArrayList<>();
     options.add(new FairPlay());
     options.add(new FoulPlay());

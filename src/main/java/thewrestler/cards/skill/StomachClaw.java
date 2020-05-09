@@ -34,7 +34,7 @@ public class StomachClaw extends CustomCard {
   public static final String IMG_PATH = "stomachclaw.png";
 
   private static final int DEBUFF_AMOUNT = 4;
-  private static final int DEBUFF_AMOUNT_UPGRADE  = 1;
+  private static final int DEBUFF_AMOUNT_UPGRADE  = 2;
 
   private static final CardStrings cardStrings;
 
@@ -77,17 +77,9 @@ public class StomachClaw extends CustomCard {
       initializeDescription();
     }
   }
+
   public static String getDescription() {
     return DESCRIPTION;
-  }
-
-  private static List<AbstractTooltipKeyword> EXTRA_KEYWORDS = Arrays.asList(
-      CustomTooltipKeywords.getTooltipKeyword(CustomTooltipKeywords.PERSISTENT_INJURY)
-  );
-
-  @Override
-  public List<TooltipInfo> getCustomTooltips() {
-    return TooltipKeywords.getTooltipInfos(EXTRA_KEYWORDS);
   }
 
   static {

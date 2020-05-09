@@ -7,6 +7,7 @@ import thewrestler.signaturemoves.cards.attack.Piledriver;
 import thewrestler.signaturemoves.cards.skill.ChopBlock;
 import thewrestler.signaturemoves.cards.skill.DoomsdayDevice;
 import thewrestler.signaturemoves.cards.skill.ElbowSmash;
+import thewrestler.signaturemoves.cards.skill.WindUp;
 import thewrestler.signaturemoves.moveinfos.*;
 import thewrestler.signaturemoves.upgrades.SignatureMoveUpgradeList;
 
@@ -22,7 +23,7 @@ public enum SignatureMoveCardEnum {
   ELBOW_SMASH(new ElbowSmash(), new ElbowSmashMoveInfo()),
   PILEDRIVER(new Piledriver(), new PiledriverMoveInfo()),
   SUPLEX(new Suplex(), new SuplexMoveInfo()),
-  WIND_UP(new Suplex(), new WindUpMoveInfo());
+  WIND_UP(new WindUp(), new WindUpMoveInfo());
 
   SignatureMoveCardEnum(AbstractSignatureMoveCard card, AbstractSignatureMoveInfo moveInfo) {
     this.card = card;

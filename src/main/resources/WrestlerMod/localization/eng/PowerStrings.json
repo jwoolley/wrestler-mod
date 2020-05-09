@@ -242,13 +242,34 @@
   "WrestlerMod:InjuredPower": {
     "NAME": "Injury",
     "DESCRIPTIONS": [
-      "Attacks against you",
-      "Attacks against this enemy",
-      " ignore #b",
-      " #yBlock this turn. If",
-      " you receive #b",
-      " it receives #b",
-      " or more unblocked damage at once, remove #yInjury and apply #yPersistent #yInjury."
+      "You take #b",
+      "Takes #b",
+      " damage at the end of",
+      " your",
+      " its",
+      " turn.",
+      " You gain #b",
+      " Gains #b",
+      " additional #yInjury when",
+      " you attack. Lose",
+      " it attacks. Loses",
+      " half of",
+      " #yInjury, rounded up (#b",
+      ") at the end of ",
+      " turn if",
+      " you",
+      " it",
+      " didn't attack."
+    ]
+  },
+
+  "WrestlerMod:PenaltyLockedPower": {
+    "NAME": "Locked Penalty",
+    "DESCRIPTIONS": [
+      "The color of your next #yPenalty #yCard won't be changed at the start of your next",
+      " turn.",
+      " #b",
+      " turns."
     ]
   },
 

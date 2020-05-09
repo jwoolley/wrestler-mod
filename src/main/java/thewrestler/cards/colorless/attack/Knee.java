@@ -37,7 +37,7 @@ public class Knee extends CustomCard {
     this.baseDamage = this.damage = DAMAGE;
     tags.add(WrestlerCardTags.DIRTY);
     this.exhaust = true;
-    this.isEthereal = true;
+    this.selfRetain = true;
   }
 
   @Override

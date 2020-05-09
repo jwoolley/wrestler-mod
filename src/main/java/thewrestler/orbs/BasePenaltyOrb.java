@@ -65,8 +65,12 @@ abstract public class BasePenaltyOrb extends AbstractOrb {
   private ArrayList<PowerTip> keywordPowerTips;
 
   private final String PENALTY_ORB_SUBDIR_PATH = "penalty/";
-
+  private final String PENALTY_ORB_LOCKED_SUBDIR_PATH = "locked/";
   // TODO: penalty card (like old custom hover)
+
+
+  private final Texture unlockedImg;
+  private final Texture lockedImg;
 
   private final String[] ORB_SPECIFIC_DESCRIPTIONS;
 
@@ -81,7 +85,8 @@ abstract public class BasePenaltyOrb extends AbstractOrb {
     this.name = NAME_PREFIX + name;
     this.description = "";
     ORB_SPECIFIC_DESCRIPTIONS = description;
-    this.img = getPenaltyOrbTexture(imgName);
+    this.img = this.unlockedImg = getPenaltyOrbTexture(imgName);
+    this.lockedImg = getPenaltyOrbTexture(PENALTY_ORB_LOCKED_SUBDIR_PATH + imgName);
     this.penaltyCard = penaltyCard;
 
     angle = MathUtils.random(0.0f); // More Animation-related Numbers
@@ -121,6 +126,8 @@ abstract public class BasePenaltyOrb extends AbstractOrb {
 
   @Override
   public void update() {
+    this.img = PenaltyCardInfo.isNextPenaltyCardLocked() ? this.lockedImg : this.unlockedImg;
+
     this.hb.update();
     if (this.hb.hovered) {
       TipHelper.queuePowerTips(getXTooltipOffset(), getYTooltipOffset(), powerTips);
